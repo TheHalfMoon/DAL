@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "SG-000014",
+  "title": "GAX-P08 - PubMedQA PQA-L qualification and split/leakage manifest",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000013"],
+  "children": [],
+  "labels": ["p08", "pubmedqa", "dataset-qualification", "leakage"],
+  "outcome": "Qualify the frozen PubMedQA PQA-L source as the first zero-founder-cost real benchmark entry using deterministic source verification, preregistered role splits, exact and near-duplicate leakage audits, and a sealed final-test boundary.",
+  "rationale": "P08 cannot authorize real evaluation until at least one required benchmark has immutable source identity, verified rights, frozen role membership, leakage evidence, and contamination disclosures. PubMedQA PQA-L is the first candidate because its source revision and MIT terms are public and its closed yes/no/maybe decision surface maps directly to GAX typed actions.",
+  "scope_in": [
+    "Frozen PubMedQA PQA-L acquisition and Git blob verification",
+    "Deterministic conversion to GAXBench yes/no/maybe items",
+    "Preregistered validation/calibration/test membership derived before model comparison",
+    "Exact split-integrity and near-duplicate text audits",
+    "Split-manifest and leakage-audit SHA-256 evidence",
+    "Dataset card and public-benchmark contamination disclosure",
+    "Dedicated zero-founder-cost GitHub Actions qualification job",
+    "Inventory promotion only after real upstream qualification evidence exists"
+  ],
+  "scope_out": [
+    "No real model inference",
+    "No model selection or threshold tuning",
+    "No ECAL component selection",
+    "No FHIR representation selection",
+    "No final-test performance result",
+    "No clinical-safety or SOTA claim",
+    "No claim that public PubMedQA is free of model pretraining contamination",
+    "No use of LONG_ANSWER, reasoning_required_pred, or reasoning_free_pred as model-visible inputs"
+  ],
+  "acceptance": [
+    "Source identity is pinned to pubmedqa/pubmedqa commit 1cbae8e92f72f20c8d3747cbb3bf5bc53554d997 and data/ori_pqal.json Git blob 38db7750761c78950ed32303e7545bdaa513390c",
+    "The build rejects source bytes whose Git blob SHA-1 does not match the frozen blob",
+    "The build validates exactly 1000 labeled PQA-L records and preserves PMID only as non-model-visible source identity",
+    "Model-visible content contains QUESTION plus abstract CONTEXTS and optional section labels, but excludes LONG_ANSWER, reasoning predictions, final_decision, PMID, YEAR, and MESHES",
+    "Actions are deterministically ordered maybe, no, yes and PubMedQA maybe remains an ordinary task answer rather than GAX abstention or information insufficiency",
+    "The role policy reproduces the upstream seed-0 label-stratified 500-CV/500-test split, uses upstream CV fold 0 as calibration, folds 1-9 as validation, uses no PQA-L training role, and keeps the official 500-item test role sealed",
+    "Role membership is frozen before any real model comparison and serialized without labels",
+    "Existing GAX exact duplicate/source/input/counterfactual audits are run across the converted roles",
+    "A preregistered cross-role near-duplicate audit uses normalized 5-token shingles and Jaccard threshold 0.80 without exposing raw text in its report",
+    "Any unresolved exact or near-duplicate cross-role finding blocks dataset qualification",
+    "The qualification report distinguishes within-GAX leakage from unresolved public-benchmark pretraining contamination risk",
+    "Final-test gold labels are not written to qualification manifests or artifacts and test BenchmarkItems carry gold=null during qualification",
+    "A dedicated GitHub Actions job downloads only the frozen public source, produces metadata-only qualification artifacts, and fails closed if qualification fails",
+    "The real inventory entry moves from pending to qualified only after the dedicated job produces actual split-manifest and leakage-audit digests",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI remains required before merge",
+    "A guarded implementation merge, successful post-main CI, and separate canonical closeout are required before SG-000014 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000014.json",
+    "src/gaxbench/pubmedqa.py",
+    "src/gaxbench/pubmedqa_cli.py",
+    "tests/test_pubmedqa.py",
+    "docs/datasets/PUBMEDQA_PQAL.md",
+    ".github/workflows/p08-pubmedqa-qualification.yml",
+    "registry/p08_real_inventory.json",
+    "registry/pubmedqa_pqal_qualification.json",
+    "pyproject.toml",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "medium",
+    "recovery": "Revert SG-000014 files and return to the canonical SG-000013 closeout. No real-model results or final-test performance outputs are introduced by this grain."
+  },
+  "evidence": {
+    "required": [
+      "issue-39-research-contract",
+      "frozen-upstream-source-verification",
+      "real-pqal-split-manifest-digest",
+      "real-pqal-leakage-audit-digest",
+      "real-pqal-qualification-report",
+      "exact-head-linux-python311-ci-pass",
+      "exact-head-linux-python312-ci-pass",
+      "exact-head-windows-python311-ci-pass",
+      "exact-head-windows-python312-ci-pass",
+      "dedicated-pubmedqa-qualification-job-pass",
+      "implementation-pr-pass",
+      "post-merge-ci-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "context": {
+    "budget_tokens": 24000,
+    "estimated_tokens": 18000
+  },
+  "metadata": {
+    "research_issue": 39,
+    "canonical_dependency": "cb32188243fed012b33f68140ba9b73fa5c8707e",
+    "split_policy": {
+      "upstream_seed": 0,
+      "official_outer_split": "500 CV / 500 test",
+      "calibration": "upstream CV fold 0",
+      "validation": "upstream CV folds 1-9",
+      "training": "none from PQA-L",
+      "test": "official outer test half"
+    },
+    "near_duplicate_policy": {
+      "normalization": "lowercase Unicode word tokens",
+      "shingles": 5,
+      "jaccard_threshold": 0.8,
+      "cross_role_only": true
+    },
+    "safety": {
+      "final_test_access": "sealed",
+      "test_tuning_forbidden": true,
+      "public_pretraining_contamination": "unresolved-and-must-be-disclosed"
+    }
+  }
+}
