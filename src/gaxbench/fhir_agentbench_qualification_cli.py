@@ -30,23 +30,23 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = build_parser().parse_args()
     if args.output is not None:
-        report = probe_frozen_source(args.source)
-        _require_metadata_only(report)
-        _write_json(args.output, report)
-        _print_compact(report)
+        source_probe = probe_frozen_source(args.source)
+        _require_metadata_only(source_probe)
+        _write_json(args.output, source_probe)
+        _print_compact(source_probe)
         return 0
 
     output_dir: Path = args.output_dir
-    probe, manifest, audit, report = qualify_frozen_source(args.source)
-    for artifact in (probe, manifest, audit, report):
+    probe, manifest, audit, qualification_report = qualify_frozen_source(args.source)
+    for artifact in (probe, manifest, audit, qualification_report):
         _require_metadata_only(artifact)
     output_dir.mkdir(parents=True, exist_ok=True)
     _write_json(output_dir / "source_probe.json", probe)
     _write_json(output_dir / "role_manifest.json", manifest)
     _write_json(output_dir / "leakage_audit.json", audit)
-    _write_json(output_dir / "qualification.json", report)
-    _print_compact(report)
-    return 0 if report.status == "qualified" else 2
+    _write_json(output_dir / "qualification.json", qualification_report)
+    _print_compact(qualification_report)
+    return 0 if qualification_report.status == "qualified" else 2
 
 
 def _require_metadata_only(value: StrictModel) -> None:
