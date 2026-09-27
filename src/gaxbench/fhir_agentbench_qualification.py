@@ -148,7 +148,14 @@ def probe_frozen_source(
 
         for raw_row in reader:
             row_count += 1
-            row = {key.strip(): (value or "").strip() for key, value in raw_row.items()}
+            row: dict[str, str] = {}
+            for raw_key, raw_value in raw_row.items():
+                if raw_key is None:
+                    raise ValueError(f"row {row_count} has fields beyond the declared header")
+                if isinstance(raw_value, list):
+                    raise ValueError(f"row {row_count} has malformed repeated field data")
+                row[raw_key.strip()] = (raw_value or "").strip()
+
             split = row["split"]
             question_id = row["question_id"]
             question = row["question"]
@@ -172,8 +179,9 @@ def probe_frozen_source(
 
             patient_id = row.get("patient_fhir_id", "")
             if patient_id:
-                patient_splits[_identifier_digest(patient_id)].add(split)
-                patient_ids_by_split[split].add(_identifier_digest(patient_id))
+                patient_digest = _identifier_digest(patient_id)
+                patient_splits[patient_digest].add(split)
+                patient_ids_by_split[split].add(patient_digest)
 
     if row_count == 0:
         raise ValueError("FHIR-AgentBench CSV must contain at least one data row")
