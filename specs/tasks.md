@@ -157,6 +157,23 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 - [x] SG-000013 guarded implementation merge and post-main CI
 - [x] SG-000013 canonical closeout
 
+### Real dataset qualification
+
+- [x] PubMedQA PQA-L frozen source/blob verification
+- [x] PubMedQA PQA-L preregistered validation/calibration/sealed-test role manifest
+- [x] PubMedQA PQA-L exact and near-duplicate cross-role leakage audit
+- [x] PubMedQA PQA-L public-pretraining contamination disclosure
+- [x] PubMedQA PQA-L inventory promotion to `qualified`
+- [x] SG-000014 exact-head cross-platform and dedicated real-source qualification
+- [x] SG-000014 guarded implementation merge and post-main qualification
+- [x] SG-000014 canonical closeout
+- [ ] FHIR-AgentBench redistribution/access-safe normalized qualification
+- [ ] MedAgentBench external-artifact/access-safe normalized qualification
+- [ ] MedQAbstain component-license and immutable-dataset qualification
+- [ ] Additional external-validation datasets only where rights and immutable identity are established
+
+PubMedQA qualification proves a reproducible benchmark slice only. Its final-test role remains sealed, public-backbone pretraining contamination remains unresolved/disclosed, and P08 remains unauthorized while other mandatory datasets, systems, and protocol fields are incomplete.
+
 ### Freeze before final-test access
 
 - [ ] Freeze benchmark version and immutable split manifests
