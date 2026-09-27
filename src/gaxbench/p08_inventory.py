@@ -10,6 +10,9 @@ from pydantic import Field, HttpUrl, field_validator, model_validator
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import StrictModel
 
+SG000012_CLOSEOUT_MERGE_SHA = "4ef48a894481abe9100f89a81970cd299138e98d"
+SG000012_CLOSEOUT_POST_MAIN_RUN_ID = 36294381495
+
 InventoryStatus = Literal["qualified", "pending", "blocked"]
 LicenseStatus = Literal["verified", "ambiguous", "restricted", "unknown"]
 Redistribution = Literal["permitted", "restricted", "prohibited", "unknown"]
@@ -21,6 +24,26 @@ ProtocolStatus = Literal["qualified", "pending"]
 
 class _HasID(Protocol):
     id: str
+
+
+class SG000012CloseoutGate(StrictModel):
+    merge_sha: str
+    post_main_run_id: int = Field(gt=0)
+    conclusion: Literal["success"]
+
+    @field_validator("merge_sha")
+    @classmethod
+    def validate_merge_sha(cls, value: str) -> str:
+        _require_git_sha(value, "sg000012_closeout.merge_sha")
+        return value
+
+    @model_validator(mode="after")
+    def validate_canonical_gate(self) -> SG000012CloseoutGate:
+        if self.merge_sha != SG000012_CLOSEOUT_MERGE_SHA:
+            raise ValueError("SG-000012 closeout merge must match canonical merge")
+        if self.post_main_run_id != SG000012_CLOSEOUT_POST_MAIN_RUN_ID:
+            raise ValueError("SG-000012 closeout CI run must match canonical post-main run")
+        return self
 
 
 class DatasetInventoryEntry(StrictModel):
@@ -66,6 +89,8 @@ class DatasetInventoryEntry(StrictModel):
                 raise ValueError("qualified datasets require verified license status")
             if self.split_manifest_sha256 is None or self.leakage_audit_sha256 is None:
                 raise ValueError("qualified datasets require split and leakage audit hashes")
+            if self.source_kind == "github":
+                _require_git_sha(self.source_revision, "qualified GitHub source_revision")
         if self.required_for_authorization and "final-test" not in self.allowed_roles:
             raise ValueError("required datasets must declare a final-test role")
         return self
@@ -157,6 +182,7 @@ class P08RealInventory(StrictModel):
     inventory_revision: str = Field(min_length=1)
     repo_revision: str
     final_test_access: Literal["sealed"] = "sealed"
+    sg000012_closeout: SG000012CloseoutGate
     datasets: list[DatasetInventoryEntry] = Field(min_length=1)
     systems: list[SystemInventoryEntry] = Field(min_length=2)
     protocol: ProtocolInventory
