@@ -16,6 +16,7 @@ Completed grains:
 - **SG-000010 — GAX-P07 FHIR interoperable read-only decision layer** — PROVEN
 - **SG-000011 — GAX-P08 Final-test freeze and claim-evidence contract** — PROVEN
 - **SG-000012 — GAX-P08 Statistical uncertainty and evidence aggregation infrastructure** — PROVEN
+- **SG-000013 — GAX-P08 Real evaluation inventory and pre-authorization freeze** — PROVEN
 
 ## Canonical P03 evidence chain
 
@@ -131,20 +132,36 @@ SG-000011 is **CLOSED_CANONICAL** as a pre-test governance result. It proves the
 
 SG-000012 is **CLOSED_CANONICAL** as pre-test statistical/evidence infrastructure only. It does not authorize final-test access and does not establish model superiority, clinical safety, ECAL gains, learned-sufficiency gains, evidence-grounding gains, FHIR gains, or SOTA claims.
 
+## Canonical P08 real-inventory chain
+
+- research contract: Issue #37 / SG-000013
+- implementation PR: #38
+- implementation exact head: `56e8e3c253a21671b07161c75498d0201cb284d9`
+- implementation exact-head CI: run `36295724870` — SUCCESS
+- implementation merge: `515dab7912d35bcdfcfb177e2592007cc46fb1e0`
+- implementation post-merge CI: run `36295793266` — SUCCESS
+- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
+- inventory entries are explicit `qualified`, `pending`, or `blocked`; missing evidence fails closed rather than disappearing
+- qualified datasets require verified licensing plus split-manifest and leakage-audit SHA-256 digests
+- qualified systems require immutable source/model identity plus real-execution evidence; qualified GAX systems additionally require checkpoint revision and training seeds
+- inventory audit is deterministic and remained `ready_for_authorization=false` while required evidence was incomplete
+- final-test access remained structurally sealed throughout SG-000013
+
+SG-000013 is **CLOSED_CANONICAL** as real-evaluation inventory and pre-authorization governance only. It does not qualify the pending datasets or systems, authorize final-test access, establish clinical safety, or support superiority/SOTA claims.
+
 Active frontier:
 
-**P08 — Real benchmark/model/protocol freeze inventory**
+**P08 — PubMedQA PQA-L qualification and split/leakage manifest**
 
-The next governed unit must populate and audit the real development/freeze inventory before final-test authorization can even be considered:
+The next governed unit is Issue #39. It must turn PubMedQA PQA-L into the first genuinely qualified, zero-founder-cost real benchmark entry without using final-test results for model selection:
 
-- immutable benchmark and split identities, license/redistribution status, source lineage, and leakage evidence;
-- GAX checkpoint identities, training seeds, architecture/training revisions, and development-only selection history;
-- baseline model/tokenizer/source revisions and real-execution qualification state;
-- calibration method/split/target-coverage policy;
-- ECAL keep/reject candidate set from development evidence only;
-- FHIR representation candidates and selection protocol;
-- hardware/timing protocol and cross-system comparability rules;
-- exact primary-comparison families and multiplicity policy.
+- bind acquisition to `pubmedqa/pubmedqa@1cbae8e92f72f20c8d3747cbb3bf5bc53554d997` and verify the PQA-L source blob;
+- preserve PMID/source lineage and the natural closed action set `maybe`, `no`, `yes`;
+- predeclare train/development/calibration/final roles before real model comparison;
+- generate immutable split-manifest and leakage-audit digests;
+- distinguish within-GAX split leakage from unavoidable public-benchmark pretraining-contamination risk;
+- keep final-test labels inaccessible to training, calibration, model selection, ECAL selection, and FHIR representation selection;
+- update the real inventory only when qualification evidence is complete.
 
 Core P08 rules remain:
 
