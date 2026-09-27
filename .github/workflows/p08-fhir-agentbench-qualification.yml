@@ -1,0 +1,84 @@
+name: GAX P08 FHIR-AgentBench Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-fhir-agentbench-qualification.yml"
+      - ".specgrain/specs/SG-000015.json"
+      - "src/gaxbench/fhir_agentbench_qualification.py"
+      - "src/gaxbench/fhir_agentbench_qualification_cli.py"
+      - "tests/test_fhir_agentbench_qualification.py"
+      - "docs/datasets/FHIR_AGENTBENCH.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_qualification.json"
+      - "registry/fhir_agentbench_role_manifest.json"
+      - "registry/fhir_agentbench_leakage_audit.json"
+      - "pyproject.toml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/p08-fhir-agentbench-qualification.yml"
+      - ".specgrain/specs/SG-000015.json"
+      - "src/gaxbench/fhir_agentbench_qualification.py"
+      - "src/gaxbench/fhir_agentbench_qualification_cli.py"
+      - "tests/test_fhir_agentbench_qualification.py"
+      - "docs/datasets/FHIR_AGENTBENCH.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_qualification.json"
+      - "registry/fhir_agentbench_role_manifest.json"
+      - "registry/fhir_agentbench_leakage_audit.json"
+      - "pyproject.toml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe-frozen-source:
+    name: Frozen FHIR-AgentBench metadata probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Download frozen public FHIR-AgentBench CSV
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.request import urlopen
+          from gaxbench.fhir_agentbench_qualification import FHIR_AGENTBENCH_RAW_URL
+
+          destination = Path("${{ runner.temp }}") / "questions_answers_sql_fhir.csv"
+          with urlopen(FHIR_AGENTBENCH_RAW_URL, timeout=60) as response:
+              payload = response.read()
+          destination.write_bytes(payload)
+          print(f"downloaded_bytes={len(payload)}")
+
+      - name: Generate metadata-only source probe
+        run: >-
+          gax-fhir-agentbench-probe
+          "${{ runner.temp }}/questions_answers_sql_fhir.csv"
+          --output "${{ runner.temp }}/fhir-agentbench-probe/source_probe.json"
+
+      - name: Upload metadata-only source probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: fhir-agentbench-source-probe
+          path: ${{ runner.temp }}/fhir-agentbench-probe/source_probe.json
+          if-no-files-found: error
+          retention-days: 7
