@@ -6,6 +6,8 @@ import pytest
 from pydantic import ValidationError
 
 from gaxbench.p08_inventory import (
+    SG000012_CLOSEOUT_MERGE_SHA,
+    SG000012_CLOSEOUT_POST_MAIN_RUN_ID,
     DatasetInventoryEntry,
     P08RealInventory,
     ProtocolInventory,
@@ -23,6 +25,8 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     inventory = load_real_inventory(INVENTORY)
     assert inventory.final_test_access == "sealed"
     assert inventory.inventory_revision == "p08-real-inventory-v0.1"
+    assert inventory.sg000012_closeout.merge_sha == SG000012_CLOSEOUT_MERGE_SHA
+    assert inventory.sg000012_closeout.post_main_run_id == SG000012_CLOSEOUT_POST_MAIN_RUN_ID
     assert any(entry.id == "pubmedqa-pqal" for entry in inventory.datasets)
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
@@ -40,6 +44,14 @@ def test_inventory_digest_is_deterministic() -> None:
     inventory = load_real_inventory(INVENTORY)
     assert inventory_digest(inventory) == inventory_digest(inventory)
     assert len(inventory_digest(inventory)) == 64
+
+
+def test_inventory_rejects_noncanonical_sg000012_gate() -> None:
+    inventory = load_real_inventory(INVENTORY)
+    payload = inventory.model_dump(mode="json")
+    payload["sg000012_closeout"]["merge_sha"] = "0" * 40
+    with pytest.raises(ValidationError, match="must match canonical merge"):
+        P08RealInventory.model_validate(payload)
 
 
 def test_pending_dataset_requires_reason() -> None:
@@ -75,6 +87,27 @@ def test_qualified_dataset_requires_hashes() -> None:
             required_for_authorization=False,
             task_family="unit",
             allowed_roles=["development"],
+            acquisition_revision="unit-v1",
+            notes="unit fixture",
+        )
+
+
+def test_qualified_github_dataset_requires_commit_sha() -> None:
+    with pytest.raises(ValidationError, match="qualified GitHub source_revision"):
+        DatasetInventoryEntry(
+            id="x",
+            source_kind="github",
+            source_url="https://github.com/example/example",
+            source_revision="mutable-main",
+            license="MIT",
+            license_status="verified",
+            redistribution="permitted",
+            status="qualified",
+            required_for_authorization=False,
+            task_family="unit",
+            allowed_roles=["development"],
+            split_manifest_sha256="1" * 64,
+            leakage_audit_sha256="2" * 64,
             acquisition_revision="unit-v1",
             notes="unit fixture",
         )
