@@ -6,10 +6,10 @@ from pathlib import Path
 import pytest
 
 from gaxbench.fhir_agentbench_qualification import (
-    _SourceRow,
     _assign_patient_roles,
     _identifier_digest,
     _included_rows_with_roles,
+    _SourceRow,
     git_blob_sha1,
     probe_frozen_source,
     report_exposes_sensitive_content,
