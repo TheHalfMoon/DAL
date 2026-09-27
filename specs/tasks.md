@@ -167,12 +167,15 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 - [x] SG-000014 exact-head cross-platform and dedicated real-source qualification
 - [x] SG-000014 guarded implementation merge and post-main qualification
 - [x] SG-000014 canonical closeout
-- [ ] FHIR-AgentBench redistribution/access-safe normalized qualification
+- [x] FHIR-AgentBench redistribution/access-safe normalized qualification
+- [x] SG-000015 exact-head cross-platform plus dedicated FHIR-AgentBench and PubMedQA regression qualification
+- [x] SG-000015 guarded implementation merge and post-main qualification
+- [x] SG-000015 canonical closeout
 - [ ] MedAgentBench external-artifact/access-safe normalized qualification
 - [ ] MedQAbstain component-license and immutable-dataset qualification
 - [ ] Additional external-validation datasets only where rights and immutable identity are established
 
-PubMedQA qualification proves a reproducible benchmark slice only. Its final-test role remains sealed, public-backbone pretraining contamination remains unresolved/disclosed, and P08 remains unauthorized while other mandatory datasets, systems, and protocol fields are incomplete.
+PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-test contracts. FHIR-AgentBench preserves R4 source identity, quarantines rows that would cross upstream test supervision, and keeps upstream EHRSQL generation-revision uncertainty explicit. P08 remains unauthorized while MedAgentBench, MedQAbstain, required real systems, and protocol fields are incomplete.
 
 ### Freeze before final-test access
 

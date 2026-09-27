@@ -18,6 +18,7 @@ Completed grains:
 - **SG-000012 — GAX-P08 Statistical uncertainty and evidence aggregation infrastructure** — PROVEN
 - **SG-000013 — GAX-P08 Real evaluation inventory and pre-authorization freeze** — PROVEN
 - **SG-000014 — GAX-P08 PubMedQA PQA-L qualification and split/leakage manifest** — PROVEN
+- **SG-000015 — GAX-P08 FHIR-AgentBench frozen local R4 dataset qualification** — PROVEN
 
 ## Canonical P03 evidence chain
 
@@ -172,13 +173,43 @@ SG-000013 is **CLOSED_CANONICAL** as real-evaluation inventory and pre-authoriza
 - final-test gold labels are not serialized into qualification artifacts; no real model inference or paper-performance evaluation occurred
 - real inventory entry `pubmedqa-pqal` is `qualified`, while overall P08 authorization remains false because other mandatory datasets, systems, and protocol fields remain incomplete
 
-SG-000014 is **CLOSED_CANONICAL** as a dataset-qualification result once this closeout merges and its own post-main CI succeeds. It proves a reproducible, leakage-audited PubMedQA PQA-L benchmark slice under a sealed final-test contract; it does not establish clinical safety, general clinical competence, absence of pretraining contamination, model superiority, or SOTA performance.
+SG-000014 is **CLOSED_CANONICAL** as a dataset-qualification result. It proves a reproducible, leakage-audited PubMedQA PQA-L benchmark slice under a sealed final-test contract; it does not establish clinical safety, general clinical competence, absence of pretraining contamination, model superiority, or SOTA performance.
+
+## Canonical P08 FHIR-AgentBench qualification chain
+
+- research contract: Issue #43 / SG-000015
+- implementation PR: #44
+- implementation exact head: `296cffdc7243792a12459c113a8cd05f56126d43`
+- implementation exact-head GAXBench CI: run `36334776478` — SUCCESS
+- implementation exact-head FHIR-AgentBench qualification: run `36334776510` — SUCCESS
+- implementation exact-head PubMedQA regression qualification: run `36334776481` — SUCCESS
+- implementation merge: `8a836b647d8cfef587e385e845cd4681e0913529`
+- implementation post-main GAXBench CI: run `36335181194` — SUCCESS
+- implementation post-main FHIR-AgentBench qualification: run `36335181207` — SUCCESS
+- implementation post-main PubMedQA regression qualification: run `36335181188` — SUCCESS
+- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
+- frozen source: `glee4810/FHIR-AgentBench@bbb42909a5a7eb907d1cd91f72a560729e7037ea`, `final_dataset/questions_answers_sql_fhir.csv`, Git blob `b2225370feeaefe962c27c4d90f911584e098ac2`
+- source SHA-256: `e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0`
+- role revision: `gax-fhir-agentbench-patient-disjoint-v0.2`
+- membership SHA-256: `b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15`
+- role manifest SHA-256: `7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c`
+- leakage audit SHA-256: `1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490`
+- frozen roles: 341 calibration / 1122 validation / 173 sealed test rows; 1295 rows quarantined rather than crossing upstream test supervision
+- cross-role patient identity overlap: none
+- cross-role exact-question overlap: none
+- preregistered normalized 5-token-shingle Jaccard >= 0.80 cross-role near-duplicate findings: none
+- upstream EHRSQL generation revision remains unproven and disclosed; GAX does not represent temporal revision evidence as proof of the generation revision
+- source remains R4 model-visible identity; no semantic R4-to-R5 conversion claim is made
+- final-test gold labels remain excluded from qualification artifacts; no real model inference or paper-performance evaluation occurred
+- real inventory entry `fhir-agentbench` is `qualified`, while overall P08 authorization remains false because MedAgentBench, MedQAbstain, real systems, and protocol-freeze fields remain incomplete
+
+SG-000015 is **CLOSED_CANONICAL** as a dataset-qualification result once this closeout merges and its own post-main CI succeeds. It proves a reproducible, metadata-safe, leakage-audited FHIR-AgentBench benchmark slice under a sealed final-test contract; it does not establish clinical correctness, patient safety, FHIR conformance certification, agent/model superiority, or SOTA performance.
 
 Active frontier:
 
-**P08 — remaining required dataset and real-system qualification under the sealed final-test contract**
+**P08 — MedAgentBench external-artifact/access-safe qualification under the sealed final-test contract**
 
-The next governed unit must be selected from the remaining fail-closed inventory blockers without opening final-test results. Priority is to qualify a redistribution/access-safe FHIR/EHR benchmark path or, where access terms block that, record the blocker canonically and advance to the next dependency-ready zero-founder-cost unit.
+The next governed unit must separate the public MIT-licensed repository/task corpus from external runtime and scoring artifacts. It must freeze the public `test_data_v2.json` and `funcs_v1.json` identities, treat published test supervision as final-test-only, independently review the Docker image/data rights and external `refsol.py`, and fail closed rather than infer that public pull/download access grants redistribution or patient-environment rights.
 
 Core P08 rules remain:
 
