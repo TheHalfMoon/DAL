@@ -9,7 +9,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, JsonValue, model_validator
 
 from gaxbench.audit import CrossSplitFinding, audit_split_integrity
 from gaxbench.provenance import canonical_json_sha256
@@ -31,8 +31,10 @@ PUBMEDQA_RAW_URL = (
 )
 
 Decision = Literal["maybe", "no", "yes"]
+QualificationSplit = Literal["validation", "calibration", "test"]
 RecordEntry = tuple[str, "PubMedQARecord"]
 
+_SPLIT_DECISIONS: tuple[Decision, ...] = ("yes", "no", "maybe")
 _ACTIONS = (
     Action(id="maybe", description="The biomedical research question is answered maybe."),
     Action(id="no", description="The biomedical research question is answered no."),
@@ -61,15 +63,15 @@ class PubMedQARecord(StrictModel):
 class PubMedQASplitManifest(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["pubmedqa-pqal"] = "pubmedqa-pqal"
-    source_repository: Literal["pubmedqa/pubmedqa"] = PUBMEDQA_REPOSITORY
+    source_repository: Literal["pubmedqa/pubmedqa"] = "pubmedqa/pubmedqa"
     source_commit: Literal["1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"] = (
-        PUBMEDQA_SOURCE_COMMIT
+        "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"
     )
     source_blob_sha1: Literal["38db7750761c78950ed32303e7545bdaa513390c"] = (
-        PUBMEDQA_SOURCE_BLOB_SHA1
+        "38db7750761c78950ed32303e7545bdaa513390c"
     )
-    transform_revision: Literal["gax-pqal-v0.1"] = PUBMEDQA_TRANSFORM_REVISION
-    upstream_seed: Literal[0] = PUBMEDQA_SPLIT_SEED
+    transform_revision: Literal["gax-pqal-v0.1"] = "gax-pqal-v0.1"
+    upstream_seed: Literal[0] = 0
     training_ids: list[str] = Field(default_factory=list)
     validation_ids: list[str]
     calibration_ids: list[str]
@@ -125,7 +127,7 @@ class PubMedQANearDuplicateFinding(StrictModel):
 class PubMedQALeakageAudit(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["pubmedqa-pqal"] = "pubmedqa-pqal"
-    transform_revision: Literal["gax-pqal-v0.1"] = PUBMEDQA_TRANSFORM_REVISION
+    transform_revision: Literal["gax-pqal-v0.1"] = "gax-pqal-v0.1"
     exact_duplicate_item_ids: list[str]
     exact_cross_split_source_ids: list[ExactCrossSplitFinding]
     exact_cross_split_input_fingerprints: list[ExactCrossSplitFinding]
@@ -133,8 +135,12 @@ class PubMedQALeakageAudit(StrictModel):
     near_duplicate_normalization: Literal["lowercase-unicode-word-tokens"] = (
         "lowercase-unicode-word-tokens"
     )
-    near_duplicate_shingle_size: Literal[5] = PUBMEDQA_NEAR_DUPLICATE_SHINGLES
-    near_duplicate_jaccard_threshold: Literal[0.8] = PUBMEDQA_NEAR_DUPLICATE_THRESHOLD
+    near_duplicate_shingle_size: Literal[5] = 5
+    near_duplicate_jaccard_threshold: float = Field(
+        default=PUBMEDQA_NEAR_DUPLICATE_THRESHOLD,
+        ge=PUBMEDQA_NEAR_DUPLICATE_THRESHOLD,
+        le=PUBMEDQA_NEAR_DUPLICATE_THRESHOLD,
+    )
     cross_split_near_duplicates: list[PubMedQANearDuplicateFinding]
     public_pretraining_contamination_risk: Literal["unresolved-public-benchmark"] = (
         "unresolved-public-benchmark"
@@ -147,13 +153,13 @@ class PubMedQAQualificationReport(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["pubmedqa-pqal"] = "pubmedqa-pqal"
     source_commit: Literal["1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"] = (
-        PUBMEDQA_SOURCE_COMMIT
+        "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"
     )
     source_blob_sha1: Literal["38db7750761c78950ed32303e7545bdaa513390c"] = (
-        PUBMEDQA_SOURCE_BLOB_SHA1
+        "38db7750761c78950ed32303e7545bdaa513390c"
     )
     source_sha256: str
-    record_count: Literal[1000] = PUBMEDQA_EXPECTED_RECORDS
+    record_count: Literal[1000] = 1000
     validation_count: Literal[450] = 450
     calibration_count: Literal[50] = 50
     test_count: Literal[500] = 500
@@ -240,7 +246,7 @@ def convert_record(
     pmid: str,
     record: PubMedQARecord,
     *,
-    split: Literal["validation", "calibration", "test"],
+    split: QualificationSplit,
     include_gold: bool,
 ) -> BenchmarkItem:
     if split == "test" and include_gold:
@@ -249,7 +255,7 @@ def convert_record(
     evidence: list[Evidence] = []
     for index, context in enumerate(record.CONTEXTS):
         section = record.LABELS[index] if index < len(record.LABELS) else None
-        structured = {"section": section} if section else None
+        structured: JsonValue | None = {"section": section} if section else None
         evidence.append(
             Evidence(
                 id=f"abstract-section-{index:03d}",
@@ -285,11 +291,12 @@ def build_qualification_items(
 ) -> list[BenchmarkItem]:
     by_pmid = dict(records)
     items: list[BenchmarkItem] = []
-    for split, ids in (
+    roles: tuple[tuple[QualificationSplit, list[str]], ...] = (
         ("validation", manifest.validation_ids),
         ("calibration", manifest.calibration_ids),
         ("test", manifest.test_ids),
-    ):
+    )
+    for split, ids in roles:
         for pmid in ids:
             record = by_pmid[pmid]
             items.append(
@@ -365,7 +372,7 @@ def _upstream_label_stratified_split(
         groups[member[1].final_decision].append(member)
 
     split_groups: dict[Decision, list[list[RecordEntry]]] = {}
-    for decision in ("yes", "no", "maybe"):
+    for decision in _SPLIT_DECISIONS:
         members = list(groups[decision])
         rng.shuffle(members)
         per_fold = math.ceil(len(members) / fold_count)
@@ -380,7 +387,7 @@ def _upstream_label_stratified_split(
     output: list[list[RecordEntry]] = []
     for index in range(fold_count):
         fold: list[RecordEntry] = []
-        for decision in ("yes", "no", "maybe"):
+        for decision in _SPLIT_DECISIONS:
             fold.extend(split_groups[decision][index])
         output.append(fold)
 
