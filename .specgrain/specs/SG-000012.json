@@ -58,7 +58,7 @@
     "readiness": {
       "minimality": {
         "choice": "new-code",
-        "rationale": "SG-000011 proved the final-test freeze mechanism, but paper evaluation still lacks frozen statistical uncertainty, ranking, reliability, denominator, and derived-artifact semantics. This grain implements only that missing pre-test infrastructure before any real final-test opening."
+        "rationale": "SG-000011 proved the final-test freeze mechanism, but paper evaluation still lacked frozen statistical uncertainty, ranking, reliability, denominator, and derived-artifact semantics. SG-000012 implemented only that missing pre-test infrastructure before any real final-test opening."
       },
       "safety": {
         "requirements": [
@@ -67,7 +67,7 @@
           "Do not turn synthetic/statistical mechanics evidence into clinical or superiority claims.",
           "Never silently remove failed, blocked, timeout, OOM, parse-failure, or evaluation-failure outcomes from denominators."
         ],
-        "status": "implementation-pending-exact-head-ci"
+        "status": "proven-pre-test-final-test-sealed"
       },
       "unresolved_decisions": [
         "Real benchmark/data freeze remains for a later P08 grain.",
@@ -76,6 +76,30 @@
         "No final-test authorization is permitted by SG-000012."
       ],
       "version": 1
+    },
+    "closeout": {
+      "research_issue": 34,
+      "implementation_pr": 35,
+      "implementation_head_sha": "af6c92afbd9a86c62989e6a92442bcb4f5eed6b6",
+      "implementation_exact_head_ci_run": 36263261077,
+      "implementation_merge_sha": "bb0f48c93981b5a66674af37f713ec374d3ce4cc",
+      "post_merge_ci_run": 36293926239,
+      "qualification": [
+        "exact-head Linux Python 3.11 CI SUCCESS",
+        "exact-head Linux Python 3.12 CI SUCCESS",
+        "exact-head Windows Python 3.11 CI SUCCESS",
+        "exact-head Windows Python 3.12 CI SUCCESS",
+        "post-main Linux Python 3.11 CI SUCCESS",
+        "post-main Linux Python 3.12 CI SUCCESS",
+        "post-main Windows Python 3.11 CI SUCCESS",
+        "post-main Windows Python 3.12 CI SUCCESS",
+        "Ruff SUCCESS",
+        "mypy strict SUCCESS",
+        "pytest SUCCESS",
+        "compileall SUCCESS",
+        "final-test access remained sealed"
+      ],
+      "next_frontier": "P08 real benchmark/model/protocol freeze inventory"
     }
   },
   "method": "research",
@@ -84,7 +108,7 @@
   "rationale": "Opening final-test access before fixing confidence-interval, AUROC/AUPRC, reliability, failure-denominator, and table/figure provenance semantics would allow post-test analytical flexibility. SG-000012 removes that flexibility by implementing and qualifying the paper statistics/evidence layer while the final test remains sealed.",
   "risk": {
     "level": "medium",
-    "recovery": "Revert SG-000012 files and return to canonical main 6c5b0075f4fdc5d42201720d69af5cbd24d9d0d8. No final-test labels, model weights, clinical datasets, or production behavior are changed by this grain."
+    "recovery": "Revert SG-000012 files and return to the canonical state preceding SG-000012. No final-test labels, model weights, clinical datasets, or production behavior are changed by this grain."
   },
   "schema_version": 1,
   "scope_in": [
@@ -106,6 +130,6 @@
     "No FHIR representation winner selection",
     "No SOTA or clinical-safety claim"
   ],
-  "state": "GRAIN",
+  "state": "PROVEN",
   "title": "GAX-P08 - Statistical uncertainty and evidence aggregation infrastructure"
 }

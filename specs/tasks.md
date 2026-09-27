@@ -159,12 +159,15 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 
 ### Statistical/evidence infrastructure
 
-- [ ] Paired bootstrap confidence-interval engine
-- [ ] Evidence AUROC/AUPRC implementation with deterministic tie handling
-- [ ] Reliability-bin artifact generation
-- [ ] Failure-preserving run aggregation
-- [ ] Table/figure source-manifest generation
-- [ ] Primary comparison registry and deterministic report serialization
+- [x] Paired bootstrap confidence-interval engine
+- [x] Evidence AUROC/AUPRC implementation with deterministic tie handling
+- [x] Reliability-bin artifact generation
+- [x] Failure-preserving run aggregation
+- [x] Table/figure source-manifest generation
+- [x] Primary comparison registry and deterministic report serialization
+- [x] SG-000012 exact-head cross-platform qualification
+- [x] SG-000012 guarded implementation merge and post-main CI
+- [x] SG-000012 canonical closeout
 
 ### Real-model qualification
 
