@@ -145,6 +145,34 @@ def test_qualified_system_requires_real_execution_evidence() -> None:
         )
 
 
+def test_qualified_gax_requires_checkpoint_revision() -> None:
+    with pytest.raises(ValidationError, match="qualified GAX systems require model_revision"):
+        SystemInventoryEntry(
+            id="gax",
+            role="gax",
+            status="qualified",
+            required_for_authorization=True,
+            source_revision="source",
+            adapter_revision="adapter",
+            training_seeds=[1],
+            real_execution_evidence_id="run-1",
+        )
+
+
+def test_qualified_gax_requires_training_seeds() -> None:
+    with pytest.raises(ValidationError, match="qualified GAX systems require training_seeds"):
+        SystemInventoryEntry(
+            id="gax",
+            role="gax",
+            status="qualified",
+            required_for_authorization=True,
+            source_revision="source",
+            model_revision="checkpoint",
+            adapter_revision="adapter",
+            real_execution_evidence_id="run-1",
+        )
+
+
 def test_pending_protocol_requires_reason() -> None:
     with pytest.raises(ValidationError, match="pending protocol requires pending_reason"):
         ProtocolInventory(
