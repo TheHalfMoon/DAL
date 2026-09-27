@@ -27,7 +27,7 @@ FHIR_AGENTBENCH_VALIDATION_PATIENTS = 40
 FHIR_AGENTBENCH_TEST_PATIENTS = 40
 FHIR_AGENTBENCH_NEAR_DUPLICATE_SHINGLES = 5
 FHIR_AGENTBENCH_NEAR_DUPLICATE_THRESHOLD = 0.80
-FHIR_AGENTBENCH_ROLE_REVISION = "gax-fhir-agentbench-patient-disjoint-v0.1"
+FHIR_AGENTBENCH_ROLE_REVISION = "gax-fhir-agentbench-patient-disjoint-v0.2"
 FHIR_AGENTBENCH_RAW_URL = (
     "https://raw.githubusercontent.com/"
     f"{FHIR_AGENTBENCH_REPOSITORY}/{FHIR_AGENTBENCH_SOURCE_COMMIT}/"
@@ -65,6 +65,10 @@ _SENSITIVE_COLUMNS = frozenset(
 )
 
 GAXRole = Literal["calibration", "validation", "test"]
+ExclusionReason = Literal[
+    "upstream-test-row-for-non-test-patient",
+    "non-test-row-for-test-patient",
+]
 
 
 @dataclass(frozen=True)
@@ -132,17 +136,24 @@ class FHIRAgentBenchSourceProbe(StrictModel):
 
 
 class FHIRAgentBenchRoleManifest(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
+    schema_version: Literal["0.2"] = "0.2"
     dataset_id: Literal["fhir-agentbench"] = "fhir-agentbench"
-    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.1"] = (
-        "gax-fhir-agentbench-patient-disjoint-v0.1"
+    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.2"] = (
+        "gax-fhir-agentbench-patient-disjoint-v0.2"
     )
     patient_identity: Literal["sha256-normalized-patient-fhir-id"] = (
         "sha256-normalized-patient-fhir-id"
     )
-    assignment_rule: Literal["sort-patient-sha256-14-calibration-40-validation-40-test"] = (
-        "sort-patient-sha256-14-calibration-40-validation-40-test"
+    assignment_rule: Literal[
+        "first-40-upstream-test-patients-by-sha256-test;"
+        "remaining-first-14-calibration;remaining-40-validation"
+    ] = (
+        "first-40-upstream-test-patients-by-sha256-test;"
+        "remaining-first-14-calibration;remaining-40-validation"
     )
+    row_inclusion_rule: Literal[
+        "test-role-keeps-upstream-test-only;non-test-roles-keep-train-valid-only"
+    ] = "test-role-keeps-upstream-test-only;non-test-roles-keep-train-valid-only"
     patient_count: Literal[94] = 94
     calibration_patient_count: Literal[14] = 14
     validation_patient_count: Literal[40] = 40
@@ -150,26 +161,37 @@ class FHIRAgentBenchRoleManifest(StrictModel):
     calibration_row_count: int = Field(ge=1)
     validation_row_count: int = Field(ge=1)
     test_row_count: int = Field(ge=1)
+    excluded_row_count: int = Field(ge=0)
+    excluded_upstream_test_for_non_test_role_count: int = Field(ge=0)
+    excluded_non_test_for_test_role_count: int = Field(ge=0)
     membership_sha256: str
     upstream_split_counts: dict[str, int]
     upstream_split_preserved_as_metadata: Literal[True] = True
-    upstream_test_is_primary_gax_test: Literal[False] = False
+    gax_test_rows_are_upstream_test_only: Literal[True] = True
+    upstream_test_rows_reassigned_to_non_test_roles: Literal[False] = False
     final_test_access: Literal["sealed"] = "sealed"
     test_gold_serialized: Literal[False] = False
 
     @model_validator(mode="after")
     def validate_manifest(self) -> FHIRAgentBenchRoleManifest:
         _require_sha256(self.membership_sha256, "membership_sha256")
-        if self.calibration_row_count + self.validation_row_count + self.test_row_count != 2931:
-            raise ValueError("GAX role row counts must cover all 2931 frozen rows")
+        included = self.calibration_row_count + self.validation_row_count + self.test_row_count
+        if included + self.excluded_row_count != FHIR_AGENTBENCH_EXPECTED_ROWS:
+            raise ValueError("included plus excluded rows must cover all frozen rows")
+        excluded_parts = (
+            self.excluded_upstream_test_for_non_test_role_count
+            + self.excluded_non_test_for_test_role_count
+        )
+        if excluded_parts != self.excluded_row_count:
+            raise ValueError("excluded-row reasons must sum to excluded_row_count")
         return self
 
 
 class FHIRAgentBenchLeakageAudit(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
+    schema_version: Literal["0.2"] = "0.2"
     dataset_id: Literal["fhir-agentbench"] = "fhir-agentbench"
-    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.1"] = (
-        "gax-fhir-agentbench-patient-disjoint-v0.1"
+    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.2"] = (
+        "gax-fhir-agentbench-patient-disjoint-v0.2"
     )
     upstream_cross_split_patient_identity_count: int = Field(ge=0)
     upstream_cross_split_exact_question_count: int = Field(ge=0)
@@ -184,6 +206,8 @@ class FHIRAgentBenchLeakageAudit(StrictModel):
     near_duplicate_shingle_size: Literal[5] = 5
     near_duplicate_jaccard_threshold: float = Field(default=0.8, ge=0.8, le=0.8)
     patient_disjoint: bool
+    non_test_roles_contain_upstream_test_rows: Literal[False] = False
+    test_role_contains_non_test_rows: Literal[False] = False
     benchmark_native_template_overlap_disclosed: Literal[True] = True
     public_benchmark_pretraining_contamination: Literal["unresolved-public-benchmark"] = (
         "unresolved-public-benchmark"
@@ -194,7 +218,7 @@ class FHIRAgentBenchLeakageAudit(StrictModel):
 
 
 class FHIRAgentBenchQualificationReport(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
+    schema_version: Literal["0.2"] = "0.2"
     dataset_id: Literal["fhir-agentbench"] = "fhir-agentbench"
     source_sha256: str
     source_blob_sha1: Literal["b2225370feeaefe962c27c4d90f911584e098ac2"] = (
@@ -202,6 +226,9 @@ class FHIRAgentBenchQualificationReport(StrictModel):
     )
     source_commit: Literal["bbb42909a5a7eb907d1cd91f72a560729e7037ea"] = (
         "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
+    )
+    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.2"] = (
+        "gax-fhir-agentbench-patient-disjoint-v0.2"
     )
     row_count: Literal[2931] = 2931
     role_manifest_sha256: str
@@ -214,6 +241,7 @@ class FHIRAgentBenchQualificationReport(StrictModel):
     ehrsql_generation_revision_proven: Literal[False] = False
     public_source_contains_test_supervision: Literal[True] = True
     qualification_logic_uses_test_supervision: Literal[False] = False
+    upstream_test_rows_reassigned_to_non_test_roles: Literal[False] = False
     final_test_access: Literal["sealed"] = "sealed"
 
     @model_validator(mode="after")
@@ -311,24 +339,36 @@ def qualify_frozen_source(
         raise ValueError("FHIR-AgentBench question_id values must be unique")
 
     _, _, rows, _ = _read_source(Path(path))
-    patient_digests = sorted({row.patient_digest for row in rows})
-    if len(patient_digests) != FHIR_AGENTBENCH_EXPECTED_PATIENTS:
-        raise ValueError(
-            "FHIR-AgentBench frozen patient count differs from the preregistered probe: "
-            f"expected {FHIR_AGENTBENCH_EXPECTED_PATIENTS}, got {len(patient_digests)}"
-        )
+    roles_by_patient = _assign_patient_roles(rows)
+    rows_with_roles, excluded = _included_rows_with_roles(rows, roles_by_patient)
 
-    roles_by_patient = _assign_patient_roles(patient_digests)
-    rows_with_roles = [(row, roles_by_patient[row.patient_digest]) for row in rows]
     role_counts: dict[GAXRole, int] = {"calibration": 0, "validation": 0, "test": 0}
     membership_payload: list[dict[str, str]] = []
+    included_ids: set[str] = set()
     for row, role in rows_with_roles:
         role_counts[role] += 1
+        question_digest = _identifier_digest(row.question_id)
+        included_ids.add(question_digest)
         membership_payload.append(
             {
-                "question_id_sha256": _identifier_digest(row.question_id),
+                "question_id_sha256": question_digest,
                 "patient_identity_sha256": row.patient_digest,
-                "role": role,
+                "membership": role,
+            }
+        )
+
+    for row in rows:
+        question_digest = _identifier_digest(row.question_id)
+        if question_digest in included_ids:
+            continue
+        assigned_role = roles_by_patient[row.patient_digest]
+        reason = _exclusion_reason(row, assigned_role)
+        membership_payload.append(
+            {
+                "question_id_sha256": question_digest,
+                "patient_identity_sha256": row.patient_digest,
+                "membership": "excluded",
+                "reason": reason,
             }
         )
     membership_payload.sort(key=lambda entry: entry["question_id_sha256"])
@@ -337,6 +377,11 @@ def qualify_frozen_source(
         calibration_row_count=role_counts["calibration"],
         validation_row_count=role_counts["validation"],
         test_row_count=role_counts["test"],
+        excluded_row_count=sum(excluded.values()),
+        excluded_upstream_test_for_non_test_role_count=excluded[
+            "upstream-test-row-for-non-test-patient"
+        ],
+        excluded_non_test_for_test_role_count=excluded["non-test-row-for-test-patient"],
         membership_sha256=canonical_json_sha256(membership_payload),
         upstream_split_counts=probe.split_counts,
     )
@@ -344,11 +389,20 @@ def qualify_frozen_source(
     gax_patient_roles: dict[str, set[str]] = defaultdict(set)
     gax_question_roles: dict[str, set[str]] = defaultdict(set)
     gax_template_roles: dict[str, set[str]] = defaultdict(set)
+    non_test_roles_contain_upstream_test_rows = False
+    test_role_contains_non_test_rows = False
     for row, role in rows_with_roles:
         gax_patient_roles[row.patient_digest].add(role)
         gax_question_roles[_fingerprint_text(row.question)].add(role)
         if row.template:
             gax_template_roles[_fingerprint_text(row.template)].add(role)
+        if role in {"calibration", "validation"} and row.upstream_split == "test":
+            non_test_roles_contain_upstream_test_rows = True
+        if role == "test" and row.upstream_split != "test":
+            test_role_contains_non_test_rows = True
+
+    if non_test_roles_contain_upstream_test_rows or test_role_contains_non_test_rows:
+        raise ValueError("FHIR-AgentBench role policy leaked rows across the upstream test boundary")
 
     audit = FHIRAgentBenchLeakageAudit(
         upstream_cross_split_patient_identity_count=probe.cross_split_patient_identity_count,
@@ -361,6 +415,8 @@ def qualify_frozen_source(
             rows_with_roles
         ),
         patient_disjoint=_cross_split_group_count(gax_patient_roles) == 0,
+        non_test_roles_contain_upstream_test_rows=False,
+        test_role_contains_non_test_rows=False,
     )
 
     role_manifest_sha256 = canonical_json_sha256(manifest.model_dump(mode="json"))
@@ -464,34 +520,70 @@ def _read_source(
     )
 
 
-def _assign_patient_roles(patient_digests: list[str]) -> dict[str, GAXRole]:
-    if patient_digests != sorted(set(patient_digests)):
-        raise ValueError("patient digests must be unique and sorted before role assignment")
+def _assign_patient_roles(rows: list[_SourceRow]) -> dict[str, GAXRole]:
+    patient_digests = sorted({row.patient_digest for row in rows})
     if len(patient_digests) != FHIR_AGENTBENCH_EXPECTED_PATIENTS:
         raise ValueError(f"expected {FHIR_AGENTBENCH_EXPECTED_PATIENTS} unique patients")
 
-    calibration_end = FHIR_AGENTBENCH_CALIBRATION_PATIENTS
-    validation_end = calibration_end + FHIR_AGENTBENCH_VALIDATION_PATIENTS
-    test_count = len(patient_digests) - validation_end
-    if test_count != FHIR_AGENTBENCH_TEST_PATIENTS:
-        raise ValueError("patient-role constants do not cover the frozen patient set")
+    test_candidates = sorted(
+        {row.patient_digest for row in rows if row.upstream_split == "test"}
+    )
+    if len(test_candidates) < FHIR_AGENTBENCH_TEST_PATIENTS:
+        raise ValueError("not enough upstream-test patient identities for the frozen test role")
+
+    test_patients = set(test_candidates[:FHIR_AGENTBENCH_TEST_PATIENTS])
+    non_test_patients = [patient for patient in patient_digests if patient not in test_patients]
+    if len(non_test_patients) != (
+        FHIR_AGENTBENCH_CALIBRATION_PATIENTS + FHIR_AGENTBENCH_VALIDATION_PATIENTS
+    ):
+        raise ValueError("frozen patient partition does not match preregistered role counts")
+
+    calibration_patients = set(non_test_patients[:FHIR_AGENTBENCH_CALIBRATION_PATIENTS])
+    validation_patients = set(non_test_patients[FHIR_AGENTBENCH_CALIBRATION_PATIENTS :])
 
     roles: dict[str, GAXRole] = {}
-    for index, patient_digest in enumerate(patient_digests):
-        if index < calibration_end:
-            roles[patient_digest] = "calibration"
-        elif index < validation_end:
-            roles[patient_digest] = "validation"
+    for patient in patient_digests:
+        if patient in test_patients:
+            roles[patient] = "test"
+        elif patient in calibration_patients:
+            roles[patient] = "calibration"
+        elif patient in validation_patients:
+            roles[patient] = "validation"
         else:
-            roles[patient_digest] = "test"
+            raise ValueError("patient was not assigned to a GAX role")
     return roles
 
 
+def _included_rows_with_roles(
+    rows: list[_SourceRow],
+    roles_by_patient: dict[str, GAXRole],
+) -> tuple[list[tuple[_SourceRow, GAXRole]], dict[ExclusionReason, int]]:
+    included: list[tuple[_SourceRow, GAXRole]] = []
+    excluded: dict[ExclusionReason, int] = {
+        "upstream-test-row-for-non-test-patient": 0,
+        "non-test-row-for-test-patient": 0,
+    }
+    for row in rows:
+        role = roles_by_patient[row.patient_digest]
+        if role == "test" and row.upstream_split == "test":
+            included.append((row, role))
+        elif role in {"calibration", "validation"} and row.upstream_split != "test":
+            included.append((row, role))
+        else:
+            excluded[_exclusion_reason(row, role)] += 1
+    return included, excluded
+
+
+def _exclusion_reason(row: _SourceRow, role: GAXRole) -> ExclusionReason:
+    if role == "test" and row.upstream_split != "test":
+        return "non-test-row-for-test-patient"
+    if role in {"calibration", "validation"} and row.upstream_split == "test":
+        return "upstream-test-row-for-non-test-patient"
+    raise ValueError("row does not require exclusion under the frozen role policy")
+
+
 def _near_duplicate_pair_count(rows_with_roles: list[tuple[_SourceRow, GAXRole]]) -> int:
-    prepared = [
-        (role, _text_shingles(row.question))
-        for row, role in rows_with_roles
-    ]
+    prepared = [(role, _text_shingles(row.question)) for row, role in rows_with_roles]
     count = 0
     for left_index, (left_role, left_shingles) in enumerate(prepared):
         for right_role, right_shingles in prepared[left_index + 1 :]:
