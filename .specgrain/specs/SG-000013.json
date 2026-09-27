@@ -63,7 +63,7 @@
     "readiness": {
       "minimality": {
         "choice": "new-code-and-registry",
-        "rationale": "SG-000012 froze statistical mechanics, but final-test authorization still lacks an honest real dataset/system/protocol inventory. SG-000013 adds only that missing pre-authorization layer and keeps the final test sealed."
+        "rationale": "SG-000012 froze statistical mechanics, but final-test authorization still lacked an honest real dataset/system/protocol inventory. SG-000013 implemented only that missing pre-authorization layer and kept the final test sealed."
       },
       "safety": {
         "requirements": [
@@ -73,7 +73,7 @@
           "Do not call adapter-qualified systems real-model-qualified without execution evidence.",
           "Preserve pending and blocked sources in the inventory with explicit reasons."
         ],
-        "status": "requirements-defined"
+        "status": "proven-pre-authorization-final-test-sealed"
       },
       "unresolved_decisions": [
         "Exact final benchmark suite remains unresolved until source terms, acquisition, split manifests, and leakage audits complete.",
@@ -82,6 +82,31 @@
         "Jev remains optional and blocked unless reproducible access and terms permit matched evaluation."
       ],
       "version": 1
+    },
+    "closeout": {
+      "research_issue": 37,
+      "implementation_pr": 38,
+      "implementation_head_sha": "56e8e3c253a21671b07161c75498d0201cb284d9",
+      "implementation_exact_head_ci_run": 36295724870,
+      "implementation_merge_sha": "515dab7912d35bcdfcfb177e2592007cc46fb1e0",
+      "post_merge_ci_run": 36295793266,
+      "qualification": [
+        "exact-head Linux Python 3.11 CI SUCCESS",
+        "exact-head Linux Python 3.12 CI SUCCESS",
+        "exact-head Windows Python 3.11 CI SUCCESS",
+        "exact-head Windows Python 3.12 CI SUCCESS",
+        "post-main Linux Python 3.11 CI SUCCESS",
+        "post-main Linux Python 3.12 CI SUCCESS",
+        "post-main Windows Python 3.11 CI SUCCESS",
+        "post-main Windows Python 3.12 CI SUCCESS",
+        "Ruff SUCCESS",
+        "mypy strict SUCCESS",
+        "pytest SUCCESS",
+        "compileall SUCCESS",
+        "final-test access remained sealed",
+        "inventory audit remained fail-closed while mandatory evidence stayed pending or blocked"
+      ],
+      "next_frontier": "P08 PubMedQA PQA-L qualification and split/leakage manifest"
     }
   },
   "method": "research",
@@ -90,7 +115,7 @@
   "rationale": "A paper can become irreproducible or biased before model evaluation if dataset rights, split roles, system identities, blocked baselines, calibration policy, and comparison families are decided informally. SG-000013 makes those unresolved dependencies machine-visible before any final-test authorization.",
   "risk": {
     "level": "medium",
-    "recovery": "Revert SG-000013 files and return to canonical SG-000012 at merge 4ef48a894481abe9100f89a81970cd299138e98d. No final-test labels, real model weights, or patient data are introduced by this grain."
+    "recovery": "Revert SG-000013 files and return to the canonical state preceding SG-000013. No final-test labels, real model weights, or patient data were introduced by this grain."
   },
   "schema_version": 1,
   "scope_in": [
@@ -111,6 +136,6 @@
     "No FHIR representation winner selection",
     "No superiority, SOTA, or clinical-safety claim"
   ],
-  "state": "GRAIN",
+  "state": "PROVEN",
   "title": "GAX-P08 - Real evaluation inventory and pre-authorization freeze"
 }
