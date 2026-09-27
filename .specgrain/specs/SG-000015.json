@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "SG-000015",
   "title": "GAX-P08 - FHIR-AgentBench frozen local R4 dataset qualification",
-  "state": "ACTIVE",
+  "state": "PROVEN",
   "method": "research",
   "parent_id": null,
   "dependencies": ["SG-000014"],
@@ -157,7 +157,46 @@
       "test_tuning_forbidden": true,
       "paid_cloud_forbidden": true,
       "gcp_required": false,
-      "raw_upstream_dataset_committed_to_gax": false
+      "raw_upstream_dataset_committed_to_gax": false,
+      "status": "proven-dataset-qualification-final-test-sealed"
+    },
+    "closeout": {
+      "research_issue": 43,
+      "implementation_pr": 44,
+      "implementation_head_sha": "296cffdc7243792a12459c113a8cd05f56126d43",
+      "implementation_exact_head_ci_run": 36334776478,
+      "implementation_exact_head_fhir_agentbench_run": 36334776510,
+      "implementation_exact_head_pubmedqa_run": 36334776481,
+      "implementation_merge_sha": "8a836b647d8cfef587e385e845cd4681e0913529",
+      "post_merge_ci_run": 36335181194,
+      "post_merge_fhir_agentbench_run": 36335181207,
+      "post_merge_pubmedqa_run": 36335181188,
+      "source_sha256": "e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0",
+      "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+      "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+      "leakage_audit_sha256": "1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490",
+      "qualification": [
+        "exact-head Linux Python 3.11 CI SUCCESS",
+        "exact-head Linux Python 3.12 CI SUCCESS",
+        "exact-head Windows Python 3.11 CI SUCCESS",
+        "exact-head Windows Python 3.12 CI SUCCESS",
+        "exact-head dedicated FHIR-AgentBench qualification SUCCESS",
+        "exact-head PubMedQA regression qualification SUCCESS",
+        "post-main Linux Python 3.11 CI SUCCESS",
+        "post-main Linux Python 3.12 CI SUCCESS",
+        "post-main Windows Python 3.11 CI SUCCESS",
+        "post-main Windows Python 3.12 CI SUCCESS",
+        "post-main dedicated FHIR-AgentBench qualification SUCCESS",
+        "post-main PubMedQA regression qualification SUCCESS",
+        "2931 frozen FHIR-AgentBench source rows verified",
+        "341 calibration / 1122 validation / 173 sealed test rows frozen",
+        "1295 rows quarantined rather than crossing upstream test supervision",
+        "no cross-role patient identity overlap",
+        "no exact cross-role question overlap",
+        "no preregistered Jaccard >= 0.80 cross-role near-duplicate pair",
+        "final-test performance remained sealed and P08 authorization remained false"
+      ],
+      "next_frontier": "P08 MedAgentBench external-artifact/access-safe qualification under the sealed final-test contract"
     }
   }
 }
