@@ -1,0 +1,14 @@
+{
+  "classification": "none",
+  "cross_template_near_duplicate_pairs": 0,
+  "dataset_id": "fhir-agentbench",
+  "final_test_access": "sealed",
+  "jaccard_threshold": 0.8,
+  "raw_patient_identifiers_serialized": false,
+  "raw_questions_serialized": false,
+  "raw_templates_serialized": false,
+  "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+  "same_template_near_duplicate_pairs": 0,
+  "schema_version": "0.2",
+  "total_cross_role_near_duplicate_pairs": 0
+}

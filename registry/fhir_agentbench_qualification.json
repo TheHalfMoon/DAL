@@ -1,0 +1,21 @@
+{
+  "dataset_id": "fhir-agentbench",
+  "ehrsql_generation_revision_proven": false,
+  "ehrsql_license": "CC-BY-4.0",
+  "final_test_access": "sealed",
+  "leakage_audit_sha256": "1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490",
+  "mimic_iv_demo_license": "ODbL-1.0",
+  "public_source_contains_test_supervision": true,
+  "qualification_logic_uses_test_supervision": false,
+  "redistribution_from_gax": "metadata-only",
+  "repository_license": "CC-BY-4.0",
+  "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+  "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+  "row_count": 2931,
+  "schema_version": "0.2",
+  "source_blob_sha1": "b2225370feeaefe962c27c4d90f911584e098ac2",
+  "source_commit": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+  "source_sha256": "e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0",
+  "status": "qualified",
+  "upstream_test_rows_reassigned_to_non_test_roles": false
+}

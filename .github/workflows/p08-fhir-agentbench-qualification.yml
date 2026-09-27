@@ -1,0 +1,139 @@
+name: GAX P08 FHIR-AgentBench Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-fhir-agentbench-qualification.yml"
+      - ".specgrain/specs/SG-000015.json"
+      - "src/gaxbench/fhir_agentbench_qualification.py"
+      - "src/gaxbench/fhir_agentbench_qualification_cli.py"
+      - "src/gaxbench/fhir_agentbench_near_duplicates.py"
+      - "tests/test_fhir_agentbench_qualification.py"
+      - "docs/datasets/FHIR_AGENTBENCH.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_source_probe.json"
+      - "registry/fhir_agentbench_qualification.json"
+      - "registry/fhir_agentbench_role_manifest.json"
+      - "registry/fhir_agentbench_leakage_audit.json"
+      - "registry/fhir_agentbench_near_duplicate_classification.json"
+      - "pyproject.toml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/p08-fhir-agentbench-qualification.yml"
+      - ".specgrain/specs/SG-000015.json"
+      - "src/gaxbench/fhir_agentbench_qualification.py"
+      - "src/gaxbench/fhir_agentbench_qualification_cli.py"
+      - "src/gaxbench/fhir_agentbench_near_duplicates.py"
+      - "tests/test_fhir_agentbench_qualification.py"
+      - "docs/datasets/FHIR_AGENTBENCH.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_source_probe.json"
+      - "registry/fhir_agentbench_qualification.json"
+      - "registry/fhir_agentbench_role_manifest.json"
+      - "registry/fhir_agentbench_leakage_audit.json"
+      - "registry/fhir_agentbench_near_duplicate_classification.json"
+      - "pyproject.toml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualify-frozen-source:
+    name: Frozen FHIR-AgentBench patient-disjoint qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Download frozen public FHIR-AgentBench CSV
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.request import urlopen
+          from gaxbench.fhir_agentbench_qualification import FHIR_AGENTBENCH_RAW_URL
+
+          destination = Path("${{ runner.temp }}") / "questions_answers_sql_fhir.csv"
+          with urlopen(FHIR_AGENTBENCH_RAW_URL, timeout=60) as response:
+              payload = response.read()
+          destination.write_bytes(payload)
+          print(f"downloaded_bytes={len(payload)}")
+
+      - name: Generate metadata-only qualification evidence
+        id: qualify
+        continue-on-error: true
+        run: >-
+          gax-fhir-agentbench-probe
+          "${{ runner.temp }}/questions_answers_sql_fhir.csv"
+          --output-dir "${{ runner.temp }}/fhir-agentbench-qualification"
+
+      - name: Classify cross-role near-duplicate pairs
+        id: classify
+        if: steps.qualify.outcome == 'success'
+        continue-on-error: true
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          from gaxbench.fhir_agentbench_near_duplicates import classify_frozen_near_duplicates
+
+          source = Path("${{ runner.temp }}") / "questions_answers_sql_fhir.csv"
+          output = (
+              Path("${{ runner.temp }}")
+              / "fhir-agentbench-qualification"
+              / "near_duplicate_classification.json"
+          )
+          result = classify_frozen_near_duplicates(source)
+          output.write_text(
+              json.dumps(result.model_dump(mode="json"), sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(result.model_dump(mode="json"), sort_keys=True, separators=(",", ":")))
+          if result.classification == "requires-review":
+              raise SystemExit("cross-template near-duplicate pair requires review")
+
+      - name: Verify committed evidence matches regenerated evidence
+        if: steps.qualify.outcome == 'success' && steps.classify.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="${{ runner.temp }}/fhir-agentbench-qualification"
+          diff -u registry/fhir_agentbench_source_probe.json "$generated/source_probe.json"
+          diff -u registry/fhir_agentbench_role_manifest.json "$generated/role_manifest.json"
+          diff -u registry/fhir_agentbench_leakage_audit.json "$generated/leakage_audit.json"
+          diff -u registry/fhir_agentbench_qualification.json "$generated/qualification.json"
+          diff -u \
+            registry/fhir_agentbench_near_duplicate_classification.json \
+            "$generated/near_duplicate_classification.json"
+
+      - name: Upload metadata-only qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fhir-agentbench-qualification
+          path: ${{ runner.temp }}/fhir-agentbench-qualification
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforce qualification result
+        if: steps.qualify.outcome != 'success' || steps.classify.outcome != 'success'
+        run: |
+          echo "Frozen FHIR-AgentBench qualification did not pass. Inspect metadata-only evidence; do not promote the inventory entry."
+          exit 1

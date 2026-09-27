@@ -1,0 +1,23 @@
+{
+  "benchmark_native_template_overlap_disclosed": true,
+  "dataset_id": "fhir-agentbench",
+  "ehrsql_generation_revision_proven": false,
+  "final_test_access": "sealed",
+  "gax_cross_role_exact_question_count": 0,
+  "gax_cross_role_near_duplicate_question_pair_count": 0,
+  "gax_cross_role_patient_identity_count": 0,
+  "gax_cross_role_template_count": 50,
+  "near_duplicate_jaccard_threshold": 0.8,
+  "near_duplicate_normalization": "lowercase-unicode-word-tokens",
+  "near_duplicate_shingle_size": 5,
+  "non_test_roles_contain_upstream_test_rows": false,
+  "patient_disjoint": true,
+  "public_benchmark_pretraining_contamination": "unresolved-public-benchmark",
+  "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+  "schema_version": "0.2",
+  "test_role_contains_non_test_rows": false,
+  "test_tuning_forbidden": true,
+  "upstream_cross_split_exact_question_count": 0,
+  "upstream_cross_split_patient_identity_count": 94,
+  "upstream_cross_split_template_count": 45
+}
