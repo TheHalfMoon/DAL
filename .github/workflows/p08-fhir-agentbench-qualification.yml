@@ -10,6 +10,7 @@ on:
       - "tests/test_fhir_agentbench_qualification.py"
       - "docs/datasets/FHIR_AGENTBENCH.md"
       - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_source_probe.json"
       - "registry/fhir_agentbench_qualification.json"
       - "registry/fhir_agentbench_role_manifest.json"
       - "registry/fhir_agentbench_leakage_audit.json"
@@ -25,6 +26,7 @@ on:
       - "tests/test_fhir_agentbench_qualification.py"
       - "docs/datasets/FHIR_AGENTBENCH.md"
       - "registry/p08_real_inventory.json"
+      - "registry/fhir_agentbench_source_probe.json"
       - "registry/fhir_agentbench_qualification.json"
       - "registry/fhir_agentbench_role_manifest.json"
       - "registry/fhir_agentbench_leakage_audit.json"
@@ -38,8 +40,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  probe-frozen-source:
-    name: Frozen FHIR-AgentBench metadata probe
+  qualify-frozen-source:
+    name: Frozen FHIR-AgentBench patient-disjoint qualification
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -69,16 +71,25 @@ jobs:
           destination.write_bytes(payload)
           print(f"downloaded_bytes={len(payload)}")
 
-      - name: Generate metadata-only source probe
+      - name: Generate metadata-only qualification evidence
+        id: qualify
+        continue-on-error: true
         run: >-
           gax-fhir-agentbench-probe
           "${{ runner.temp }}/questions_answers_sql_fhir.csv"
-          --output "${{ runner.temp }}/fhir-agentbench-probe/source_probe.json"
+          --output-dir "${{ runner.temp }}/fhir-agentbench-qualification"
 
-      - name: Upload metadata-only source probe
+      - name: Upload metadata-only qualification evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: fhir-agentbench-source-probe
-          path: ${{ runner.temp }}/fhir-agentbench-probe/source_probe.json
+          name: fhir-agentbench-qualification
+          path: ${{ runner.temp }}/fhir-agentbench-qualification
           if-no-files-found: error
           retention-days: 7
+
+      - name: Enforce qualification result
+        if: steps.qualify.outcome != 'success'
+        run: |
+          echo "Frozen FHIR-AgentBench qualification did not pass. Inspect metadata-only evidence; do not promote the inventory entry."
+          exit 1
