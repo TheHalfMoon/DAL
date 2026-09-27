@@ -144,6 +144,19 @@ P07 proves deterministic read-only interoperability mechanics and frozen source/
 
 Final-test access remains sealed after SG-000011. The freeze mechanism is proven; the real benchmark/model/data freeze has not yet been authorized.
 
+### Real inventory and pre-authorization foundation
+
+- [x] Strict dataset/system/protocol inventory schema
+- [x] Explicit qualified/pending/blocked state with fail-closed reasons
+- [x] Dataset license/redistribution fields and required split/leakage digests
+- [x] System source/model identity and real-execution evidence contract
+- [x] GAX checkpoint identity and training-seed qualification requirement
+- [x] Deterministic inventory digest and blocker audit
+- [x] Final-test access structurally sealed throughout SG-000013
+- [x] SG-000013 exact-head cross-platform qualification
+- [x] SG-000013 guarded implementation merge and post-main CI
+- [x] SG-000013 canonical closeout
+
 ### Freeze before final-test access
 
 - [ ] Freeze benchmark version and immutable split manifests
