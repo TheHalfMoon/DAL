@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Protocol
 
 from pydantic import Field, HttpUrl, field_validator, model_validator
 
@@ -16,6 +17,10 @@ SourceKind = Literal["github", "huggingface", "other"]
 DatasetRole = Literal["development", "calibration", "final-test", "external-validation"]
 SystemRole = Literal["gax", "baseline", "control"]
 ProtocolStatus = Literal["qualified", "pending"]
+
+
+class _HasID(Protocol):
+    id: str
 
 
 class DatasetInventoryEntry(StrictModel):
@@ -247,8 +252,8 @@ def _validate_status_reasons(
         raise ValueError("qualified entries must not carry pending or blocked reasons")
 
 
-def _require_unique_ids(entries: list[object], kind: str) -> None:
-    ids = [getattr(entry, "id") for entry in entries]
+def _require_unique_ids(entries: Sequence[_HasID], kind: str) -> None:
+    ids = [entry.id for entry in entries]
     if len(ids) != len(set(ids)):
         raise ValueError(f"{kind} ids must be unique")
 
