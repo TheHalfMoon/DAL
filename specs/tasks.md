@@ -167,7 +167,7 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 - [x] Primary comparison registry and deterministic report serialization
 - [x] SG-000012 exact-head cross-platform qualification
 - [x] SG-000012 guarded implementation merge and post-main CI
-- [ ] SG-000012 canonical closeout
+- [x] SG-000012 canonical closeout
 
 ### Real-model qualification
 
