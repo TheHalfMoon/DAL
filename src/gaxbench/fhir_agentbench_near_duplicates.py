@@ -11,6 +11,7 @@ from gaxbench.fhir_agentbench_qualification import (
     GAXRole,
     _assign_patient_roles,
     _fingerprint_text,
+    _included_rows_with_roles,
     _read_source,
     _text_shingles,
 )
@@ -18,10 +19,10 @@ from gaxbench.schema import StrictModel
 
 
 class FHIRAgentBenchNearDuplicateClassification(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
+    schema_version: Literal["0.2"] = "0.2"
     dataset_id: Literal["fhir-agentbench"] = "fhir-agentbench"
-    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.1"] = (
-        "gax-fhir-agentbench-patient-disjoint-v0.1"
+    role_revision: Literal["gax-fhir-agentbench-patient-disjoint-v0.2"] = (
+        "gax-fhir-agentbench-patient-disjoint-v0.2"
     )
     jaccard_threshold: float = Field(default=0.8, ge=0.8, le=0.8)
     total_cross_role_near_duplicate_pairs: int = Field(ge=0)
@@ -40,17 +41,12 @@ def classify_frozen_near_duplicates(
     expected_blob_sha1: str = FHIR_AGENTBENCH_SOURCE_BLOB_SHA1,
 ) -> FHIRAgentBenchNearDuplicateClassification:
     _, _, rows, _ = _read_source(Path(path), expected_blob_sha1=expected_blob_sha1)
-    patient_digests = sorted({row.patient_digest for row in rows})
-    roles_by_patient = _assign_patient_roles(patient_digests)
+    roles_by_patient = _assign_patient_roles(rows)
+    rows_with_roles, _ = _included_rows_with_roles(rows, roles_by_patient)
+
     prepared: list[tuple[GAXRole, str, frozenset[tuple[str, ...]]]] = []
-    for row in rows:
-        prepared.append(
-            (
-                roles_by_patient[row.patient_digest],
-                _fingerprint_text(row.template),
-                _text_shingles(row.question),
-            )
-        )
+    for row, role in rows_with_roles:
+        prepared.append((role, _fingerprint_text(row.template), _text_shingles(row.question)))
 
     total = 0
     same_template = 0
