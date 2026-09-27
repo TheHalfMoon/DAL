@@ -238,21 +238,21 @@ def audit_real_inventory(inventory: P08RealInventory) -> InventoryAudit:
     required_datasets = [entry for entry in inventory.datasets if entry.required_for_authorization]
     required_systems = [entry for entry in inventory.systems if entry.required_for_authorization]
 
-    for entry in required_datasets:
-        if entry.status != "qualified":
-            blockers.append(f"dataset:{entry.id}:status={entry.status}")
-        if entry.license_status != "verified":
-            blockers.append(f"dataset:{entry.id}:license={entry.license_status}")
-        if entry.split_manifest_sha256 is None:
-            blockers.append(f"dataset:{entry.id}:missing-split-manifest")
-        if entry.leakage_audit_sha256 is None:
-            blockers.append(f"dataset:{entry.id}:missing-leakage-audit")
+    for dataset_entry in required_datasets:
+        if dataset_entry.status != "qualified":
+            blockers.append(f"dataset:{dataset_entry.id}:status={dataset_entry.status}")
+        if dataset_entry.license_status != "verified":
+            blockers.append(f"dataset:{dataset_entry.id}:license={dataset_entry.license_status}")
+        if dataset_entry.split_manifest_sha256 is None:
+            blockers.append(f"dataset:{dataset_entry.id}:missing-split-manifest")
+        if dataset_entry.leakage_audit_sha256 is None:
+            blockers.append(f"dataset:{dataset_entry.id}:missing-leakage-audit")
 
-    for entry in required_systems:
-        if entry.status != "qualified":
-            blockers.append(f"system:{entry.id}:status={entry.status}")
-        if entry.real_execution_evidence_id is None:
-            blockers.append(f"system:{entry.id}:missing-real-execution-evidence")
+    for system_entry in required_systems:
+        if system_entry.status != "qualified":
+            blockers.append(f"system:{system_entry.id}:status={system_entry.status}")
+        if system_entry.real_execution_evidence_id is None:
+            blockers.append(f"system:{system_entry.id}:missing-real-execution-evidence")
 
     if inventory.protocol.status != "qualified":
         blockers.append("protocol:status=pending")
