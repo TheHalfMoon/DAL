@@ -1,0 +1,29 @@
+{
+  "assignment_rule": "first-40-upstream-test-patients-by-sha256-test;remaining-first-14-calibration;remaining-40-validation",
+  "calibration_patient_count": 14,
+  "calibration_row_count": 341,
+  "dataset_id": "fhir-agentbench",
+  "excluded_non_test_for_test_role_count": 1059,
+  "excluded_row_count": 1295,
+  "excluded_upstream_test_for_non_test_role_count": 236,
+  "final_test_access": "sealed",
+  "gax_test_rows_are_upstream_test_only": true,
+  "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+  "patient_count": 94,
+  "patient_identity": "sha256-normalized-patient-fhir-id",
+  "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+  "row_inclusion_rule": "test-role-keeps-upstream-test-only;non-test-roles-keep-train-valid-only",
+  "schema_version": "0.2",
+  "test_gold_serialized": false,
+  "test_patient_count": 40,
+  "test_row_count": 173,
+  "upstream_split_counts": {
+    "test": 409,
+    "train": 2098,
+    "valid": 424
+  },
+  "upstream_split_preserved_as_metadata": true,
+  "upstream_test_rows_reassigned_to_non_test_roles": false,
+  "validation_patient_count": 40,
+  "validation_row_count": 1122
+}
