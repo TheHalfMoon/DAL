@@ -20,7 +20,12 @@ from gaxbench.pubmedqa import (
 )
 
 
-def _record(index: int, *, decision: str | None = None, text: str | None = None) -> dict[str, object]:
+def _record(
+    index: int,
+    *,
+    decision: str | None = None,
+    text: str | None = None,
+) -> dict[str, object]:
     resolved_decision = decision or ("yes", "no", "maybe")[index % 3]
     context = text or (
         f"Study {index} enrolled participants and measured a unique endpoint number {index}. "
