@@ -26,6 +26,7 @@ gax = "gaxbench.gax_cli:main"
 gax-p08 = "gaxbench.p08_cli:main"
 gax-p08-inventory = "gaxbench.p08_inventory_cli:main"
 gax-pubmedqa-qualify = "gaxbench.pubmedqa_cli:main"
+gax-fhir-agentbench-probe = "gaxbench.fhir_agentbench_qualification_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
