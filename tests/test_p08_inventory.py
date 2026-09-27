@@ -27,6 +27,7 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert inventory.inventory_revision == "p08-real-inventory-v0.1"
     assert inventory.sg000012_closeout.merge_sha == SG000012_CLOSEOUT_MERGE_SHA
     assert inventory.sg000012_closeout.post_main_run_id == SG000012_CLOSEOUT_POST_MAIN_RUN_ID
+
     pubmedqa = next(entry for entry in inventory.datasets if entry.id == "pubmedqa-pqal")
     assert pubmedqa.status == "qualified"
     assert pubmedqa.split_manifest_sha256 == (
@@ -34,6 +35,16 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     )
     assert pubmedqa.leakage_audit_sha256 == (
         "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443"
+    )
+
+    fhir = next(entry for entry in inventory.datasets if entry.id == "fhir-agentbench")
+    assert fhir.status == "qualified"
+    assert fhir.test_labels_sealed is True
+    assert fhir.split_manifest_sha256 == (
+        "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c"
+    )
+    assert fhir.leakage_audit_sha256 == (
+        "1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490"
     )
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
@@ -44,7 +55,9 @@ def test_repository_inventory_is_not_ready_for_authorization() -> None:
     assert report.final_test_access == "sealed"
     assert "protocol:status=pending" in report.blockers
     assert "dataset:pubmedqa-pqal:status=pending" not in report.blockers
-    assert "dataset:fhir-agentbench:status=pending" in report.blockers
+    assert "dataset:fhir-agentbench:status=pending" not in report.blockers
+    assert "dataset:medagentbench:status=pending" in report.blockers
+    assert "dataset:medqabstain:status=pending" in report.blockers
     assert "system:gax-paper-candidate:status=pending" in report.blockers
 
 
