@@ -172,7 +172,9 @@ class PubMedQAQualificationReport(StrictModel):
             ("split_manifest_sha256", self.split_manifest_sha256),
             ("leakage_audit_sha256", self.leakage_audit_sha256),
         ):
-            if len(value) != 64 or any(character not in "0123456789abcdef" for character in value):
+            if len(value) != 64 or any(
+                character not in "0123456789abcdef" for character in value
+            ):
                 raise ValueError(f"{name} must be a lowercase SHA-256 digest")
         return self
 
@@ -182,7 +184,11 @@ def git_blob_sha1(data: bytes) -> str:
     return hashlib.sha1(header + data, usedforsecurity=False).hexdigest()
 
 
-def verify_frozen_source(data: bytes, *, expected_blob_sha1: str = PUBMEDQA_SOURCE_BLOB_SHA1) -> None:
+def verify_frozen_source(
+    data: bytes,
+    *,
+    expected_blob_sha1: str = PUBMEDQA_SOURCE_BLOB_SHA1,
+) -> None:
     actual = git_blob_sha1(data)
     if actual != expected_blob_sha1:
         raise ValueError(
@@ -440,7 +446,9 @@ def _text_shingles(text: str) -> frozenset[tuple[str, ...]]:
     size = PUBMEDQA_NEAR_DUPLICATE_SHINGLES
     if len(tokens) < size:
         return frozenset({tuple(tokens)})
-    return frozenset(tuple(tokens[index : index + size]) for index in range(len(tokens) - size + 1))
+    return frozenset(
+        tuple(tokens[index : index + size]) for index in range(len(tokens) - size + 1)
+    )
 
 
 def _convert_exact_findings(
