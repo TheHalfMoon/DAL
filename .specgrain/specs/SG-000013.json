@@ -1,0 +1,116 @@
+{
+  "acceptance": [
+    "A strict P08 real-inventory schema records datasets, systems, protocol candidates, immutable source identities where known, qualification status, licensing state, and authorization-critical evidence fields",
+    "Inventory status is explicit qualified, pending, or blocked and pending/blocked entries require reasons rather than silent omission",
+    "Required datasets cannot be marked qualified without verified license status plus immutable split-manifest and leakage-audit SHA-256 digests",
+    "Required systems cannot be marked qualified without source/model identity plus real-execution evidence",
+    "The inventory requires at least one GAX candidate and at least one comparison system",
+    "Final-test access is structurally sealed throughout SG-000013",
+    "A deterministic audit emits a canonical inventory digest and sorted blocker list and reports ready_for_authorization=false while mandatory evidence is incomplete",
+    "PubMedQA PQA-L, FHIR-AgentBench, MedAgentBench, MedQAbstain, MedMCQA, MedQA, and Med-PRM are recorded with honest source/license/use status rather than assumed compatibility",
+    "The existing CLM, Laya, decider, restricted-logit, clinical-encoder, structured-output, GAX, and conditional Jev identities are carried into the paper inventory with real-execution state separated from adapter qualification",
+    "Calibration, coverage, ECAL candidate components, FHIR representations, hardware protocol, and multiplicity policy are represented without using final-test labels for selection",
+    "CLI inventory auditing is deterministic and does not authorize final-test access",
+    "Tests cover sealed state, deterministic digest, blocker ordering, status-reason requirements, qualified dataset/system evidence requirements, required final-test role, protocol constraints, and duplicate IDs",
+    "Exact-head GitHub CI runs Ruff, mypy strict, pytest, and compileall on Python 3.11/3.12 across Linux and Windows",
+    "SG-000013 introduces no real final-test result, model superiority claim, clinical-safety claim, or SOTA claim"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000013.json",
+    "src/gaxbench/p08_inventory.py",
+    "src/gaxbench/p08_inventory_cli.py",
+    "registry/p08_real_inventory.json",
+    "tests/test_p08_inventory.py",
+    "tests/test_p08_inventory_cli.py",
+    "docs/research/P08_REAL_INVENTORY.md",
+    "pyproject.toml",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "children": [],
+  "context": {
+    "budget_tokens": 18000,
+    "estimated_tokens": 14000
+  },
+  "dependencies": [
+    "SG-000012"
+  ],
+  "evidence": {
+    "required": [
+      "issue-37-research-contract",
+      "source-license-inventory-review",
+      "exact-head-linux-python311-ci-pass",
+      "exact-head-linux-python312-ci-pass",
+      "exact-head-windows-python311-ci-pass",
+      "exact-head-windows-python312-ci-pass",
+      "ruff-pass",
+      "mypy-strict-pass",
+      "pytest-pass",
+      "compileall-pass",
+      "implementation-pr-pass",
+      "post-merge-ci-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "id": "SG-000013",
+  "labels": [
+    "p08",
+    "inventory",
+    "licensing",
+    "pre-authorization"
+  ],
+  "metadata": {
+    "readiness": {
+      "minimality": {
+        "choice": "new-code-and-registry",
+        "rationale": "SG-000012 froze statistical mechanics, but final-test authorization still lacks an honest real dataset/system/protocol inventory. SG-000013 adds only that missing pre-authorization layer and keeps the final test sealed."
+      },
+      "safety": {
+        "requirements": [
+          "Keep final-test access sealed throughout SG-000013.",
+          "Do not ingest or expose final-test labels or final results.",
+          "Do not infer third-party data redistribution rights from a repository software license.",
+          "Do not call adapter-qualified systems real-model-qualified without execution evidence.",
+          "Preserve pending and blocked sources in the inventory with explicit reasons."
+        ],
+        "status": "requirements-defined"
+      },
+      "unresolved_decisions": [
+        "Exact final benchmark suite remains unresolved until source terms, acquisition, split manifests, and leakage audits complete.",
+        "The GAX paper checkpoint and training seeds remain unresolved until development-only model selection is complete.",
+        "Calibration method, ECAL component retention, FHIR representation selection, hardware protocol, and multiplicity family remain unresolved until development evidence is frozen.",
+        "Jev remains optional and blocked unless reproducible access and terms permit matched evaluation."
+      ],
+      "version": 1
+    }
+  },
+  "method": "research",
+  "outcome": "Create a strict, digest-bound inventory of real P08 dataset, model, and protocol candidates that fails closed on missing qualification evidence while final-test access remains sealed.",
+  "parent_id": null,
+  "rationale": "A paper can become irreproducible or biased before model evaluation if dataset rights, split roles, system identities, blocked baselines, calibration policy, and comparison families are decided informally. SG-000013 makes those unresolved dependencies machine-visible before any final-test authorization.",
+  "risk": {
+    "level": "medium",
+    "recovery": "Revert SG-000013 files and return to canonical SG-000012 at merge 4ef48a894481abe9100f89a81970cd299138e98d. No final-test labels, real model weights, or patient data are introduced by this grain."
+  },
+  "schema_version": 1,
+  "scope_in": [
+    "Real dataset/source inventory with licensing and redistribution state",
+    "Real GAX/baseline system inventory with execution qualification state",
+    "Pending protocol freeze inventory for calibration, ECAL, FHIR, hardware, and multiplicity",
+    "Deterministic inventory digest and blocker audit",
+    "CLI, tests, and research documentation"
+  ],
+  "scope_out": [
+    "No final-test authorization",
+    "No final-test labels or results",
+    "No dataset download or redistribution",
+    "No real model training or inference",
+    "No model selection",
+    "No calibration winner selection",
+    "No ECAL keep/reject decision",
+    "No FHIR representation winner selection",
+    "No superiority, SOTA, or clinical-safety claim"
+  ],
+  "state": "GRAIN",
+  "title": "GAX-P08 - Real evaluation inventory and pre-authorization freeze"
+}
