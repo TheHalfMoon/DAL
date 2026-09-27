@@ -402,7 +402,9 @@ def qualify_frozen_source(
             test_role_contains_non_test_rows = True
 
     if non_test_roles_contain_upstream_test_rows or test_role_contains_non_test_rows:
-        raise ValueError("FHIR-AgentBench role policy leaked rows across the upstream test boundary")
+        raise ValueError(
+            "FHIR-AgentBench role policy leaked rows across the upstream test boundary"
+        )
 
     audit = FHIRAgentBenchLeakageAudit(
         upstream_cross_split_patient_identity_count=probe.cross_split_patient_identity_count,
