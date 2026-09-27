@@ -3,6 +3,11 @@
   "inventory_revision": "p08-real-inventory-v0.1",
   "repo_revision": "4ef48a894481abe9100f89a81970cd299138e98d",
   "final_test_access": "sealed",
+  "sg000012_closeout": {
+    "merge_sha": "4ef48a894481abe9100f89a81970cd299138e98d",
+    "post_main_run_id": 36294381495,
+    "conclusion": "success"
+  },
   "datasets": [
     {
       "id": "pubmedqa-pqal",
