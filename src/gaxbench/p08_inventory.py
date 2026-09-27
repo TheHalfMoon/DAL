@@ -118,6 +118,11 @@ class SystemInventoryEntry(StrictModel):
                 raise ValueError("qualified systems require a source or model revision")
             if self.real_execution_evidence_id is None:
                 raise ValueError("qualified systems require real_execution_evidence_id")
+            if self.role == "gax":
+                if self.model_revision is None:
+                    raise ValueError("qualified GAX systems require model_revision")
+                if not self.training_seeds:
+                    raise ValueError("qualified GAX systems require training_seeds")
         return self
 
 
