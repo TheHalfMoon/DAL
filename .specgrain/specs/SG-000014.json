@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "SG-000014",
   "title": "GAX-P08 - PubMedQA PQA-L qualification and split/leakage manifest",
-  "state": "ACTIVE",
+  "state": "PROVEN",
   "method": "research",
   "parent_id": null,
   "dependencies": ["SG-000013"],
@@ -53,10 +53,13 @@
     "src/gaxbench/pubmedqa.py",
     "src/gaxbench/pubmedqa_cli.py",
     "tests/test_pubmedqa.py",
+    "tests/test_p08_inventory.py",
     "docs/datasets/PUBMEDQA_PQAL.md",
     ".github/workflows/p08-pubmedqa-qualification.yml",
     "registry/p08_real_inventory.json",
     "registry/pubmedqa_pqal_qualification.json",
+    "registry/pubmedqa_pqal_split_manifest.json",
+    "registry/pubmedqa_pqal_leakage_audit.json",
     "pyproject.toml",
     "specs/CURRENT.md",
     "specs/tasks.md"
@@ -106,7 +109,40 @@
     "safety": {
       "final_test_access": "sealed",
       "test_tuning_forbidden": true,
-      "public_pretraining_contamination": "unresolved-and-must-be-disclosed"
+      "public_pretraining_contamination": "unresolved-and-must-be-disclosed",
+      "status": "proven-dataset-qualification-final-test-sealed"
+    },
+    "closeout": {
+      "research_issue": 39,
+      "implementation_pr": 41,
+      "implementation_head_sha": "5ea43ee66f1f7dd1c802d563b3fe181a1d37d902",
+      "implementation_exact_head_ci_run": 36305931114,
+      "implementation_exact_head_pubmedqa_run": 36305931102,
+      "implementation_merge_sha": "d83c78d9bc5c25162b0663bed5c9f1e757904ea6",
+      "post_merge_ci_run": 36306126656,
+      "post_merge_pubmedqa_run": 36306126686,
+      "source_sha256": "8b3276be8942ebbd77f3ddcda12c1749bf0e490045a736fd8438ee40cf37a41d",
+      "split_manifest_sha256": "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723",
+      "leakage_audit_sha256": "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443",
+      "qualification": [
+        "exact-head Linux Python 3.11 CI SUCCESS",
+        "exact-head Linux Python 3.12 CI SUCCESS",
+        "exact-head Windows Python 3.11 CI SUCCESS",
+        "exact-head Windows Python 3.12 CI SUCCESS",
+        "exact-head dedicated PubMedQA qualification SUCCESS",
+        "post-main Linux Python 3.11 CI SUCCESS",
+        "post-main Linux Python 3.12 CI SUCCESS",
+        "post-main Windows Python 3.11 CI SUCCESS",
+        "post-main Windows Python 3.12 CI SUCCESS",
+        "post-main dedicated PubMedQA qualification SUCCESS",
+        "1000 frozen PQA-L records verified",
+        "450 validation / 50 calibration / 500 sealed test membership frozen",
+        "no exact cross-role leakage finding",
+        "no preregistered Jaccard >= 0.80 near-duplicate finding",
+        "public pretraining contamination remains unresolved and disclosed",
+        "final-test performance remained sealed and P08 authorization remained false"
+      ],
+      "next_frontier": "P08 remaining required dataset and real-system qualification under the sealed final-test contract"
     }
   }
 }

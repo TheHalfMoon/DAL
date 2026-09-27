@@ -17,6 +17,7 @@ Completed grains:
 - **SG-000011 — GAX-P08 Final-test freeze and claim-evidence contract** — PROVEN
 - **SG-000012 — GAX-P08 Statistical uncertainty and evidence aggregation infrastructure** — PROVEN
 - **SG-000013 — GAX-P08 Real evaluation inventory and pre-authorization freeze** — PROVEN
+- **SG-000014 — GAX-P08 PubMedQA PQA-L qualification and split/leakage manifest** — PROVEN
 
 ## Canonical P03 evidence chain
 
@@ -149,19 +150,35 @@ SG-000012 is **CLOSED_CANONICAL** as pre-test statistical/evidence infrastructur
 
 SG-000013 is **CLOSED_CANONICAL** as real-evaluation inventory and pre-authorization governance only. It does not qualify the pending datasets or systems, authorize final-test access, establish clinical safety, or support superiority/SOTA claims.
 
+## Canonical P08 PubMedQA qualification chain
+
+- research contract: Issue #39 / SG-000014
+- implementation PR: #41
+- implementation exact head: `5ea43ee66f1f7dd1c802d563b3fe181a1d37d902`
+- implementation exact-head GAXBench CI: run `36305931114` — SUCCESS
+- implementation exact-head PubMedQA qualification: run `36305931102` — SUCCESS
+- implementation merge: `d83c78d9bc5c25162b0663bed5c9f1e757904ea6`
+- implementation post-main GAXBench CI: run `36306126656` — SUCCESS
+- implementation post-main PubMedQA qualification: run `36306126686` — SUCCESS
+- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
+- frozen source: `pubmedqa/pubmedqa@1cbae8e92f72f20c8d3747cbb3bf5bc53554d997`, `data/ori_pqal.json`, Git blob `38db7750761c78950ed32303e7545bdaa513390c`
+- source SHA-256: `8b3276be8942ebbd77f3ddcda12c1749bf0e490045a736fd8438ee40cf37a41d`
+- split manifest SHA-256: `7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723`
+- leakage audit SHA-256: `7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443`
+- frozen roles: 450 validation / 50 calibration / 500 sealed test / no PQA-L training role
+- exact cross-role leakage findings: none
+- preregistered normalized 5-token-shingle Jaccard >= 0.80 near-duplicate findings: none
+- public-backbone pretraining contamination remains `unresolved-public-benchmark` and is explicitly not represented as absent
+- final-test gold labels are not serialized into qualification artifacts; no real model inference or paper-performance evaluation occurred
+- real inventory entry `pubmedqa-pqal` is `qualified`, while overall P08 authorization remains false because other mandatory datasets, systems, and protocol fields remain incomplete
+
+SG-000014 is **CLOSED_CANONICAL** as a dataset-qualification result once this closeout merges and its own post-main CI succeeds. It proves a reproducible, leakage-audited PubMedQA PQA-L benchmark slice under a sealed final-test contract; it does not establish clinical safety, general clinical competence, absence of pretraining contamination, model superiority, or SOTA performance.
+
 Active frontier:
 
-**P08 — PubMedQA PQA-L qualification and split/leakage manifest**
+**P08 — remaining required dataset and real-system qualification under the sealed final-test contract**
 
-The next governed unit is Issue #39. It must turn PubMedQA PQA-L into the first genuinely qualified, zero-founder-cost real benchmark entry without using final-test results for model selection:
-
-- bind acquisition to `pubmedqa/pubmedqa@1cbae8e92f72f20c8d3747cbb3bf5bc53554d997` and verify the PQA-L source blob;
-- preserve PMID/source lineage and the natural closed action set `maybe`, `no`, `yes`;
-- predeclare train/development/calibration/final roles before real model comparison;
-- generate immutable split-manifest and leakage-audit digests;
-- distinguish within-GAX split leakage from unavoidable public-benchmark pretraining-contamination risk;
-- keep final-test labels inaccessible to training, calibration, model selection, ECAL selection, and FHIR representation selection;
-- update the real inventory only when qualification evidence is complete.
+The next governed unit must be selected from the remaining fail-closed inventory blockers without opening final-test results. Priority is to qualify a redistribution/access-safe FHIR/EHR benchmark path or, where access terms block that, record the blocker canonically and advance to the next dependency-ready zero-founder-cost unit.
 
 Core P08 rules remain:
 
