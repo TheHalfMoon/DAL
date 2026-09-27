@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "id": "SG-000015",
+  "title": "GAX-P08 - FHIR-AgentBench frozen local R4 dataset qualification",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000014"],
+  "children": [],
+  "labels": ["p08", "fhir-agentbench", "dataset-qualification", "fhir", "leakage"],
+  "outcome": "Qualify or explicitly block the frozen FHIR-AgentBench derived dataset using a zero-founder-cost local/public artifact path, metadata-only provenance evidence, role/leakage audits, and a sealed final-test boundary.",
+  "rationale": "P08 requires a real interoperable EHR/FHIR benchmark path. FHIR-AgentBench ships a frozen derived CSV in its public repository, so GAX can test whether that artifact is reproducibly usable without GCP or paid APIs while preserving CC BY, EHRSQL, MIMIC ODbL, and provenance constraints.",
+  "scope_in": [
+    "Frozen FHIR-AgentBench derived CSV acquisition and Git blob verification",
+    "Metadata-only real-source schema/count/split probe",
+    "FHIR-AgentBench, EHRSQL-2024, and MIMIC-IV demo license/provenance record",
+    "Explicit upstream unpinned-EHRSQL-generation caveat",
+    "Deterministic non-test role policy frozen before model comparison",
+    "Exact question/source and patient/source overlap audits",
+    "Preregistered normalized question/template overlap audit",
+    "R4 identity preservation and read-only GAX conversion contract",
+    "Dedicated zero-founder-cost GitHub Actions qualification path",
+    "Inventory promotion, retention, or block only according to real evidence"
+  ],
+  "scope_out": [
+    "No GCP FHIR store",
+    "No founder-paid cloud or paid model API",
+    "No real model inference",
+    "No final-test performance result",
+    "No model, threshold, ECAL, or FHIR representation selection",
+    "No raw FHIR-AgentBench CSV redistribution from GAX",
+    "No patient-level resource content in committed qualification evidence",
+    "No semantic R4-to-R5 conversion claim",
+    "No clinical-safety, FHIR-conformance, agent-superiority, or SOTA claim"
+  ],
+  "acceptance": [
+    "The source is pinned to glee4810/FHIR-AgentBench commit bbb42909a5a7eb907d1cd91f72a560729e7037ea and final_dataset/questions_answers_sql_fhir.csv Git blob b2225370feeaefe962c27c4d90f911584e098ac2",
+    "The build rejects source bytes whose Git blob SHA-1 does not match the frozen blob",
+    "A real-source GitHub Actions probe records only metadata-safe source SHA-256, byte count, exact header, row/split counts, identifier counts, missingness summaries, and aggregate overlap findings",
+    "Committed reports contain no raw question, SQL, answer, FHIR ID, patient resource, or patient-level row",
+    "FHIR-AgentBench repository/derived artifact CC BY 4.0, EHRSQL-2024 CC BY 4.0, and MIMIC-IV demo ODbL 1.0 obligations are recorded separately",
+    "The upstream setup_data.sh unpinned EHRSQL clone is recorded as provenance uncertainty; temporal EHRSQL revision evidence is not represented as proof of the generation revision",
+    "GAX does not relicense or commit the upstream derived CSV under Apache-2.0",
+    "Upstream split identity is preserved and final-test rows remain sealed",
+    "Any GAX calibration role is derived deterministically from non-test membership before model comparison",
+    "Cross-role patient/source identity overlap, exact question overlap, and normalized question/template overlap are measured and classified rather than silently ignored",
+    "R4 remains model-visible source identity and no semantic R4-to-R5 conversion claim is made",
+    "True answers, SQL, and true FHIR IDs are supervision-only and excluded from model-visible state",
+    "Qualification artifacts serialize no final-test gold labels",
+    "Inventory status changes only to the evidence-supported qualified, pending, or blocked state",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI and the dedicated frozen-source qualification job pass before merge",
+    "A guarded implementation merge, successful post-main qualification, and separate canonical closeout are required before SG-000015 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000015.json",
+    "src/gaxbench/fhir_agentbench_qualification.py",
+    "src/gaxbench/fhir_agentbench_qualification_cli.py",
+    "tests/test_fhir_agentbench_qualification.py",
+    "docs/datasets/FHIR_AGENTBENCH.md",
+    ".github/workflows/p08-fhir-agentbench-qualification.yml",
+    "registry/p08_real_inventory.json",
+    "registry/fhir_agentbench_qualification.json",
+    "registry/fhir_agentbench_role_manifest.json",
+    "registry/fhir_agentbench_leakage_audit.json",
+    "pyproject.toml",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "Revert SG-000015 files and retain FHIR-AgentBench as pending or blocked. Final-test access remains sealed and no model results are generated in this grain."
+  },
+  "evidence": {
+    "required": [
+      "issue-43-research-contract",
+      "frozen-fhir-agentbench-source-verification",
+      "real-source-metadata-probe",
+      "license-and-provenance-record",
+      "role-manifest-digest",
+      "leakage-audit-digest",
+      "inventory-state-evidence",
+      "exact-head-linux-python311-ci-pass",
+      "exact-head-linux-python312-ci-pass",
+      "exact-head-windows-python311-ci-pass",
+      "exact-head-windows-python312-ci-pass",
+      "dedicated-fhir-agentbench-qualification-job-pass",
+      "implementation-pr-pass",
+      "post-merge-ci-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "context": {
+    "budget_tokens": 30000,
+    "estimated_tokens": 24000
+  },
+  "metadata": {
+    "research_issue": 43,
+    "canonical_dependency": "fed5036d238bd2aeb661542624dc7c45b99f7702",
+    "source": {
+      "repository": "glee4810/FHIR-AgentBench",
+      "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+      "path": "final_dataset/questions_answers_sql_fhir.csv",
+      "git_blob_sha1": "b2225370feeaefe962c27c4d90f911584e098ac2",
+      "source_fhir_version": "R4"
+    },
+    "upstream_provenance": {
+      "ehrsql_repository": "glee4810/ehrsql-2024",
+      "ehrsql_license": "CC-BY-4.0",
+      "latest_ehrsql_commit_before_frozen_fhir_agentbench_revision": "1886034a8846dede2e8513a2ee16149c65a46fcf",
+      "generation_revision_proven": false,
+      "mimic_demo_license": "ODbL-1.0"
+    },
+    "safety": {
+      "final_test_access": "sealed",
+      "test_tuning_forbidden": true,
+      "paid_cloud_forbidden": true,
+      "gcp_required": false,
+      "raw_upstream_dataset_committed_to_gax": false
+    }
+  }
+}
