@@ -15,6 +15,7 @@ Completed grains:
 - **SG-000009 — GAX-P06 Evidence interventions and counterfactual robustness** — PROVEN
 - **SG-000010 — GAX-P07 FHIR interoperable read-only decision layer** — PROVEN
 - **SG-000011 — GAX-P08 Final-test freeze and claim-evidence contract** — PROVEN
+- **SG-000012 — GAX-P08 Statistical uncertainty and evidence aggregation infrastructure** — PROVEN
 
 ## Canonical P03 evidence chain
 
@@ -106,7 +107,7 @@ P07 is **CLOSED_CANONICAL** as an interoperability and evaluation-contract resul
 - implementation exact head: `45bd2dcdcd1e4b96be20ffbf0c77080d3bd690d0`
 - implementation exact-head CI: run `36259370327` — SUCCESS
 - implementation merge: `1818aa67f93d5ed484611392011934ecfa770a1c`
-- implementation post-main CI: run `36259485349` — SUCCESS
+- implementation post-merge CI: run `36259485349` — SUCCESS
 - exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
 - final-test access is sealed by default and authorization requires a clean tree, frozen benchmark manifests, audit hashes, frozen system identities, calibration/statistics/protocol contracts, and a digest-bound separate authorization artifact
 - the P08 gate is hard-bound to the canonical P07 closeout merge `250ffdf6d3c91c030c79fc2835daabe605efef40` and post-main run `36258521894`
@@ -116,18 +117,34 @@ P07 is **CLOSED_CANONICAL** as an interoperability and evaluation-contract resul
 
 SG-000011 is **CLOSED_CANONICAL** as a pre-test governance result. It proves the freeze/authorization/claim discipline only. It does not authorize final-test access and does not establish any model, mechanism, clinical, FHIR, calibration, or efficiency result.
 
+## Canonical P08 statistical/evidence infrastructure chain
+
+- research contract: Issue #34 / SG-000012
+- implementation PR: #35
+- implementation exact head: `af6c92afbd9a86c62989e6a92442bcb4f5eed6b6`
+- implementation exact-head CI: run `36263261077` — SUCCESS
+- implementation merge: `bb0f48c93981b5a66674af37f713ec374d3ce4cc`
+- implementation post-merge CI: run `36293926239` — SUCCESS
+- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
+- paired percentile bootstrap, evidence AUROC/AUPRC, reliability bins, failure-preserving aggregation, derived-artifact manifests, and deterministic primary-comparison reports are frozen before real final-test access
+- final-test labels and real clinical benchmark results remained sealed throughout the grain
+
+SG-000012 is **CLOSED_CANONICAL** as pre-test statistical/evidence infrastructure only. It does not authorize final-test access and does not establish model superiority, clinical safety, ECAL gains, learned-sufficiency gains, evidence-grounding gains, FHIR gains, or SOTA claims.
+
 Active frontier:
 
-**P08 — Full Paper Evaluation / statistical and evidence infrastructure**
+**P08 — Real benchmark/model/protocol freeze inventory**
 
-P08 remains open. The next governed unit builds the paired uncertainty and evidence aggregation layer needed before a real final-test freeze:
+The next governed unit must populate and audit the real development/freeze inventory before final-test authorization can even be considered:
 
-- paired bootstrap confidence intervals with frozen seeds/replicate counts;
-- deterministic evidence AUROC/AUPRC with tie handling and undefined-case reporting;
-- reliability-bin artifacts alongside ECE/NLL/Brier;
-- failure-preserving aggregation that never silently changes denominators;
-- table/figure source manifests binding every derived artifact to raw run/evidence identifiers;
-- deterministic primary-comparison report serialization.
+- immutable benchmark and split identities, license/redistribution status, source lineage, and leakage evidence;
+- GAX checkpoint identities, training seeds, architecture/training revisions, and development-only selection history;
+- baseline model/tokenizer/source revisions and real-execution qualification state;
+- calibration method/split/target-coverage policy;
+- ECAL keep/reject candidate set from development evidence only;
+- FHIR representation candidates and selection protocol;
+- hardware/timing protocol and cross-system comparability rules;
+- exact primary-comparison families and multiplicity policy.
 
 Core P08 rules remain:
 
