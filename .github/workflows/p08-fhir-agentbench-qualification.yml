@@ -109,6 +109,20 @@ jobs:
           if result.classification == "requires-review":
               raise SystemExit("cross-template near-duplicate pair requires review")
 
+      - name: Verify committed evidence matches regenerated evidence
+        if: steps.qualify.outcome == 'success' && steps.classify.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="${{ runner.temp }}/fhir-agentbench-qualification"
+          diff -u registry/fhir_agentbench_source_probe.json "$generated/source_probe.json"
+          diff -u registry/fhir_agentbench_role_manifest.json "$generated/role_manifest.json"
+          diff -u registry/fhir_agentbench_leakage_audit.json "$generated/leakage_audit.json"
+          diff -u registry/fhir_agentbench_qualification.json "$generated/qualification.json"
+          diff -u \
+            registry/fhir_agentbench_near_duplicate_classification.json \
+            "$generated/near_duplicate_classification.json"
+
       - name: Upload metadata-only qualification evidence
         if: always()
         uses: actions/upload-artifact@v4
