@@ -1,0 +1,16 @@
+{
+  "cross_split_near_duplicates": [],
+  "dataset_id": "pubmedqa-pqal",
+  "exact_cross_split_counterfactual_groups": [],
+  "exact_cross_split_input_fingerprints": [],
+  "exact_cross_split_source_ids": [],
+  "exact_duplicate_item_ids": [],
+  "final_test_access": "sealed",
+  "near_duplicate_jaccard_threshold": 0.8,
+  "near_duplicate_normalization": "lowercase-unicode-word-tokens",
+  "near_duplicate_shingle_size": 5,
+  "public_pretraining_contamination_risk": "unresolved-public-benchmark",
+  "schema_version": "0.1",
+  "test_tuning_forbidden": true,
+  "transform_revision": "gax-pqal-v0.1"
+}

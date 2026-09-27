@@ -1,0 +1,117 @@
+name: GAX P08 PubMedQA Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-pubmedqa-qualification.yml"
+      - ".specgrain/specs/SG-000014.json"
+      - "src/gaxbench/pubmedqa.py"
+      - "src/gaxbench/pubmedqa_cli.py"
+      - "tests/test_pubmedqa.py"
+      - "docs/datasets/PUBMEDQA_PQAL.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/pubmedqa_pqal_qualification.json"
+      - "registry/pubmedqa_pqal_split_manifest.json"
+      - "registry/pubmedqa_pqal_leakage_audit.json"
+      - "pyproject.toml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/p08-pubmedqa-qualification.yml"
+      - ".specgrain/specs/SG-000014.json"
+      - "src/gaxbench/pubmedqa.py"
+      - "src/gaxbench/pubmedqa_cli.py"
+      - "tests/test_pubmedqa.py"
+      - "docs/datasets/PUBMEDQA_PQAL.md"
+      - "registry/p08_real_inventory.json"
+      - "registry/pubmedqa_pqal_qualification.json"
+      - "registry/pubmedqa_pqal_split_manifest.json"
+      - "registry/pubmedqa_pqal_leakage_audit.json"
+      - "pyproject.toml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualify-pqal:
+    name: Frozen PubMedQA PQA-L qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Download frozen PubMedQA PQA-L source
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.request import urlopen
+          from gaxbench.pubmedqa import PUBMEDQA_RAW_URL
+
+          destination = Path("${{ runner.temp }}") / "ori_pqal.json"
+          with urlopen(PUBMEDQA_RAW_URL, timeout=60) as response:
+              payload = response.read()
+          destination.write_bytes(payload)
+          print(f"downloaded_bytes={len(payload)}")
+
+      - name: Qualify frozen source and enforce frozen digests
+        id: qualify
+        continue-on-error: true
+        run: >-
+          gax-pubmedqa-qualify
+          "${{ runner.temp }}/ori_pqal.json"
+          --output-dir "${{ runner.temp }}/pubmedqa-qualification"
+          --expect-split-manifest-sha256 7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723
+          --expect-leakage-audit-sha256 7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443
+
+      - name: Verify generated qualification evidence equals registry evidence
+        if: steps.qualify.outcome == 'success'
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          generated = Path("${{ runner.temp }}") / "pubmedqa-qualification"
+          checks = {
+              generated / "qualification.json": Path("registry/pubmedqa_pqal_qualification.json"),
+              generated / "split_manifest.json": Path("registry/pubmedqa_pqal_split_manifest.json"),
+              generated / "leakage_audit.json": Path("registry/pubmedqa_pqal_leakage_audit.json"),
+          }
+          for actual_path, expected_path in checks.items():
+              actual = json.loads(actual_path.read_text(encoding="utf-8"))
+              expected = json.loads(expected_path.read_text(encoding="utf-8"))
+              if actual != expected:
+                  raise SystemExit(
+                      f"generated evidence differs from registry evidence: {expected_path}"
+                  )
+          print("registry_evidence_match=true")
+
+      - name: Upload metadata-only qualification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pubmedqa-pqal-qualification
+          path: ${{ runner.temp }}/pubmedqa-qualification
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforce qualification result
+        if: steps.qualify.outcome != 'success'
+        run: |
+          echo "Frozen PubMedQA qualification did not pass. Inspect the metadata artifact; do not promote the inventory entry."
+          exit 1
