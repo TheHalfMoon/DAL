@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import pytest
 
+from gaxbench.medagentbench_audit import leakage_audit_payload
 from gaxbench.medagentbench_qualification import (
     MEDAGENTBENCH_ROLE_REVISION,
+    MedAgentBenchCorpusProbe,
     MedAgentBenchRoleManifest,
     MedAgentBenchRuntimeStatus,
     _jaccard,
@@ -12,6 +14,7 @@ from gaxbench.medagentbench_qualification import (
     _visible_tasks,
     git_blob_sha1,
 )
+from gaxbench.provenance import canonical_json_sha256
 
 
 def test_git_blob_sha1_matches_git_blob_format() -> None:
@@ -44,9 +47,21 @@ def test_visible_task_projection_requires_string_context() -> None:
 def test_near_duplicate_summary_counts_cross_family_pairs() -> None:
     tasks = _visible_tasks(
         [
-            {"id": "task1_1", "instruction": "alpha beta gamma delta epsilon zeta", "context": ""},
-            {"id": "task2_1", "instruction": "alpha beta gamma delta epsilon zeta", "context": ""},
-            {"id": "task3_1", "instruction": "one two three four five six", "context": ""},
+            {
+                "id": "task1_1",
+                "instruction": "alpha beta gamma delta epsilon zeta",
+                "context": "",
+            },
+            {
+                "id": "task2_1",
+                "instruction": "alpha beta gamma delta epsilon zeta",
+                "context": "",
+            },
+            {
+                "id": "task3_1",
+                "instruction": "one two three four five six",
+                "context": "",
+            },
         ]
     )
     near_pairs, cross_family_pairs, digest = _near_duplicate_summary(tasks)
@@ -72,9 +87,35 @@ def test_role_manifest_is_final_test_only() -> None:
 
 
 def test_official_runtime_is_fail_closed() -> None:
-    status = MedAgentBenchRuntimeStatus(blocked_reason="external artifacts are not qualified")
+    status = MedAgentBenchRuntimeStatus(
+        blocked_reason="external artifacts are not qualified"
+    )
     assert status.official_runtime_status == "blocked"
     assert status.docker_reference_is_mutable_tag is True
     assert status.refsol_immutable_revision_verified is False
     assert status.refsol_license_verified is False
     assert status.official_success_rate_claim_allowed is False
+
+
+def test_persisted_audit_payload_matches_qualification_digest_contract() -> None:
+    probe = MedAgentBenchCorpusProbe(
+        task_sha256="0" * 64,
+        task_count=2,
+        unique_task_id_count=2,
+        duplicate_task_id_count=0,
+        task_field_names=["context", "id", "instruction"],
+        task_family_counts={"task1": 2},
+        exact_duplicate_visible_task_count=0,
+        near_duplicate_visible_pair_count=1,
+        cross_family_near_duplicate_pair_count=0,
+        near_duplicate_pair_digest="1" * 64,
+        function_sha256="2" * 64,
+        function_count=1,
+        unique_function_name_count=1,
+        duplicate_function_name_count=0,
+        function_field_names=["description", "name", "parameters"],
+    )
+    payload = leakage_audit_payload(probe)
+    assert payload["role_revision"] == MEDAGENTBENCH_ROLE_REVISION
+    assert payload["near_duplicate_visible_pair_count"] == 1
+    assert len(canonical_json_sha256(payload)) == 64
