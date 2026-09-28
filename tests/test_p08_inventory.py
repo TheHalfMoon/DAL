@@ -46,6 +46,21 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert fhir.leakage_audit_sha256 == (
         "1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490"
     )
+
+    medagentbench = next(
+        entry for entry in inventory.datasets if entry.id == "medagentbench"
+    )
+    assert medagentbench.status == "blocked"
+    assert medagentbench.corpus_status == "qualified"
+    assert medagentbench.official_runtime_status == "blocked"
+    assert medagentbench.official_runtime_required_for_authorization is True
+    assert medagentbench.allowed_roles == ["final-test"]
+    assert medagentbench.split_manifest_sha256 == (
+        "daf963c8f1c13e974a4608a1cf222505f0013ed81a15616e129a106cb9a6dcb1"
+    )
+    assert medagentbench.leakage_audit_sha256 == (
+        "b1fa338c510b4787e33cb40c525d5e2ca00154eae97b86c93c5a419abf143356"
+    )
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
 
@@ -56,7 +71,9 @@ def test_repository_inventory_is_not_ready_for_authorization() -> None:
     assert "protocol:status=pending" in report.blockers
     assert "dataset:pubmedqa-pqal:status=pending" not in report.blockers
     assert "dataset:fhir-agentbench:status=pending" not in report.blockers
-    assert "dataset:medagentbench:status=pending" in report.blockers
+    assert "dataset:medagentbench:status=blocked" in report.blockers
+    assert "dataset:medagentbench:official-runtime=blocked" in report.blockers
+    assert "dataset:medagentbench:corpus-status=qualified" not in report.blockers
     assert "dataset:medqabstain:status=pending" in report.blockers
     assert "system:gax-paper-candidate:status=pending" in report.blockers
 
@@ -151,6 +168,54 @@ def test_required_dataset_must_declare_final_test_role() -> None:
             acquisition_revision="unit-v1",
             notes="unit fixture",
             pending_reason="not ready",
+        )
+
+
+def test_compound_dataset_requires_all_component_fields() -> None:
+    with pytest.raises(ValidationError, match="compound dataset qualification requires"):
+        DatasetInventoryEntry(
+            id="x",
+            source_kind="github",
+            source_url="https://github.com/example/example",
+            source_revision="0" * 40,
+            license="MIT",
+            license_status="verified",
+            redistribution="restricted",
+            status="blocked",
+            required_for_authorization=True,
+            task_family="unit",
+            allowed_roles=["final-test"],
+            split_manifest_sha256="1" * 64,
+            leakage_audit_sha256="2" * 64,
+            acquisition_revision="unit-v1",
+            notes="qualified corpus with blocked runtime",
+            blocked_reason="runtime unavailable",
+            corpus_status="qualified",
+        )
+
+
+def test_required_blocked_runtime_prevents_aggregate_qualification() -> None:
+    with pytest.raises(ValidationError, match="required official runtime"):
+        DatasetInventoryEntry(
+            id="x",
+            source_kind="github",
+            source_url="https://github.com/example/example",
+            source_revision="0" * 40,
+            license="MIT",
+            license_status="verified",
+            redistribution="restricted",
+            status="qualified",
+            required_for_authorization=True,
+            task_family="unit",
+            allowed_roles=["final-test"],
+            split_manifest_sha256="1" * 64,
+            leakage_audit_sha256="2" * 64,
+            acquisition_revision="unit-v1",
+            notes="unit fixture",
+            corpus_status="qualified",
+            official_runtime_status="blocked",
+            official_runtime_required_for_authorization=True,
+            official_runtime_blocked_reason="runtime unavailable",
         )
 
 
