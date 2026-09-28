@@ -66,6 +66,10 @@ class DatasetInventoryEntry(StrictModel):
     notes: str = Field(min_length=1)
     pending_reason: str | None = None
     blocked_reason: str | None = None
+    corpus_status: InventoryStatus | None = None
+    official_runtime_status: InventoryStatus | None = None
+    official_runtime_required_for_authorization: bool | None = None
+    official_runtime_blocked_reason: str | None = None
 
     @field_validator("allowed_roles")
     @classmethod
@@ -84,13 +88,54 @@ class DatasetInventoryEntry(StrictModel):
     @model_validator(mode="after")
     def validate_status(self) -> DatasetInventoryEntry:
         _validate_status_reasons(self.status, self.pending_reason, self.blocked_reason)
-        if self.status == "qualified":
+
+        component_values = (
+            self.corpus_status,
+            self.official_runtime_status,
+            self.official_runtime_required_for_authorization,
+        )
+        has_component_state = any(value is not None for value in component_values)
+        if has_component_state and any(value is None for value in component_values):
+            raise ValueError(
+                "compound dataset qualification requires corpus status, runtime status, "
+                "and runtime authorization requirement"
+            )
+
+        corpus_qualified = self.status == "qualified" or self.corpus_status == "qualified"
+        if corpus_qualified:
             if self.license_status != "verified":
-                raise ValueError("qualified datasets require verified license status")
+                raise ValueError("qualified dataset corpora require verified license status")
             if self.split_manifest_sha256 is None or self.leakage_audit_sha256 is None:
-                raise ValueError("qualified datasets require split and leakage audit hashes")
+                raise ValueError(
+                    "qualified dataset corpora require split and leakage audit hashes"
+                )
             if self.source_kind == "github":
-                _require_git_sha(self.source_revision, "qualified GitHub source_revision")
+                _require_git_sha(
+                    self.source_revision,
+                    "qualified GitHub source_revision",
+                )
+
+        if self.status == "qualified" and self.corpus_status not in {None, "qualified"}:
+            raise ValueError("aggregate qualified dataset cannot have unqualified corpus status")
+
+        if self.official_runtime_status == "blocked":
+            if not self.official_runtime_blocked_reason:
+                raise ValueError("blocked official runtime requires a blocked reason")
+        elif self.official_runtime_blocked_reason is not None:
+            raise ValueError(
+                "official_runtime_blocked_reason is only valid for blocked runtime status"
+            )
+
+        if (
+            self.official_runtime_required_for_authorization is True
+            and self.official_runtime_status != "qualified"
+            and self.status == "qualified"
+        ):
+            raise ValueError(
+                "dataset cannot be aggregate-qualified while a required official runtime "
+                "is unqualified"
+            )
+
         if self.required_for_authorization and "final-test" not in self.allowed_roles:
             raise ValueError("required datasets must declare a final-test role")
         return self
@@ -241,6 +286,18 @@ def audit_real_inventory(inventory: P08RealInventory) -> InventoryAudit:
     for dataset_entry in required_datasets:
         if dataset_entry.status != "qualified":
             blockers.append(f"dataset:{dataset_entry.id}:status={dataset_entry.status}")
+        if dataset_entry.corpus_status is not None and dataset_entry.corpus_status != "qualified":
+            blockers.append(
+                f"dataset:{dataset_entry.id}:corpus-status={dataset_entry.corpus_status}"
+            )
+        if (
+            dataset_entry.official_runtime_required_for_authorization is True
+            and dataset_entry.official_runtime_status != "qualified"
+        ):
+            blockers.append(
+                "dataset:"
+                f"{dataset_entry.id}:official-runtime={dataset_entry.official_runtime_status}"
+            )
         if dataset_entry.license_status != "verified":
             blockers.append(f"dataset:{dataset_entry.id}:license={dataset_entry.license_status}")
         if dataset_entry.split_manifest_sha256 is None:
