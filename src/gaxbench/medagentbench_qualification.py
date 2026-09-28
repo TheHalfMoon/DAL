@@ -53,17 +53,21 @@ class _VisibleTask:
 class MedAgentBenchCorpusProbe(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["medagentbench"] = "medagentbench"
-    source_repository: Literal["stanfordmlgroup/MedAgentBench"] = MEDAGENTBENCH_REPOSITORY
+    source_repository: Literal["stanfordmlgroup/MedAgentBench"] = (
+        "stanfordmlgroup/MedAgentBench"
+    )
     source_commit: Literal["99260117137b09f04837a8c18d18a1107efa55ae"] = (
-        MEDAGENTBENCH_SOURCE_COMMIT
+        "99260117137b09f04837a8c18d18a1107efa55ae"
     )
     repository_license: Literal["MIT"] = "MIT"
-    task_path: Literal["data/medagentbench/test_data_v2.json"] = MEDAGENTBENCH_TASK_PATH
+    task_path: Literal["data/medagentbench/test_data_v2.json"] = (
+        "data/medagentbench/test_data_v2.json"
+    )
     task_blob_sha1: Literal["7f568f041f9d22e11b5bf31b80efd2219aaaf14f"] = (
-        MEDAGENTBENCH_TASK_BLOB_SHA1
+        "7f568f041f9d22e11b5bf31b80efd2219aaaf14f"
     )
     task_sha256: str
-    task_bytes: Literal[118276] = MEDAGENTBENCH_TASK_BYTES
+    task_bytes: Literal[118276] = 118276
     task_count: int = Field(ge=1)
     unique_task_id_count: int = Field(ge=1)
     duplicate_task_id_count: int = Field(ge=0)
@@ -73,12 +77,14 @@ class MedAgentBenchCorpusProbe(StrictModel):
     near_duplicate_visible_pair_count: int = Field(ge=0)
     cross_family_near_duplicate_pair_count: int = Field(ge=0)
     near_duplicate_pair_digest: str
-    function_path: Literal["data/medagentbench/funcs_v1.json"] = MEDAGENTBENCH_FUNCTION_PATH
+    function_path: Literal["data/medagentbench/funcs_v1.json"] = (
+        "data/medagentbench/funcs_v1.json"
+    )
     function_blob_sha1: Literal["9b15acc0ccf402ede8964261c371d6a00889b436"] = (
-        MEDAGENTBENCH_FUNCTION_BLOB_SHA1
+        "9b15acc0ccf402ede8964261c371d6a00889b436"
     )
     function_sha256: str
-    function_bytes: Literal[12571] = MEDAGENTBENCH_FUNCTION_BYTES
+    function_bytes: Literal[12571] = 12571
     function_count: int = Field(ge=1)
     unique_function_name_count: int = Field(ge=1)
     duplicate_function_name_count: int = Field(ge=0)
@@ -107,7 +113,7 @@ class MedAgentBenchRoleManifest(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["medagentbench"] = "medagentbench"
     role_revision: Literal["gax-medagentbench-final-test-only-v0.1"] = (
-        MEDAGENTBENCH_ROLE_REVISION
+        "gax-medagentbench-final-test-only-v0.1"
     )
     role: Literal["final-test"] = "final-test"
     item_count: int = Field(ge=1)
@@ -131,13 +137,17 @@ class MedAgentBenchRuntimeStatus(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["medagentbench"] = "medagentbench"
     official_runtime_status: Literal["blocked"] = "blocked"
-    docker_reference: Literal["jyxsu6/medagentbench:latest"] = MEDAGENTBENCH_DOCKER_REFERENCE
+    docker_reference: Literal["jyxsu6/medagentbench:latest"] = (
+        "jyxsu6/medagentbench:latest"
+    )
     docker_reference_is_mutable_tag: Literal[True] = True
     docker_terms_verified: Literal[False] = False
     docker_patient_environment_rights_verified: Literal[False] = False
     refsol_url: Literal[
         "https://stanfordmedicine.box.com/s/fizv0unyjgkb1r3a83rfn5p3dc673uho"
-    ] = MEDAGENTBENCH_REFSOL_URL
+    ] = (
+        "https://stanfordmedicine.box.com/s/fizv0unyjgkb1r3a83rfn5p3dc673uho"
+    )
     refsol_immutable_revision_verified: Literal[False] = False
     refsol_license_verified: Literal[False] = False
     official_scoring_depends_on_refsol: Literal[True] = True
@@ -157,7 +167,7 @@ class MedAgentBenchQualificationReport(StrictModel):
     audit_sha256: str
     repository_license: Literal["MIT"] = "MIT"
     role_revision: Literal["gax-medagentbench-final-test-only-v0.1"] = (
-        MEDAGENTBENCH_ROLE_REVISION
+        "gax-medagentbench-final-test-only-v0.1"
     )
     raw_upstream_files_committed_to_gax: Literal[False] = False
     official_success_rate_claim_allowed: Literal[False] = False
