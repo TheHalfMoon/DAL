@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "id": "SG-000017",
+  "title": "GAX-P08 - MedQAbstain immutable dataset and component-rights qualification",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000016"],
+  "children": [],
+  "labels": ["p08", "medqabstain", "dataset-qualification", "abstention", "licensing"],
+  "outcome": "Freeze the immutable MedQAbstain dataset identity, audit transformed source families and rights separately, verify abstention transformation lineage without hidden-gold leakage, and admit only evidence-supported components under a sealed final-test boundary.",
+  "rationale": "MedQAbstain is directly relevant to GAX native abstention, but it is derived from multiple medical QA sources with different content and media rights. A dataset-wide code or repository license cannot substitute for component-level provenance and redistribution evidence.",
+  "scope_in": [
+    "Immutable Hugging Face dataset revision and sibling identity probe",
+    "Dataset-card license metadata recording",
+    "Component-level source/license/redistribution matrix",
+    "Separate multimodal image-rights classification",
+    "Transformation-lineage and hidden-gold leakage checks",
+    "Final-test-only default role freeze",
+    "Duplicate and near-duplicate/source-lineage audit",
+    "Public-pretraining contamination disclosure",
+    "Per-component qualified/blocked outcomes",
+    "Dedicated zero-founder-cost qualification workflow",
+    "Inventory update only to evidence-supported state"
+  ],
+  "scope_out": [
+    "No GAX or baseline final-test inference",
+    "No model/checkpoint/prompt/threshold selection from MedQAbstain",
+    "No paid API or founder-paid cloud",
+    "No copying of upstream images or raw source datasets into GAX",
+    "No real-world clinical-safety claim",
+    "No superiority or SOTA claim"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000016 closeout main a1432dc81d48407c551b1b8ddefefa478a2cd33f",
+    "Research repository is frozen at disi-unibo-nlp/llm-medical-abstention commit 3c296b55686f1bcf3e0eccbdd12bfc57c4bfdd1d",
+    "The Hugging Face dataset revision must be obtained from immutable API/Git metadata and must not be guessed as main",
+    "Sibling files and LFS/content identities are frozen metadata-only",
+    "Dataset-card license metadata is recorded exactly as published",
+    "MedXpertQA text, MedXpertQA multimodal, MedMCQA, MedQA 4-option, MedQA 5-option, and AfriMedQA are audited separately",
+    "Image/media rights are classified separately from text rights",
+    "The transformed gold target cannot be created unless the original correct option is absent from the model-visible action set",
+    "Original gold/source labels remain supervision-only",
+    "Default paper role is final-test-only unless an independent prospective development surface is proven before model comparison",
+    "Exact and preregistered normalized near-duplicate/source-overlap audits are metadata-only",
+    "Public-pretraining contamination remains unresolved and disclosed",
+    "At closeout each required component is qualified or blocked rather than indefinitely ambiguous",
+    "Overall P08 final-test access remains sealed",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI and the dedicated MedQAbstain qualification workflow pass before merge",
+    "Implementation merge uses expected_head_sha and post-main qualification succeeds",
+    "A separate canonical closeout is required before SG-000017 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000017.json",
+    "src/gaxbench/medqabstain_probe.py",
+    "tests/test_medqabstain_probe.py",
+    "docs/datasets/MEDQABSTAIN.md",
+    ".github/workflows/p08-medqabstain-qualification.yml",
+    "registry/medqabstain_hub_probe.json",
+    "registry/medqabstain_component_rights.json",
+    "registry/medqabstain_role_manifest.json",
+    "registry/medqabstain_leakage_audit.json",
+    "registry/medqabstain_qualification.json",
+    "registry/p08_real_inventory.json",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "Revert SG-000017 files and keep MedQAbstain pending/blocked. Final-test access remains sealed and no model result is generated in this grain."
+  },
+  "evidence": {
+    "required": [
+      "issue-50-research-contract",
+      "immutable-huggingface-revision-probe",
+      "component-rights-matrix",
+      "transformation-lineage-check",
+      "role-manifest-digest",
+      "leakage-audit-digest",
+      "inventory-state-evidence",
+      "exact-head-cross-platform-ci-pass",
+      "dedicated-medqabstain-qualification-pass",
+      "implementation-pr-pass",
+      "post-main-qualification-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 50,
+    "canonical_dependency": "a1432dc81d48407c551b1b8ddefefa478a2cd33f",
+    "research_repository": "disi-unibo-nlp/llm-medical-abstention",
+    "research_revision": "3c296b55686f1bcf3e0eccbdd12bfc57c4bfdd1d",
+    "dataset_repository": "disi-unibo-nlp/MedQAbstain",
+    "dataset_revision": null,
+    "components": [
+      "afrimedqa",
+      "medmcqa",
+      "medqa-4opt",
+      "medqa-5opt",
+      "medxpertqa-mm",
+      "medxpertqa-text"
+    ],
+    "safety": {
+      "final_test_access": "sealed",
+      "default_role": "final-test-only",
+      "test_tuning_forbidden": true,
+      "paid_cloud_forbidden": true
+    }
+  }
+}
