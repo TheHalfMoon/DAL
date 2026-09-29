@@ -19,7 +19,13 @@ def sha256_file(path: Path) -> str:
 
 
 def stable_value(value: Any) -> str:
-    return json.dumps(value, sort_keys=True, ensure_ascii=False, default=str, separators=(",", ":"))
+    return json.dumps(
+        value,
+        sort_keys=True,
+        ensure_ascii=False,
+        default=str,
+        separators=(",", ":"),
+    )
 
 
 def probe(path: Path, role: str) -> dict[str, Any]:
@@ -34,10 +40,7 @@ def probe(path: Path, role: str) -> dict[str, Any]:
         "column_count": table.num_columns,
         "columns": columns,
         "schema": {field.name: str(field.type) for field in table.schema},
-        "null_counts": {
-            name: table[name].null_count
-            for name in columns
-        },
+        "null_counts": {name: table[name].null_count for name in columns},
     }
 
     if "dataset" in columns:
@@ -88,7 +91,10 @@ def main() -> None:
         "raw_answers_serialized": False,
         "final_test_access": "sealed",
     }
-    Path(args.output).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    Path(args.output).write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     print(
         json.dumps(
             {
