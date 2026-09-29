@@ -3,13 +3,10 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Literal
 
-from pydantic import model_validator
+from pydantic import Field, model_validator
 
 from gaxbench.p08_real_systems import (
     PUBMEDQA_PARENT_ROLE_MANIFEST_SHA256,
-    SG000019_SELECTION_COUNT,
-    SG000019_TRAIN_COUNT,
-    SG000019_TRANSFORM_REVISION,
     DevelopmentTrainingManifest,
 )
 from gaxbench.provenance import canonical_json_sha256
@@ -29,12 +26,12 @@ from gaxbench.schema import BenchmarkItem, StrictModel
 class DevelopmentLeakageAudit(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["pubmedqa-pqal"] = "pubmedqa-pqal"
-    transform_revision: Literal["dal-p08-nested-dev-v0.1"] = SG000019_TRANSFORM_REVISION
+    transform_revision: Literal["dal-p08-nested-dev-v0.1"] = "dal-p08-nested-dev-v0.1"
     parent_role_manifest_sha256: Literal[
         "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
-    ] = PUBMEDQA_PARENT_ROLE_MANIFEST_SHA256
-    train_count: Literal[360] = SG000019_TRAIN_COUNT
-    selection_count: Literal[90] = SG000019_SELECTION_COUNT
+    ] = "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
+    train_count: Literal[360] = 360
+    selection_count: Literal[90] = 90
     exact_duplicate_item_ids: list[str]
     exact_cross_role_source_ids: list[ExactCrossSplitFinding]
     exact_cross_role_input_fingerprints: list[ExactCrossSplitFinding]
@@ -43,7 +40,7 @@ class DevelopmentLeakageAudit(StrictModel):
         "lowercase-unicode-word-tokens"
     )
     near_duplicate_shingle_size: Literal[5] = 5
-    near_duplicate_jaccard_threshold: Literal[0.8] = 0.8
+    near_duplicate_jaccard_threshold: float = Field(default=0.8, ge=0.8, le=0.8)
     cross_role_near_duplicates: list[PubMedQANearDuplicateFinding]
     clean: bool
     final_test_access: Literal["sealed"] = "sealed"
@@ -52,6 +49,8 @@ class DevelopmentLeakageAudit(StrictModel):
 
     @model_validator(mode="after")
     def validate_clean_flag(self) -> DevelopmentLeakageAudit:
+        if self.parent_role_manifest_sha256 != PUBMEDQA_PARENT_ROLE_MANIFEST_SHA256:
+            raise ValueError("parent role manifest digest drift")
         has_findings = bool(
             self.exact_duplicate_item_ids
             or self.exact_cross_role_source_ids
