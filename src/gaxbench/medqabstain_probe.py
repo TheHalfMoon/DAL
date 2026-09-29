@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 from pathlib import Path
@@ -138,8 +137,13 @@ def parse_hub_metadata(payload: dict[str, Any]) -> MedQAbstainHubProbe:
     )
 
 
-def metadata_sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+def canonical_probe_output(probe: MedQAbstainHubProbe) -> dict[str, Any]:
+    """Return publication evidence derived only from stable semantic Hub fields."""
+    return {
+        **probe.model_dump(mode="json"),
+        "research_repository": MEDQABSTAIN_RESEARCH_REPOSITORY,
+        "research_revision": MEDQABSTAIN_RESEARCH_REVISION,
+    }
 
 
 def main() -> None:
@@ -148,19 +152,12 @@ def main() -> None:
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
 
-    raw = Path(args.metadata).read_bytes()
-    payload = json.loads(raw)
+    payload = json.loads(Path(args.metadata).read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
         raise SystemExit("Hugging Face API payload must be a JSON object")
     probe = parse_hub_metadata(payload)
-    output = {
-        **probe.model_dump(mode="json"),
-        "metadata_response_sha256": metadata_sha256(raw),
-        "research_repository": MEDQABSTAIN_RESEARCH_REPOSITORY,
-        "research_revision": MEDQABSTAIN_RESEARCH_REVISION,
-    }
     Path(args.output).write_text(
-        json.dumps(output, indent=2, sort_keys=True) + "\n",
+        json.dumps(canonical_probe_output(probe), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
     print(
