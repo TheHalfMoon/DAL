@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "id": "SG-000018",
+  "title": "GAX-P08 - Native licensed abstention benchmark and pre-results protocol replacement",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000017"],
+  "children": [],
+  "labels": ["p08", "abstention", "benchmark", "protocol-freeze", "licensing"],
+  "outcome": "Replace blocked paper-required abstention/runtime dependencies with reproducible pre-results benchmark and protocol decisions while preserving sealed final-test access.",
+  "rationale": "SG-000017 proved that MedQAbstain is reproducibly identifiable but not licensed clearly enough for paper-required use. SG-000016 separately proved the MedAgentBench public corpus while leaving its official runtime/scorer blocked. These blockers must be resolved by an explicit pre-results protocol decision, never by dropping hard cases after seeing model performance.",
+  "scope_in": [
+    "GAX-native evidence-availability insufficiency pairs derived from the already-qualified PubMedQA PQA-L source",
+    "Separate information-sufficiency supervision from the closed action distribution",
+    "Deterministic pair lineage and role-manifest digests",
+    "Metadata-only split and near-duplicate audit",
+    "Independent qualification of optional external abstention sources only when immutable identity and source-content rights are established",
+    "Pre-results reclassification of blocked MedQAbstain and MedAgentBench official runtime requirements",
+    "Pre-results required-versus-optional baseline policy based only on reproducibility and zero-founder-cost compute",
+    "Calibration, coverage, hardware, multiplicity, ECAL-selection, and FHIR-representation protocol freeze",
+    "Dedicated zero-founder-cost qualification workflow"
+  ],
+  "scope_out": [
+    "No GAX or baseline final-test inference",
+    "No final-test threshold, checkpoint, prompt, ECAL, or representation selection",
+    "No conversion of abstain into an ordinary candidate action",
+    "No claim that missing benchmark evidence proves generic clinical insufficiency",
+    "No clinical-safety, deployment, superiority, or SOTA claim",
+    "No paid founder cloud/API requirement",
+    "No raw restricted source republishing"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000017 closeout main a97bd6b637be2d98ef98758749edf5f197cc97f8",
+    "Research contract is Issue #57",
+    "The required native abstention source reuses the already-qualified PubMedQA PQA-L identity rather than inventing a new mutable source",
+    "For evidence-present development/calibration items, Gold.sufficient is true and the original typed action supervision is preserved",
+    "For evidence-withheld development/calibration items, Gold.sufficient is false while Gold.action is null; abstain is not inserted into BenchmarkItem.actions",
+    "Evidence-withheld pairs preserve the same state, allowed actions, source identity, split, and deterministic pair lineage while removing model-visible evidence",
+    "Final-test pair construction never serializes action or sufficiency supervision while P08 access is sealed",
+    "No test-derived teacher data, threshold selection, prompt selection, checkpoint selection, ECAL selection, or FHIR representation selection occurs",
+    "The benchmark is described narrowly as evidence-availability insufficiency/selective-decision evaluation and not as generic clinical safety",
+    "Any external source is admitted only after immutable revision, license/source-content provenance, redistribution, split, and leakage evidence are frozen",
+    "MedQAbstain remains reported as a blocked external benchmark rather than silently removed",
+    "MedAgentBench public corpus/runtime distinction remains visible even if the blocked official runtime becomes optional for authorization",
+    "Required heavyweight baselines are reclassified only from pre-results reproducibility and zero-founder-cost evidence, never observed performance",
+    "Overall P08 final-test access remains sealed throughout SG-000018",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI and dedicated native-abstention qualification pass before merge",
+    "Implementation merges with expected_head_sha and post-main qualification succeeds",
+    "A separate canonical closeout is required before SG-000018 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000018.json",
+    ".github/workflows/p08-native-abstention-qualification.yml",
+    "docs/datasets/GAX_NATIVE_ABSTENTION.md",
+    "registry/gax_native_abstention_role_manifest.json",
+    "registry/gax_native_abstention_leakage_audit.json",
+    "registry/gax_native_abstention_qualification.json",
+    "registry/p08_real_inventory.json",
+    "src/gaxbench/native_abstention.py",
+    "tests/test_native_abstention.py",
+    "tests/test_p08_inventory.py",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "Revert SG-000018 and retain MedQAbstain/MedAgentBench blockers. Final-test access remains sealed and no model result is generated in this grain."
+  },
+  "evidence": {
+    "required": [
+      "issue-57-research-contract",
+      "sg000017-canonical-dependency",
+      "native-abstention-transform-tests",
+      "role-manifest-digest",
+      "leakage-audit-digest",
+      "protocol-freeze-evidence",
+      "inventory-state-evidence",
+      "exact-head-cross-platform-ci-pass",
+      "dedicated-native-abstention-qualification-pass",
+      "implementation-pr-pass",
+      "post-main-qualification-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 57,
+    "canonical_dependency": "a97bd6b637be2d98ef98758749edf5f197cc97f8",
+    "required_native_source": {
+      "dataset": "PubMedQA PQA-L",
+      "repository": "pubmedqa/pubmedqa",
+      "revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
+      "license": "MIT",
+      "base_qualification": "SG-000014"
+    },
+    "benchmark_tracks": [
+      "evidence-present",
+      "evidence-withheld"
+    ],
+    "external_validation_candidates": [
+      "afrimedqa/afrimedqa_v2"
+    ],
+    "safety": {
+      "final_test_access": "sealed",
+      "test_tuning_forbidden": true,
+      "abstain_is_candidate_action": false,
+      "paid_cloud_forbidden": true
+    }
+  }
+}
