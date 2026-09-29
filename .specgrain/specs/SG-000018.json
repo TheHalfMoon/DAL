@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "SG-000018",
   "title": "DAL-P08 - Native licensed abstention benchmark and pre-results protocol replacement",
-  "state": "ACTIVE",
+  "state": "PROVEN",
   "method": "research",
   "parent_id": null,
   "dependencies": ["SG-000017"],
@@ -51,7 +51,7 @@
     "The inventory transform is deterministic, idempotent on the frozen SG-000018 state, and fails closed on duplicate or conflicting native entries",
     "The calibration split digest is the canonical JSON SHA-256 of registry/p08_calibration_manifest_sg000018.json and each source digest binds the corresponding qualified role manifest",
     "The typed inventory regression suite agrees with the SG-000018 required-versus-optional dataset policy and frozen protocol state",
-    "specs/CURRENT.md and specs/tasks.md identify DAL as the current program, preserve historical GAX evidence identity, and identify SG-000018 as the active frontier",
+    "specs/CURRENT.md and specs/tasks.md identify DAL as the current program, preserve historical GAX evidence identity, and identify SG-000018 as the active frontier during implementation",
     "Overall P08 final-test access remains sealed throughout SG-000018",
     "Exact-head Linux/Windows Python 3.11/3.12 CI and dedicated native-abstention qualification pass before merge",
     "Affected PubMedQA, FHIR-AgentBench, MedAgentBench, and MedQAbstain regression qualifications pass on the exact final implementation head",
@@ -128,7 +128,7 @@
     },
     "review_tools": {
       "alibaba_open_code_review": "v1.12.9 checksum-pinned delegation/accounting",
-      "jev": "exact-diff semantic review required when a secure TypeSafe credential path is available; never fabricate execution"
+      "jev": "TypeSafe Jev exact-diff semantic review, pinned upstream revision 31f89602797fb7bea007f8a480bf368bf564954e"
     },
     "benchmark_tracks": [
       "evidence-present",
@@ -142,6 +142,55 @@
       "test_tuning_forbidden": true,
       "abstain_is_candidate_action": false,
       "paid_cloud_forbidden": true
+    },
+    "closeout": {
+      "research_issue": 57,
+      "implementation_pr": 60,
+      "implementation_base_sha": "0236a8219cecd03c7d9da52691ff67a8a2262ba4",
+      "implementation_head_sha": "bcc216885113a19d9eef8618c821b3712fa0d444",
+      "implementation_exact_head_ci_run": 36635301300,
+      "implementation_exact_head_native_abstention_run": 36635301225,
+      "implementation_exact_head_pubmedqa_run": 36635301345,
+      "implementation_exact_head_fhir_agentbench_run": 36635301277,
+      "implementation_exact_head_medagentbench_run": 36635301311,
+      "implementation_exact_head_medqabstain_run": 36635301238,
+      "implementation_exact_head_alibaba_ocr_run": 36635301242,
+      "implementation_exact_head_jev_run": 36635297195,
+      "implementation_exact_head_jev_job": 109638612830,
+      "implementation_exact_head_jev_hunks": "39/39",
+      "implementation_exact_head_jev_blocking_findings": 0,
+      "implementation_merge_sha": "dfd9899f7b8b7ba4f515b1d773b806545b0361c3",
+      "post_merge_ci_run": 36636682683,
+      "post_merge_native_abstention_run": 36636682707,
+      "post_merge_pubmedqa_run": 36636682657,
+      "post_merge_fhir_agentbench_run": 36636682597,
+      "post_merge_medagentbench_run": 36636682626,
+      "post_merge_medqabstain_run": 36636682649,
+      "qualification": [
+        "exact-head Linux Python 3.11 CI SUCCESS",
+        "exact-head Linux Python 3.12 CI SUCCESS",
+        "exact-head Windows Python 3.11 CI SUCCESS",
+        "exact-head Windows Python 3.12 CI SUCCESS",
+        "exact-head native-abstention qualification SUCCESS",
+        "exact-head PubMedQA regression qualification SUCCESS",
+        "exact-head FHIR-AgentBench regression qualification SUCCESS",
+        "exact-head MedAgentBench regression qualification SUCCESS",
+        "exact-head MedQAbstain regression qualification SUCCESS",
+        "exact-head checksum-pinned Alibaba OpenCodeReview delegation/accounting SUCCESS",
+        "exact-head Jev semantic review PASSED with complete 39/39 hunk coverage and zero blocking findings",
+        "post-main Linux Python 3.11 CI SUCCESS",
+        "post-main Linux Python 3.12 CI SUCCESS",
+        "post-main Windows Python 3.11 CI SUCCESS",
+        "post-main Windows Python 3.12 CI SUCCESS",
+        "post-main native-abstention qualification SUCCESS",
+        "post-main PubMedQA regression qualification SUCCESS",
+        "post-main FHIR-AgentBench regression qualification SUCCESS",
+        "post-main MedAgentBench regression qualification SUCCESS",
+        "post-main MedQAbstain regression qualification SUCCESS",
+        "calibration manifest canonical JSON SHA-256 89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230 remains frozen",
+        "final-test access remained sealed and no final-test model inference or test-derived selection occurred"
+      ],
+      "next_frontier": "P08 real-system qualification and development-only model/protocol selection; a new SpecGrain is required before implementation"
     }
   }
 }
