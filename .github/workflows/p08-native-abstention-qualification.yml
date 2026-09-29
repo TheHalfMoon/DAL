@@ -63,6 +63,10 @@ jobs:
           python scripts/update_sg000018_inventory.py \
             --input registry/p08_real_inventory.json \
             --output "$RUNNER_TEMP/gax-native-abstention/inventory.json"
-          echo "---BEGIN SG000018 INVENTORY---"
-          cat "$RUNNER_TEMP/gax-native-abstention/inventory.json"
-          echo "---END SG000018 INVENTORY---"
+      - name: Upload exact generated inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: sg000018-generated-inventory
+          path: ${{ runner.temp }}/gax-native-abstention/inventory.json
+          if-no-files-found: error
+          retention-days: 1
