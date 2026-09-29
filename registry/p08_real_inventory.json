@@ -299,7 +299,7 @@
   "protocol": {
     "status": "qualified",
     "calibration_method": "temperature-scaling-action+platt-sufficiency-v0.1",
-    "calibration_split_sha256": "11d347a4763475749e9f8e63532f1b26023d9d8c16c077b5005961c314f9c291",
+    "calibration_split_sha256": "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
     "coverage_targets": [0.5, 0.8, 0.9],
     "ecal_candidate_components": ["evidence", "hard-negative", "proper-scoring", "replay-retention", "state-action-contrastive"],
     "fhir_representation_candidates": ["canonical-structured", "canonical-with-narrative", "flat-text", "source-order-json"],
