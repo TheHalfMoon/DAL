@@ -168,8 +168,8 @@ def _validated_answer(result: object) -> tuple[str, dict[str, float], float | No
 def _load_agent() -> Any:
     hub_module = importlib.import_module("huggingface_hub")
     laya_module = importlib.import_module("laya")
-    snapshot_download = getattr(hub_module, "snapshot_download")
-    agent_type = getattr(laya_module, "Agent")
+    snapshot_download = hub_module.snapshot_download
+    agent_type = laya_module.Agent
     snapshot = snapshot_download(
         repo_id=LAYA_MODEL_ID,
         revision=LAYA_MODEL_REVISION,
@@ -183,7 +183,8 @@ def _load_agent() -> Any:
     snapshot_path = Path(snapshot).resolve()
     if snapshot_path.name != LAYA_MODEL_REVISION:
         raise RuntimeError(
-            f"Laya snapshot revision drift: expected {LAYA_MODEL_REVISION}, got {snapshot_path.name}"
+            "Laya snapshot revision drift: "
+            f"expected {LAYA_MODEL_REVISION}, got {snapshot_path.name}"
         )
     if not (snapshot_path / "model.safetensors").is_file():
         raise RuntimeError("pinned Laya snapshot is missing model.safetensors")
