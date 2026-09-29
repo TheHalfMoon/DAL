@@ -51,23 +51,30 @@
     "A separate canonical closeout is required before SG-000017 becomes PROVEN"
   ],
   "change_surface": [
-    ".specgrain/specs/SG-000017.json",
-    "src/gaxbench/medqabstain_probe.py",
-    "tests/test_medqabstain_probe.py",
-    "docs/datasets/MEDQABSTAIN.md",
     ".github/workflows/p08-medqabstain-qualification.yml",
-    "registry/medqabstain_hub_probe.json",
+    ".specgrain/specs/SG-000017.json",
+    "docs/datasets/MEDQABSTAIN.md",
     "registry/medqabstain_component_rights.json",
-    "registry/medqabstain_role_manifest.json",
+    "registry/medqabstain_hub_probe.json",
     "registry/medqabstain_leakage_audit.json",
+    "registry/medqabstain_parquet_probe.json",
     "registry/medqabstain_qualification.json",
+    "registry/medqabstain_role_manifest.json",
+    "registry/medqabstain_transform_audit.json",
     "registry/p08_real_inventory.json",
+    "scripts/audit_medqabstain_leakage.py",
+    "scripts/audit_medqabstain_transform.py",
+    "scripts/probe_medqabstain_parquet.py",
     "specs/CURRENT.md",
-    "specs/tasks.md"
+    "specs/tasks.md",
+    "src/gaxbench/medqabstain_probe.py",
+    "tests/test_medqabstain_leakage.py",
+    "tests/test_medqabstain_probe.py",
+    "tests/test_p08_inventory.py"
   ],
   "risk": {
     "level": "high",
-    "recovery": "Revert SG-000017 files and keep MedQAbstain pending/blocked. Final-test access remains sealed and no model result is generated in this grain."
+    "recovery": "Revert SG-000017 files and keep MedQAbstain blocked. Final-test access remains sealed and no model result is generated in this grain."
   },
   "evidence": {
     "required": [
@@ -91,7 +98,7 @@
     "research_repository": "disi-unibo-nlp/llm-medical-abstention",
     "research_revision": "3c296b55686f1bcf3e0eccbdd12bfc57c4bfdd1d",
     "dataset_repository": "disi-unibo-nlp/MedQAbstain",
-    "dataset_revision": null,
+    "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
     "components": [
       "afrimedqa",
       "medmcqa",
@@ -100,6 +107,15 @@
       "medxpertqa-mm",
       "medxpertqa-text"
     ],
+    "observed_outcome": {
+      "derived_dataset_card_license": null,
+      "aggregate_paper_eligibility": "blocked",
+      "source_row_count": 11232,
+      "construction_eligible_item_count": 11215,
+      "quarantined_item_count": 17,
+      "all_components_final_state": "blocked",
+      "blocked_reason": "The immutable derived dataset exposes no license grant and exact source-generation revisions/media rights are not sufficiently established for paper-required use."
+    },
     "safety": {
       "final_test_access": "sealed",
       "default_role": "final-test-only",
