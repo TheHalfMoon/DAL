@@ -19,6 +19,7 @@
     "Pre-results reclassification of blocked MedQAbstain and MedAgentBench official runtime requirements",
     "Pre-results required-versus-optional baseline policy based only on reproducibility and zero-founder-cost compute",
     "Calibration, coverage, hardware, multiplicity, ECAL-selection, and FHIR-representation protocol freeze",
+    "Reproducible calibration manifest binding the three authorization-critical calibration roles",
     "Dedicated zero-founder-cost qualification workflow",
     "DAL current-frontier and task-governance alignment without rewriting historical evidence"
   ],
@@ -47,6 +48,7 @@
     "MedAgentBench public corpus/runtime distinction remains visible even if the blocked official runtime becomes optional for authorization",
     "Required heavyweight baselines are reclassified only from pre-results reproducibility and zero-founder-cost evidence, never observed performance",
     "The inventory transform is deterministic, idempotent on the frozen SG-000018 state, and fails closed on duplicate or conflicting native entries",
+    "The calibration split digest is the canonical JSON SHA-256 of registry/p08_calibration_manifest_sg000018.json and each source digest binds the corresponding qualified role manifest",
     "The typed inventory regression suite agrees with the SG-000018 required-versus-optional dataset policy and frozen protocol state",
     "specs/CURRENT.md and specs/tasks.md identify DAL as the current program, preserve historical GAX evidence identity, and identify SG-000018 as the active frontier",
     "Overall P08 final-test access remains sealed throughout SG-000018",
@@ -64,6 +66,7 @@
     "registry/gax_native_abstention_leakage_audit.json",
     "registry/gax_native_abstention_qualification.json",
     "registry/gax_native_abstention_role_manifest.json",
+    "registry/p08_calibration_manifest_sg000018.json",
     "registry/p08_real_inventory.json",
     "scripts/qualify_native_abstention.py",
     "scripts/update_sg000018_inventory.py",
@@ -87,6 +90,7 @@
       "native-abstention-transform-tests",
       "role-manifest-digest",
       "leakage-audit-digest",
+      "calibration-manifest-digest-evidence",
       "protocol-freeze-evidence",
       "inventory-state-evidence",
       "inventory-idempotence-and-conflict-regression-evidence",
@@ -112,6 +116,11 @@
       "revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
       "license": "MIT",
       "base_qualification": "SG-000014"
+    },
+    "calibration_manifest": {
+      "path": "registry/p08_calibration_manifest_sg000018.json",
+      "canonical_json_sha256": "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
+      "final_test_access": "sealed"
     },
     "benchmark_tracks": [
       "evidence-present",
