@@ -16,6 +16,7 @@ from gaxbench.p08_real_systems import (
     development_manifest_digest,
 )
 from gaxbench.p08_system_qualification import (
+    RequiredModelRevisionRegistry,
     SystemQualificationBundle,
     load_qualification_bundle,
     load_required_model_registry,
@@ -65,7 +66,7 @@ def _runtime() -> RuntimeIdentity:
 
 def _canonical_qualification() -> tuple[
     P08RealInventory,
-    object,
+    RequiredModelRevisionRegistry,
     SystemQualificationBundle,
 ]:
     return (
