@@ -3,15 +3,16 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import model_validator
 
 from gaxbench.p08_real_systems import (
-    DevelopmentTrainingManifest,
     PUBMEDQA_PARENT_ROLE_MANIFEST_SHA256,
     SG000019_SELECTION_COUNT,
     SG000019_TRAIN_COUNT,
     SG000019_TRANSFORM_REVISION,
+    DevelopmentTrainingManifest,
 )
+from gaxbench.provenance import canonical_json_sha256
 from gaxbench.pubmedqa import (
     ExactCrossSplitFinding,
     PubMedQANearDuplicateFinding,
@@ -22,7 +23,6 @@ from gaxbench.pubmedqa import (
     convert_record,
     leakage_audit_ok,
 )
-from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import BenchmarkItem, StrictModel
 
 
@@ -69,7 +69,8 @@ def audit_development_training_split(
     parent: PubMedQASplitManifest,
     manifest: DevelopmentTrainingManifest,
 ) -> DevelopmentLeakageAudit:
-    if canonical_json_sha256(parent.model_dump(mode="json")) != manifest.parent_role_manifest_sha256:
+    parent_digest = canonical_json_sha256(parent.model_dump(mode="json"))
+    if parent_digest != manifest.parent_role_manifest_sha256:
         raise ValueError("development manifest parent digest does not match the supplied parent")
 
     by_pmid: dict[str, PubMedQARecord] = dict(records)
