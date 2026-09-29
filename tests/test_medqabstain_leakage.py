@@ -43,18 +43,13 @@ def test_exact_duplicate_audit_is_cross_component_and_cross_role() -> None:
 
 
 def test_near_duplicate_audit_excludes_exact_pairs() -> None:
-    prefix = (
-        "one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
-        "fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree "
-        "twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone "
-        "thirtytwo thirtythree thirtyfour thirtyfive thirtysix thirtyseven thirtyeight thirtynine"
-    )
+    prefix = " ".join(f"token{index}" for index in range(60))
     rows = [
         row(
             item_id="a",
             component="source-a",
             role="safe",
-            question=f"{prefix} forty",
+            question=f"{prefix} original",
         ),
         row(
             item_id="b",
