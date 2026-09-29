@@ -24,7 +24,7 @@ INVENTORY = ROOT / "registry" / "p08_real_inventory.json"
 def test_repository_inventory_is_valid_and_sealed() -> None:
     inventory = load_real_inventory(INVENTORY)
     assert inventory.final_test_access == "sealed"
-    assert inventory.inventory_revision == "p08-real-inventory-v0.2-sg000018"
+    assert inventory.inventory_revision == "p08-real-inventory-v0.3-sg000019-laya"
     assert inventory.sg000012_closeout.merge_sha == SG000012_CLOSEOUT_MERGE_SHA
     assert inventory.sg000012_closeout.post_main_run_id == SG000012_CLOSEOUT_POST_MAIN_RUN_ID
 
@@ -100,20 +100,31 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert inventory.protocol.multiplicity_policy == "holm-primary-family-v0.1"
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
+    laya = next(entry for entry in inventory.systems if entry.id == "laya")
+    assert laya.status == "qualified"
+    assert laya.required_for_authorization is True
+    assert laya.source_revision == "3c68ca2ccf6a83640ab80c20379503fe72c772fd"
+    assert laya.model_revision == "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+    assert laya.adapter_revision == "dal-p08-laya-pubmedqa-choice-v0.1"
+    assert laya.training_seeds == []
+    assert laya.real_execution_evidence_id == (
+        "sha256:b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    )
+
 
 def test_repository_inventory_is_not_ready_for_authorization() -> None:
     report = audit_real_inventory(load_real_inventory(INVENTORY))
     assert report.ready_for_authorization is False
     assert report.final_test_access == "sealed"
     assert report.required_dataset_count == 3
+    assert report.required_system_count == 3
     assert "protocol:status=pending" not in report.blockers
     assert not any(blocker.startswith("dataset:") for blocker in report.blockers)
     assert "system:gax-paper-candidate:status=pending" in report.blockers
     assert "system:gax-paper-candidate:missing-real-execution-evidence" in report.blockers
     assert "system:clinical-encoder:status=pending" in report.blockers
     assert "system:clinical-encoder:missing-real-execution-evidence" in report.blockers
-    assert "system:laya:status=pending" in report.blockers
-    assert "system:laya:missing-real-execution-evidence" in report.blockers
+    assert not any(blocker.startswith("system:laya:") for blocker in report.blockers)
 
 
 def test_inventory_digest_is_deterministic() -> None:
