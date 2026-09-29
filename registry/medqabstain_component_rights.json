@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.1",
+  "dataset_id": "disi-unibo-nlp/MedQAbstain",
+  "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
+  "derived_dataset_card_license": null,
+  "derived_dataset_license_status": "ambiguous",
+  "derived_dataset_redistribution": "unknown",
+  "aggregate_paper_eligibility": "blocked",
+  "aggregate_blocked_reason": "The immutable MedQAbstain dataset card exposes no license grant. Source-component licenses do not automatically license MedQAbstain's transformed collection, threat labels, prompts, or repackaged media. GAX will not treat public download access as permission.",
+  "components": [
+    {
+      "id": "afrimedqa",
+      "source_url": "https://huggingface.co/datasets/afrimedqa/afrimedqa_v2",
+      "source_license": "CC-BY-4.0",
+      "source_license_status": "verified-current-source-card",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-applicable-text-component",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "Underlying source publishes CC BY 4.0, but the MedQAbstain transformed collection has no declared dataset license and the exact upstream generation revision is not pinned by frozen preprocessing code."
+    },
+    {
+      "id": "medmcqa",
+      "source_url": "https://huggingface.co/datasets/openlifescienceai/medmcqa",
+      "source_license": "Apache-2.0",
+      "source_license_status": "verified-current-source-card",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-applicable-text-component",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "Underlying source card advertises Apache-2.0, but the MedQAbstain transformed collection has no declared dataset license and its local-source generation revision is not pinned."
+    },
+    {
+      "id": "medqa-4opt",
+      "source_url": "https://huggingface.co/datasets/bigbio/med_qa",
+      "source_license": "unknown",
+      "source_license_status": "unknown",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-applicable-text-component",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "Medical exam source-content license is not established and the MedQAbstain transformed dataset itself declares no license."
+    },
+    {
+      "id": "medqa-5opt",
+      "source_url": "https://huggingface.co/datasets/bigbio/med_qa",
+      "source_license": "unknown",
+      "source_license_status": "unknown",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-applicable-text-component",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "Medical exam source-content license is not established and the MedQAbstain transformed dataset itself declares no license."
+    },
+    {
+      "id": "medxpertqa-text",
+      "source_url": "https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA",
+      "source_license": "MIT",
+      "source_license_status": "verified-current-source-card",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-applicable-text-component",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "Underlying MedXpertQA card advertises MIT, but frozen MedQAbstain preprocessing does not pin the source generation revision and the transformed dataset card has no license grant."
+    },
+    {
+      "id": "medxpertqa-mm",
+      "source_url": "https://huggingface.co/datasets/TsinghuaC3I/MedXpertQA",
+      "source_license": "MIT",
+      "source_license_status": "verified-current-source-card",
+      "source_generation_revision_proven": false,
+      "media_rights_status": "not-independently-verified-for-every-image",
+      "derived_component_status": "blocked",
+      "paper_eligible": false,
+      "blocked_reason": "MedXpertQA card advertises MIT, but image/media rights were not independently verified per asset, the source generation revision is unpinned, and MedQAbstain images.zip has no separate license grant."
+    }
+  ],
+  "public_access_is_permission": false,
+  "raw_source_content_committed_to_gax": false,
+  "final_test_access": "sealed"
+}
