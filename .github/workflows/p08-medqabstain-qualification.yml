@@ -7,6 +7,7 @@ on:
       - ".specgrain/specs/SG-000017.json"
       - "src/gaxbench/medqabstain_probe.py"
       - "scripts/probe_medqabstain_parquet.py"
+      - "scripts/audit_medqabstain_transform.py"
       - "tests/test_medqabstain_probe.py"
       - "docs/datasets/MEDQABSTAIN.md"
       - "registry/medqabstain_*.json"
@@ -18,6 +19,7 @@ on:
       - ".specgrain/specs/SG-000017.json"
       - "src/gaxbench/medqabstain_probe.py"
       - "scripts/probe_medqabstain_parquet.py"
+      - "scripts/audit_medqabstain_transform.py"
       - "tests/test_medqabstain_probe.py"
       - "docs/datasets/MEDQABSTAIN.md"
       - "registry/medqabstain_*.json"
@@ -73,13 +75,23 @@ jobs:
             --lt /tmp/LT.parquet \
             --safe /tmp/Safe.parquet \
             --output /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
-      - name: Verify committed parquet probe when frozen
+      - name: Verify frozen parquet identity
         run: |
-          if [ -f registry/medqabstain_parquet_probe.json ]; then
-            diff -u registry/medqabstain_parquet_probe.json \
-              /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
+          diff -u registry/medqabstain_parquet_probe.json \
+            /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
+      - name: Audit transformed abstention lineage
+        run: |
+          python scripts/audit_medqabstain_transform.py \
+            --lt /tmp/LT.parquet \
+            --safe /tmp/Safe.parquet \
+            --output /tmp/medqabstain-evidence/medqabstain_transform_audit.json
+      - name: Verify committed transformation audit when frozen
+        run: |
+          if [ -f registry/medqabstain_transform_audit.json ]; then
+            diff -u registry/medqabstain_transform_audit.json \
+              /tmp/medqabstain-evidence/medqabstain_transform_audit.json
           else
-            echo "Parquet probe stage: committed freeze evidence does not exist yet."
+            echo "Transformation audit stage: committed freeze evidence does not exist yet."
           fi
       - name: Upload metadata-only probes
         uses: actions/upload-artifact@v4
