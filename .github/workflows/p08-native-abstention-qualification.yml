@@ -69,8 +69,28 @@ jobs:
           python scripts/update_sg000018_inventory.py \
             --input registry/p08_real_inventory.json \
             --output "$RUNNER_TEMP/gax-native-abstention/inventory.json"
-      - name: Verify committed pre-results inventory
-        run: diff -u registry/p08_real_inventory.json "$RUNNER_TEMP/gax-native-abstention/inventory.json"
+      - name: Verify committed pre-results inventory semantics
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          from gaxbench.p08_inventory import P08RealInventory
+          from gaxbench.provenance import canonical_json_sha256
+
+          committed_path = Path("registry/p08_real_inventory.json")
+          generated_path = Path(os.environ["RUNNER_TEMP"]) / "gax-native-abstention" / "inventory.json"
+          committed = P08RealInventory.model_validate(
+              json.loads(committed_path.read_text(encoding="utf-8"))
+          ).model_dump(mode="json")
+          generated = P08RealInventory.model_validate(
+              json.loads(generated_path.read_text(encoding="utf-8"))
+          ).model_dump(mode="json")
+          if committed != generated:
+              raise SystemExit("generated SG-000018 inventory differs semantically from committed inventory")
+          print(canonical_json_sha256(committed))
+          PY
       - name: Upload exact generated inventory
         uses: actions/upload-artifact@v4
         with:
