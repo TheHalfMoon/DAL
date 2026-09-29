@@ -34,7 +34,7 @@ The detailed evidence for each grain is preserved in its SpecGrain JSON, impleme
 PRs, Git history, workflow runs, and research evidence files. This file is a current-frontier index,
 not a mutable duplicate of every historical packet.
 
-## Latest closeout — SG-000018
+## Latest canonical closeout — SG-000018
 
 SG-000018 prospectively resolved the paper-critical benchmark/protocol blockers without opening
 final-test access or using final-test model performance for selection.
@@ -65,63 +65,82 @@ final-test access or using final-test model performance for selection.
 - multiplicity policy: `holm-primary-family-v0.1`;
 - final-test tuning: forbidden.
 
-This corrects the stale pre-merge digest previously shown in this file. The canonical digest is the
-one bound by the SG-000018 calibration manifest and verified by the implementation tests.
-
-### Implementation evidence
+### Canonical evidence
 
 - implementation PR: #60
-- exact base: `0236a8219cecd03c7d9da52691ff67a8a2262ba4`
 - exact implementation head: `bcc216885113a19d9eef8618c821b3712fa0d444`
-- exact-head GAXBench CI: run `36635301300` — SUCCESS
-- exact-head native-abstention qualification: run `36635301225` — SUCCESS
-- exact-head PubMedQA qualification: run `36635301345` — SUCCESS
-- exact-head FHIR-AgentBench qualification: run `36635301277` — SUCCESS
-- exact-head MedAgentBench qualification: run `36635301311` — SUCCESS
-- exact-head MedQAbstain qualification: run `36635301238` — SUCCESS
-- exact-head Alibaba OpenCodeReview gate: run `36635301242` — SUCCESS
-- exact-head secure Jev review: run `36635297195`, job `109638612830` — PASSED
-- Jev coverage: 39/39 exact-diff hunks, zero blocking findings
-- guarded normal implementation merge: `dfd9899f7b8b7ba4f515b1d773b806545b0361c3`
+- implementation merge: `dfd9899f7b8b7ba4f515b1d773b806545b0361c3`
+- implementation exact-head GAXBench CI: `36635301300` — SUCCESS
+- implementation exact-head secure Jev: `36635297195` / job `109638612830` — PASSED, 39/39 hunks, zero blocking findings
+- implementation exact-head Alibaba OpenCodeReview: `36635301242` — SUCCESS
+- post-main GAXBench CI: `36636682683` — SUCCESS
+- canonical closeout PR: #62
+- closeout exact head: `f72f4b1c8dc6c566ce63768097b1d6093a553bb6`
+- closeout GAXBench CI: `36637213255` — SUCCESS
+- closeout secure Jev: `36637212993` / job `109640678356` — PASSED, 11/11 hunks, zero blocking findings
+- closeout Alibaba OpenCodeReview: `36637213442` — SUCCESS
+- canonical closeout merge: `54ffad6005e3848058be59870f1fee408073ef55`
+- post-closeout GAXBench CI: `36637386023` — SUCCESS on Linux/Windows × Python 3.11/3.12
 
-### Post-main evidence on implementation merge
+Issue #57 is closed as completed. SG-000018 is CLOSED_CANONICAL.
 
-- GAXBench CI: run `36636682683` — SUCCESS on Linux/Windows × Python 3.11/3.12
-- native-abstention qualification: run `36636682707` — SUCCESS
-- PubMedQA qualification: run `36636682657` — SUCCESS
-- FHIR-AgentBench qualification: run `36636682597` — SUCCESS
-- MedAgentBench qualification: run `36636682626` — SUCCESS
-- MedQAbstain qualification: run `36636682649` — SUCCESS
+## Active frontier — SG-000019
 
-The closeout PR contains only governance/evidence binding and the correction of the stale digest in
-this index. The canonical closeout merge is represented by the merge commit that lands this file;
-this file does not predict or self-reference a future merge SHA.
+**SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation** is ACTIVE under Issue #63.
 
-## Next governed frontier — P08 real-system qualification
+Canonical dependency:
 
-No new final-test authorization exists. Before final-test access can open, a new SpecGrain must
-prospectively bind development-only real-system qualification and model/protocol selection.
+`54ffad6005e3848058be59870f1fee408073ef55`
 
-Authorization-critical unresolved systems:
+### Why SG-000019 exists
 
-- DAL/GAX paper candidate — immutable checkpoint identity, training recipe, and seeds;
-- clinical encoder — immutable model/tokenizer/source identity and real execution evidence;
-- Laya — immutable source/model identity and real execution evidence.
+The three authorization-critical systems are still pending:
 
-Development-only unresolved selections:
+- `gax-paper-candidate` — legacy inventory ID for the DAL paper candidate;
+- `clinical-encoder`;
+- `laya`.
 
-- DAL paper checkpoint and training seed selection;
-- ECAL component keep/reject set;
-- FHIR representation selection;
-- required comparison model/tokenizer revisions.
+The tiny deterministic `gax-bilinear-v0` remains an engineering/control model and must not become
+the headline paper model merely because it is already runnable.
 
-Secondary/optional systems may be qualified when legally reproducible at zero founder cost, but
-missing optional systems must remain explicit blocked/unavailable outcomes rather than silent
-exclusions.
+A second gap is now explicitly governed: the qualified PubMedQA PQA-L role surface contains 450
+development, 50 calibration, and 500 sealed final-test rows, while the trainable reference path
+requires explicit training items. SG-000019 therefore derives training only inside the 450-row
+development surface:
 
-A separate digest-bound authorization artifact is still required before any sealed final-test model
-inference. No threshold, checkpoint, prompt, ECAL component, FHIR representation, or claim may be
-selected from final-test data.
+- 360 deterministic train rows;
+- 90 deterministic selection/validation rows;
+- stratified by the frozen yes/no/maybe label;
+- calibration rows remain reserved for calibration;
+- final-test rows remain sealed and unavailable to model/protocol selection.
+
+PQA-A and PQA-U are not silently admitted because upstream distributes them as separate artifacts;
+any use would require separate immutable identity and rights qualification.
+
+### SG-000019 required outputs
+
+- nested development split manifest and leakage audit;
+- stronger DAL paper-candidate architecture/training/checkpoint provenance path;
+- matched clinical-encoder control path;
+- exact Laya checkpoint/model identity and zero-founder-cost qualification path;
+- preregistered training seeds `[0, 1, 2]`;
+- machine-readable training recipe, selection history, checkpoint, hardware/runtime, failure, and
+  real-execution evidence manifests;
+- fail-closed inventory promotion rules;
+- zero-founder-cost accelerator notebook/workflow for runs ordinary CI cannot complete;
+- exact-head CI, Alibaba OpenCodeReview, and secure TypeSafe Jev evidence before merge.
+
+The intended DAL paper candidate is non-autoregressive and typed: a frozen clinical/biomedical
+encoder backbone, typed candidate-action scoring, an evidence-sensitive path, and an explicit
+information-sufficiency mechanism separated from the action distribution. Qwen3.5-4B remains a
+structured-output generative comparison rather than the DAL headline model.
+
+### Safety boundary
+
+P08 final-test access remains **sealed** throughout SG-000019. No final-test inference, checkpoint
+selection, threshold selection, prompt selection, ECAL selection, FHIR representation selection,
+or public superiority claim is authorized. A separate later digest-bound authorization artifact is
+still mandatory before final-test execution.
 
 ## Core P08 invariants
 
