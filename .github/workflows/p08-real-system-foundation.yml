@@ -7,7 +7,9 @@ on:
       - ".specgrain/specs/SG-000019.json"
       - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
       - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
       - "scripts/qualify_p08_real_systems.py"
+      - "scripts/resolve_p08_required_model_revisions.py"
       - "src/gaxbench/p08_real_systems.py"
       - "tests/test_p08_real_systems.py"
   push:
@@ -17,7 +19,9 @@ on:
       - ".specgrain/specs/SG-000019.json"
       - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
       - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
       - "scripts/qualify_p08_real_systems.py"
+      - "scripts/resolve_p08_required_model_revisions.py"
       - "src/gaxbench/p08_real_systems.py"
       - "tests/test_p08_real_systems.py"
   workflow_dispatch:
@@ -59,6 +63,16 @@ jobs:
           else
             echo "Bootstrap generation only: committed SG-000019 manifest is not present yet."
           fi
+      - name: Resolve or verify immutable required-model revisions
+        run: |
+          if [ -f registry/p08_required_model_revisions_sg000019.json ]; then
+            python scripts/resolve_p08_required_model_revisions.py \
+              --registry registry/p08_required_model_revisions_sg000019.json \
+              --output "$RUNNER_TEMP/sg000019/model_revisions.json"
+          else
+            python scripts/resolve_p08_required_model_revisions.py \
+              --output "$RUNNER_TEMP/sg000019/model_revisions.json"
+          fi
       - name: Run SG-000019 contract tests
         run: python -m pytest -q tests/test_p08_real_systems.py
       - name: Upload exact generated SG-000019 artifacts
@@ -68,5 +82,6 @@ jobs:
           path: |
             ${{ runner.temp }}/sg000019/development_manifest.json
             ${{ runner.temp }}/sg000019/summary.json
+            ${{ runner.temp }}/sg000019/model_revisions.json
           if-no-files-found: error
           retention-days: 3
