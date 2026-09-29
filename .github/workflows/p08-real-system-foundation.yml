@@ -1,0 +1,72 @@
+name: DAL P08 Real-System Foundation
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-real-system-foundation.yml"
+      - ".specgrain/specs/SG-000019.json"
+      - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "scripts/qualify_p08_real_systems.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "tests/test_p08_real_systems.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-real-system-foundation.yml"
+      - ".specgrain/specs/SG-000019.json"
+      - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "scripts/qualify_p08_real_systems.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "tests/test_p08_real_systems.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Frozen SG-000019 development and evidence foundation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Download exact frozen PubMedQA PQA-L source
+        run: |
+          mkdir -p "$RUNNER_TEMP/sg000019"
+          curl --fail --location --retry 3 \
+            "https://raw.githubusercontent.com/pubmedqa/pubmedqa/1cbae8e92f72f20c8d3747cbb3bf5bc53554d997/data/ori_pqal.json" \
+            --output "$RUNNER_TEMP/sg000019/ori_pqal.json"
+      - name: Generate nested development manifest
+        run: |
+          python scripts/qualify_p08_real_systems.py \
+            --source "$RUNNER_TEMP/sg000019/ori_pqal.json" \
+            --parent-split registry/pubmedqa_pqal_split_manifest.json \
+            --manifest-output "$RUNNER_TEMP/sg000019/development_manifest.json" \
+            --summary-output "$RUNNER_TEMP/sg000019/summary.json"
+      - name: Verify committed development manifest when present
+        run: |
+          if [ -f registry/p08_development_training_manifest_sg000019.json ]; then
+            diff -u \
+              registry/p08_development_training_manifest_sg000019.json \
+              "$RUNNER_TEMP/sg000019/development_manifest.json"
+          else
+            echo "Bootstrap generation only: committed SG-000019 manifest is not present yet."
+          fi
+      - name: Run SG-000019 contract tests
+        run: python -m pytest -q tests/test_p08_real_systems.py
+      - name: Upload exact generated SG-000019 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sg000019-development-foundation
+          path: |
+            ${{ runner.temp }}/sg000019/development_manifest.json
+            ${{ runner.temp }}/sg000019/summary.json
+          if-no-files-found: error
+          retention-days: 3
