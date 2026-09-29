@@ -1,0 +1,109 @@
+name: DAL Secure Jev Review
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dal-secure-jev-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  jev-review:
+    name: Jev Exact-Diff Semantic Review
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      JEV_REVIEW_SHA: 31f89602797fb7bea007f8a480bf368bf564954e
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.base.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+      - name: Require secure TypeSafe credential
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${TYPESAFE_API_KEY:-}" ]; then
+            echo "::error::TYPESAFE_API_KEY is not configured for DAL GitHub Actions; Jev review is UNPROVEN."
+            exit 1
+          fi
+      - name: Fetch exact PR head as data only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$BASE_SHA"
+          git cat-file -e "$BASE_SHA^{commit}"
+          git fetch --no-tags origin "refs/pull/$PR_NUMBER/head"
+          test "$(git rev-parse FETCH_HEAD)" = "$HEAD_SHA"
+          git cat-file -e "$HEAD_SHA^{commit}"
+          test "$(git merge-base "$BASE_SHA" "$HEAD_SHA")" = "$BASE_SHA"
+          git diff --check "$BASE_SHA" "$HEAD_SHA"
+      - name: Install pinned Jev Review runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          JEV_DIR="$RUNNER_TEMP/jev-review"
+          git clone https://github.com/devagrawal09/jev-review.git "$JEV_DIR"
+          git -C "$JEV_DIR" checkout --detach "$JEV_REVIEW_SHA"
+          npm --prefix "$JEV_DIR" ci
+      - name: Verify base-controlled review adapter
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$BASE_SHA"
+          git cat-file -e "$BASE_SHA:.github/scripts/jev-exact-diff.mjs"
+          BASE_ADAPTER="$RUNNER_TEMP/dal-jev-exact-diff.mjs"
+          git show "$BASE_SHA:.github/scripts/jev-exact-diff.mjs" > "$BASE_ADAPTER"
+          node --check "$BASE_ADAPTER"
+      - name: Run genuine Jev exact-diff review
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          JEV_DIR="$RUNNER_TEMP/jev-review"
+          BASE_ADAPTER="$RUNNER_TEMP/dal-jev-exact-diff.mjs"
+          node "$BASE_ADAPTER" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_WORKSPACE" "$JEV_DIR" \
+            | tee "$RUNNER_TEMP/jev-review.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "jev-review.json").read_text())
+          if report.get("base_sha") != os.environ["BASE_SHA"]:
+              raise SystemExit("Jev report base SHA mismatch")
+          if report.get("head_sha") != os.environ["HEAD_SHA"]:
+              raise SystemExit("Jev report head SHA mismatch")
+          if report.get("status") != "PASSED":
+              raise SystemExit("Jev report did not pass")
+          if not report.get("coverage", {}).get("complete"):
+              raise SystemExit("Jev exact-diff coverage is incomplete")
+          if report.get("blocking_findings"):
+              raise SystemExit("Jev reported blocking findings")
+          print(
+              "Jev exact-diff PASS: "
+              f"{report['coverage']['reviewed_hunks']}/{report['coverage']['expected_hunks']} hunks"
+          )
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: dal-jev-review-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/jev-review.json
+          if-no-files-found: warn
+          retention-days: 14
