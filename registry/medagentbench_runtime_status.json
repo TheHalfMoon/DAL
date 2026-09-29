@@ -1,0 +1,16 @@
+{
+  "blocked_reason": "Official scoring depends on external refsol.py and a Docker-hosted FHIR environment. The frozen repository does not provide immutable refsol identity/license evidence, and the referenced Docker image uses a mutable latest tag with patient-environment rights not established by the repository MIT license.",
+  "dataset_id": "medagentbench",
+  "docker_patient_environment_rights_verified": false,
+  "docker_reference": "jyxsu6/medagentbench:latest",
+  "docker_reference_is_mutable_tag": true,
+  "docker_terms_verified": false,
+  "official_runtime_required_for_corpus_identity": false,
+  "official_runtime_status": "blocked",
+  "official_scoring_depends_on_refsol": true,
+  "official_success_rate_claim_allowed": false,
+  "refsol_immutable_revision_verified": false,
+  "refsol_license_verified": false,
+  "refsol_url": "https://stanfordmedicine.box.com/s/fizv0unyjgkb1r3a83rfn5p3dc673uho",
+  "schema_version": "0.1"
+}

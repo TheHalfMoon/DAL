@@ -1,0 +1,15 @@
+{
+  "audit_sha256": "b1fa338c510b4787e33cb40c525d5e2ca00154eae97b86c93c5a419abf143356",
+  "corpus_status": "qualified",
+  "dataset_id": "medagentbench",
+  "final_test_access": "sealed",
+  "function_sha256": "c977266db5eca75182c0d12cac1962b33ae6b5a54b9029ceb104e1a93b4c38c1",
+  "official_runtime_status": "blocked",
+  "official_success_rate_claim_allowed": false,
+  "raw_upstream_files_committed_to_gax": false,
+  "repository_license": "MIT",
+  "role_manifest_sha256": "daf963c8f1c13e974a4608a1cf222505f0013ed81a15616e129a106cb9a6dcb1",
+  "role_revision": "gax-medagentbench-final-test-only-v0.1",
+  "schema_version": "0.1",
+  "task_sha256": "b6e89b2ef82f1bef27c5778a644a8a66c7b25738bbd6a48d03ab3e5182df6ca8"
+}

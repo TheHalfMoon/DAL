@@ -1,0 +1,9 @@
+{
+  "cross_family_near_duplicate_pair_count": 0,
+  "duplicate_task_id_count": 0,
+  "exact_duplicate_visible_task_count": 0,
+  "near_duplicate_pair_digest": "f4e880f456b374c62d00a20c7e5e414544eb2ef57b4a5636057f68ca20f56718",
+  "near_duplicate_visible_pair_count": 2610,
+  "public_benchmark_pretraining_contamination": "unresolved-public-benchmark",
+  "role_revision": "gax-medagentbench-final-test-only-v0.1"
+}

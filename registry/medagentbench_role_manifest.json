@@ -1,0 +1,16 @@
+{
+  "calibration_use_forbidden": true,
+  "dataset_id": "medagentbench",
+  "final_test_access": "sealed",
+  "item_count": 300,
+  "membership_sha256": "85831df8b2b3e4f610186776b6e1e247a6cefd2113341675e7efc6318385a01d",
+  "membership_uses_task_ids_only": true,
+  "model_selection_use_forbidden": true,
+  "prompt_selection_use_forbidden": true,
+  "role": "final-test",
+  "role_revision": "gax-medagentbench-final-test-only-v0.1",
+  "schema_version": "0.1",
+  "test_gold_serialized": false,
+  "threshold_selection_use_forbidden": true,
+  "training_use_forbidden": true
+}
