@@ -8,7 +8,6 @@
   "gated": false,
   "image_archive_count": 1,
   "immutable_revision_verified": true,
-  "metadata_response_sha256": "328cfbdc2e56f9b169fdddc66e95836e36030efb0a2ac5eb0430b36067b3b7d2",
   "parquet_file_count": 2,
   "private": false,
   "raw_dataset_rows_serialized": false,
