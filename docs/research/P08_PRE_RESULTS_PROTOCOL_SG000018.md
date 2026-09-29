@@ -56,11 +56,15 @@ Prospectively frozen calibration method revision:
 - headline selective reporting includes full risk-coverage curves and risk at the frozen coverage targets;
 - insufficient/evidence-withheld cases are evaluated separately from ordinary action correctness.
 
-Calibration split digest:
+Calibration manifest:
 
-`11d347a4763475749e9f8e63532f1b26023d9d8c16c077b5005961c314f9c291`
+`registry/p08_calibration_manifest_sg000018.json`
 
-The calibration manifest binds the qualified PubMedQA, native abstention, and FHIR-AgentBench calibration-role identities. It is not a hash of final-test labels.
+Canonical JSON SHA-256:
+
+`89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230`
+
+The manifest binds the qualified calibration roles for PubMedQA PQA-L, the DAL-native abstention benchmark, and FHIR-AgentBench. Its three child digests are the corresponding qualified role/split manifest digests, and the regression suite recomputes each binding. It is not a hash of final-test labels and does not authorize final-test access.
 
 ## Primary comparisons and multiplicity
 
@@ -106,7 +110,7 @@ Before this protocol is canonical, the exact final SG-000018 implementation head
 - Linux/Windows Python 3.11/3.12 CI success;
 - native-abstention qualification success;
 - PubMedQA, FHIR-AgentBench, MedAgentBench, and MedQAbstain regression qualification success;
-- registry/tests/governance consistency;
+- calibration-manifest, inventory, tests, and governance consistency;
 - honestly recorded independent review evidence or an explicit unavailable-tool record;
 - an expected-head normal merge followed by post-main qualification;
 - a separate SG-000018 canonical closeout.
