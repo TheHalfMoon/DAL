@@ -9,8 +9,6 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-import pyarrow.parquet as pq
-
 _TOKEN_RE = re.compile(r"\w+", flags=re.UNICODE)
 SHINGLE_SIZE = 5
 NEAR_DUPLICATE_THRESHOLD = 0.80
@@ -62,6 +60,8 @@ def pair_digest(keys: list[str]) -> str:
 
 
 def load_rows(path: Path, role: str) -> list[dict[str, Any]]:
+    import pyarrow.parquet as pq
+
     table = pq.read_table(path, columns=["id", "dataset", "question", "options"])
     rows = table.to_pylist()
     for row in rows:
