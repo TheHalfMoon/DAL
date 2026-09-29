@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
-  "inventory_revision": "p08-real-inventory-v0.2-sg000018",
-  "repo_revision": "a97bd6b637be2d98ef98758749edf5f197cc97f8",
+  "inventory_revision": "p08-real-inventory-v0.3-sg000019-laya",
+  "repo_revision": "7f75fb23677492258a855f99c6c406caaf61f849",
   "final_test_access": "sealed",
   "sg000012_closeout": {
     "merge_sha": "4ef48a894481abe9100f89a81970cd299138e98d",
@@ -228,15 +228,15 @@
     {
       "id": "laya",
       "role": "baseline",
-      "status": "pending",
+      "status": "qualified",
       "required_for_authorization": true,
       "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd",
-      "model_revision": null,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
       "tokenizer_revision": null,
-      "adapter_revision": "4ef48a894481abe9100f89a81970cd299138e98d",
+      "adapter_revision": "dal-p08-laya-pubmedqa-choice-v0.1",
       "training_seeds": [],
-      "real_execution_evidence_id": null,
-      "pending_reason": "Transport is adapter-qualified; immutable model revision and real zero-founder-cost execution remain pending.",
+      "real_execution_evidence_id": "sha256:b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
+      "pending_reason": null,
       "blocked_reason": null
     },
     {
