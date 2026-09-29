@@ -1,0 +1,114 @@
+name: GAX P08 MedQAbstain Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-medqabstain-qualification.yml"
+      - ".specgrain/specs/SG-000017.json"
+      - "src/gaxbench/medqabstain_probe.py"
+      - "scripts/probe_medqabstain_parquet.py"
+      - "scripts/audit_medqabstain_transform.py"
+      - "scripts/audit_medqabstain_leakage.py"
+      - "tests/test_medqabstain_probe.py"
+      - "docs/datasets/MEDQABSTAIN.md"
+      - "registry/medqabstain_*.json"
+      - "registry/p08_real_inventory.json"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-medqabstain-qualification.yml"
+      - ".specgrain/specs/SG-000017.json"
+      - "src/gaxbench/medqabstain_probe.py"
+      - "scripts/probe_medqabstain_parquet.py"
+      - "scripts/audit_medqabstain_transform.py"
+      - "scripts/audit_medqabstain_leakage.py"
+      - "tests/test_medqabstain_probe.py"
+      - "docs/datasets/MEDQABSTAIN.md"
+      - "registry/medqabstain_*.json"
+      - "registry/p08_real_inventory.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    name: Frozen MedQAbstain immutable-source qualification probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install -e .
+          python -m pip install "pyarrow>=17,<22"
+      - name: Download immutable-revision metadata source
+        run: |
+          curl --fail --location --silent --show-error \
+            "https://huggingface.co/api/datasets/disi-unibo-nlp/MedQAbstain?blobs=true" \
+            --output /tmp/medqabstain-hub.json
+      - name: Generate immutable identity probe
+        run: |
+          mkdir -p /tmp/medqabstain-evidence
+          python -m gaxbench.medqabstain_probe \
+            --metadata /tmp/medqabstain-hub.json \
+            --output /tmp/medqabstain-evidence/medqabstain_hub_probe.json
+      - name: Verify frozen hub identity
+        run: |
+          diff -u registry/medqabstain_hub_probe.json \
+            /tmp/medqabstain-evidence/medqabstain_hub_probe.json
+      - name: Download frozen parquet sources
+        run: |
+          REV="d215847217bb5f4124b9110379d33b9eb2f8d3f7"
+          BASE="https://huggingface.co/datasets/disi-unibo-nlp/MedQAbstain/resolve/${REV}/data"
+          curl --fail --location --silent --show-error \
+            "${BASE}/LT-00000-of-00001.parquet" --output /tmp/LT.parquet
+          curl --fail --location --silent --show-error \
+            "${BASE}/Safe-00000-of-00001.parquet" --output /tmp/Safe.parquet
+      - name: Generate metadata-only parquet probe
+        run: |
+          python scripts/probe_medqabstain_parquet.py \
+            --lt /tmp/LT.parquet \
+            --safe /tmp/Safe.parquet \
+            --output /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
+      - name: Verify frozen parquet identity
+        run: |
+          diff -u registry/medqabstain_parquet_probe.json \
+            /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
+      - name: Audit transformed abstention lineage
+        run: |
+          python scripts/audit_medqabstain_transform.py \
+            --lt /tmp/LT.parquet \
+            --safe /tmp/Safe.parquet \
+            --output /tmp/medqabstain-evidence/medqabstain_transform_audit.json
+      - name: Verify committed transformation audit
+        run: |
+          diff -u registry/medqabstain_transform_audit.json \
+            /tmp/medqabstain-evidence/medqabstain_transform_audit.json
+      - name: Audit model-visible exact and near duplicates
+        run: |
+          python scripts/audit_medqabstain_leakage.py \
+            --lt /tmp/LT.parquet \
+            --safe /tmp/Safe.parquet \
+            --output /tmp/medqabstain-evidence/medqabstain_leakage_audit.json
+      - name: Verify committed leakage audit when frozen
+        run: |
+          if [ -f registry/medqabstain_leakage_audit.json ]; then
+            diff -u registry/medqabstain_leakage_audit.json \
+              /tmp/medqabstain-evidence/medqabstain_leakage_audit.json
+          else
+            echo "Leakage audit stage: committed freeze evidence does not exist yet."
+          fi
+      - name: Upload metadata-only probes
+        uses: actions/upload-artifact@v4
+        with:
+          name: medqabstain-qualification-probes
+          path: /tmp/medqabstain-evidence/*.json
+          if-no-files-found: error
+          retention-days: 7
