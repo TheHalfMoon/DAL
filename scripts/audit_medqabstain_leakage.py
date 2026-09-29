@@ -85,7 +85,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             options = parse_options(row["options"])
         except ValueError:
             parse_failures[component] += 1
-            options = {}
+            continue
 
         question = normalize(row["question"])
         option_values = sorted(normalize(value) for value in options.values())
@@ -100,6 +100,12 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         roles.append(role)
         fingerprints.append(fingerprint)
         shingle_sets.append(shingles(visible_text))
+
+    if parse_failures:
+        raise ValueError(
+            "option parsing failed; leakage audit refuses a partial model-visible surface: "
+            f"{dict(sorted(parse_failures.items()))}"
+        )
 
     fingerprint_groups: dict[str, list[int]] = defaultdict(list)
     for index, fingerprint in enumerate(fingerprints):
@@ -174,7 +180,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "row_count": len(rows),
         "unique_composite_key_count": composite_key_count,
         "duplicate_composite_key_count": len(rows) - composite_key_count,
-        "option_parse_failure_counts": dict(sorted(parse_failures.items())),
+        "option_parse_failure_counts": {},
         "exact_duplicate_group_count": exact_duplicate_group_count,
         "exact_duplicate_pair_count": exact_pair_count,
         "exact_cross_component_pair_count": exact_cross_component,
