@@ -1,0 +1,22 @@
+{
+  "artifact_id": 11067464805,
+  "artifact_sha256": "0123a17c4f845f2701a749526ddc7ac112b01c6d389dde3867ce7fbdb9b9f9c5",
+  "completed_count": 90,
+  "development_accuracy": {
+    "accuracy": 0.5333333333333333,
+    "correct_count": 48
+  },
+  "execution_evidence_sha256": "4d4a3fcb141ead95352afd465139e0cc450b2073f9b14b1cc06988bfc551e42a",
+  "failure_count": 0,
+  "final_test_access": "sealed",
+  "head_sha": "7f75fb23677492258a855f99c6c406caaf61f849",
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "qualification_bundle_sha256": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
+  "requested_count": 90,
+  "run_id": 36644042755,
+  "schema_version": "0.1",
+  "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd",
+  "status": "complete",
+  "system_id": "laya",
+  "zero_founder_cost": true
+}

@@ -1,0 +1,114 @@
+name: DAL P08 Laya Real Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-laya-real-qualification.yml"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
+      - "registry/p08_real_inventory.json"
+      - "registry/p08_laya_execution_evidence_sg000019.json"
+      - "registry/p08_laya_qualification_bundle_sg000019.json"
+      - "registry/p08_laya_qualification_summary_sg000019.json"
+      - "scripts/run_p08_laya_qualification.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "src/gaxbench/p08_system_qualification.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-laya-real-qualification.yml"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
+      - "registry/p08_real_inventory.json"
+      - "registry/p08_laya_execution_evidence_sg000019.json"
+      - "registry/p08_laya_qualification_bundle_sg000019.json"
+      - "registry/p08_laya_qualification_summary_sg000019.json"
+      - "scripts/run_p08_laya_qualification.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "src/gaxbench/p08_system_qualification.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  LAYA_SOURCE_REVISION: 3c68ca2ccf6a83640ab80c20379503fe72c772fd
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  TOKENIZERS_PARALLELISM: "false"
+  OMP_NUM_THREADS: "2"
+  MKL_NUM_THREADS: "2"
+
+jobs:
+  qualify-laya:
+    name: Pinned Laya CPU development-selection qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install DAL and pinned CPU runtime
+        run: |
+          python -m pip install -e .
+          python -m pip install \
+            --index-url https://download.pytorch.org/whl/cpu \
+            "torch==2.8.0"
+          python -m pip install \
+            "transformers==4.57.1" \
+            "safetensors==0.6.2" \
+            "huggingface_hub==0.35.3" \
+            "tokenizers==0.22.1" \
+            "numpy==2.2.6"
+          python -m pip install --no-deps \
+            "git+https://github.com/NandhaKishorM/laya.git@${LAYA_SOURCE_REVISION}"
+      - name: Download exact frozen PubMedQA PQA-L source
+        run: |
+          mkdir -p "$RUNNER_TEMP/sg000019-laya"
+          curl --fail --location --retry 3 \
+            "https://raw.githubusercontent.com/pubmedqa/pubmedqa/1cbae8e92f72f20c8d3747cbb3bf5bc53554d997/data/ori_pqal.json" \
+            --output "$RUNNER_TEMP/sg000019-laya/ori_pqal.json"
+      - name: Execute pinned Laya on development-selection only
+        run: |
+          python scripts/run_p08_laya_qualification.py \
+            --source "$RUNNER_TEMP/sg000019-laya/ori_pqal.json" \
+            --development-manifest registry/p08_development_training_manifest_sg000019.json \
+            --predictions-output "$RUNNER_TEMP/sg000019-laya/predictions.json" \
+            --evidence-output "$RUNNER_TEMP/sg000019-laya/execution_evidence.json" \
+            --bundle-output "$RUNNER_TEMP/sg000019-laya/qualification_bundle.json" \
+            --summary-output "$RUNNER_TEMP/sg000019-laya/summary.json"
+      - name: Upload exact real-execution evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000019-laya-real-qualification
+          path: ${{ runner.temp }}/sg000019-laya/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Require complete failure-free qualification
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          from gaxbench.p08_real_systems import SystemExecutionEvidence
+          from gaxbench.p08_system_qualification import SystemQualificationBundle
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000019-laya"
+          evidence = SystemExecutionEvidence.model_validate(
+              json.loads((root / "execution_evidence.json").read_text(encoding="utf-8"))
+          )
+          if evidence.status != "complete":
+              raise SystemExit(
+                  "Laya real qualification is not complete: "
+                  f"status={evidence.status} failures={evidence.failures.total()}"
+              )
+          bundle = SystemQualificationBundle.model_validate(
+              json.loads((root / "qualification_bundle.json").read_text(encoding="utf-8"))
+          )
+          if bundle.system_id != "laya":
+              raise SystemExit("unexpected qualification bundle system")
+          print("Laya real qualification PASS: 90/90, zero preserved failures")
+          PY

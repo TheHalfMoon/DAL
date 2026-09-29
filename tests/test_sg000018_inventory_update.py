@@ -23,10 +23,43 @@ def _payload() -> dict[str, object]:
     return json.loads(INVENTORY.read_text(encoding="utf-8"))
 
 
+def _system(payload: dict[str, object], system_id: str) -> dict[str, object]:
+    systems = payload["systems"]
+    assert isinstance(systems, list)
+    return next(
+        entry
+        for entry in systems
+        if isinstance(entry, dict) and entry.get("id") == system_id
+    )
+
+
 def test_sg000018_inventory_transform_is_idempotent() -> None:
     payload = _payload()
-    assert transform(payload) == payload
-    assert transform(transform(payload)) == payload
+    transformed = transform(payload)
+
+    assert transformed == payload
+    assert transform(transformed) == payload
+    assert transformed["inventory_revision"] == "p08-real-inventory-v0.3-sg000019-laya"
+    assert transformed["repo_revision"] == "7f75fb23677492258a855f99c6c406caaf61f849"
+
+    laya = _system(transformed, "laya")
+    assert laya["status"] == "qualified"
+    assert laya["model_revision"] == "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+    assert laya["adapter_revision"] == "dal-p08-laya-pubmedqa-choice-v0.1"
+    assert laya["real_execution_evidence_id"] == (
+        "sha256:b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    )
+
+
+def test_sg000018_inventory_transform_does_not_mutate_later_input() -> None:
+    payload = _payload()
+    before = copy.deepcopy(payload)
+
+    transformed = transform(payload)
+
+    assert payload == before
+    assert transformed == before
+    assert transformed is not payload
 
 
 def test_sg000018_inventory_transform_fails_closed_on_native_conflict() -> None:
@@ -56,6 +89,25 @@ def test_sg000018_inventory_transform_rejects_duplicate_native_dataset() -> None
     datasets.append(copy.deepcopy(native))
 
     with pytest.raises(ValueError, match="appears more than once"):
+        transform(payload)
+
+
+def test_sg000018_inventory_transform_rejects_post_sg18_protocol_drift() -> None:
+    payload = _payload()
+    protocol = payload["protocol"]
+    assert isinstance(protocol, dict)
+    protocol["calibration_split_sha256"] = "0" * 64
+
+    with pytest.raises(ValueError, match="protocol field 'calibration_split_sha256' drifted"):
+        transform(payload)
+
+
+def test_sg000018_inventory_transform_rejects_post_sg18_policy_drift() -> None:
+    payload = _payload()
+    laya = _system(payload, "laya")
+    laya["required_for_authorization"] = False
+
+    with pytest.raises(ValueError, match="laya must remain authorization-critical"):
         transform(payload)
 
 

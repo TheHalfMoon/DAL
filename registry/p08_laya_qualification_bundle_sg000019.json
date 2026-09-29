@@ -1,0 +1,53 @@
+{
+  "checkpoints": [],
+  "development_leakage_audit_sha256": "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76",
+  "development_manifest_sha256": "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c",
+  "executions": [
+    {
+      "adapter_revision": "dal-p08-laya-pubmedqa-choice-v0.1",
+      "checkpoint_sha256": null,
+      "completed_count": 90,
+      "dataset_manifest_sha256": "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c",
+      "evaluation_role": "development-selection",
+      "failures": {
+        "interface": 0,
+        "oom": 0,
+        "other": 0,
+        "timeout": 0,
+        "transport": 0
+      },
+      "final_test_access": "sealed",
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "predictions_sha256": "577b487ea4f4f7ad728d46fe216d56d693838a55cb23b4388e2edd0bdf797d9b",
+      "requested_count": 90,
+      "role": "baseline",
+      "runtime": {
+        "accelerator": "cpu",
+        "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "packages": {
+          "gaxbench": "0.1.0",
+          "huggingface_hub": "0.35.3",
+          "laya": "0.3.20",
+          "numpy": "2.2.6",
+          "safetensors": "0.6.2",
+          "tokenizers": "0.22.1",
+          "torch": "2.8.0+cpu",
+          "transformers": "4.57.1"
+        },
+        "processor": "x86_64",
+        "python": "3.12.14"
+      },
+      "schema_version": "0.1",
+      "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd",
+      "status": "complete",
+      "system_id": "laya",
+      "tokenizer_revision": null,
+      "training_seed": null,
+      "zero_founder_cost": true
+    }
+  ],
+  "final_test_access": "sealed",
+  "qualification_status": "qualified",
+  "schema_version": "0.1",
+  "system_id": "laya"
+}

@@ -1,0 +1,120 @@
+name: DAL P08 Real-System Foundation
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-real-system-foundation.yml"
+      - ".specgrain/specs/SG-000019.json"
+      - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_development_leakage_audit_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
+      - "registry/p08_real_inventory.json"
+      - "registry/p08_laya_execution_evidence_sg000019.json"
+      - "registry/p08_laya_qualification_bundle_sg000019.json"
+      - "registry/p08_laya_qualification_summary_sg000019.json"
+      - "scripts/qualify_p08_real_systems.py"
+      - "scripts/resolve_p08_required_model_revisions.py"
+      - "src/gaxbench/p08_development_audit.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "src/gaxbench/p08_system_qualification.py"
+      - "tests/test_p08_real_systems.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-real-system-foundation.yml"
+      - ".specgrain/specs/SG-000019.json"
+      - "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md"
+      - "registry/p08_development_training_manifest_sg000019.json"
+      - "registry/p08_development_leakage_audit_sg000019.json"
+      - "registry/p08_required_model_revisions_sg000019.json"
+      - "registry/p08_real_inventory.json"
+      - "registry/p08_laya_execution_evidence_sg000019.json"
+      - "registry/p08_laya_qualification_bundle_sg000019.json"
+      - "registry/p08_laya_qualification_summary_sg000019.json"
+      - "scripts/qualify_p08_real_systems.py"
+      - "scripts/resolve_p08_required_model_revisions.py"
+      - "src/gaxbench/p08_development_audit.py"
+      - "src/gaxbench/p08_real_systems.py"
+      - "src/gaxbench/p08_system_qualification.py"
+      - "tests/test_p08_real_systems.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Frozen SG-000019 development and evidence foundation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Download exact frozen PubMedQA PQA-L source
+        run: |
+          mkdir -p "$RUNNER_TEMP/sg000019"
+          curl --fail --location --retry 3 \
+            "https://raw.githubusercontent.com/pubmedqa/pubmedqa/1cbae8e92f72f20c8d3747cbb3bf5bc53554d997/data/ori_pqal.json" \
+            --output "$RUNNER_TEMP/sg000019/ori_pqal.json"
+      - name: Generate nested development manifest and leakage audit
+        run: |
+          python scripts/qualify_p08_real_systems.py \
+            --source "$RUNNER_TEMP/sg000019/ori_pqal.json" \
+            --parent-split registry/pubmedqa_pqal_split_manifest.json \
+            --manifest-output "$RUNNER_TEMP/sg000019/development_manifest.json" \
+            --leakage-output "$RUNNER_TEMP/sg000019/development_leakage_audit.json" \
+            --summary-output "$RUNNER_TEMP/sg000019/summary.json"
+      - name: Verify committed development artifacts
+        run: |
+          diff -u \
+            registry/p08_development_training_manifest_sg000019.json \
+            "$RUNNER_TEMP/sg000019/development_manifest.json"
+          diff -u \
+            registry/p08_development_leakage_audit_sg000019.json \
+            "$RUNNER_TEMP/sg000019/development_leakage_audit.json"
+      - name: Resolve and verify immutable required-model revisions
+        run: |
+          python scripts/resolve_p08_required_model_revisions.py \
+            --registry registry/p08_required_model_revisions_sg000019.json \
+            --output "$RUNNER_TEMP/sg000019/model_revisions.json"
+      - name: Validate canonical system promotion evidence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          from gaxbench.p08_inventory import load_real_inventory
+          from gaxbench.p08_system_qualification import (
+              load_qualification_bundle,
+              load_required_model_registry,
+              validate_inventory_qualification,
+          )
+
+          root = Path("registry")
+          inventory = load_real_inventory(root / "p08_real_inventory.json")
+          registry = load_required_model_registry(
+              root / "p08_required_model_revisions_sg000019.json"
+          )
+          laya_bundle = load_qualification_bundle(
+              root / "p08_laya_qualification_bundle_sg000019.json"
+          )
+          validate_inventory_qualification(inventory, registry, {"laya": laya_bundle})
+          print("Canonical Laya promotion evidence PASS; remaining required systems stay pending")
+          PY
+      - name: Run SG-000019 contract tests
+        run: python -m pytest -q tests/test_p08_real_systems.py
+      - name: Upload exact generated SG-000019 artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000019-development-foundation
+          path: |
+            ${{ runner.temp }}/sg000019/development_manifest.json
+            ${{ runner.temp }}/sg000019/development_leakage_audit.json
+            ${{ runner.temp }}/sg000019/summary.json
+            ${{ runner.temp }}/sg000019/model_revisions.json
+          if-no-files-found: error
+          retention-days: 3

@@ -1,0 +1,26 @@
+{
+  "final_test_access": "sealed",
+  "identity_policy": "immutable-huggingface-commit-v0.1",
+  "schema_version": "0.1",
+  "systems": [
+    {
+      "identity_status": "frozen-not-executed",
+      "license": "Apache-2.0",
+      "model_id": "convaiinnovations/laya",
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "role": "baseline",
+      "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd",
+      "system_id": "laya"
+    },
+    {
+      "identity_status": "frozen-not-executed",
+      "license": "MIT",
+      "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
+      "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+      "role": "control",
+      "source_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+      "system_id": "clinical-encoder",
+      "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    }
+  ]
+}

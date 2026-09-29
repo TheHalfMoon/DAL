@@ -1,0 +1,20 @@
+{
+  "calibration_rows_included": false,
+  "clean": true,
+  "cross_role_near_duplicates": [],
+  "dataset_id": "pubmedqa-pqal",
+  "exact_cross_role_counterfactual_groups": [],
+  "exact_cross_role_input_fingerprints": [],
+  "exact_cross_role_source_ids": [],
+  "exact_duplicate_item_ids": [],
+  "final_test_access": "sealed",
+  "final_test_rows_included": false,
+  "near_duplicate_jaccard_threshold": 0.8,
+  "near_duplicate_normalization": "lowercase-unicode-word-tokens",
+  "near_duplicate_shingle_size": 5,
+  "parent_role_manifest_sha256": "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723",
+  "schema_version": "0.1",
+  "selection_count": 90,
+  "train_count": 360,
+  "transform_revision": "dal-p08-nested-dev-v0.1"
+}
