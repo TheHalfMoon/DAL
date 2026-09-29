@@ -210,7 +210,37 @@ PubMedQA and FHIR-AgentBench are qualified required benchmark slices under seale
 - [x] Independent review evidence recorded: checksum-pinned Alibaba OpenCodeReview and secure TypeSafe Jev exact-diff review
 - [x] SG-000018 implementation merged with expected-head guard
 - [x] Post-main qualification verified
-- [x] Separate SG-000018 canonical closeout prepared and required to land by guarded normal merge
+- [x] SG-000018 canonical closeout merged and post-closeout CI verified
+
+### SG-000019 — Paper-candidate training freeze and required-system qualification foundation (ACTIVE)
+
+Research contract: Issue #63. Canonical dependency: `54ffad6005e3848058be59870f1fee408073ef55`.
+
+- [ ] Derive exactly 360 train and 90 selection rows from the 450 qualified PubMedQA development rows
+- [ ] Prove derived train/selection membership is disjoint from 50 calibration and 500 sealed final-test rows
+- [ ] Bind deterministic stratification, transform revision, role-manifest digest, and leakage audit
+- [ ] Keep PQA-A/PQA-U excluded unless separately qualified for immutable identity and rights
+- [ ] Implement stronger DAL paper-candidate typed-decision architecture/training path
+- [ ] Keep `gax-bilinear-v0` as engineering/control model, not headline paper candidate
+- [ ] Freeze clinical backbone and tokenizer revision for the DAL candidate
+- [ ] Implement evidence-sensitive representation and separate information-sufficiency mechanism
+- [ ] Freeze training seeds `[0, 1, 2]`
+- [ ] Create machine-readable training recipe and per-seed checkpoint provenance
+- [ ] Create machine-readable development-only selection history / keep-reject ledger
+- [ ] Implement matched BioClinical ModernBERT clinical-encoder control path
+- [ ] Freeze exact Laya checkpoint/model revision on source revision `3c68ca2ccf6a83640ab80c20379503fe72c772fd`
+- [ ] Implement zero-founder-cost Laya real-execution qualification path
+- [ ] Create real-execution evidence schema with hardware/runtime/software identity and failure-preserving counts
+- [ ] Ensure inventory promotion fails closed without immutable real-execution evidence
+- [ ] Create zero-founder-cost accelerator notebook/workflow with no final-test labels
+- [ ] Keep P08 final-test access sealed throughout implementation
+- [ ] Exact-head Linux/Windows Python 3.11/3.12 CI
+- [ ] Affected P08 regression qualification
+- [ ] Checksum-pinned Alibaba OpenCodeReview exact-range evidence
+- [ ] Secure TypeSafe Jev exact-diff review with complete coverage and zero blocking findings
+- [ ] Guarded normal implementation merge with expected head
+- [ ] Post-main qualification
+- [ ] Separate SG-000019 canonical closeout
 
 ### Freeze before final-test access
 
@@ -237,9 +267,7 @@ PubMedQA and FHIR-AgentBench are qualified required benchmark slices under seale
 - [x] SG-000012 guarded implementation merge and post-main CI
 - [x] SG-000012 canonical closeout
 
-### Real-model qualification — next governed frontier
-
-A new SpecGrain must be activated before implementation. Final-test access remains sealed.
+### Real-model qualification
 
 Authorization-critical systems:
 
