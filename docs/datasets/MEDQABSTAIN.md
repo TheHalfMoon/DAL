@@ -2,57 +2,69 @@
 
 GAX treats MedQAbstain as a derived abstention benchmark whose source families and media rights must be qualified independently.
 
-## Frozen research source
+## Frozen identity
 
 - research repository: `disi-unibo-nlp/llm-medical-abstention`
 - research revision: `3c296b55686f1bcf3e0eccbdd12bfc57c4bfdd1d`
 - dataset repository: `disi-unibo-nlp/MedQAbstain`
-- dataset revision: **not frozen until the dedicated Hugging Face metadata probe records an immutable 40-character revision**
+- immutable dataset revision: `d215847217bb5f4124b9110379d33b9eb2f8d3f7`
+- dataset files at that revision: 5
+- parquet files: 2
+- image archive: 1 (`images.zip`)
+- dataset-card license field: **absent / null**
 
-No moving `main` reference is accepted as publication evidence.
+Moving `main` is not accepted as publication evidence. The dedicated qualification workflow re-fetches the public Hub metadata and frozen parquet files and verifies committed metadata-only evidence.
 
 ## Upstream transformation
 
-The frozen upstream README describes MedQAbstain as a transformation of medical MCQA sources that removes the original gold answer from the visible option set and adds an explicit abstention/escalation option. GAX will not infer clinical safety from this construction. The paper may only describe performance on this deliberately constructed insufficiency/unsafe-commit condition.
+The frozen upstream code removes the original gold option from model-visible choices and adds an explicit `I abstain` choice. GAX independently audits this property rather than trusting the transformation description.
 
-The qualification must prove that the original correct option is absent from model-visible choices before assigning abstention as the transformed gold target. Original answer identity and threat/source labels remain supervision/evaluation metadata unless a later preregistered protocol explicitly admits a field.
+The frozen dataset contains 11,232 rows across six source components. The transformation audit records 11,215 construction-eligible rows and quarantines 17 rows before any paper evaluation:
 
-## Component-level rights
+| Component | Source rows | Eligible | Quarantined | Observed anomaly |
+| --- | ---: | ---: | ---: | --- |
+| AfriMedQA | 2,350 | 2,336 | 14 | original gold remains visible |
+| MedMCQA | 1,886 | 1,885 | 1 | original gold remains visible |
+| MedQA 4-option | 1,273 | 1,272 | 1 | transformed gold is not abstention |
+| MedQA 5-option | 1,273 | 1,273 | 0 | none under the frozen rule |
+| MedXpertQA text | 2,450 | 2,450 | 0 | none under the frozen rule |
+| MedXpertQA multimodal | 2,000 | 1,999 | 1 | transformed gold is not abstention |
 
-The benchmark exposes at least these source families:
+The quarantine membership is represented only by digests. GAX does not commit raw item IDs, questions, answers, or images as qualification evidence.
 
-| Component | Preliminary evidence state | GAX publication state |
+The lineage key is `dataset + id`, not raw `id`. This is required because the 4-option and 5-option MedQA variants reuse source identifiers.
+
+## Component-level rights outcome
+
+The immutable MedQAbstain dataset card exposes no license grant. GAX therefore does **not** infer redistribution or paper-evaluation permission from public download access.
+
+| Component | Source evidence | Derived MedQAbstain publication state |
 | --- | --- | --- |
-| MedXpertQA text | upstream card currently advertises MIT; immutable source revision still to freeze | pending |
-| MedXpertQA multimodal | text/card evidence is not sufficient by itself for every image/media asset | pending |
-| MedMCQA | official HF repository advertises Apache-2.0 metadata; content lineage/revision still to freeze | pending |
-| MedQA 4-option | available dataset metadata has historically exposed unclear/unknown content licensing | pending rights review |
-| MedQA 5-option | same source-content rights question as MedQA 4-option | pending rights review |
-| AfriMedQA | current public metadata shows Creative Commons licensing, but exact source/version used by MedQAbstain must be frozen before selecting the applicable terms | pending |
+| MedXpertQA text | current source card advertises MIT | blocked |
+| MedXpertQA multimodal | current source card advertises MIT; per-image rights not independently proven | blocked |
+| MedMCQA | current source card advertises Apache-2.0 | blocked |
+| MedQA 4-option | source-content license unresolved | blocked |
+| MedQA 5-option | source-content license unresolved | blocked |
+| AfriMedQA | current source card advertises CC BY 4.0 | blocked |
 
-These are **preliminary research notes**, not qualification conclusions. The machine-readable component-rights artifact created by SG-000017 is authoritative after exact source revisions are frozen.
+The block is deliberate: source-component licenses do not automatically relicense MedQAbstain's transformed collection, threat labels, prompts, or repackaged media. The exact upstream generation revisions used to create the frozen MedQAbstain files are also not pinned by the frozen preprocessing code.
 
-A repository/software license never automatically relicenses exam questions, transformed medical content, or third-party images.
+This is a **qualification result**, not an unfinished rights review. SG-000017 may close with a blocked aggregate outcome once the preregistered leakage audit and exact-head/post-main CI evidence are bound.
 
 ## Role policy
 
-Default GAX role: **final-test-only**.
+MedQAbstain remains **final-test-only candidate data with paper evaluation unauthorized**.
 
-MedQAbstain items cannot be used to choose GAX checkpoints, prompts, calibration methods, thresholds, ECAL components, learned information-sufficiency variants, FHIR representations, or repair rules. Any future non-test role requires a separately licensed and prospectively frozen development surface before model comparison.
+It cannot be used to choose GAX checkpoints, prompts, calibration methods, thresholds, ECAL components, learned information-sufficiency variants, FHIR representations, or repair rules. P08 final-test access remains sealed.
+
+Because aggregate paper use is blocked, GAX will not make MedQAbstain a hidden dependency of the paper. A later pre-results governance grain may define a GAX-native abstention benchmark from independently frozen sources with explicit compatible licenses and provenance.
 
 ## Evidence policy
 
-Committed GAX evidence may contain:
-
-- immutable repository/file identities;
-- SHA-256/LFS digests;
-- schemas and aggregate counts;
-- per-component license/redistribution states;
-- duplicate/near-duplicate counts and digests;
-- role-manifest and transformation-audit digests.
+Committed GAX evidence may contain immutable repository/file identities, SHA-256/LFS digests, schemas and aggregate counts, per-component rights states, duplicate/near-duplicate counts and digests, and role/transformation membership digests.
 
 It must not contain copied source questions, original answers, images, or other upstream payloads merely to make the benchmark convenient to redistribute.
 
-## Current non-claims
+## Non-claims
 
-SG-000017 is not a performance study. Until a later digest-authorized P08 opening manifest exists, it establishes no GAX accuracy, abstention superiority, clinical safety, calibration superiority, or SOTA claim. Final-test access remains sealed.
+SG-000017 is not a performance study. It establishes no GAX accuracy, abstention superiority, clinical safety, calibration superiority, or SOTA claim. Quarantining construction anomalies does not establish absence of public-benchmark pretraining contamination, which remains unresolved and must be disclosed.
