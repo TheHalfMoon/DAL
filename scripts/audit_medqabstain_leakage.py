@@ -128,7 +128,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 if roles[left] != roles[right]:
                     exact_cross_role += 1
                 token = hashlib.sha256(
-                    f"{keys[left]}\u0000{keys[right]}".encode("utf-8")
+                    f"{keys[left]}\u0000{keys[right]}".encode()
                 ).hexdigest()
                 exact_pair_tokens.append(token)
 
@@ -166,7 +166,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         pair_name = "|".join(sorted((components[left], components[right])))
         component_pair_counts[pair_name] += 1
         token = hashlib.sha256(
-            f"{keys[left]}\u0000{keys[right]}".encode("utf-8")
+            f"{keys[left]}\u0000{keys[right]}".encode()
         ).hexdigest()
         near_pair_tokens.append(token)
 
