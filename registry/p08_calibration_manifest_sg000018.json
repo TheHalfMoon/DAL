@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1",
+  "manifest_id": "p08-sg000018-calibration-v0.1",
+  "final_test_access": "sealed",
+  "selection_policy": "qualified-calibration-roles-only",
+  "sources": [
+    {
+      "dataset_id": "pubmedqa-pqal",
+      "role_manifest_sha256": "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723",
+      "calibration_item_count": 50
+    },
+    {
+      "dataset_id": "gax-native-abstention-pqal",
+      "role_manifest_sha256": "d64bfdf057afeaae35fb4209a8513dfc48a6c52e2abd08260dbf111afec1474f",
+      "calibration_item_count": 100
+    },
+    {
+      "dataset_id": "fhir-agentbench",
+      "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+      "calibration_item_count": 341
+    }
+  ],
+  "test_tuning_forbidden": true
+}
