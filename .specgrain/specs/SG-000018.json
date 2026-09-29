@@ -21,6 +21,7 @@
     "Calibration, coverage, hardware, multiplicity, ECAL-selection, and FHIR-representation protocol freeze",
     "Reproducible calibration manifest binding the three authorization-critical calibration roles",
     "Dedicated zero-founder-cost qualification workflow",
+    "Checksum-pinned Alibaba OpenCodeReview exact-range delegation/accounting gate",
     "DAL current-frontier and task-governance alignment without rewriting historical evidence"
   ],
   "scope_out": [
@@ -54,12 +55,14 @@
     "Overall P08 final-test access remains sealed throughout SG-000018",
     "Exact-head Linux/Windows Python 3.11/3.12 CI and dedicated native-abstention qualification pass before merge",
     "Affected PubMedQA, FHIR-AgentBench, MedAgentBench, and MedQAbstain regression qualifications pass on the exact final implementation head",
-    "Independent review evidence is recorded honestly; Jev or Alibaba Open Code Review execution must not be fabricated",
+    "Checksum-pinned Alibaba OpenCodeReview delegation/accounting binds the exact PR base/head range and uploads machine-readable evidence",
+    "Independent review evidence is recorded honestly; Jev execution is required when securely available and must never be fabricated",
     "Implementation merges with expected_head_sha and post-main qualification succeeds",
     "A separate canonical closeout is required before SG-000018 becomes PROVEN"
   ],
   "change_surface": [
     ".github/workflows/p08-native-abstention-qualification.yml",
+    ".github/workflows/review-gates.yml",
     ".specgrain/specs/SG-000018.json",
     "docs/datasets/GAX_NATIVE_ABSTENTION.md",
     "docs/research/P08_PRE_RESULTS_PROTOCOL_SG000018.md",
@@ -98,7 +101,8 @@
       "exact-head-cross-platform-ci-pass",
       "dedicated-native-abstention-qualification-pass",
       "affected-p08-regression-qualification-pass",
-      "independent-review-evidence-or-explicit-unavailable-record",
+      "alibaba-ocr-exact-range-delegation-evidence",
+      "jev-review-evidence-or-explicit-secure-unavailability-record",
       "implementation-pr-pass",
       "post-main-qualification-pass",
       "canonical-closeout-pass"
@@ -121,6 +125,10 @@
       "path": "registry/p08_calibration_manifest_sg000018.json",
       "canonical_json_sha256": "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
       "final_test_access": "sealed"
+    },
+    "review_tools": {
+      "alibaba_open_code_review": "v1.12.9 checksum-pinned delegation/accounting",
+      "jev": "exact-diff semantic review required when a secure TypeSafe credential path is available; never fabricate execution"
     },
     "benchmark_tracks": [
       "evidence-present",
