@@ -43,19 +43,24 @@ def test_exact_duplicate_audit_is_cross_component_and_cross_role() -> None:
 
 
 def test_near_duplicate_audit_excludes_exact_pairs() -> None:
-    prefix = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen"
+    prefix = (
+        "one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
+        "fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree "
+        "twentyfour twentyfive twentysix twentyseven twentyeight twentynine thirty thirtyone "
+        "thirtytwo thirtythree thirtyfour thirtyfive thirtysix thirtyseven thirtyeight thirtynine"
+    )
     rows = [
         row(
             item_id="a",
             component="source-a",
             role="safe",
-            question=f"{prefix} fifteen sixteen seventeen eighteen nineteen twenty",
+            question=f"{prefix} forty",
         ),
         row(
             item_id="b",
             component="source-b",
             role="safe",
-            question=f"{prefix} fifteen sixteen seventeen eighteen nineteen changed",
+            question=f"{prefix} changed",
         ),
     ]
     report = audit(rows)
