@@ -72,6 +72,12 @@ def load_rows(path: Path, role: str) -> list[dict[str, Any]]:
     return rows
 
 
+def digest_keys(keys: set[str]) -> str:
+    return hashlib.sha256(
+        json.dumps(sorted(keys), separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
 def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     component_counts: Counter[str] = Counter()
     composite_keys: list[str] = []
@@ -81,6 +87,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     option_count_changed = Counter[str]()
     parse_failures = Counter[str]()
     role_keys: dict[str, set[str]] = defaultdict(set)
+    quarantine_keys: dict[str, set[str]] = defaultdict(set)
+    eligible_keys: dict[str, set[str]] = defaultdict(set)
 
     for row in rows:
         component = str(row["dataset"])
@@ -90,35 +98,48 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         component_counts[component] += 1
         composite_keys.append(key)
         role_keys[role].add(key)
+        anomaly = False
         try:
             original_options = parse_options(row["original_options"])
             transformed_options = parse_options(row["options"])
         except ValueError:
             parse_failures[component] += 1
-            continue
+            anomaly = True
+            original_options = {}
+            transformed_options = {}
 
-        original_gold = normalize(resolve_answer(row["original_answer"], original_options))
-        transformed_gold = normalize(resolve_answer(row["answer"], transformed_options))
-        visible_values = {normalize(value) for value in transformed_options.values()}
+        if not anomaly:
+            original_gold = normalize(resolve_answer(row["original_answer"], original_options))
+            transformed_gold = normalize(resolve_answer(row["answer"], transformed_options))
+            visible_values = {normalize(value) for value in transformed_options.values()}
 
-        if original_gold in visible_values:
-            original_gold_visible[component] += 1
-        if transformed_gold not in visible_values:
-            transformed_gold_missing[component] += 1
-        if transformed_gold == "i abstain":
-            abstention_gold[component] += 1
-        if len(original_options) != len(transformed_options):
-            option_count_changed[component] += 1
+            if original_gold in visible_values:
+                original_gold_visible[component] += 1
+                anomaly = True
+            if transformed_gold not in visible_values:
+                transformed_gold_missing[component] += 1
+                anomaly = True
+            if transformed_gold == "i abstain":
+                abstention_gold[component] += 1
+            else:
+                anomaly = True
+            if len(original_options) != len(transformed_options):
+                option_count_changed[component] += 1
+                anomaly = True
+
+        if anomaly:
+            quarantine_keys[component].add(key)
+        else:
+            eligible_keys[component].add(key)
 
     duplicate_composite_keys = len(composite_keys) - len(set(composite_keys))
     cross_role_overlap = len(role_keys.get("life-threatening", set()) & role_keys.get("safe", set()))
-    membership_digest = hashlib.sha256(
-        json.dumps(sorted(set(composite_keys)), separators=(",", ":")).encode("utf-8")
-    ).hexdigest()
-
     components = sorted(component_counts)
+    all_quarantine = set().union(*(quarantine_keys[c] for c in components))
+    all_eligible = set().union(*(eligible_keys[c] for c in components))
+
     result = {
-        "schema_version": "0.1",
+        "schema_version": "0.2",
         "dataset_id": "disi-unibo-nlp/MedQAbstain",
         "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
         "lineage_key": "dataset+id",
@@ -126,7 +147,15 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "component_counts": dict(sorted(component_counts.items())),
         "duplicate_composite_key_count": duplicate_composite_keys,
         "cross_lt_safe_composite_key_overlap_count": cross_role_overlap,
-        "membership_sha256": membership_digest,
+        "membership_sha256": digest_keys(set(composite_keys)),
+        "eligible_item_count": len(all_eligible),
+        "eligible_membership_sha256": digest_keys(all_eligible),
+        "quarantined_item_count": len(all_quarantine),
+        "quarantine_membership_sha256": digest_keys(all_quarantine),
+        "quarantine_rule": (
+            "parse-failure-or-original-gold-visible-or-transformed-gold-not-visible-or-"
+            "transformed-gold-not-i-abstain-or-option-count-changed"
+        ),
         "per_component": {
             component: {
                 "row_count": component_counts[component],
@@ -136,12 +165,17 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "abstention_gold_count": abstention_gold[component],
                 "non_abstention_gold_count": component_counts[component] - abstention_gold[component],
                 "option_count_changed_count": option_count_changed[component],
+                "eligible_item_count": len(eligible_keys[component]),
+                "eligible_membership_sha256": digest_keys(eligible_keys[component]),
+                "quarantined_item_count": len(quarantine_keys[component]),
+                "quarantine_membership_sha256": digest_keys(quarantine_keys[component]),
             }
             for component in components
         },
         "raw_rows_serialized": False,
         "raw_questions_serialized": False,
         "raw_answers_serialized": False,
+        "raw_item_ids_serialized": False,
         "final_test_access": "sealed",
     }
     return result
@@ -161,6 +195,8 @@ def main() -> None:
         json.dumps(
             {
                 "row_count": result["row_count"],
+                "eligible_item_count": result["eligible_item_count"],
+                "quarantined_item_count": result["quarantined_item_count"],
                 "duplicate_composite_key_count": result["duplicate_composite_key_count"],
                 "cross_lt_safe_composite_key_overlap_count": result[
                     "cross_lt_safe_composite_key_overlap_count"
