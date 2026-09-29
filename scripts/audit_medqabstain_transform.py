@@ -133,7 +133,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             eligible_keys[component].add(key)
 
     duplicate_composite_keys = len(composite_keys) - len(set(composite_keys))
-    cross_role_overlap = len(role_keys.get("life-threatening", set()) & role_keys.get("safe", set()))
+    cross_role_overlap = len(
+        role_keys.get("life-threatening", set()) & role_keys.get("safe", set())
+    )
     components = sorted(component_counts)
     all_quarantine = set().union(*(quarantine_keys[c] for c in components))
     all_eligible = set().union(*(eligible_keys[c] for c in components))
@@ -163,7 +165,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "original_gold_still_visible_count": original_gold_visible[component],
                 "transformed_gold_not_visible_count": transformed_gold_missing[component],
                 "abstention_gold_count": abstention_gold[component],
-                "non_abstention_gold_count": component_counts[component] - abstention_gold[component],
+                "non_abstention_gold_count": (
+                    component_counts[component] - abstention_gold[component]
+                ),
                 "option_count_changed_count": option_count_changed[component],
                 "eligible_item_count": len(eligible_keys[component]),
                 "eligible_membership_sha256": digest_keys(eligible_keys[component]),
@@ -190,7 +194,10 @@ def main() -> None:
 
     rows = load_rows(Path(args.lt), "life-threatening") + load_rows(Path(args.safe), "safe")
     result = audit(rows)
-    Path(args.output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    Path(args.output).write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     print(
         json.dumps(
             {
