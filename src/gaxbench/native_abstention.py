@@ -71,7 +71,9 @@ def _validate_pubmedqa_item(item: BenchmarkItem) -> None:
     if provenance.license != PUBMEDQA_LICENSE:
         raise ValueError("native evidence-abstention pairs require the qualified PubMedQA license")
     if provenance.transform_revision != PUBMEDQA_TRANSFORM_REVISION:
-        raise ValueError("native evidence-abstention pairs require the qualified PubMedQA transform")
+        raise ValueError(
+            "native evidence-abstention pairs require the qualified PubMedQA transform"
+        )
     if provenance.source_url != f"https://github.com/{PUBMEDQA_REPOSITORY}":
         raise ValueError("native evidence-abstention pairs require the frozen PubMedQA source URL")
     if item.split not in _ALLOWED_SOURCE_SPLITS:
