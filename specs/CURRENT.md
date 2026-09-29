@@ -1,6 +1,19 @@
 # Current Frontier
 
-Program: **GAX**
+Program: **DAL — Decision Assurance Layer**
+
+Repository: `TheHalfMoon/DAL`
+
+Historical `GAX` / `GAXBench` identifiers are retained where they name already-frozen
+artifacts, workflows, schemas, model roles, or evidence chains. DAL is the current program
+identity. A later governed identity-migration grain may rename compatibility surfaces, but it
+must not rewrite historical evidence or silently change artifact identity.
+
+## Canonical state
+
+Canonical `main` before the active SG-000018 implementation is:
+
+`a97bd6b637be2d98ef98758749edf5f197cc97f8`
 
 Completed grains:
 
@@ -20,239 +33,182 @@ Completed grains:
 - **SG-000014 — GAX-P08 PubMedQA PQA-L qualification and split/leakage manifest** — PROVEN
 - **SG-000015 — GAX-P08 FHIR-AgentBench frozen local R4 dataset qualification** — PROVEN
 - **SG-000016 — GAX-P08 MedAgentBench public corpus and external runtime qualification** — PROVEN
+- **SG-000017 — GAX-P08 MedQAbstain immutable dataset and component-rights qualification** — PROVEN
 
-## Canonical P03 evidence chain
+The detailed historical evidence for each completed grain is preserved in its SpecGrain JSON,
+its implementation/closeout PRs, Git history, workflow runs, and research evidence files. This
+file is intentionally a current-frontier index rather than a second mutable copy of every prior
+closeout packet.
 
-- implementation PR: #15
-- implementation exact head: `18bad9e76ef161836875282e26acbaa0ff873a92`
-- implementation exact-head CI: run `36239680443` — SUCCESS
-- implementation merge: `5b51faf169ec828888d0f314acf2e8e8196bb5cb`
-- implementation post-merge CI: run `36239756362` — SUCCESS
-- model-visible-boundary correction PR: #16
-- correction exact head: `89f19898ca4a46dcd9551979f216dc77737ef266`
-- correction exact-head CI: run `36240225652` — SUCCESS
-- corrected main: `d04cc0c63d83b944c2f1f3527a358848c27dd304`
-- correction post-merge CI: run `36240311386` — SUCCESS
-- final P03 feature revision: `sha256-word-v0.2`
+## Latest canonical closeout — SG-000017
 
-P03 is **CLOSED_CANONICAL**. GAX has a genuine trainable non-generative typed-decision reference model with deterministic training, integrity-bound checkpointing, CLI, and direct GAXBench integration. Closeout review caught and corrected a model-visible evidence-label leak before freeze. Abstract smoke results remain infrastructure evidence only and are not clinical or paper performance results.
+Research outcome:
 
-## Canonical P04 evidence chain
+- MedQAbstain is reproducibly frozen at immutable dataset revision
+  `d215847217bb5f4124b9110379d33b9eb2f8d3f7`.
+- 11,232 source rows were identified; 11,215 are construction-eligible and 17 anomalous rows are
+  quarantined.
+- The metadata-only leakage audit records 5 exact visible duplicate pairs and 1,264 preregistered
+  near-duplicate pairs, including 1,261 MedQA 4-option / 5-option pairs.
+- The immutable derived dataset exposes no license grant sufficient for paper-required use, so
+  the aggregate benchmark remains **blocked**, not silently dropped and not represented as
+  qualified.
+- Public-pretraining contamination remains unresolved and disclosed.
+- Final-test access remained sealed and no model-performance result was produced.
 
-- implementation PR: #19
-- implementation exact head: `d1f3315c949ed4a10783a6bfd3881e80521f8e74`
-- implementation exact-head CI: run `36247918779` — SUCCESS
-- implementation merge: `4baf5104314d1a1eecbb91cb7984ccb5e7df7866`
-- implementation post-merge CI: run `36248363024` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- implementation qualification includes multi-positive alignment, deterministic hard-negative control, hidden-label-safe evidence intervention, Brier-gradient verification, equal-step replay/retention, explicit experiment context, and a governed deterministic fallback for exact zero-norm signed-hash cancellation
-- all ECAL paper decisions remain `defer-real-data`; synthetic mechanism fixtures are implementation evidence only
+Evidence chain:
 
-P04 is **CLOSED_CANONICAL**. GAX has a qualified component-wise ECAL experiment framework, not an ECAL superiority claim. No ECAL component may enter the paper as a positive contribution until its preregistered keep/reject gate is evaluated on licensed, leakage-audited development evidence.
+- implementation PR: #56
+- implementation exact head: `2834eb79b99834b99d738cbebcf4fd948bb49444`
+- implementation exact-head GAXBench CI: run `36614891027` — SUCCESS
+- implementation exact-head MedQAbstain qualification: run `36614891098` — SUCCESS
+- implementation exact-head FHIR-AgentBench regression: run `36614891225` — SUCCESS
+- implementation exact-head MedAgentBench regression: run `36614891295` — SUCCESS
+- implementation exact-head PubMedQA regression: run `36614891396` — SUCCESS
+- implementation merge: `db44fc9b3f76d877cb664065b275e7c9652cc335`
+- post-main GAXBench CI: run `36616090694` — SUCCESS
+- post-main MedQAbstain qualification: run `36616090738` — SUCCESS
+- post-main FHIR-AgentBench regression: run `36616090733` — SUCCESS
+- post-main MedAgentBench regression: run `36616090684` — SUCCESS
+- post-main PubMedQA regression: run `36616090701` — SUCCESS
+- closeout PR: #58
+- closeout exact head: `9d7523803be689fde47215e9fe4d69eeac4ef6fd`
+- closeout exact-head GAXBench CI: run `36620424236` — SUCCESS
+- canonical closeout merge: `a97bd6b637be2d98ef98758749edf5f197cc97f8`
 
-## Canonical P05 evidence chain
+SG-000017 is **CLOSED_CANONICAL**. Its blocked licensing result is preserved as a research result,
+not treated as a reason to remove the benchmark after seeing model performance.
 
-- implementation PR: #22
-- implementation exact head: `309e7c108f4dab87f80d2ab24849d9c3032102db`
-- implementation exact-head CI: run `36251925614` — SUCCESS
-- implementation merge: `ced14e8e8f599f8022a273c762fda56452c335c6`
-- implementation post-merge CI: run `36252259764` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- confidence-only controls: max probability, normalized entropy confidence, top-1/top-2 margin
-- learned information sufficiency remains a separate model-visible probability-like signal trained without updating the frozen action model
-- calibration-split threshold selection remains isolated from validation evaluation; P05 final-test selector evaluation is rejected
-- unsafe-commit and over-abstention accounting are both required under matched coverage
-- learned sufficiency paper decision remains `defer-real-data`; synthetic fixtures are implementation evidence only
+## Active frontier — SG-000018 / Issue #57 / PR #60
 
-P05 is **CLOSED_CANONICAL** as an implementation and selective-evaluation framework result. It does not establish clinical safety, a formal conformal guarantee, or learned-sufficiency superiority. A paper-level keep decision still requires licensed, leakage-audited development evidence under the preregistered matched-coverage gate.
+**P08 — Native licensed abstention benchmark and pre-results paper protocol replacement**
 
-## Canonical P06 evidence chain
+SG-000018 is the sole active governed unit. PR #60 remains a draft until its exact final head is
+qualified. Do not bind this file to an intermediate branch SHA; the final implementation head
+must be recorded from the PR at qualification/merge time.
 
-- research contract: Issue #23
-- implementation PR: #25
-- implementation exact head: `e848499a2b1500de6fda2e1f55afd5afc79beae2`
-- implementation exact-head CI: run `36254832102` — SUCCESS
-- implementation merge: `a63704e89d4ad81c97358d3f65f5deb18cdcc041`
-- implementation post-merge CI: run `36254912534` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- paired evaluator freezes total-variation and natural-log Jensen-Shannon conventions, same-split/source/group lineage, exact denominator alignment, explicit abstention, directional action/support/sufficiency response, and irrelevant-edit stability
-- P06 CLI rejects final-test items and binds runs to a 40-character git revision plus compute provenance and artifact hashes
-- abstract fixtures contain no patient data, PHI, real medical thresholds, diagnosis rules, treatment guidance, or clinical source claims
-- all P06 paper mechanism decisions remain `defer-real-data`
+### Research purpose
 
-P06 is **CLOSED_CANONICAL** as a paired intervention/evaluation framework result. It does not establish clinical safety, causal identification, or medical counterfactual superiority. The proven surface is a governed pair manifest/evaluator and synthetic mechanics suite; real medical intervention construction and paper-level keep decisions require licensed, reviewed, leakage-audited development evidence.
+SG-000018 resolves paper-critical blockers prospectively, before final-test model inference:
 
-## Canonical P07 evidence chain
+1. replace the blocked paper-required abstention dependency with a deterministic native benchmark
+   derived from already-qualified PubMedQA PQA-L;
+2. keep `abstain` outside the ordinary candidate-action distribution;
+3. freeze benchmark, calibration, coverage, hardware, multiplicity, ECAL-selection, and
+   FHIR-representation policy before final-test access;
+4. reclassify non-reproducible heavyweight comparisons as secondary/optional only from
+   reproducibility, rights, and zero-founder-cost constraints — never observed model performance;
+5. retain MedQAbstain and MedAgentBench runtime blockers visibly in the inventory.
 
-- research contract: Issue #27 / SG-000010
-- implementation PR: #28
-- implementation exact head: `01e818a5139dea3d0ea3258b49f60f24593ade41`
-- implementation exact-head CI: run `36258059106` — SUCCESS
-- implementation merge: `a9128a7f8de49dfa614ded1bd472cf1230f0041a`
-- implementation post-merge CI: run `36258143003` — SUCCESS
-- closeout PR: #29
-- closeout exact head: `ee04a3ae2e5c3c82aa82324ae0aaf566ed9dd996`
-- closeout exact-head CI: run `36258444879` — SUCCESS
-- canonical closeout merge: `250ffdf6d3c91c030c79fc2835daabe605efef40`
-- closeout post-main CI: run `36258521894` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- canonical published FHIR reference is R5 5.0.0 while R4 benchmark inputs preserve explicit source-native identity
-- P07 makes no R4-to-R5 semantic conversion claim and does not treat deterministic rendering as HL7 profile/conformance certification
-- FHIR actions are read-only; POST/PUT/PATCH/DELETE templates are rejected and no model-selected EHR write operation is exposed
-- MedAgentBench and FHIR-AgentBench repository identities/revisions are frozen while restricted external data/runtime artifacts remain separately governed
-- public P07 fixtures are abstract CC0 synthetic content and final-test conversion remains blocked during P07
+### Native abstention benchmark
 
-P07 is **CLOSED_CANONICAL** as an interoperability and evaluation-contract result. It proves deterministic FHIR rendering, explicit version identity, read-only action boundaries, representation controls, and frozen local-export adapter protocols. It does not prove FHIR benchmark superiority, clinical correctness, FHIR conformance certification, or semantic R4-to-R5 equivalence.
+The active implementation creates deterministic PubMedQA evidence-availability pairs:
 
-## Canonical P08 pre-test freeze evidence chain
+- `evidence-present`: the original closed biomedical action set plus PubMedQA evidence;
+- `evidence-withheld`: the same state/action identity with benchmark evidence intentionally removed.
 
-- research contract: Issue #30 / SG-000011
-- implementation PR: #31
-- implementation exact head: `45bd2dcdcd1e4b96be20ffbf0c77080d3bd690d0`
-- implementation exact-head CI: run `36259370327` — SUCCESS
-- implementation merge: `1818aa67f93d5ed484611392011934ecfa770a1c`
-- implementation post-merge CI: run `36259485349` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- final-test access is sealed by default and authorization requires a clean tree, frozen benchmark manifests, audit hashes, frozen system identities, calibration/statistics/protocol contracts, and a digest-bound separate authorization artifact
-- the P08 gate is hard-bound to the canonical P07 closeout merge `250ffdf6d3c91c030c79fc2835daabe605efef40` and post-main run `36258521894`
-- claim states are machine-readable; affirmative export is restricted to `supported` claims carrying evidence-packet identifiers
-- null, rejected, blocked, and exploratory results remain visible by contract
-- the 2026-09-26 literature refresh raises the novelty bar beyond generic typed-decision/Jev-like behavior
+Development/calibration behavior:
 
-SG-000011 is **CLOSED_CANONICAL** as a pre-test governance result. It proves the freeze/authorization/claim discipline only. It does not authorize final-test access and does not establish any model, mechanism, clinical, FHIR, calibration, or efficiency result.
+- evidence-present preserves typed action supervision and sets `Gold.sufficient=true`;
+- evidence-withheld sets `Gold.sufficient=false` and `Gold.action=null`;
+- abstention is never inserted into `BenchmarkItem.actions`.
 
-## Canonical P08 statistical/evidence infrastructure chain
+Sealed final-test behavior:
 
-- research contract: Issue #34 / SG-000012
-- implementation PR: #35
-- implementation exact head: `af6c92afbd9a86c62989e6a92442bcb4f5eed6b6`
-- implementation exact-head CI: run `36263261077` — SUCCESS
-- implementation merge: `bb0f48c93981b5a66674af37f713ec374d3ce4cc`
-- implementation post-merge CI: run `36293926239` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- paired percentile bootstrap, evidence AUROC/AUPRC, reliability bins, failure-preserving aggregation, derived-artifact manifests, and deterministic primary-comparison reports are frozen before real final-test access
-- final-test labels and real clinical benchmark results remained sealed throughout the grain
+- neither action supervision nor sufficiency supervision is serialized;
+- no threshold, prompt, checkpoint, ECAL component, FHIR representation, or paper claim may be
+  selected from final-test data;
+- this grain performs no final-test model inference.
 
-SG-000012 is **CLOSED_CANONICAL** as pre-test statistical/evidence infrastructure only. It does not authorize final-test access and does not establish model superiority, clinical safety, ECAL gains, learned-sufficiency gains, evidence-grounding gains, FHIR gains, or SOTA claims.
+Frozen inherited source roles are 450 validation / 50 calibration / 500 sealed test source items,
+which deterministically produce 900 validation / 100 calibration / 1,000 sealed-test variants.
 
-## Canonical P08 real-inventory chain
+The benchmark claim scope is deliberately narrow: **evidence-availability insufficiency and
+selective-decision behavior under a constructed intervention**. It is not generic clinical-safety,
+diagnosis, treatment, triage, or deployment evidence.
 
-- research contract: Issue #37 / SG-000013
-- implementation PR: #38
-- implementation exact head: `56e8e3c253a21671b07161c75498d0201cb284d9`
-- implementation exact-head CI: run `36295724870` — SUCCESS
-- implementation merge: `515dab7912d35bcdfcfb177e2592007cc46fb1e0`
-- implementation post-merge CI: run `36295793266` — SUCCESS
-- exact-head and post-main matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- inventory entries are explicit `qualified`, `pending`, or `blocked`; missing evidence fails closed rather than disappearing
-- qualified datasets require verified licensing plus split-manifest and leakage-audit SHA-256 digests
-- qualified systems require immutable source/model identity plus real-execution evidence; qualified GAX systems additionally require checkpoint revision and training seeds
-- inventory audit is deterministic and remained `ready_for_authorization=false` while required evidence was incomplete
-- final-test access remained structurally sealed throughout SG-000013
+### Proposed authorization-critical dataset suite
 
-SG-000013 is **CLOSED_CANONICAL** as real-evaluation inventory and pre-authorization governance only. It does not qualify the pending datasets or systems, authorize final-test access, establish clinical safety, or support superiority/SOTA claims.
+The SG-000018 pre-results proposal makes these datasets authorization-critical:
 
-## Canonical P08 PubMedQA qualification chain
+- `pubmedqa-pqal` — qualified;
+- `gax-native-abstention-pqal` — qualified by the active grain once canonical;
+- `fhir-agentbench` — qualified.
 
-- research contract: Issue #39 / SG-000014
-- implementation PR: #41
-- implementation exact head: `5ea43ee66f1f7dd1c802d563b3fe181a1d37d902`
-- implementation exact-head GAXBench CI: run `36305931114` — SUCCESS
-- implementation exact-head PubMedQA qualification: run `36305931102` — SUCCESS
-- implementation merge: `d83c78d9bc5c25162b0663bed5c9f1e757904ea6`
-- implementation post-main GAXBench CI: run `36306126656` — SUCCESS
-- implementation post-main PubMedQA qualification: run `36306126686` — SUCCESS
-- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- frozen source: `pubmedqa/pubmedqa@1cbae8e92f72f20c8d3747cbb3bf5bc53554d997`, `data/ori_pqal.json`, Git blob `38db7750761c78950ed32303e7545bdaa513390c`
-- source SHA-256: `8b3276be8942ebbd77f3ddcda12c1749bf0e490045a736fd8438ee40cf37a41d`
-- split manifest SHA-256: `7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723`
-- leakage audit SHA-256: `7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443`
-- frozen roles: 450 validation / 50 calibration / 500 sealed test / no PQA-L training role
-- exact cross-role leakage findings: none
-- preregistered normalized 5-token-shingle Jaccard >= 0.80 near-duplicate findings: none
-- public-backbone pretraining contamination remains `unresolved-public-benchmark` and is explicitly not represented as absent
-- final-test gold labels are not serialized into qualification artifacts; no real model inference or paper-performance evaluation occurred
-- real inventory entry `pubmedqa-pqal` is `qualified`, while overall P08 authorization remains false because other mandatory datasets, systems, and protocol fields remain incomplete
+These remain visible but secondary/optional for authorization:
 
-SG-000014 is **CLOSED_CANONICAL** as a dataset-qualification result. It proves a reproducible, leakage-audited PubMedQA PQA-L benchmark slice under a sealed final-test contract; it does not establish clinical safety, general clinical competence, absence of pretraining contamination, model superiority, or SOTA performance.
+- `medagentbench` — public corpus qualified; official external runtime/scorer blocked;
+- `medqabstain` — immutable dataset identified, but paper-required use blocked by absent derived
+  dataset license grant.
 
-## Canonical P08 FHIR-AgentBench qualification chain
+No blocked source is represented as successful and no blocker is removed from the evidence record.
 
-- research contract: Issue #43 / SG-000015
-- implementation PR: #44
-- implementation exact head: `296cffdc7243792a12459c113a8cd05f56126d43`
-- implementation exact-head GAXBench CI: run `36334776478` — SUCCESS
-- implementation exact-head FHIR-AgentBench qualification: run `36334776510` — SUCCESS
-- implementation exact-head PubMedQA regression qualification: run `36334776481` — SUCCESS
-- implementation merge: `8a836b647d8cfef587e385e845cd4681e0913529`
-- implementation post-main GAXBench CI: run `36335181194` — SUCCESS
-- implementation post-main FHIR-AgentBench qualification: run `36335181207` — SUCCESS
-- implementation post-main PubMedQA regression qualification: run `36335181188` — SUCCESS
-- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- frozen source: `glee4810/FHIR-AgentBench@bbb42909a5a7eb907d1cd91f72a560729e7037ea`, `final_dataset/questions_answers_sql_fhir.csv`, Git blob `b2225370feeaefe962c27c4d90f911584e098ac2`
-- source SHA-256: `e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0`
-- role revision: `gax-fhir-agentbench-patient-disjoint-v0.2`
-- membership SHA-256: `b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15`
-- role manifest SHA-256: `7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c`
-- leakage audit SHA-256: `1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490`
-- frozen roles: 341 calibration / 1122 validation / 173 sealed test rows; 1295 rows quarantined rather than crossing upstream test supervision
-- cross-role patient identity overlap: none
-- cross-role exact-question overlap: none
-- preregistered normalized 5-token-shingle Jaccard >= 0.80 cross-role near-duplicate findings: none
-- upstream EHRSQL generation revision remains unproven and disclosed; GAX does not represent temporal revision evidence as proof of the generation revision
-- source remains R4 model-visible identity; no semantic R4-to-R5 conversion claim is made
-- final-test gold labels remain excluded from qualification artifacts; no real model inference or paper-performance evaluation occurred
-- real inventory entry `fhir-agentbench` is `qualified`, while overall P08 authorization remains false because MedAgentBench, MedQAbstain, real systems, and protocol-freeze fields remain incomplete
+### Proposed protocol freeze
 
-SG-000015 is **CLOSED_CANONICAL** as a dataset-qualification result. It proves a reproducible, metadata-safe, leakage-audited FHIR-AgentBench benchmark slice under a sealed final-test contract; it does not establish clinical correctness, patient safety, FHIR conformance certification, agent/model superiority, or SOTA performance.
+The active inventory proposal freezes, before final-test model inference:
 
-## Canonical P08 MedAgentBench qualification chain
+- calibration: `temperature-scaling-action+platt-sufficiency-v0.1`;
+- calibration split digest:
+  `11d347a4763475749e9f8e63532f1b26023d9d8c16c077b5005961c314f9c291`;
+- target coverages: 0.50 / 0.80 / 0.90;
+- hardware protocol: `p08-hardware-stratified-v0.1`;
+- multiplicity policy: `holm-primary-family-v0.1`;
+- test tuning: forbidden.
 
-- research contract: Issue #46 / SG-000016
-- implementation PR: #48
-- implementation exact head: `6fef42897df06f18b3632cbfd2ba31669ce2cf29`
-- implementation exact-head GAXBench CI: run `36408842717` — SUCCESS
-- implementation exact-head MedAgentBench qualification: run `36408842787` — SUCCESS
-- implementation exact-head FHIR-AgentBench regression qualification: run `36408842689` — SUCCESS
-- implementation exact-head PubMedQA regression qualification: run `36408842729` — SUCCESS
-- implementation merge: `2f9a113e43a742f8e751273538d16e18d17a1e1c`
-- implementation post-main GAXBench CI: run `36569608938` — SUCCESS
-- implementation post-main MedAgentBench qualification: run `36569609045` — SUCCESS
-- implementation post-main FHIR-AgentBench regression qualification: run `36569609111` — SUCCESS
-- implementation post-main PubMedQA regression qualification: run `36569608847` — SUCCESS
-- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
-- frozen repository: `stanfordmlgroup/MedAgentBench@99260117137b09f04837a8c18d18a1107efa55ae`
-- task corpus: `data/medagentbench/test_data_v2.json`, Git blob `7f568f041f9d22e11b5bf31b80efd2219aaaf14f`, SHA-256 `b6e89b2ef82f1bef27c5778a644a8a66c7b25738bbd6a48d03ab3e5182df6ca8`
-- function catalog: `data/medagentbench/funcs_v1.json`, Git blob `9b15acc0ccf402ede8964261c371d6a00889b436`, SHA-256 `c977266db5eca75182c0d12cac1962b33ae6b5a54b9029ceb104e1a93b4c38c1`
-- final-test-only role revision: `gax-medagentbench-final-test-only-v0.1`
-- membership SHA-256: `85831df8b2b3e4f610186776b6e1e247a6cefd2113341675e7efc6318385a01d`
-- role manifest SHA-256: `daf963c8f1c13e974a4608a1cf222505f0013ed81a15616e129a106cb9a6dcb1`
-- leakage audit SHA-256: `b1fa338c510b4787e33cb40c525d5e2ca00154eae97b86c93c5a419abf143356`
-- public corpus: 300 tasks / 300 unique IDs / 10 families × 30 tasks / zero exact duplicate visible tasks
-- 2610 preregistered within-family near-duplicate pairs are disclosed as benchmark template redundancy; cross-family near-duplicate pairs are zero
-- repository/public corpus is MIT-covered and qualified as a frozen corpus; the full corpus remains final-test-only and public-pretraining contamination remains unresolved/disclosed
-- official runtime/scorer remains `blocked`: upstream references mutable `jyxsu6/medagentbench:latest`, separately downloaded `refsol.py`, and patient-environment content whose immutable identity/terms are not established by the repository license
-- a later public Docker manifest observation is not represented as the frozen upstream runtime identity
-- official MedAgentBench success-rate claims remain forbidden while runtime/scorer is blocked
-- aggregate required inventory entry remains blocked and `required_for_authorization` remains true; P08 authorization remains false
+These fields are not canonical until SG-000018 implementation merges and post-main qualification
+succeeds.
 
-SG-000016 is **CLOSED_CANONICAL** as a compound dataset/runtime qualification result once this closeout merges and its own post-main CI/regression qualification succeeds. It proves the public benchmark corpus is reproducibly identifiable and final-test-only while preserving the official runtime/scorer blocker; it does not establish official MedAgentBench reproducibility, clinical correctness, patient safety, FHIR conformance, agent/model superiority, or SOTA performance.
+### Current authorization blockers
 
-Active frontier:
+Even after the SG-000018 dataset/protocol proposal, final-test access remains **sealed**.
+Authorization still requires real, immutable execution evidence for the required systems:
 
-**P08 — MedQAbstain component-license and immutable-dataset qualification under the sealed final-test contract**
+- DAL/GAX paper candidate;
+- clinical encoder;
+- Laya.
 
-The next governed unit must freeze the MedQAbstain Hugging Face dataset revision and audit each underlying component dataset/license separately. Code-repository licensing must not be treated as evidence that transformed medical questions or multimodal assets are freely redistributable. The qualification must preserve the abstention transformation semantics, source lineage, final-test sealing, and public-pretraining contamination disclosure before any model comparison.
+CLM, decider, restricted-logit, structured-output LLM, and Jev are secondary/optional under the
+active proposal when they can be reproduced legally and at zero founder cost. A missing optional
+system must be disclosed, not converted into a hidden success or silently excluded result.
 
-Core P08 rules remain:
+## SG-000018 implementation exit requirements
+
+PR #60 must remain unmerged until all of the following are true on the same exact final head:
+
+- Linux Python 3.11 CI — SUCCESS;
+- Linux Python 3.12 CI — SUCCESS;
+- Windows Python 3.11 CI — SUCCESS;
+- Windows Python 3.12 CI — SUCCESS;
+- dedicated native-abstention qualification — SUCCESS;
+- affected PubMedQA, FHIR-AgentBench, MedAgentBench, and MedQAbstain regressions — SUCCESS;
+- registry and governance documents agree with the typed inventory;
+- no final-test inference or test-derived selection occurred;
+- independent review evidence is recorded honestly;
+- implementation merge uses an expected-head guard and normal merge semantics;
+- post-main qualification succeeds;
+- a separate closeout marks SG-000018 PROVEN.
+
+No Jev, Alibaba Open Code Review, or other independent-review evidence may be claimed unless the
+actual tool execution and its revision-bound result are available. CodeRabbit, Qodo, Cubic, or
+similar service output is not qualification evidence for this program.
+
+## Core P08 invariants
 
 ```text
 final-test access != model selection
 confidence != information sufficiency
+abstain != candidate action
 FHIR formatting != clinical correctness
 faster on different hardware != speed superiority
 missing/failed inference != silent exclusion
 negative result != disposable result
+blocked dependency != permission to hide it
+formatting equality != semantic evidence equality
 ```
 
-Final-test labels remain sealed. No paper-level claim for ECAL, learned information sufficiency, evidence grounding, counterfactual robustness, FHIR gains, efficiency, or baseline superiority is authorized until the real P08 data/model/protocol freeze is populated, audited, digest-authorized, and evaluated under the preregistered contract. Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.
+Final-test labels remain sealed. No paper-level claim for ECAL, learned information sufficiency,
+evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority,
+clinical safety, or SOTA performance is authorized until the real P08 model/data/protocol freeze
+is complete, audited, digest-authorized, and evaluated under the preregistered contract.
+
+Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.
