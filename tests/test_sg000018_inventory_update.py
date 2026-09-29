@@ -51,6 +51,17 @@ def test_sg000018_inventory_transform_is_idempotent() -> None:
     )
 
 
+def test_sg000018_inventory_transform_does_not_mutate_later_input() -> None:
+    payload = _payload()
+    before = copy.deepcopy(payload)
+
+    transformed = transform(payload)
+
+    assert payload == before
+    assert transformed == before
+    assert transformed is not payload
+
+
 def test_sg000018_inventory_transform_fails_closed_on_native_conflict() -> None:
     payload = _payload()
     datasets = payload["datasets"]
