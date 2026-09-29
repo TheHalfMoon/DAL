@@ -8,10 +8,6 @@ from pydantic import Field, model_validator
 
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.pubmedqa import (
-    PUBMEDQA_REPOSITORY,
-    PUBMEDQA_SOURCE_BLOB_SHA1,
-    PUBMEDQA_SOURCE_COMMIT,
-    PUBMEDQA_TRANSFORM_REVISION,
     Decision,
     PubMedQARecord,
     PubMedQASplitManifest,
@@ -39,20 +35,20 @@ EvaluationRole = Literal["development-selection", "calibration"]
 class DevelopmentTrainingManifest(StrictModel):
     schema_version: Literal["0.1"] = "0.1"
     dataset_id: Literal["pubmedqa-pqal"] = "pubmedqa-pqal"
-    source_repository: Literal["pubmedqa/pubmedqa"] = PUBMEDQA_REPOSITORY
+    source_repository: Literal["pubmedqa/pubmedqa"] = "pubmedqa/pubmedqa"
     source_commit: Literal["1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"] = (
-        PUBMEDQA_SOURCE_COMMIT
+        "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997"
     )
     source_blob_sha1: Literal["38db7750761c78950ed32303e7545bdaa513390c"] = (
-        PUBMEDQA_SOURCE_BLOB_SHA1
+        "38db7750761c78950ed32303e7545bdaa513390c"
     )
-    parent_transform_revision: Literal["gax-pqal-v0.1"] = PUBMEDQA_TRANSFORM_REVISION
+    parent_transform_revision: Literal["gax-pqal-v0.1"] = "gax-pqal-v0.1"
     parent_role_manifest_sha256: Literal[
         "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
-    ] = PUBMEDQA_PARENT_ROLE_MANIFEST_SHA256
-    transform_revision: Literal["dal-p08-nested-dev-v0.1"] = SG000019_TRANSFORM_REVISION
+    ] = "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
+    transform_revision: Literal["dal-p08-nested-dev-v0.1"] = "dal-p08-nested-dev-v0.1"
     selection_method: Literal["sha256-stratified-largest-remainder-v0.1"] = (
-        SG000019_SELECTION_METHOD
+        "sha256-stratified-largest-remainder-v0.1"
     )
     train_ids: list[str]
     selection_ids: list[str]
