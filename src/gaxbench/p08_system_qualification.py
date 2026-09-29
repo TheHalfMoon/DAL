@@ -8,8 +8,8 @@ from pydantic import Field, model_validator
 
 from gaxbench.p08_inventory import P08RealInventory, SystemInventoryEntry
 from gaxbench.p08_real_systems import (
-    CheckpointProvenance,
     SG000019_TRAINING_SEEDS,
+    CheckpointProvenance,
     SystemExecutionEvidence,
 )
 from gaxbench.provenance import canonical_json_sha256
@@ -122,7 +122,9 @@ class SystemQualificationBundle(StrictModel):
 
         if self.system_id == "laya":
             if self.checkpoints:
-                raise ValueError("zero-shot Laya qualification must not invent training checkpoints")
+                raise ValueError(
+                    "zero-shot Laya qualification must not invent training checkpoints"
+                )
             if len(self.executions) != 1:
                 raise ValueError("Laya requires exactly one complete frozen-model execution")
             execution = self.executions[0]
@@ -148,7 +150,9 @@ class SystemQualificationBundle(StrictModel):
         if execution_seeds != required_seeds or len(self.executions) != 3:
             raise ValueError("trainable qualification requires one complete execution per seed")
 
-        checkpoint_by_seed = {checkpoint.training_seed: checkpoint for checkpoint in self.checkpoints}
+        checkpoint_by_seed = {
+            checkpoint.training_seed: checkpoint for checkpoint in self.checkpoints
+        }
         for execution in self.executions:
             if execution.training_seed is None:
                 raise ValueError("trainable execution requires training_seed")
