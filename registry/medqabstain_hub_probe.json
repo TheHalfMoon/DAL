@@ -1,0 +1,38 @@
+{
+  "card_license": null,
+  "dataset_id": "disi-unibo-nlp/MedQAbstain",
+  "dataset_last_modified": "2026-06-24T08:35:34.000Z",
+  "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
+  "disabled": false,
+  "final_test_access": "sealed",
+  "gated": false,
+  "image_archive_count": 1,
+  "immutable_revision_verified": true,
+  "metadata_response_sha256": "328cfbdc2e56f9b169fdddc66e95836e36030efb0a2ac5eb0430b36067b3b7d2",
+  "parquet_file_count": 2,
+  "private": false,
+  "raw_dataset_rows_serialized": false,
+  "research_repository": "disi-unibo-nlp/llm-medical-abstention",
+  "research_revision": "3c296b55686f1bcf3e0eccbdd12bfc57c4bfdd1d",
+  "schema_version": "0.1",
+  "sibling_count": 5,
+  "sibling_manifest_sha256": "e4e3e733d4fe41647bb06e0c2428abc9af907bb1da19eaaf23f48d4f9cae65fd",
+  "siblings": [
+    {"lfs_sha256": null, "path": ".gitattributes", "size": 2461},
+    {"lfs_sha256": null, "path": "README.md", "size": 17941},
+    {"lfs_sha256": null, "path": "data/LT-00000-of-00001.parquet", "size": 12675544},
+    {"lfs_sha256": null, "path": "data/Safe-00000-of-00001.parquet", "size": 8589519},
+    {"lfs_sha256": null, "path": "images.zip", "size": 517328829}
+  ],
+  "tags": [
+    "format:parquet",
+    "library:datasets",
+    "library:mlcroissant",
+    "library:pandas",
+    "library:polars",
+    "modality:image",
+    "modality:text",
+    "region:us",
+    "size_categories:10K<n<100K"
+  ]
+}
