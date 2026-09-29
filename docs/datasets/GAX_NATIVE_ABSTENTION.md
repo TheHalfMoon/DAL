@@ -1,8 +1,10 @@
-# GAX Native Abstention / PubMedQA PQA-L
+# DAL Native Abstention / PubMedQA PQA-L
 
-Status: **pre-results qualification**
+Compatibility dataset ID: `gax-native-abstention-pqal`
 
-This benchmark is a deterministic paired transformation of the already-qualified PubMedQA PQA-L source frozen by SG-000014. It exists to replace a blocked paper-required abstention dependency without weakening the scientific question after observing model results.
+Status: **SG-000018 pre-results qualification; canonical only after implementation merge, post-main qualification, and closeout**
+
+This benchmark is a deterministic paired transformation of the already-qualified PubMedQA PQA-L source frozen by SG-000014. It exists to replace a blocked paper-required abstention dependency without weakening the scientific question after observing model results. The legacy `gax-*` dataset identifier is retained in this grain as a compatibility/provenance identifier rather than rewritten mid-evidence-chain.
 
 ## What it measures
 
