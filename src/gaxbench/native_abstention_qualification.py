@@ -82,7 +82,11 @@ class NativeAbstentionQualification(StrictModel):
 def qualify_native_abstention(
     parent_split_path: str | Path,
     parent_leakage_path: str | Path,
-) -> tuple[NativeAbstentionRoleManifest, NativeAbstentionLeakageAudit, NativeAbstentionQualification]:
+) -> tuple[
+    NativeAbstentionRoleManifest,
+    NativeAbstentionLeakageAudit,
+    NativeAbstentionQualification,
+]:
     parent_split = PubMedQASplitManifest.model_validate(
         json.loads(Path(parent_split_path).read_text(encoding="utf-8"))
     )
