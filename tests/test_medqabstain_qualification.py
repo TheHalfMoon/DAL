@@ -83,7 +83,7 @@ def test_all_component_outcomes_are_blocked() -> None:
     components = rights["components"]
     assert isinstance(components, list)
     by_id = {
-        component["component_id"]: component["status"]
+        component["id"]: component["derived_component_status"]
         for component in components
         if isinstance(component, dict)
     }
