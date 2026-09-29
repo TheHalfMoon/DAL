@@ -26,28 +26,31 @@ def build_pubmedqa_evidence_pair(item: BenchmarkItem) -> NativeAbstentionPair:
     _validate_pubmedqa_item(item)
     supervision = _pair_supervision(item)
     group = f"gax-native-abstention::{item.source_id}"
+    provenance = _native_provenance(item.provenance)
 
-    common = {
-        "source_id": item.source_id,
-        "split": item.split,
-        "state": item.state,
-        "actions": list(item.actions),
-        "counterfactual_group": group,
-        "provenance": _native_provenance(item.provenance),
-    }
     sufficient = BenchmarkItem(
         id=f"{item.id}::evidence-present",
+        source_id=item.source_id,
+        split=item.split,
         task_family="biomedical-evidence-availability",
+        state=item.state,
+        actions=list(item.actions),
         gold=supervision[0],
         evidence=list(item.evidence),
-        **common,
+        counterfactual_group=group,
+        provenance=provenance,
     )
     insufficient = BenchmarkItem(
         id=f"{item.id}::evidence-withheld",
+        source_id=item.source_id,
+        split=item.split,
         task_family="biomedical-evidence-availability",
+        state=item.state,
+        actions=list(item.actions),
         gold=supervision[1],
         evidence=[],
-        **common,
+        counterfactual_group=group,
+        provenance=provenance,
     )
     return NativeAbstentionPair(sufficient=sufficient, insufficient=insufficient)
 
