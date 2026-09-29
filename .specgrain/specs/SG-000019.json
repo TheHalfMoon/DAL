@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "id": "SG-000019",
+  "title": "DAL-P08 - Paper-candidate training freeze and required-system qualification foundation",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000018"],
+  "children": [],
+  "labels": ["p08", "paper-candidate", "training-freeze", "real-system-qualification", "development-only"],
+  "outcome": "Build a reproducible development-only training and real-system qualification foundation for the DAL paper candidate, matched clinical-encoder control, and Laya while P08 final-test access remains sealed.",
+  "rationale": "SG-000018 closed the benchmark and pre-results protocol blockers but left all three authorization-critical systems pending. The current trainable GAX v0 is an engineering control rather than an adequate paper candidate, and the frozen PubMedQA role surface has no explicit train split. SG-000019 prospectively derives training only from the qualified development role and binds stronger model/checkpoint/real-execution evidence before any final-test inference.",
+  "scope_in": [
+    "Deterministic nested 360-train/90-selection split derived only from the 450 qualified PubMedQA PQA-L development rows",
+    "Development-only split lineage, stratification, leakage checks, and canonical digest",
+    "DAL paper-candidate architecture/training/checkpoint provenance path using a frozen clinical encoder backbone and typed action scoring",
+    "Explicit evidence-sensitive representation path and information-sufficiency mechanism separated from the action distribution",
+    "Matched clinical-encoder control training/qualification path",
+    "Exact Laya checkpoint/model identity freeze and zero-founder-cost real-execution qualification path",
+    "Preregistered training seeds [0, 1, 2]",
+    "Machine-readable training recipe, checkpoint, selection-history, hardware/runtime, and real-execution evidence manifests",
+    "Failure-preserving requested/completed/timeout/OOM/transport/interface accounting",
+    "Zero-founder-cost accelerator notebook/workflow for execution that cannot be completed on ordinary CI hardware",
+    "Fail-closed inventory mutation that cannot mark required systems qualified without immutable real-execution evidence",
+    "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review"
+  ],
+  "scope_out": [
+    "No P08 final-test model inference",
+    "No use of calibration or final-test rows for training or development selection",
+    "No PQA-A or PQA-U use without separate immutable identity and rights qualification",
+    "No promotion of gax-bilinear-v0 to the headline paper model by convenience",
+    "No autoregressive answer generation in the DAL paper-candidate path",
+    "No final-test-derived checkpoint, threshold, prompt, ECAL, or FHIR representation selection",
+    "No clinical-safety, regulatory-readiness, deployment, superiority, or SOTA claim",
+    "No paid founder compute, API, SaaS, or reviewer requirement",
+    "No silent removal of Laya or other frozen required systems because execution is difficult"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000018 closeout main 54ffad6005e3848058be59870f1fee408073ef55",
+    "Research contract is Issue #63",
+    "The training surface is derived only from the 450 qualified PubMedQA development rows and contains exactly 360 train plus 90 selection rows",
+    "Nested development membership is deterministic from frozen source identity and an explicit transform revision",
+    "The derived train/selection surface is disjoint from all 50 calibration and 500 sealed final-test rows",
+    "The derived split records class/action stratification and exact/near-duplicate leakage evidence",
+    "PQA-A and PQA-U are not admitted silently as training data",
+    "The DAL paper candidate uses an immutable clinical backbone/tokenizer identity and typed candidate-action scoring",
+    "The DAL paper candidate exposes evidence-sensitive and information-sufficiency mechanisms without turning abstention into a candidate action",
+    "gax-bilinear-v0 remains an engineering/control model rather than the headline paper candidate",
+    "Training-sensitive paper-candidate runs bind preregistered seeds 0, 1, and 2",
+    "Per-seed checkpoints bind training data manifest, configuration, software revision, and content digest",
+    "Development-only selection history is machine readable and cannot reference final-test outputs",
+    "The clinical-encoder control uses a matched task-training/evaluation path with immutable model/tokenizer/checkpoint evidence",
+    "Laya binds source revision 3c68ca2ccf6a83640ab80c20379503fe72c772fd plus an immutable checkpoint/model revision before any qualified inventory promotion",
+    "Real-execution evidence records hardware/runtime/software identity and preserves requested/completed/failed counts",
+    "Qualified system inventory state fails closed when real-execution evidence or required revisions are missing",
+    "Different hardware classes cannot support direct speed-superiority claims",
+    "Zero-founder-cost execution routes are reproducible and do not contain final-test labels",
+    "P08 final-test access remains sealed throughout the grain",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI passes before implementation merge",
+    "Affected P08 regression qualification passes on the exact implementation head",
+    "Checksum-pinned Alibaba OpenCodeReview binds the exact PR base/head range",
+    "Secure TypeSafe Jev exact-diff review passes with complete hunk coverage and zero blocking findings",
+    "Implementation merges with normal merge semantics and exact expected_head_sha",
+    "Post-main qualification succeeds",
+    "A separate canonical closeout is required before SG-000019 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000019.json",
+    "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md",
+    "registry/p08_development_training_manifest_sg000019.json",
+    "registry/p08_real_execution_schema_sg000019.json",
+    "registry/p08_real_inventory.json",
+    "scripts/qualify_p08_real_systems.py",
+    "specs/CURRENT.md",
+    "specs/tasks.md",
+    "src/gaxbench/p08_real_systems.py",
+    "tests/test_p08_real_systems.py",
+    "notebooks/dal_p08_real_system_qualification.ipynb"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "Revert SG-000019 changes and retain all three authorization-critical systems as pending. Final-test access remains sealed; no final-test result is generated in this grain."
+  },
+  "evidence": {
+    "required": [
+      "issue-63-research-contract",
+      "sg000018-canonical-dependency",
+      "nested-development-split-manifest",
+      "nested-development-leakage-audit",
+      "paper-candidate-architecture-and-training-recipe",
+      "multi-seed-checkpoint-provenance",
+      "development-selection-history",
+      "matched-clinical-encoder-qualification-path",
+      "laya-immutable-model-identity",
+      "real-execution-evidence-schema",
+      "zero-founder-cost-execution-route",
+      "inventory-fail-closed-regression-evidence",
+      "exact-head-cross-platform-ci-pass",
+      "affected-p08-regression-qualification-pass",
+      "alibaba-ocr-exact-range-delegation-evidence",
+      "jev-exact-diff-review-evidence",
+      "implementation-pr-pass",
+      "post-main-qualification-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 63,
+    "canonical_dependency": "54ffad6005e3848058be59870f1fee408073ef55",
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
+    "final_test_access": "sealed",
+    "development_source": {
+      "dataset": "PubMedQA PQA-L",
+      "repository": "pubmedqa/pubmedqa",
+      "revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
+      "qualified_development_count": 450,
+      "nested_train_count": 360,
+      "nested_selection_count": 90,
+      "calibration_count_reserved": 50,
+      "final_test_count_sealed": 500
+    },
+    "training_seeds": [0, 1, 2],
+    "required_systems": [
+      "gax-paper-candidate",
+      "clinical-encoder",
+      "laya"
+    ],
+    "clinical_encoder": {
+      "model": "thomas-sounack/BioClinical-ModernBERT-base",
+      "revision": "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    },
+    "laya": {
+      "source": "NandhaKishorM/laya",
+      "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd"
+    },
+    "safety": {
+      "final_test_access": "sealed",
+      "test_tuning_forbidden": true,
+      "calibration_training_forbidden": true,
+      "abstain_is_candidate_action": false,
+      "paid_founder_compute_forbidden": true
+    }
+  }
+}
