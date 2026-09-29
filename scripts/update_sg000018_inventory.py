@@ -11,6 +11,8 @@ NATIVE_LEAKAGE_SHA = "e4c105bb1315138310f9b10432430fc753f5d0bfa87d8378dad97399a3
 NATIVE_MEMBERSHIP_SHA = "7ce6787ef0d9c936cf11b39a13e8d73b8e740e1555ec5167ff6badb1a8b8bdc0"
 CALIBRATION_MANIFEST_SHA = "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230"
 NATIVE_DATASET_ID = "gax-native-abstention-pqal"
+SG000018_INVENTORY_REVISION = "p08-real-inventory-v0.2-sg000018"
+SG000018_REPO_REVISION = "a97bd6b637be2d98ef98758749edf5f197cc97f8"
 OPTIONAL_SYSTEM_POLICY_NOTE = (
     "SG-000018 prospectively classifies this system as secondary/optional because its "
     "reproducible zero-founder-cost execution is not required for the primary matched "
@@ -47,8 +49,111 @@ def _native_dataset() -> dict[str, object]:
     }
 
 
+def _require_sg000018_semantics(data: dict[str, object]) -> None:
+    datasets = data.get("datasets")
+    if not isinstance(datasets, list):
+        raise ValueError("inventory datasets must be a list")
+
+    native_indexes = [
+        index
+        for index, entry in enumerate(datasets)
+        if isinstance(entry, dict) and entry.get("id") == NATIVE_DATASET_ID
+    ]
+    if len(native_indexes) != 1:
+        if len(native_indexes) > 1:
+            raise ValueError("native abstention dataset appears more than once")
+        raise ValueError("post-SG-000018 inventory is missing the native abstention dataset")
+
+    parent_indexes = [
+        index
+        for index, entry in enumerate(datasets)
+        if isinstance(entry, dict) and entry.get("id") == "pubmedqa-pqal"
+    ]
+    if len(parent_indexes) != 1:
+        raise ValueError("expected exactly one canonical PubMedQA PQA-L dataset")
+
+    native_index = native_indexes[0]
+    if datasets[native_index] != _native_dataset():
+        raise ValueError("native abstention dataset conflicts with frozen SG-000018 definition")
+    if native_index != parent_indexes[0] + 1:
+        raise ValueError("native abstention dataset is not adjacent to its PubMedQA parent")
+
+    dataset_by_id = {
+        entry.get("id"): entry for entry in datasets if isinstance(entry, dict)
+    }
+    medagentbench = dataset_by_id.get("medagentbench")
+    if not isinstance(medagentbench, dict):
+        raise ValueError("post-SG-000018 inventory is missing MedAgentBench")
+    if medagentbench.get("required_for_authorization") is not False:
+        raise ValueError("MedAgentBench must remain non-authorization-critical after SG-000018")
+    if medagentbench.get("official_runtime_required_for_authorization") is not False:
+        raise ValueError("MedAgentBench runtime must remain optional after SG-000018")
+
+    medqabstain = dataset_by_id.get("medqabstain")
+    if not isinstance(medqabstain, dict):
+        raise ValueError("post-SG-000018 inventory is missing MedQAbstain")
+    if medqabstain.get("required_for_authorization") is not False:
+        raise ValueError("MedQAbstain must remain non-authorization-critical after SG-000018")
+
+    systems = data.get("systems")
+    if not isinstance(systems, list):
+        raise ValueError("inventory systems must be a list")
+    system_by_id = {
+        entry.get("id"): entry for entry in systems if isinstance(entry, dict)
+    }
+    for system_id in ("gax-paper-candidate", "clinical-encoder", "laya"):
+        entry = system_by_id.get(system_id)
+        if not isinstance(entry, dict) or entry.get("required_for_authorization") is not True:
+            raise ValueError(f"{system_id} must remain authorization-critical after SG-000018")
+    for system_id in ("clm", "decider", "restricted-logit", "structured-output-llm"):
+        entry = system_by_id.get(system_id)
+        if not isinstance(entry, dict):
+            raise ValueError(f"post-SG-000018 inventory is missing {system_id}")
+        if entry.get("required_for_authorization") is not False:
+            raise ValueError(f"{system_id} must remain optional after SG-000018")
+        pending_reason = str(entry.get("pending_reason") or "")
+        if OPTIONAL_SYSTEM_POLICY_NOTE not in pending_reason:
+            raise ValueError(f"{system_id} is missing the frozen SG-000018 optional-system policy")
+
+    protocol = data.get("protocol")
+    if not isinstance(protocol, dict):
+        raise ValueError("inventory protocol must be an object")
+    expected_protocol = {
+        "status": "qualified",
+        "calibration_method": "temperature-scaling-action+platt-sufficiency-v0.1",
+        "calibration_split_sha256": CALIBRATION_MANIFEST_SHA,
+        "coverage_targets": [0.5, 0.8, 0.9],
+        "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+        "multiplicity_policy": "holm-primary-family-v0.1",
+        "pending_reason": None,
+        "test_tuning_forbidden": True,
+    }
+    for field, expected in expected_protocol.items():
+        if protocol.get(field) != expected:
+            raise ValueError(
+                f"post-SG-000018 protocol field {field!r} drifted: expected {expected!r}"
+            )
+
+
 def transform(payload: dict[str, object]) -> dict[str, object]:
     data = json.loads(json.dumps(payload))
+    inventory_revision = data.get("inventory_revision")
+    if not isinstance(inventory_revision, str):
+        raise ValueError("inventory_revision must be a string")
+
+    # Historical migration scripts must never roll a later canonical frontier backwards.
+    # If SG-000018 semantics are already frozen and the inventory has advanced, validate those
+    # semantics fail-closed and preserve every later field byte-for-byte at the JSON value level.
+    if inventory_revision != SG000018_INVENTORY_REVISION:
+        datasets = data.get("datasets")
+        if isinstance(datasets, list) and any(
+            isinstance(entry, dict) and entry.get("id") == NATIVE_DATASET_ID
+            for entry in datasets
+        ):
+            _require_sg000018_semantics(data)
+            P08RealInventory.model_validate(data)
+            return data
+
     datasets = data["datasets"]
     assert isinstance(datasets, list)
 
@@ -131,8 +236,8 @@ def transform(payload: dict[str, object]) -> dict[str, object]:
             "test_tuning_forbidden": True,
         }
     )
-    data["inventory_revision"] = "p08-real-inventory-v0.2-sg000018"
-    data["repo_revision"] = "a97bd6b637be2d98ef98758749edf5f197cc97f8"
+    data["inventory_revision"] = SG000018_INVENTORY_REVISION
+    data["repo_revision"] = SG000018_REPO_REVISION
     P08RealInventory.model_validate(data)
     return data
 
