@@ -28,10 +28,10 @@
   "component_outcomes": {
     "afrimedqa": "blocked",
     "medmcqa": "blocked",
-    "medqa_4opt": "blocked",
-    "medqa_5opt": "blocked",
-    "medxpertqa": "blocked",
-    "medxpertqa-MM": "blocked"
+    "medqa-4opt": "blocked",
+    "medqa-5opt": "blocked",
+    "medxpertqa-text": "blocked",
+    "medxpertqa-mm": "blocked"
   },
   "blocked_reason": "The immutable derived dataset card exposes no license grant, and source-component licenses do not automatically authorize the transformed collection, threat labels, prompts, or repackaged media. Exact source-generation revisions and multimodal media rights are not sufficiently established for paper-required use.",
   "raw_rows_committed": false,
