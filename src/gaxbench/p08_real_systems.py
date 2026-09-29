@@ -291,7 +291,7 @@ def _selection_quotas(counts: dict[Decision, int]) -> dict[Decision, int]:
 
 
 def _rank_key(decision: Decision, pmid: str) -> tuple[str, str]:
-    material = f"{SG000019_TRANSFORM_REVISION}|{decision}|{pmid}".encode("utf-8")
+    material = f"{SG000019_TRANSFORM_REVISION}|{decision}|{pmid}".encode()
     return hashlib.sha256(material).hexdigest(), pmid
 
 
