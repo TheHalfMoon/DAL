@@ -1,0 +1,102 @@
+name: DAL P08 Native Abstention Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-native-abstention-qualification.yml"
+      - "registry/gax_native_abstention_*.json"
+      - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_calibration_manifest_sg000018.json"
+      - "registry/p08_real_inventory.json"
+      - "scripts/qualify_native_abstention.py"
+      - "scripts/update_sg000018_inventory.py"
+      - "src/gaxbench/native_abstention.py"
+      - "src/gaxbench/native_abstention_qualification.py"
+      - "tests/test_native_abstention*.py"
+      - "tests/test_sg000018_inventory_update.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-native-abstention-qualification.yml"
+      - "registry/gax_native_abstention_*.json"
+      - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_calibration_manifest_sg000018.json"
+      - "registry/p08_real_inventory.json"
+      - "scripts/qualify_native_abstention.py"
+      - "scripts/update_sg000018_inventory.py"
+      - "src/gaxbench/native_abstention.py"
+      - "src/gaxbench/native_abstention_qualification.py"
+      - "tests/test_native_abstention*.py"
+      - "tests/test_sg000018_inventory_update.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Frozen DAL-native PubMedQA abstention qualification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Rebuild metadata-only qualification artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/gax-native-abstention"
+          python scripts/qualify_native_abstention.py \
+            --parent-split registry/pubmedqa_pqal_split_manifest.json \
+            --parent-leakage registry/pubmedqa_pqal_leakage_audit.json \
+            --role-output "$RUNNER_TEMP/gax-native-abstention/role.json" \
+            --audit-output "$RUNNER_TEMP/gax-native-abstention/audit.json" \
+            --qualification-output "$RUNNER_TEMP/gax-native-abstention/qualification.json"
+      - name: Verify committed role manifest
+        run: diff -u registry/gax_native_abstention_role_manifest.json "$RUNNER_TEMP/gax-native-abstention/role.json"
+      - name: Verify committed leakage audit
+        run: diff -u registry/gax_native_abstention_leakage_audit.json "$RUNNER_TEMP/gax-native-abstention/audit.json"
+      - name: Verify committed qualification
+        run: diff -u registry/gax_native_abstention_qualification.json "$RUNNER_TEMP/gax-native-abstention/qualification.json"
+      - name: Run native abstention tests
+        run: >-
+          python -m pytest -q
+          tests/test_native_abstention.py
+          tests/test_native_abstention_qualification.py
+          tests/test_sg000018_inventory_update.py
+      - name: Generate proposed pre-results inventory
+        run: |
+          python scripts/update_sg000018_inventory.py \
+            --input registry/p08_real_inventory.json \
+            --output "$RUNNER_TEMP/gax-native-abstention/inventory.json"
+      - name: Verify committed pre-results inventory semantics
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          from gaxbench.p08_inventory import P08RealInventory
+          from gaxbench.provenance import canonical_json_sha256
+
+          committed_path = Path("registry/p08_real_inventory.json")
+          generated_path = Path(os.environ["RUNNER_TEMP"]) / "gax-native-abstention" / "inventory.json"
+          committed = P08RealInventory.model_validate(
+              json.loads(committed_path.read_text(encoding="utf-8"))
+          ).model_dump(mode="json")
+          generated = P08RealInventory.model_validate(
+              json.loads(generated_path.read_text(encoding="utf-8"))
+          ).model_dump(mode="json")
+          if committed != generated:
+              raise SystemExit("generated SG-000018 inventory differs semantically from committed inventory")
+          print(canonical_json_sha256(committed))
+          PY
+      - name: Upload exact generated inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: sg000018-generated-inventory
+          path: ${{ runner.temp }}/gax-native-abstention/inventory.json
+          if-no-files-found: error
+          retention-days: 1

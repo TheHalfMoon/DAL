@@ -1,4 +1,8 @@
-# GAX Program Tasks
+# DAL Program Tasks
+
+DAL is the current repository and program identity: **Decision Assurance Layer**. Historical
+`GAX` / `GAXBench` names below are retained where they identify already-frozen artifacts,
+revisions, workflows, or evidence chains. Identity migration must not rewrite historical evidence.
 
 ## P00 — Research foundation
 
@@ -40,7 +44,7 @@
 - [x] Structured-output LLM identity/revision/license freeze
 - [x] Canonical P02 phase closeout
 
-## P03 — GAX v0
+## P03 — GAX v0 historical implementation
 
 - [x] Model interface
 - [x] Training pipeline
@@ -142,7 +146,7 @@ P07 proves deterministic read-only interoperability mechanics and frozen source/
 - [x] SG-000011 guarded implementation merge and post-main CI
 - [x] SG-000011 canonical closeout
 
-Final-test access remains sealed after SG-000011. The freeze mechanism is proven; the real benchmark/model/data freeze has not yet been authorized.
+Final-test access remains sealed after SG-000011. The freeze mechanism is proven; final-test authorization remains a separate later artifact and has not been issued.
 
 ### Real inventory and pre-authorization foundation
 
@@ -178,23 +182,48 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 - [x] SG-000016 exact-head cross-platform plus MedAgentBench/FHIR-AgentBench/PubMedQA qualification
 - [x] SG-000016 guarded implementation merge and post-main qualification
 - [x] SG-000016 canonical closeout
-- [ ] MedQAbstain component-license and immutable-dataset qualification
+- [x] MedQAbstain immutable dataset and component-rights qualification completed in SG-000017
+- [x] MedQAbstain remains explicitly blocked for paper-required use because the frozen derived dataset exposes no license grant
+- [x] SG-000017 implementation merge, post-main qualification, and canonical closeout
 - [ ] Additional external-validation datasets only where rights and immutable identity are established
 
-PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-test contracts. The MedAgentBench public corpus is qualified and final-test-only, while the official Docker/refsol runtime remains explicitly blocked because immutable identity and independent terms are not established. The aggregate required MedAgentBench inventory entry therefore remains blocked and P08 remains unauthorized. MedQAbstain, required real systems, and protocol fields remain incomplete.
+PubMedQA and FHIR-AgentBench are qualified required benchmark slices under sealed final-test contracts. MedAgentBench's public corpus is qualified while its official external runtime remains blocked. MedQAbstain is reproducibly frozen but blocked for paper-required use because the derived collection exposes no license grant. SG-000018 prospectively replaces those blocked paper-critical dependencies rather than hiding them.
+
+### SG-000018 — Native abstention and pre-results protocol replacement (ACTIVE)
+
+- [x] Reuse the already-qualified PubMedQA PQA-L immutable source rather than inventing a mutable source
+- [x] Deterministic evidence-present / evidence-withheld pair constructor
+- [x] Keep abstention outside the candidate action distribution
+- [x] Development/calibration sufficiency supervision separated from action supervision
+- [x] Sealed final-test variants serialize neither action nor sufficiency gold
+- [x] Native role manifest, leakage audit, and qualification artifacts generated from frozen metadata
+- [x] Dedicated native-abstention qualification workflow
+- [x] Prospective required benchmark suite encoded without observing final-test model performance
+- [x] MedAgentBench official runtime reclassified as secondary/optional while retaining blocked status
+- [x] MedQAbstain reclassified as secondary/optional while retaining blocked status and licensing disclosure
+- [x] Calibration method and calibration split proposal frozen in the SG-000018 inventory
+- [x] Coverage targets, hardware protocol, and multiplicity policy proposal frozen in the SG-000018 inventory
+- [x] Inventory transform made deterministic, idempotent, and fail-closed on conflicting native entries
+- [x] Inventory regression suite aligned with the SG-000018 prospective state
+- [ ] Exact-head Linux/Windows Python 3.11/3.12 CI verified on the final implementation head
+- [ ] Dedicated and affected P08 qualification workflows verified on the final implementation head
+- [ ] Independent review evidence recorded; Jev / Alibaba Open Code Review must not be fabricated
+- [ ] SG-000018 implementation merged with expected-head guard
+- [ ] Post-main qualification verified
+- [ ] Separate SG-000018 canonical closeout merged
 
 ### Freeze before final-test access
 
-- [ ] Freeze benchmark version and immutable split manifests
-- [ ] Freeze GAX model/checkpoint revisions and training seeds
-- [ ] Freeze all baseline model/tokenizer/source revisions
-- [ ] Freeze calibration method, calibration split, and selective policy
+- [ ] Freeze benchmark version and immutable split manifests in canonical main (SG-000018 proposal exists; canonical merge pending)
+- [ ] Freeze DAL/GAX paper-candidate model/checkpoint revisions and training seeds
+- [ ] Freeze required comparison model/tokenizer/source revisions
+- [ ] Freeze calibration method, calibration split, and selective policy in canonical main
 - [ ] Freeze ECAL component keep/reject candidate set from development evidence
 - [ ] Freeze FHIR representation candidates and selection protocol
-- [ ] Freeze hardware/timing protocol and comparability rules
-- [ ] Complete dataset/license/redistribution audit
-- [ ] Complete train/dev/calibration/test leakage audit
-- [ ] Sign final-test opening manifest
+- [ ] Freeze hardware/timing protocol and comparability rules in canonical main
+- [ ] Complete dataset/license/redistribution audit for the required benchmark suite
+- [ ] Complete train/dev/calibration/test leakage audit for the required benchmark suite
+- [ ] Sign final-test opening manifest as a separate digest-bound authorization artifact
 
 ### Statistical/evidence infrastructure
 
@@ -210,12 +239,18 @@ PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-t
 
 ### Real-model qualification
 
+Authorization-critical systems under the SG-000018 proposal:
+
+- [ ] DAL/GAX paper candidate real-model qualification with immutable checkpoint identity and training seeds
 - [ ] Clinical encoder real-model qualification
-- [ ] CLM real-model qualification
 - [ ] Laya real-model qualification
-- [ ] decider real-model qualification
-- [ ] restricted-logit real-model qualification
-- [ ] structured-output LLM real-model qualification
+
+Secondary/optional systems, retained for useful comparison when reproducible at zero founder cost:
+
+- [ ] CLM real-model qualification if reproducible access permits
+- [ ] decider real-model qualification if reproducible access permits
+- [ ] restricted-logit real-model qualification if reproducible access permits
+- [ ] structured-output LLM real-model qualification if reproducible access permits
 - [ ] Jev evaluation if reproducible access and terms permit; otherwise record explicit blocked status
 
 ### Primary paper evaluation
@@ -248,7 +283,7 @@ PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-t
 - [ ] Paper manuscript
 - [ ] Appendix
 - [ ] Reproducibility bundle
-- [ ] GAXBench release
+- [ ] GAXBench compatibility release / governed DAL naming migration
 - [ ] Model release
 - [ ] Fine-tuning notebooks
 - [ ] Hugging Face release

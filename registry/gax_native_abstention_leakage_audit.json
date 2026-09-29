@@ -1,0 +1,14 @@
+{
+  "abstain_candidate_action_count": 0,
+  "cross_role_pair_overlap_count": 0,
+  "dataset_id": "gax-native-abstention-pqal",
+  "final_test_access": "sealed",
+  "intentional_within_source_pair_count": 1000,
+  "parent_cross_role_exact_overlap_count": 0,
+  "parent_cross_role_near_duplicate_count": 0,
+  "parent_leakage_audit_sha256": "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443",
+  "public_pretraining_contamination_risk": "unresolved-public-benchmark",
+  "schema_version": "0.1",
+  "test_supervision_serialized": false,
+  "transform_revision": "gax-native-abstention-pqal-v0.1"
+}

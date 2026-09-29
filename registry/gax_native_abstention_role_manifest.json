@@ -1,0 +1,29 @@
+{
+  "dataset_id": "gax-native-abstention-pqal",
+  "final_test_access": "sealed",
+  "membership_sha256": "7ce6787ef0d9c936cf11b39a13e8d73b8e740e1555ec5167ff6badb1a8b8bdc0",
+  "parent_dataset_id": "pubmedqa-pqal",
+  "parent_split_manifest_sha256": "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723",
+  "roles": {
+    "calibration": {
+      "pair_count": 100,
+      "source_count": 50
+    },
+    "test": {
+      "pair_count": 1000,
+      "source_count": 500
+    },
+    "validation": {
+      "pair_count": 900,
+      "source_count": 450
+    }
+  },
+  "schema_version": "0.1",
+  "task_scope": "evidence-availability insufficiency/selective-decision evaluation; not generic clinical safety",
+  "test_supervision_serialized": false,
+  "transform_revision": "gax-native-abstention-pqal-v0.1",
+  "variants": [
+    "evidence-present",
+    "evidence-withheld"
+  ]
+}
