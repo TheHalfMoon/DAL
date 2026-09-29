@@ -1,0 +1,37 @@
+{
+  "dataset_id": "disi-unibo-nlp/MedQAbstain",
+  "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
+  "duplicate_composite_key_count": 0,
+  "exact_cross_component_pair_count": 0,
+  "exact_cross_role_pair_count": 1,
+  "exact_duplicate_group_count": 5,
+  "exact_duplicate_pair_count": 5,
+  "exact_pair_digest": "93031d3eb1326cd67448cf3811aca52956bdb004bb8943d12dbe583733b86f99",
+  "final_test_access": "sealed",
+  "lineage_key": "dataset+id",
+  "model_visible_surface": "normalized-question+transformed-option-values",
+  "near_component_pair_counts": {
+    "afrimedqa|afrimedqa": 2,
+    "medmcqa|medmcqa": 1,
+    "medqa_4opt|medqa_5opt": 1261
+  },
+  "near_cross_component_pair_count": 1261,
+  "near_cross_role_pair_count": 0,
+  "near_duplicate_pair_count": 1264,
+  "near_duplicate_rule": {
+    "exact_duplicates_excluded": true,
+    "jaccard_threshold": 0.8,
+    "normalization": "unicode-word-casefold",
+    "shingle_size": 5
+  },
+  "near_pair_digest": "4cd7069a174fd46fdaa6776b8ee26b164e37273a8ddd5ede3fc8195e4b7f5d08",
+  "option_parse_failure_counts": {},
+  "public_pretraining_contamination": "unresolved-public-benchmark",
+  "raw_item_ids_serialized": false,
+  "raw_options_serialized": false,
+  "raw_questions_serialized": false,
+  "raw_rows_serialized": false,
+  "row_count": 11232,
+  "schema_version": "0.1",
+  "unique_composite_key_count": 11232
+}
