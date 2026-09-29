@@ -6,7 +6,9 @@ on:
       - ".github/workflows/p08-native-abstention-qualification.yml"
       - "registry/gax_native_abstention_*.json"
       - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_real_inventory.json"
       - "scripts/qualify_native_abstention.py"
+      - "scripts/update_sg000018_inventory.py"
       - "src/gaxbench/native_abstention.py"
       - "src/gaxbench/native_abstention_qualification.py"
       - "tests/test_native_abstention*.py"
@@ -16,7 +18,9 @@ on:
       - ".github/workflows/p08-native-abstention-qualification.yml"
       - "registry/gax_native_abstention_*.json"
       - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_real_inventory.json"
       - "scripts/qualify_native_abstention.py"
+      - "scripts/update_sg000018_inventory.py"
       - "src/gaxbench/native_abstention.py"
       - "src/gaxbench/native_abstention_qualification.py"
       - "tests/test_native_abstention*.py"
@@ -54,3 +58,11 @@ jobs:
         run: diff -u registry/gax_native_abstention_qualification.json "$RUNNER_TEMP/gax-native-abstention/qualification.json"
       - name: Run native abstention tests
         run: python -m pytest -q tests/test_native_abstention.py tests/test_native_abstention_qualification.py
+      - name: Generate proposed pre-results inventory
+        run: |
+          python scripts/update_sg000018_inventory.py \
+            --input registry/p08_real_inventory.json \
+            --output "$RUNNER_TEMP/gax-native-abstention/inventory.json"
+          echo "---BEGIN SG000018 INVENTORY---"
+          cat "$RUNNER_TEMP/gax-native-abstention/inventory.json"
+          echo "---END SG000018 INVENTORY---"
