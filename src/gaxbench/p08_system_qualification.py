@@ -263,6 +263,9 @@ def _validate_qualified_entry(
     execution_revisions = {execution.model_revision for execution in bundle.executions}
     if len(execution_revisions) != 1 or entry.model_revision not in execution_revisions:
         raise ValueError("inventory model_revision must match all qualified executions")
+    execution_adapters = {execution.adapter_revision for execution in bundle.executions}
+    if len(execution_adapters) != 1 or entry.adapter_revision not in execution_adapters:
+        raise ValueError("inventory adapter_revision must match all qualified executions")
 
     if entry.id == "laya":
         identity = registry.by_id("laya")
