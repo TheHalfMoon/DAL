@@ -27,16 +27,25 @@ SelectionMetric = Literal[
 
 
 class FrozenBackboneIdentity(StrictModel):
-    model_id: Literal["thomas-sounack/BioClinical-ModernBERT-base"] = BACKBONE_MODEL_ID
-    model_revision: Literal["5e17e2f25260b6993e0fb60485f94678ff29779a"] = BACKBONE_REVISION
-    tokenizer_revision: Literal["5e17e2f25260b6993e0fb60485f94678ff29779a"] = BACKBONE_REVISION
+    model_id: Literal["thomas-sounack/BioClinical-ModernBERT-base"] = (
+        "thomas-sounack/BioClinical-ModernBERT-base"
+    )
+    model_revision: Literal["5e17e2f25260b6993e0fb60485f94678ff29779a"] = (
+        "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    )
+    tokenizer_revision: Literal["5e17e2f25260b6993e0fb60485f94678ff29779a"] = (
+        "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    )
     trainable: Literal[False] = False
     pooling: Literal["attention-mask-mean"] = "attention-mask-mean"
+    embedding_normalization: Literal["l2"] = "l2"
 
 
 class EncoderInputPolicy(StrictModel):
     max_length: Literal[512] = 512
-    question_evidence_separator: Literal["\n\nEvidence:\n"] = "\n\nEvidence:\n"
+    encoding_mode: Literal["tokenizer-pair-question-evidence"] = (
+        "tokenizer-pair-question-evidence"
+    )
     evidence_joiner: Literal["\n"] = "\n"
     truncation_policy: Literal["preserve-question-truncate-evidence"] = (
         "preserve-question-truncate-evidence"
@@ -92,10 +101,10 @@ class TrainingRecipe(StrictModel):
     recipe_revision: Literal["dal-p08-paper-training-v0.1"] = "dal-p08-paper-training-v0.1"
     development_manifest_sha256: Literal[
         "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
-    ] = DEVELOPMENT_MANIFEST_SHA256
+    ] = "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
     development_leakage_audit_sha256: Literal[
         "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
-    ] = DEVELOPMENT_LEAKAGE_SHA256
+    ] = "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
     train_count: Literal[360] = 360
     selection_count: Literal[90] = 90
     training_seeds: list[int] = Field(default_factory=lambda: list(TRAINING_SEEDS))
@@ -103,11 +112,11 @@ class TrainingRecipe(StrictModel):
     head_batch_size: Literal[32] = 32
     epochs: Literal[80] = 80
     optimizer: Literal["adamw"] = "adamw"
-    learning_rate: Literal[0.02] = 0.02
-    weight_decay: Literal[0.0001] = 0.0001
-    gradient_clip_norm: Literal[1.0] = 1.0
-    action_loss_weight: Literal[1.0] = 1.0
-    sufficiency_loss_weight: Literal[0.5] = 0.5
+    learning_rate: float = Field(default=0.02, ge=0.02, le=0.02)
+    weight_decay: float = Field(default=0.0001, ge=0.0001, le=0.0001)
+    gradient_clip_norm: float = Field(default=1.0, ge=1.0, le=1.0)
+    action_loss_weight: float = Field(default=1.0, ge=1.0, le=1.0)
+    sufficiency_loss_weight: float = Field(default=0.5, ge=0.5, le=0.5)
     selection_tie_break: Literal["lower-epoch"] = "lower-epoch"
     final_test_access: Literal["sealed"] = "sealed"
     calibration_rows_used_for_training: Literal[False] = False
