@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "SG-000018",
-  "title": "GAX-P08 - Native licensed abstention benchmark and pre-results protocol replacement",
+  "title": "DAL-P08 - Native licensed abstention benchmark and pre-results protocol replacement",
   "state": "ACTIVE",
   "method": "research",
   "parent_id": null,
@@ -11,7 +11,7 @@
   "outcome": "Replace blocked paper-required abstention/runtime dependencies with reproducible pre-results benchmark and protocol decisions while preserving sealed final-test access.",
   "rationale": "SG-000017 proved that MedQAbstain is reproducibly identifiable but not licensed clearly enough for paper-required use. SG-000016 separately proved the MedAgentBench public corpus while leaving its official runtime/scorer blocked. These blockers must be resolved by an explicit pre-results protocol decision, never by dropping hard cases after seeing model performance.",
   "scope_in": [
-    "GAX-native evidence-availability insufficiency pairs derived from the already-qualified PubMedQA PQA-L source",
+    "DAL-native evidence-availability insufficiency pairs derived from the already-qualified PubMedQA PQA-L source; legacy gax-* identifiers remain compatibility/provenance identifiers in this grain",
     "Separate information-sufficiency supervision from the closed action distribution",
     "Deterministic pair lineage and role-manifest digests",
     "Metadata-only split and near-duplicate audit",
@@ -19,16 +19,18 @@
     "Pre-results reclassification of blocked MedQAbstain and MedAgentBench official runtime requirements",
     "Pre-results required-versus-optional baseline policy based only on reproducibility and zero-founder-cost compute",
     "Calibration, coverage, hardware, multiplicity, ECAL-selection, and FHIR-representation protocol freeze",
-    "Dedicated zero-founder-cost qualification workflow"
+    "Dedicated zero-founder-cost qualification workflow",
+    "DAL current-frontier and task-governance alignment without rewriting historical evidence"
   ],
   "scope_out": [
-    "No GAX or baseline final-test inference",
+    "No DAL/GAX or baseline final-test inference",
     "No final-test threshold, checkpoint, prompt, ECAL, or representation selection",
     "No conversion of abstain into an ordinary candidate action",
     "No claim that missing benchmark evidence proves generic clinical insufficiency",
     "No clinical-safety, deployment, superiority, or SOTA claim",
     "No paid founder cloud/API requirement",
-    "No raw restricted source republishing"
+    "No raw restricted source republishing",
+    "No destructive mass rename of historical GAX/GAXBench evidence identifiers"
   ],
   "acceptance": [
     "Canonical dependency is SG-000017 closeout main a97bd6b637be2d98ef98758749edf5f197cc97f8",
@@ -44,24 +46,35 @@
     "MedQAbstain remains reported as a blocked external benchmark rather than silently removed",
     "MedAgentBench public corpus/runtime distinction remains visible even if the blocked official runtime becomes optional for authorization",
     "Required heavyweight baselines are reclassified only from pre-results reproducibility and zero-founder-cost evidence, never observed performance",
+    "The inventory transform is deterministic, idempotent on the frozen SG-000018 state, and fails closed on duplicate or conflicting native entries",
+    "The typed inventory regression suite agrees with the SG-000018 required-versus-optional dataset policy and frozen protocol state",
+    "specs/CURRENT.md and specs/tasks.md identify DAL as the current program, preserve historical GAX evidence identity, and identify SG-000018 as the active frontier",
     "Overall P08 final-test access remains sealed throughout SG-000018",
     "Exact-head Linux/Windows Python 3.11/3.12 CI and dedicated native-abstention qualification pass before merge",
+    "Affected PubMedQA, FHIR-AgentBench, MedAgentBench, and MedQAbstain regression qualifications pass on the exact final implementation head",
+    "Independent review evidence is recorded honestly; Jev or Alibaba Open Code Review execution must not be fabricated",
     "Implementation merges with expected_head_sha and post-main qualification succeeds",
     "A separate canonical closeout is required before SG-000018 becomes PROVEN"
   ],
   "change_surface": [
-    ".specgrain/specs/SG-000018.json",
     ".github/workflows/p08-native-abstention-qualification.yml",
+    ".specgrain/specs/SG-000018.json",
     "docs/datasets/GAX_NATIVE_ABSTENTION.md",
-    "registry/gax_native_abstention_role_manifest.json",
+    "docs/research/P08_PRE_RESULTS_PROTOCOL_SG000018.md",
     "registry/gax_native_abstention_leakage_audit.json",
     "registry/gax_native_abstention_qualification.json",
+    "registry/gax_native_abstention_role_manifest.json",
     "registry/p08_real_inventory.json",
-    "src/gaxbench/native_abstention.py",
-    "tests/test_native_abstention.py",
-    "tests/test_p08_inventory.py",
+    "scripts/qualify_native_abstention.py",
+    "scripts/update_sg000018_inventory.py",
     "specs/CURRENT.md",
-    "specs/tasks.md"
+    "specs/tasks.md",
+    "src/gaxbench/native_abstention.py",
+    "src/gaxbench/native_abstention_qualification.py",
+    "tests/test_native_abstention.py",
+    "tests/test_native_abstention_qualification.py",
+    "tests/test_p08_inventory.py",
+    "tests/test_sg000018_inventory_update.py"
   ],
   "risk": {
     "level": "high",
@@ -76,8 +89,12 @@
       "leakage-audit-digest",
       "protocol-freeze-evidence",
       "inventory-state-evidence",
+      "inventory-idempotence-and-conflict-regression-evidence",
+      "governance-frontier-consistency-evidence",
       "exact-head-cross-platform-ci-pass",
       "dedicated-native-abstention-qualification-pass",
+      "affected-p08-regression-qualification-pass",
+      "independent-review-evidence-or-explicit-unavailable-record",
       "implementation-pr-pass",
       "post-main-qualification-pass",
       "canonical-closeout-pass"
@@ -86,6 +103,9 @@
   "metadata": {
     "research_issue": 57,
     "canonical_dependency": "a97bd6b637be2d98ef98758749edf5f197cc97f8",
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
     "required_native_source": {
       "dataset": "PubMedQA PQA-L",
       "repository": "pubmedqa/pubmedqa",
