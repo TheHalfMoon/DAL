@@ -13,6 +13,7 @@ from gaxbench.schema import StrictModel
 
 PARENT_SPLIT_MANIFEST_SHA256 = "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
 PARENT_LEAKAGE_AUDIT_SHA256 = "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443"
+NativeAbstentionRole = Literal["validation", "calibration", "test"]
 
 
 class RoleCount(StrictModel):
@@ -29,7 +30,7 @@ class NativeAbstentionRoleManifest(StrictModel):
         "gax-native-abstention-pqal-v0.1"
     )
     variants: list[Literal["evidence-present", "evidence-withheld"]]
-    roles: dict[Literal["validation", "calibration", "test"], RoleCount]
+    roles: dict[NativeAbstentionRole, RoleCount]
     membership_sha256: str
     final_test_access: Literal["sealed"] = "sealed"
     test_supervision_serialized: Literal[False] = False
@@ -108,7 +109,7 @@ def qualify_native_abstention(
     ):
         raise ValueError("parent PubMedQA leakage audit is not clean")
 
-    roles = {
+    roles: dict[NativeAbstentionRole, RoleCount] = {
         "calibration": RoleCount(
             source_count=len(parent_split.calibration_ids),
             pair_count=2 * len(parent_split.calibration_ids),
