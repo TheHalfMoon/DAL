@@ -57,7 +57,9 @@ class MedQAbstainHubProbe(StrictModel):
         if self.sibling_count != len(self.siblings):
             raise ValueError("sibling_count must equal siblings length")
         if self.private:
-            raise ValueError("MedQAbstain dataset must be publicly accessible for zero-cost qualification")
+            raise ValueError(
+                "MedQAbstain dataset must be publicly accessible for zero-cost qualification"
+            )
         if self.disabled is True:
             raise ValueError("MedQAbstain dataset is disabled")
         return self
@@ -100,14 +102,21 @@ def parse_hub_metadata(payload: dict[str, Any]) -> MedQAbstainHubProbe:
         raw_license = card_data.get("license")
         if isinstance(raw_license, str):
             card_license = raw_license
-        elif isinstance(raw_license, list) and all(isinstance(value, str) for value in raw_license):
+        elif isinstance(raw_license, list) and all(
+            isinstance(value, str) for value in raw_license
+        ):
             card_license = list(raw_license)
 
     tags = payload.get("tags")
-    clean_tags = sorted(value for value in tags if isinstance(value, str)) if isinstance(tags, list) else []
+    clean_tags = (
+        sorted(value for value in tags if isinstance(value, str))
+        if isinstance(tags, list)
+        else []
+    )
     parquet_count = sum(item.path.endswith(".parquet") for item in siblings)
     image_archive_count = sum(
-        item.path.lower().endswith((".zip", ".tar", ".tar.gz")) and "image" in item.path.lower()
+        item.path.lower().endswith((".zip", ".tar", ".tar.gz"))
+        and "image" in item.path.lower()
         for item in siblings
     )
 
@@ -150,7 +159,10 @@ def main() -> None:
         "research_repository": MEDQABSTAIN_RESEARCH_REPOSITORY,
         "research_revision": MEDQABSTAIN_RESEARCH_REVISION,
     }
-    Path(args.output).write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    Path(args.output).write_text(
+        json.dumps(output, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     print(
         json.dumps(
             {
