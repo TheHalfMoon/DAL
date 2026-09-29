@@ -94,11 +94,11 @@ Canonical dependency:
 
 ### Why SG-000019 exists
 
-The three authorization-critical systems are still pending:
+The authorization-critical system set is:
 
-- `gax-paper-candidate` — legacy inventory ID for the DAL paper candidate;
-- `clinical-encoder`;
-- `laya`.
+- `gax-paper-candidate` — legacy inventory ID for the DAL paper candidate — **pending**;
+- `clinical-encoder` — **pending**;
+- `laya` — **qualified in the current SG-000019 implementation tranche from genuine development-only execution evidence**.
 
 The tiny deterministic `gax-bilinear-v0` remains an engineering/control model and must not become
 the headline paper model merely because it is already runnable.
@@ -116,6 +116,36 @@ development surface:
 
 PQA-A and PQA-U are not silently admitted because upstream distributes them as separate artifacts;
 any use would require separate immutable identity and rights qualification.
+
+### Current SG-000019 implementation evidence
+
+The current implementation tranche has established the GPU-independent qualification foundation:
+
+- development manifest: `registry/p08_development_training_manifest_sg000019.json`;
+- development manifest SHA-256:
+  `9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c`;
+- child development leakage audit: `registry/p08_development_leakage_audit_sg000019.json`;
+- leakage-audit SHA-256:
+  `1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76`;
+- exact Laya source revision: `3c68ca2ccf6a83640ab80c20379503fe72c772fd`;
+- exact Laya model revision: `55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851`;
+- exact BioClinical ModernBERT model/tokenizer revision:
+  `5e17e2f25260b6993e0fb60485f94678ff29779a`;
+- real Laya evidence-producing run: `36644042755` on head
+  `7f75fb23677492258a855f99c6c406caaf61f849`;
+- Laya execution: 90 requested / 90 completed / 0 preserved failures;
+- Laya development-only result: 48 / 90 correct = **53.33% accuracy**;
+- Laya qualification-bundle SHA-256:
+  `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`;
+- final-test access remained **sealed** throughout the run.
+
+The 53.33% result is retained because qualification means immutable, reproducible, completely
+accounted real execution; it does not mean the baseline achieved a favorable result. Null or weak
+development evidence must not be discarded.
+
+`registry/p08_real_inventory.json` binds the Laya promotion to the exact qualification bundle,
+source revision, model revision, and execution adapter. `gax-paper-candidate` and
+`clinical-encoder` remain pending and therefore still block final-test authorization.
 
 ### SG-000019 required outputs
 
