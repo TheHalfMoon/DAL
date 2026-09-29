@@ -171,11 +171,17 @@ Final-test access remains sealed after SG-000011. The freeze mechanism is proven
 - [x] SG-000015 exact-head cross-platform plus dedicated FHIR-AgentBench and PubMedQA regression qualification
 - [x] SG-000015 guarded implementation merge and post-main qualification
 - [x] SG-000015 canonical closeout
-- [ ] MedAgentBench external-artifact/access-safe normalized qualification
+- [x] MedAgentBench public corpus immutable-identity / metadata-only qualification
+- [x] MedAgentBench complete published corpus frozen as final-test-only
+- [x] MedAgentBench duplicate and near-duplicate audit with within-family template redundancy disclosure
+- [x] MedAgentBench official Docker/refsol runtime recorded as blocked rather than inferred qualified
+- [x] SG-000016 exact-head cross-platform plus MedAgentBench/FHIR-AgentBench/PubMedQA qualification
+- [x] SG-000016 guarded implementation merge and post-main qualification
+- [x] SG-000016 canonical closeout
 - [ ] MedQAbstain component-license and immutable-dataset qualification
 - [ ] Additional external-validation datasets only where rights and immutable identity are established
 
-PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-test contracts. FHIR-AgentBench preserves R4 source identity, quarantines rows that would cross upstream test supervision, and keeps upstream EHRSQL generation-revision uncertainty explicit. P08 remains unauthorized while MedAgentBench, MedQAbstain, required real systems, and protocol fields are incomplete.
+PubMedQA and FHIR-AgentBench are qualified benchmark slices under sealed final-test contracts. The MedAgentBench public corpus is qualified and final-test-only, while the official Docker/refsol runtime remains explicitly blocked because immutable identity and independent terms are not established. The aggregate required MedAgentBench inventory entry therefore remains blocked and P08 remains unauthorized. MedQAbstain, required real systems, and protocol fields remain incomplete.
 
 ### Freeze before final-test access
 

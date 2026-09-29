@@ -19,6 +19,7 @@ Completed grains:
 - **SG-000013 — GAX-P08 Real evaluation inventory and pre-authorization freeze** — PROVEN
 - **SG-000014 — GAX-P08 PubMedQA PQA-L qualification and split/leakage manifest** — PROVEN
 - **SG-000015 — GAX-P08 FHIR-AgentBench frozen local R4 dataset qualification** — PROVEN
+- **SG-000016 — GAX-P08 MedAgentBench public corpus and external runtime qualification** — PROVEN
 
 ## Canonical P03 evidence chain
 
@@ -203,13 +204,45 @@ SG-000014 is **CLOSED_CANONICAL** as a dataset-qualification result. It proves a
 - final-test gold labels remain excluded from qualification artifacts; no real model inference or paper-performance evaluation occurred
 - real inventory entry `fhir-agentbench` is `qualified`, while overall P08 authorization remains false because MedAgentBench, MedQAbstain, real systems, and protocol-freeze fields remain incomplete
 
-SG-000015 is **CLOSED_CANONICAL** as a dataset-qualification result once this closeout merges and its own post-main CI succeeds. It proves a reproducible, metadata-safe, leakage-audited FHIR-AgentBench benchmark slice under a sealed final-test contract; it does not establish clinical correctness, patient safety, FHIR conformance certification, agent/model superiority, or SOTA performance.
+SG-000015 is **CLOSED_CANONICAL** as a dataset-qualification result. It proves a reproducible, metadata-safe, leakage-audited FHIR-AgentBench benchmark slice under a sealed final-test contract; it does not establish clinical correctness, patient safety, FHIR conformance certification, agent/model superiority, or SOTA performance.
+
+## Canonical P08 MedAgentBench qualification chain
+
+- research contract: Issue #46 / SG-000016
+- implementation PR: #48
+- implementation exact head: `6fef42897df06f18b3632cbfd2ba31669ce2cf29`
+- implementation exact-head GAXBench CI: run `36408842717` — SUCCESS
+- implementation exact-head MedAgentBench qualification: run `36408842787` — SUCCESS
+- implementation exact-head FHIR-AgentBench regression qualification: run `36408842689` — SUCCESS
+- implementation exact-head PubMedQA regression qualification: run `36408842729` — SUCCESS
+- implementation merge: `2f9a113e43a742f8e751273538d16e18d17a1e1c`
+- implementation post-main GAXBench CI: run `36569608938` — SUCCESS
+- implementation post-main MedAgentBench qualification: run `36569609045` — SUCCESS
+- implementation post-main FHIR-AgentBench regression qualification: run `36569609111` — SUCCESS
+- implementation post-main PubMedQA regression qualification: run `36569608847` — SUCCESS
+- exact-head and post-main GAXBench matrices: Linux/Windows × Python 3.11/3.12 — SUCCESS
+- frozen repository: `stanfordmlgroup/MedAgentBench@99260117137b09f04837a8c18d18a1107efa55ae`
+- task corpus: `data/medagentbench/test_data_v2.json`, Git blob `7f568f041f9d22e11b5bf31b80efd2219aaaf14f`, SHA-256 `b6e89b2ef82f1bef27c5778a644a8a66c7b25738bbd6a48d03ab3e5182df6ca8`
+- function catalog: `data/medagentbench/funcs_v1.json`, Git blob `9b15acc0ccf402ede8964261c371d6a00889b436`, SHA-256 `c977266db5eca75182c0d12cac1962b33ae6b5a54b9029ceb104e1a93b4c38c1`
+- final-test-only role revision: `gax-medagentbench-final-test-only-v0.1`
+- membership SHA-256: `85831df8b2b3e4f610186776b6e1e247a6cefd2113341675e7efc6318385a01d`
+- role manifest SHA-256: `daf963c8f1c13e974a4608a1cf222505f0013ed81a15616e129a106cb9a6dcb1`
+- leakage audit SHA-256: `b1fa338c510b4787e33cb40c525d5e2ca00154eae97b86c93c5a419abf143356`
+- public corpus: 300 tasks / 300 unique IDs / 10 families × 30 tasks / zero exact duplicate visible tasks
+- 2610 preregistered within-family near-duplicate pairs are disclosed as benchmark template redundancy; cross-family near-duplicate pairs are zero
+- repository/public corpus is MIT-covered and qualified as a frozen corpus; the full corpus remains final-test-only and public-pretraining contamination remains unresolved/disclosed
+- official runtime/scorer remains `blocked`: upstream references mutable `jyxsu6/medagentbench:latest`, separately downloaded `refsol.py`, and patient-environment content whose immutable identity/terms are not established by the repository license
+- a later public Docker manifest observation is not represented as the frozen upstream runtime identity
+- official MedAgentBench success-rate claims remain forbidden while runtime/scorer is blocked
+- aggregate required inventory entry remains blocked and `required_for_authorization` remains true; P08 authorization remains false
+
+SG-000016 is **CLOSED_CANONICAL** as a compound dataset/runtime qualification result once this closeout merges and its own post-main CI/regression qualification succeeds. It proves the public benchmark corpus is reproducibly identifiable and final-test-only while preserving the official runtime/scorer blocker; it does not establish official MedAgentBench reproducibility, clinical correctness, patient safety, FHIR conformance, agent/model superiority, or SOTA performance.
 
 Active frontier:
 
-**P08 — MedAgentBench external-artifact/access-safe qualification under the sealed final-test contract**
+**P08 — MedQAbstain component-license and immutable-dataset qualification under the sealed final-test contract**
 
-The next governed unit must separate the public MIT-licensed repository/task corpus from external runtime and scoring artifacts. It must freeze the public `test_data_v2.json` and `funcs_v1.json` identities, treat published test supervision as final-test-only, independently review the Docker image/data rights and external `refsol.py`, and fail closed rather than infer that public pull/download access grants redistribution or patient-environment rights.
+The next governed unit must freeze the MedQAbstain Hugging Face dataset revision and audit each underlying component dataset/license separately. Code-repository licensing must not be treated as evidence that transformed medical questions or multimodal assets are freely redistributable. The qualification must preserve the abstention transformation semantics, source lineage, final-test sealing, and public-pretraining contamination disclosure before any model comparison.
 
 Core P08 rules remain:
 
