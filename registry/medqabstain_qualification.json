@@ -15,7 +15,7 @@
   "quarantined_item_count": 17,
   "final_test_membership_sha256": "07056674a688d64468fd2fbeb815828605df1501f92ff0e31a255700bbf3d3f6",
   "quarantine_membership_sha256": "2e93f91165626842e093851c82e914d26a7468440c21dc0a9b8e11bb7e86f6d2",
-  "hub_probe_sha256": "7f06315b2af369336acf17c2cb9e2c9db8dc2d407124aaab3ebb43d7649907f8",
+  "hub_probe_sha256": "decb43fcd559bcdc19925ceea4e3f1fd7b0d716b6e4317cf507f01963069b854",
   "parquet_probe_sha256": "c9b258af838d8ceebf8302cf7c7139d8d00fe23dfa80a8997734b6d1b186ce2a",
   "transform_audit_sha256": "0b3be3404fbc1e066293330589eb04df197594fe4ca4ea839d19ec13d137cabe",
   "leakage_audit_sha256": "af8ac0c084fa96195a179b405d7823d9d8d89ce4211d854addb461f635f078f4",
