@@ -1,7 +1,7 @@
 # P08 Real-System Qualification — SG-000019
 
-Status: **ACTIVE / pre-results**  
-Research contract: `SG-000019` / Issue #63  
+Status: **ACTIVE / pre-results**
+Research contract: `SG-000019` / Issue #63
 Final-test access: **SEALED**
 
 ## Purpose
