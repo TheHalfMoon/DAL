@@ -13,7 +13,8 @@ def load(name: str) -> dict[str, object]:
 
 
 def file_sha256(name: str) -> str:
-    return hashlib.sha256((REGISTRY / name).read_bytes()).hexdigest()
+    normalized_text = (REGISTRY / name).read_text(encoding="utf-8")
+    return hashlib.sha256(normalized_text.encode("utf-8")).hexdigest()
 
 
 def test_qualification_summary_is_bound_to_frozen_evidence() -> None:
