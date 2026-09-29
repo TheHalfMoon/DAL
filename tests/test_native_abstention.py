@@ -6,6 +6,12 @@ from gaxbench.native_abstention import (
     NATIVE_ABSTENTION_TRANSFORM_REVISION,
     build_pubmedqa_evidence_pair,
 )
+from gaxbench.pubmedqa import (
+    PUBMEDQA_LICENSE,
+    PUBMEDQA_REPOSITORY,
+    PUBMEDQA_SOURCE_COMMIT,
+    PUBMEDQA_TRANSFORM_REVISION,
+)
 from gaxbench.schema import Action, BenchmarkItem, Evidence, Gold, Provenance
 
 
@@ -25,10 +31,10 @@ def make_item(*, split: str = "validation", gold: bool = True) -> BenchmarkItem:
         evidence=[Evidence(id="abstract-section-000", text="Study evidence.")],
         provenance=Provenance(
             dataset="PubMedQA PQA-L",
-            revision="1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
-            license="MIT",
-            transform_revision="gax-pqal-v0.1",
-            source_url="https://github.com/pubmedqa/pubmedqa",
+            revision=PUBMEDQA_SOURCE_COMMIT,
+            license=PUBMEDQA_LICENSE,
+            transform_revision=PUBMEDQA_TRANSFORM_REVISION,
+            source_url=f"https://github.com/{PUBMEDQA_REPOSITORY}",
         ),
     )
 
@@ -72,16 +78,58 @@ def test_final_test_source_rejects_serialized_gold() -> None:
 def test_wrong_source_is_rejected() -> None:
     item = make_item().model_copy(
         update={
-            "provenance": Provenance(
-                dataset="Other",
-                revision="revision",
-                license="MIT",
-                transform_revision="v1",
-            )
+            "provenance": make_item().provenance.model_copy(update={"dataset": "Other"})
         }
     )
     with pytest.raises(ValueError, match="require PubMedQA PQA-L provenance"):
         build_pubmedqa_evidence_pair(item)
+
+
+def test_wrong_source_revision_is_rejected() -> None:
+    item = make_item().model_copy(
+        update={
+            "provenance": make_item().provenance.model_copy(update={"revision": "0" * 40})
+        }
+    )
+    with pytest.raises(ValueError, match="frozen PubMedQA revision"):
+        build_pubmedqa_evidence_pair(item)
+
+
+def test_wrong_source_license_is_rejected() -> None:
+    item = make_item().model_copy(
+        update={"provenance": make_item().provenance.model_copy(update={"license": "Other"})}
+    )
+    with pytest.raises(ValueError, match="qualified PubMedQA license"):
+        build_pubmedqa_evidence_pair(item)
+
+
+def test_wrong_parent_transform_is_rejected() -> None:
+    item = make_item().model_copy(
+        update={
+            "provenance": make_item().provenance.model_copy(
+                update={"transform_revision": "other-v1"}
+            )
+        }
+    )
+    with pytest.raises(ValueError, match="qualified PubMedQA transform"):
+        build_pubmedqa_evidence_pair(item)
+
+
+def test_wrong_source_url_is_rejected() -> None:
+    item = make_item().model_copy(
+        update={
+            "provenance": make_item().provenance.model_copy(
+                update={"source_url": "https://github.com/example/example"}
+            )
+        }
+    )
+    with pytest.raises(ValueError, match="frozen PubMedQA source URL"):
+        build_pubmedqa_evidence_pair(item)
+
+
+def test_train_role_is_rejected() -> None:
+    with pytest.raises(ValueError, match="reject non-qualified PubMedQA roles"):
+        build_pubmedqa_evidence_pair(make_item(split="train"))
 
 
 def test_source_without_evidence_is_rejected() -> None:
@@ -102,3 +150,8 @@ def test_source_with_abstain_action_is_rejected() -> None:
     )
     with pytest.raises(ValueError, match="policy output"):
         build_pubmedqa_evidence_pair(item)
+
+
+def test_non_test_source_without_action_gold_is_rejected() -> None:
+    with pytest.raises(ValueError, match="require typed action supervision"):
+        build_pubmedqa_evidence_pair(make_item(gold=False))
