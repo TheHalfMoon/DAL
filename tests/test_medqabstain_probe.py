@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from gaxbench.medqabstain_probe import parse_hub_metadata
+from gaxbench.medqabstain_probe import canonical_probe_output, parse_hub_metadata
 
 
 def payload() -> dict[str, object]:
@@ -41,6 +41,19 @@ def test_probe_freezes_revision_and_sibling_manifest() -> None:
         "bench/train-00000-of-00001.parquet",
         "images.zip",
     ]
+
+
+def test_canonical_probe_ignores_irrelevant_raw_response_fields() -> None:
+    left = payload()
+    right = payload()
+    left["volatileRequestId"] = "request-a"
+    right["volatileRequestId"] = "request-b"
+    right["irrelevantServerField"] = {"order": [3, 2, 1]}
+
+    assert canonical_probe_output(parse_hub_metadata(left)) == canonical_probe_output(
+        parse_hub_metadata(right)
+    )
+    assert "metadata_response_sha256" not in canonical_probe_output(parse_hub_metadata(left))
 
 
 def test_probe_rejects_moving_main_without_immutable_sha() -> None:
