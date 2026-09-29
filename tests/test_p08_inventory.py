@@ -24,12 +24,13 @@ INVENTORY = ROOT / "registry" / "p08_real_inventory.json"
 def test_repository_inventory_is_valid_and_sealed() -> None:
     inventory = load_real_inventory(INVENTORY)
     assert inventory.final_test_access == "sealed"
-    assert inventory.inventory_revision == "p08-real-inventory-v0.1"
+    assert inventory.inventory_revision == "p08-real-inventory-v0.2-sg000018"
     assert inventory.sg000012_closeout.merge_sha == SG000012_CLOSEOUT_MERGE_SHA
     assert inventory.sg000012_closeout.post_main_run_id == SG000012_CLOSEOUT_POST_MAIN_RUN_ID
 
     pubmedqa = next(entry for entry in inventory.datasets if entry.id == "pubmedqa-pqal")
     assert pubmedqa.status == "qualified"
+    assert pubmedqa.required_for_authorization is True
     assert pubmedqa.split_manifest_sha256 == (
         "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723"
     )
@@ -37,8 +38,22 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
         "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443"
     )
 
+    native = next(
+        entry for entry in inventory.datasets if entry.id == "gax-native-abstention-pqal"
+    )
+    assert native.status == "qualified"
+    assert native.required_for_authorization is True
+    assert native.allowed_roles == ["calibration", "development", "final-test"]
+    assert native.split_manifest_sha256 == (
+        "d64bfdf057afeaae35fb4209a8513dfc48a6c52e2abd08260dbf111afec1474f"
+    )
+    assert native.leakage_audit_sha256 == (
+        "e4c105bb1315138310f9b10432430fc753f5d0bfa87d8378dad97399a37cb8d8"
+    )
+
     fhir = next(entry for entry in inventory.datasets if entry.id == "fhir-agentbench")
     assert fhir.status == "qualified"
+    assert fhir.required_for_authorization is True
     assert fhir.test_labels_sealed is True
     assert fhir.split_manifest_sha256 == (
         "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c"
@@ -51,9 +66,10 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
         entry for entry in inventory.datasets if entry.id == "medagentbench"
     )
     assert medagentbench.status == "blocked"
+    assert medagentbench.required_for_authorization is False
     assert medagentbench.corpus_status == "qualified"
     assert medagentbench.official_runtime_status == "blocked"
-    assert medagentbench.official_runtime_required_for_authorization is True
+    assert medagentbench.official_runtime_required_for_authorization is False
     assert medagentbench.allowed_roles == ["final-test"]
     assert medagentbench.split_manifest_sha256 == (
         "daf963c8f1c13e974a4608a1cf222505f0013ed81a15616e129a106cb9a6dcb1"
@@ -67,13 +83,21 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert medqabstain.source_kind == "huggingface"
     assert medqabstain.source_revision == "d215847217bb5f4124b9110379d33b9eb2f8d3f7"
     assert medqabstain.allowed_roles == ["final-test"]
-    assert medqabstain.required_for_authorization is True
+    assert medqabstain.required_for_authorization is False
     assert medqabstain.split_manifest_sha256 == (
         "07056674a688d64468fd2fbeb815828605df1501f92ff0e31a255700bbf3d3f6"
     )
     assert medqabstain.leakage_audit_sha256 == (
         "af8ac0c084fa96195a179b405d7823d9d8d89ce4211d854addb461f635f078f4"
     )
+
+    assert inventory.protocol.status == "qualified"
+    assert inventory.protocol.pending_reason is None
+    assert inventory.protocol.calibration_method == (
+        "temperature-scaling-action+platt-sufficiency-v0.1"
+    )
+    assert inventory.protocol.hardware_protocol_revision == "p08-hardware-stratified-v0.1"
+    assert inventory.protocol.multiplicity_policy == "holm-primary-family-v0.1"
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
 
@@ -81,16 +105,15 @@ def test_repository_inventory_is_not_ready_for_authorization() -> None:
     report = audit_real_inventory(load_real_inventory(INVENTORY))
     assert report.ready_for_authorization is False
     assert report.final_test_access == "sealed"
-    assert "protocol:status=pending" in report.blockers
-    assert "dataset:pubmedqa-pqal:status=pending" not in report.blockers
-    assert "dataset:fhir-agentbench:status=pending" not in report.blockers
-    assert "dataset:medagentbench:status=blocked" in report.blockers
-    assert "dataset:medagentbench:official-runtime=blocked" in report.blockers
-    assert "dataset:medagentbench:corpus-status=qualified" not in report.blockers
-    assert "dataset:medqabstain:status=blocked" in report.blockers
-    assert "dataset:medqabstain:license=ambiguous" in report.blockers
-    assert "dataset:medqabstain:status=pending" not in report.blockers
+    assert report.required_dataset_count == 3
+    assert "protocol:status=pending" not in report.blockers
+    assert not any(blocker.startswith("dataset:") for blocker in report.blockers)
     assert "system:gax-paper-candidate:status=pending" in report.blockers
+    assert "system:gax-paper-candidate:missing-real-execution-evidence" in report.blockers
+    assert "system:clinical-encoder:status=pending" in report.blockers
+    assert "system:clinical-encoder:missing-real-execution-evidence" in report.blockers
+    assert "system:laya:status=pending" in report.blockers
+    assert "system:laya:missing-real-execution-evidence" in report.blockers
 
 
 def test_inventory_digest_is_deterministic() -> None:
