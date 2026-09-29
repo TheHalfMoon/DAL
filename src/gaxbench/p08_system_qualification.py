@@ -95,10 +95,10 @@ class SystemQualificationBundle(StrictModel):
     system_id: RequiredSystemID
     development_manifest_sha256: Literal[
         "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
-    ] = SG000019_DEVELOPMENT_MANIFEST_SHA256
+    ] = "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
     development_leakage_audit_sha256: Literal[
         "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
-    ] = SG000019_DEVELOPMENT_LEAKAGE_SHA256
+    ] = "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
     checkpoints: list[CheckpointProvenance] = Field(default_factory=list)
     executions: list[SystemExecutionEvidence] = Field(min_length=1)
     final_test_access: Literal["sealed"] = "sealed"
@@ -106,6 +106,10 @@ class SystemQualificationBundle(StrictModel):
 
     @model_validator(mode="after")
     def validate_bundle(self) -> SystemQualificationBundle:
+        if self.development_manifest_sha256 != SG000019_DEVELOPMENT_MANIFEST_SHA256:
+            raise ValueError("development manifest digest drift")
+        if self.development_leakage_audit_sha256 != SG000019_DEVELOPMENT_LEAKAGE_SHA256:
+            raise ValueError("development leakage audit digest drift")
         for execution in self.executions:
             if execution.system_id != self.system_id:
                 raise ValueError("all executions must belong to the bundle system")
