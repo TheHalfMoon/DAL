@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1",
+  "dataset_id": "disi-unibo-nlp/MedQAbstain",
+  "dataset_revision": "d215847217bb5f4124b9110379d33b9eb2f8d3f7",
+  "role_revision": "gax-medqabstain-final-test-only-v0.1",
+  "role": "final-test-only-candidate",
+  "source_row_count": 11232,
+  "construction_eligible_item_count": 11215,
+  "construction_eligible_membership_sha256": "07056674a688d64468fd2fbeb815828605df1501f92ff0e31a255700bbf3d3f6",
+  "quarantined_item_count": 17,
+  "quarantine_membership_sha256": "2e93f91165626842e093851c82e914d26a7468440c21dc0a9b8e11bb7e86f6d2",
+  "lineage_key": "dataset+id",
+  "components": {
+    "afrimedqa": {"eligible": 2336, "quarantined": 14},
+    "medmcqa": {"eligible": 1885, "quarantined": 1},
+    "medqa_4opt": {"eligible": 1272, "quarantined": 1},
+    "medqa_5opt": {"eligible": 1273, "quarantined": 0},
+    "medxpertqa": {"eligible": 2450, "quarantined": 0},
+    "medxpertqa-MM": {"eligible": 1999, "quarantined": 1}
+  },
+  "training_use_forbidden": true,
+  "calibration_use_forbidden": true,
+  "prompt_selection_use_forbidden": true,
+  "threshold_selection_use_forbidden": true,
+  "model_selection_use_forbidden": true,
+  "ecal_selection_use_forbidden": true,
+  "fhir_representation_selection_use_forbidden": true,
+  "paper_evaluation_use_authorized": false,
+  "paper_evaluation_blocked_reason": "Component/source and derived MedQAbstain licensing is not sufficiently established for the frozen aggregate dataset.",
+  "final_test_access": "sealed",
+  "test_gold_serialized": false,
+  "raw_item_ids_serialized": false
+}
