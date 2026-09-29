@@ -6,6 +6,7 @@ on:
       - ".github/workflows/p08-medqabstain-qualification.yml"
       - ".specgrain/specs/SG-000017.json"
       - "src/gaxbench/medqabstain_probe.py"
+      - "scripts/probe_medqabstain_parquet.py"
       - "tests/test_medqabstain_probe.py"
       - "docs/datasets/MEDQABSTAIN.md"
       - "registry/medqabstain_*.json"
@@ -16,6 +17,7 @@ on:
       - ".github/workflows/p08-medqabstain-qualification.yml"
       - ".specgrain/specs/SG-000017.json"
       - "src/gaxbench/medqabstain_probe.py"
+      - "scripts/probe_medqabstain_parquet.py"
       - "tests/test_medqabstain_probe.py"
       - "docs/datasets/MEDQABSTAIN.md"
       - "registry/medqabstain_*.json"
@@ -30,39 +32,59 @@ concurrency:
 
 jobs:
   probe:
-    name: Frozen MedQAbstain Hugging Face metadata probe
+    name: Frozen MedQAbstain immutable-source qualification probe
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install
-        run: python -m pip install -e .
+        run: |
+          python -m pip install -e .
+          python -m pip install "pyarrow>=17,<22"
       - name: Download immutable-revision metadata source
         run: |
           curl --fail --location --silent --show-error \
             "https://huggingface.co/api/datasets/disi-unibo-nlp/MedQAbstain?blobs=true" \
             --output /tmp/medqabstain-hub.json
-      - name: Generate metadata-only immutable identity probe
+      - name: Generate immutable identity probe
         run: |
           mkdir -p /tmp/medqabstain-evidence
           python -m gaxbench.medqabstain_probe \
             --metadata /tmp/medqabstain-hub.json \
             --output /tmp/medqabstain-evidence/medqabstain_hub_probe.json
-      - name: Verify committed probe when frozen
+      - name: Verify frozen hub identity
         run: |
-          if [ -f registry/medqabstain_hub_probe.json ]; then
-            diff -u registry/medqabstain_hub_probe.json \
-              /tmp/medqabstain-evidence/medqabstain_hub_probe.json
+          diff -u registry/medqabstain_hub_probe.json \
+            /tmp/medqabstain-evidence/medqabstain_hub_probe.json
+      - name: Download frozen parquet sources
+        run: |
+          REV="d215847217bb5f4124b9110379d33b9eb2f8d3f7"
+          BASE="https://huggingface.co/datasets/disi-unibo-nlp/MedQAbstain/resolve/${REV}/data"
+          curl --fail --location --silent --show-error \
+            "${BASE}/LT-00000-of-00001.parquet" --output /tmp/LT.parquet
+          curl --fail --location --silent --show-error \
+            "${BASE}/Safe-00000-of-00001.parquet" --output /tmp/Safe.parquet
+      - name: Generate metadata-only parquet probe
+        run: |
+          python scripts/probe_medqabstain_parquet.py \
+            --lt /tmp/LT.parquet \
+            --safe /tmp/Safe.parquet \
+            --output /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
+      - name: Verify committed parquet probe when frozen
+        run: |
+          if [ -f registry/medqabstain_parquet_probe.json ]; then
+            diff -u registry/medqabstain_parquet_probe.json \
+              /tmp/medqabstain-evidence/medqabstain_parquet_probe.json
           else
-            echo "Probe stage: committed freeze evidence does not exist yet."
+            echo "Parquet probe stage: committed freeze evidence does not exist yet."
           fi
-      - name: Upload metadata-only probe
+      - name: Upload metadata-only probes
         uses: actions/upload-artifact@v4
         with:
-          name: medqabstain-hub-probe
-          path: /tmp/medqabstain-evidence/medqabstain_hub_probe.json
+          name: medqabstain-qualification-probes
+          path: /tmp/medqabstain-evidence/*.json
           if-no-files-found: error
           retention-days: 7
