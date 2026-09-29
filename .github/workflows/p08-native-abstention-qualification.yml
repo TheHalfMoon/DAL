@@ -1,0 +1,56 @@
+name: GAX P08 Native Abstention Qualification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/p08-native-abstention-qualification.yml"
+      - "registry/gax_native_abstention_*.json"
+      - "registry/pubmedqa_pqal_*.json"
+      - "scripts/qualify_native_abstention.py"
+      - "src/gaxbench/native_abstention.py"
+      - "src/gaxbench/native_abstention_qualification.py"
+      - "tests/test_native_abstention*.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/p08-native-abstention-qualification.yml"
+      - "registry/gax_native_abstention_*.json"
+      - "registry/pubmedqa_pqal_*.json"
+      - "scripts/qualify_native_abstention.py"
+      - "src/gaxbench/native_abstention.py"
+      - "src/gaxbench/native_abstention_qualification.py"
+      - "tests/test_native_abstention*.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Frozen GAX-native PubMedQA abstention qualification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Rebuild metadata-only qualification artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/gax-native-abstention"
+          python scripts/qualify_native_abstention.py \
+            --parent-split registry/pubmedqa_pqal_split_manifest.json \
+            --parent-leakage registry/pubmedqa_pqal_leakage_audit.json \
+            --role-output "$RUNNER_TEMP/gax-native-abstention/role.json" \
+            --audit-output "$RUNNER_TEMP/gax-native-abstention/audit.json" \
+            --qualification-output "$RUNNER_TEMP/gax-native-abstention/qualification.json"
+      - name: Verify committed role manifest
+        run: diff -u registry/gax_native_abstention_role_manifest.json "$RUNNER_TEMP/gax-native-abstention/role.json"
+      - name: Verify committed leakage audit
+        run: diff -u registry/gax_native_abstention_leakage_audit.json "$RUNNER_TEMP/gax-native-abstention/audit.json"
+      - name: Verify committed qualification
+        run: diff -u registry/gax_native_abstention_qualification.json "$RUNNER_TEMP/gax-native-abstention/qualification.json"
+      - name: Run native abstention tests
+        run: python -m pytest -q tests/test_native_abstention.py tests/test_native_abstention_qualification.py

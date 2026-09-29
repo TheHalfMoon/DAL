@@ -1,0 +1,19 @@
+{
+  "calibration_count": 100,
+  "dataset_id": "gax-native-abstention-pqal",
+  "derived_item_count": 2000,
+  "final_test_access": "sealed",
+  "leakage_audit_sha256": "e4c105bb1315138310f9b10432430fc753f5d0bfa87d8378dad97399a37cb8d8",
+  "license": "MIT",
+  "role_manifest_sha256": "d64bfdf057afeaae35fb4209a8513dfc48a6c52e2abd08260dbf111afec1474f",
+  "schema_version": "0.1",
+  "scope_limitation": "Evidence-withheld variants test authorization under intentionally missing benchmark evidence; they do not establish generic clinical insufficiency or clinical safety.",
+  "source_item_count": 1000,
+  "source_repository": "pubmedqa/pubmedqa",
+  "source_revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
+  "status": "qualified",
+  "test_count": 1000,
+  "test_supervision_serialized": false,
+  "transform_revision": "gax-native-abstention-pqal-v0.1",
+  "validation_count": 900
+}
