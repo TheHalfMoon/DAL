@@ -142,7 +142,9 @@ def _verify_registry(payload: dict[str, Any]) -> dict[str, Any]:
     if by_id["clinical-encoder"].get("model_revision") != CLINICAL_MODEL_REVISION:
         raise RuntimeError("clinical-encoder immutable revision drifted from the prior freeze")
     if by_id["clinical-encoder"].get("tokenizer_revision") != CLINICAL_MODEL_REVISION:
-        raise RuntimeError("clinical-encoder tokenizer revision must match the frozen model revision")
+        raise RuntimeError(
+            "clinical-encoder tokenizer revision must match the frozen model revision"
+        )
     return {
         "schema_version": "0.1",
         "final_test_access": "sealed",
