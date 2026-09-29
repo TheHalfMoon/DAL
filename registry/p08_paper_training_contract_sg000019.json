@@ -1,0 +1,109 @@
+{
+  "backbone": {
+    "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
+    "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+    "pooling": "attention-mask-mean",
+    "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+    "trainable": false
+  },
+  "capacity_matching_note": "paper-candidate=3H+4; clinical-control=3H+3; backbone frozen for both",
+  "encoder_input": {
+    "action_text_source": "benchmark-action-description",
+    "evidence_joiner": "\n",
+    "max_length": 512,
+    "question_evidence_separator": "\n\nEvidence:\n",
+    "truncation_policy": "preserve-question-truncate-evidence",
+    "withheld_representation": "question-only"
+  },
+  "final_test_access": "sealed",
+  "matched_backbone_and_input_policy": true,
+  "recipe": {
+    "action_loss_weight": 1.0,
+    "calibration_rows_used_for_training": false,
+    "development_leakage_audit_sha256": "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76",
+    "development_manifest_sha256": "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c",
+    "encoder_batch_size": 8,
+    "epochs": 80,
+    "final_test_access": "sealed",
+    "final_test_rows_used_for_training_or_selection": false,
+    "gradient_clip_norm": 1.0,
+    "head_batch_size": 32,
+    "learning_rate": 0.02,
+    "optimizer": "adamw",
+    "recipe_revision": "dal-p08-paper-training-v0.1",
+    "schema_version": "0.1",
+    "selection_count": 90,
+    "selection_tie_break": "lower-epoch",
+    "sufficiency_loss_weight": 0.5,
+    "train_count": 360,
+    "training_seeds": [0, 1, 2],
+    "weight_decay": 0.0001
+  },
+  "schema_version": "0.1",
+  "systems": [
+    {
+      "architecture": {
+        "abstain_is_candidate_action": false,
+        "action_distribution": "closed-typed-softmax",
+        "action_scoring": "shared-diagonal-state+evidence-delta-by-action-embedding",
+        "architecture_id": "dal-typed-evidence-diag-v0.1",
+        "autoregressive_generation": false,
+        "encoder_input": {
+          "action_text_source": "benchmark-action-description",
+          "evidence_joiner": "\n",
+          "max_length": 512,
+          "question_evidence_separator": "\n\nEvidence:\n",
+          "truncation_policy": "preserve-question-truncate-evidence",
+          "withheld_representation": "question-only"
+        },
+        "frozen_backbone": {
+          "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
+          "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+          "pooling": "attention-mask-mean",
+          "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+          "trainable": false
+        },
+        "state_representation": "full-state+question-only+evidence-delta",
+        "sufficiency_mechanism": "separate-logistic-head-over-evidence-delta",
+        "system_id": "gax-paper-candidate",
+        "trainable_parameter_formula": "3H+4"
+      },
+      "selection_metric": "action-nll+0.5-sufficiency-brier",
+      "system_id": "gax-paper-candidate",
+      "train_action_on_evidence_present_only": true,
+      "train_sufficiency_on_present_withheld_pairs": true
+    },
+    {
+      "architecture": {
+        "abstain_is_candidate_action": false,
+        "action_distribution": "closed-typed-softmax",
+        "action_scoring": "three-class-linear-head-over-frozen-state",
+        "architecture_id": "bioclinical-linear-control-v0.1",
+        "autoregressive_generation": false,
+        "encoder_input": {
+          "action_text_source": "benchmark-action-description",
+          "evidence_joiner": "\n",
+          "max_length": 512,
+          "question_evidence_separator": "\n\nEvidence:\n",
+          "truncation_policy": "preserve-question-truncate-evidence",
+          "withheld_representation": "question-only"
+        },
+        "frozen_backbone": {
+          "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
+          "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+          "pooling": "attention-mask-mean",
+          "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
+          "trainable": false
+        },
+        "state_representation": "full-state",
+        "sufficiency_mechanism": "none",
+        "system_id": "clinical-encoder",
+        "trainable_parameter_formula": "3H+3"
+      },
+      "selection_metric": "action-nll",
+      "system_id": "clinical-encoder",
+      "train_action_on_evidence_present_only": true,
+      "train_sufficiency_on_present_withheld_pairs": false
+    }
+  ]
+}
