@@ -3,10 +3,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
+from gaxbench.pubmedqa import (
+    PUBMEDQA_LICENSE,
+    PUBMEDQA_REPOSITORY,
+    PUBMEDQA_SOURCE_COMMIT,
+    PUBMEDQA_TRANSFORM_REVISION,
+)
 from gaxbench.schema import BenchmarkItem, Gold, Provenance
 
 NATIVE_ABSTENTION_TRANSFORM_REVISION = "gax-native-abstention-pqal-v0.1"
 NativeAbstentionVariant = Literal["evidence-present", "evidence-withheld"]
+_ALLOWED_SOURCE_SPLITS = frozenset({"validation", "calibration", "test"})
 
 
 @dataclass(frozen=True)
@@ -56,8 +63,19 @@ def build_pubmedqa_evidence_pair(item: BenchmarkItem) -> NativeAbstentionPair:
 
 
 def _validate_pubmedqa_item(item: BenchmarkItem) -> None:
-    if item.provenance.dataset != "PubMedQA PQA-L":
+    provenance = item.provenance
+    if provenance.dataset != "PubMedQA PQA-L":
         raise ValueError("native evidence-abstention pairs require PubMedQA PQA-L provenance")
+    if provenance.revision != PUBMEDQA_SOURCE_COMMIT:
+        raise ValueError("native evidence-abstention pairs require the frozen PubMedQA revision")
+    if provenance.license != PUBMEDQA_LICENSE:
+        raise ValueError("native evidence-abstention pairs require the qualified PubMedQA license")
+    if provenance.transform_revision != PUBMEDQA_TRANSFORM_REVISION:
+        raise ValueError("native evidence-abstention pairs require the qualified PubMedQA transform")
+    if provenance.source_url != f"https://github.com/{PUBMEDQA_REPOSITORY}":
+        raise ValueError("native evidence-abstention pairs require the frozen PubMedQA source URL")
+    if item.split not in _ALLOWED_SOURCE_SPLITS:
+        raise ValueError("native evidence-abstention pairs reject non-qualified PubMedQA roles")
     if item.task_family != "biomedical-closed-qa":
         raise ValueError("native evidence-abstention pairs require biomedical-closed-qa input")
     if not item.evidence:
