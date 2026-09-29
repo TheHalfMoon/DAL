@@ -1,4 +1,4 @@
-name: GAX P08 Native Abstention Qualification
+name: DAL P08 Native Abstention Qualification
 
 on:
   pull_request:
@@ -6,6 +6,7 @@ on:
       - ".github/workflows/p08-native-abstention-qualification.yml"
       - "registry/gax_native_abstention_*.json"
       - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_calibration_manifest_sg000018.json"
       - "registry/p08_real_inventory.json"
       - "scripts/qualify_native_abstention.py"
       - "scripts/update_sg000018_inventory.py"
@@ -19,6 +20,7 @@ on:
       - ".github/workflows/p08-native-abstention-qualification.yml"
       - "registry/gax_native_abstention_*.json"
       - "registry/pubmedqa_pqal_*.json"
+      - "registry/p08_calibration_manifest_sg000018.json"
       - "registry/p08_real_inventory.json"
       - "scripts/qualify_native_abstention.py"
       - "scripts/update_sg000018_inventory.py"
@@ -33,7 +35,7 @@ permissions:
 
 jobs:
   qualify:
-    name: Frozen GAX-native PubMedQA abstention qualification
+    name: Frozen DAL-native PubMedQA abstention qualification
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
