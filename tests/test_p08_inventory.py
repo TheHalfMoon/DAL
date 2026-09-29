@@ -61,6 +61,19 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert medagentbench.leakage_audit_sha256 == (
         "b1fa338c510b4787e33cb40c525d5e2ca00154eae97b86c93c5a419abf143356"
     )
+
+    medqabstain = next(entry for entry in inventory.datasets if entry.id == "medqabstain")
+    assert medqabstain.status == "blocked"
+    assert medqabstain.source_kind == "huggingface"
+    assert medqabstain.source_revision == "d215847217bb5f4124b9110379d33b9eb2f8d3f7"
+    assert medqabstain.allowed_roles == ["final-test"]
+    assert medqabstain.required_for_authorization is True
+    assert medqabstain.split_manifest_sha256 == (
+        "07056674a688d64468fd2fbeb815828605df1501f92ff0e31a255700bbf3d3f6"
+    )
+    assert medqabstain.leakage_audit_sha256 == (
+        "af8ac0c084fa96195a179b405d7823d9d8d89ce4211d854addb461f635f078f4"
+    )
     assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
 
 
@@ -74,7 +87,9 @@ def test_repository_inventory_is_not_ready_for_authorization() -> None:
     assert "dataset:medagentbench:status=blocked" in report.blockers
     assert "dataset:medagentbench:official-runtime=blocked" in report.blockers
     assert "dataset:medagentbench:corpus-status=qualified" not in report.blockers
-    assert "dataset:medqabstain:status=pending" in report.blockers
+    assert "dataset:medqabstain:status=blocked" in report.blockers
+    assert "dataset:medqabstain:license=ambiguous" in report.blockers
+    assert "dataset:medqabstain:status=pending" not in report.blockers
     assert "system:gax-paper-candidate:status=pending" in report.blockers
 
 
