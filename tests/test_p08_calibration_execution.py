@@ -131,8 +131,12 @@ def test_fhir_selection_rejects_no_eligible_candidate() -> None:
 def test_authorization_candidate_is_structurally_sealed() -> None:
     candidate = AuthorizationCandidate(
         required_system_bundle_digests={
-            "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
-            "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+            "gax-paper-candidate": (
+                "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b"
+            ),
+            "clinical-encoder": (
+                "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388"
+            ),
             "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
         },
         calibration_evidence_sha256="c" * 64,
