@@ -47,7 +47,11 @@ def test_paper_and_control_share_exact_frozen_backbone_and_input_policy() -> Non
     assert paper.architecture.frozen_backbone.model_revision == BACKBONE_REVISION
     assert paper.architecture.frozen_backbone.tokenizer_revision == BACKBONE_REVISION
     assert paper.architecture.frozen_backbone.trainable is False
+    assert paper.architecture.frozen_backbone.embedding_normalization == "l2"
     assert paper.architecture.encoder_input.max_length == 512
+    assert paper.architecture.encoder_input.encoding_mode == (
+        "tokenizer-pair-question-evidence"
+    )
     assert paper.architecture.encoder_input.truncation_policy == (
         "preserve-question-truncate-evidence"
     )
@@ -67,6 +71,17 @@ def test_capacity_match_is_intentional_and_paper_candidate_is_non_generative() -
         "separate-logistic-head-over-evidence-delta"
     )
     assert control.architecture.sufficiency_mechanism == "none"
+
+
+def test_checkpoint_and_seed_selection_are_prospectively_frozen() -> None:
+    recipe = _persisted().recipe
+
+    assert recipe.initialization == "torch-xavier-uniform-zero-bias"
+    assert recipe.deterministic_algorithms is True
+    assert recipe.epoch_selection_rule == "minimum-development-selection-metric"
+    assert recipe.epoch_selection_tie_break == "lower-epoch"
+    assert recipe.seed_selection_rule == "minimum-development-selection-metric"
+    assert recipe.seed_selection_tie_break == "lower-seed"
 
 
 def test_contract_rejects_unmatched_backbone() -> None:
@@ -93,4 +108,12 @@ def test_contract_rejects_replacing_paper_candidate_with_control_architecture() 
     )
 
     with pytest.raises(ValidationError, match="paper candidate"):
+        PaperTrainingContract.model_validate(payload)
+
+
+def test_contract_rejects_seed_selection_policy_drift() -> None:
+    payload = _persisted().model_dump(mode="json")
+    payload["recipe"]["seed_selection_tie_break"] = "higher-seed"
+
+    with pytest.raises(ValidationError):
         PaperTrainingContract.model_validate(payload)
