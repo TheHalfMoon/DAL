@@ -111,7 +111,7 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert paper.adapter_revision == "dal-p08-paper-head-v0.1"
     assert paper.training_seeds == [0, 1, 2]
     assert paper.real_execution_evidence_id == (
-        "sha256:e40d96e020bd8b8388dcb172f9fc345ed66ac8f35facc0f8ec8268fa887fba97"
+        "sha256:0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b"
     )
 
     clinical = next(entry for entry in inventory.systems if entry.id == "clinical-encoder")
@@ -123,7 +123,7 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     assert clinical.adapter_revision == "dal-p08-clinical-control-head-v0.1"
     assert clinical.training_seeds == [0, 1, 2]
     assert clinical.real_execution_evidence_id == (
-        "sha256:e91e6fa72d4cfb6945b7dff6dcf4c0740b8e6c2465bf351577c450da6b7213cc"
+        "sha256:b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388"
     )
 
     laya = next(entry for entry in inventory.systems if entry.id == "laya")
