@@ -7,6 +7,12 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from gaxbench.p08_inventory import P08RealInventory, SystemInventoryEntry
+from gaxbench.p08_paper_models import (
+    BACKBONE_MODEL_ID,
+    BACKBONE_REVISION,
+    canonical_training_contract,
+    training_contract_digest,
+)
 from gaxbench.p08_real_systems import (
     SG000019_TRAINING_SEEDS,
     CheckpointProvenance,
@@ -21,9 +27,15 @@ SG000019_DEVELOPMENT_MANIFEST_SHA256 = (
 SG000019_DEVELOPMENT_LEAKAGE_SHA256 = (
     "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
 )
+SG000019_PAPER_TRAINING_CONTRACT_SHA256 = training_contract_digest(
+    canonical_training_contract()
+)
+PAPER_MODEL_REVISION = f"contract-sha256:{SG000019_PAPER_TRAINING_CONTRACT_SHA256}"
+PAPER_ADAPTER_REVISION = "dal-p08-paper-head-v0.1"
+CONTROL_ADAPTER_REVISION = "dal-p08-clinical-control-head-v0.1"
 LAYA_SOURCE_REVISION = "3c68ca2ccf6a83640ab80c20379503fe72c772fd"
 LAYA_MODEL_REVISION = "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
-CLINICAL_MODEL_REVISION = "5e17e2f25260b6993e0fb60485f94678ff29779a"
+CLINICAL_MODEL_REVISION = BACKBONE_REVISION
 
 RequiredSystemID = Literal["gax-paper-candidate", "clinical-encoder", "laya"]
 ExternalRequiredSystemID = Literal["clinical-encoder", "laya"]
@@ -54,7 +66,7 @@ class RequiredModelIdentity(StrictModel):
             expected = {
                 "role": "control",
                 "source_revision": CLINICAL_MODEL_REVISION,
-                "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
+                "model_id": BACKBONE_MODEL_ID,
                 "model_revision": CLINICAL_MODEL_REVISION,
                 "license": "MIT",
                 "tokenizer_revision": CLINICAL_MODEL_REVISION,
@@ -157,28 +169,43 @@ class SystemQualificationBundle(StrictModel):
         checkpoint_by_seed = {
             checkpoint.training_seed: checkpoint for checkpoint in self.checkpoints
         }
+        checkpoint_sources = {checkpoint.source_revision for checkpoint in self.checkpoints}
+        execution_sources = {execution.source_revision for execution in self.executions}
+        if len(checkpoint_sources) != 1 or checkpoint_sources != execution_sources:
+            raise ValueError("trainable checkpoint/execution source revision drift")
+
+        for checkpoint in self.checkpoints:
+            if checkpoint.base_model_id != BACKBONE_MODEL_ID:
+                raise ValueError("trainable checkpoint base model id drift")
+            if checkpoint.base_model_revision != BACKBONE_REVISION:
+                raise ValueError("trainable checkpoint base model revision drift")
+            if checkpoint.tokenizer_revision != BACKBONE_REVISION:
+                raise ValueError("trainable checkpoint tokenizer revision drift")
+            if checkpoint.training_recipe_sha256 != SG000019_PAPER_TRAINING_CONTRACT_SHA256:
+                raise ValueError("trainable checkpoint training contract digest drift")
+
         for execution in self.executions:
             if execution.training_seed is None:
                 raise ValueError("trainable execution requires training_seed")
             checkpoint = checkpoint_by_seed[execution.training_seed]
             if execution.checkpoint_sha256 != checkpoint.checkpoint_sha256:
                 raise ValueError("execution checkpoint digest must match checkpoint provenance")
+            if execution.tokenizer_revision != BACKBONE_REVISION:
+                raise ValueError("trainable execution tokenizer revision drift")
+            if execution.source_revision != checkpoint.source_revision:
+                raise ValueError("execution source revision must match checkpoint provenance")
 
         if self.system_id == "clinical-encoder":
             for checkpoint in self.checkpoints:
                 if checkpoint.system_id != "clinical-encoder":
                     raise ValueError("clinical-encoder bundle contains foreign checkpoint")
-                if checkpoint.base_model_revision != CLINICAL_MODEL_REVISION:
-                    raise ValueError("clinical-encoder base model revision drift")
-                if checkpoint.tokenizer_revision != CLINICAL_MODEL_REVISION:
-                    raise ValueError("clinical-encoder tokenizer revision drift")
             for execution in self.executions:
                 if execution.role != "control":
                     raise ValueError("clinical-encoder execution must use control role")
                 if execution.model_revision != CLINICAL_MODEL_REVISION:
                     raise ValueError("clinical-encoder execution model revision drift")
-                if execution.tokenizer_revision != CLINICAL_MODEL_REVISION:
-                    raise ValueError("clinical-encoder execution tokenizer revision drift")
+                if execution.adapter_revision != CONTROL_ADAPTER_REVISION:
+                    raise ValueError("clinical-encoder adapter revision drift")
         else:
             for checkpoint in self.checkpoints:
                 if checkpoint.system_id != "gax-paper-candidate":
@@ -186,6 +213,10 @@ class SystemQualificationBundle(StrictModel):
             for execution in self.executions:
                 if execution.role != "gax":
                     raise ValueError("paper-candidate execution must use gax role")
+                if execution.model_revision != PAPER_MODEL_REVISION:
+                    raise ValueError("paper-candidate model revision drift")
+                if execution.adapter_revision != PAPER_ADAPTER_REVISION:
+                    raise ValueError("paper-candidate adapter revision drift")
         return self
 
 
@@ -266,6 +297,9 @@ def _validate_qualified_entry(
     execution_adapters = {execution.adapter_revision for execution in bundle.executions}
     if len(execution_adapters) != 1 or entry.adapter_revision not in execution_adapters:
         raise ValueError("inventory adapter_revision must match all qualified executions")
+    execution_sources = {execution.source_revision for execution in bundle.executions}
+    if len(execution_sources) != 1 or entry.source_revision not in execution_sources:
+        raise ValueError("inventory source_revision must match all qualified executions")
 
     if entry.id == "laya":
         identity = registry.by_id("laya")
@@ -275,12 +309,12 @@ def _validate_qualified_entry(
             raise ValueError("Laya inventory model revision drift")
     elif entry.id == "clinical-encoder":
         identity = registry.by_id("clinical-encoder")
-        if entry.source_revision != identity.source_revision:
-            raise ValueError("clinical-encoder inventory source revision drift")
         if entry.model_revision != identity.model_revision:
             raise ValueError("clinical-encoder inventory model revision drift")
         if entry.tokenizer_revision != identity.tokenizer_revision:
             raise ValueError("clinical-encoder inventory tokenizer revision drift")
+    elif entry.model_revision != PAPER_MODEL_REVISION:
+        raise ValueError("paper-candidate inventory model revision drift")
 
 
 def _require_git_sha(value: str, field_name: str) -> None:
