@@ -39,8 +39,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: read
-  contents: write
+  contents: read
 
 env:
   HF_HUB_DISABLE_TELEMETRY: "1"
@@ -60,42 +59,6 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - name: Bootstrap exact frozen SG-000019 checkpoint
-        if: github.event_name == 'pull_request'
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          CHECKPOINT_PATH: registry/p08_gax_paper_candidate_seed0_checkpoint_sg000019.json
-          CHECKPOINT_SHA256: 351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b
-          ARTIFACT_ID: "11103012765"
-          ARTIFACT_ZIP_SHA256: d757bc11841617fe3358351ac15ea31a9cf0b4bc9818de867c8d28b2d43a354b
-        run: |
-          if [[ -f "$CHECKPOINT_PATH" ]]; then
-            echo "canonical checkpoint already present"
-            exit 0
-          fi
-          work="$RUNNER_TEMP/sg000019-checkpoint-bootstrap"
-          rm -rf "$work"
-          mkdir -p "$work/unpacked"
-          curl --fail --location --retry 3 \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" \
-            --output "$work/artifact.zip"
-          echo "${ARTIFACT_ZIP_SHA256}  $work/artifact.zip" | sha256sum --check --strict
-          unzip -q "$work/artifact.zip" -d "$work/unpacked"
-          source_file="$work/unpacked/gax-paper-candidate.seed-0.checkpoint.json"
-          echo "${CHECKPOINT_SHA256}  $source_file" | sha256sum --check --strict
-          cp "$source_file" "$CHECKPOINT_PATH"
-          echo "${CHECKPOINT_SHA256}  $CHECKPOINT_PATH" | sha256sum --check --strict
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$CHECKPOINT_PATH"
-          git commit -m "DAL-P08: persist frozen SG-000019 seed-0 checkpoint"
-          git push origin "HEAD:${{ github.head_ref }}"
-          echo "bootstrap committed the exact frozen checkpoint; this run is intentionally stale"
-          exit 1
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
