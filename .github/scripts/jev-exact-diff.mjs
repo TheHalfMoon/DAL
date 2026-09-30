@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const [baseArg, headArg, repository, jevDirectory] = process.argv.slice(2);
+const MAX_REVIEW_CHARS = 6000;
 const report = {
   schema_version: "1",
   reviewer: "TypeSafe Jev via pinned devagrawal09/jev-review checkout",
@@ -81,6 +82,26 @@ function splitHunks(patch) {
   }));
 }
 
+function splitReviewUnits(hunk, sourceHunk) {
+  if (hunk.patch.length <= MAX_REVIEW_CHARS) {
+    return [{ ...hunk, sourceHunk, fragment: 1, fragments: 1 }];
+  }
+  const fragments = Math.ceil(hunk.patch.length / MAX_REVIEW_CHARS);
+  return Array.from({ length: fragments }, (_, index) => {
+    const start = index * MAX_REVIEW_CHARS;
+    const end = Math.min(hunk.patch.length, start + MAX_REVIEW_CHARS);
+    return {
+      patch:
+        `[DAL Jev review fragment ${index + 1}/${fragments} of source hunk ${sourceHunk}]\n` +
+        hunk.patch.slice(start, end),
+      startLine: hunk.startLine,
+      sourceHunk,
+      fragment: index + 1,
+      fragments,
+    };
+  });
+}
+
 try {
   git(["cat-file", "-e", `${baseArg}^{commit}`]);
   git(["cat-file", "-e", `${headArg}^{commit}`]);
@@ -107,12 +128,18 @@ try {
       "--",
       path,
     ]);
-    const hunks = splitHunks(patch);
-    const fileResult = { path, hunks: hunks.length, reviewed_hunks: 0 };
+    const sourceHunks = splitHunks(patch);
+    const reviewUnits = sourceHunks.flatMap((hunk, index) => splitReviewUnits(hunk, index + 1));
+    const fileResult = {
+      path,
+      source_hunks: sourceHunks.length,
+      hunks: reviewUnits.length,
+      reviewed_hunks: 0,
+    };
     report.changed_files.push(fileResult);
-    report.coverage.expected_hunks += hunks.length;
+    report.coverage.expected_hunks += reviewUnits.length;
 
-    for (const [index, hunk] of hunks.entries()) {
+    for (const [index, hunk] of reviewUnits.entries()) {
       const questions = Object.fromEntries(
         Object.entries(dimensions).map(([key, definition]) => [
           key,
@@ -132,7 +159,10 @@ try {
       report.coverage.reviewed_hunks += 1;
       report.hunk_judgments.push({
         file: path,
-        hunk: index + 1,
+        hunk: hunk.sourceHunk,
+        review_unit: index + 1,
+        fragment: hunk.fragment,
+        fragments: hunk.fragments,
         line: hunk.startLine,
         screening: Object.fromEntries(
           Object.keys(dimensions).map((dimension) => [
@@ -181,7 +211,10 @@ try {
         if (classification.answers.mechanism.choice === "noIssue") continue;
         const finding = {
           file: path,
-          hunk: index + 1,
+          hunk: hunk.sourceHunk,
+          review_unit: index + 1,
+          fragment: hunk.fragment,
+          fragments: hunk.fragments,
           line: hunk.startLine,
           dimension,
           mechanism: classification.answers.mechanism.choice,
@@ -199,7 +232,7 @@ try {
   report.coverage.complete =
     report.coverage.expected_hunks === report.coverage.reviewed_hunks &&
     report.changed_files.every((file) => file.hunks === file.reviewed_hunks);
-  if (!report.coverage.complete) throw new Error("not every exact-diff hunk received a Jev judgment");
+  if (!report.coverage.complete) throw new Error("not every exact-diff review unit received a Jev judgment");
   report.status = report.blocking_findings.length === 0 ? "PASSED" : "FAILED";
 } catch (error) {
   report.error = error instanceof Error ? error.message : String(error);
