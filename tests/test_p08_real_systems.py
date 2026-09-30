@@ -28,6 +28,8 @@ ROOT = Path(__file__).parents[1]
 PARENT_MANIFEST = ROOT / "registry" / "pubmedqa_pqal_split_manifest.json"
 REAL_INVENTORY = ROOT / "registry" / "p08_real_inventory.json"
 MODEL_REGISTRY = ROOT / "registry" / "p08_required_model_revisions_sg000019.json"
+PAPER_BUNDLE = ROOT / "registry" / "p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+CLINICAL_BUNDLE = ROOT / "registry" / "p08_clinical_encoder_qualification_bundle_sg000019.json"
 LAYA_BUNDLE = ROOT / "registry" / "p08_laya_qualification_bundle_sg000019.json"
 SHA256 = "a" * 64
 
@@ -67,12 +69,16 @@ def _runtime() -> RuntimeIdentity:
 def _canonical_qualification() -> tuple[
     P08RealInventory,
     RequiredModelRevisionRegistry,
-    SystemQualificationBundle,
+    dict[str, SystemQualificationBundle],
 ]:
     return (
         load_real_inventory(REAL_INVENTORY),
         load_required_model_registry(MODEL_REGISTRY),
-        load_qualification_bundle(LAYA_BUNDLE),
+        {
+            "gax-paper-candidate": load_qualification_bundle(PAPER_BUNDLE),
+            "clinical-encoder": load_qualification_bundle(CLINICAL_BUNDLE),
+            "laya": load_qualification_bundle(LAYA_BUNDLE),
+        },
     )
 
 
@@ -234,9 +240,9 @@ def test_checkpoint_provenance_rejects_non_preregistered_seed() -> None:
 
 
 def test_canonical_laya_promotion_is_bound_to_exact_bundle() -> None:
-    inventory, registry, bundle = _canonical_qualification()
+    inventory, registry, bundles = _canonical_qualification()
 
-    validate_inventory_qualification(inventory, registry, {"laya": bundle})
+    validate_inventory_qualification(inventory, registry, bundles)
 
     laya = next(system for system in inventory.systems if system.id == "laya")
     assert laya.status == "qualified"
@@ -248,25 +254,25 @@ def test_canonical_laya_promotion_is_bound_to_exact_bundle() -> None:
 
 
 def test_inventory_promotion_rejects_forged_bundle_digest() -> None:
-    inventory, registry, bundle = _canonical_qualification()
+    inventory, registry, bundles = _canonical_qualification()
     payload = inventory.model_dump(mode="json")
     laya = next(system for system in payload["systems"] if system["id"] == "laya")
     laya["real_execution_evidence_id"] = f"sha256:{'0' * 64}"
     forged = P08RealInventory.model_validate(payload)
 
     with pytest.raises(ValueError, match="bundle digest"):
-        validate_inventory_qualification(forged, registry, {"laya": bundle})
+        validate_inventory_qualification(forged, registry, bundles)
 
 
 def test_inventory_promotion_rejects_stale_adapter_revision() -> None:
-    inventory, registry, bundle = _canonical_qualification()
+    inventory, registry, bundles = _canonical_qualification()
     payload = inventory.model_dump(mode="json")
     laya = next(system for system in payload["systems"] if system["id"] == "laya")
     laya["adapter_revision"] = "stale-adapter"
     stale = P08RealInventory.model_validate(payload)
 
     with pytest.raises(ValueError, match="adapter_revision"):
-        validate_inventory_qualification(stale, registry, {"laya": bundle})
+        validate_inventory_qualification(stale, registry, bundles)
 
 
 def test_qualification_bundle_rejects_partial_real_execution() -> None:
