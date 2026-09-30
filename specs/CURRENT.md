@@ -9,125 +9,90 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 ## Canonical completed grains
 
 - SG-000001 through SG-000017 — PROVEN under their historical GAX/DAL evidence chains.
-- **SG-000018 — DAL-P08 Native licensed abstention benchmark and pre-results protocol replacement — PROVEN.**
-- **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — PROVEN by this closeout.**
+- **SG-000018 — DAL-P08 Native licensed abstention benchmark and pre-results protocol replacement — CLOSED_CANONICAL.**
+- **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — CLOSED_CANONICAL at `3ca0dd2aae85a68473849108764a45a538de1019`.**
 
-Detailed evidence remains in each SpecGrain JSON, implementation/promotion/closeout PR, Git history, workflow runs, and research evidence files. This file is the current-frontier index rather than a duplicate of every historical packet.
+SG-000019 post-closeout verification succeeded:
 
-## Latest canonical research outcome — SG-000019
+- GAXBench CI `36743845440` — SUCCESS on Python 3.11/3.12 × Ubuntu/Windows;
+- Real-System Foundation `36743845501` — SUCCESS;
+- Issue #63 — closed as completed.
 
-SG-000019 completed the development-only training and real-system qualification foundation without opening the P08 final test.
+## Active grain — SG-000020
 
-### Frozen development surface
+**DAL-P08 — Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze**
 
-- source: PubMedQA PQA-L at `1cbae8e92f72f20c8d3747cbb3bf5bc53554d997`;
-- qualified source role: 450 development rows;
-- nested train: 360 rows;
-- nested development-selection: 90 rows;
-- calibration reserved: 50 rows;
-- sealed final test: 500 rows;
-- development manifest SHA-256: `9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c`;
-- development leakage-audit SHA-256: `1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76`.
+Research contract: Issue #69.
 
-No calibration or final-test row was used for model training or architecture selection.
+Canonical dependency:
 
-### Required-system state
+`3ca0dd2aae85a68473849108764a45a538de1019`
 
-All three authorization-critical systems are now `qualified` in `registry/p08_real_inventory.json` while `final_test_access` remains `sealed`:
+State: **ACTIVE**
 
-- `gax-paper-candidate` — legacy inventory ID for the DAL paper candidate;
-- `clinical-encoder` — matched BioClinical ModernBERT control;
-- `laya` — frozen real baseline.
+Final-test access: **sealed**
 
-Canonical semantic qualification-bundle digests:
+### Frozen system identities inherited from SG-000019
 
-- DAL paper candidate: `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`;
-- clinical encoder: `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`;
-- Laya: `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`.
+- DAL paper-candidate semantic qualification bundle: `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`;
+- matched clinical-encoder semantic qualification bundle: `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`;
+- Laya semantic qualification bundle: `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`.
 
-The inventory audit is authorization-ready with respect to the required system/dataset inventory, but that state **does not itself authorize final-test execution**.
+Architecture search is closed after D03. D01 and D02 remain rejected; D03 remains the accepted assurance path. No D04 or equivalent architecture/checkpoint search on the frozen 90-row development-selection set is permitted.
 
-### Paper-candidate development decision
+### Frozen calibration contract
 
-Architecture search on the frozen 90-row development-selection set is closed after D03.
+- method: `temperature-scaling-action+platt-sufficiency-v0.1`;
+- calibration manifest SHA-256: `89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230`;
+- total reserved calibration rows: 491;
+- PubMedQA PQA-L: 50;
+- DAL-native evidence-availability surface: 100;
+- FHIR-AgentBench: 341;
+- coverage targets: `0.50`, `0.80`, `0.90`.
 
-- D01 — rejected;
-- D02 — rejected;
-- D03 — accepted as the paper assurance path;
-- selected seed — 0 for DAL and matched control;
-- action accuracy — DAL = control = `0.5555555820465088`;
-- control action NLL — `0.9351183772087097`;
-- DAL shadow-critic NLL — `0.9342377781867981`;
-- DAL sufficiency Brier — `0.007211523596197367` versus preregistered ceiling `0.25`;
-- action-superiority claim — **not supported and not made**.
+Calibration may fit calibration parameters only. It cannot retrain or reselect the model, backbone, checkpoint, seed, prompt family, or D03 architecture.
 
-D03 preserves the matched control action outputs and qualifies the additional assurance path; it is not evidence that DAL improves base action-selection accuracy.
+### Frozen ECAL candidates
 
-### Canonical evidence chain
+- `evidence`
+- `hard-negative`
+- `proper-scoring`
+- `replay-retention`
+- `state-action-contrastive`
 
-Foundation tranche:
+SG-000020 must persist the deterministic selection rule and tie-breaks before candidate outcome inspection, retain every null/negative/failed candidate result, and bind the selected configuration to an immutable digest.
 
-- PR #65 — merged; genuine Laya development execution preserved, including the weak 48/90 = 53.33% result.
+### Frozen FHIR representation candidates
 
-Paper-candidate tranche:
+- `canonical-structured`
+- `canonical-with-narrative`
+- `flat-text`
+- `source-order-json`
 
-- PR #66 exact head: `31580aee46198b84fcbfe61c70e0522a639a6bb5`;
-- exact-head GAXBench CI: `36696007258` — SUCCESS;
-- exact-head Alibaba OpenCodeReview: `36696007334` — SUCCESS;
-- exact-head secure Jev: `36696003579` — SUCCESS;
-- exact-head Real-System Foundation: `36696007260` — SUCCESS;
-- exact-head Laya qualification: `36696007254` — SUCCESS;
-- exact-head paper training qualification: `36696007200` — SUCCESS;
-- implementation merge: `54bdd9e18cf5e7d1dbcbc6dbfd3a4e12e58a70a5`;
-- post-main GAXBench CI: `36726951396` — SUCCESS;
-- post-main Real-System Foundation: `36726951278` — SUCCESS;
-- post-main Laya qualification: `36726951197` — SUCCESS;
-- post-main paper training qualification: `36726951419` — SUCCESS.
+SG-000020 must persist the deterministic selection rule and tie-breaks before candidate outcome inspection, retain every null/negative/parse/interface result, and bind the selected representation to an immutable digest.
 
-Required-system promotion tranche:
+### Frozen statistical/runtime policy
 
-- PR #67 exact head: `690400ea5de8af457f8206a7fb5b0e52d0f33b77`;
-- exact-head GAXBench CI: `36730760363` — SUCCESS;
-- exact-head Alibaba OpenCodeReview: `36730760422` — SUCCESS;
-- exact-head secure Jev: `36730755431` — SUCCESS;
-- exact-head Real-System Foundation: `36730760378` — SUCCESS;
-- exact-head Native Abstention: `36730760367` — SUCCESS;
-- exact-head PubMedQA: `36730760394` — SUCCESS;
-- exact-head FHIR-AgentBench: `36730760411` — SUCCESS;
-- exact-head MedAgentBench: `36730760480` — SUCCESS;
-- exact-head MedQAbstain: `36730760395` — SUCCESS;
-- exact-head Laya: `36730760393` — SUCCESS;
-- promotion merge: `de0a14cfb7c77385457c603cd177b734a86b437c`;
-- post-promotion GAXBench CI: `36731436133` — SUCCESS;
-- post-promotion Native Abstention: `36731436164` — SUCCESS;
-- post-promotion PubMedQA: `36731436260` — SUCCESS;
-- post-promotion FHIR-AgentBench: `36731436493` — SUCCESS;
-- post-promotion MedAgentBench: `36731436398` — SUCCESS;
-- post-promotion MedQAbstain: `36731436243` — SUCCESS;
-- post-promotion Real-System Foundation: `36731436301` — SUCCESS;
-- post-promotion Laya: `36731436447` — SUCCESS.
+- hardware protocol: `p08-hardware-stratified-v0.1`;
+- multiplicity policy: `holm-primary-family-v0.1`;
+- failure accounting must preserve requested/completed/timeout/OOM/transport/interface/parse outcomes;
+- different hardware classes cannot support direct speed-superiority claims.
 
-SG-000019 is eligible for canonical closeout on this governance-only branch. Issue #63 may be closed only after the closeout merge and post-closeout verification succeed.
+### Exit target
 
-## Next governed frontier
+SG-000020 must produce a machine-readable **final-test authorization candidate** binding the final selected system/checkpoint, calibration, ECAL, FHIR, coverage, hardware, multiplicity, and evidence digests.
 
-A new SpecGrain is required before further P08 model/protocol selection. The next grain must remain development/calibration-only and freeze the remaining pre-final-test choices:
-
-1. execute the already-frozen calibration method on the reserved calibration roles without retraining on calibration;
-2. select/freeze ECAL component configuration from authorized development/calibration evidence only;
-3. select/freeze FHIR representation from authorized development/calibration evidence only;
-4. bind selected checkpoint/model/protocol/hardware/multiplicity digests into a final-test authorization candidate;
-5. keep final-test access sealed until a separate digest-bound authorization artifact is qualified and merged.
-
-The next grain must not reopen D01–D03 architecture search on the same 90-row development-selection set.
+That candidate is **not** authorization. It must explicitly retain `final_test_access = sealed`. A separate later governed grain/PR is required to qualify and explicitly open final-test access before any P08 final-test inference.
 
 ## Core P08 invariants
 
 ```text
 final-test access != model selection
 inventory readiness != final-test authorization
+authorization candidate != authorization
 confidence != information sufficiency
 abstain != candidate action
+calibration != model retraining
 FHIR formatting != clinical correctness
 faster on different hardware != speed superiority
 missing/failed inference != silent exclusion
@@ -136,6 +101,6 @@ blocked dependency != permission to hide it
 formatting equality != semantic evidence equality
 ```
 
-No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until the remaining P08 protocol freeze is complete, a separate final-test authorization artifact is qualified, and final evaluation runs exactly under the preregistered contract.
+No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until SG-000020 closes, a separate final-test authorization artifact is qualified, and final evaluation runs exactly under the preregistered contract.
 
 Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.

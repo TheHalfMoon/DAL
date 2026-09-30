@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "id": "SG-000020",
+  "title": "DAL-P08 - Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000019"],
+  "children": [],
+  "labels": ["p08", "calibration", "ecal", "fhir", "authorization-candidate", "pre-final-test"],
+  "outcome": "Freeze all remaining development/calibration-only P08 protocol choices and build a digest-bound final-test authorization candidate while keeping final-test access sealed.",
+  "rationale": "SG-000019 closed the paper-candidate and required-system qualification frontier. Inventory readiness is now true, but calibration execution, ECAL component selection, FHIR representation selection, and final selected protocol binding remain incomplete. These choices must be frozen without using final-test evidence before a later authorization grain may open final-test access.",
+  "scope_in": [
+    "Execute temperature-scaling action calibration and Platt sufficiency calibration on the frozen calibration roles only",
+    "Persist calibration parameters, diagnostics, calibrated outputs, failure accounting, and canonical digests",
+    "Prospectively freeze deterministic ECAL candidate selection rule and tie-breaks before measuring candidates",
+    "Evaluate and preserve the complete frozen ECAL candidate ledger on authorized development/calibration evidence only",
+    "Freeze selected ECAL component configuration and digest",
+    "Prospectively freeze deterministic FHIR representation selection rule and tie-breaks before measuring candidates",
+    "Evaluate and preserve the complete frozen FHIR representation candidate ledger on authorized development/calibration evidence only",
+    "Freeze selected FHIR representation and digest",
+    "Bind selected model/checkpoint/system, calibration, ECAL, FHIR, coverage, hardware, and multiplicity identities into a machine-readable final-test authorization candidate",
+    "Keep final-test access sealed throughout SG-000020",
+    "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review"
+  ],
+  "scope_out": [
+    "No P08 final-test inference",
+    "No final-test labels, predictions, metrics, slices, or errors in any selection decision",
+    "No model/backbone/checkpoint/seed retraining or reselection from calibration outcomes",
+    "No D04 or reopening D01-D03 architecture search on the same development-selection set",
+    "No calibration-set architecture, checkpoint, prompt-family, or model selection",
+    "No autonomous diagnosis, treatment, prescribing, triage, or EHR-write authorization",
+    "No clinical-safety, regulatory-readiness, deployment, superiority, or SOTA claim",
+    "No paid founder compute, paid APIs, paid SaaS, or paid reviewers",
+    "No final-test authorization merge inside this grain"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000019 closeout main 3ca0dd2aae85a68473849108764a45a538de1019",
+    "Research contract is Issue #69",
+    "P08 final-test access remains sealed for the entire grain",
+    "The required DAL paper candidate, clinical encoder, and Laya bundle digests remain immutable",
+    "D01 and D02 remain rejected and D03 remains the final accepted assurance architecture on the frozen development-selection set",
+    "No D04 or equivalent architecture revision is introduced",
+    "Calibration uses method temperature-scaling-action+platt-sufficiency-v0.1 exactly",
+    "Calibration binds canonical calibration manifest 89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
+    "Calibration operates only on the reserved calibration roles and cannot retrain or reselect model/backbone/checkpoint/seed",
+    "Action temperature and sufficiency Platt parameters are persisted with reproducible diagnostics and digests",
+    "Coverage targets remain exactly 0.50, 0.80, and 0.90",
+    "ECAL candidate set remains exactly evidence, hard-negative, proper-scoring, replay-retention, and state-action-contrastive",
+    "ECAL selection rule and deterministic tie-breaks are persisted before candidate outcome inspection",
+    "Every ECAL candidate result including null/negative/failed outcomes is preserved",
+    "Selected ECAL configuration is immutable and digest-bound",
+    "FHIR representation candidates remain exactly canonical-structured, canonical-with-narrative, flat-text, and source-order-json",
+    "FHIR selection rule and deterministic tie-breaks are persisted before candidate outcome inspection",
+    "Every FHIR candidate result including null/negative/parse/interface failures is preserved",
+    "Selected FHIR representation is immutable and digest-bound",
+    "Hardware protocol remains p08-hardware-stratified-v0.1",
+    "Multiplicity policy remains holm-primary-family-v0.1",
+    "Failure accounting preserves requested/completed/timeout/OOM/transport/interface/parse outcomes",
+    "A machine-readable final-test authorization candidate binds all selected model/checkpoint/system/protocol/evidence digests",
+    "The authorization candidate explicitly states final_test_access=sealed and cannot itself authorize inference",
+    "A separate later SpecGrain/PR is required to qualify and explicitly open final-test access",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI passes before merge",
+    "Affected P08 qualification/regression gates pass on exact implementation head",
+    "Checksum-pinned Alibaba OpenCodeReview binds the exact PR base/head range",
+    "Secure TypeSafe Jev exact-diff review passes with complete hunk coverage and zero blocking findings",
+    "Implementation merges with normal merge semantics and an exact expected-head guard",
+    "Post-main qualification succeeds",
+    "A separate canonical closeout is required before SG-000020 becomes PROVEN"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000020.json",
+    "docs/research/P08_CALIBRATION_SELECTION_PROTOCOL.md",
+    "registry/p08_calibration_selection_contract_sg000020.json",
+    "registry/p08_calibration_evidence_sg000020.json",
+    "registry/p08_ecal_selection_ledger_sg000020.json",
+    "registry/p08_fhir_selection_ledger_sg000020.json",
+    "registry/p08_final_test_authorization_candidate_sg000020.json",
+    "scripts/qualify_p08_protocol_selection.py",
+    "specs/CURRENT.md",
+    "specs/tasks.md",
+    "src/gaxbench/p08_protocol_selection.py",
+    "tests/test_p08_protocol_selection.py"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "Revert SG-000020 changes and retain SG-000019 canonical system/checkpoint identities. Final-test access remains sealed."
+  },
+  "evidence": {
+    "required": [
+      "issue-69-research-contract",
+      "sg000019-canonical-dependency",
+      "calibration-method-and-manifest-binding",
+      "calibration-parameters-and-diagnostics",
+      "ecal-pre-results-selection-rule",
+      "ecal-full-candidate-ledger",
+      "selected-ecal-configuration-digest",
+      "fhir-pre-results-selection-rule",
+      "fhir-full-candidate-ledger",
+      "selected-fhir-representation-digest",
+      "hardware-and-multiplicity-binding",
+      "failure-accounting-evidence",
+      "final-test-authorization-candidate-sealed",
+      "exact-head-cross-platform-ci-pass",
+      "affected-p08-regression-qualification-pass",
+      "alibaba-ocr-exact-range-delegation-evidence",
+      "jev-exact-diff-review-evidence",
+      "implementation-pr-pass",
+      "post-main-qualification-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 69,
+    "canonical_dependency": "3ca0dd2aae85a68473849108764a45a538de1019",
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
+    "final_test_access": "sealed",
+    "architecture_search": {
+      "closed_after": "D03",
+      "D01": "rejected",
+      "D02": "rejected",
+      "D03": "accepted-assurance-path",
+      "reopen_forbidden": true
+    },
+    "required_system_bundle_digests": {
+      "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
+      "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+      "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    },
+    "calibration": {
+      "method": "temperature-scaling-action+platt-sufficiency-v0.1",
+      "manifest_sha256": "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
+      "total_rows": 491,
+      "pubmedqa_rows": 50,
+      "native_abstention_rows": 100,
+      "fhir_agentbench_rows": 341,
+      "coverage_targets": [0.5, 0.8, 0.9]
+    },
+    "ecal_candidate_components": [
+      "evidence",
+      "hard-negative",
+      "proper-scoring",
+      "replay-retention",
+      "state-action-contrastive"
+    ],
+    "fhir_representation_candidates": [
+      "canonical-structured",
+      "canonical-with-narrative",
+      "flat-text",
+      "source-order-json"
+    ],
+    "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+    "multiplicity_policy": "holm-primary-family-v0.1",
+    "review_tools": {
+      "alibaba_open_code_review": "checksum-pinned exact-range delegation/accounting",
+      "jev": "secure TypeSafe Jev exact-diff semantic review"
+    },
+    "safety": {
+      "final_test_access": "sealed",
+      "test_tuning_forbidden": true,
+      "calibration_model_retraining_forbidden": true,
+      "architecture_reopening_forbidden": true,
+      "paid_founder_compute_forbidden": true
+    }
+  }
+}
