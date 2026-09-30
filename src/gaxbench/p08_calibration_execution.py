@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-import statistics
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -198,8 +197,12 @@ class AuthorizationCandidate(StrictModel):
     @model_validator(mode="after")
     def validate_hashes(self) -> AuthorizationCandidate:
         expected_systems = {
-            "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
-            "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+            "gax-paper-candidate": (
+                "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b"
+            ),
+            "clinical-encoder": (
+                "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388"
+            ),
             "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
         }
         if self.required_system_bundle_digests != expected_systems:
@@ -362,12 +365,17 @@ def frozen_ecal_ledger() -> EcalDecisionLedger:
             canonical_mapping="P04 replay sampling policy",
             requires_retraining_or_checkpoint_mutation=True,
             exact_frozen_d03_mapping=False,
-            rationale="Replay changes the training schedule and is incompatible with the frozen D03 checkpoint.",
+            rationale=(
+                "Replay changes the training schedule and is incompatible with the frozen "
+                "D03 checkpoint."
+            ),
         ),
         EcalDecision(
             component="state-action-contrastive",
             decision="reject",
-            canonical_mapping="No exact same-name canonical component; P04 bidirectional alignment is related",
+            canonical_mapping=(
+                "No exact same-name canonical component; P04 bidirectional alignment is related"
+            ),
             requires_retraining_or_checkpoint_mutation=True,
             exact_frozen_d03_mapping=False,
             rationale=(
