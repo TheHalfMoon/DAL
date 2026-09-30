@@ -2,14 +2,14 @@
   "schema_version": 1,
   "id": "SG-000019",
   "title": "DAL-P08 - Paper-candidate training freeze and required-system qualification foundation",
-  "state": "ACTIVE",
+  "state": "PROVEN",
   "method": "research",
   "parent_id": null,
   "dependencies": ["SG-000018"],
   "children": [],
   "labels": ["p08", "paper-candidate", "training-freeze", "real-system-qualification", "development-only"],
   "outcome": "Build a reproducible development-only training and real-system qualification foundation for the DAL paper candidate, matched clinical-encoder control, and Laya while P08 final-test access remains sealed.",
-  "rationale": "SG-000018 closed the benchmark and pre-results protocol blockers but left all three authorization-critical systems pending. The current trainable GAX v0 is an engineering control rather than an adequate paper candidate, and the frozen PubMedQA role surface has no explicit train split. SG-000019 prospectively derives training only from the qualified development role and binds stronger model/checkpoint/real-execution evidence before any final-test inference.",
+  "rationale": "SG-000018 closed the benchmark and pre-results protocol blockers but left all three authorization-critical systems pending. SG-000019 derived training only from the qualified development role and bound model/checkpoint/real-execution evidence before any final-test inference.",
   "scope_in": [
     "Deterministic nested 360-train/90-selection split derived only from the 450 qualified PubMedQA PQA-L development rows",
     "Development-only split lineage, stratification, leakage checks, and canonical digest",
@@ -20,7 +20,7 @@
     "Preregistered training seeds [0, 1, 2]",
     "Machine-readable training recipe, checkpoint, selection-history, hardware/runtime, and real-execution evidence manifests",
     "Failure-preserving requested/completed/timeout/OOM/transport/interface accounting",
-    "Zero-founder-cost accelerator notebook/workflow for execution that cannot be completed on ordinary CI hardware",
+    "Zero-founder-cost execution routes",
     "Fail-closed inventory mutation that cannot mark required systems qualified without immutable real-execution evidence",
     "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review"
   ],
@@ -50,36 +50,47 @@
     "Per-seed checkpoints bind training data manifest, configuration, software revision, and content digest",
     "Development-only selection history is machine readable and cannot reference final-test outputs",
     "The clinical-encoder control uses a matched task-training/evaluation path with immutable model/tokenizer/checkpoint evidence",
-    "Laya binds source revision 3c68ca2ccf6a83640ab80c20379503fe72c772fd plus an immutable checkpoint/model revision before any qualified inventory promotion",
+    "Laya binds source revision 3c68ca2ccf6a83640ab80c20379503fe72c772fd plus immutable model revision 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
     "Real-execution evidence records hardware/runtime/software identity and preserves requested/completed/failed counts",
     "Qualified system inventory state fails closed when real-execution evidence or required revisions are missing",
     "Different hardware classes cannot support direct speed-superiority claims",
     "Zero-founder-cost execution routes are reproducible and do not contain final-test labels",
     "P08 final-test access remains sealed throughout the grain",
     "Exact-head Linux/Windows Python 3.11/3.12 CI passes before implementation merge",
-    "Affected P08 regression qualification passes on the exact implementation head",
+    "Affected P08 regression qualification passes on the exact implementation and promotion heads",
     "Checksum-pinned Alibaba OpenCodeReview binds the exact PR base/head range",
     "Secure TypeSafe Jev exact-diff review passes with complete hunk coverage and zero blocking findings",
-    "Implementation merges with normal merge semantics and exact expected_head_sha",
-    "Post-main qualification succeeds",
+    "Implementation and promotion merge with normal merge semantics and exact expected-head qualification",
+    "Post-main qualification succeeds after implementation and promotion",
     "A separate canonical closeout is required before SG-000019 becomes PROVEN"
   ],
   "change_surface": [
     ".specgrain/specs/SG-000019.json",
     "docs/research/P08_REAL_SYSTEM_QUALIFICATION.md",
+    "docs/research/P08_PAPER_CANDIDATE_DEVELOPMENT_LEDGER.md",
     "registry/p08_development_training_manifest_sg000019.json",
-    "registry/p08_real_execution_schema_sg000019.json",
+    "registry/p08_development_leakage_audit_sg000019.json",
     "registry/p08_real_inventory.json",
+    "registry/p08_laya_qualification_bundle_sg000019.json",
+    "registry/p08_paper_candidate_qualification_bundle_sg000019.json",
+    "registry/p08_clinical_encoder_qualification_bundle_sg000019.json",
+    "registry/p08_paper_training_contract_sg000019.json",
     "scripts/qualify_p08_real_systems.py",
+    "scripts/run_p08_laya.py",
+    "scripts/run_p08_paper_training.py",
+    "scripts/run_p08_d03_assurance.py",
     "specs/CURRENT.md",
     "specs/tasks.md",
     "src/gaxbench/p08_real_systems.py",
+    "src/gaxbench/p08_paper_models.py",
+    "src/gaxbench/p08_system_qualification.py",
     "tests/test_p08_real_systems.py",
-    "notebooks/dal_p08_real_system_qualification.ipynb"
+    "tests/test_p08_paper_models.py",
+    "tests/test_p08_paper_qualification.py"
   ],
   "risk": {
     "level": "high",
-    "recovery": "Revert SG-000019 changes and retain all three authorization-critical systems as pending. Final-test access remains sealed; no final-test result is generated in this grain."
+    "recovery": "Revert SG-000019 implementation/promotion changes and retain authorization-critical systems as pending. Final-test access remains sealed."
   },
   "evidence": {
     "required": [
@@ -100,6 +111,7 @@
       "alibaba-ocr-exact-range-delegation-evidence",
       "jev-exact-diff-review-evidence",
       "implementation-pr-pass",
+      "promotion-pr-pass",
       "post-main-qualification-pass",
       "canonical-closeout-pass"
     ]
@@ -119,21 +131,34 @@
       "nested_train_count": 360,
       "nested_selection_count": 90,
       "calibration_count_reserved": 50,
-      "final_test_count_sealed": 500
+      "final_test_count_sealed": 500,
+      "development_manifest_sha256": "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c",
+      "development_leakage_audit_sha256": "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
     },
     "training_seeds": [0, 1, 2],
-    "required_systems": [
-      "gax-paper-candidate",
-      "clinical-encoder",
-      "laya"
-    ],
-    "clinical_encoder": {
-      "model": "thomas-sounack/BioClinical-ModernBERT-base",
-      "revision": "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    "training_contract_sha256": "0b9b9bef795d1af39f94e45f89913038f68446f90c045e3747573d11c4a9dc2b",
+    "required_systems": ["gax-paper-candidate", "clinical-encoder", "laya"],
+    "required_system_bundle_digests": {
+      "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
+      "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+      "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
     },
-    "laya": {
-      "source": "NandhaKishorM/laya",
-      "source_revision": "3c68ca2ccf6a83640ab80c20379503fe72c772fd"
+    "development_decision": {
+      "architecture_search_closed_after": "D03",
+      "D01": "rejected",
+      "D02": "rejected",
+      "D03": "accepted-assurance-path",
+      "selected_seed": 0,
+      "control_action_accuracy": 0.5555555820465088,
+      "dal_action_accuracy": 0.5555555820465088,
+      "control_action_nll": 0.9351183772087097,
+      "dal_shadow_critic_nll": 0.9342377781867981,
+      "dal_sufficiency_brier": 0.007211523596197367,
+      "action_superiority_claim": false
+    },
+    "review_tools": {
+      "alibaba_open_code_review": "checksum-pinned exact-range delegation/accounting",
+      "jev": "secure TypeSafe Jev exact-diff semantic review"
     },
     "safety": {
       "final_test_access": "sealed",
@@ -141,6 +166,55 @@
       "calibration_training_forbidden": true,
       "abstain_is_candidate_action": false,
       "paid_founder_compute_forbidden": true
+    },
+    "closeout": {
+      "research_issue": 63,
+      "foundation_pr": 65,
+      "paper_candidate_pr": 66,
+      "paper_candidate_head_sha": "31580aee46198b84fcbfe61c70e0522a639a6bb5",
+      "paper_candidate_exact_head_ci_run": 36696007258,
+      "paper_candidate_exact_head_alibaba_ocr_run": 36696007334,
+      "paper_candidate_exact_head_jev_run": 36696003579,
+      "paper_candidate_exact_head_foundation_run": 36696007260,
+      "paper_candidate_exact_head_laya_run": 36696007254,
+      "paper_candidate_exact_head_training_run": 36696007200,
+      "paper_candidate_merge_sha": "54bdd9e18cf5e7d1dbcbc6dbfd3a4e12e58a70a5",
+      "paper_candidate_post_main_ci_run": 36726951396,
+      "paper_candidate_post_main_foundation_run": 36726951278,
+      "paper_candidate_post_main_laya_run": 36726951197,
+      "paper_candidate_post_main_training_run": 36726951419,
+      "promotion_pr": 67,
+      "promotion_head_sha": "690400ea5de8af457f8206a7fb5b0e52d0f33b77",
+      "promotion_exact_head_jev_run": 36730755431,
+      "promotion_exact_head_alibaba_ocr_run": 36730760422,
+      "promotion_exact_head_foundation_run": 36730760378,
+      "promotion_exact_head_native_abstention_run": 36730760367,
+      "promotion_exact_head_pubmedqa_run": 36730760394,
+      "promotion_exact_head_fhir_agentbench_run": 36730760411,
+      "promotion_exact_head_medagentbench_run": 36730760480,
+      "promotion_exact_head_medqabstain_run": 36730760395,
+      "promotion_exact_head_ci_run": 36730760363,
+      "promotion_exact_head_laya_run": 36730760393,
+      "promotion_merge_sha": "de0a14cfb7c77385457c603cd177b734a86b437c",
+      "promotion_post_main_ci_run": 36731436133,
+      "promotion_post_main_native_abstention_run": 36731436164,
+      "promotion_post_main_pubmedqa_run": 36731436260,
+      "promotion_post_main_fhir_agentbench_run": 36731436493,
+      "promotion_post_main_medagentbench_run": 36731436398,
+      "promotion_post_main_medqabstain_run": 36731436243,
+      "promotion_post_main_foundation_run": 36731436301,
+      "promotion_post_main_laya_run": 36731436447,
+      "qualification": [
+        "all three authorization-critical systems are qualified and bound to canonical semantic bundle digests",
+        "inventory authorization readiness is true while final-test access remains sealed",
+        "D01 and D02 negative development results are preserved",
+        "D03 accepted only as an assurance path; action accuracy is unchanged and no action-superiority claim is made",
+        "architecture search is closed after D03 on the frozen 90-row development-selection set",
+        "paper-candidate implementation and promotion exact-head CI/review/qualification succeeded",
+        "paper-candidate and promotion post-main qualification succeeded",
+        "final-test access remained sealed and no calibration/final-test rows were used for architecture selection"
+      ],
+      "next_frontier": "A new SpecGrain is required for development-only calibration, ECAL component selection, FHIR representation selection, and digest-bound final-test authorization preparation; this closeout does not open final-test access"
     }
   }
 }
