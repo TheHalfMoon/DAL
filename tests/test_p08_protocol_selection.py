@@ -13,8 +13,8 @@ from gaxbench.p08_protocol_selection import (
     ECAL_CANDIDATES,
     FHIR_CANDIDATES,
     PAPER_CHECKPOINT_SHA256,
-    P08ProtocolSelectionContract,
     SG000020_CONTRACT_SHA256,
+    P08ProtocolSelectionContract,
     protocol_selection_contract_digest,
 )
 
