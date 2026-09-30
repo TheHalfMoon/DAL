@@ -109,10 +109,10 @@ class TrainingRecipe(StrictModel):
     )
     development_manifest_sha256: Literal[
         "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
-    ] = DEVELOPMENT_MANIFEST_SHA256
+    ] = "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
     development_leakage_audit_sha256: Literal[
         "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
-    ] = DEVELOPMENT_LEAKAGE_SHA256
+    ] = "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76"
     train_count: Literal[360] = 360
     selection_count: Literal[90] = 90
     training_seeds: list[int] = Field(default_factory=lambda: list(TRAINING_SEEDS))
@@ -233,7 +233,7 @@ class PaperTrainingContract(StrictModel):
 def canonical_training_contract() -> PaperTrainingContract:
     paper_architecture = ModelArchitectureContract(
         system_id="gax-paper-candidate",
-        architecture_id=DAL_PAPER_ARCHITECTURE,
+        architecture_id="dal-shadow-assurance-critic-v0.3",
         state_representation="full-state+question-only+evidence-delta",
         action_scoring="nested-clinical-action-head+shadow-typed-evidence-critic",
         output_action_policy="identical-to-same-seed-clinical-control",
@@ -242,7 +242,7 @@ def canonical_training_contract() -> PaperTrainingContract:
     )
     control_architecture = ModelArchitectureContract(
         system_id="clinical-encoder",
-        architecture_id=CLINICAL_CONTROL_ARCHITECTURE,
+        architecture_id="bioclinical-linear-control-v0.1",
         state_representation="full-state",
         action_scoring="three-class-linear-head-over-frozen-state",
         output_action_policy="selected-linear-head",
