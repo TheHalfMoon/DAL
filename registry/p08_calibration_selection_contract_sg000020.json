@@ -1,0 +1,163 @@
+{
+  "schema_version": "0.1",
+  "contract_id": "dal-p08-sg000020-pre-results-v0.1",
+  "research_issue": 69,
+  "activation_revision": "851a4ebdd3bf1654cd5259c6a5e4121965b66144",
+  "canonical_dependency": "3ca0dd2aae85a68473849108764a45a538de1019",
+  "final_test_access": "sealed",
+  "architecture_search": {
+    "closed_after": "D03",
+    "reopen_forbidden": true,
+    "model_retraining_from_calibration_forbidden": true,
+    "checkpoint_reselection_from_calibration_forbidden": true,
+    "prompt_reselection_from_calibration_forbidden": true
+  },
+  "required_system_bundle_digests": {
+    "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
+    "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+    "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+  },
+  "selected_paper_checkpoint": {
+    "system_id": "gax-paper-candidate",
+    "training_seed": 0,
+    "checkpoint_sha256": "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+    "training_contract_sha256": "0b9b9bef795d1af39f94e45f89913038f68446f90c045e3747573d11c4a9dc2b",
+    "reconstruction_policy": "deterministic-rebuild-allowed-only-if-checkpoint-digest-matches",
+    "digest_mismatch_policy": "fail-closed"
+  },
+  "calibration": {
+    "method": "temperature-scaling-action+platt-sufficiency-v0.1",
+    "manifest_sha256": "89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230",
+    "coverage_targets": [0.5, 0.8, 0.9],
+    "role_assignments": [
+      {
+        "dataset_id": "pubmedqa-pqal",
+        "count": 50,
+        "purpose": "action-temperature-fit",
+        "action_space": ["maybe", "no", "yes"]
+      },
+      {
+        "dataset_id": "gax-native-abstention-pqal",
+        "count": 100,
+        "purpose": "sufficiency-platt-fit",
+        "pair_policy": "50-evidence-present+50-evidence-withheld"
+      },
+      {
+        "dataset_id": "fhir-agentbench",
+        "count": 341,
+        "purpose": "fhir-representation-selection-only"
+      }
+    ],
+    "action_temperature_optimizer": {
+      "parameterization": "log-temperature",
+      "objective": "multiclass-negative-log-likelihood",
+      "domain": [-5.0, 5.0],
+      "algorithm": "golden-section-search",
+      "iterations": 128,
+      "tie_break": "lower-log-temperature"
+    },
+    "sufficiency_platt_optimizer": {
+      "form": "sigmoid(a*raw_logit+b)",
+      "objective": "binary-cross-entropy+l2",
+      "l2": 1e-06,
+      "algorithm": "damped-newton-2d",
+      "iterations": 100,
+      "gradient_tolerance": 1e-12,
+      "damping": 1e-08,
+      "initial_a": 1.0,
+      "initial_b": 0.0
+    },
+    "forbidden": [
+      "architecture-selection",
+      "checkpoint-selection",
+      "seed-selection",
+      "backbone-selection",
+      "prompt-family-selection",
+      "final-test-threshold-selection"
+    ]
+  },
+  "ecal": {
+    "candidate_order": [
+      "evidence",
+      "hard-negative",
+      "proper-scoring",
+      "replay-retention",
+      "state-action-contrastive"
+    ],
+    "selection_scope": "paper-mechanism-reporting-freeze-not-paper-checkpoint-mutation",
+    "decision_rule": [
+      "retain every candidate in the ledger",
+      "keep only a component with an exact canonical implementation mapping and evidence compatible with the frozen D03 checkpoint without retraining or checkpoint mutation",
+      "reject a component that requires new training, changes the frozen action head, or lacks an exact canonical implementation mapping",
+      "negative or null evidence cannot be deleted",
+      "a keep decision authorizes reporting/ablation scope only and does not alter the frozen D03 checkpoint"
+    ],
+    "tie_break": "candidate_order",
+    "historical_mapping": {
+      "evidence": "P04 evidence intervention objective; D03 evidence-delta assurance path",
+      "hard-negative": "P04 hard-negative training objective",
+      "proper-scoring": "P04 Brier/proper-scoring training objective",
+      "replay-retention": "P04 replay sampling policy",
+      "state-action-contrastive": "no exact same-name canonical P04 component; bidirectional multi-positive alignment is related but must not be silently renamed"
+    }
+  },
+  "fhir": {
+    "candidate_order": [
+      "canonical-structured",
+      "canonical-with-narrative",
+      "flat-text",
+      "source-order-json"
+    ],
+    "source": {
+      "fhir_agentbench_repository": "glee4810/FHIR-AgentBench",
+      "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+      "fhir_agentbench_calibration_rows": 341,
+      "mimic_fhir_demo_project": "mimic-iv-fhir-demo",
+      "mimic_fhir_demo_version": "2.1.0",
+      "mimic_fhir_demo_license": "ODbL-1.0",
+      "mimic_fhir_demo_access": "open",
+      "mimic_fhir_demo_expected_uncompressed_bytes_class": "49.5-MB-release",
+      "source_checksum_policy": "record-and-verify-PhysioNet-SHA256SUMS-before-selection"
+    },
+    "eligibility_rule": [
+      "all referenced calibration resources must resolve locally from the frozen open MIMIC-IV FHIR demo",
+      "render success must equal requested resource count",
+      "strict JSON/FHIR validation failures must equal zero",
+      "representation output must be deterministic across repeated renders",
+      "canonical key-order perturbation invariance is required for canonical-structured, canonical-with-narrative, and flat-text",
+      "source-order-json is not penalized for source-order sensitivity but that sensitivity must be recorded",
+      "narrative exposure must be recorded and cannot be treated as free clinical evidence"
+    ],
+    "selection_objective": "minimum-median-rendered-bytes-among-eligible-representations",
+    "tie_break": "candidate_order"
+  },
+  "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+  "multiplicity_policy": "holm-primary-family-v0.1",
+  "failure_categories": [
+    "timeout",
+    "oom",
+    "transport",
+    "interface",
+    "parse",
+    "missing-resource",
+    "other"
+  ],
+  "authorization_candidate": {
+    "state": "candidate-only",
+    "must_bind": [
+      "canonical_dependency",
+      "paper_checkpoint_sha256",
+      "required_system_bundle_digests",
+      "calibration_contract_sha256",
+      "calibration_evidence_sha256",
+      "selected_ecal_configuration_sha256",
+      "selected_fhir_representation_sha256",
+      "coverage_targets",
+      "hardware_protocol_revision",
+      "multiplicity_policy"
+    ],
+    "final_test_access": "sealed",
+    "can_authorize_inference": false,
+    "separate_authorization_grain_required": true
+  }
+}
