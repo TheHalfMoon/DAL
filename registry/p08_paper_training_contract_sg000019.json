@@ -1,5 +1,6 @@
 {
   "backbone": {
+    "embedding_normalization": "l2",
     "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
     "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
     "pooling": "attention-mask-mean",
@@ -9,9 +10,9 @@
   "capacity_matching_note": "paper-candidate=3H+4; clinical-control=3H+3; backbone frozen for both",
   "encoder_input": {
     "action_text_source": "benchmark-action-description",
+    "encoding_mode": "tokenizer-pair-question-evidence",
     "evidence_joiner": "\n",
     "max_length": 512,
-    "question_evidence_separator": "\n\nEvidence:\n",
     "truncation_policy": "preserve-question-truncate-evidence",
     "withheld_representation": "question-only"
   },
@@ -50,13 +51,14 @@
         "autoregressive_generation": false,
         "encoder_input": {
           "action_text_source": "benchmark-action-description",
+          "encoding_mode": "tokenizer-pair-question-evidence",
           "evidence_joiner": "\n",
           "max_length": 512,
-          "question_evidence_separator": "\n\nEvidence:\n",
           "truncation_policy": "preserve-question-truncate-evidence",
           "withheld_representation": "question-only"
         },
         "frozen_backbone": {
+          "embedding_normalization": "l2",
           "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
           "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
           "pooling": "attention-mask-mean",
@@ -82,13 +84,14 @@
         "autoregressive_generation": false,
         "encoder_input": {
           "action_text_source": "benchmark-action-description",
+          "encoding_mode": "tokenizer-pair-question-evidence",
           "evidence_joiner": "\n",
           "max_length": 512,
-          "question_evidence_separator": "\n\nEvidence:\n",
           "truncation_policy": "preserve-question-truncate-evidence",
           "withheld_representation": "question-only"
         },
         "frozen_backbone": {
+          "embedding_normalization": "l2",
           "model_id": "thomas-sounack/BioClinical-ModernBERT-base",
           "model_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
           "pooling": "attention-mask-mean",
