@@ -10,6 +10,8 @@ on:
       - "registry/p08_development_leakage_audit_sg000019.json"
       - "registry/p08_required_model_revisions_sg000019.json"
       - "registry/p08_real_inventory.json"
+      - "registry/p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+      - "registry/p08_clinical_encoder_qualification_bundle_sg000019.json"
       - "registry/p08_laya_execution_evidence_sg000019.json"
       - "registry/p08_laya_qualification_bundle_sg000019.json"
       - "registry/p08_laya_qualification_summary_sg000019.json"
@@ -19,6 +21,7 @@ on:
       - "src/gaxbench/p08_real_systems.py"
       - "src/gaxbench/p08_system_qualification.py"
       - "tests/test_p08_real_systems.py"
+      - "tests/test_p08_paper_qualification.py"
   push:
     branches: [main]
     paths:
@@ -29,6 +32,8 @@ on:
       - "registry/p08_development_leakage_audit_sg000019.json"
       - "registry/p08_required_model_revisions_sg000019.json"
       - "registry/p08_real_inventory.json"
+      - "registry/p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+      - "registry/p08_clinical_encoder_qualification_bundle_sg000019.json"
       - "registry/p08_laya_execution_evidence_sg000019.json"
       - "registry/p08_laya_qualification_bundle_sg000019.json"
       - "registry/p08_laya_qualification_summary_sg000019.json"
@@ -38,6 +43,7 @@ on:
       - "src/gaxbench/p08_real_systems.py"
       - "src/gaxbench/p08_system_qualification.py"
       - "tests/test_p08_real_systems.py"
+      - "tests/test_p08_paper_qualification.py"
   workflow_dispatch:
 
 permissions:
@@ -82,12 +88,12 @@ jobs:
           python scripts/resolve_p08_required_model_revisions.py \
             --registry registry/p08_required_model_revisions_sg000019.json \
             --output "$RUNNER_TEMP/sg000019/model_revisions.json"
-      - name: Validate canonical system promotion evidence
+      - name: Validate canonical required-system promotion evidence
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          from gaxbench.p08_inventory import load_real_inventory
+          from gaxbench.p08_inventory import audit_real_inventory, load_real_inventory
           from gaxbench.p08_system_qualification import (
               load_qualification_bundle,
               load_required_model_registry,
@@ -99,14 +105,31 @@ jobs:
           registry = load_required_model_registry(
               root / "p08_required_model_revisions_sg000019.json"
           )
-          laya_bundle = load_qualification_bundle(
-              root / "p08_laya_qualification_bundle_sg000019.json"
-          )
-          validate_inventory_qualification(inventory, registry, {"laya": laya_bundle})
-          print("Canonical Laya promotion evidence PASS; remaining required systems stay pending")
+          bundles = {
+              "gax-paper-candidate": load_qualification_bundle(
+                  root / "p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+              ),
+              "clinical-encoder": load_qualification_bundle(
+                  root / "p08_clinical_encoder_qualification_bundle_sg000019.json"
+              ),
+              "laya": load_qualification_bundle(
+                  root / "p08_laya_qualification_bundle_sg000019.json"
+              ),
+          }
+          validate_inventory_qualification(inventory, registry, bundles)
+          report = audit_real_inventory(inventory)
+          if not report.ready_for_authorization or report.blockers:
+              raise SystemExit(f"required-system promotion remains blocked: {report.blockers}")
+          if report.final_test_access != "sealed":
+              raise SystemExit("final-test access must remain sealed during SG-000019")
+          print("Canonical required-system promotion evidence PASS; authorization inventory ready and still sealed")
           PY
       - name: Run SG-000019 contract tests
-        run: python -m pytest -q tests/test_p08_real_systems.py
+        run: |
+          python -m pytest -q \
+            tests/test_p08_real_systems.py \
+            tests/test_p08_inventory.py \
+            tests/test_p08_paper_qualification.py
       - name: Upload exact generated SG-000019 artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
