@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
+from gaxbench.p08_inventory import load_real_inventory
 from gaxbench.p08_paper_models import BACKBONE_MODEL_ID, BACKBONE_REVISION
 from gaxbench.p08_real_systems import (
     CheckpointProvenance,
@@ -16,8 +19,13 @@ from gaxbench.p08_system_qualification import (
     SG000019_DEVELOPMENT_MANIFEST_SHA256,
     SG000019_PAPER_TRAINING_CONTRACT_SHA256,
     SystemQualificationBundle,
+    load_qualification_bundle,
+    load_required_model_registry,
+    qualification_bundle_digest,
+    validate_inventory_qualification,
 )
 
+ROOT = Path(__file__).parents[1]
 SOURCE_REVISION = "1" * 40
 
 
@@ -83,6 +91,35 @@ def test_exact_paper_bundle_is_accepted() -> None:
     assert bundle.qualification_status == "qualified"
     assert [checkpoint.training_seed for checkpoint in bundle.checkpoints] == [0, 1, 2]
     assert [execution.training_seed for execution in bundle.executions] == [0, 1, 2]
+
+
+def test_canonical_required_system_bundles_validate_promoted_inventory() -> None:
+    inventory = load_real_inventory(ROOT / "registry" / "p08_real_inventory.json")
+    registry = load_required_model_registry(
+        ROOT / "registry" / "p08_required_model_revisions_sg000019.json"
+    )
+    bundles = {
+        "gax-paper-candidate": load_qualification_bundle(
+            ROOT / "registry" / "p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+        ),
+        "clinical-encoder": load_qualification_bundle(
+            ROOT / "registry" / "p08_clinical_encoder_qualification_bundle_sg000019.json"
+        ),
+        "laya": load_qualification_bundle(
+            ROOT / "registry" / "p08_laya_qualification_bundle_sg000019.json"
+        ),
+    }
+
+    assert qualification_bundle_digest(bundles["gax-paper-candidate"]) == (
+        "e40d96e020bd8b8388dcb172f9fc345ed66ac8f35facc0f8ec8268fa887fba97"
+    )
+    assert qualification_bundle_digest(bundles["clinical-encoder"]) == (
+        "e91e6fa72d4cfb6945b7dff6dcf4c0740b8e6c2465bf351577c450da6b7213cc"
+    )
+    assert qualification_bundle_digest(bundles["laya"]) == (
+        "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    )
+    validate_inventory_qualification(inventory, registry, bundles)
 
 
 def test_paper_bundle_rejects_forged_training_contract_digest() -> None:
