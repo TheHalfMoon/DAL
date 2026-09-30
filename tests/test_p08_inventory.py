@@ -24,7 +24,8 @@ INVENTORY = ROOT / "registry" / "p08_real_inventory.json"
 def test_repository_inventory_is_valid_and_sealed() -> None:
     inventory = load_real_inventory(INVENTORY)
     assert inventory.final_test_access == "sealed"
-    assert inventory.inventory_revision == "p08-real-inventory-v0.3-sg000019-laya"
+    assert inventory.inventory_revision == "p08-real-inventory-v0.4-sg000019-required-systems"
+    assert inventory.repo_revision == "54bdd9e18cf5e7d1dbcbc6dbfd3a4e12e58a70a5"
     assert inventory.sg000012_closeout.merge_sha == SG000012_CLOSEOUT_MERGE_SHA
     assert inventory.sg000012_closeout.post_main_run_id == SG000012_CLOSEOUT_POST_MAIN_RUN_ID
 
@@ -98,7 +99,32 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     )
     assert inventory.protocol.hardware_protocol_revision == "p08-hardware-stratified-v0.1"
     assert inventory.protocol.multiplicity_policy == "holm-primary-family-v0.1"
-    assert any(entry.id == "gax-paper-candidate" for entry in inventory.systems)
+
+    paper = next(entry for entry in inventory.systems if entry.id == "gax-paper-candidate")
+    assert paper.status == "qualified"
+    assert paper.required_for_authorization is True
+    assert paper.source_revision == "54bdd9e18cf5e7d1dbcbc6dbfd3a4e12e58a70a5"
+    assert paper.model_revision == (
+        "contract-sha256:0b9b9bef795d1af39f94e45f89913038f68446f90c045e3747573d11c4a9dc2b"
+    )
+    assert paper.tokenizer_revision == "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    assert paper.adapter_revision == "dal-p08-paper-head-v0.1"
+    assert paper.training_seeds == [0, 1, 2]
+    assert paper.real_execution_evidence_id == (
+        "sha256:e40d96e020bd8b8388dcb172f9fc345ed66ac8f35facc0f8ec8268fa887fba97"
+    )
+
+    clinical = next(entry for entry in inventory.systems if entry.id == "clinical-encoder")
+    assert clinical.status == "qualified"
+    assert clinical.required_for_authorization is True
+    assert clinical.source_revision == "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    assert clinical.model_revision == "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    assert clinical.tokenizer_revision == "5e17e2f25260b6993e0fb60485f94678ff29779a"
+    assert clinical.adapter_revision == "dal-p08-clinical-control-head-v0.1"
+    assert clinical.training_seeds == [0, 1, 2]
+    assert clinical.real_execution_evidence_id == (
+        "sha256:e91e6fa72d4cfb6945b7dff6dcf4c0740b8e6c2465bf351577c450da6b7213cc"
+    )
 
     laya = next(entry for entry in inventory.systems if entry.id == "laya")
     assert laya.status == "qualified"
@@ -112,19 +138,13 @@ def test_repository_inventory_is_valid_and_sealed() -> None:
     )
 
 
-def test_repository_inventory_is_not_ready_for_authorization() -> None:
+def test_repository_inventory_is_ready_for_authorization_but_still_sealed() -> None:
     report = audit_real_inventory(load_real_inventory(INVENTORY))
-    assert report.ready_for_authorization is False
+    assert report.ready_for_authorization is True
     assert report.final_test_access == "sealed"
     assert report.required_dataset_count == 3
     assert report.required_system_count == 3
-    assert "protocol:status=pending" not in report.blockers
-    assert not any(blocker.startswith("dataset:") for blocker in report.blockers)
-    assert "system:gax-paper-candidate:status=pending" in report.blockers
-    assert "system:gax-paper-candidate:missing-real-execution-evidence" in report.blockers
-    assert "system:clinical-encoder:status=pending" in report.blockers
-    assert "system:clinical-encoder:missing-real-execution-evidence" in report.blockers
-    assert not any(blocker.startswith("system:laya:") for blocker in report.blockers)
+    assert report.blockers == []
 
 
 def test_inventory_digest_is_deterministic() -> None:
