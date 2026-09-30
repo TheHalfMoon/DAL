@@ -49,7 +49,6 @@ env:
   PUBMEDQA_SOURCE_REVISION: 1cbae8e92f72f20c8d3747cbb3bf5bc53554d997
   FHIR_AGENTBENCH_REVISION: bbb42909a5a7eb907d1cd91f72a560729e7037ea
   PHYSIONET_BASE: https://physionet.org/files/mimic-iv-fhir-demo/2.1.0
-  PHYSIONET_ZIP: https://physionet.org/content/mimic-iv-fhir-demo/get-zip/2.1.0/
 
 jobs:
   execute:
@@ -88,29 +87,78 @@ jobs:
         shell: bash
         run: |
           work="$RUNNER_TEMP/sg000020/physionet"
-          mkdir -p "$work/extracted"
+          mkdir -p "$work"
           curl --fail --location --retry 3 \
             "${PHYSIONET_BASE}/SHA256SUMS.txt" \
             --output "$work/official-SHA256SUMS.txt"
-          curl --fail --location --retry 3 \
-            "${PHYSIONET_ZIP}" \
-            --output "$work/release.zip"
-          unzip -q "$work/release.zip" -d "$work/extracted"
-          extracted_manifest="$(find "$work/extracted" -type f -name SHA256SUMS.txt -print -quit)"
-          if [[ -z "$extracted_manifest" ]]; then
-            echo "PhysioNet ZIP did not contain SHA256SUMS.txt" >&2
-            exit 1
-          fi
-          if ! cmp --silent "$work/official-SHA256SUMS.txt" "$extracted_manifest"; then
-            echo "PhysioNet ZIP checksum manifest differs from separately fetched official manifest" >&2
-            exit 1
-          fi
-          release_root="$(dirname "$extracted_manifest")"
-          if [[ ! -d "$release_root/fhir" ]]; then
-            echo "PhysioNet ZIP did not contain the expected fhir directory" >&2
-            exit 1
-          fi
-          echo "PHYSIONET_ROOT=$release_root" >> "$GITHUB_ENV"
+          python - <<'PY'
+          import concurrent.futures
+          import hashlib
+          import os
+          import time
+          from pathlib import Path
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000020" / "physionet"
+          base = os.environ["PHYSIONET_BASE"].rstrip("/")
+          manifest = root / "official-SHA256SUMS.txt"
+          entries: list[tuple[str, str]] = []
+          for line_number, line in enumerate(manifest.read_text(encoding="utf-8").splitlines(), start=1):
+              stripped = line.strip()
+              if not stripped:
+                  continue
+              parts = stripped.split(maxsplit=1)
+              if len(parts) != 2:
+                  raise SystemExit(f"invalid PhysioNet checksum row {line_number}: {line!r}")
+              digest, relative = parts
+              relative = relative.lstrip("*").strip()
+              if relative.startswith("./"):
+                  relative = relative[2:]
+              if not relative or ".." in Path(relative).parts:
+                  raise SystemExit(f"unsafe PhysioNet path: {relative!r}")
+              if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
+                  raise SystemExit(f"invalid PhysioNet SHA-256: {digest!r}")
+              entries.append((digest, relative))
+          if not entries:
+              raise SystemExit("PhysioNet checksum manifest is empty")
+
+          def download(entry: tuple[str, str]) -> str:
+              digest, relative = entry
+              target = root / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              encoded = "/".join(quote(part) for part in Path(relative).parts)
+              url = f"{base}/{encoded}"
+              last_error: BaseException | None = None
+              for attempt in range(1, 4):
+                  try:
+                      request = Request(url, headers={"User-Agent": "DAL-research/0.1"})
+                      with urlopen(request, timeout=120) as response, target.open("wb") as handle:
+                          while chunk := response.read(1024 * 1024):
+                              handle.write(chunk)
+                      actual = hashlib.sha256(target.read_bytes()).hexdigest()
+                      if actual != digest:
+                          raise RuntimeError(
+                              f"PhysioNet SHA-256 mismatch for {relative}: {actual} != {digest}"
+                          )
+                      return relative
+                  except BaseException as error:
+                      last_error = error
+                      target.unlink(missing_ok=True)
+                      if attempt < 3:
+                          time.sleep(attempt)
+              assert last_error is not None
+              raise last_error
+
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+              completed = list(executor.map(download, entries))
+          if len(completed) != len(entries):
+              raise SystemExit("PhysioNet download coverage incomplete")
+          if not (root / "fhir").is_dir():
+              raise SystemExit("PhysioNet release did not contain the expected fhir directory")
+          print(f"verified {len(completed)} PhysioNet release files from official SHA256SUMS.txt")
+          PY
+          echo "PHYSIONET_ROOT=$work" >> "$GITHUB_ENV"
           echo "PHYSIONET_SUMS=$work/official-SHA256SUMS.txt" >> "$GITHUB_ENV"
       - name: Resolve exact implementation source revision
         id: source
