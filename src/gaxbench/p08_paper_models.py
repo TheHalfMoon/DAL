@@ -117,7 +117,18 @@ class TrainingRecipe(StrictModel):
     gradient_clip_norm: float = Field(default=1.0, ge=1.0, le=1.0)
     action_loss_weight: float = Field(default=1.0, ge=1.0, le=1.0)
     sufficiency_loss_weight: float = Field(default=0.5, ge=0.5, le=0.5)
-    selection_tie_break: Literal["lower-epoch"] = "lower-epoch"
+    initialization: Literal["torch-xavier-uniform-zero-bias"] = (
+        "torch-xavier-uniform-zero-bias"
+    )
+    deterministic_algorithms: Literal[True] = True
+    epoch_selection_rule: Literal["minimum-development-selection-metric"] = (
+        "minimum-development-selection-metric"
+    )
+    epoch_selection_tie_break: Literal["lower-epoch"] = "lower-epoch"
+    seed_selection_rule: Literal["minimum-development-selection-metric"] = (
+        "minimum-development-selection-metric"
+    )
+    seed_selection_tie_break: Literal["lower-seed"] = "lower-seed"
     final_test_access: Literal["sealed"] = "sealed"
     calibration_rows_used_for_training: Literal[False] = False
     final_test_rows_used_for_training_or_selection: Literal[False] = False
