@@ -7,7 +7,7 @@
     "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
     "trainable": false
   },
-  "capacity_matching_note": "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters",
+  "capacity_matching_note": "paper-candidate=3H+9; clinical-control=3H+3; delta=6 scalar assurance parameters",
   "encoder_input": {
     "action_text_source": "benchmark-action-description",
     "encoding_mode": "tokenizer-pair-question-evidence",
@@ -19,41 +19,58 @@
   "final_test_access": "sealed",
   "matched_backbone_and_input_policy": true,
   "recipe": {
-    "action_loss_weight": 1.0,
+    "architecture_search_boundary": "D03-final-development-candidate",
+    "architecture_search_closed_after_this_revision": true,
+    "assurance_epoch_zero_included": true,
+    "assurance_loss_weight": 1.0,
     "batch_order": "manifest-order-no-shuffle",
     "calibration_rows_used_for_training": false,
+    "control_epoch_selection_rule": "minimum-development-action-nll",
+    "control_seed_selection_rule": "minimum-development-action-nll",
+    "critic_initialization": "zero-residual-to-control-logits",
+    "critic_nll_nondegradation_required": true,
+    "critic_nll_tolerance": 1e-09,
     "deterministic_algorithms": true,
     "development_leakage_audit_sha256": "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76",
     "development_manifest_sha256": "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c",
     "encoder_batch_size": 8,
-    "epoch_selection_rule": "minimum-development-selection-metric",
     "epoch_selection_tie_break": "lower-epoch",
     "epochs": 80,
     "final_test_access": "sealed",
     "final_test_rows_used_for_training_or_selection": false,
     "gradient_clip_norm": 1.0,
     "head_batch_size": 32,
-    "initialization": "xavier-linear-zero-bias-zero-residual-unit-suff-scale",
+    "initialization": "xavier-linear-zero-bias-zero-critic-scale-unit-suff-scale",
     "learning_rate": 0.02,
     "optimizer": "adamw",
-    "recipe_revision": "dal-p08-paper-training-v0.2",
-    "schema_version": "0.2",
-    "seed_selection_rule": "minimum-development-selection-metric",
+    "paper_action_equivalence_required": true,
+    "paper_action_head_source": "same-seed-selected-clinical-control",
+    "paper_action_head_trainable_during_assurance_stage": false,
+    "paper_assurance_epoch_selection_rule": "minimum-development-assurance-metric-subject-to-critic-nll-nondegradation",
+    "paper_seed_selection_rule": "same-as-control-selected-seed",
+    "recipe_revision": "dal-p08-paper-training-v0.3",
+    "schema_version": "0.3",
     "seed_selection_tie_break": "lower-seed",
     "selection_count": 90,
+    "sufficiency_brier_acceptance_ceiling": 0.25,
     "sufficiency_loss_weight": 0.5,
     "train_count": 360,
-    "training_seeds": [0, 1, 2],
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
     "weight_decay": 0.0001
   },
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "systems": [
     {
+      "action_head_training_policy": "clone-selected-same-seed-control-then-freeze",
       "architecture": {
         "abstain_is_candidate_action": false,
         "action_distribution": "closed-typed-softmax",
-        "action_scoring": "linear-state-head+gated-typed-evidence-residual",
-        "architecture_id": "dal-typed-evidence-residual-v0.2",
+        "action_scoring": "nested-clinical-action-head+shadow-typed-evidence-critic",
+        "architecture_id": "dal-shadow-assurance-critic-v0.3",
         "autoregressive_generation": false,
         "encoder_input": {
           "action_text_source": "benchmark-action-description",
@@ -71,17 +88,18 @@
           "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
           "trainable": false
         },
+        "output_action_policy": "identical-to-same-seed-clinical-control",
         "state_representation": "full-state+question-only+evidence-delta",
         "sufficiency_mechanism": "logistic-head-over-evidence-delta-norm",
         "system_id": "gax-paper-candidate",
-        "trainable_parameter_formula": "3H+6"
+        "trainable_parameter_formula": "3H+9"
       },
-      "selection_metric": "action-nll+0.5-sufficiency-brier",
+      "selection_metric": "critic-nll+0.5-sufficiency-brier",
       "system_id": "gax-paper-candidate",
-      "train_action_on_evidence_present_only": true,
       "train_sufficiency_on_present_withheld_pairs": true
     },
     {
+      "action_head_training_policy": "train-on-evidence-present",
       "architecture": {
         "abstain_is_candidate_action": false,
         "action_distribution": "closed-typed-softmax",
@@ -104,6 +122,7 @@
           "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
           "trainable": false
         },
+        "output_action_policy": "selected-linear-head",
         "state_representation": "full-state",
         "sufficiency_mechanism": "none",
         "system_id": "clinical-encoder",
@@ -111,7 +130,6 @@
       },
       "selection_metric": "action-nll",
       "system_id": "clinical-encoder",
-      "train_action_on_evidence_present_only": true,
       "train_sufficiency_on_present_withheld_pairs": false
     }
   ]

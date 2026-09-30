@@ -57,41 +57,68 @@ def test_paper_and_control_share_exact_frozen_backbone_and_input_policy() -> Non
     )
 
 
-def test_capacity_match_is_intentional_and_paper_candidate_is_non_generative() -> None:
+def test_shadow_assurance_candidate_cannot_replace_the_control_action_head() -> None:
     contract = _persisted()
     paper, control = contract.systems
 
     assert paper.architecture.architecture_id == DAL_PAPER_ARCHITECTURE
     assert control.architecture.architecture_id == CLINICAL_CONTROL_ARCHITECTURE
-    assert paper.architecture.trainable_parameter_formula == "3H+6"
+    assert paper.architecture.trainable_parameter_formula == "3H+9"
     assert control.architecture.trainable_parameter_formula == "3H+3"
     assert contract.capacity_matching_note == (
-        "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters"
+        "paper-candidate=3H+9; clinical-control=3H+3; "
+        "delta=6 scalar assurance parameters"
     )
     assert paper.architecture.autoregressive_generation is False
     assert paper.architecture.abstain_is_candidate_action is False
     assert paper.architecture.action_scoring == (
-        "linear-state-head+gated-typed-evidence-residual"
+        "nested-clinical-action-head+shadow-typed-evidence-critic"
     )
+    assert paper.architecture.output_action_policy == (
+        "identical-to-same-seed-clinical-control"
+    )
+    assert paper.action_head_training_policy == (
+        "clone-selected-same-seed-control-then-freeze"
+    )
+    assert control.action_head_training_policy == "train-on-evidence-present"
     assert paper.architecture.sufficiency_mechanism == (
         "logistic-head-over-evidence-delta-norm"
     )
     assert control.architecture.sufficiency_mechanism == "none"
 
 
+def test_d03_is_the_final_development_architecture_search_revision() -> None:
+    recipe = _persisted().recipe
+
+    assert recipe.schema_version == "0.3"
+    assert recipe.recipe_revision == "dal-p08-paper-training-v0.3"
+    assert recipe.architecture_search_boundary == "D03-final-development-candidate"
+    assert recipe.architecture_search_closed_after_this_revision is True
+    assert recipe.paper_action_head_source == "same-seed-selected-clinical-control"
+    assert recipe.paper_action_head_trainable_during_assurance_stage is False
+    assert recipe.assurance_epoch_zero_included is True
+    assert recipe.critic_initialization == "zero-residual-to-control-logits"
+    assert recipe.paper_action_equivalence_required is True
+    assert recipe.critic_nll_nondegradation_required is True
+    assert recipe.critic_nll_tolerance == 1e-9
+    assert recipe.sufficiency_brier_acceptance_ceiling == 0.25
+
+
 def test_checkpoint_and_seed_selection_are_prospectively_frozen() -> None:
     recipe = _persisted().recipe
 
-    assert recipe.schema_version == "0.2"
-    assert recipe.recipe_revision == "dal-p08-paper-training-v0.2"
     assert recipe.batch_order == "manifest-order-no-shuffle"
     assert recipe.initialization == (
-        "xavier-linear-zero-bias-zero-residual-unit-suff-scale"
+        "xavier-linear-zero-bias-zero-critic-scale-unit-suff-scale"
     )
     assert recipe.deterministic_algorithms is True
-    assert recipe.epoch_selection_rule == "minimum-development-selection-metric"
+    assert recipe.control_epoch_selection_rule == "minimum-development-action-nll"
+    assert recipe.paper_assurance_epoch_selection_rule == (
+        "minimum-development-assurance-metric-subject-to-critic-nll-nondegradation"
+    )
     assert recipe.epoch_selection_tie_break == "lower-epoch"
-    assert recipe.seed_selection_rule == "minimum-development-selection-metric"
+    assert recipe.control_seed_selection_rule == "minimum-development-action-nll"
+    assert recipe.paper_seed_selection_rule == "same-as-control-selected-seed"
     assert recipe.seed_selection_tie_break == "lower-seed"
 
 
@@ -122,9 +149,9 @@ def test_contract_rejects_replacing_paper_candidate_with_control_architecture() 
         PaperTrainingContract.model_validate(payload)
 
 
-def test_contract_rejects_seed_selection_policy_drift() -> None:
+def test_contract_rejects_action_head_policy_drift() -> None:
     payload = _persisted().model_dump(mode="json")
-    payload["recipe"]["seed_selection_tie_break"] = "higher-seed"
+    payload["systems"][0]["action_head_training_policy"] = "train-on-evidence-present"
 
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError, match="action-head training policy"):
         PaperTrainingContract.model_validate(payload)

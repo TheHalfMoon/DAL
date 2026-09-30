@@ -8,6 +8,7 @@ on:
       - "registry/p08_paper_training_contract_sg000019.json"
       - "registry/p08_required_model_revisions_sg000019.json"
       - "scripts/run_p08_paper_training.py"
+      - "scripts/run_p08_d03_assurance.py"
       - "src/gaxbench/p08_paper_models.py"
       - "src/gaxbench/p08_real_systems.py"
       - "src/gaxbench/p08_system_qualification.py"
@@ -19,6 +20,7 @@ on:
       - "registry/p08_paper_training_contract_sg000019.json"
       - "registry/p08_required_model_revisions_sg000019.json"
       - "scripts/run_p08_paper_training.py"
+      - "scripts/run_p08_d03_assurance.py"
       - "src/gaxbench/p08_paper_models.py"
       - "src/gaxbench/p08_real_systems.py"
       - "src/gaxbench/p08_system_qualification.py"
@@ -74,7 +76,7 @@ jobs:
           fi
       - name: Train and qualify both required trainable systems
         run: |
-          python scripts/run_p08_paper_training.py \
+          python scripts/run_p08_d03_assurance.py \
             --source "$RUNNER_TEMP/sg000019-paper/ori_pqal.json" \
             --development-manifest registry/p08_development_training_manifest_sg000019.json \
             --training-contract registry/p08_paper_training_contract_sg000019.json \
@@ -88,7 +90,7 @@ jobs:
           path: ${{ runner.temp }}/sg000019-paper/evidence/
           if-no-files-found: error
           retention-days: 14
-      - name: Require complete three-seed qualification for both systems
+      - name: Require complete final-development qualification
         run: |
           python - <<'PY'
           import json
@@ -99,10 +101,15 @@ jobs:
 
           root = Path(os.environ["RUNNER_TEMP"]) / "sg000019-paper" / "evidence"
           summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          if summary["architecture_search_boundary"] != "D03-final-development-candidate":
+              raise SystemExit("D03 final architecture-search boundary drifted")
+          if summary["architecture_search_closed_after_d03"] is not True:
+              raise SystemExit("D03 did not close adaptive architecture search")
           if summary["final_test_access"] != "sealed":
               raise SystemExit("final-test access changed during SG-000019 training")
           if summary["calibration_rows_used"] != 0 or summary["final_test_rows_used"] != 0:
               raise SystemExit("forbidden calibration/final-test rows were used")
+
           for system_id in ("gax-paper-candidate", "clinical-encoder"):
               bundle = load_qualification_bundle(
                   root / f"{system_id}.qualification-bundle.json"
@@ -113,5 +120,36 @@ jobs:
                   raise SystemExit(f"{system_id} is missing three-seed evidence")
               if any(execution.failures.total() for execution in bundle.executions):
                   raise SystemExit(f"{system_id} contains hidden execution failures")
-          print("SG-000019 paper training qualification PASS: 2 systems x 3 seeds")
+
+          paper = summary["systems"]["gax-paper-candidate"]
+          control = summary["systems"]["clinical-encoder"]
+          if summary["paper_action_equivalence_verified"] is not True:
+              raise SystemExit("paper action distribution is not control-equivalent")
+          if summary["paper_selected_seed_matches_control"] is not True:
+              raise SystemExit("paper selected seed does not match the frozen control seed")
+          if paper["selected_seed"] != control["selected_seed"]:
+              raise SystemExit("paper/control selected seed mismatch")
+          if summary["paper_selected_critic_nll_nondegradation"] is not True:
+              raise SystemExit("selected shadow critic degrades matched-control NLL")
+          if summary["paper_selected_sufficiency_brier_accepted"] is not True:
+              raise SystemExit("selected sufficiency Brier exceeds frozen ceiling")
+          if summary["paper_development_decision"] != "accepted":
+              raise SystemExit("D03 final development candidate was rejected")
+
+          selected_seed = paper["selected_seed"]
+          paper_row = next(row for row in paper["seeds"] if row["seed"] == selected_seed)
+          control_row = next(
+              row for row in control["seeds"] if row["seed"] == selected_seed
+          )
+          if paper_row["action_nll"] != control_row["action_nll"]:
+              raise SystemExit("selected paper action NLL drifted from matched control")
+          if paper_row["accuracy"] != control_row["accuracy"]:
+              raise SystemExit("selected paper accuracy drifted from matched control")
+          if any(not row["action_equivalent_to_control"] for row in paper["seeds"]):
+              raise SystemExit("at least one paper seed changed the control action output")
+
+          print(
+              "SG-000019 D03 PASS: exact control-equivalent action path, "
+              "non-degrading shadow critic, accepted sufficiency, 2 systems x 3 seeds"
+          )
           PY
