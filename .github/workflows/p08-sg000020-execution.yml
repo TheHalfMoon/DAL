@@ -49,6 +49,7 @@ env:
   PUBMEDQA_SOURCE_REVISION: 1cbae8e92f72f20c8d3747cbb3bf5bc53554d997
   FHIR_AGENTBENCH_REVISION: bbb42909a5a7eb907d1cd91f72a560729e7037ea
   PHYSIONET_BASE: https://physionet.org/files/mimic-iv-fhir-demo/2.1.0
+  PHYSIONET_ZIP: https://physionet.org/content/mimic-iv-fhir-demo/get-zip/2.1.0/
 
 jobs:
   execute:
@@ -86,37 +87,31 @@ jobs:
       - name: Download frozen open PhysioNet FHIR demo and official checksums
         shell: bash
         run: |
-          mkdir -p "$RUNNER_TEMP/sg000020/physionet"
+          work="$RUNNER_TEMP/sg000020/physionet"
+          mkdir -p "$work/extracted"
           curl --fail --location --retry 3 \
             "${PHYSIONET_BASE}/SHA256SUMS.txt" \
-            --output "$RUNNER_TEMP/sg000020/physionet/SHA256SUMS.txt"
-          python - <<'PY'
-          import os
-          from pathlib import Path
-          from urllib.parse import quote
-          from urllib.request import Request, urlopen
-
-          root = Path(os.environ["RUNNER_TEMP"]) / "sg000020" / "physionet"
-          base = os.environ["PHYSIONET_BASE"].rstrip("/")
-          sums = (root / "SHA256SUMS.txt").read_text(encoding="utf-8").splitlines()
-          for line in sums:
-              if not line.strip():
-                  continue
-              parts = line.strip().split(maxsplit=1)
-              if len(parts) != 2:
-                  raise SystemExit(f"invalid PhysioNet checksum row: {line!r}")
-              relative = parts[1].lstrip("*").strip()
-              if relative.startswith("./"):
-                  relative = relative[2:]
-              if not relative or ".." in Path(relative).parts:
-                  raise SystemExit(f"unsafe PhysioNet path: {relative!r}")
-              target = root / relative
-              target.parent.mkdir(parents=True, exist_ok=True)
-              encoded = "/".join(quote(part) for part in Path(relative).parts)
-              request = Request(f"{base}/{encoded}", headers={"User-Agent": "DAL-research/0.1"})
-              with urlopen(request, timeout=120) as response, target.open("wb") as handle:
-                  handle.write(response.read())
-          PY
+            --output "$work/official-SHA256SUMS.txt"
+          curl --fail --location --retry 3 \
+            "${PHYSIONET_ZIP}" \
+            --output "$work/release.zip"
+          unzip -q "$work/release.zip" -d "$work/extracted"
+          extracted_manifest="$(find "$work/extracted" -type f -name SHA256SUMS.txt -print -quit)"
+          if [[ -z "$extracted_manifest" ]]; then
+            echo "PhysioNet ZIP did not contain SHA256SUMS.txt" >&2
+            exit 1
+          fi
+          if ! cmp --silent "$work/official-SHA256SUMS.txt" "$extracted_manifest"; then
+            echo "PhysioNet ZIP checksum manifest differs from separately fetched official manifest" >&2
+            exit 1
+          fi
+          release_root="$(dirname "$extracted_manifest")"
+          if [[ ! -d "$release_root/fhir" ]]; then
+            echo "PhysioNet ZIP did not contain the expected fhir directory" >&2
+            exit 1
+          fi
+          echo "PHYSIONET_ROOT=$release_root" >> "$GITHUB_ENV"
+          echo "PHYSIONET_SUMS=$work/official-SHA256SUMS.txt" >> "$GITHUB_ENV"
       - name: Resolve exact implementation source revision
         id: source
         shell: bash
@@ -135,8 +130,8 @@ jobs:
             --development-manifest registry/p08_development_training_manifest_sg000019.json \
             --training-contract registry/p08_paper_training_contract_sg000019.json \
             --fhir-agentbench-csv "$RUNNER_TEMP/sg000020/sources/questions_answers_sql_fhir.csv" \
-            --physionet-root "$RUNNER_TEMP/sg000020/physionet" \
-            --physionet-sha256s "$RUNNER_TEMP/sg000020/physionet/SHA256SUMS.txt" \
+            --physionet-root "$PHYSIONET_ROOT" \
+            --physionet-sha256s "$PHYSIONET_SUMS" \
             --source-revision "${{ steps.source.outputs.sha }}" \
             --output-dir "$RUNNER_TEMP/sg000020/evidence"
       - name: Upload exact SG-000020 evidence
