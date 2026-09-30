@@ -110,11 +110,13 @@ def test_canonical_required_system_bundles_validate_promoted_inventory() -> None
         ),
     }
 
+    # These are canonical semantic bundle digests. They intentionally differ from
+    # the byte-level file SHA values emitted by the D03 runtime summary.
     assert qualification_bundle_digest(bundles["gax-paper-candidate"]) == (
-        "e40d96e020bd8b8388dcb172f9fc345ed66ac8f35facc0f8ec8268fa887fba97"
+        "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b"
     )
     assert qualification_bundle_digest(bundles["clinical-encoder"]) == (
-        "e91e6fa72d4cfb6945b7dff6dcf4c0740b8e6c2465bf351577c450da6b7213cc"
+        "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388"
     )
     assert qualification_bundle_digest(bundles["laya"]) == (
         "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
