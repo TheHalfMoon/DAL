@@ -14,7 +14,7 @@ Canonical machine-readable pre-results contract:
 
 Canonical JSON SHA-256:
 
-`6910e2ef834b799d4d05f9b313c2eefcd0d326ee94de8fd3dec8814c03f49471`
+`13f05f806ced6a4f2aa67543e1e4236ec0c6208a19905de7158fd96ce6bde637`
 
 P08 final-test access remains **sealed**. This protocol cannot authorize final-test inference.
 
