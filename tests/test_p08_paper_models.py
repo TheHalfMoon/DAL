@@ -63,12 +63,18 @@ def test_capacity_match_is_intentional_and_paper_candidate_is_non_generative() -
 
     assert paper.architecture.architecture_id == DAL_PAPER_ARCHITECTURE
     assert control.architecture.architecture_id == CLINICAL_CONTROL_ARCHITECTURE
-    assert paper.architecture.trainable_parameter_formula == "3H+4"
+    assert paper.architecture.trainable_parameter_formula == "3H+6"
     assert control.architecture.trainable_parameter_formula == "3H+3"
+    assert contract.capacity_matching_note == (
+        "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters"
+    )
     assert paper.architecture.autoregressive_generation is False
     assert paper.architecture.abstain_is_candidate_action is False
+    assert paper.architecture.action_scoring == (
+        "linear-state-head+gated-typed-evidence-residual"
+    )
     assert paper.architecture.sufficiency_mechanism == (
-        "separate-logistic-head-over-evidence-delta"
+        "logistic-head-over-evidence-delta-norm"
     )
     assert control.architecture.sufficiency_mechanism == "none"
 
@@ -76,7 +82,12 @@ def test_capacity_match_is_intentional_and_paper_candidate_is_non_generative() -
 def test_checkpoint_and_seed_selection_are_prospectively_frozen() -> None:
     recipe = _persisted().recipe
 
-    assert recipe.initialization == "torch-xavier-uniform-zero-bias"
+    assert recipe.schema_version == "0.2"
+    assert recipe.recipe_revision == "dal-p08-paper-training-v0.2"
+    assert recipe.batch_order == "manifest-order-no-shuffle"
+    assert recipe.initialization == (
+        "xavier-linear-zero-bias-zero-residual-unit-suff-scale"
+    )
     assert recipe.deterministic_algorithms is True
     assert recipe.epoch_selection_rule == "minimum-development-selection-metric"
     assert recipe.epoch_selection_tie_break == "lower-epoch"
