@@ -15,8 +15,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from gaxbench.fhir import FHIR_REPRESENTATION_REVISION, render_fhir_resource, validate_fhir_resource
 from gaxbench import fhir_agentbench_qualification as fq
+from gaxbench.fhir import FHIR_REPRESENTATION_REVISION, render_fhir_resource, validate_fhir_resource
 from gaxbench.p08_calibration_execution import (
     AuthorizationCandidate,
     CalibrationEvidence,
@@ -281,7 +281,9 @@ def _checksum_manifest(root: Path, path: Path) -> tuple[str, int, int]:
     return manifest_sha, entries, verified
 
 
-def _load_fhir_resources(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[str, Any]]], int]:
+def _load_fhir_resources(
+    root: Path,
+) -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[str, Any]]], int]:
     exact: dict[str, dict[str, Any]] = {}
     by_id: dict[str, list[dict[str, Any]]] = defaultdict(list)
     failures = 0
