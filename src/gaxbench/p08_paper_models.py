@@ -7,7 +7,7 @@ from pydantic import Field, model_validator
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import StrictModel
 
-DAL_PAPER_ARCHITECTURE = "dal-typed-evidence-diag-v0.1"
+DAL_PAPER_ARCHITECTURE = "dal-typed-evidence-residual-v0.2"
 CLINICAL_CONTROL_ARCHITECTURE = "bioclinical-linear-control-v0.1"
 BACKBONE_MODEL_ID = "thomas-sounack/BioClinical-ModernBERT-base"
 BACKBONE_REVISION = "5e17e2f25260b6993e0fb60485f94678ff29779a"
@@ -17,7 +17,7 @@ TRAINING_SEEDS = (0, 1, 2)
 
 SystemID = Literal["gax-paper-candidate", "clinical-encoder"]
 ArchitectureID = Literal[
-    "dal-typed-evidence-diag-v0.1",
+    "dal-typed-evidence-residual-v0.2",
     "bioclinical-linear-control-v0.1",
 ]
 SelectionMetric = Literal[
@@ -76,11 +76,11 @@ class ModelArchitectureContract(StrictModel):
                 raise ValueError("paper candidate must use the frozen DAL paper architecture")
             if self.state_representation != "full-state+question-only+evidence-delta":
                 raise ValueError("paper candidate state representation drift")
-            if self.action_scoring != "shared-diagonal-state+evidence-delta-by-action-embedding":
+            if self.action_scoring != "linear-state-head+gated-typed-evidence-residual":
                 raise ValueError("paper candidate action scoring drift")
-            if self.sufficiency_mechanism != "separate-logistic-head-over-evidence-delta":
+            if self.sufficiency_mechanism != "logistic-head-over-evidence-delta-norm":
                 raise ValueError("paper candidate sufficiency mechanism drift")
-            if self.trainable_parameter_formula != "3H+4":
+            if self.trainable_parameter_formula != "3H+6":
                 raise ValueError("paper candidate parameter formula drift")
         else:
             if self.architecture_id != CLINICAL_CONTROL_ARCHITECTURE:
@@ -97,8 +97,8 @@ class ModelArchitectureContract(StrictModel):
 
 
 class TrainingRecipe(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
-    recipe_revision: Literal["dal-p08-paper-training-v0.1"] = "dal-p08-paper-training-v0.1"
+    schema_version: Literal["0.2"] = "0.2"
+    recipe_revision: Literal["dal-p08-paper-training-v0.2"] = "dal-p08-paper-training-v0.2"
     development_manifest_sha256: Literal[
         "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
     ] = "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
@@ -110,6 +110,7 @@ class TrainingRecipe(StrictModel):
     training_seeds: list[int] = Field(default_factory=lambda: list(TRAINING_SEEDS))
     encoder_batch_size: Literal[8] = 8
     head_batch_size: Literal[32] = 32
+    batch_order: Literal["manifest-order-no-shuffle"] = "manifest-order-no-shuffle"
     epochs: Literal[80] = 80
     optimizer: Literal["adamw"] = "adamw"
     learning_rate: float = Field(default=0.02, ge=0.02, le=0.02)
@@ -117,9 +118,9 @@ class TrainingRecipe(StrictModel):
     gradient_clip_norm: float = Field(default=1.0, ge=1.0, le=1.0)
     action_loss_weight: float = Field(default=1.0, ge=1.0, le=1.0)
     sufficiency_loss_weight: float = Field(default=0.5, ge=0.5, le=0.5)
-    initialization: Literal["torch-xavier-uniform-zero-bias"] = (
-        "torch-xavier-uniform-zero-bias"
-    )
+    initialization: Literal[
+        "xavier-linear-zero-bias-zero-residual-unit-suff-scale"
+    ] = "xavier-linear-zero-bias-zero-residual-unit-suff-scale"
     deterministic_algorithms: Literal[True] = True
     epoch_selection_rule: Literal["minimum-development-selection-metric"] = (
         "minimum-development-selection-metric"
@@ -167,15 +168,15 @@ class SystemTrainingPlan(StrictModel):
 
 
 class PaperTrainingContract(StrictModel):
-    schema_version: Literal["0.1"] = "0.1"
+    schema_version: Literal["0.2"] = "0.2"
     backbone: FrozenBackboneIdentity = Field(default_factory=FrozenBackboneIdentity)
     encoder_input: EncoderInputPolicy = Field(default_factory=EncoderInputPolicy)
     recipe: TrainingRecipe = Field(default_factory=TrainingRecipe)
     systems: list[SystemTrainingPlan]
     matched_backbone_and_input_policy: Literal[True] = True
     capacity_matching_note: Literal[
-        "paper-candidate=3H+4; clinical-control=3H+3; backbone frozen for both"
-    ] = "paper-candidate=3H+4; clinical-control=3H+3; backbone frozen for both"
+        "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters"
+    ] = "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters"
     final_test_access: Literal["sealed"] = "sealed"
 
     @model_validator(mode="after")
@@ -194,11 +195,11 @@ class PaperTrainingContract(StrictModel):
 def canonical_training_contract() -> PaperTrainingContract:
     paper_architecture = ModelArchitectureContract(
         system_id="gax-paper-candidate",
-        architecture_id="dal-typed-evidence-diag-v0.1",
+        architecture_id="dal-typed-evidence-residual-v0.2",
         state_representation="full-state+question-only+evidence-delta",
-        action_scoring="shared-diagonal-state+evidence-delta-by-action-embedding",
-        sufficiency_mechanism="separate-logistic-head-over-evidence-delta",
-        trainable_parameter_formula="3H+4",
+        action_scoring="linear-state-head+gated-typed-evidence-residual",
+        sufficiency_mechanism="logistic-head-over-evidence-delta-norm",
+        trainable_parameter_formula="3H+6",
     )
     control_architecture = ModelArchitectureContract(
         system_id="clinical-encoder",
