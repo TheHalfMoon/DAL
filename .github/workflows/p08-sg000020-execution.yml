@@ -37,6 +37,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: p08-sg000020-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   HF_HUB_DISABLE_TELEMETRY: "1"
   TOKENIZERS_PARALLELISM: "false"
