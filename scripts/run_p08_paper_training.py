@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import importlib.metadata
 import json
 import math
 import os
 import platform
-import sys
-from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -27,12 +24,16 @@ from gaxbench.p08_real_systems import (
     RuntimeIdentity,
     SystemExecutionEvidence,
 )
-from gaxbench.p08_system_qualification import SystemQualificationBundle
+from gaxbench.p08_system_qualification import (
+    CLINICAL_MODEL_REVISION,
+    CONTROL_ADAPTER_REVISION,
+    PAPER_ADAPTER_REVISION,
+    PAPER_MODEL_REVISION,
+    SystemQualificationBundle,
+)
 from gaxbench.provenance import canonical_json_sha256, sha256_file
 from gaxbench.pubmedqa import PubMedQARecord, convert_record, load_frozen_pqal
 
-PAPER_ADAPTER_REVISION = "dal-p08-paper-head-v0.1"
-CONTROL_ADAPTER_REVISION = "dal-p08-clinical-control-head-v0.1"
 _ACTION_ORDER = ("maybe", "no", "yes")
 
 
@@ -110,11 +111,9 @@ def _encode_pairs(
     model.eval()
     with torch.no_grad():
         for start in range(0, len(questions), batch_size):
-            question_batch = questions[start : start + batch_size]
-            evidence_batch = evidences[start : start + batch_size]
             encoded = tokenizer(
-                question_batch,
-                evidence_batch,
+                questions[start : start + batch_size],
+                evidences[start : start + batch_size],
                 padding=True,
                 truncation="only_second",
                 max_length=512,
@@ -236,21 +235,22 @@ def _prepare_embeddings(
     }
 
 
-def _xavier_vector(parameter: Any, torch: Any) -> None:
-    torch.nn.init.xavier_uniform_(parameter.view(1, -1))
+def _linear_parameters(hidden_size: int, torch: Any) -> dict[str, Any]:
+    weight = torch.nn.Parameter(torch.empty(3, hidden_size))
+    bias = torch.nn.Parameter(torch.zeros(3))
+    torch.nn.init.xavier_uniform_(weight)
+    return {"action_weight": weight, "action_bias": bias}
 
 
 def _paper_parameters(hidden_size: int, torch: Any) -> dict[str, Any]:
-    parameters = {
-        "w_state": torch.nn.Parameter(torch.empty(hidden_size)),
-        "w_delta": torch.nn.Parameter(torch.empty(hidden_size)),
-        "w_suff": torch.nn.Parameter(torch.empty(hidden_size)),
-        "action_bias": torch.nn.Parameter(torch.zeros(3)),
-        "suff_bias": torch.nn.Parameter(torch.zeros(1)),
-    }
-    _xavier_vector(parameters["w_state"], torch)
-    _xavier_vector(parameters["w_delta"], torch)
-    _xavier_vector(parameters["w_suff"], torch)
+    parameters = _linear_parameters(hidden_size, torch)
+    parameters.update(
+        {
+            "residual_scale": torch.nn.Parameter(torch.zeros(1)),
+            "suff_scale": torch.nn.Parameter(torch.ones(1)),
+            "suff_bias": torch.nn.Parameter(torch.zeros(1)),
+        }
+    )
     return parameters
 
 
@@ -259,21 +259,24 @@ def _paper_logits(
     delta: Any,
     action_embeddings: Any,
     parameters: dict[str, Any],
+    *,
+    torch: Any,
 ) -> tuple[Any, Any, Any]:
-    action_logits = (
-        (full * parameters["w_state"]) @ action_embeddings.T
-        + (delta * parameters["w_delta"]) @ action_embeddings.T
-        + parameters["action_bias"]
+    base_logits = full @ parameters["action_weight"].T + parameters["action_bias"]
+    typed_residual = delta @ action_embeddings.T
+    action_logits = base_logits + parameters["residual_scale"] * typed_residual
+    evidence_delta_norm = torch.linalg.vector_norm(delta, ord=2, dim=1)
+    present_sufficiency = (
+        parameters["suff_scale"] * evidence_delta_norm + parameters["suff_bias"]
     )
-    present_sufficiency = delta @ parameters["w_suff"] + parameters["suff_bias"]
-    withheld_sufficiency = torch_zeros_like(present_sufficiency) + parameters["suff_bias"]
+    withheld_sufficiency = torch.zeros_like(present_sufficiency) + parameters["suff_bias"]
     return action_logits, present_sufficiency, withheld_sufficiency
 
 
-def torch_zeros_like(value: Any) -> Any:
-    import torch
-
-    return torch.zeros_like(value)
+def _classification_metrics(logits: Any, labels: Any, *, torch: Any) -> tuple[float, float]:
+    nll = float(torch.nn.functional.cross_entropy(logits, labels).item())
+    accuracy = float((logits.argmax(dim=1) == labels).float().mean().item())
+    return nll, accuracy
 
 
 def _paper_metric(
@@ -284,24 +287,29 @@ def _paper_metric(
     parameters: dict[str, Any],
     *,
     torch: Any,
-) -> tuple[float, float, float]:
+) -> tuple[float, float, float, float]:
     with torch.no_grad():
         logits, present, withheld = _paper_logits(
             full,
             delta,
             action_embeddings,
             parameters,
+            torch=torch,
         )
-        action_nll = torch.nn.functional.cross_entropy(logits, labels).item()
+        action_nll, accuracy = _classification_metrics(logits, labels, torch=torch)
         present_probability = torch.sigmoid(present)
         withheld_probability = torch.sigmoid(withheld)
-        sufficiency_brier = torch.cat(
-            [
-                (present_probability - 1.0).square(),
-                withheld_probability.square(),
-            ]
-        ).mean().item()
-    return action_nll + 0.5 * sufficiency_brier, action_nll, sufficiency_brier
+        sufficiency_brier = float(
+            torch.cat(
+                [
+                    (present_probability - 1.0).square(),
+                    withheld_probability.square(),
+                ]
+            )
+            .mean()
+            .item()
+        )
+    return action_nll + 0.5 * sufficiency_brier, action_nll, sufficiency_brier, accuracy
 
 
 def _clone_parameters(parameters: dict[str, Any]) -> dict[str, Any]:
@@ -319,7 +327,7 @@ def _train_paper(
     seed: int,
     *,
     torch: Any,
-) -> tuple[dict[str, Any], list[dict[str, float | int]], int, float]:
+) -> tuple[dict[str, Any], list[dict[str, float | int]], dict[str, float | int]]:
     torch.manual_seed(seed)
     parameters = _paper_parameters(embeddings["hidden_size"], torch)
     optimizer = torch.optim.AdamW(
@@ -329,8 +337,8 @@ def _train_paper(
     )
     history: list[dict[str, float | int]] = []
     best_metric = math.inf
-    best_epoch = 0
     best_state: dict[str, Any] | None = None
+    best_record: dict[str, float | int] | None = None
     count = int(embeddings["train_full"].shape[0])
     batch_size = contract.recipe.head_batch_size
 
@@ -343,6 +351,7 @@ def _train_paper(
                 embeddings["train_delta"][start:stop],
                 embeddings["action_embeddings"],
                 parameters,
+                torch=torch,
             )
             action_loss = torch.nn.functional.cross_entropy(
                 logits,
@@ -367,7 +376,7 @@ def _train_paper(
             )
             optimizer.step()
 
-        metric, action_nll, sufficiency_brier = _paper_metric(
+        metric, action_nll, sufficiency_brier, accuracy = _paper_metric(
             embeddings["selection_full"],
             embeddings["selection_delta"],
             embeddings["selection_labels"],
@@ -375,35 +384,27 @@ def _train_paper(
             parameters,
             torch=torch,
         )
-        history.append(
-            {
-                "epoch": epoch,
-                "selection_metric": metric,
-                "action_nll": action_nll,
-                "sufficiency_brier": sufficiency_brier,
-            }
-        )
+        record: dict[str, float | int] = {
+            "epoch": epoch,
+            "selection_metric": metric,
+            "action_nll": action_nll,
+            "sufficiency_brier": sufficiency_brier,
+            "accuracy": accuracy,
+        }
+        history.append(record)
         if metric < best_metric:
             best_metric = metric
-            best_epoch = epoch
             best_state = _clone_parameters(parameters)
+            best_record = dict(record)
 
-    if best_state is None:
+    if best_state is None or best_record is None:
         raise RuntimeError("paper training produced no checkpoint")
     _restore_parameters(parameters, best_state)
-    return parameters, history, best_epoch, best_metric
+    return parameters, history, best_record
 
 
-def _control_module(hidden_size: int, torch: Any) -> Any:
-    module = torch.nn.Linear(hidden_size, 3)
-    torch.nn.init.xavier_uniform_(module.weight)
-    torch.nn.init.zeros_(module.bias)
-    return module
-
-
-def _control_metric(module: Any, full: Any, labels: Any, *, torch: Any) -> float:
-    with torch.no_grad():
-        return float(torch.nn.functional.cross_entropy(module(full), labels).item())
+def _control_logits(full: Any, parameters: dict[str, Any]) -> Any:
+    return full @ parameters["action_weight"].T + parameters["action_bias"]
 
 
 def _train_control(
@@ -412,18 +413,18 @@ def _train_control(
     seed: int,
     *,
     torch: Any,
-) -> tuple[Any, list[dict[str, float | int]], int, float]:
+) -> tuple[dict[str, Any], list[dict[str, float | int]], dict[str, float | int]]:
     torch.manual_seed(seed)
-    module = _control_module(embeddings["hidden_size"], torch)
+    parameters = _linear_parameters(embeddings["hidden_size"], torch)
     optimizer = torch.optim.AdamW(
-        module.parameters(),
+        list(parameters.values()),
         lr=contract.recipe.learning_rate,
         weight_decay=contract.recipe.weight_decay,
     )
     history: list[dict[str, float | int]] = []
     best_metric = math.inf
-    best_epoch = 0
     best_state: dict[str, Any] | None = None
+    best_record: dict[str, float | int] | None = None
     count = int(embeddings["train_full"].shape[0])
     batch_size = contract.recipe.head_batch_size
 
@@ -431,41 +432,44 @@ def _train_control(
         for start in range(0, count, batch_size):
             stop = min(start + batch_size, count)
             optimizer.zero_grad(set_to_none=True)
-            logits = module(embeddings["train_full"][start:stop])
+            logits = _control_logits(embeddings["train_full"][start:stop], parameters)
             loss = torch.nn.functional.cross_entropy(
                 logits,
                 embeddings["train_labels"][start:stop],
             )
             loss.backward()
             torch.nn.utils.clip_grad_norm_(
-                module.parameters(),
+                list(parameters.values()),
                 contract.recipe.gradient_clip_norm,
             )
             optimizer.step()
 
-        metric = _control_metric(
-            module,
-            embeddings["selection_full"],
-            embeddings["selection_labels"],
-            torch=torch,
-        )
-        history.append({"epoch": epoch, "selection_metric": metric, "action_nll": metric})
-        if metric < best_metric:
-            best_metric = metric
-            best_epoch = epoch
-            best_state = deepcopy(module.state_dict())
+        with torch.no_grad():
+            selection_logits = _control_logits(embeddings["selection_full"], parameters)
+            action_nll, accuracy = _classification_metrics(
+                selection_logits,
+                embeddings["selection_labels"],
+                torch=torch,
+            )
+        record = {
+            "epoch": epoch,
+            "selection_metric": action_nll,
+            "action_nll": action_nll,
+            "accuracy": accuracy,
+        }
+        history.append(record)
+        if action_nll < best_metric:
+            best_metric = action_nll
+            best_state = _clone_parameters(parameters)
+            best_record = dict(record)
 
-    if best_state is None:
+    if best_state is None or best_record is None:
         raise RuntimeError("control training produced no checkpoint")
-    module.load_state_dict(best_state)
-    return module, history, best_epoch, best_metric
+    _restore_parameters(parameters, best_state)
+    return parameters, history, best_record
 
 
-def _state_payload(state: dict[str, Any]) -> dict[str, object]:
-    return {name: tensor.detach().cpu().tolist() for name, tensor in sorted(state.items())}
-
-
-def _paper_state_payload(parameters: dict[str, Any]) -> dict[str, object]:
+def _state_payload(parameters: dict[str, Any]) -> dict[str, object]:
     return {
         name: parameter.detach().cpu().tolist()
         for name, parameter in sorted(parameters.items())
@@ -521,18 +525,19 @@ def _checkpoint_payload(
     system_id: str,
     architecture_id: str,
     seed: int,
-    selected_epoch: int,
-    selection_metric: float,
+    selected_record: dict[str, float | int],
     contract_sha256: str,
     state: dict[str, object],
 ) -> dict[str, object]:
     return {
-        "schema_version": "0.1",
+        "schema_version": "0.2",
         "system_id": system_id,
         "architecture_id": architecture_id,
         "training_seed": seed,
-        "selected_epoch": selected_epoch,
-        "selection_metric": selection_metric,
+        "selected_epoch": selected_record["epoch"],
+        "selection_metric": selected_record["selection_metric"],
+        "action_nll": selected_record["action_nll"],
+        "accuracy": selected_record["accuracy"],
         "training_contract_sha256": contract_sha256,
         "development_manifest_sha256": (
             "9e096564891b517440ae3e75a2261de5a0b97cbaa1605417f382a446c5169e6c"
@@ -610,8 +615,18 @@ def _checkpoint_provenance(
     )
 
 
-def main() -> int:
-    args = _parse_args()
+def _failure_category(error: BaseException) -> str:
+    text = str(error).casefold()
+    if isinstance(error, MemoryError) or "out of memory" in text:
+        return "oom"
+    if isinstance(error, TimeoutError) or "timed out" in text or "timeout" in text:
+        return "timeout"
+    if isinstance(error, ConnectionError) or "connection" in text or "http" in text:
+        return "transport"
+    return "interface"
+
+
+def _run(args: argparse.Namespace) -> int:
     source_revision = str(args.source_revision)
     if len(source_revision) != 40 or any(c not in "0123456789abcdef" for c in source_revision):
         raise ValueError("source revision must be an exact lowercase git SHA")
@@ -643,8 +658,9 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     runtime = _runtime_identity()
     bundles: dict[str, SystemQualificationBundle] = {}
-    summary: dict[str, object] = {
-        "schema_version": "0.1",
+    summary: dict[str, Any] = {
+        "schema_version": "0.2",
+        "implementation_source_revision": source_revision,
         "training_contract_sha256": contract_sha256,
         "development_manifest_sha256": canonical_json_sha256(manifest.model_dump(mode="json")),
         "backbone_model_id": BACKBONE_MODEL_ID,
@@ -666,18 +682,19 @@ def main() -> int:
 
         for seed in contract.recipe.training_seeds:
             if system_id == "gax-paper-candidate":
-                parameters, history, selected_epoch, selected_metric = _train_paper(
+                parameters, history, selected = _train_paper(
                     embeddings,
                     contract,
                     seed,
                     torch=torch,
                 )
-                checkpoint_state = _paper_state_payload(parameters)
+                checkpoint_state = _state_payload(parameters)
                 logits, present_sufficiency, _ = _paper_logits(
                     embeddings["selection_full"],
                     embeddings["selection_delta"],
                     embeddings["action_embeddings"],
                     parameters,
+                    torch=torch,
                 )
                 predictions = _prediction_payload(
                     system_id,
@@ -689,17 +706,18 @@ def main() -> int:
                 )
                 architecture_id = DAL_PAPER_ARCHITECTURE
                 adapter_revision = PAPER_ADAPTER_REVISION
-                model_revision = f"contract-sha256:{contract_sha256}"
+                model_revision = PAPER_MODEL_REVISION
                 role = "gax"
+                provenance_source_revision = source_revision
             else:
-                module, history, selected_epoch, selected_metric = _train_control(
+                parameters, history, selected = _train_control(
                     embeddings,
                     contract,
                     seed,
                     torch=torch,
                 )
-                checkpoint_state = _state_payload(module.state_dict())
-                logits = module(embeddings["selection_full"])
+                checkpoint_state = _state_payload(parameters)
+                logits = _control_logits(embeddings["selection_full"], parameters)
                 predictions = _prediction_payload(
                     system_id,
                     seed,
@@ -709,8 +727,9 @@ def main() -> int:
                 )
                 architecture_id = CLINICAL_CONTROL_ARCHITECTURE
                 adapter_revision = CONTROL_ADAPTER_REVISION
-                model_revision = BACKBONE_REVISION
+                model_revision = CLINICAL_MODEL_REVISION
                 role = "control"
+                provenance_source_revision = BACKBONE_REVISION
 
             checkpoint_path = output_dir / f"{system_id}.seed-{seed}.checkpoint.json"
             checkpoint_sha256 = _write_json(
@@ -719,8 +738,7 @@ def main() -> int:
                     system_id=system_id,
                     architecture_id=architecture_id,
                     seed=seed,
-                    selected_epoch=selected_epoch,
-                    selection_metric=selected_metric,
+                    selected_record=selected,
                     contract_sha256=contract_sha256,
                     state=checkpoint_state,
                 ),
@@ -733,14 +751,14 @@ def main() -> int:
                     seed=seed,
                     checkpoint_sha256=checkpoint_sha256,
                     contract_sha256=contract_sha256,
-                    source_revision=source_revision,
+                    source_revision=provenance_source_revision,
                 )
             )
             executions.append(
                 _evidence_for_seed(
                     system_id=system_id,
                     role=role,
-                    source_revision=source_revision,
+                    source_revision=provenance_source_revision,
                     model_revision=model_revision,
                     adapter_revision=adapter_revision,
                     checkpoint_sha256=checkpoint_sha256,
@@ -750,15 +768,18 @@ def main() -> int:
                 )
             )
             histories[str(seed)] = history
-            seed_summaries.append(
-                {
-                    "seed": seed,
-                    "selected_epoch": selected_epoch,
-                    "selection_metric": selected_metric,
-                    "checkpoint_sha256": checkpoint_sha256,
-                    "predictions_sha256": predictions_sha256,
-                }
-            )
+            seed_summary: dict[str, object] = {
+                "seed": seed,
+                "selected_epoch": selected["epoch"],
+                "selection_metric": selected["selection_metric"],
+                "action_nll": selected["action_nll"],
+                "accuracy": selected["accuracy"],
+                "checkpoint_sha256": checkpoint_sha256,
+                "predictions_sha256": predictions_sha256,
+            }
+            if "sufficiency_brier" in selected:
+                seed_summary["sufficiency_brier"] = selected["sufficiency_brier"]
+            seed_summaries.append(seed_summary)
 
         history_path = output_dir / f"{system_id}.selection-history.json"
         history_sha256 = _write_json(history_path, histories)
@@ -787,6 +808,28 @@ def main() -> int:
         raise RuntimeError("missing required trainable system qualification bundle")
     print(json.dumps(summary, sort_keys=True, allow_nan=False))
     return 0
+
+
+def main() -> int:
+    args = _parse_args()
+    output_dir = Path(args.output_dir)
+    try:
+        return _run(args)
+    except BaseException as error:
+        _write_json(
+            output_dir / "failure.json",
+            {
+                "schema_version": "0.1",
+                "status": "blocked",
+                "failure_category": _failure_category(error),
+                "error_type": type(error).__name__,
+                "error_message": str(error),
+                "final_test_access": "sealed",
+                "calibration_rows_used": 0,
+                "final_test_rows_used": 0,
+            },
+        )
+        raise
 
 
 if __name__ == "__main__":
