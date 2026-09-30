@@ -39,8 +39,10 @@ def test_sg000018_inventory_transform_is_idempotent() -> None:
 
     assert transformed == payload
     assert transform(transformed) == payload
-    assert transformed["inventory_revision"] == "p08-real-inventory-v0.3-sg000019-laya"
-    assert transformed["repo_revision"] == "7f75fb23677492258a855f99c6c406caaf61f849"
+    assert transformed["inventory_revision"] == (
+        "p08-real-inventory-v0.4-sg000019-required-systems"
+    )
+    assert transformed["repo_revision"] == "54bdd9e18cf5e7d1dbcbc6dbfd3a4e12e58a70a5"
 
     laya = _system(transformed, "laya")
     assert laya["status"] == "qualified"

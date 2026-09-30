@@ -9,7 +9,7 @@ ROOT = Path(__file__).parents[1]
 INVENTORY = ROOT / "registry" / "p08_real_inventory.json"
 
 
-def test_inventory_cli_reports_sealed_blockers() -> None:
+def test_inventory_cli_reports_sealed_authorization_readiness() -> None:
     completed = subprocess.run(
         [
             sys.executable,
@@ -24,6 +24,6 @@ def test_inventory_cli_reports_sealed_blockers() -> None:
     )
     payload = json.loads(completed.stdout)
     assert payload["final_test_access"] == "sealed"
-    assert payload["ready_for_authorization"] is False
-    assert payload["blockers"] == sorted(payload["blockers"])
+    assert payload["ready_for_authorization"] is True
+    assert payload["blockers"] == []
     assert len(payload["inventory_digest"]) == 64
