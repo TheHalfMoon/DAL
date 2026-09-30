@@ -13,84 +13,123 @@ DAL is the current repository and program identity: **Decision Assurance Layer**
 - [x] P06 evidence interventions and counterfactual robustness framework
 - [x] P07 FHIR interoperable read-only decision layer
 
-Historical closeout evidence remains in SG-000001 through SG-000010 and their implementation/closeout PRs.
-
 ## P08 — Full paper evaluation
 
-### Governance, statistics, and benchmark foundation
+### Canonical foundation through SG-000019
 
 - [x] Final-test state sealed by default
-- [x] Digest-bound final-test authorization schema
+- [x] Digest-bound final-test authorization schema foundation
 - [x] Benchmark split/license/leakage hash requirements
-- [x] Calibration and target-coverage freeze contract
-- [x] Statistical primary-comparison/bootstrap freeze contract
-- [x] Hardware/failure/evidence/FHIR protocol revision binding
-- [x] Machine-readable claim ledger and evidence-packet requirement
-- [x] Real dataset/system/protocol inventory schema
+- [x] Calibration and target-coverage contract frozen
+- [x] Hardware/timing and multiplicity policies frozen
 - [x] PubMedQA PQA-L immutable qualification
 - [x] FHIR-AgentBench immutable qualification
-- [x] MedAgentBench public-corpus qualification with blocked official runtime preserved
-- [x] MedQAbstain immutable identification with blocked license status preserved
 - [x] DAL-native licensed abstention replacement
-- [x] Pre-results calibration, coverage, hardware, multiplicity, ECAL-candidate, and FHIR-candidate policy freeze
-- [x] SG-000011 through SG-000018 canonical closeouts
+- [x] Paper candidate, matched clinical encoder, and Laya immutable qualification
+- [x] Development-only 360-train / 90-selection child split
+- [x] Multi-seed `[0,1,2]` checkpoint provenance
+- [x] D01 and D02 negative architecture results preserved
+- [x] D03 accepted only as the assurance path with unchanged action accuracy
+- [x] Architecture search closed after D03
+- [x] SG-000019 canonical closeout at `3ca0dd2aae85a68473849108764a45a538de1019`
+- [x] SG-000019 post-closeout GAXBench `36743845440` SUCCESS
+- [x] SG-000019 post-closeout Real-System Foundation `36743845501` SUCCESS
 
-### SG-000019 — Paper-candidate training freeze and required-system qualification foundation (PROVEN)
+### SG-000020 — Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze (ACTIVE)
 
-Research contract: Issue #63. Canonical dependency: `54ffad6005e3848058be59870f1fee408073ef55`.
+Research contract: Issue #69. Canonical dependency: `3ca0dd2aae85a68473849108764a45a538de1019`.
 
-- [x] Derive exactly 360 train and 90 selection rows from the 450 qualified PubMedQA development rows
-- [x] Prove train/selection membership is disjoint from 50 calibration and 500 sealed final-test rows
-- [x] Bind deterministic stratification, transform revision, development manifest, and leakage audit
-- [x] Keep PQA-A/PQA-U excluded without separate immutable identity and rights qualification
-- [x] Keep `gax-bilinear-v0` as an engineering/control model rather than the headline paper candidate
-- [x] Freeze BioClinical ModernBERT backbone/tokenizer revision
-- [x] Freeze training seeds `[0, 1, 2]`
-- [x] Create machine-readable training recipe, per-seed checkpoint provenance, selection history, predictions, and execution evidence
-- [x] Preserve D01 as a rejected architecture attempt
-- [x] Preserve D02 as a rejected architecture attempt
-- [x] Freeze D03 prospectively as the final architecture revision on the 90-row development-selection surface
-- [x] Close architecture search after D03; no D04 on the same development-selection set
-- [x] Qualify D03 as an assurance path with exact action equivalence to the matched control
-- [x] Preserve the null action-accuracy result: DAL and control both `0.5555555820465088`
-- [x] Record control action NLL `0.9351183772087097`
-- [x] Record DAL shadow-critic NLL `0.9342377781867981`
-- [x] Record DAL sufficiency Brier `0.007211523596197367` under the preregistered `0.25` ceiling
-- [x] Make no action-performance superiority claim
-- [x] Implement matched clinical-encoder control training/qualification path
-- [x] Freeze exact Laya source/model identity
-- [x] Execute genuine zero-founder-cost Laya qualification and preserve the weak 48/90 = 53.33% development result
-- [x] Create failure-preserving real-execution evidence schema
-- [x] Make required-system inventory promotion fail closed on evidence/revision drift
-- [x] Qualify DAL/GAX paper candidate with immutable checkpoint identity and seeds `[0,1,2]`
-- [x] Qualify clinical encoder control with immutable checkpoint/model/tokenizer evidence
-- [x] Qualify Laya with immutable source/model evidence
-- [x] Bind all three canonical semantic qualification-bundle digests into inventory
-- [x] Require `audit_real_inventory(...).ready_for_authorization == true`
-- [x] Keep P08 final-test access sealed throughout implementation and promotion
-- [x] Exact-head Linux/Windows Python 3.11/3.12 CI on implementation/promotion heads
-- [x] Affected P08 regression qualification on exact promotion head
-- [x] Checksum-pinned Alibaba OpenCodeReview exact-range evidence
-- [x] Secure TypeSafe Jev exact-diff review with zero blocking findings
-- [x] Guarded implementation merge and post-main qualification
-- [x] Guarded required-system promotion merge and post-main qualification
-- [x] Separate SG-000019 canonical closeout
+#### Calibration
+
+- [ ] Bind exact calibration manifest `89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230`
+- [ ] Use exactly `temperature-scaling-action+platt-sufficiency-v0.1`
+- [ ] Confirm calibration roles contain exactly 50 PubMedQA + 100 native-abstention + 341 FHIR-AgentBench rows
+- [ ] Fit action temperature parameter(s) on permitted calibration evidence only
+- [ ] Fit sufficiency Platt parameter(s) on permitted calibration evidence only
+- [ ] Persist calibration parameters and canonical digest
+- [ ] Persist pre/post calibration diagnostics
+- [ ] Preserve calibration requested/completed/failure accounting
+- [ ] Prove calibration does not retrain or reselect model/backbone/checkpoint/seed
+- [ ] Keep coverage targets exactly `[0.50, 0.80, 0.90]`
+
+#### ECAL selection
+
+Frozen candidate set:
+
+- `evidence`
+- `hard-negative`
+- `proper-scoring`
+- `replay-retention`
+- `state-action-contrastive`
+
+Tasks:
+
+- [ ] Persist ECAL selection objective before candidate outcome inspection
+- [ ] Persist deterministic ECAL tie-break rule before candidate outcome inspection
+- [ ] Evaluate every frozen candidate on authorized development/calibration evidence only
+- [ ] Preserve every null/negative/failed ECAL outcome
+- [ ] Freeze selected ECAL configuration
+- [ ] Bind selected ECAL configuration to immutable digest
+
+#### FHIR representation selection
+
+Frozen candidate set:
+
+- `canonical-structured`
+- `canonical-with-narrative`
+- `flat-text`
+- `source-order-json`
+
+Tasks:
+
+- [ ] Persist FHIR selection objective before candidate outcome inspection
+- [ ] Persist deterministic FHIR tie-break rule before candidate outcome inspection
+- [ ] Evaluate every frozen representation on authorized development/calibration evidence only
+- [ ] Preserve parse/interface/failure accounting for every representation
+- [ ] Preserve every null/negative FHIR result
+- [ ] Freeze selected FHIR representation
+- [ ] Bind selected FHIR representation to immutable digest
+
+#### Final-test authorization candidate
+
+- [ ] Bind canonical DAL paper-candidate bundle digest `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`
+- [ ] Bind canonical clinical-encoder bundle digest `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`
+- [ ] Bind canonical Laya bundle digest `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`
+- [ ] Bind selected calibration evidence digest
+- [ ] Bind selected ECAL configuration digest
+- [ ] Bind selected FHIR representation digest
+- [ ] Bind coverage targets `[0.50, 0.80, 0.90]`
+- [ ] Bind hardware protocol `p08-hardware-stratified-v0.1`
+- [ ] Bind multiplicity policy `holm-primary-family-v0.1`
+- [ ] Preserve explicit `final_test_access = sealed`
+- [ ] Make authorization candidate fail closed on any digest/revision mismatch
+- [ ] Require a separate later SpecGrain/PR before final-test access can be opened
+
+#### Qualification and closeout
+
+- [ ] Exact-head Linux/Windows Python 3.11/3.12 CI
+- [ ] Affected P08 regression qualification
+- [ ] Checksum-pinned Alibaba OpenCodeReview exact-range evidence
+- [ ] Secure TypeSafe Jev exact-diff review with complete coverage and zero blocking findings
+- [ ] Guarded normal implementation merge with expected-head SHA
+- [ ] Post-main qualification
+- [ ] Separate SG-000020 canonical closeout
+
+Final-test access remains **sealed** throughout SG-000020.
 
 ### Freeze before final-test access
 
 - [x] Freeze benchmark versions and immutable split manifests
-- [x] Freeze DAL/GAX paper-candidate model/checkpoint identity and training seeds
-- [x] Freeze required clinical-control model/tokenizer/checkpoint identity
-- [x] Freeze Laya source/model identity
+- [x] Freeze DAL paper candidate, clinical control, and Laya identities
 - [x] Freeze calibration method, calibration split, and coverage targets
 - [x] Freeze hardware/timing protocol and comparability rules
 - [x] Freeze multiplicity policy
 - [x] Complete required dataset license/redistribution audit
 - [x] Complete required train/development/calibration/test leakage audit
-- [ ] Execute calibration under the frozen method without calibration-set retraining
-- [ ] Freeze ECAL component keep/reject selection from authorized development/calibration evidence
-- [ ] Freeze FHIR representation selection from authorized development/calibration evidence
-- [ ] Bind the final selected system/protocol/checkpoint digests into an authorization candidate
+- [ ] Execute calibration under frozen method without model retraining
+- [ ] Freeze ECAL component selection
+- [ ] Freeze FHIR representation selection
+- [ ] Bind final selected system/protocol/checkpoint digests into an authorization candidate
 - [ ] Qualify and merge a separate digest-bound final-test opening artifact
 
 Final-test access remains **sealed** until the last item above is satisfied.
@@ -107,7 +146,7 @@ Final-test access remains **sealed** until the last item above is satisfied.
 - [ ] FHIR representation and EHR-agent action-selection evaluation
 - [ ] Distribution-shift slices
 - [ ] Failure taxonomy and qualitative error analysis
-- [ ] Latency, throughput, peak-memory, and scaling analysis under the frozen hardware protocol
+- [ ] Latency, throughput, peak-memory, and scaling analysis under frozen hardware protocol
 - [ ] Paired bootstrap confidence intervals and declared primary comparisons
 - [ ] Preserve null, negative, timeout, OOM, and parse/interface-failure outcomes
 
