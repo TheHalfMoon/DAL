@@ -144,7 +144,9 @@ class SystemTrainingPlan(StrictModel):
             if self.selection_metric != "action-nll+0.5-sufficiency-brier":
                 raise ValueError("paper candidate selection metric drift")
             if not self.train_sufficiency_on_present_withheld_pairs:
-                raise ValueError("paper candidate must train the sufficiency head on paired evidence")
+                raise ValueError(
+                    "paper candidate must train the sufficiency head on paired evidence"
+                )
         else:
             if self.selection_metric != "action-nll":
                 raise ValueError("clinical control selection metric drift")
