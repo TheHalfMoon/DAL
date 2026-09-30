@@ -7,7 +7,7 @@
     "tokenizer_revision": "5e17e2f25260b6993e0fb60485f94678ff29779a",
     "trainable": false
   },
-  "capacity_matching_note": "paper-candidate=3H+4; clinical-control=3H+3; backbone frozen for both",
+  "capacity_matching_note": "paper-candidate=3H+6; clinical-control=3H+3; delta=3 scalar DAL parameters",
   "encoder_input": {
     "action_text_source": "benchmark-action-description",
     "encoding_mode": "tokenizer-pair-question-evidence",
@@ -20,6 +20,7 @@
   "matched_backbone_and_input_policy": true,
   "recipe": {
     "action_loss_weight": 1.0,
+    "batch_order": "manifest-order-no-shuffle",
     "calibration_rows_used_for_training": false,
     "deterministic_algorithms": true,
     "development_leakage_audit_sha256": "1ed3dc8bbf740888e60d1b36ac7b94d5b3a75c8f120c9129c2ad996e24984a76",
@@ -32,11 +33,11 @@
     "final_test_rows_used_for_training_or_selection": false,
     "gradient_clip_norm": 1.0,
     "head_batch_size": 32,
-    "initialization": "torch-xavier-uniform-zero-bias",
+    "initialization": "xavier-linear-zero-bias-zero-residual-unit-suff-scale",
     "learning_rate": 0.02,
     "optimizer": "adamw",
-    "recipe_revision": "dal-p08-paper-training-v0.1",
-    "schema_version": "0.1",
+    "recipe_revision": "dal-p08-paper-training-v0.2",
+    "schema_version": "0.2",
     "seed_selection_rule": "minimum-development-selection-metric",
     "seed_selection_tie_break": "lower-seed",
     "selection_count": 90,
@@ -45,14 +46,14 @@
     "training_seeds": [0, 1, 2],
     "weight_decay": 0.0001
   },
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "systems": [
     {
       "architecture": {
         "abstain_is_candidate_action": false,
         "action_distribution": "closed-typed-softmax",
-        "action_scoring": "shared-diagonal-state+evidence-delta-by-action-embedding",
-        "architecture_id": "dal-typed-evidence-diag-v0.1",
+        "action_scoring": "linear-state-head+gated-typed-evidence-residual",
+        "architecture_id": "dal-typed-evidence-residual-v0.2",
         "autoregressive_generation": false,
         "encoder_input": {
           "action_text_source": "benchmark-action-description",
@@ -71,9 +72,9 @@
           "trainable": false
         },
         "state_representation": "full-state+question-only+evidence-delta",
-        "sufficiency_mechanism": "separate-logistic-head-over-evidence-delta",
+        "sufficiency_mechanism": "logistic-head-over-evidence-delta-norm",
         "system_id": "gax-paper-candidate",
-        "trainable_parameter_formula": "3H+4"
+        "trainable_parameter_formula": "3H+6"
       },
       "selection_metric": "action-nll+0.5-sufficiency-brier",
       "system_id": "gax-paper-candidate",
