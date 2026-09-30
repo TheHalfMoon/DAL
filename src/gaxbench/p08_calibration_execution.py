@@ -9,8 +9,6 @@ from gaxbench.p08_protocol_selection import (
     COVERAGE_TARGETS,
     ECAL_CANDIDATES,
     FHIR_CANDIDATES,
-    PAPER_CHECKPOINT_SHA256,
-    SG000020_CONTRACT_SHA256,
 )
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import StrictModel
@@ -46,10 +44,10 @@ class CalibrationEvidence(StrictModel):
     )
     contract_sha256: Literal[
         "13f05f806ced6a4f2aa67543e1e4236ec0c6208a19905de7158fd96ce6bde637"
-    ] = SG000020_CONTRACT_SHA256
+    ] = "13f05f806ced6a4f2aa67543e1e4236ec0c6208a19905de7158fd96ce6bde637"
     paper_checkpoint_sha256: Literal[
         "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
-    ] = PAPER_CHECKPOINT_SHA256
+    ] = "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
     checkpoint_reconstruction_verified: Literal[True] = True
     action: TemperatureFit
     sufficiency: PlattFit
@@ -92,7 +90,7 @@ class EcalDecisionLedger(StrictModel):
     decisions: list[EcalDecision]
     paper_checkpoint_sha256: Literal[
         "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
-    ] = PAPER_CHECKPOINT_SHA256
+    ] = "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
     checkpoint_mutated: Literal[False] = False
     final_test_access: Literal["sealed"] = "sealed"
 
@@ -175,11 +173,11 @@ class AuthorizationCandidate(StrictModel):
     ] = "3ca0dd2aae85a68473849108764a45a538de1019"
     paper_checkpoint_sha256: Literal[
         "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
-    ] = PAPER_CHECKPOINT_SHA256
+    ] = "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b"
     required_system_bundle_digests: dict[str, str]
     calibration_contract_sha256: Literal[
         "13f05f806ced6a4f2aa67543e1e4236ec0c6208a19905de7158fd96ce6bde637"
-    ] = SG000020_CONTRACT_SHA256
+    ] = "13f05f806ced6a4f2aa67543e1e4236ec0c6208a19905de7158fd96ce6bde637"
     calibration_evidence_sha256: str
     selected_ecal_configuration_sha256: str
     selected_fhir_representation_sha256: str
