@@ -148,7 +148,7 @@ Research contract: Issue #80. Canonical dependency: `ebe981db8b2554a2b52037b8d3c
 - [x] Merge authorization normally with expected-head guard at `1daa55d9742050f37fe56d2c84ccf4c8743ef984`
 - [x] Verify post-main authorization state with GAXBench `36866791467` SUCCESS
 - [x] Preserve `final_test_inference_executed=false` and `final_test_rows_used=0`
-- [x] Prepare separate canonical closeout state transition
+- [x] Establish the separate SG-000021 canonical closeout through this governance-only state transition
 
 SG-000021 is authorization-only. It executed no final-test inference. The canonical authorization artifact is scoped only to SG-000022.
 
@@ -156,7 +156,7 @@ SG-000021 is authorization-only. It executed no final-test inference. The canoni
 
 Activation prerequisites:
 
-- [ ] Merge SG-000021 canonical closeout
+- [x] SG-000021 canonical closeout is the prerequisite established when this governance-only state transition reaches `main`
 - [ ] Create a separate SG-000022 research contract and SpecGrain bound to the SG-000021 authorization digest
 - [ ] Freeze the exact executable final-evaluation plan without changing any authorized model/protocol/policy identity
 - [ ] Prove final-test access occurs only through the canonical authorization artifact
