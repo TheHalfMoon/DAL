@@ -134,9 +134,9 @@ Final-test access remained **sealed** throughout SG-000020.
 - [x] Bind final selected system/protocol/checkpoint digests into an authorization candidate
 - [x] Qualify and merge a separate digest-bound final-test opening artifact under SG-000021
 
-### SG-000021 — Final-test authorization qualification (PROVEN by closeout state transition)
+### SG-000021 — Final-test authorization qualification (CLOSED_CANONICAL)
 
-Research contract: Issue #80. Canonical dependency: `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.
+Research contract: Issue #80. Canonical closeout: `ef36ae4d050cf2e1bb7ada07f4054b083e886045`.
 
 - [x] Activate a separate research contract and SpecGrain for final-test authorization
 - [x] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
@@ -144,38 +144,56 @@ Research contract: Issue #80. Canonical dependency: `ebe981db8b2554a2b52037b8d3c
 - [x] Re-verify immutable final-test split/source manifests and leakage boundaries
 - [x] Bind frozen coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
 - [x] Create machine-readable authorization artifact `626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
-- [x] Qualify exact head `c88bbac110169a48ae6ce2288c5228a0d2b9980f` with GAXBench `36866528564`, Alibaba OpenCodeReview `36866528579`, and secure TypeSafe Jev `36866521762`
+- [x] Qualify exact implementation head `c88bbac110169a48ae6ce2288c5228a0d2b9980f` with GAXBench `36866528564`, Alibaba OpenCodeReview `36866528579`, and secure TypeSafe Jev `36866521762`
 - [x] Merge authorization normally with expected-head guard at `1daa55d9742050f37fe56d2c84ccf4c8743ef984`
-- [x] Verify post-main authorization state with GAXBench `36866791467` SUCCESS
+- [x] Verify implementation post-main with GAXBench `36866791467` SUCCESS
+- [x] Qualify governance closeout head `6ff33ad96e636418429abf842175919243e66ecd` with GAXBench `36867843947`, Alibaba OpenCodeReview `36867844045`, and secure TypeSafe Jev `36867843711`
+- [x] Merge canonical closeout at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`
+- [x] Verify post-closeout GAXBench `36868102682` SUCCESS
 - [x] Preserve `final_test_inference_executed=false` and `final_test_rows_used=0`
-- [x] Establish the separate SG-000021 canonical closeout through this governance-only state transition
 
-SG-000021 is authorization-only. It executed no final-test inference. The canonical authorization artifact is scoped only to SG-000022.
+SG-000021 executed no final-test inference. Its canonical authorization artifact is scoped only to SG-000022.
 
-### SG-000022 — Primary final evaluation (NOT YET ACTIVATED)
+### SG-000022 — Authorized primary final evaluation (ACTIVE)
 
-Activation prerequisites:
+Research contract: Issue #84. Canonical dependency: `ef36ae4d050cf2e1bb7ada07f4054b083e886045`.
 
-- [x] SG-000021 canonical closeout is the prerequisite established when this governance-only state transition reaches `main`
-- [ ] Create a separate SG-000022 research contract and SpecGrain bound to the SG-000021 authorization digest
-- [ ] Freeze the exact executable final-evaluation plan without changing any authorized model/protocol/policy identity
-- [ ] Prove final-test access occurs only through the canonical authorization artifact
+Activation requirements:
 
-Primary evaluation tasks after SG-000022 activation:
+- [x] Create SG-000022 research contract Issue #84
+- [x] Bind SG-000021 canonical closeout and post-closeout run `36868102682`
+- [x] Bind authorization digest `626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
+- [x] Freeze activation as governance-only with zero final-test rows
+- [x] Require a separate implementation PR after canonical activation
+- [ ] Qualify activation exact head with Linux/Windows Python 3.11/3.12 CI
+- [ ] Qualify activation exact head with checksum-pinned Alibaba OpenCodeReview
+- [ ] Qualify activation exact head with secure TypeSafe Jev
+- [ ] Merge activation normally with expected-head guard
+- [ ] Verify post-main activation before any final-test inference
 
-- [ ] Main action-selection tables
-- [ ] NLL, Brier, ECE, and reliability analysis
-- [ ] Risk-coverage curves, AURC, and risk@50/80/90
-- [ ] Matched-coverage abstention analysis
-- [ ] ECAL selected configuration and declared ablations
-- [ ] Evidence-intervention evaluation
-- [ ] Counterfactual material-sensitivity and irrelevant-edit stability evaluation
-- [ ] FHIR representation and EHR-agent action-selection evaluation
-- [ ] Distribution-shift slices
-- [ ] Failure taxonomy and qualitative error analysis
-- [ ] Latency, throughput, peak-memory, and scaling analysis under frozen hardware protocol
-- [ ] Paired bootstrap confidence intervals and declared primary comparisons
-- [ ] Preserve null, negative, timeout, OOM, and parse/interface-failure outcomes
+Primary evaluation tasks after canonical activation:
+
+- [ ] Implement fail-closed authorization verification at the execution entry point
+- [ ] Persist immutable raw predictions/results before derived analysis
+- [ ] Preserve exact requested/completed/timeout/OOM/transport/interface/parse accounting
+- [ ] Execute `pubmedqa-pqal` 500-row authorized final-test surface
+- [ ] Execute `gax-native-abstention-pqal` 1000-variant authorized final-test surface
+- [ ] Execute `fhir-agentbench` 173-row patient-disjoint authorized final-test surface
+- [ ] Produce main action-selection metrics and tables
+- [ ] Produce NLL, Brier, ECE, and reliability analysis
+- [ ] Produce risk-coverage curves, AURC, and risk@50/80/90
+- [ ] Produce matched-coverage abstention analysis
+- [ ] Evaluate the frozen selected ECAL configuration and declared ablations without reselection
+- [ ] Evaluate evidence interventions without post-test tuning
+- [ ] Evaluate counterfactual material-sensitivity and irrelevant-edit stability without post-test tuning
+- [ ] Evaluate frozen `canonical-structured` FHIR representation and EHR-agent action selection
+- [ ] Produce valid preregistered distribution-shift slices only where source data supports them
+- [ ] Produce failure taxonomy and qualitative error analysis without silent exclusion
+- [ ] Measure latency, throughput, and peak memory only under the frozen hardware protocol
+- [ ] Compute paired bootstrap confidence intervals and declared primary comparisons
+- [ ] Apply frozen Holm multiplicity policy to the declared primary family
+- [ ] Preserve all null, negative, timeout, OOM, transport, parse, and interface-failure outcomes
+- [ ] Generate every paper table/figure from versioned raw artifacts with exact provenance
 
 ### Reproducibility and claim freeze
 
