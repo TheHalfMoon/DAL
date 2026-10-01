@@ -53,6 +53,10 @@
       "journal_ref": null,
       "key": "lee2026fhiragentbench",
       "kind": "arxiv",
+      "peer_review_verified_via": [
+        "PMLR v297 page title"
+      ],
+      "peer_reviewed_venue": "Machine Learning for Health 2026, PMLR 297",
       "role": "benchmark-source",
       "title": "FHIR-AgentBench: Benchmarking LLM Agents for Realistic Interoperable EHR Question Answering",
       "url": "https://arxiv.org/abs/2509.19319",
@@ -135,6 +139,11 @@
       "journal_ref": null,
       "key": "guo2017calibration",
       "kind": "arxiv",
+      "peer_review_verified_via": [
+        "OpenAlex API location",
+        "PMLR v70 page title"
+      ],
+      "peer_reviewed_venue": "International Conference on Machine Learning (ICML 2017), PMLR 70",
       "role": "method-foundation",
       "title": "On Calibration of Modern Neural Networks",
       "url": "https://arxiv.org/abs/1706.04599",
@@ -152,6 +161,10 @@
       "journal_ref": null,
       "key": "geifman2017selective",
       "kind": "arxiv",
+      "peer_review_verified_via": [
+        "OpenAlex API location"
+      ],
+      "peer_reviewed_venue": "Neural Information Processing Systems (NeurIPS 2017)",
       "role": "method-foundation",
       "title": "Selective Classification for Deep Neural Networks",
       "url": "https://arxiv.org/abs/1705.08500",
@@ -929,6 +942,7 @@
     }
   ],
   "grain_id": "SG-000024",
+  "peer_review_policy": "arXiv entries carry a peer-reviewed venue only where one was verified; otherwise they are cited by arXiv identifier with no assertion about peer-review status.",
   "policy": "Every field below was returned by the listed free public API on the verification date; no bibliographic field was typed by hand.",
   "record_id": "sg24-verified-bibliography-v0.1",
   "schema_version": "0.1",
