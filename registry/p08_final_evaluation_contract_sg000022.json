@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1",
+  "grain_id": "SG-000022",
+  "contract_revision": "dal-p08-final-evaluation-v0.1",
+  "canonical_activation_sha": "c7ea6fbc81a1dd7526a6c453d12c585db6841cb3",
+  "authorization_artifact": "registry/p08_final_test_authorization_sg000021.json",
+  "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+  "pre_execution_amendment": {
+    "reason": "The pre-results protocol froze 95% paired-bootstrap inference and the Holm primary family but did not serialize an exact real-run bootstrap replicate count, bootstrap seed, or per-benchmark primary metric names. This contract materializes those implementation parameters before any SG-000022 final-test row is accessed.",
+    "final_test_rows_used_before_freeze": 0,
+    "outcome_information_used": false,
+    "basis": "P08 statistics infrastructure plus the documented non-synthetic CLI bootstrap example and the preregistered P05/P08 metric family"
+  },
+  "statistics": {
+    "ci_level": 0.95,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 1729,
+    "bootstrap_method": "paired-percentile-mean-difference-v0.1",
+    "multiplicity_policy": "holm-primary-family-v0.1"
+  },
+  "coverage_targets": [0.5, 0.8, 0.9],
+  "calibration_method": "temperature-scaling-action+platt-sufficiency-v0.1",
+  "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+  "required_systems": [
+    "gax-paper-candidate",
+    "clinical-encoder",
+    "laya"
+  ],
+  "primary_comparison": "gax-paper-candidate-vs-clinical-encoder",
+  "benchmarks": [
+    {
+      "id": "pubmedqa-pqal",
+      "final_test_count": 500,
+      "primary_metric": "action_accuracy",
+      "metric_direction": "higher-is-better",
+      "primary_status": "executable",
+      "secondary_systems": ["laya"]
+    },
+    {
+      "id": "gax-native-abstention-pqal",
+      "final_test_count": 1000,
+      "primary_metric": "risk_at_80",
+      "metric_direction": "lower-is-better",
+      "primary_status": "executable",
+      "must_report": [
+        "risk_at_50",
+        "risk_at_80",
+        "risk_at_90",
+        "aurc",
+        "unsafe_commit_rate",
+        "over_abstain_rate",
+        "actual_policy_coverage",
+        "present_action_accuracy"
+      ]
+    },
+    {
+      "id": "fhir-agentbench",
+      "final_test_count": 173,
+      "primary_metric": "action_accuracy",
+      "metric_direction": "higher-is-better",
+      "primary_status": "interface-blocked-preexecution",
+      "interface_block": {
+        "detected_before_final_test_access": true,
+        "reason": "The frozen DAL/clinical heads expose exactly the PubMedQA maybe/no/yes logits and the frozen Laya adapter is also a PubMedQA yes/no/maybe choice interface, while FHIR-AgentBench exposes variable read-only candidate action sets. Creating a new adapter after authorization is forbidden.",
+        "failure_category": "interface",
+        "requested_count": 173,
+        "completed_count": 0,
+        "failed_count": 173,
+        "replacement_forbidden": true
+      }
+    }
+  ],
+  "failure_accounting": [
+    "requested",
+    "completed",
+    "timeout",
+    "oom",
+    "transport",
+    "interface",
+    "parse"
+  ],
+  "execution_policy": {
+    "implementation_qualification_must_precede_final_test": true,
+    "final_execution_requires_canonical_main": true,
+    "raw_artifacts_persist_before_derived_metrics": true,
+    "no_post_test_tuning": true,
+    "no_architecture_reopening": true,
+    "no_checkpoint_reselection": true,
+    "no_calibration_refit": true,
+    "no_ecal_reselection": true,
+    "no_fhir_adapter_creation_after_authorization": true,
+    "null_negative_blocked_results_must_remain_visible": true,
+    "zero_founder_cost": true
+  },
+  "final_test_access": "authorized-only-after-canonical-implementation",
+  "final_test_inference_executed": false,
+  "final_test_rows_used": 0
+}
