@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "id": "SG-000021",
+  "title": "DAL-P08 - Digest-bound final-test authorization qualification",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000020"],
+  "children": [],
+  "labels": ["p08", "authorization", "final-test", "pre-results", "fail-closed"],
+  "outcome": "Independently qualify a digest-bound authorization artifact for the already-frozen P08 primary final-test surfaces without executing final-test inference or changing any model/protocol choice.",
+  "rationale": "SG-000020 closed calibration, ECAL, FHIR, and authorization-candidate selection while final-test access remained sealed. A separate grain is required to revalidate the complete frozen chain and canonically authorize later final-test execution.",
+  "scope_in": [
+    "Bind exact SG-000020 canonical closeout merge and successful post-main CI",
+    "Revalidate the SG-000020 authorization-candidate semantic digest",
+    "Revalidate all authorization-critical system qualification-bundle digests and selected paper checkpoint digest",
+    "Revalidate authorization-critical PubMedQA PQA-L, DAL-native abstention, and FHIR-AgentBench source/split/role/leakage identities",
+    "Bind exact final-test row counts and test-supervision sealing metadata without executing inference",
+    "Bind canonical calibration, ECAL, selected FHIR representation, coverage, hardware, multiplicity, and failure-accounting identities",
+    "Preserve no-post-test-tuning and zero-founder-cost requirements",
+    "Persist explicit authorized and non-authorization benchmark scopes",
+    "Create a machine-readable authorization artifact with a self-verifiable authorization digest",
+    "Fail closed on any stale, missing, ambiguous, blocked-required, or mismatched dependency",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review"
+  ],
+  "scope_out": [
+    "No final-test model inference in SG-000021",
+    "No final-test predictions, metrics, slices, error analysis, or qualitative review",
+    "No final-test gold labels entering model-selection or protocol-selection logic",
+    "No model, backbone, checkpoint, seed, prompt, action-head, threshold, ECAL, FHIR, coverage, hardware, or multiplicity reselection",
+    "No admission of MedAgentBench official runtime, MedQAbstain, MedMCQA, MedQA, or Med-PRM into the primary authorization-critical scope",
+    "No autonomous diagnosis, treatment, prescribing, triage, or EHR-write authorization",
+    "No clinical-safety, regulatory-readiness, deployment, superiority, efficiency-superiority, or SOTA claim",
+    "No paid founder compute, paid model APIs, paid SaaS, or paid reviewers"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000020 closeout main ebe981db8b2554a2b52037b8d3cdfc48ef42ba78",
+    "SG-000020 post-closeout GAXBench run 36839981925 is SUCCESS on Linux/Windows Python 3.11/3.12",
+    "Research contract is Issue #78",
+    "SG-000020 authorization-candidate semantic SHA-256 remains 3f4000cb5616578332a85d00aeda18e120c2b959d59e32375696cd53486b5484",
+    "Selected paper checkpoint SHA-256 remains 351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+    "Required system bundle digests remain exactly the DAL paper candidate, clinical encoder, and Laya digests frozen by SG-000019/SG-000020",
+    "PubMedQA PQA-L source, split-manifest, leakage-audit, and 500-row final-test identities match the frozen qualified evidence exactly",
+    "DAL-native abstention source, role-manifest, membership, leakage-audit, and 1000-row derived final-test identities match the frozen qualified evidence exactly",
+    "FHIR-AgentBench source, role-manifest, patient-disjoint membership, leakage-audit, 173-row/40-patient final-test identities match the frozen qualified evidence exactly",
+    "Required final-test source/role manifests remain historical sealed selection artifacts and are not mutated to authorize access",
+    "MedAgentBench official runtime and MedQAbstain remain blocked and non-authorization-critical",
+    "MedMCQA and Med-PRM remain pending and non-authorization-critical; MedQA remains blocked and non-authorization-critical",
+    "Calibration evidence semantic SHA-256 remains 025d92c2d704dfa3889e267be8fac17037d034b5760e635886c536d198c8c8dc",
+    "ECAL selection semantic SHA-256 remains 3bfb069bfdd3ee50890f97c3e4744024af14cb9c9a62211cca008eb4c5ef9bb8",
+    "FHIR selection semantic SHA-256 remains 79ddfd4336b5b8a8376ff9761d40ae46fe890eef9962bc6205e8622533b85b9a",
+    "Selected FHIR representation remains canonical-structured with semantic SHA-256 10665e1fec0be7ec6d2bf6e3710f54b26ded79a16dc48d032a15c8862112963b",
+    "Coverage targets remain exactly 0.50, 0.80, and 0.90",
+    "Hardware protocol remains p08-hardware-stratified-v0.1",
+    "Multiplicity policy remains holm-primary-family-v0.1",
+    "Authorization artifact binds no-post-test-tuning, failure-accounting, and zero-founder-cost requirements",
+    "Authorization artifact has an explicit primary authorized benchmark scope and explicit non-authorization/secondary scope",
+    "Authorization digest is computed deterministically with the digest field null/omitted and verifies fail closed",
+    "Branch-local authorization does not permit inference; authorization becomes effective only after canonical merge and successful post-main verification",
+    "No final-test inference occurs anywhere in SG-000021",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI passes before authorization merge",
+    "Checksum-pinned Alibaba OpenCodeReview binds the exact PR base/head range",
+    "Secure TypeSafe Jev exact-diff review passes with complete coverage and zero blocking findings",
+    "Authorization merges with normal merge semantics and an exact expected-head guard",
+    "Post-main authorization qualification succeeds",
+    "A separate canonical closeout is required before SG-000021 becomes PROVEN",
+    "A later execution grain is required before any final-test inference begins"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000021.json",
+    "docs/research/P08_FINAL_TEST_AUTHORIZATION_PROTOCOL.md",
+    "registry/p08_final_test_authorization_contract_sg000021.json",
+    "registry/p08_final_test_authorization_sg000021.json",
+    "scripts/qualify_p08_final_test_authorization.py",
+    "specs/CURRENT.md",
+    "specs/tasks.md",
+    "src/gaxbench/p08_authorization.py",
+    "tests/test_p08_authorization.py"
+  ],
+  "risk": {
+    "level": "critical",
+    "recovery": "Revert SG-000021 authorization changes. Treat final-test access as sealed unless the canonical authorization artifact independently verifies from main after successful post-main qualification."
+  },
+  "evidence": {
+    "required": [
+      "issue-78-research-contract",
+      "sg000020-canonical-closeout",
+      "sg000020-post-closeout-ci-pass",
+      "authorization-candidate-binding",
+      "required-system-digest-binding",
+      "paper-checkpoint-binding",
+      "pubmedqa-final-test-identity-binding",
+      "native-abstention-final-test-identity-binding",
+      "fhir-agentbench-final-test-identity-binding",
+      "non-authorization-benchmark-scope",
+      "calibration-ecal-fhir-binding",
+      "coverage-hardware-multiplicity-binding",
+      "failure-accounting-and-no-post-test-tuning-binding",
+      "zero-founder-cost-binding",
+      "authorization-digest-verification",
+      "zero-final-test-inference-during-authorization",
+      "exact-head-cross-platform-ci-pass",
+      "alibaba-ocr-exact-range-delegation-evidence",
+      "jev-exact-diff-review-evidence",
+      "authorization-pr-pass",
+      "post-main-authorization-pass",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 78,
+    "canonical_dependency": "ebe981db8b2554a2b52037b8d3cdfc48ef42ba78",
+    "canonical_dependency_post_main_ci_run": 36839981925,
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
+    "activation_final_test_access": "sealed",
+    "authorization_effective_only_after_canonical_merge_and_post_main_verification": true,
+    "authorization_candidate_sha256": "3f4000cb5616578332a85d00aeda18e120c2b959d59e32375696cd53486b5484",
+    "paper_checkpoint_sha256": "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+    "required_system_bundle_digests": {
+      "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
+      "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+      "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    },
+    "required_datasets": {
+      "pubmedqa-pqal": {
+        "source_revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
+        "source_sha256": "8b3276be8942ebbd77f3ddcda12c1749bf0e490045a736fd8438ee40cf37a41d",
+        "split_manifest_sha256": "7f5c65b88161911179fd95b372e615d802ba6558bc8bc64661bb447b38ed7723",
+        "leakage_audit_sha256": "7a8a576c0485b351190b58a49ac6662e614470b5b414a0d437ca761da3e76443",
+        "final_test_count": 500
+      },
+      "gax-native-abstention-pqal": {
+        "source_revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
+        "role_manifest_sha256": "d64bfdf057afeaae35fb4209a8513dfc48a6c52e2abd08260dbf111afec1474f",
+        "membership_sha256": "7ce6787ef0d9c936cf11b39a13e8d73b8e740e1555ec5167ff6badb1a8b8bdc0",
+        "leakage_audit_sha256": "e4c105bb1315138310f9b10432430fc753f5d0bfa87d8378dad97399a37cb8d8",
+        "final_test_count": 1000
+      },
+      "fhir-agentbench": {
+        "source_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+        "source_sha256": "e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0",
+        "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+        "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+        "leakage_audit_sha256": "1e45851f334cf5ab0522ac96766080566cb7609462d6917d625814a5612c6490",
+        "final_test_count": 173,
+        "final_test_patient_count": 40
+      }
+    },
+    "sg000020_evidence": {
+      "calibration_evidence_sha256": "025d92c2d704dfa3889e267be8fac17037d034b5760e635886c536d198c8c8dc",
+      "ecal_selection_sha256": "3bfb069bfdd3ee50890f97c3e4744024af14cb9c9a62211cca008eb4c5ef9bb8",
+      "fhir_selection_sha256": "79ddfd4336b5b8a8376ff9761d40ae46fe890eef9962bc6205e8622533b85b9a",
+      "selected_fhir_representation": "canonical-structured",
+      "selected_fhir_representation_sha256": "10665e1fec0be7ec6d2bf6e3710f54b26ded79a16dc48d032a15c8862112963b"
+    },
+    "coverage_targets": [0.5, 0.8, 0.9],
+    "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+    "multiplicity_policy": "holm-primary-family-v0.1",
+    "non_authorization_surfaces": [
+      "medagentbench-official-runtime",
+      "medqabstain",
+      "medmcqa",
+      "medqa",
+      "med-prm"
+    ],
+    "review_tools": {
+      "alibaba_open_code_review": "checksum-pinned exact-range delegation/accounting",
+      "jev": "secure TypeSafe Jev exact-diff semantic review"
+    },
+    "safety": {
+      "final_test_inference_during_grain_forbidden": true,
+      "test_tuning_forbidden": true,
+      "architecture_reopening_forbidden": true,
+      "paid_founder_compute_forbidden": true
+    }
+  }
+}
