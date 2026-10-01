@@ -1,10 +1,17 @@
 {
   "canonical_sources": [
     "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
     "registry/p08_sg000023_derivation_contract.json"
   ],
   "grain_id": "SG-000023",
   "mandatory_warning": "The paper system has unsafe_commit_rate=1.0 at frozen target coverages 0.8 and 0.9; these negative outcomes must remain visible.",
+  "paper_control_action_identity": {
+    "identical_action_correctness_rows": 1000,
+    "identical_selection_score_rows": 0,
+    "interpretation": "exact equality counts over raw final rows; descriptive only",
+    "rows": 1000
+  },
   "primary_comparison": {
     "benchmark": "gax-native-abstention-pqal",
     "direction": "paper-minus-control; lower-is-better",

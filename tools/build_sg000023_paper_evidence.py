@@ -18,6 +18,7 @@ ECAL_PATH = ROOT / "registry" / "p08_ecal_selection_ledger_sg000020.json"
 FHIR_SELECTION_PATH = ROOT / "registry" / "p08_fhir_selection_ledger_sg000020.json"
 DEFAULT_OUTPUT = ROOT / "registry" / "p08_sg000023_paper_evidence"
 RELATED_WORK_PATH = ROOT / "registry" / "p08_sg000023_related_work_refresh.json"
+P04_LEDGER_PATH = ROOT / "experiments" / "p04" / "decision_ledger.json"
 
 MANIFEST_PATH = FINAL_ROOT / "manifest.json"
 METRICS_PATH = FINAL_ROOT / "metrics.json"
@@ -47,6 +48,7 @@ FROZEN_SOURCE_SHA256: dict[Path, str] = {
     RAW_NATIVE_PATH: "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da",
     RAW_PUBMED_PATH: "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9",
     SUMMARY_PATH: "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
+    P04_LEDGER_PATH: "fe0f1e1855f1e53263849dc595bd73aa839cfce2df3035f09727b366ce08de13",
     RELATED_WORK_PATH: "4bdb130f470a5913d5ee71d56127bf8e95873ce09411410d683e9d8017421c4c",
 }
 
@@ -61,21 +63,31 @@ BASE_ARTIFACT_NAMES: tuple[str, ...] = (
     "reliability_source_data.json",
     "risk_coverage_source_data.json",
     "fhir_block_table.json",
+    "ecal_selection_table.json",
     "qualitative_examples.json",
     "evidence_packets.json",
     "claim_ledger.json",
+    "figure_reliability.svg",
+    "figure_risk_coverage.svg",
 )
 ARTIFACT_NAMES: tuple[str, ...] = (*BASE_ARTIFACT_NAMES, PROVENANCE_INDEX_NAME)
+
+# SVG figures are rendered only from their figure source-data artifact, never from raw evidence.
+FIGURE_SOURCES: dict[str, str] = {
+    "figure_reliability.svg": "reliability_source_data.json",
+    "figure_risk_coverage.svg": "risk_coverage_source_data.json",
+}
 
 # Exact canonical inputs read by each derivation. Derivations receive a view restricted to
 # these paths; reading an undeclared path or declaring an unread path fails the build.
 ARTIFACT_INPUTS: dict[str, tuple[Path, ...]] = {
-    "main_results.json": (METRICS_PATH, CONTRACT_PATH),
-    "selective_results.json": (METRICS_PATH, CONTRACT_PATH),
+    "main_results.json": (METRICS_PATH, CONTRACT_PATH, RAW_PUBMED_PATH),
+    "selective_results.json": (METRICS_PATH, CONTRACT_PATH, RAW_NATIVE_PATH),
     "evidence_boundaries.json": (MATRIX_PATH,),
     "reliability_source_data.json": (RAW_PUBMED_PATH, METRICS_PATH, CONTRACT_PATH, MANIFEST_PATH),
     "risk_coverage_source_data.json": (RAW_NATIVE_PATH, METRICS_PATH, CONTRACT_PATH),
     "fhir_block_table.json": (RAW_FHIR_PATH,),
+    "ecal_selection_table.json": (ECAL_PATH, P04_LEDGER_PATH),
     "qualitative_examples.json": (
         RAW_PUBMED_PATH,
         RAW_LAYA_PATH,
@@ -85,15 +97,21 @@ ARTIFACT_INPUTS: dict[str, tuple[Path, ...]] = {
     ),
     "evidence_packets.json": (MATRIX_PATH,),
     "claim_ledger.json": (
+        RAW_PUBMED_PATH,
+        RAW_NATIVE_PATH,
         METRICS_PATH,
         MANIFEST_PATH,
         RAW_FHIR_PATH,
         CONTRACT_PATH,
         MATRIX_PATH,
         RELATED_WORK_PATH,
+        ECAL_PATH,
+        P04_LEDGER_PATH,
     ),
     PROVENANCE_INDEX_NAME: tuple(FROZEN_SOURCE_SHA256),
 }
+for _figure, _source in FIGURE_SOURCES.items():
+    ARTIFACT_INPUTS[_figure] = ARTIFACT_INPUTS[_source]
 
 PENDING_PACKET_STATUS = "declared-pending-later-stage"
 # Literature evidence may only remove or narrow claims; it never supports an exportable claim.
@@ -131,9 +149,9 @@ PACKET_SPECS: tuple[dict[str, Any], ...] = (
         "packet_id": "EP-SG23-ECAL-001",
         "matrix_row_id": "ecal-reporting",
         "status": "supported-development-calibration-only",
-        "derived_artifacts": [],
-        "supporting_sources": [ECAL_PATH, CALIBRATION_PATH],
-        "scope": "frozen ECAL selection; no new final-test ECAL ablation",
+        "derived_artifacts": ["ecal_selection_table.json"],
+        "supporting_sources": [CALIBRATION_PATH],
+        "scope": "frozen ECAL selection ledger and P04 development status only; no measured ECAL benefit and no final-test ECAL ablation",
     },
     {
         "packet_id": "EP-SG23-FHIR-BLOCK-001",
@@ -160,6 +178,7 @@ PACKET_SPECS: tuple[dict[str, Any], ...] = (
             "selective_results.json",
             "evidence_boundaries.json",
             "fhir_block_table.json",
+            "ecal_selection_table.json",
         ],
         "supporting_sources": [],
         "scope": "paper-table source data with blocked/null outcomes preserved",
@@ -168,9 +187,14 @@ PACKET_SPECS: tuple[dict[str, Any], ...] = (
         "packet_id": "EP-SG23-FIGURES-001",
         "matrix_row_id": "paper-figures",
         "status": "supported",
-        "derived_artifacts": ["reliability_source_data.json", "risk_coverage_source_data.json"],
+        "derived_artifacts": [
+            "reliability_source_data.json",
+            "risk_coverage_source_data.json",
+            "figure_reliability.svg",
+            "figure_risk_coverage.svg",
+        ],
         "supporting_sources": [],
-        "scope": "paper-figure source data without smoothing or threshold refit",
+        "scope": "paper-figure source data and SVG figures rendered from it without smoothing or threshold refit",
     },
     {
         "packet_id": "EP-SG23-PACKETS-INDEX",
@@ -220,6 +244,14 @@ def _load(path: Path) -> Any:
 
 def _dump(payload: Any) -> str:
     return json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+
+
+def _serialize(name: str, payload: Any) -> str:
+    if name.endswith(".svg"):
+        if not isinstance(payload, str):
+            raise TypeError(f"{name} must be rendered SVG text")
+        return payload
+    return _dump(payload)
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -327,6 +359,40 @@ def _primary_comparison(metrics: dict[str, Any], benchmark: str, metric: str) ->
     )
 
 
+def _pubmed_identity(raw_pubmed: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "rows": len(raw_pubmed),
+        "identical_action_probability_rows": sum(
+            1
+            for row in raw_pubmed
+            if row["paper_action_probabilities"] == row["clinical_control_action_probabilities"]
+        ),
+        "identical_predicted_action_rows": sum(
+            1
+            for row in raw_pubmed
+            if row["paper_predicted_action"] == row["clinical_control_predicted_action"]
+        ),
+        "interpretation": "exact equality counts over raw final rows; descriptive only",
+    }
+
+
+def _native_identity(raw_native: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "rows": len(raw_native),
+        "identical_action_correctness_rows": sum(
+            1
+            for row in raw_native
+            if bool(row["paper_action_correct"]) == bool(row["clinical_control_action_correct"])
+        ),
+        "identical_selection_score_rows": sum(
+            1
+            for row in raw_native
+            if row["paper_selection_score"] == row["clinical_control_selection_score"]
+        ),
+        "interpretation": "exact equality counts over raw final rows; descriptive only",
+    }
+
+
 def _main_results(src: SourceView) -> dict[str, Any]:
     metrics = src[METRICS_PATH]
     spec = src[CONTRACT_PATH]["paper_outputs"]["main_results_table"]
@@ -342,6 +408,7 @@ def _main_results(src: SourceView) -> dict[str, Any]:
         "rows": rows,
         "primary_comparison": comparison,
         "primary_comparison_display": _comparison_display(comparison),
+        "paper_control_action_identity": _pubmed_identity(src[RAW_PUBMED_PATH]),
         "claim_boundary": {
             "superiority": "not-claimed",
             "significance": "not-claimed",
@@ -390,6 +457,7 @@ def _selective_results(src: SourceView) -> dict[str, Any]:
         "rows": rows,
         "primary_comparison": comparison,
         "primary_comparison_display": _comparison_display(comparison),
+        "paper_control_action_identity": _native_identity(src[RAW_NATIVE_PATH]),
         "mandatory_warning": (
             "The paper system has unsafe_commit_rate=1.0 at frozen target coverages 0.8 and 0.9; "
             "these negative outcomes must remain visible."
@@ -725,6 +793,172 @@ def _qualitative(src: SourceView) -> dict[str, Any]:
     }
 
 
+def _ecal_selection(src: SourceView) -> dict[str, Any]:
+    ecal = src[ECAL_PATH]
+    p04 = src[P04_LEDGER_PATH]
+    if ecal["checkpoint_mutated"] is not False or ecal["final_test_access"] != "sealed":
+        raise ValueError("ECAL selection ledger violates the frozen-checkpoint boundary")
+    p04_status = [
+        {
+            "component": row["id"],
+            "mechanistic_status": row["mechanistic_status"],
+            "paper_decision": row["paper_decision"],
+            "development_gate": row["development_gate"],
+        }
+        for row in p04["components"]
+    ]
+    measured = [
+        row["component"] for row in p04_status if row["paper_decision"] != "defer-real-data"
+    ]
+    return {
+        "schema_version": "0.1",
+        "grain_id": "SG-000023",
+        "table_id": "sg23-ecal-selection-v0.1",
+        "selection_scope": ecal["selection_scope"],
+        "paper_checkpoint_sha256": ecal["paper_checkpoint_sha256"],
+        "checkpoint_mutated": ecal["checkpoint_mutated"],
+        "final_test_access": ecal["final_test_access"],
+        "selection_rows": [
+            {
+                "component": row["component"],
+                "decision": row["decision"],
+                "canonical_mapping": row["canonical_mapping"],
+                "requires_retraining_or_checkpoint_mutation": row[
+                    "requires_retraining_or_checkpoint_mutation"
+                ],
+                "rationale": row["rationale"],
+            }
+            for row in ecal["decisions"]
+        ],
+        "p04_development_status": p04_status,
+        "components_with_real_data_development_decision": measured,
+        "measured_ecal_benefit": None,
+        "boundary": (
+            "Keep/reject decisions reflect compatibility with the frozen paper checkpoint, not a "
+            "measured ablation benefit. Canonical P04 evidence defers every paper-level ECAL "
+            "decision to real development data, and no final-test ECAL ablation exists."
+        ),
+    }
+
+
+def _svg_axes(title: str, x_label: str, y_label: str) -> list[str]:
+    parts = [
+        '<rect x="60" y="40" width="400" height="400" fill="none" stroke="#000000" stroke-width="1"/>',
+        f'<text x="260" y="24" text-anchor="middle" font-family="sans-serif" font-size="14">{title}</text>',
+        f'<text x="260" y="480" text-anchor="middle" font-family="sans-serif" font-size="12">{x_label}</text>',
+        f'<text x="18" y="240" text-anchor="middle" font-family="sans-serif" font-size="12" transform="rotate(-90 18 240)">{y_label}</text>',
+    ]
+    for tick in range(6):
+        value = tick / 5
+        x = _x(value)
+        y = _y(value)
+        parts.append(
+            f'<line x1="{x}" y1="440" x2="{x}" y2="445" stroke="#000000" stroke-width="1"/>'
+        )
+        parts.append(
+            f'<text x="{x}" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">{value:.1f}</text>'
+        )
+        parts.append(f'<line x1="55" y1="{y}" x2="60" y2="{y}" stroke="#000000" stroke-width="1"/>')
+        parts.append(
+            f'<text x="50" y="{y}" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">{value:.1f}</text>'
+        )
+    return parts
+
+
+def _x(value: float) -> str:
+    return f"{60 + 400 * value:.2f}"
+
+
+def _y(value: float) -> str:
+    return f"{440 - 400 * value:.2f}"
+
+
+SYSTEM_STYLE = {
+    "paper": ("#1f4e9c", "DAL paper system"),
+    "clinical_control": ("#c2410c", "clinical control"),
+}
+
+
+def _svg_document(body: list[str], source_name: str, source_digest: str, note: str) -> str:
+    lines = [
+        '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="540" viewBox="0 0 520 540">',
+        f"<metadata>source={source_name} source_sha256={source_digest} grain=SG-000023</metadata>",
+        '<rect x="0" y="0" width="520" height="540" fill="#ffffff"/>',
+        *body,
+        f'<text x="260" y="525" text-anchor="middle" font-family="sans-serif" font-size="10">{note}</text>',
+        "</svg>",
+    ]
+    return chr(10).join(lines) + chr(10)
+
+
+def _legend(systems: list[str]) -> list[str]:
+    parts = []
+    for index, system_id in enumerate(systems):
+        color, label = SYSTEM_STYLE[system_id]
+        y = 60 + 16 * index
+        parts.append(
+            f'<line x1="300" y1="{y}" x2="320" y2="{y}" stroke="{color}" stroke-width="2"/>'
+        )
+        parts.append(
+            f'<text x="326" y="{y}" dominant-baseline="middle" font-family="sans-serif" font-size="11">{label}</text>'
+        )
+    return parts
+
+
+def _render_reliability(source: dict[str, Any], digest: str) -> str:
+    body = _svg_axes("Reliability (PubMedQA final rows)", "mean confidence", "accuracy")
+    body.append(
+        f'<line x1="{_x(0)}" y1="{_y(0)}" x2="{_x(1)}" y2="{_y(1)}" stroke="#888888" stroke-width="1" stroke-dasharray="4 4"/>'
+    )
+    systems = []
+    for system in source["systems"]:
+        color, _ = SYSTEM_STYLE[system["system_id"]]
+        systems.append(system["system_id"])
+        points = [
+            (row["mean_confidence"], row["accuracy"]) for row in system["bins"] if row["count"] > 0
+        ]
+        path = " ".join(f"{_x(conf)},{_y(acc)}" for conf, acc in points)
+        body.append(f'<polyline points="{path}" fill="none" stroke="{color}" stroke-width="1.5"/>')
+        for conf, acc in points:
+            body.append(f'<circle cx="{_x(conf)}" cy="{_y(acc)}" r="3" fill="{color}"/>')
+    body.extend(_legend(systems))
+    return _svg_document(
+        body,
+        FIGURE_SOURCES["figure_reliability.svg"],
+        digest,
+        "15 equal-width bins; empty bins omitted; Laya excluded (uncalibrated confidence)",
+    )
+
+
+def _render_risk_coverage(source: dict[str, Any], digest: str) -> str:
+    body = _svg_axes("Risk-coverage (native abstention final rows)", "coverage", "selective risk")
+    for target in (0.5, 0.8, 0.9):
+        body.append(
+            f'<line x1="{_x(target)}" y1="{_y(0)}" x2="{_x(target)}" y2="{_y(1)}" stroke="#bbbbbb" stroke-width="1" stroke-dasharray="2 3"/>'
+        )
+    systems = []
+    for system in source["systems"]:
+        color, _ = SYSTEM_STYLE[system["system_id"]]
+        systems.append(system["system_id"])
+        path = " ".join(
+            f"{_x(point['coverage'])},{_y(point['risk'])}" for point in system["points"]
+        )
+        body.append(f'<polyline points="{path}" fill="none" stroke="{color}" stroke-width="1.5"/>')
+    body.extend(_legend(systems))
+    return _svg_document(
+        body,
+        FIGURE_SOURCES["figure_risk_coverage.svg"],
+        digest,
+        "unsmoothed prefix curves by frozen selection score; dotted lines mark coverage 0.5/0.8/0.9",
+    )
+
+
+FIGURE_RENDERERS: dict[str, Callable[[dict[str, Any], str], str]] = {
+    "figure_reliability.svg": _render_reliability,
+    "figure_risk_coverage.svg": _render_risk_coverage,
+}
+
+
 def _matrix_packet_ids(matrix: dict[str, Any]) -> list[str]:
     return [packet_id for row in matrix["rows"] for packet_id in row["evidence_packet_ids"]]
 
@@ -804,6 +1038,17 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
         f"{row['candidate_claim']} ({row['dal_evidence']})"
         for row in related_work["novelty_disposition"]
         if row["disposition"] == "narrowed-to-descriptive"
+    ]
+    pubmed_identity = _pubmed_identity(src[RAW_PUBMED_PATH])
+    native_identity = _native_identity(src[RAW_NATIVE_PATH])
+    if (
+        pubmed_identity["identical_action_probability_rows"] != pubmed_identity["rows"]
+        or native_identity["identical_action_correctness_rows"] != native_identity["rows"]
+    ):
+        raise ValueError("SG23-C014 wording requires full paper/control action identity")
+    p04_decisions = sorted({row["paper_decision"] for row in src[P04_LEDGER_PATH]["components"]})
+    ecal_kept = [
+        row["component"] for row in src[ECAL_PATH]["decisions"] if row["decision"] == "keep"
     ]
     retained = [
         row
@@ -923,6 +1168,22 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
             [RELATED_WORK_PATH],
         ),
         _claim(
+            "SG23-C014",
+            "supported-descriptive-only",
+            True,
+            f"The paper system and the clinical control emitted identical action-probability vectors on {pubmed_identity['identical_action_probability_rows']} of {pubmed_identity['rows']} frozen PubMedQA rows and identical action correctness on {native_identity['identical_action_correctness_rows']} of {native_identity['rows']} native-abstention rows; the compared systems differ in selection scores ({native_identity['identical_selection_score_rows']} identical score rows), so the PubMedQA comparison isolates no action-selection difference.",
+            "EP-SG23-TABLES-001",
+            [RAW_PUBMED_PATH, RAW_NATIVE_PATH],
+        ),
+        _claim(
+            "SG23-C013",
+            "unavailable",
+            False,
+            f"An ECAL benefit is not established: the frozen selection kept {', '.join(ecal_kept)} for compatibility with the frozen paper checkpoint rather than for a measured ablation benefit, canonical P04 paper decisions are {', '.join(p04_decisions)}, and no final-test ECAL ablation exists.",
+            "EP-SG23-ECAL-001",
+            [ECAL_PATH, P04_LEDGER_PATH],
+        ),
+        _claim(
             "SG23-C012",
             "candidate-scoped-description",
             False,
@@ -946,6 +1207,7 @@ DERIVATIONS: dict[str, Callable[[SourceView], dict[str, Any]]] = {
     "reliability_source_data.json": _reliability,
     "risk_coverage_source_data.json": _risk_coverage,
     "fhir_block_table.json": _fhir_block,
+    "ecal_selection_table.json": _ecal_selection,
     "qualitative_examples.json": _qualitative,
     "evidence_packets.json": _evidence_packets,
     "claim_ledger.json": _claim_ledger,
@@ -955,6 +1217,11 @@ DERIVATIONS: dict[str, Callable[[SourceView], dict[str, Any]]] = {
 def _build_base_artifacts(loaded: Mapping[Path, Any]) -> dict[str, Any]:
     artifacts: dict[str, Any] = {}
     for name in BASE_ARTIFACT_NAMES:
+        if name in FIGURE_SOURCES:
+            source_name = FIGURE_SOURCES[name]
+            digest = _sha256_bytes(_dump(artifacts[source_name]).encode("utf-8"))
+            artifacts[name] = FIGURE_RENDERERS[name](artifacts[source_name], digest)
+            continue
         inputs = ARTIFACT_INPUTS[name]
         view = SourceView(loaded, inputs)
         payload = DERIVATIONS[name](view)
@@ -971,7 +1238,7 @@ def _build_base_artifacts(loaded: Mapping[Path, Any]) -> dict[str, Any]:
 def _provenance_index(artifacts: dict[str, Any]) -> dict[str, Any]:
     source_digests = {_rel(path): digest for path, digest in sorted(FROZEN_SOURCE_SHA256.items())}
     artifact_digests = {
-        filename: _sha256_bytes(_dump(artifacts[filename]).encode("utf-8"))
+        filename: _sha256_bytes(_serialize(filename, artifacts[filename]).encode("utf-8"))
         for filename in BASE_ARTIFACT_NAMES
     }
     return {
@@ -1036,7 +1303,11 @@ def validate_package(artifacts: dict[str, Any], matrix: dict[str, Any]) -> list[
                 errors.append(f"packet {packet['packet_id']} binds unknown artifact {name}")
                 continue
             covered.add(name)
-            actual = artifacts[name]["canonical_sources"]
+            actual = (
+                artifacts[FIGURE_SOURCES[name]]["canonical_sources"]
+                if name in FIGURE_SOURCES
+                else artifacts[name]["canonical_sources"]
+            )
             if not set(actual) <= set(packet["canonical_sources"]):
                 errors.append(f"packet {packet['packet_id']} omits sources of {name}")
     uncovered = set(ARTIFACT_NAMES) - covered
@@ -1090,14 +1361,18 @@ def build_artifacts() -> dict[str, Any]:
 def write_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     for filename, payload in artifacts.items():
-        (output_dir / filename).write_text(_dump(payload), encoding="utf-8", newline="\n")
+        (output_dir / filename).write_text(
+            _serialize(filename, payload), encoding="utf-8", newline="\n"
+        )
 
 
 def check_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     expected_names = set(artifacts)
     actual_names = (
-        {path.name for path in output_dir.glob("*.json")} if output_dir.is_dir() else set()
+        {path.name for path in output_dir.iterdir() if path.is_file()}
+        if output_dir.is_dir()
+        else set()
     )
     if actual_names != expected_names:
         errors.append(
@@ -1108,7 +1383,7 @@ def check_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> list[str]:
         if not path.is_file():
             errors.append(f"missing artifact: {filename}")
             continue
-        expected = _dump(payload)
+        expected = _serialize(filename, payload)
         actual = path.read_text(encoding="utf-8")
         if actual != expected:
             errors.append(f"artifact differs from deterministic rebuild: {filename}")

@@ -41,7 +41,12 @@ def _matrix() -> dict[str, Any]:
 
 
 def _committed_package() -> dict[str, Any]:
-    return {name: _load(name) for name in BUILDER.ARTIFACT_NAMES}
+    return {
+        name: (EVIDENCE / name).read_text(encoding="utf-8")
+        if name in BUILDER.FIGURE_SOURCES
+        else _load(name)
+        for name in BUILDER.ARTIFACT_NAMES
+    }
 
 
 def test_paper_evidence_is_deterministically_rebuildable() -> None:
@@ -57,7 +62,9 @@ def test_paper_evidence_is_deterministically_rebuildable() -> None:
 
 
 def test_paper_evidence_catalog_matches_shared_inventory() -> None:
-    assert {path.name for path in EVIDENCE.glob("*.json")} == set(BUILDER.ARTIFACT_NAMES)
+    assert {path.name for path in EVIDENCE.iterdir() if path.is_file()} == set(
+        BUILDER.ARTIFACT_NAMES
+    )
 
 
 def test_frozen_sources_match_pins_and_final_manifest() -> None:
@@ -102,8 +109,10 @@ def test_packet_sources_cover_every_derived_artifact_input() -> None:
     package = _committed_package()
     for packet in package["evidence_packets.json"]["packets"]:
         for name in packet["derived_artifacts"]:
-            assert set(package[name]["canonical_sources"]) <= set(packet["canonical_sources"])
-            assert set(package[name]["canonical_sources"]) <= set(packet["derivation_inputs"])
+            source_name = BUILDER.FIGURE_SOURCES.get(name, name)
+            sources = set(package[source_name]["canonical_sources"])
+            assert sources <= set(packet["canonical_sources"])
+            assert sources <= set(packet["derivation_inputs"])
     reliability_packets = [
         packet
         for packet in package["evidence_packets.json"]["packets"]
@@ -256,3 +265,40 @@ def test_provenance_index_binds_sources_and_derived_artifacts() -> None:
         path.relative_to(ROOT).as_posix(): digest
         for path, digest in BUILDER.FROZEN_SOURCE_SHA256.items()
     }
+
+
+def test_ecal_table_reports_compatibility_selection_without_benefit() -> None:
+    table = _load("ecal_selection_table.json")
+    assert table["checkpoint_mutated"] is False
+    assert table["final_test_access"] == "sealed"
+    assert table["measured_ecal_benefit"] is None
+    assert table["components_with_real_data_development_decision"] == []
+    assert {row["paper_decision"] for row in table["p04_development_status"]} == {"defer-real-data"}
+    assert "not a measured ablation benefit" in table["boundary"]
+    claims = {row["claim_id"]: row for row in _load("claim_ledger.json")["claims"]}
+    assert claims["SG23-C013"]["status"] == "unavailable"
+    assert claims["SG23-C013"]["exportable"] is False
+    assert claims["SG23-C013"]["evidence_packet_id"] == "EP-SG23-ECAL-001"
+
+
+def test_paper_and_control_action_identity_is_reported() -> None:
+    main = _load("main_results.json")["paper_control_action_identity"]
+    assert main["identical_action_probability_rows"] == main["rows"] == 500
+    native = _load("selective_results.json")["paper_control_action_identity"]
+    assert native["identical_action_correctness_rows"] == native["rows"] == 1000
+    assert native["identical_selection_score_rows"] < native["rows"]
+    claims = {row["claim_id"]: row for row in _load("claim_ledger.json")["claims"]}
+    assert claims["SG23-C014"]["evidence_packet_id"] == "EP-SG23-TABLES-001"
+    assert "isolates no action-selection difference" in claims["SG23-C014"]["text"]
+
+
+def test_figures_are_rendered_from_source_data_and_bind_its_digest() -> None:
+    package = _committed_package()
+    for figure, source in BUILDER.FIGURE_SOURCES.items():
+        svg = package[figure]
+        assert svg.startswith("<svg ")
+        assert svg.rstrip().endswith("</svg>")
+        digest = BUILDER._sha256_bytes(BUILDER._dump(package[source]).encode("utf-8"))
+        assert f"source={source} source_sha256={digest}" in svg
+    assert "Laya excluded" in package["figure_reliability.svg"]
+    assert "laya" not in package["figure_reliability.svg"].replace("Laya excluded", "")

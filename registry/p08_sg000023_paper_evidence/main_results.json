@@ -1,6 +1,7 @@
 {
   "canonical_sources": [
     "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
     "registry/p08_sg000023_derivation_contract.json"
   ],
   "claim_boundary": {
@@ -10,6 +11,12 @@
     "superiority": "not-claimed"
   },
   "grain_id": "SG-000023",
+  "paper_control_action_identity": {
+    "identical_action_probability_rows": 500,
+    "identical_predicted_action_rows": 500,
+    "interpretation": "exact equality counts over raw final rows; descriptive only",
+    "rows": 500
+  },
   "primary_comparison": {
     "benchmark": "pubmedqa-pqal",
     "direction": "paper-minus-control",

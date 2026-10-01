@@ -13,6 +13,7 @@
       ],
       "derivation_inputs": [
         "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
@@ -81,19 +82,24 @@
     },
     {
       "canonical_sources": [
+        "experiments/p04/decision_ledger.json",
         "registry/p08_calibration_evidence_sg000020.json",
         "registry/p08_ecal_selection_ledger_sg000020.json"
       ],
-      "derivation_inputs": [],
-      "derived_artifacts": [],
+      "derivation_inputs": [
+        "experiments/p04/decision_ledger.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json"
+      ],
+      "derived_artifacts": [
+        "ecal_selection_table.json"
+      ],
       "matrix_row_id": "ecal-reporting",
       "matrix_row_status": "available",
       "packet_id": "EP-SG23-ECAL-001",
-      "scope": "frozen ECAL selection; no new final-test ECAL ablation",
+      "scope": "frozen ECAL selection ledger and P04 development status only; no measured ECAL benefit and no final-test ECAL ablation",
       "status": "supported-development-calibration-only",
       "supporting_sources": [
-        "registry/p08_calibration_evidence_sg000020.json",
-        "registry/p08_ecal_selection_ledger_sg000020.json"
+        "registry/p08_calibration_evidence_sg000020.json"
       ]
     },
     {
@@ -145,14 +151,22 @@
     },
     {
       "canonical_sources": [
+        "experiments/p04/decision_ledger.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json",
         "registry/p08_sg000023_evidence_availability_matrix.json"
       ],
       "derivation_inputs": [
+        "experiments/p04/decision_ledger.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json",
         "registry/p08_sg000023_evidence_availability_matrix.json"
       ],
@@ -160,7 +174,8 @@
         "main_results.json",
         "selective_results.json",
         "evidence_boundaries.json",
-        "fhir_block_table.json"
+        "fhir_block_table.json",
+        "ecal_selection_table.json"
       ],
       "matrix_row_id": "paper-tables",
       "matrix_row_status": "available",
@@ -186,17 +201,20 @@
       ],
       "derived_artifacts": [
         "reliability_source_data.json",
-        "risk_coverage_source_data.json"
+        "risk_coverage_source_data.json",
+        "figure_reliability.svg",
+        "figure_risk_coverage.svg"
       ],
       "matrix_row_id": "paper-figures",
       "matrix_row_status": "available",
       "packet_id": "EP-SG23-FIGURES-001",
-      "scope": "paper-figure source data without smoothing or threshold refit",
+      "scope": "paper-figure source data and SVG figures rendered from it without smoothing or threshold refit",
       "status": "supported",
       "supporting_sources": []
     },
     {
       "canonical_sources": [
+        "experiments/p04/decision_ledger.json",
         "registry/p08_calibration_evidence_sg000020.json",
         "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_fhir_selection_ledger_sg000020.json",
@@ -212,6 +230,7 @@
         "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derivation_inputs": [
+        "experiments/p04/decision_ledger.json",
         "registry/p08_calibration_evidence_sg000020.json",
         "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_fhir_selection_ledger_sg000020.json",
@@ -239,17 +258,25 @@
     },
     {
       "canonical_sources": [
+        "experiments/p04/decision_ledger.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_sg000022_final_evaluation/manifest.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json",
         "registry/p08_sg000023_evidence_availability_matrix.json",
         "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derivation_inputs": [
+        "experiments/p04/decision_ledger.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
         "registry/p08_sg000022_final_evaluation/manifest.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json",
         "registry/p08_sg000023_evidence_availability_matrix.json",
         "registry/p08_sg000023_related_work_refresh.json"

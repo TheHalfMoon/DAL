@@ -1,0 +1,85 @@
+{
+  "boundary": "Keep/reject decisions reflect compatibility with the frozen paper checkpoint, not a measured ablation benefit. Canonical P04 evidence defers every paper-level ECAL decision to real development data, and no final-test ECAL ablation exists.",
+  "canonical_sources": [
+    "experiments/p04/decision_ledger.json",
+    "registry/p08_ecal_selection_ledger_sg000020.json"
+  ],
+  "checkpoint_mutated": false,
+  "components_with_real_data_development_decision": [],
+  "final_test_access": "sealed",
+  "grain_id": "SG-000023",
+  "measured_ecal_benefit": null,
+  "p04_development_status": [
+    {
+      "component": "bidirectional",
+      "development_gate": "Improve the preregistered ranking/generalization metric without a material calibration/selective-risk regression.",
+      "mechanistic_status": "implementation-proven",
+      "paper_decision": "defer-real-data"
+    },
+    {
+      "component": "hard-negative",
+      "development_gate": "Improve hard-candidate discrimination beyond the random-negative control without a material calibration regression.",
+      "mechanistic_status": "implementation-proven",
+      "paper_decision": "defer-real-data"
+    },
+    {
+      "component": "evidence",
+      "development_gate": "Any benefit must survive evidence removal/swap controls and evidence-relation input-invariance tests.",
+      "mechanistic_status": "implementation-proven",
+      "paper_decision": "defer-real-data"
+    },
+    {
+      "component": "proper-scoring",
+      "development_gate": "Improve the declared NLL/Brier calibration criterion while preserving action quality within the preregistered tolerance.",
+      "mechanistic_status": "implementation-proven",
+      "paper_decision": "defer-real-data"
+    },
+    {
+      "component": "replay",
+      "development_gate": "Improve the frozen retention slice while preserving current-task development performance within the declared tolerance.",
+      "mechanistic_status": "implementation-proven",
+      "paper_decision": "defer-real-data"
+    }
+  ],
+  "paper_checkpoint_sha256": "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+  "schema_version": "0.1",
+  "selection_rows": [
+    {
+      "canonical_mapping": "P04 evidence intervention + D03 evidence-delta assurance path",
+      "component": "evidence",
+      "decision": "keep",
+      "rationale": "D03 already contains the frozen evidence-delta assurance mechanism; keeping evidence changes reporting scope only and does not mutate the checkpoint.",
+      "requires_retraining_or_checkpoint_mutation": false
+    },
+    {
+      "canonical_mapping": "P04 hard-negative training objective",
+      "component": "hard-negative",
+      "decision": "reject",
+      "rationale": "Applying the P04 hard-negative objective would require reopening training.",
+      "requires_retraining_or_checkpoint_mutation": true
+    },
+    {
+      "canonical_mapping": "P04 Brier/proper-scoring training objective",
+      "component": "proper-scoring",
+      "decision": "reject",
+      "rationale": "Applying the P04 proper-scoring objective would require reopening training.",
+      "requires_retraining_or_checkpoint_mutation": true
+    },
+    {
+      "canonical_mapping": "P04 replay sampling policy",
+      "component": "replay-retention",
+      "decision": "reject",
+      "rationale": "Replay changes the training schedule and is incompatible with the frozen D03 checkpoint.",
+      "requires_retraining_or_checkpoint_mutation": true
+    },
+    {
+      "canonical_mapping": "No exact same-name canonical component; P04 bidirectional alignment is related",
+      "component": "state-action-contrastive",
+      "decision": "reject",
+      "rationale": "The candidate lacks an exact canonical D03 mapping and the related P04 alignment objective would require retraining; silent renaming is forbidden.",
+      "requires_retraining_or_checkpoint_mutation": true
+    }
+  ],
+  "selection_scope": "paper-mechanism-reporting-freeze-not-paper-checkpoint-mutation",
+  "table_id": "sg23-ecal-selection-v0.1"
+}

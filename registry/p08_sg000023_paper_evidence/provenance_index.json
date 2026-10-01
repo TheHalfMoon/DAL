@@ -6,24 +6,31 @@
     "reliability_source_data.json",
     "risk_coverage_source_data.json",
     "fhir_block_table.json",
+    "ecal_selection_table.json",
     "qualitative_examples.json",
     "evidence_packets.json",
     "claim_ledger.json",
+    "figure_reliability.svg",
+    "figure_risk_coverage.svg",
     "provenance_index.json"
   ],
   "artifact_sha256": {
-    "claim_ledger.json": "c8a28eadb97882ce5c0dd21f42e1bcd485a25065cbb5369679e4f259c7c9b2c1",
+    "claim_ledger.json": "b7e78ba6ce793f2139e01e45b3fd9d0c3160e259208541676ba73206fb5a6028",
+    "ecal_selection_table.json": "1e977fa161fb1fbac5a805a7dff3dee7a943868415f3241cf5829824901f4078",
     "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
-    "evidence_packets.json": "95c713ae59ce83a48bcc4d7483ad52b04b17587d63463bd9e95a3dc216e8fb4f",
+    "evidence_packets.json": "d9dd8f7a51db0648327eb485bb11aefe36e05d3e2332edb4df87fea3667069e6",
     "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
-    "main_results.json": "402817ff58d3113ba6ddccedd28fc430f03a0e763fa1d416472f134a652b2797",
+    "figure_reliability.svg": "68efc9d5844f50f9e6b60ff109746ef353f977f03000ddd936652b90d7787074",
+    "figure_risk_coverage.svg": "1e54a247f5f451c6d4a9c56350568e459da356cafd394ca0a72431fcc5a6e0de",
+    "main_results.json": "b40bc314bb5fdcfa6447d5174b7b71bb65f680e1573c517c8bcd488561bd3dec",
     "qualitative_examples.json": "14351ed417da3c9b086423aa1726dc7f8dad1cb26e3403c5edb48b83e4d3fb91",
     "reliability_source_data.json": "c08450e439f479670e111a983be261a33671ea8f44d2c366799a4bc37855310e",
     "risk_coverage_source_data.json": "c5c5d39c69f43245009e06db1f9aa21af9c1cd9b139d63590569485de738b08c",
-    "selective_results.json": "5e065a3307b7beb50ec6dd4b037937276a5b37503c6fbe86b0e7a29bc4b2acab"
+    "selective_results.json": "44661dfca6b96bcd90c73a4c877c4a6c39db08008943500dd764502c2f9c50ff"
   },
   "canonical_main_dependency": "a18c1e10a0d9eba16ba8bffc55b29988507772ff",
   "canonical_sources": [
+    "experiments/p04/decision_ledger.json",
     "registry/p08_calibration_evidence_sg000020.json",
     "registry/p08_ecal_selection_ledger_sg000020.json",
     "registry/p08_fhir_selection_ledger_sg000020.json",
@@ -47,6 +54,7 @@
   "schema_version": "0.1",
   "self_hash_exclusion": "provenance_index.json cannot contain its own digest; artifact_sha256 covers every other artifact in artifact_inventory",
   "source_sha256": {
+    "experiments/p04/decision_ledger.json": "fe0f1e1855f1e53263849dc595bd73aa839cfce2df3035f09727b366ce08de13",
     "registry/p08_calibration_evidence_sg000020.json": "1e9ed4558180d07756d4992b6c46963692695ed1fbc8e6ccb01a90a25c003eb6",
     "registry/p08_ecal_selection_ledger_sg000020.json": "db77c67ed1041fdb21fed771c1de97e134a1635076bc2254bfe8c8512599c793",
     "registry/p08_fhir_selection_ledger_sg000020.json": "0965e516b642c11d305223ac0725e99af7f4002b3252dc10203bc532ec877647",
