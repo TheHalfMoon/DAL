@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: >-
+  If you use DAL or its frozen evaluation evidence, please cite it as below.
+  The author list and the arXiv identifier will be finalized by the project
+  founder before release.
+title: "DAL: Decision Assurance Layer — frozen-protocol evaluation evidence and manuscript"
+type: software
+authors:
+  - name: "DAL contributors"
+repository-code: "https://github.com/TheHalfMoon/DAL"
+license: Apache-2.0
+keywords:
+  - clinical NLP
+  - selective prediction
+  - typed decisions
+  - reproducibility

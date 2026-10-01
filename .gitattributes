@@ -4,3 +4,4 @@ registry/p08_*sg000023*.json text eol=lf
 experiments/p04/decision_ledger.json text eol=lf
 registry/p09_*sg000024*.json text eol=lf
 paper/generated/* text eol=lf
+docs/release/*.md text eol=lf
