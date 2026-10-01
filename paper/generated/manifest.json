@@ -1,0 +1,38 @@
+{
+  "bibliography_record_sha256": "f522792267a9b448b8e7f6ac7dc070e5fae0a6adf8ca75ce897181d379138338",
+  "frozen_claim_set_sha256": "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b",
+  "generator": "tools/build_sg000024_manuscript_inputs.py",
+  "grain_id": "SG-000024",
+  "outputs_sha256": {
+    "dal_claims.tex": "eb45e84a735d3d1269bc9ccc4a7a39ba7d6d5a65edc44aa42fde2b31f60c1510",
+    "dal_numbers.tex": "66790c109a179e5f2302bc08791827d3145592ca79935fc2f03ac1a863bb6070",
+    "fig_reliability.tex": "0eb95b20e0348e67ceb2136e9c5be5e0470a07086db58374878c644217215f5c",
+    "fig_risk_coverage.tex": "39413e5fecb6d13283c5d5111fb57692c2e29f5f88baf293825eea97cc4e2f67",
+    "references.bib": "31996f96f041c121b63f014220b90d69b4c43537ca7b8f9c8cd0db62021d80f8",
+    "tab_boundaries.tex": "0e9e2a4b8dd59120cfebf8c227530d7555c6d38222a064814005ebd006167db5",
+    "tab_claims.tex": "d895ac5bcd91318b9c889f6e088783d3bed10f1832c87fcbb3c0b0f190ad9abe",
+    "tab_ecal.tex": "74b0ecd5af09ac8bcb570118f1ab053ba57278b625f22eda85e8ce435eb0a051",
+    "tab_errors.tex": "07e1383645fcd59f92e4da11d7d258760f7791f8c36b1467e86661b3cb15cf62",
+    "tab_fhir.tex": "0d997329bc106771d7f5afc727d9181cebf9d9f5c6383465f237c926f1359092",
+    "tab_main.tex": "e724f987a88ae2585a7e288a061909d7bdc460b7497c4be4037edb5f0d4bc141",
+    "tab_policy.tex": "9dfce124b7d6603b1ce9665680513cc4db846d400ed50631409db499311b0541",
+    "tab_selective.tex": "b750dbf488455398ecdad7a190aaa16f066b4136fb8f074f8bf32c00764da61d"
+  },
+  "paper_evidence_artifact_sha256": {
+    "claim_freeze_manifest.json": "baa6268b3f3674ca8863f5496047710aa784bd613ea8c51b88482939d5a41fec",
+    "claim_ledger.json": "3ec51e8713cbcd35a425ed68fad3e248dff1e82b260ab274b1df01ed43056053",
+    "ecal_selection_table.json": "1e977fa161fb1fbac5a805a7dff3dee7a943868415f3241cf5829824901f4078",
+    "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
+    "evidence_packets.json": "a344a579a7e3528791f285574d57ba9b80efff051b1f399eeaf52182e2aa2f49",
+    "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
+    "figure_reliability.svg": "68efc9d5844f50f9e6b60ff109746ef353f977f03000ddd936652b90d7787074",
+    "figure_risk_coverage.svg": "1e54a247f5f451c6d4a9c56350568e459da356cafd394ca0a72431fcc5a6e0de",
+    "main_results.json": "b40bc314bb5fdcfa6447d5174b7b71bb65f680e1573c517c8bcd488561bd3dec",
+    "qualitative_examples.json": "14351ed417da3c9b086423aa1726dc7f8dad1cb26e3403c5edb48b83e4d3fb91",
+    "reliability_source_data.json": "c08450e439f479670e111a983be261a33671ea8f44d2c366799a4bc37855310e",
+    "risk_coverage_source_data.json": "c5c5d39c69f43245009e06db1f9aa21af9c1cd9b139d63590569485de738b08c",
+    "selective_results.json": "44661dfca6b96bcd90c73a4c877c4a6c39db08008943500dd764502c2f9c50ff"
+  },
+  "paper_evidence_root": "registry/p08_sg000023_paper_evidence",
+  "schema_version": "0.1"
+}

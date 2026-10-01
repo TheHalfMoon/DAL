@@ -1,0 +1,936 @@
+{
+  "entries": [
+    {
+      "authors": [
+        "Alessio Cocchieri",
+        "Luca Ragazzi",
+        "Giuseppe Tagliavini",
+        "Gianluca Moro"
+      ],
+      "doi": "10.18653/v1/2026.acl-long.1365",
+      "identifier": "10.18653/v1/2026.acl-long.1365",
+      "key": "cocchieri2026medqabstain",
+      "kind": "doi",
+      "role": "benchmark-source",
+      "title": "LLMs (Almost) Never Abstain Under Medical Uncertainty",
+      "url": "https://doi.org/10.18653/v1/2026.acl-long.1365",
+      "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+      "verified_via": "Crossref REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "Qiao Jin",
+        "Bhuwan Dhingra",
+        "Zhengping Liu",
+        "William Cohen",
+        "Xinghua Lu"
+      ],
+      "doi": "10.18653/v1/D19-1259",
+      "identifier": "10.18653/v1/D19-1259",
+      "key": "jin2019pubmedqa",
+      "kind": "doi",
+      "role": "benchmark-source",
+      "title": "PubMedQA: A Dataset for Biomedical Research Question Answering",
+      "url": "https://doi.org/10.18653/v1/D19-1259",
+      "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+      "verified_via": "Crossref REST API",
+      "year": 2019
+    },
+    {
+      "arxiv": "2509.19319",
+      "authors": [
+        "Gyubok Lee",
+        "Elea Bach",
+        "Eric Yang",
+        "Tom Pollard",
+        "Alistair Johnson",
+        "Edward Choi",
+        "Yugang jia",
+        "Jong Ha Lee"
+      ],
+      "identifier": "2509.19319",
+      "journal_ref": null,
+      "key": "lee2026fhiragentbench",
+      "kind": "arxiv",
+      "role": "benchmark-source",
+      "title": "FHIR-AgentBench: Benchmarking LLM Agents for Realistic Interoperable EHR Question Answering",
+      "url": "https://arxiv.org/abs/2509.19319",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "authors": [
+        "Yixing Jiang",
+        "Kameron C. Black",
+        "Gloria Geng",
+        "Danny Park",
+        "James Zou",
+        "Andrew Y. Ng",
+        "Jonathan H. Chen"
+      ],
+      "doi": "10.1056/AIdbp2500144",
+      "identifier": "10.1056/AIdbp2500144",
+      "key": "jiang2025medagentbench",
+      "kind": "doi",
+      "role": "related-work",
+      "title": "MedAgentBench: A Virtual EHR Environment to Benchmark Medical LLM Agents",
+      "url": "https://doi.org/10.1056/AIdbp2500144",
+      "venue": "NEJM AI",
+      "verified_via": "Crossref REST API",
+      "year": 2025
+    },
+    {
+      "authors": [
+        "Jaehoon Yun",
+        "Jiwoong Sohn",
+        "Jungwoo Park",
+        "Hyunjae Kim",
+        "Xiangru Tang",
+        "Daniel Shao",
+        "Yong Hoe Koo",
+        "Ko Minhyeok",
+        "Qingyu Chen",
+        "Mark Gerstein",
+        "Michael Moor",
+        "Jaewoo Kang"
+      ],
+      "doi": "10.18653/v1/2025.emnlp-main.837",
+      "identifier": "10.18653/v1/2025.emnlp-main.837",
+      "key": "yun2025medprm",
+      "kind": "doi",
+      "role": "related-work",
+      "title": "Med-PRM: Medical Reasoning Models with Stepwise, Guideline-verified Process Rewards",
+      "url": "https://doi.org/10.18653/v1/2025.emnlp-main.837",
+      "venue": "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+      "verified_via": "Crossref REST API",
+      "year": 2025
+    },
+    {
+      "authors": [
+        "Tilmann Gneiting",
+        "Adrian E Raftery"
+      ],
+      "doi": "10.1198/016214506000001437",
+      "identifier": "10.1198/016214506000001437",
+      "key": "gneiting2007proper",
+      "kind": "doi",
+      "role": "method-foundation",
+      "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+      "url": "https://doi.org/10.1198/016214506000001437",
+      "venue": "Journal of the American Statistical Association",
+      "verified_via": "Crossref REST API",
+      "year": 2007
+    },
+    {
+      "arxiv": "1706.04599",
+      "authors": [
+        "Chuan Guo",
+        "Geoff Pleiss",
+        "Yu Sun",
+        "Kilian Q. Weinberger"
+      ],
+      "identifier": "1706.04599",
+      "journal_ref": null,
+      "key": "guo2017calibration",
+      "kind": "arxiv",
+      "role": "method-foundation",
+      "title": "On Calibration of Modern Neural Networks",
+      "url": "https://arxiv.org/abs/1706.04599",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2017
+    },
+    {
+      "arxiv": "1705.08500",
+      "authors": [
+        "Yonatan Geifman",
+        "Ran El-Yaniv"
+      ],
+      "identifier": "1705.08500",
+      "journal_ref": null,
+      "key": "geifman2017selective",
+      "kind": "arxiv",
+      "role": "method-foundation",
+      "title": "Selective Classification for Deep Neural Networks",
+      "url": "https://arxiv.org/abs/1705.08500",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2017
+    },
+    {
+      "arxiv": "2506.10896",
+      "authors": [
+        "Thomas Sounack",
+        "Joshua Davis",
+        "Brigitte Durieux",
+        "Antoine Chaffin",
+        "Tom J. Pollard",
+        "Eric Lehman",
+        "Alistair E. W. Johnson",
+        "Matthew McDermott",
+        "Tristan Naumann",
+        "Charlotta Lindvall"
+      ],
+      "identifier": "2506.10896",
+      "journal_ref": null,
+      "key": "sounack2025bioclinicalmodernbert",
+      "kind": "arxiv",
+      "role": "model-source",
+      "title": "BioClinical ModernBERT: A State-of-the-Art Long-Context Encoder for Biomedical and Clinical NLP",
+      "url": "https://arxiv.org/abs/2506.10896",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2504.03964",
+      "authors": [
+        "Simon A. Lee",
+        "Anthony Wu",
+        "Jeffrey N. Chiang"
+      ],
+      "identifier": "2504.03964",
+      "journal_ref": null,
+      "key": "lee2025clinicalmodernbert",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Clinical ModernBERT: An efficient and long context encoder for biomedical text",
+      "url": "https://arxiv.org/abs/2504.03964",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "authors": [
+        "Oriana Presacan",
+        "Alireza Nik",
+        "Jaya Ojha",
+        "Vajira Thambawita",
+        "Bogdan Ionescu",
+        "Michael A. Riegler"
+      ],
+      "doi": "10.1038/s41746-026-02882-1",
+      "identifier": "10.1038/s41746-026-02882-1",
+      "key": "presacan2026silence",
+      "kind": "doi",
+      "role": "related-work",
+      "title": "When silence is safer: a review and decision-theoretic framework for LLM abstention in healthcare",
+      "url": "https://doi.org/10.1038/s41746-026-02882-1",
+      "venue": "npj Digital Medicine",
+      "verified_via": "Crossref REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "Sebastian Daniel Boie",
+        "Florian Reis",
+        "Nicolas Frey",
+        "Elias Grünewald",
+        "Felix Balzer"
+      ],
+      "doi": "10.1007/s10916-026-02430-0",
+      "identifier": "10.1007/s10916-026-02430-0",
+      "key": "boie2026calibration",
+      "kind": "doi",
+      "role": "related-work",
+      "title": "Calibration of Self-Reported Confidence and Accuracy of Large Language Models in Medical Question Answering",
+      "url": "https://doi.org/10.1007/s10916-026-02430-0",
+      "venue": "Journal of Medical Systems",
+      "verified_via": "Crossref REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "NandhaKishorM"
+      ],
+      "identifier": "NandhaKishorM/laya",
+      "key": "laya_repo",
+      "kind": "github",
+      "license": "Apache-2.0",
+      "role": "baseline-source",
+      "title": "NandhaKishorM/laya: Non-autoregressive System 1 decision engine. Typed choice, score and yes/no decisions over any text in a single forward pass, in 100+ languages, with a router that picks the right checkpoint per request.",
+      "url": "https://github.com/NandhaKishorM/laya",
+      "venue": "GitHub repository",
+      "verified_via": "GitHub REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "Mapika"
+      ],
+      "identifier": "Mapika/decider",
+      "key": "decider_repo",
+      "kind": "github",
+      "license": "Apache-2.0",
+      "role": "related-work",
+      "title": "Mapika/decider: A family of System One-style models fine-tuned from Qwen3.5, designed for one-pass typed decisions with calibrated probabilities.",
+      "url": "https://github.com/Mapika/decider",
+      "venue": "GitHub repository",
+      "verified_via": "GitHub REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "Contrastive-LM"
+      ],
+      "identifier": "Contrastive-LM/CLM",
+      "key": "clm_repo",
+      "kind": "github",
+      "license": "Apache-2.0",
+      "role": "related-work",
+      "title": "Contrastive-LM/CLM",
+      "url": "https://github.com/Contrastive-LM/CLM",
+      "venue": "GitHub repository",
+      "verified_via": "GitHub REST API",
+      "year": 2026
+    },
+    {
+      "authors": [
+        "disi-unibo-nlp"
+      ],
+      "identifier": "disi-unibo-nlp/llm-medical-abstention",
+      "key": "medqabstain_repo",
+      "kind": "github",
+      "license": null,
+      "role": "benchmark-source",
+      "title": "disi-unibo-nlp/llm-medical-abstention",
+      "url": "https://github.com/disi-unibo-nlp/llm-medical-abstention",
+      "venue": "GitHub repository",
+      "verified_via": "GitHub REST API",
+      "year": 2025
+    },
+    {
+      "authors": [
+        "glee4810"
+      ],
+      "identifier": "glee4810/FHIR-AgentBench",
+      "key": "fhiragentbench_repo",
+      "kind": "github",
+      "license": "CC-BY-4.0",
+      "role": "benchmark-source",
+      "title": "glee4810/FHIR-AgentBench: Code and Data for FHIR-AgentBench",
+      "url": "https://github.com/glee4810/FHIR-AgentBench",
+      "venue": "GitHub repository",
+      "verified_via": "GitHub REST API",
+      "year": 2025
+    },
+    {
+      "authors": [],
+      "identifier": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+      "key": "jev_blog",
+      "kind": "url",
+      "role": "related-work",
+      "title": "Introducing System One Models &amp; Jev - TypeSafe AI Blog",
+      "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+      "venue": "web page",
+      "verified_via": "HTTP fetch of page title",
+      "year": 2026
+    },
+    {
+      "arxiv": "2601.12471",
+      "authors": [
+        "Sravanthi Machcha",
+        "Sushrita Yerra",
+        "Sahil Gupta",
+        "Aishwarya Sahoo",
+        "Sharmin Sultana",
+        "Hong Yu",
+        "Zonghai Yao"
+      ],
+      "identifier": "2601.12471",
+      "journal_ref": null,
+      "key": "arxiv2601_12471",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Knowing When to Abstain: Medical LLMs Under Clinical Uncertainty",
+      "url": "https://arxiv.org/abs/2601.12471",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2506.09038",
+      "authors": [
+        "Polina Kirichenko",
+        "Mark Ibrahim",
+        "Kamalika Chaudhuri",
+        "Samuel J. Bell"
+      ],
+      "identifier": "2506.09038",
+      "journal_ref": null,
+      "key": "arxiv2506_09038",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions",
+      "url": "https://arxiv.org/abs/2506.09038",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2511.16625",
+      "authors": [
+        "Elias Hossain",
+        "Md Mehedi Hasan Nipu",
+        "Maleeha Sheikh",
+        "Tasfia Nuzhat",
+        "Rajib Rana",
+        "Subash Neupane",
+        "Björn W. Schuller",
+        "Niloofar Yousefi"
+      ],
+      "identifier": "2511.16625",
+      "journal_ref": null,
+      "key": "arxiv2511_16625",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support",
+      "url": "https://arxiv.org/abs/2511.16625",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2608.09080",
+      "authors": [
+        "Maryam Tahermazandarani",
+        "Adnan Mahmood",
+        "Fahmida Islam",
+        "Quan Z. Sheng"
+      ],
+      "identifier": "2608.09080",
+      "journal_ref": null,
+      "key": "arxiv2608_09080",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "When Confidence Fails: Overconfidence in LLMs under Uncertainty and Missing Clinical Information",
+      "url": "https://arxiv.org/abs/2608.09080",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2502.18050",
+      "authors": [
+        "Artem Vazhentsev",
+        "Ivan Sviridov",
+        "Alvard Barseghyan",
+        "Gleb Kuzmin",
+        "Alexander Panchenko",
+        "Aleksandr Nesterov",
+        "Artem Shelmanov",
+        "Maxim Panov"
+      ],
+      "identifier": "2502.18050",
+      "journal_ref": null,
+      "key": "arxiv2502_18050",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Uncertainty-aware abstention in medical diagnosis based on medical texts",
+      "url": "https://arxiv.org/abs/2502.18050",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2509.24816",
+      "authors": [
+        "Xilin Dang",
+        "Kexin Chen",
+        "Xiaorui Su",
+        "Ayush Noori",
+        "Iñaki Arango",
+        "Lucas Vittor",
+        "Xinyi Long",
+        "Yuyang Du",
+        "Marinka Zitnik",
+        "Pheng Ann Heng"
+      ],
+      "identifier": "2509.24816",
+      "journal_ref": null,
+      "key": "arxiv2509_24816",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "KnowGuard: Knowledge-Driven Abstention for Multi-Round Clinical Reasoning",
+      "url": "https://arxiv.org/abs/2509.24816",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2607.10059",
+      "authors": [
+        "Xun Liu",
+        "Yi Evie Zhang",
+        "Vira Kasprova",
+        "Parisa Rabbani",
+        "Pardis Sadat Zahraei",
+        "Tianyu Zhang",
+        "Ali Ebrahimpour-Boroojeny",
+        "Varun Chandrasekaran"
+      ],
+      "identifier": "2607.10059",
+      "journal_ref": null,
+      "key": "arxiv2607_10059",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "AgentAbstain: Do LLM Agents Know When Not to Act?",
+      "url": "https://arxiv.org/abs/2607.10059",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2606.28733",
+      "authors": [
+        "Han Luo",
+        "Bingbing Wen",
+        "Lucy Lu Wang"
+      ],
+      "identifier": "2606.28733",
+      "journal_ref": null,
+      "key": "arxiv2606_28733",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Agentic Abstention: Do Agents Know When to Stop Instead of Act?",
+      "url": "https://arxiv.org/abs/2606.28733",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2407.01032",
+      "authors": [
+        "Jeremias Traub",
+        "Till J. Bungert",
+        "Carsten T. Lüth",
+        "Michael Baumgartner",
+        "Klaus H. Maier-Hein",
+        "Lena Maier-Hein",
+        "Paul F Jaeger"
+      ],
+      "identifier": "2407.01032",
+      "journal_ref": null,
+      "key": "arxiv2407_01032",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems",
+      "url": "https://arxiv.org/abs/2407.01032",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2024
+    },
+    {
+      "arxiv": "2410.15361",
+      "authors": [
+        "Han Zhou",
+        "Jordy Van Landeghem",
+        "Teodora Popordanoska",
+        "Matthew B. Blaschko"
+      ],
+      "identifier": "2410.15361",
+      "journal_ref": null,
+      "key": "arxiv2410_15361",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "A Novel Characterization of the Population Area Under the Risk Coverage Curve (AURC) and Rates of Finite Sample Estimators",
+      "url": "https://arxiv.org/abs/2410.15361",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2024
+    },
+    {
+      "arxiv": "2606.31179",
+      "authors": [
+        "Qianchu Liu",
+        "Sheng Zhang",
+        "Guanghui Qin",
+        "Jeya Maria Jose Valanarasu",
+        "Maximilian Rokuss",
+        "Mingyu Lu",
+        "Timothy Ossowski",
+        "Juan Manuel Zambrano Chaves",
+        "Cliff Wong",
+        "Peniel Argaw",
+        "Yashna Hasija",
+        "Mu Wei",
+        "Wen-wai Yim",
+        "Qin Liu",
+        "Zilin Jing",
+        "Jason Entenmann",
+        "Naoto Usuyama",
+        "Tristan Naumann",
+        "Hoifung Poon"
+      ],
+      "identifier": "2606.31179",
+      "journal_ref": null,
+      "key": "arxiv2606_31179",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "HealthAgentBench: A Unified Benchmark Suite of Realistic Agentic Healthcare Environments for Challenging Frontier AI Agents",
+      "url": "https://arxiv.org/abs/2606.31179",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2602.23479",
+      "authors": [
+        "Michael Frew",
+        "Nishit Bheda",
+        "Bryan Tripp"
+      ],
+      "identifier": "2602.23479",
+      "journal_ref": null,
+      "key": "arxiv2602_23479",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "FHIRPath-QA: Executable Question Answering over FHIR Electronic Health Records",
+      "url": "https://arxiv.org/abs/2602.23479",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2605.14126",
+      "authors": [
+        "Marius S. Knorr",
+        "Robert Müller",
+        "Jan P. Bremer",
+        "Nils Schweingruber"
+      ],
+      "identifier": "2605.14126",
+      "journal_ref": null,
+      "key": "arxiv2605_14126",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Reinforcement Learning for Tool-Calling Agents in Fast Healthcare Interoperability Resources (FHIR)",
+      "url": "https://arxiv.org/abs/2605.14126",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2604.21076",
+      "authors": [
+        "Sanjoy Pator"
+      ],
+      "identifier": "2604.21076",
+      "journal_ref": null,
+      "key": "arxiv2604_21076",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Serialisation Strategy Matters: How FHIR Data Format Affects LLM Medication Reconciliation",
+      "url": "https://arxiv.org/abs/2604.21076",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2608.07796",
+      "authors": [
+        "Veronica Chatrath",
+        "Bryan Zhu",
+        "George Pu",
+        "Jingxuan Fan",
+        "Apaar Shanker",
+        "Varun Ursekar",
+        "Anahita Sharma",
+        "Jason Qin",
+        "Keqi Han",
+        "Soham Dinesh Tiwari",
+        "Soham Dan",
+        "Vijay Kalmath",
+        "Yuan Li",
+        "Daniel Yue Zhang",
+        "Chenguang Wang",
+        "Zainab Doctor",
+        "Zhijun Yin",
+        "Nigam H. Shah",
+        "Yuan Xue"
+      ],
+      "identifier": "2608.07796",
+      "journal_ref": null,
+      "key": "arxiv2608_07796",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "CliniCARE-Bench: Clinical Calibrated Audit of Medical Reasoning in EHR",
+      "url": "https://arxiv.org/abs/2608.07796",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2510.14400",
+      "authors": [
+        "Yingpeng Ning",
+        "Yuanyuan Sun",
+        "Ling Luo",
+        "Yanhua Wang",
+        "Yuchen Pan",
+        "Hongfei Lin"
+      ],
+      "identifier": "2510.14400",
+      "journal_ref": null,
+      "key": "arxiv2510_14400",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "MedTrust-RAG: Evidence Verification and Trust Alignment for Biomedical Question Answering",
+      "url": "https://arxiv.org/abs/2510.14400",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2603.05308",
+      "authors": [
+        "Qiao Jin",
+        "Yin Fang",
+        "Lauren He",
+        "Yifan Yang",
+        "Guangzhi Xiong",
+        "Zhizheng Wang",
+        "Nicholas Wan",
+        "Joey Chan",
+        "Donald C. Comeau",
+        "Robert Leaman",
+        "Charalampos S. Floudas",
+        "Aidong Zhang",
+        "Michael F. Chiang",
+        "Yifan Peng",
+        "Zhiyong Lu"
+      ],
+      "identifier": "2603.05308",
+      "journal_ref": null,
+      "key": "arxiv2603_05308",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "url": "https://arxiv.org/abs/2603.05308",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2606.15735",
+      "authors": [
+        "Jiyoun Kim",
+        "Muhan Yeo",
+        "Eunhye Jang",
+        "Jeewon Yang",
+        "Hangyul Yoon",
+        "Su Ji Lee",
+        "Hee Jo Han",
+        "Hee-Jae Jung",
+        "Doyun Kwon",
+        "Jun young Lee",
+        "Jaehun Lee",
+        "Jung-Oh Lee",
+        "Sunjun Kweon",
+        "Jong Hak Moon",
+        "Daseul Kim",
+        "Minjae Cho",
+        "Edward Choi"
+      ],
+      "identifier": "2606.15735",
+      "journal_ref": null,
+      "key": "arxiv2606_15735",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "EHRNote-ChatQA: A Benchmark for Evidence-Grounded Multi-Turn Clinical Question Answering over Longitudinal Discharge Summaries",
+      "url": "https://arxiv.org/abs/2606.15735",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2506.10769",
+      "authors": [
+        "Alberto Testoni",
+        "Iacer Calixto"
+      ],
+      "identifier": "2506.10769",
+      "journal_ref": null,
+      "key": "arxiv2506_10769",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Mind the Gap: Benchmarking LLM Uncertainty and Calibration with Specialty-Aware Clinical QA and Reasoning-Based Behavioural Features",
+      "url": "https://arxiv.org/abs/2506.10769",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2025
+    },
+    {
+      "arxiv": "2609.34024",
+      "authors": [
+        "Alfredo Madrid-García",
+        "Beatriz Merino-Barbancho"
+      ],
+      "identifier": "2609.34024",
+      "journal_ref": null,
+      "key": "arxiv2609_34024",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Jev in Medicine: A Benchmark Evaluation. Preliminary Results",
+      "url": "https://arxiv.org/abs/2609.34024",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2609.32160",
+      "authors": [
+        "Lijuan Tang",
+        "Yuemeng Zheng"
+      ],
+      "identifier": "2609.32160",
+      "journal_ref": null,
+      "key": "arxiv2609_32160",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Typed Decision Models: An Early Evidence Audit and Evaluation Checklist",
+      "url": "https://arxiv.org/abs/2609.32160",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2609.33209",
+      "authors": [
+        "Keyi Li",
+        "Yihao He",
+        "Quanyi Li"
+      ],
+      "identifier": "2609.33209",
+      "journal_ref": null,
+      "key": "arxiv2609_33209",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Beyond Calibration: Do a Typed-Decision Model's Probabilities Obey the Probability Axioms?",
+      "url": "https://arxiv.org/abs/2609.33209",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2609.33401",
+      "authors": [
+        "Yixuan Liu"
+      ],
+      "identifier": "2609.33401",
+      "journal_ref": null,
+      "key": "arxiv2609_33401",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Evaluating System One Models for Agent Security Decisions: Reliability, Calibration, and Selective Automation",
+      "url": "https://arxiv.org/abs/2609.33401",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2609.34227",
+      "authors": [
+        "Rishabh Sharma",
+        "Rishika Lall"
+      ],
+      "identifier": "2609.34227",
+      "journal_ref": null,
+      "key": "arxiv2609_34227",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "When Does Selection Replace Extraction? A Pre-Registered Test of Agent Memory with a Typed Decision Model",
+      "url": "https://arxiv.org/abs/2609.34227",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2606.09500",
+      "authors": [
+        "Yoojin Nam",
+        "Jinhoon Jeong",
+        "Namkug Kim"
+      ],
+      "identifier": "2606.09500",
+      "journal_ref": null,
+      "key": "arxiv2606_09500",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "Deterministic Integrity Gates for LLM-Assisted Clinical Manuscript Preparation: An Auditable Biomedical Informatics Architecture",
+      "url": "https://arxiv.org/abs/2606.09500",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2607.05410",
+      "authors": [
+        "Dexter Hadley"
+      ],
+      "identifier": "2607.05410",
+      "journal_ref": null,
+      "key": "arxiv2607_05410",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "CANONIC: Governance Is Compilation",
+      "url": "https://arxiv.org/abs/2607.05410",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2607.28374",
+      "authors": [
+        "Enjun Du",
+        "Hange Zhou",
+        "Chenxu Du",
+        "Siyi Liu",
+        "Zirong Chen",
+        "Ziyu Zheng",
+        "Yongqi Zhang"
+      ],
+      "identifier": "2607.28374",
+      "journal_ref": null,
+      "key": "arxiv2607_28374",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "LEDGERMIND: Provenance-Constrained Multimodal Agentic Reasoning with a Structured Evidence Ledger",
+      "url": "https://arxiv.org/abs/2607.28374",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    },
+    {
+      "arxiv": "2607.14385",
+      "authors": [
+        "Thanni Adewuyi",
+        "Anuoluwa Sotome",
+        "Samuel Okoko",
+        "Angel Ezendu",
+        "Oluwafunke Akinbuwa",
+        "Oluwaseun Odunsi",
+        "Oluwasegun Oguntuase",
+        "Ifeoma Nwabueze",
+        "Abiodun Adereni"
+      ],
+      "identifier": "2607.14385",
+      "journal_ref": null,
+      "key": "arxiv2607_14385",
+      "kind": "arxiv",
+      "role": "related-work",
+      "title": "MamaBench: Benchmarking LLM Robustness in Maternal and Child Health Diagnosis through Counterfactual Clinical Perturbation",
+      "url": "https://arxiv.org/abs/2607.14385",
+      "venue": "arXiv preprint",
+      "verified_via": "arXiv API",
+      "year": 2026
+    }
+  ],
+  "grain_id": "SG-000024",
+  "policy": "Every field below was returned by the listed free public API on the verification date; no bibliographic field was typed by hand.",
+  "record_id": "sg24-verified-bibliography-v0.1",
+  "schema_version": "0.1",
+  "verified_on": "2026-10-01"
+}
