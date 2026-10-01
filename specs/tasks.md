@@ -278,15 +278,40 @@ P08 closes with blocked/unavailable rows kept explicit: ECAL ablation benefit, e
 
 ## P09 — arXiv and release
 
-- [ ] Paper manuscript
-- [ ] Appendix
-- [ ] Reproducibility bundle
+### SG-000024 — Manuscript, reproducibility bundle, and release-candidate packaging (ACTIVE — GOVERNANCE ONLY)
+
+Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca163e0f7db56e35da`. Dependency post-main GAXBench: `36923984783` SUCCESS. Frozen claim-set SHA-256: `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
+
+#### Activation
+
+- [x] Create SG-000024 research contract Issue #101
+- [x] Bind SG-000023/P08 closeout and the frozen claim-set digest
+- [x] Forbid new inference, claim-set mutation, and manual result transcription
+- [x] Record arXiv, Hugging Face, release tag, and model-weight redistribution as founder boundaries
+- [ ] Qualify activation exact head (GAXBench, Alibaba OpenCodeReview, secure Jev)
+- [ ] Merge activation normally with expected-head guard
+- [ ] Verify post-main activation before implementation
+
+#### Implementation
+
+- [ ] Deterministic manuscript-input generator with `--check` (numbers, tables, claim macros, figure coordinates)
+- [ ] Paper manuscript (DAL identity, all required sections)
+- [ ] Appendix (protocol, evidence packets, claim ledger, limitations)
+- [ ] Verified bibliography
+- [ ] Clean-room CI manuscript compilation with checksum-pinned zero-cost TeX engine
+- [ ] Reproducibility bundle and checklist
+- [ ] arXiv source-bundle manifest (no submission)
+- [ ] README alignment, `CITATION.cff`, tool/model and Hugging Face card drafts, release-notes draft, licensing statement
+- [ ] Canonical SG-000024 closeout
+
+### Remaining P09 items outside SG-000024
+
 - [ ] Governed DAL naming migration / GAXBench compatibility release
-- [ ] Model release
-- [ ] Fine-tuning notebooks
-- [ ] Hugging Face release
-- [ ] arXiv submission package
-- [ ] Public release tag
+- [ ] Model release — blocked pending founder license/redistribution decision
+- [ ] Fine-tuning notebooks — deferred; require execution evidence
+- [ ] Hugging Face release — founder-account boundary
+- [ ] arXiv submission — founder-account boundary
+- [ ] Public release tag — founder decision
 
 ## P10 — Peer review / external validation
 
