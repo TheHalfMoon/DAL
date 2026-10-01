@@ -154,52 +154,78 @@ Research contract: Issue #80. Canonical closeout: `ef36ae4d050cf2e1bb7ada07f4054
 
 SG-000021 executed no final-test inference. Its canonical authorization artifact is scoped only to SG-000022.
 
-### SG-000022 — Authorized primary final evaluation (ACTIVE)
+### SG-000022 — Authorized primary final evaluation (PROVEN by this closeout state transition)
 
 Research contract: Issue #84. Canonical dependency: `ef36ae4d050cf2e1bb7ada07f4054b083e886045`.
 
-Activation requirements:
+#### Activation and implementation
 
 - [x] Create SG-000022 research contract Issue #84
 - [x] Bind SG-000021 canonical closeout and post-closeout run `36868102682`
 - [x] Bind authorization digest `626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
 - [x] Freeze activation as governance-only with zero final-test rows
 - [x] Require a separate implementation PR after canonical activation
-- [ ] Qualify activation exact head with Linux/Windows Python 3.11/3.12 CI
-- [ ] Qualify activation exact head with checksum-pinned Alibaba OpenCodeReview
-- [ ] Qualify activation exact head with secure TypeSafe Jev
-- [ ] Merge activation normally with expected-head guard
-- [ ] Verify post-main activation before any final-test inference
+- [x] Qualify activation exact head `638eec3132ca3ac87a9f36db8f195f1310a396f0` with GAXBench `36868975243`, Alibaba OpenCodeReview `36868975233`, and secure TypeSafe Jev `36868975703`
+- [x] Merge activation normally at `c7ea6fbc81a1dd7526a6c453d12c585db6841cb3` with expected-head guard
+- [x] Verify post-main activation with GAXBench `36869200519` before final-test inference
+- [x] Implement fail-closed authorization verification at the execution entry point
+- [x] Qualify implementation head `563883489fdb3df5ae337267cc2510d31551e53e` with GAXBench `36885982630`, Alibaba OpenCodeReview `36885982580`, and secure TypeSafe Jev `36886188326`
+- [x] Merge implementation normally at `42e09ca1b1431340b26fe57ae318ff1b1b662fc3` with expected-head guard
+- [x] Verify implementation post-main with GAXBench `36886206716` before final-test source access
+- [x] Prospectively qualify the operational-only one-shot transport amendment before final-test access because connected tooling could not invoke `workflow_dispatch`
+- [x] Qualify transport head `4cfee6e2b23637c117549c149efdd335456557c6` with GAXBench `36886639294`, Alibaba OpenCodeReview `36886639411`, and secure TypeSafe Jev `36886639719`
+- [x] Merge one-shot transport normally at `f1955d5beeb2444f1d604626629036196a1dedd5`; no scientific binding changed
 
-Primary evaluation tasks after canonical activation:
+#### Canonical primary final evaluation
 
-- [ ] Implement fail-closed authorization verification at the execution entry point
-- [ ] Persist immutable raw predictions/results before derived analysis
-- [ ] Preserve exact requested/completed/timeout/OOM/transport/interface/parse accounting
-- [ ] Execute `pubmedqa-pqal` 500-row authorized final-test surface
-- [ ] Execute `gax-native-abstention-pqal` 1000-variant authorized final-test surface
-- [ ] Execute `fhir-agentbench` 173-row patient-disjoint authorized final-test surface
-- [ ] Produce main action-selection metrics and tables
-- [ ] Produce NLL, Brier, ECE, and reliability analysis
-- [ ] Produce risk-coverage curves, AURC, and risk@50/80/90
-- [ ] Produce matched-coverage abstention analysis
-- [ ] Evaluate the frozen selected ECAL configuration and declared ablations without reselection
-- [ ] Evaluate evidence interventions without post-test tuning
-- [ ] Evaluate counterfactual material-sensitivity and irrelevant-edit stability without post-test tuning
-- [ ] Evaluate frozen `canonical-structured` FHIR representation and EHR-agent action selection
-- [ ] Produce valid preregistered distribution-shift slices only where source data supports them
-- [ ] Produce failure taxonomy and qualitative error analysis without silent exclusion
-- [ ] Measure latency, throughput, and peak memory only under the frozen hardware protocol
-- [ ] Compute paired bootstrap confidence intervals and declared primary comparisons
-- [ ] Apply frozen Holm multiplicity policy to the declared primary family
-- [ ] Preserve all null, negative, timeout, OOM, transport, parse, and interface-failure outcomes
-- [ ] Generate every paper table/figure from versioned raw artifacts with exact provenance
+- [x] Pass one-shot canonical boundary and authorization preflight before final-test source download
+- [x] Persist immutable raw predictions/results before derived analysis
+- [x] Preserve exact requested/completed/timeout/OOM/transport/interface/parse accounting
+- [x] Execute `pubmedqa-pqal` 500-row authorized final-test surface
+- [x] Execute `gax-native-abstention-pqal` 1000-variant authorized final-test surface
+- [x] Preserve `fhir-agentbench` as the preregistered `interface-blocked-preexecution` outcome: denominator 173, zero gold rows loaded, zero completed, 173 interface failures per required system, and no post-authorization adapter
+- [x] Complete one-shot final-evaluation run `36886952302` on canonical main with zero founder cost
+- [x] Preserve source Actions artifact `11176566473` and ZIP SHA-256 `8dcd894be6ae184aaf5311417d268a5500b89d0d78d14ee7a79305fbb3071136`
+- [x] Compute main PubMedQA action-selection metrics
+- [x] Compute PubMedQA NLL, multiclass Brier, and ECE without claiming Laya affected confidence as calibrated
+- [x] Compute native-abstention AURC and risk@50/80/90
+- [x] Compute frozen target-policy coverage, unsafe-commit, and over-abstain outcomes and preserve unfavorable DAL target 0.8/0.9 unsafe-commit rate `1.0`
+- [x] Compute paired-bootstrap confidence intervals and declared primary comparisons with 10000 replicates and seed 1729
+- [x] Enforce the frozen Holm multiplicity boundary without fabricating p-values because no primary p-value construction was preregistered
+- [x] Preserve all null, negative, timeout, OOM, transport, parse, interface-failure, blocked, and calibration-pathology outcomes
+- [x] Preserve no significance, superiority, clinical-safety, regulatory-readiness, or SOTA claim from SG-000022
+
+#### Canonical evidence promotion
+
+- [x] Promote the six exact JSON members as text under `registry/p08_sg000022_final_evaluation/`
+- [x] Bind source run, artifact, authorization digest, exact byte lengths, and SHA-256 values in `manifest.json`
+- [x] Qualify evidence-promotion head `4ae8b39010a2b55f33258fdbf57ce1abc7a13ff3` with GAXBench `36902369992`, Alibaba OpenCodeReview `36902369988`, and secure TypeSafe Jev `36902370171`
+- [x] Merge evidence promotion normally at `4417a0fc294a3d35f76e54958f151884bf8bfe80`
+- [x] Verify evidence-promotion main with GAXBench `36902663435` SUCCESS
+- [x] Start a separate governance-only canonical closeout boundary with no final-test rerun or tuning
+
+### SG-000023 — Remaining P08 immutable post-final analysis and claim freeze (NOT YET ACTIVATED)
+
+The following tasks remain open because SG-000022 did **not** execute or qualify them. They must not be marked complete by inference from the primary final-evaluation run:
+
+- [ ] Create SG-000023 research contract and SpecGrain after SG-000022 canonical closeout and post-closeout verification
+- [ ] Determine which remaining analyses are valid derivations from immutable canonical evidence and which must be recorded unavailable/blocked rather than rerun
+- [ ] Produce paper-ready main action-selection tables from versioned raw artifacts
+- [ ] Produce reliability plots/analysis from valid calibrated evidence only; preserve the Laya uncalibrated-confidence limitation
+- [ ] Produce risk-coverage curves from canonical native-abstention evidence
+- [ ] Evaluate/report the frozen selected ECAL configuration and declared ablations only where already-authorized immutable evidence supports the analysis, without reselection
+- [ ] Evaluate/report evidence interventions without post-test tuning only where immutable evidence supports them; otherwise record the result unavailable/blocked
+- [ ] Evaluate/report counterfactual material-sensitivity and irrelevant-edit stability without post-test tuning only where immutable evidence supports them; otherwise record the result unavailable/blocked
+- [ ] Preserve the FHIR final-evaluation result as interface-blocked; do not create a new adapter or claim FHIR action-selection performance
+- [ ] Produce valid preregistered distribution-shift slices only where canonical source data and pre-result contracts support them
+- [ ] Produce failure taxonomy and qualitative error analysis without silent exclusion or cherry-picking
+- [ ] Measure/report latency, throughput, and peak memory only if the frozen hardware protocol can still be satisfied without rerunning the completed final-test experiment; otherwise mark efficiency claims unsupported
+- [ ] Generate every paper table from versioned canonical artifacts with exact provenance
+- [ ] Generate every paper figure from versioned canonical artifacts with exact provenance
 
 ### Reproducibility and claim freeze
 
 - [ ] Complete evidence packet for every paper-table row
-- [ ] Generate every table from raw versioned artifacts
-- [ ] Generate every figure from raw versioned artifacts
 - [ ] Map every manuscript claim to exact evidence or explicit rejection
 - [ ] Freeze P08 final results without post-test tuning
 - [ ] Canonical P08 closeout
