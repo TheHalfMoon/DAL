@@ -1,0 +1,109 @@
+{
+  "claim_ledger_id": "sg23-claim-ledger-v0.1",
+  "claims": [
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json"
+      ],
+      "claim_id": "SG23-C001",
+      "evidence_packet_id": "EP-SG23-ACTION-001",
+      "exportable": true,
+      "status": "supported",
+      "text": "On the frozen PubMedQA PQA-L final rows, the paper system and clinical control each achieved action accuracy 0.552."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json"
+      ],
+      "claim_id": "SG23-C002",
+      "evidence_packet_id": "EP-SG23-ACTION-001",
+      "exportable": true,
+      "status": "supported-descriptive-only",
+      "text": "The frozen paper-minus-control PubMedQA action-accuracy estimate is 0.0 with a 95% paired-bootstrap interval [0.0, 0.0]; this does not support a superiority claim."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_calibration_evidence_sg000020.json"
+      ],
+      "claim_id": "SG23-C003",
+      "evidence_packet_id": "EP-SG23-ACTION-001",
+      "exportable": true,
+      "status": "supported-with-calibration-limitation",
+      "text": "Laya completed 500 frozen PubMedQA rows with action accuracy 0.53; affected Laya confidence is excluded from reliability/calibration figures as uncalibrated."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json"
+      ],
+      "claim_id": "SG23-C004",
+      "evidence_packet_id": "EP-SG23-SELECTIVE-001",
+      "exportable": true,
+      "status": "supported-negative-result",
+      "text": "At the frozen native target-coverage 0.8 policy, the paper system achieved actual coverage 1.0 with unsafe-commit rate 1.0, while the clinical control achieved actual coverage 0.769 with unsafe-commit rate 0.578."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json"
+      ],
+      "claim_id": "SG23-C005",
+      "evidence_packet_id": "EP-SG23-SELECTIVE-001",
+      "exportable": true,
+      "status": "supported-descriptive-only",
+      "text": "Frozen native risk@80 is 0.655 for the paper system and 0.6675 for the clinical control; this is descriptive and is not exported as a superiority claim."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json"
+      ],
+      "claim_id": "SG23-C006",
+      "evidence_packet_id": "EP-SG23-FHIR-BLOCK-001",
+      "exportable": true,
+      "status": "supported-blocked-result",
+      "text": "FHIR-AgentBench final action selection is blocked pre-execution because the frozen adapter cannot represent variable candidate action sets; zero gold rows were loaded and no replacement adapter is permitted."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "claim_id": "SG23-C007",
+      "evidence_packet_id": null,
+      "exportable": false,
+      "status": "blocked",
+      "text": "Medical evidence-intervention effectiveness is not supported because canonical P06 evidence is synthetic/mechanics-only."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "claim_id": "SG23-C008",
+      "evidence_packet_id": null,
+      "exportable": false,
+      "status": "unavailable",
+      "text": "Preregistered distribution-shift slice effects are unavailable because no valid frozen slice semantics are bound to final rows."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "claim_id": "SG23-C009",
+      "evidence_packet_id": null,
+      "exportable": false,
+      "status": "blocked",
+      "text": "Direct latency, throughput, and peak-memory superiority are not supported by the canonical final evidence."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "claim_id": "SG23-C010",
+      "evidence_packet_id": null,
+      "exportable": false,
+      "status": "not-claimed",
+      "text": "Superiority, clinical safety, SOTA, final FHIR performance, and direct efficiency superiority are not claimed."
+    }
+  ],
+  "grain_id": "SG-000023",
+  "schema_version": "0.1"
+}

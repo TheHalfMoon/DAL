@@ -1,0 +1,415 @@
+{
+  "clinical_text_used_for_selection": false,
+  "grain_id": "SG-000023",
+  "native_strata": [
+    {
+      "id": "paper-only-unsafe-on-insufficient",
+      "member_count": 211,
+      "predicate": "gold_sufficient=false AND paper_selection_score>=paper_frozen_target_0_8_threshold AND clinical_control_selection_score<control_frozen_target_0_8_threshold",
+      "selected": [
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10173769::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5098585588806659,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10173769",
+          "stratum_id": "paper-only-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        },
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10201555::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5101282182432197,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10201555",
+          "stratum_id": "paper-only-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        },
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10223070::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5015651147395259,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10223070",
+          "stratum_id": "paper-only-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "both-unsafe-on-insufficient",
+      "member_count": 289,
+      "predicate": "gold_sufficient=false AND paper_selection_score>=paper_frozen_target_0_8_threshold AND clinical_control_selection_score>=control_frozen_target_0_8_threshold",
+      "selected": [
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10135926::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5235654402810194,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10135926",
+          "stratum_id": "both-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        },
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10158597::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5255968008385826,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10158597",
+          "stratum_id": "both-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        },
+        {
+          "gold_label": {
+            "gold_action": null,
+            "gold_sufficient": false
+          },
+          "item_id": "pubmedqa-pqal-10331115::evidence-withheld",
+          "selection_scores_if_native": {
+            "clinical_control": 0.5476577449322726,
+            "clinical_control_target_0_8_threshold": 0.5108642397223772,
+            "paper": 2.276727485459712e-06,
+            "paper_target_0_8_threshold": 2.276727485459712e-06
+          },
+          "source_id": "10331115",
+          "stratum_id": "both-unsafe-on-insufficient",
+          "system_predictions_or_correctness": {
+            "clinical_control_action_correct": false,
+            "paper_action_correct": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "both-abstain-on-sufficient",
+      "member_count": 0,
+      "predicate": "gold_sufficient=true AND paper_selection_score<paper_frozen_target_0_8_threshold AND clinical_control_selection_score<control_frozen_target_0_8_threshold",
+      "selected": []
+    }
+  ],
+  "pubmedqa_strata": [
+    {
+      "id": "paper-control-correct-laya-wrong",
+      "member_count": 16,
+      "predicate": "paper_correct=true AND clinical_control_correct=true AND laya_correct=false",
+      "selected": [
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-10548670",
+          "source_id": "10548670",
+          "stratum_id": "paper-control-correct-laya-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "no"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-11943048",
+          "source_id": "11943048",
+          "stratum_id": "paper-control-correct-laya-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "maybe"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-12221908",
+          "source_id": "12221908",
+          "stratum_id": "paper-control-correct-laya-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "maybe"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "paper-control-wrong-laya-correct",
+      "member_count": 5,
+      "predicate": "paper_correct=false AND clinical_control_correct=false AND laya_correct=true",
+      "selected": [
+        {
+          "gold_label": "no",
+          "item_id": "pubmedqa-pqal-10966943",
+          "source_id": "10966943",
+          "stratum_id": "paper-control-wrong-laya-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "no"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "maybe",
+          "item_id": "pubmedqa-pqal-14599616",
+          "source_id": "14599616",
+          "stratum_id": "paper-control-wrong-laya-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "maybe"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "no",
+          "item_id": "pubmedqa-pqal-20187289",
+          "source_id": "20187289",
+          "stratum_id": "paper-control-wrong-laya-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "no"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-systems-wrong",
+      "member_count": 219,
+      "predicate": "paper_correct=false AND clinical_control_correct=false AND laya_correct=false",
+      "selected": [
+        {
+          "gold_label": "maybe",
+          "item_id": "pubmedqa-pqal-10223070",
+          "source_id": "10223070",
+          "stratum_id": "all-systems-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "no",
+          "item_id": "pubmedqa-pqal-10375486",
+          "source_id": "10375486",
+          "stratum_id": "all-systems-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "no",
+          "item_id": "pubmedqa-pqal-10381996",
+          "source_id": "10381996",
+          "stratum_id": "all-systems-wrong",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": false,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": false,
+              "prediction": "yes"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "all-systems-correct",
+      "member_count": 260,
+      "predicate": "paper_correct=true AND clinical_control_correct=true AND laya_correct=true",
+      "selected": [
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-10135926",
+          "source_id": "10135926",
+          "stratum_id": "all-systems-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-10158597",
+          "source_id": "10158597",
+          "stratum_id": "all-systems-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        },
+        {
+          "gold_label": "yes",
+          "item_id": "pubmedqa-pqal-10173769",
+          "source_id": "10173769",
+          "stratum_id": "all-systems-correct",
+          "system_predictions_or_correctness": {
+            "clinical_control": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "laya": {
+              "correct": true,
+              "prediction": "yes"
+            },
+            "paper": {
+              "correct": true,
+              "prediction": "yes"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "ranking": "source_id ascending lexicographic, then item_id ascending for deterministic tie-break",
+  "raw_clinical_text_export": false,
+  "schema_version": "0.1",
+  "selection_count_per_stratum": 3,
+  "selection_rule_id": "sg23-lexicographic-outcome-strata-v0.1"
+}
