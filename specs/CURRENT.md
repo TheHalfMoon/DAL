@@ -12,7 +12,7 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000018 — DAL-P08 Native licensed abstention benchmark and pre-results protocol replacement — CLOSED_CANONICAL.**
 - **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — CLOSED_CANONICAL at `3ca0dd2aae85a68473849108764a45a538de1019`.**
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
-- **SG-000021 — DAL-P08 Final-test authorization qualification — PROVEN by this canonical closeout state transition; implementation main is `1daa55d9742050f37fe56d2c84ccf4c8743ef984`.**
+- **SG-000021 — DAL-P08 Final-test authorization qualification — CLOSED_CANONICAL at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`; post-closeout GAXBench `36868102682` SUCCESS.**
 
 ## SG-000020 canonical evidence
 
@@ -52,13 +52,13 @@ Qualification evidence includes exact-head Linux/Windows Python 3.11/3.12 CI, ch
 
 ## SG-000021 canonical authorization evidence
 
-Research contract: Issue #80.
+Research contract: Issue #80 — completed.
 
 Canonical dependency:
 
 `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`
 
-Authorization implementation:
+Authorization implementation and closeout:
 
 - activation PR #81 merged at `f8ac88c34557902d760d49b36227010d4fdc46a9`;
 - implementation PR #82 exact head `c88bbac110169a48ae6ce2288c5228a0d2b9980f`;
@@ -66,7 +66,13 @@ Authorization implementation:
 - exact-head Alibaba OpenCodeReview `36866528579` — SUCCESS;
 - exact-head secure TypeSafe Jev `36866521762` — SUCCESS;
 - implementation merged normally at `1daa55d9742050f37fe56d2c84ccf4c8743ef984` with expected-head guard;
-- post-main GAXBench `36866791467` — SUCCESS.
+- implementation post-main GAXBench `36866791467` — SUCCESS;
+- governance closeout PR #83 exact head `6ff33ad96e636418429abf842175919243e66ecd`;
+- closeout GAXBench `36867843947` — SUCCESS;
+- closeout Alibaba OpenCodeReview `36867844045` — SUCCESS;
+- closeout secure TypeSafe Jev `36867843711` — SUCCESS;
+- closeout merged normally at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`;
+- post-closeout GAXBench `36868102682` — SUCCESS.
 
 Canonical authorization artifact:
 
@@ -78,19 +84,35 @@ Authorization SHA-256:
 
 The authorization is scoped **only** to `SG-000022`. SG-000021 itself executed no final-test inference and used exactly zero final-test rows. The authorization binds the required DAL paper candidate, clinical encoder, Laya, paper checkpoint, three authorization-critical dataset identities, frozen calibration, ECAL selection, FHIR selection, coverage targets, hardware protocol, multiplicity policy, failure accounting, and no-post-test-tuning policy.
 
-No model, checkpoint, seed, architecture, calibration, ECAL, FHIR, coverage, hardware, multiplicity, prompt/interface, comparison-family, or failure-accounting reselection is permitted after authorization. Any such change invalidates the authorization and requires a new governed experiment revision.
+No model, checkpoint, seed, architecture, calibration, ECAL, FHIR, coverage, hardware, multiplicity, prompt/interface, comparison-family, denominator, exclusion-rule, or failure-accounting reselection is permitted after authorization. Any such change invalidates the authorization and requires a new governed experiment revision.
 
-## Next frontier — SG-000022
+## Current frontier — SG-000022
 
-**P08 final evaluation under canonical authorization**
+**P08 authorized primary final evaluation**
 
-State: **NOT YET ACTIVATED**
+State: **ACTIVE through this governance activation transition**
 
-SG-000022 may be activated only from the canonical SG-000021 closeout. It may consume the SG-000021 authorization artifact and access only the preregistered final-test surfaces bound by that artifact.
+Research contract: Issue #84.
 
-The next grain must preserve complete requested/completed/failure accounting; generate immutable raw result artifacts; retain null, negative, timeout, OOM, transport, parse, and interface failures; and prohibit all post-test tuning or reselection.
+Canonical dependency:
 
-No paper claim becomes supported merely because SG-000021 authorized evaluation. Claims require SG-000022 result evidence and later claim-ledger qualification.
+`ef36ae4d050cf2e1bb7ada07f4054b083e886045`
+
+Canonical authorization digest:
+
+`626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
+
+Activation is governance-only. This activation transition must execute zero final-test rows and must not read final-test labels, predictions, metrics, or errors. A separate implementation PR is required after canonical activation and successful post-main qualification before final-test inference may begin.
+
+The authorized primary final-test surfaces remain exactly:
+
+1. `pubmedqa-pqal` — 500 sealed rows;
+2. `gax-native-abstention-pqal` — 1000 sealed derived variants;
+3. `fhir-agentbench` — 173 patient-disjoint sealed rows.
+
+The implementation must consume only the canonical authorization artifact, fail closed on any identity/policy mismatch, persist immutable raw result artifacts before derived analysis, preserve complete requested/completed/failure accounting, and retain all null, negative, timeout, OOM, transport, parse, and interface outcomes.
+
+No paper claim becomes supported merely because SG-000022 is active or because final-test inference runs. Claims require qualified immutable result evidence and later claim-ledger mapping.
 
 ## Core P08 invariants
 
@@ -99,6 +121,7 @@ final-test access != model selection
 inventory readiness != final-test authorization
 authorization candidate != authorization
 authorization != evaluation
+evaluation != supported claim
 confidence != information sufficiency
 abstain != candidate action
 calibration != model retraining
@@ -110,6 +133,6 @@ blocked dependency != permission to hide it
 formatting equality != semantic evidence equality
 ```
 
-No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until SG-000022 runs exactly under the canonical SG-000021 authorization and the resulting evidence is qualified.
+No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until SG-000022 executes exactly under the canonical SG-000021 authorization and the resulting evidence is independently qualified.
 
 Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.
