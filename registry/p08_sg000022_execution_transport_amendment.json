@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1",
+  "grain_id": "SG-000022",
+  "amendment_id": "sg000022-execution-transport-v0.1",
+  "created_before_final_test_access": true,
+  "final_test_rows_used_before_amendment": 0,
+  "outcome_information_used": false,
+  "implementation_main_sha": "42e09ca1b1431340b26fe57ae318ff1b1b662fc3",
+  "implementation_post_main_run": 36886206716,
+  "implementation_post_main_conclusion": "success",
+  "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+  "reason": "The connected GitHub execution interface available to the autonomous agent cannot dispatch workflow_dispatch. Replace only the execution transport with a fail-closed one-shot canonical-main merge trigger so the already-authorized frozen evaluation can execute without manual intervention.",
+  "previous_transport": "workflow_dispatch-main-only-with-authorization-token",
+  "replacement_transport": "canonical-main-merge-once-v0.1",
+  "one_shot_guards": [
+    "main branch only",
+    "GITHUB_RUN_ATTEMPT must equal 1",
+    "merge first parent must equal the qualified implementation main SHA",
+    "execution sentinel must be newly added by that canonical merge",
+    "execution sentinel payload must exactly bind SG-000022, implementation main, post-main run, and authorization digest"
+  ],
+  "scientific_policy_changed": false,
+  "unchanged_scientific_bindings": [
+    "models and system qualification bundles",
+    "paper checkpoint",
+    "dataset memberships and denominators",
+    "calibration and ECAL",
+    "FHIR representation and pre-execution interface block",
+    "coverage targets 0.50/0.80/0.90",
+    "CI level 0.95",
+    "bootstrap replicates 10000 and seed 1729",
+    "primary comparison and benchmark primary metrics",
+    "hardware protocol p08-hardware-stratified-v0.1",
+    "multiplicity policy holm-primary-family-v0.1",
+    "failure accounting",
+    "no-post-test-tuning and no-reselection policies"
+  ],
+  "zero_founder_cost": true
+}
