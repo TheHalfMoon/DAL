@@ -10,15 +10,17 @@
     "qualitative_examples.json",
     "evidence_packets.json",
     "claim_ledger.json",
+    "claim_freeze_manifest.json",
     "figure_reliability.svg",
     "figure_risk_coverage.svg",
     "provenance_index.json"
   ],
   "artifact_sha256": {
-    "claim_ledger.json": "b7e78ba6ce793f2139e01e45b3fd9d0c3160e259208541676ba73206fb5a6028",
+    "claim_freeze_manifest.json": "baa6268b3f3674ca8863f5496047710aa784bd613ea8c51b88482939d5a41fec",
+    "claim_ledger.json": "3ec51e8713cbcd35a425ed68fad3e248dff1e82b260ab274b1df01ed43056053",
     "ecal_selection_table.json": "1e977fa161fb1fbac5a805a7dff3dee7a943868415f3241cf5829824901f4078",
     "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
-    "evidence_packets.json": "d9dd8f7a51db0648327eb485bb11aefe36e05d3e2332edb4df87fea3667069e6",
+    "evidence_packets.json": "a344a579a7e3528791f285574d57ba9b80efff051b1f399eeaf52182e2aa2f49",
     "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
     "figure_reliability.svg": "68efc9d5844f50f9e6b60ff109746ef353f977f03000ddd936652b90d7787074",
     "figure_risk_coverage.svg": "1e54a247f5f451c6d4a9c56350568e459da356cafd394ca0a72431fcc5a6e0de",
@@ -28,7 +30,7 @@
     "risk_coverage_source_data.json": "c5c5d39c69f43245009e06db1f9aa21af9c1cd9b139d63590569485de738b08c",
     "selective_results.json": "44661dfca6b96bcd90c73a4c877c4a6c39db08008943500dd764502c2f9c50ff"
   },
-  "canonical_main_dependency": "a18c1e10a0d9eba16ba8bffc55b29988507772ff",
+  "canonical_main_dependency": "fabbfdd9045415d49f91d56e4e1ba3cd24ac5c1d",
   "canonical_sources": [
     "experiments/p04/decision_ledger.json",
     "registry/p08_calibration_evidence_sg000020.json",

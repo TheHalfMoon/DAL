@@ -307,15 +307,24 @@
       ]
     },
     {
-      "canonical_sources": [],
-      "derivation_inputs": [],
-      "derived_artifacts": [],
+      "canonical_sources": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000023_related_work_refresh.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000023_related_work_refresh.json"
+      ],
+      "derived_artifacts": [
+        "claim_freeze_manifest.json"
+      ],
       "matrix_row_id": "p08-final-result-freeze",
       "matrix_row_status": "available",
       "packet_id": "EP-SG23-FREEZE-001",
-      "pending_reason": "The final result/claim freeze is a later SG-000023 governance stage that requires the related-work refresh; this package does not freeze claims.",
-      "scope": "P08 final result and claim freeze manifest",
-      "status": "declared-pending-later-stage",
+      "scope": "P08 final result and claim freeze manifest binding final-evaluation digests and the frozen claim set",
+      "status": "supported",
       "supporting_sources": []
     }
   ],

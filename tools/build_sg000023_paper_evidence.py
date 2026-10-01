@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from collections.abc import Callable, Iterator, Mapping
 from pathlib import Path
 from typing import Any
@@ -28,7 +29,7 @@ RAW_LAYA_PATH = FINAL_ROOT / "raw-laya-pubmedqa-predictions.json"
 RAW_NATIVE_PATH = FINAL_ROOT / "raw-native-abstention-predictions.json"
 RAW_PUBMED_PATH = FINAL_ROOT / "raw-pubmedqa-predictions.json"
 
-CANONICAL_MAIN_DEPENDENCY = "a18c1e10a0d9eba16ba8bffc55b29988507772ff"
+CANONICAL_MAIN_DEPENDENCY = "fabbfdd9045415d49f91d56e4e1ba3cd24ac5c1d"
 
 # Byte-level SHA-256 of every canonical input. Final-evaluation and SG-000020/SG-000023 contract
 # inputs are pinned as of the canonical main dependency; the dated related-work record is the
@@ -67,6 +68,7 @@ BASE_ARTIFACT_NAMES: tuple[str, ...] = (
     "qualitative_examples.json",
     "evidence_packets.json",
     "claim_ledger.json",
+    "claim_freeze_manifest.json",
     "figure_reliability.svg",
     "figure_risk_coverage.svg",
 )
@@ -108,6 +110,7 @@ ARTIFACT_INPUTS: dict[str, tuple[Path, ...]] = {
         ECAL_PATH,
         P04_LEDGER_PATH,
     ),
+    "claim_freeze_manifest.json": (MANIFEST_PATH, METRICS_PATH, RELATED_WORK_PATH),
     PROVENANCE_INDEX_NAME: tuple(FROZEN_SOURCE_SHA256),
 }
 for _figure, _source in FIGURE_SOURCES.items():
@@ -223,11 +226,10 @@ PACKET_SPECS: tuple[dict[str, Any], ...] = (
     {
         "packet_id": "EP-SG23-FREEZE-001",
         "matrix_row_id": "p08-final-result-freeze",
-        "status": PENDING_PACKET_STATUS,
-        "derived_artifacts": [],
+        "status": "supported",
+        "derived_artifacts": ["claim_freeze_manifest.json"],
         "supporting_sources": [],
-        "scope": "P08 final result and claim freeze manifest",
-        "pending_reason": "The final result/claim freeze is a later SG-000023 governance stage that requires the related-work refresh; this package does not freeze claims.",
+        "scope": "P08 final result and claim freeze manifest binding final-evaluation digests and the frozen claim set",
     },
 )
 
@@ -1004,6 +1006,106 @@ def _evidence_packets(src: SourceView) -> dict[str, Any]:
     }
 
 
+AFFIRMATIVE = "affirmative-claim"
+LIMITATION = "limitation-statement"
+
+# Phrases that no exportable claim text may contain (whole-word, case-insensitive).
+GLOBAL_PROHIBITED_PHRASES: tuple[str, ...] = (
+    "state of the art",
+    "sota",
+    "clinically safe",
+    "clinically validated",
+    "deployment-ready",
+    "regulatory",
+    "outperforms",
+    "significant",
+    "significantly",
+    "first",
+    "novel",
+)
+
+# Frozen public-use policy for every claim: (public_use, prohibited wording, scope/limitations).
+CLAIM_POLICY: dict[str, tuple[str, tuple[str, ...], str]] = {
+    "SG23-C001": (
+        AFFIRMATIVE,
+        ("DAL improves accuracy", "DAL is more accurate", "clinically accurate"),
+        "Frozen PubMedQA PQA-L final rows only; descriptive accuracy, not clinical correctness.",
+    ),
+    "SG23-C002": (
+        AFFIRMATIVE,
+        ("superior to the control", "non-inferior", "statistically significant"),
+        "Frozen paired bootstrap only; no p-value or non-inferiority margin was preregistered.",
+    ),
+    "SG23-C003": (
+        AFFIRMATIVE,
+        ("Laya is calibrated", "calibrated Laya confidence", "Laya reliability"),
+        "Laya action accuracy only; affected Laya confidence is uncalibrated and excluded.",
+    ),
+    "SG23-C004": (
+        AFFIRMATIVE,
+        ("safe abstention", "meets its coverage target", "reliable abstention policy"),
+        "Frozen target-coverage policy outcome; a negative result that must remain visible.",
+    ),
+    "SG23-C005": (
+        AFFIRMATIVE,
+        ("superior abstention", "safer than the control", "better selective risk"),
+        "Descriptive frozen-protocol difference; no superiority, significance, or safety claim.",
+    ),
+    "SG23-C006": (
+        AFFIRMATIVE,
+        ("FHIR performance", "FHIR-capable", "FHIR compliant"),
+        "Pre-execution interface block only; no FHIR action-selection result exists.",
+    ),
+    "SG23-C007": (
+        LIMITATION,
+        ("evidence-grounded", "causally grounded", "robust to evidence interventions"),
+        "Limitation statement; P06 evidence is synthetic mechanics only.",
+    ),
+    "SG23-C008": (
+        LIMITATION,
+        ("robust to distribution shift", "generalizes across populations"),
+        "Limitation statement; no preregistered slice semantics exist for final rows.",
+    ),
+    "SG23-C009": (
+        LIMITATION,
+        ("faster", "more efficient", "lower latency", "lower memory"),
+        "Limitation statement; matched hardware evidence under p08-hardware-stratified-v0.1 is absent.",
+    ),
+    "SG23-C010": (
+        LIMITATION,
+        ("clinically safe", "deployment-ready", "regulatory-ready", "state of the art", "superior"),
+        "Limitation statement covering superiority, safety, SOTA, FHIR, and efficiency claims.",
+    ),
+    "SG23-C011": (
+        LIMITATION,
+        ("first", "novel method", "unique"),
+        "Limitation statement derived from the dated related-work refresh.",
+    ),
+    "SG23-C012": (
+        AFFIRMATIVE,
+        ("first", "novel method", "state of the art", "clinically validated"),
+        "Describes this study only; never phrased as first, as a novel method, or as state of the art.",
+    ),
+    "SG23-C013": (
+        LIMITATION,
+        ("ECAL improves", "evidence-calibrated training improves", "validated ECAL benefit"),
+        "Limitation statement; no measured ECAL benefit and no final-test ECAL ablation exist.",
+    ),
+    "SG23-C014": (
+        AFFIRMATIVE,
+        ("DAL improves action selection", "different action predictions"),
+        "Exact equality counts over raw final rows; descriptive only.",
+    ),
+}
+
+
+def _contains_phrase(text: str, phrase: str) -> bool:
+    return (
+        re.search(r"(?<![\w-])" + re.escape(phrase.lower()) + r"(?![\w-])", text.lower())
+        is not None
+    )
+
+
 def _claim(
     claim_id: str,
     status: str,
@@ -1185,18 +1287,82 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
         ),
         _claim(
             "SG23-C012",
-            "candidate-scoped-description",
-            False,
-            f"{retained[0]['permitted_wording']} Scope: {retained[0]['scope']}",
-            "EP-SG23-LIT-001",
+            "supported-scoped-description",
+            True,
+            retained[0]["permitted_wording"],
+            "EP-SG23-FREEZE-001",
             [RELATED_WORK_PATH],
         ),
     ]
+    for claim in claims:
+        public_use, prohibited, scope = CLAIM_POLICY[claim["claim_id"]]
+        claim["public_use"] = public_use
+        claim["prohibited_wording"] = list(prohibited)
+        claim["scope_limitations"] = scope
+    claims.sort(key=lambda claim: claim["claim_id"])
     return {
         "schema_version": "0.1",
         "grain_id": "SG-000023",
         "claim_ledger_id": "sg23-claim-ledger-v0.1",
+        "wording_policy": {
+            "text": "the only permitted public wording for the claim",
+            AFFIRMATIVE: "may be stated affirmatively in manuscript, README, release, and abstract text",
+            LIMITATION: "may be stated only as a limitation, null, blocked, or disclaimer statement",
+            "global_prohibited_phrases": list(GLOBAL_PROHIBITED_PHRASES),
+        },
         "claims": claims,
+    }
+
+
+def _claim_digest(claim: dict[str, Any]) -> str:
+    return _sha256_bytes(_dump(claim).encode("utf-8"))
+
+
+def _claim_freeze(src: SourceView, ledger: dict[str, Any]) -> dict[str, Any]:
+    manifest = src[MANIFEST_PATH]
+    metrics = src[METRICS_PATH]
+    related_work = src[RELATED_WORK_PATH]
+    claims = [
+        {
+            "claim_id": claim["claim_id"],
+            "status": claim["status"],
+            "exportable": claim["exportable"],
+            "public_use": claim["public_use"],
+            "evidence_packet_id": claim["evidence_packet_id"],
+            "claim_sha256": _claim_digest(claim),
+        }
+        for claim in ledger["claims"]
+    ]
+    return {
+        "schema_version": "0.1",
+        "grain_id": "SG-000023",
+        "freeze_id": "sg23-p08-final-result-and-claim-freeze-v0.1",
+        "frozen_against_main": CANONICAL_MAIN_DEPENDENCY,
+        "final_result_freeze": {
+            "source_final_evaluation_run": manifest["source_workflow_run_id"],
+            "source_artifact_id": manifest["source_artifact_id"],
+            "source_artifact_zip_sha256": manifest["source_artifact_zip_sha256"],
+            "authorization_digest": manifest["authorization_digest"],
+            "final_manifest_sha256": FROZEN_SOURCE_SHA256[MANIFEST_PATH],
+            "final_metrics_sha256": FROZEN_SOURCE_SHA256[METRICS_PATH],
+            "results": manifest["results"],
+            "multiplicity": metrics["multiplicity"],
+            "post_test_tuning_permitted": manifest["post_test_tuning_permitted"],
+        },
+        "claim_freeze": {
+            "related_work_search_date": related_work["search_date"],
+            "claims": claims,
+            "claim_set_sha256": _sha256_bytes(_dump(claims).encode("utf-8")),
+            "exportable_claim_ids": [row["claim_id"] for row in claims if row["exportable"]],
+            "limitation_claim_ids": [
+                row["claim_id"] for row in claims if row["public_use"] == LIMITATION
+            ],
+        },
+        "change_policy": (
+            "Frozen. Any change to a frozen result, claim text, status, exportability, wording "
+            "policy, or evidence binding requires a new governed SpecGrain with exact-head "
+            "qualification; no change may be motivated by final-test outcomes."
+        ),
     }
 
 
@@ -1224,7 +1390,10 @@ def _build_base_artifacts(loaded: Mapping[Path, Any]) -> dict[str, Any]:
             continue
         inputs = ARTIFACT_INPUTS[name]
         view = SourceView(loaded, inputs)
-        payload = DERIVATIONS[name](view)
+        if name == "claim_freeze_manifest.json":
+            payload = _claim_freeze(view, artifacts["claim_ledger.json"])
+        else:
+            payload = DERIVATIONS[name](view)
         unread = set(inputs) - view.accessed
         if unread:
             raise ValueError(
@@ -1314,7 +1483,29 @@ def validate_package(artifacts: dict[str, Any], matrix: dict[str, Any]) -> list[
     if uncovered:
         errors.append(f"artifacts not bound to any packet: {sorted(uncovered)}")
 
-    for claim in artifacts["claim_ledger.json"]["claims"]:
+    claim_rows = artifacts["claim_ledger.json"]["claims"]
+    if [claim["claim_id"] for claim in claim_rows] != sorted(CLAIM_POLICY):
+        errors.append("claim ledger does not cover exactly the frozen claim policy in order")
+    frozen = artifacts["claim_freeze_manifest.json"]["claim_freeze"]["claims"]
+    if [row["claim_id"] for row in frozen] != [claim["claim_id"] for claim in claim_rows]:
+        errors.append("claim freeze manifest does not list the claim ledger claims")
+    for row, claim in zip(frozen, claim_rows, strict=False):
+        if row["claim_sha256"] != _claim_digest(claim):
+            errors.append(f"claim freeze digest mismatch: {claim['claim_id']}")
+    for claim in claim_rows:
+        if claim.get("public_use") not in {AFFIRMATIVE, LIMITATION}:
+            errors.append(f"claim without public-use class: {claim['claim_id']}")
+        if not claim.get("prohibited_wording") or not claim.get("scope_limitations"):
+            errors.append(f"claim without prohibited wording or scope: {claim['claim_id']}")
+        if claim["exportable"] != (claim.get("public_use") == AFFIRMATIVE):
+            errors.append(f"claim exportability disagrees with public use: {claim['claim_id']}")
+        if claim["exportable"]:
+            for phrase in (*GLOBAL_PROHIBITED_PHRASES, *claim.get("prohibited_wording", [])):
+                if _contains_phrase(claim["text"], phrase):
+                    errors.append(
+                        f"exportable claim {claim['claim_id']} uses prohibited '{phrase}'"
+                    )
+    for claim in claim_rows:
         packet_id = claim["evidence_packet_id"]
         if claim["exportable"]:
             if packet_id is None:

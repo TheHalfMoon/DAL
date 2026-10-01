@@ -1,0 +1,191 @@
+{
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/manifest.json",
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000023_related_work_refresh.json"
+  ],
+  "change_policy": "Frozen. Any change to a frozen result, claim text, status, exportability, wording policy, or evidence binding requires a new governed SpecGrain with exact-head qualification; no change may be motivated by final-test outcomes.",
+  "claim_freeze": {
+    "claim_set_sha256": "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b",
+    "claims": [
+      {
+        "claim_id": "SG23-C001",
+        "claim_sha256": "2d331aaf74257cc94cfcb304fe4520b1fa317dd3a474395b81b9f40f72a91411",
+        "evidence_packet_id": "EP-SG23-ACTION-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported"
+      },
+      {
+        "claim_id": "SG23-C002",
+        "claim_sha256": "d4525363d3881960f9f727a58b1d95525211db3d6c0d2d991d2ea1adc7720def",
+        "evidence_packet_id": "EP-SG23-ACTION-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-descriptive-only"
+      },
+      {
+        "claim_id": "SG23-C003",
+        "claim_sha256": "519f6fad5b35490395ca263215369de09497386863bbb5468b4871b66970b54f",
+        "evidence_packet_id": "EP-SG23-CAL-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-with-calibration-limitation"
+      },
+      {
+        "claim_id": "SG23-C004",
+        "claim_sha256": "11882596d9b04fb2eef7e970ac8abbc97c34faf5392aad37cb3f479112f564ce",
+        "evidence_packet_id": "EP-SG23-SELECTIVE-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-negative-result"
+      },
+      {
+        "claim_id": "SG23-C005",
+        "claim_sha256": "d394685b5bf422f4d92108dcfae3a0e9f44a4cb6dda730a07ffa106b01be2faf",
+        "evidence_packet_id": "EP-SG23-SELECTIVE-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-descriptive-only"
+      },
+      {
+        "claim_id": "SG23-C006",
+        "claim_sha256": "3139ef569f41c842e7fcb0d6f47992f65d645e039d1e170c4b576c06e65d271a",
+        "evidence_packet_id": "EP-SG23-FHIR-BLOCK-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-blocked-result"
+      },
+      {
+        "claim_id": "SG23-C007",
+        "claim_sha256": "3bb1574c42b842bb3f01c04896fbe301cad12d61636dcc199fd48e1d25316406",
+        "evidence_packet_id": null,
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "blocked"
+      },
+      {
+        "claim_id": "SG23-C008",
+        "claim_sha256": "4ec6a2e411601cd8b59b45bb25006e8eeb940e277b7610b1b7a5bb304196b52d",
+        "evidence_packet_id": null,
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "unavailable"
+      },
+      {
+        "claim_id": "SG23-C009",
+        "claim_sha256": "a744c64eb3f11f1c4bcf4468eda6319fc989fcf143ca269dbce8c1aef0fe45cd",
+        "evidence_packet_id": null,
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "blocked"
+      },
+      {
+        "claim_id": "SG23-C010",
+        "claim_sha256": "7ffe39b19bd7d9ad738242384cdb66161eb8f86b64562bcb07388ff25cf64d93",
+        "evidence_packet_id": null,
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "not-claimed"
+      },
+      {
+        "claim_id": "SG23-C011",
+        "claim_sha256": "0a035afbeb2b9677e34f598f44088339d457c9c7937b365b7a4c6abd055432d4",
+        "evidence_packet_id": "EP-SG23-LIT-001",
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "not-claimed"
+      },
+      {
+        "claim_id": "SG23-C012",
+        "claim_sha256": "35d9e3d7c37f71373b96ff956c72a329d06f06fc20f423c0f88dcaa3c931076e",
+        "evidence_packet_id": "EP-SG23-FREEZE-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-scoped-description"
+      },
+      {
+        "claim_id": "SG23-C013",
+        "claim_sha256": "03f30d3fe250f54582971c972dee3ac11fda0565349b08200096f81cc5fbf4a0",
+        "evidence_packet_id": "EP-SG23-ECAL-001",
+        "exportable": false,
+        "public_use": "limitation-statement",
+        "status": "unavailable"
+      },
+      {
+        "claim_id": "SG23-C014",
+        "claim_sha256": "936fc5443c6e4cc978dff9ba4b2703eaa30321a9eef699538ee1b1c7c09ccde1",
+        "evidence_packet_id": "EP-SG23-TABLES-001",
+        "exportable": true,
+        "public_use": "affirmative-claim",
+        "status": "supported-descriptive-only"
+      }
+    ],
+    "exportable_claim_ids": [
+      "SG23-C001",
+      "SG23-C002",
+      "SG23-C003",
+      "SG23-C004",
+      "SG23-C005",
+      "SG23-C006",
+      "SG23-C012",
+      "SG23-C014"
+    ],
+    "limitation_claim_ids": [
+      "SG23-C007",
+      "SG23-C008",
+      "SG23-C009",
+      "SG23-C010",
+      "SG23-C011",
+      "SG23-C013"
+    ],
+    "related_work_search_date": "2026-10-01"
+  },
+  "final_result_freeze": {
+    "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+    "final_manifest_sha256": "6ac53a51eb6caf373a691333c8241b2b7301cde81caa0dda02871154ba2b6dd1",
+    "final_metrics_sha256": "da2e41e7ecda10c2f7dad60b28ad386e160f028b58f76414d7645512633161db",
+    "multiplicity": {
+      "policy": "holm-primary-family-v0.1",
+      "reason": "The frozen statistics layer specifies confidence intervals and Holm policy but does not freeze a primary p-value construction. No significance or superiority claim is emitted from SG-000022.",
+      "status": "no-p-values-emitted"
+    },
+    "post_test_tuning_permitted": false,
+    "results": {
+      "fhir_agentbench": {
+        "completed_per_required_system": 0,
+        "interface_failures_per_required_system": 173,
+        "requested": 173,
+        "status": "interface-blocked-preexecution"
+      },
+      "native_abstention": {
+        "clinical_control_risk_at_80": 0.6675,
+        "paper_minus_control_risk_at_80": -0.012499999999999956,
+        "paper_minus_control_risk_at_80_ci95": [
+          -0.020000000000000018,
+          -0.004999999999999893
+        ],
+        "paper_risk_at_80": 0.655,
+        "requested": 1000
+      },
+      "pubmedqa": {
+        "clinical_control_accuracy": 0.552,
+        "laya_accuracy": 0.53,
+        "paper_accuracy": 0.552,
+        "paper_minus_control_accuracy": 0.0,
+        "paper_minus_control_accuracy_ci95": [
+          0.0,
+          0.0
+        ],
+        "requested": 500
+      }
+    },
+    "source_artifact_id": 11176566473,
+    "source_artifact_zip_sha256": "8dcd894be6ae184aaf5311417d268a5500b89d0d78d14ee7a79305fbb3071136",
+    "source_final_evaluation_run": 36886952302
+  },
+  "freeze_id": "sg23-p08-final-result-and-claim-freeze-v0.1",
+  "frozen_against_main": "fabbfdd9045415d49f91d56e4e1ba3cd24ac5c1d",
+  "grain_id": "SG-000023",
+  "schema_version": "0.1"
+}
