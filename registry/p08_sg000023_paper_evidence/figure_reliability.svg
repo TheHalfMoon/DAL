@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="540" viewBox="0 0 520 540">
+<metadata>source=reliability_source_data.json source_sha256=c08450e439f479670e111a983be261a33671ea8f44d2c366799a4bc37855310e grain=SG-000023</metadata>
+<rect x="0" y="0" width="520" height="540" fill="#ffffff"/>
+<rect x="60" y="40" width="400" height="400" fill="none" stroke="#000000" stroke-width="1"/>
+<text x="260" y="24" text-anchor="middle" font-family="sans-serif" font-size="14">Reliability (PubMedQA final rows)</text>
+<text x="260" y="480" text-anchor="middle" font-family="sans-serif" font-size="12">mean confidence</text>
+<text x="18" y="240" text-anchor="middle" font-family="sans-serif" font-size="12" transform="rotate(-90 18 240)">accuracy</text>
+<line x1="60.00" y1="440" x2="60.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="60.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">0.0</text>
+<line x1="55" y1="440.00" x2="60" y2="440.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="440.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">0.0</text>
+<line x1="140.00" y1="440" x2="140.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="140.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">0.2</text>
+<line x1="55" y1="360.00" x2="60" y2="360.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="360.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">0.2</text>
+<line x1="220.00" y1="440" x2="220.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="220.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">0.4</text>
+<line x1="55" y1="280.00" x2="60" y2="280.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="280.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">0.4</text>
+<line x1="300.00" y1="440" x2="300.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="300.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">0.6</text>
+<line x1="55" y1="200.00" x2="60" y2="200.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="200.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">0.6</text>
+<line x1="380.00" y1="440" x2="380.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="380.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">0.8</text>
+<line x1="55" y1="120.00" x2="60" y2="120.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="120.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">0.8</text>
+<line x1="460.00" y1="440" x2="460.00" y2="445" stroke="#000000" stroke-width="1"/>
+<text x="460.00" y="458" text-anchor="middle" font-family="sans-serif" font-size="10">1.0</text>
+<line x1="55" y1="40.00" x2="60" y2="40.00" stroke="#000000" stroke-width="1"/>
+<text x="50" y="40.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10">1.0</text>
+<line x1="60.00" y1="440.00" x2="460.00" y2="40.00" stroke="#888888" stroke-width="1" stroke-dasharray="4 4"/>
+<polyline points="268.27,201.24 282.64,224.36 303.07,255.38" fill="none" stroke="#1f4e9c" stroke-width="1.5"/>
+<circle cx="268.27" cy="201.24" r="3" fill="#1f4e9c"/>
+<circle cx="282.64" cy="224.36" r="3" fill="#1f4e9c"/>
+<circle cx="303.07" cy="255.38" r="3" fill="#1f4e9c"/>
+<polyline points="268.27,201.24 282.64,224.36 303.07,255.38" fill="none" stroke="#c2410c" stroke-width="1.5"/>
+<circle cx="268.27" cy="201.24" r="3" fill="#c2410c"/>
+<circle cx="282.64" cy="224.36" r="3" fill="#c2410c"/>
+<circle cx="303.07" cy="255.38" r="3" fill="#c2410c"/>
+<line x1="300" y1="60" x2="320" y2="60" stroke="#1f4e9c" stroke-width="2"/>
+<text x="326" y="60" dominant-baseline="middle" font-family="sans-serif" font-size="11">DAL paper system</text>
+<line x1="300" y1="76" x2="320" y2="76" stroke="#c2410c" stroke-width="2"/>
+<text x="326" y="76" dominant-baseline="middle" font-family="sans-serif" font-size="11">clinical control</text>
+<text x="260" y="525" text-anchor="middle" font-family="sans-serif" font-size="10">15 equal-width bins; empty bins omitted; Laya excluded (uncalibrated confidence)</text>
+</svg>

@@ -123,7 +123,12 @@ def test_literature_packet_and_claim_binding() -> None:
 
 def test_literature_packet_cannot_support_exportable_claim() -> None:
     builder = _builder()
-    package = {name: _load(name) for name in builder.ARTIFACT_NAMES}
+    package = {
+        name: (EVIDENCE / name).read_text(encoding="utf-8")
+        if name in builder.FIGURE_SOURCES
+        else _load(name)
+        for name in builder.ARTIFACT_NAMES
+    }
     matrix = json.loads(builder.MATRIX_PATH.read_text(encoding="utf-8"))
     tampered = copy.deepcopy(package)
     for claim in tampered["claim_ledger.json"]["claims"]:
