@@ -267,9 +267,12 @@ def _verify_sg000020_evidence(root: Path) -> None:
     ecal = EcalDecisionLedger.model_validate(
         _load_json(registry / "p08_ecal_selection_ledger_sg000020.json")
     )
-    fhir = FhirSelectionEvidence.model_validate(
-        _load_json(registry / "p08_fhir_selection_ledger_sg000020.json")
-    )
+    fhir_payload = _load_json(registry / "p08_fhir_selection_ledger_sg000020.json")
+    if fhir_payload.pop("fhir_representation_revision", None) != "gax-fhir-v0.1":
+        raise ValueError("FHIR representation revision drift")
+    if fhir_payload.pop("missing_reference_sha256s", None) != []:
+        raise ValueError("FHIR missing-reference ledger drift")
+    fhir = FhirSelectionEvidence.model_validate(fhir_payload)
     candidate = AuthorizationCandidate.model_validate(
         _load_json(registry / "p08_final_test_authorization_candidate_sg000020.json")
     )
