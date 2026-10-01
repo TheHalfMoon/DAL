@@ -114,7 +114,8 @@ Tasks:
 - [x] Guarded normal implementation merge with expected-head SHA
 - [x] Post-main qualification
 - [x] Canonical evidence promotion with byte/semantic digest verification
-- [x] Separate SG-000020 canonical closeout
+- [x] Separate SG-000020 canonical closeout at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`
+- [x] SG-000020 post-closeout GAXBench `36839981925` SUCCESS
 
 Final-test access remained **sealed** throughout SG-000020.
 
@@ -135,9 +136,11 @@ Final-test access remained **sealed** throughout SG-000020.
 
 Final-test access remains **sealed** until the last item above is satisfied.
 
-### SG-000021 — Final-test authorization qualification (NEXT)
+### SG-000021 — Final-test authorization qualification (ACTIVE)
 
-- [ ] Activate a separate research contract and SpecGrain for final-test authorization
+Research contract: Issue #80. Canonical dependency: `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.
+
+- [x] Activate a separate research contract and SpecGrain for final-test authorization
 - [ ] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
 - [ ] Re-verify required-system bundle and paper-checkpoint identities
 - [ ] Re-verify immutable final-test split/source manifests and leakage boundaries
@@ -147,7 +150,7 @@ Final-test access remains **sealed** until the last item above is satisfied.
 - [ ] Merge authorization with normal expected-head guard
 - [ ] Verify post-main authorization state before any final-test inference
 
-No final-test inference is permitted before every SG-000021 authorization item above is proven canonically.
+SG-000021 is authorization-only. No final-test inference is permitted inside the grain. A separate final-evaluation grain is required after canonical authorization.
 
 ### Primary paper evaluation — after separate final-test authorization only
 
