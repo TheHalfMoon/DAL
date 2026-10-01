@@ -43,7 +43,7 @@ REQUIRED_SYSTEM_DIGESTS = {
     "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
 }
 
-REQUIRED_DATASETS = {
+REQUIRED_DATASETS: dict[str, dict[str, Any]] = {
     "pubmedqa-pqal": {
         "source_revision": "1cbae8e92f72f20c8d3747cbb3bf5bc53554d997",
         "data_revision_sha256": "8b3276be8942ebbd77f3ddcda12c1749bf0e490045a736fd8438ee40cf37a41d",
@@ -67,6 +67,16 @@ REQUIRED_DATASETS = {
     },
 }
 
+_FAILURE_ACCOUNTING = [
+    "requested",
+    "completed",
+    "timeout",
+    "oom",
+    "transport",
+    "interface",
+    "parse",
+]
+
 
 class DatasetAuthorizationBinding(StrictModel):
     id: str = Field(min_length=1)
@@ -85,37 +95,21 @@ class FinalTestAuthorizationArtifact(StrictModel):
     research_issue: Literal[80] = 80
     state: Literal["authorized-for-next-grain"] = "authorized-for-next-grain"
     authorized_grain: Literal["SG-000022"] = "SG-000022"
-    sg000020_closeout_sha: Literal[SG000020_CLOSEOUT_SHA] = SG000020_CLOSEOUT_SHA
-    sg000021_activation_sha: Literal[SG000021_ACTIVATION_SHA] = SG000021_ACTIVATION_SHA
+    sg000020_closeout_sha: str = SG000020_CLOSEOUT_SHA
+    sg000021_activation_sha: str = SG000021_ACTIVATION_SHA
     required_system_bundle_digests: dict[str, str]
-    paper_checkpoint_sha256: Literal[PAPER_CHECKPOINT_SHA256] = PAPER_CHECKPOINT_SHA256
+    paper_checkpoint_sha256: str = PAPER_CHECKPOINT_SHA256
     required_datasets: list[DatasetAuthorizationBinding]
-    calibration_manifest_sha256: Literal[CALIBRATION_MANIFEST_SHA256] = CALIBRATION_MANIFEST_SHA256
-    calibration_evidence_semantic_sha256: Literal[CALIBRATION_SEMANTIC_SHA256] = (
-        CALIBRATION_SEMANTIC_SHA256
-    )
-    ecal_selection_semantic_sha256: Literal[ECAL_SEMANTIC_SHA256] = ECAL_SEMANTIC_SHA256
-    fhir_selection_semantic_sha256: Literal[FHIR_SEMANTIC_SHA256] = FHIR_SEMANTIC_SHA256
-    selected_fhir_representation_semantic_sha256: Literal[FHIR_SELECTED_SEMANTIC_SHA256] = (
-        FHIR_SELECTED_SEMANTIC_SHA256
-    )
-    authorization_candidate_semantic_sha256: Literal[
-        AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256
-    ] = AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256
+    calibration_manifest_sha256: str = CALIBRATION_MANIFEST_SHA256
+    calibration_evidence_semantic_sha256: str = CALIBRATION_SEMANTIC_SHA256
+    ecal_selection_semantic_sha256: str = ECAL_SEMANTIC_SHA256
+    fhir_selection_semantic_sha256: str = FHIR_SEMANTIC_SHA256
+    selected_fhir_representation_semantic_sha256: str = FHIR_SELECTED_SEMANTIC_SHA256
+    authorization_candidate_semantic_sha256: str = AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256
     coverage_targets: list[float] = Field(default_factory=lambda: list(COVERAGE_TARGETS))
-    hardware_protocol_revision: Literal[HARDWARE_PROTOCOL_REVISION] = HARDWARE_PROTOCOL_REVISION
-    multiplicity_policy: Literal[MULTIPLICITY_POLICY] = MULTIPLICITY_POLICY
-    failure_accounting: list[str] = Field(
-        default_factory=lambda: [
-            "requested",
-            "completed",
-            "timeout",
-            "oom",
-            "transport",
-            "interface",
-            "parse",
-        ]
-    )
+    hardware_protocol_revision: str = HARDWARE_PROTOCOL_REVISION
+    multiplicity_policy: str = MULTIPLICITY_POLICY
+    failure_accounting: list[str] = Field(default_factory=lambda: list(_FAILURE_ACCOUNTING))
     no_post_test_tuning: Literal[True] = True
     architecture_reopening_forbidden: Literal[True] = True
     calibration_refit_forbidden: Literal[True] = True
@@ -129,19 +123,48 @@ class FinalTestAuthorizationArtifact(StrictModel):
 
     @model_validator(mode="after")
     def validate_frozen_authorization(self) -> FinalTestAuthorizationArtifact:
+        scalar_bindings = {
+            "sg000020_closeout_sha": (self.sg000020_closeout_sha, SG000020_CLOSEOUT_SHA),
+            "sg000021_activation_sha": (self.sg000021_activation_sha, SG000021_ACTIVATION_SHA),
+            "paper_checkpoint_sha256": (self.paper_checkpoint_sha256, PAPER_CHECKPOINT_SHA256),
+            "calibration_manifest_sha256": (
+                self.calibration_manifest_sha256,
+                CALIBRATION_MANIFEST_SHA256,
+            ),
+            "calibration_evidence_semantic_sha256": (
+                self.calibration_evidence_semantic_sha256,
+                CALIBRATION_SEMANTIC_SHA256,
+            ),
+            "ecal_selection_semantic_sha256": (
+                self.ecal_selection_semantic_sha256,
+                ECAL_SEMANTIC_SHA256,
+            ),
+            "fhir_selection_semantic_sha256": (
+                self.fhir_selection_semantic_sha256,
+                FHIR_SEMANTIC_SHA256,
+            ),
+            "selected_fhir_representation_semantic_sha256": (
+                self.selected_fhir_representation_semantic_sha256,
+                FHIR_SELECTED_SEMANTIC_SHA256,
+            ),
+            "authorization_candidate_semantic_sha256": (
+                self.authorization_candidate_semantic_sha256,
+                AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256,
+            ),
+            "hardware_protocol_revision": (
+                self.hardware_protocol_revision,
+                HARDWARE_PROTOCOL_REVISION,
+            ),
+            "multiplicity_policy": (self.multiplicity_policy, MULTIPLICITY_POLICY),
+        }
+        for name, (actual, expected) in scalar_bindings.items():
+            if actual != expected:
+                raise ValueError(f"{name} drift")
         if self.required_system_bundle_digests != REQUIRED_SYSTEM_DIGESTS:
             raise ValueError("required system bundle digest drift")
         if self.coverage_targets != COVERAGE_TARGETS:
             raise ValueError("coverage target drift")
-        if self.failure_accounting != [
-            "requested",
-            "completed",
-            "timeout",
-            "oom",
-            "transport",
-            "interface",
-            "parse",
-        ]:
+        if self.failure_accounting != _FAILURE_ACCOUNTING:
             raise ValueError("failure-accounting policy drift")
         expected_datasets = [
             DatasetAuthorizationBinding(id=dataset_id, **values)
@@ -261,7 +284,8 @@ def _verify_sg000020_evidence(root: Path) -> None:
     )
     if canonical_json_sha256(selected.model_dump(mode="json")) != FHIR_SELECTED_SEMANTIC_SHA256:
         raise ValueError("selected FHIR representation semantic digest drift")
-    if canonical_json_sha256(candidate.model_dump(mode="json")) != AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256:
+    candidate_digest = canonical_json_sha256(candidate.model_dump(mode="json"))
+    if candidate_digest != AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256:
         raise ValueError("SG-000020 authorization-candidate semantic digest drift")
     if candidate.final_test_access != "sealed" or candidate.can_authorize_inference is not False:
         raise ValueError("SG-000020 candidate must remain sealed and non-executable")
