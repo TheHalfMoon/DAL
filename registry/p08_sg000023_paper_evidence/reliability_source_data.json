@@ -17,11 +17,22 @@
     0.9333333333333333,
     1.0
   ],
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/manifest.json",
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
   "figure_source_id": "sg23-reliability-v0.1",
   "grain_id": "SG-000023",
   "laya_disposition": "exclude-from-calibration-figure-because-runtime-warning-marks-affected-confidence-uncalibrated",
+  "laya_runtime_warning": {
+    "kind": "uncalibrated-confidence-warning",
+    "observed": true,
+    "paper_use_boundary": "Do not present affected Laya confidence/calibration outputs as calibrated evidence.",
+    "summary": "Pinned Laya checkpoint reported invalid/out-of-range temperatures; affected confidence entries are uncalibrated."
+  },
   "schema_version": "0.1",
-  "source": "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
   "systems": [
     {
       "bins": [

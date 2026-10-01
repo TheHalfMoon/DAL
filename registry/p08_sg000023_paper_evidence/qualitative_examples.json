@@ -1,4 +1,11 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
   "clinical_text_used_for_selection": false,
   "grain_id": "SG-000023",
   "native_strata": [

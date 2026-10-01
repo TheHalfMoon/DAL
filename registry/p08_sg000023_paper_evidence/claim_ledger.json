@@ -1,4 +1,11 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/manifest.json",
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+    "registry/p08_sg000023_derivation_contract.json",
+    "registry/p08_sg000023_evidence_availability_matrix.json"
+  ],
   "claim_ledger_id": "sg23-claim-ledger-v0.1",
   "claims": [
     {
@@ -9,7 +16,7 @@
       "evidence_packet_id": "EP-SG23-ACTION-001",
       "exportable": true,
       "status": "supported",
-      "text": "On the frozen PubMedQA PQA-L final rows, the paper system and clinical control each achieved action accuracy 0.552."
+      "text": "On the frozen PubMedQA PQA-L final rows, the paper system achieved action accuracy 0.552 and the clinical control achieved action accuracy 0.552."
     },
     {
       "canonical_source_paths": [
@@ -19,18 +26,19 @@
       "evidence_packet_id": "EP-SG23-ACTION-001",
       "exportable": true,
       "status": "supported-descriptive-only",
-      "text": "The frozen paper-minus-control PubMedQA action-accuracy estimate is 0.0 with a 95% paired-bootstrap interval [0.0, 0.0]; this does not support a superiority claim."
+      "text": "The frozen paper-minus-control PubMedQA action-accuracy estimate is 0.0000 with a 95% paired-bootstrap interval [0.0000, 0.0000]; this does not support a superiority claim."
     },
     {
       "canonical_source_paths": [
         "registry/p08_sg000022_final_evaluation/metrics.json",
-        "registry/p08_calibration_evidence_sg000020.json"
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000023_derivation_contract.json"
       ],
       "claim_id": "SG23-C003",
-      "evidence_packet_id": "EP-SG23-ACTION-001",
+      "evidence_packet_id": "EP-SG23-CAL-001",
       "exportable": true,
       "status": "supported-with-calibration-limitation",
-      "text": "Laya completed 500 frozen PubMedQA rows with action accuracy 0.53; affected Laya confidence is excluded from reliability/calibration figures as uncalibrated."
+      "text": "Laya completed 500 of 500 frozen PubMedQA rows with action accuracy 0.53; affected Laya confidence is excluded from reliability/calibration figures as uncalibrated."
     },
     {
       "canonical_source_paths": [
@@ -50,7 +58,7 @@
       "evidence_packet_id": "EP-SG23-SELECTIVE-001",
       "exportable": true,
       "status": "supported-descriptive-only",
-      "text": "Frozen native risk@80 is 0.655 for the paper system and 0.6675 for the clinical control; this is descriptive and is not exported as a superiority claim."
+      "text": "Frozen native risk@80 is 0.655 for the paper system and 0.6675 for the clinical control (paper-minus-control estimate -0.0125, 95% paired-bootstrap interval [-0.0200, -0.0050], lower is better); this is descriptive and is not exported as a superiority claim."
     },
     {
       "canonical_source_paths": [
@@ -60,7 +68,7 @@
       "evidence_packet_id": "EP-SG23-FHIR-BLOCK-001",
       "exportable": true,
       "status": "supported-blocked-result",
-      "text": "FHIR-AgentBench final action selection is blocked pre-execution because the frozen adapter cannot represent variable candidate action sets; zero gold rows were loaded and no replacement adapter is permitted."
+      "text": "FHIR-AgentBench final action selection is blocked pre-execution because the frozen adapter cannot represent variable candidate action sets; 0 gold rows were loaded for a requested denominator of 173, and no replacement adapter is permitted."
     },
     {
       "canonical_source_paths": [

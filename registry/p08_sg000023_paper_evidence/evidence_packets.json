@@ -1,84 +1,160 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000023_evidence_availability_matrix.json"
+  ],
   "grain_id": "SG-000023",
   "packets": [
     {
       "canonical_sources": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
-        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json"
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
         "main_results.json"
       ],
+      "matrix_row_id": "main-action-selection-tables",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-ACTION-001",
       "scope": "PubMedQA action-selection descriptive results and frozen paired-bootstrap comparison",
-      "status": "supported"
+      "status": "supported",
+      "supporting_sources": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json"
+      ]
     },
     {
       "canonical_sources": [
+        "registry/p08_calibration_evidence_sg000020.json",
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
-        "registry/p08_calibration_evidence_sg000020.json"
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
         "reliability_source_data.json"
       ],
+      "matrix_row_id": "reliability-analysis",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-CAL-001",
-      "scope": "DAL/control reliability only; Laya calibration remains excluded",
-      "status": "supported"
+      "scope": "DAL/control reliability only; affected Laya confidence remains excluded as uncalibrated",
+      "status": "supported",
+      "supporting_sources": [
+        "registry/p08_calibration_evidence_sg000020.json"
+      ]
     },
     {
       "canonical_sources": [
+        "registry/p08_calibration_evidence_sg000020.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
-        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json"
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
         "selective_results.json",
         "risk_coverage_source_data.json"
       ],
+      "matrix_row_id": "risk-coverage-analysis",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-SELECTIVE-001",
       "scope": "native-abstention risk/coverage and frozen target-policy outcomes",
-      "status": "supported"
+      "status": "supported",
+      "supporting_sources": [
+        "registry/p08_calibration_evidence_sg000020.json"
+      ]
     },
     {
       "canonical_sources": [
-        "registry/p08_ecal_selection_ledger_sg000020.json",
-        "registry/p08_calibration_evidence_sg000020.json"
+        "registry/p08_calibration_evidence_sg000020.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json"
       ],
+      "derivation_inputs": [],
       "derived_artifacts": [],
+      "matrix_row_id": "ecal-reporting",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-ECAL-001",
       "scope": "frozen ECAL selection; no new final-test ECAL ablation",
-      "status": "supported-development-calibration-only"
+      "status": "supported-development-calibration-only",
+      "supporting_sources": [
+        "registry/p08_calibration_evidence_sg000020.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json"
+      ]
     },
     {
       "canonical_sources": [
-        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
-        "registry/p08_fhir_selection_ledger_sg000020.json"
+        "registry/p08_fhir_selection_ledger_sg000020.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json"
       ],
       "derived_artifacts": [
         "fhir_block_table.json"
       ],
+      "matrix_row_id": "fhir-final-action-selection",
+      "matrix_row_status": "blocked",
       "packet_id": "EP-SG23-FHIR-BLOCK-001",
       "scope": "pre-execution FHIR interface block only; no final FHIR performance claim",
-      "status": "supported-blocked-result"
+      "status": "supported-blocked-result",
+      "supporting_sources": [
+        "registry/p08_fhir_selection_ledger_sg000020.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json"
+      ]
     },
     {
       "canonical_sources": [
-        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
         "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
         "qualitative_examples.json"
       ],
+      "matrix_row_id": "failure-taxonomy-and-qualitative-errors",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-ERROR-001",
       "scope": "content-blind deterministic qualitative strata and selected examples",
-      "status": "supported"
+      "status": "supported",
+      "supporting_sources": []
     },
     {
       "canonical_sources": [
         "registry/p08_sg000022_final_evaluation/metrics.json",
-        "registry/p08_sg000023_evidence_availability_matrix.json",
-        "registry/p08_sg000023_derivation_contract.json"
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
       ],
       "derived_artifacts": [
         "main_results.json",
@@ -86,24 +162,134 @@
         "evidence_boundaries.json",
         "fhir_block_table.json"
       ],
+      "matrix_row_id": "paper-tables",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-TABLES-001",
       "scope": "paper-table source data with blocked/null outcomes preserved",
-      "status": "supported"
+      "status": "supported",
+      "supporting_sources": []
     },
     {
       "canonical_sources": [
-        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000023_derivation_contract.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000023_derivation_contract.json"
       ],
       "derived_artifacts": [
         "reliability_source_data.json",
         "risk_coverage_source_data.json"
       ],
+      "matrix_row_id": "paper-figures",
+      "matrix_row_status": "available",
       "packet_id": "EP-SG23-FIGURES-001",
       "scope": "paper-figure source data without smoothing or threshold refit",
-      "status": "supported"
+      "status": "supported",
+      "supporting_sources": []
+    },
+    {
+      "canonical_sources": [
+        "registry/p08_calibration_evidence_sg000020.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
+        "registry/p08_fhir_selection_ledger_sg000020.json",
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/summary.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_calibration_evidence_sg000020.json",
+        "registry/p08_ecal_selection_ledger_sg000020.json",
+        "registry/p08_fhir_selection_ledger_sg000020.json",
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/summary.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "derived_artifacts": [
+        "evidence_packets.json",
+        "provenance_index.json"
+      ],
+      "matrix_row_id": "evidence-packets",
+      "matrix_row_status": "available",
+      "packet_id": "EP-SG23-PACKETS-INDEX",
+      "scope": "evidence-packet registry and byte-level provenance index for this package",
+      "status": "supported",
+      "supporting_sources": []
+    },
+    {
+      "canonical_sources": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "derivation_inputs": [
+        "registry/p08_sg000022_final_evaluation/manifest.json",
+        "registry/p08_sg000022_final_evaluation/metrics.json",
+        "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+        "registry/p08_sg000023_derivation_contract.json",
+        "registry/p08_sg000023_evidence_availability_matrix.json"
+      ],
+      "derived_artifacts": [
+        "claim_ledger.json"
+      ],
+      "matrix_row_id": "claim-ledger",
+      "matrix_row_status": "available",
+      "packet_id": "EP-SG23-CLAIMS-INDEX",
+      "scope": "machine-readable claim ledger with supported, null, negative, blocked, and unavailable dispositions",
+      "status": "supported",
+      "supporting_sources": []
+    },
+    {
+      "canonical_sources": [],
+      "derivation_inputs": [],
+      "derived_artifacts": [],
+      "matrix_row_id": "related-work-refresh",
+      "matrix_row_status": "available",
+      "packet_id": "EP-SG23-LIT-001",
+      "pending_reason": "Related-work refresh evidence is produced by a later SG-000023 stage; this package contains no literature evidence and supports no novelty claim.",
+      "scope": "dated related-work refresh and novelty disposition",
+      "status": "declared-pending-later-stage",
+      "supporting_sources": []
+    },
+    {
+      "canonical_sources": [],
+      "derivation_inputs": [],
+      "derived_artifacts": [],
+      "matrix_row_id": "p08-final-result-freeze",
+      "matrix_row_status": "available",
+      "packet_id": "EP-SG23-FREEZE-001",
+      "pending_reason": "The final result/claim freeze is a later SG-000023 governance stage that requires the related-work refresh; this package does not freeze claims.",
+      "scope": "P08 final result and claim freeze manifest",
+      "status": "declared-pending-later-stage",
+      "supporting_sources": []
     }
   ],
-  "schema_version": "0.1"
+  "schema_version": "0.1",
+  "source_semantics": {
+    "canonical_sources": "union of derivation_inputs and supporting_sources",
+    "declared-pending-later-stage": "packet declared by the availability matrix whose evidence is produced by a later SG-000023 stage; it supports no claim",
+    "derivation_inputs": "exact canonical files read by the derivations of the packet's derived artifacts",
+    "supporting_sources": "canonical files the packet binds as supporting evidence without a derivation reading them"
+  }
 }

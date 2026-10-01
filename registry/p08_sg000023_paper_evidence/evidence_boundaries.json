@@ -1,4 +1,7 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000023_evidence_availability_matrix.json"
+  ],
   "grain_id": "SG-000023",
   "rows": [
     {
@@ -98,6 +101,5 @@
     }
   ],
   "schema_version": "0.1",
-  "source": "registry/p08_sg000023_evidence_availability_matrix.json",
   "table_id": "sg23-evidence-boundaries-v0.1"
 }

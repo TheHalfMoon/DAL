@@ -1,4 +1,8 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
   "grain_id": "SG-000023",
   "mandatory_warning": "The paper system has unsafe_commit_rate=1.0 at frozen target coverages 0.8 and 0.9; these negative outcomes must remain visible.",
   "primary_comparison": {
@@ -14,6 +18,13 @@
       "seed": 1729
     },
     "status": "measured"
+  },
+  "primary_comparison_display": {
+    "ci_high": "-0.0050",
+    "ci_level": 0.95,
+    "ci_low": "-0.0200",
+    "estimate": "-0.0125",
+    "rule": "presentation-only fixed-point rounding to 4 decimal places; the unrounded canonical values remain in primary_comparison and are the scientific evidence"
   },
   "rows": [
     {
@@ -102,6 +113,5 @@
     }
   ],
   "schema_version": "0.1",
-  "source": "registry/p08_sg000022_final_evaluation/metrics.json",
   "table_id": "sg23-native-selective-v0.1"
 }

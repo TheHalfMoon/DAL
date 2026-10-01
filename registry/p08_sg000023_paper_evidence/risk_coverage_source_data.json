@@ -1,11 +1,15 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
   "figure_source_id": "sg23-risk-coverage-v0.1",
   "grain_id": "SG-000023",
   "no_smoothing": true,
   "no_threshold_refit": true,
   "ordering": "descending-frozen-selection-score-then-item-id-ascending",
   "schema_version": "0.1",
-  "source": "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
   "systems": [
     {
       "canonical_aurc": 0.5296075715789592,

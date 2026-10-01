@@ -1,19 +1,47 @@
 from __future__ import annotations
 
+import copy
+import importlib.util
 import json
 import subprocess
 import sys
 from pathlib import Path
+from types import ModuleType
 from typing import Any
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "registry" / "p08_sg000023_paper_evidence"
+BUILDER_PATH = ROOT / "tools" / "build_sg000023_paper_evidence.py"
+
+
+def _builder() -> ModuleType:
+    spec = importlib.util.spec_from_file_location("build_sg000023_paper_evidence", BUILDER_PATH)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+BUILDER = _builder()
 
 
 def _load(name: str) -> dict[str, Any]:
     payload = json.loads((EVIDENCE / name).read_text(encoding="utf-8"))
     assert isinstance(payload, dict)
     return payload
+
+
+def _matrix() -> dict[str, Any]:
+    payload = json.loads(BUILDER.MATRIX_PATH.read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
+
+def _committed_package() -> dict[str, Any]:
+    return {name: _load(name) for name in BUILDER.ARTIFACT_NAMES}
 
 
 def test_paper_evidence_is_deterministically_rebuildable() -> None:
@@ -25,22 +53,103 @@ def test_paper_evidence_is_deterministically_rebuildable() -> None:
         text=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "10 artifacts" in result.stdout
+    assert f"{len(BUILDER.ARTIFACT_NAMES)} artifacts" in result.stdout
 
 
-def test_paper_evidence_catalog_is_complete() -> None:
-    assert {path.name for path in EVIDENCE.glob("*.json")} == {
-        "claim_ledger.json",
-        "evidence_boundaries.json",
-        "evidence_packets.json",
-        "fhir_block_table.json",
-        "main_results.json",
-        "provenance_index.json",
-        "qualitative_examples.json",
-        "reliability_source_data.json",
-        "risk_coverage_source_data.json",
-        "selective_results.json",
+def test_paper_evidence_catalog_matches_shared_inventory() -> None:
+    assert {path.name for path in EVIDENCE.glob("*.json")} == set(BUILDER.ARTIFACT_NAMES)
+    assert BUILDER.ARTIFACT_NAMES == (*BUILDER.BASE_ARTIFACT_NAMES, BUILDER.PROVENANCE_INDEX_NAME)
+
+
+def test_frozen_sources_match_pins_and_final_manifest() -> None:
+    assert BUILDER.verify_frozen_sources() == []
+    manifest = json.loads(BUILDER.MANIFEST_PATH.read_text(encoding="utf-8"))
+    for filename, record in manifest["artifacts"].items():
+        assert BUILDER.FROZEN_SOURCE_SHA256[BUILDER.FINAL_ROOT / filename] == record["byte_sha256"]
+
+
+def test_mutated_canonical_source_fails_closed(monkeypatch: pytest.MonkeyPatch) -> None:
+    pins = dict(BUILDER.FROZEN_SOURCE_SHA256)
+    pins[BUILDER.METRICS_PATH] = "0" * 64
+    monkeypatch.setattr(BUILDER, "FROZEN_SOURCE_SHA256", pins)
+    errors = BUILDER.verify_frozen_sources()
+    assert any("metrics.json" in error and "digest mismatch" in error for error in errors)
+    with pytest.raises(ValueError, match="digest mismatch"):
+        BUILDER.build_artifacts()
+
+
+def test_undeclared_source_read_is_rejected() -> None:
+    view = BUILDER.SourceView({BUILDER.METRICS_PATH: {}}, (BUILDER.METRICS_PATH,))
+    with pytest.raises(KeyError, match="undeclared canonical source"):
+        view[BUILDER.CALIBRATION_PATH]
+
+
+def test_package_validation_passes_on_committed_artifacts() -> None:
+    assert BUILDER.validate_package(_committed_package(), _matrix()) == []
+
+
+def test_packet_registry_matches_availability_matrix() -> None:
+    declared = [pid for row in _matrix()["rows"] for pid in row["evidence_packet_ids"]]
+    packets = _load("evidence_packets.json")["packets"]
+    assert sorted(packet["packet_id"] for packet in packets) == sorted(declared)
+    for packet in packets:
+        if packet["status"] == BUILDER.PENDING_PACKET_STATUS:
+            assert packet["derived_artifacts"] == []
+            assert packet["canonical_sources"] == []
+            assert packet["pending_reason"]
+
+
+def test_packet_sources_cover_every_derived_artifact_input() -> None:
+    package = _committed_package()
+    for packet in package["evidence_packets.json"]["packets"]:
+        for name in packet["derived_artifacts"]:
+            assert set(package[name]["canonical_sources"]) <= set(packet["canonical_sources"])
+            assert set(package[name]["canonical_sources"]) <= set(packet["derivation_inputs"])
+    reliability_packets = [
+        packet
+        for packet in package["evidence_packets.json"]["packets"]
+        if "reliability_source_data.json" in packet["derived_artifacts"]
+    ]
+    assert {packet["packet_id"] for packet in reliability_packets} == {
+        "EP-SG23-CAL-001",
+        "EP-SG23-FIGURES-001",
     }
+    expected = set(package["reliability_source_data.json"]["canonical_sources"])
+    for packet in reliability_packets:
+        assert expected <= set(packet["derivation_inputs"])
+
+
+def test_validation_rejects_missing_matrix_packet() -> None:
+    package = copy.deepcopy(_committed_package())
+    package["evidence_packets.json"]["packets"] = [
+        packet
+        for packet in package["evidence_packets.json"]["packets"]
+        if packet["packet_id"] != "EP-SG23-CLAIMS-INDEX"
+    ]
+    errors = BUILDER.validate_package(package, _matrix())
+    assert any("missing=['EP-SG23-CLAIMS-INDEX']" in error for error in errors)
+
+
+def test_validation_rejects_claim_sources_outside_packet() -> None:
+    package = copy.deepcopy(_committed_package())
+    for claim in package["claim_ledger.json"]["claims"]:
+        if claim["claim_id"] == "SG23-C003":
+            claim["evidence_packet_id"] = "EP-SG23-ACTION-001"
+            claim["canonical_source_paths"].append(
+                "registry/p08_calibration_evidence_sg000020.json"
+            )
+    errors = BUILDER.validate_package(package, _matrix())
+    assert any("SG23-C003 cites sources outside packet" in error for error in errors)
+
+
+def test_laya_calibration_claim_is_bound_to_calibration_packet() -> None:
+    claims = {row["claim_id"]: row for row in _load("claim_ledger.json")["claims"]}
+    packets = {row["packet_id"]: row for row in _load("evidence_packets.json")["packets"]}
+    claim = claims["SG23-C003"]
+    assert claim["evidence_packet_id"] == "EP-SG23-CAL-001"
+    assert set(claim["canonical_source_paths"]) <= set(
+        packets["EP-SG23-CAL-001"]["canonical_sources"]
+    )
 
 
 def test_reliability_and_risk_coverage_preserve_frozen_semantics() -> None:
@@ -53,6 +162,7 @@ def test_reliability_and_risk_coverage_preserve_frozen_semantics() -> None:
         assert len(system["bins"]) == 15
         assert system["computed_ece_15_equal_width"] == system["canonical_ece_15_equal_width"]
     assert "uncalibrated" in reliability["laya_disposition"]
+    assert reliability["laya_runtime_warning"]["observed"] is True
 
     risk = _load("risk_coverage_source_data.json")
     assert risk["no_smoothing"] is True
@@ -63,6 +173,17 @@ def test_reliability_and_risk_coverage_preserve_frozen_semantics() -> None:
         assert system["points"][0]["coverage"] == 0.001
         assert system["points"][-1]["coverage"] == 1.0
         assert system["computed_aurc"] == system["canonical_aurc"]
+
+
+def test_display_values_do_not_replace_canonical_values() -> None:
+    metrics = json.loads(BUILDER.METRICS_PATH.read_text(encoding="utf-8"))
+    canonical = next(row for row in metrics["primary_comparisons"] if row["metric"] == "risk_at_80")
+    selective = _load("selective_results.json")
+    assert selective["primary_comparison"] == canonical
+    assert selective["primary_comparison_display"]["estimate"] == "-0.0125"
+    assert selective["primary_comparison_display"]["ci_low"] == "-0.0200"
+    assert selective["primary_comparison_display"]["ci_high"] == "-0.0050"
+    assert canonical["paired_bootstrap"]["estimate"] == -0.012499999999999956
 
 
 def test_negative_and_blocked_results_remain_visible() -> None:
@@ -111,9 +232,16 @@ def test_claim_ledger_blocks_forbidden_affirmative_exports() -> None:
 
 
 def test_provenance_index_binds_sources_and_derived_artifacts() -> None:
-    provenance = _load("provenance_index.json")
-    assert provenance["canonical_main_dependency"] == ("d676beccfec001fd75d1b157b43068eb49a5733d")
+    provenance = _load(BUILDER.PROVENANCE_INDEX_NAME)
+    assert provenance["canonical_main_dependency"] == BUILDER.CANONICAL_MAIN_DEPENDENCY
     assert provenance["no_new_inference"] is True
     assert provenance["no_post_test_tuning"] is True
-    assert len(provenance["artifact_sha256"]) == 9
-    assert "registry/p08_sg000022_final_evaluation/metrics.json" in provenance["source_sha256"]
+    assert provenance["frozen_source_digests_verified_before_derivation"] is True
+    assert provenance["artifact_inventory"] == list(BUILDER.ARTIFACT_NAMES)
+    # The provenance index hashes every other artifact; it cannot contain its own digest.
+    assert set(provenance["artifact_sha256"]) == set(BUILDER.BASE_ARTIFACT_NAMES)
+    assert BUILDER.PROVENANCE_INDEX_NAME not in provenance["artifact_sha256"]
+    assert provenance["source_sha256"] == {
+        path.relative_to(ROOT).as_posix(): digest
+        for path, digest in BUILDER.FROZEN_SOURCE_SHA256.items()
+    }

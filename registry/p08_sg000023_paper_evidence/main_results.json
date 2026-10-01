@@ -1,4 +1,8 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
   "claim_boundary": {
     "clinical_safety": "not-claimed",
     "significance": "not-claimed",
@@ -19,6 +23,13 @@
       "seed": 1729
     },
     "status": "measured"
+  },
+  "primary_comparison_display": {
+    "ci_high": "0.0000",
+    "ci_level": 0.95,
+    "ci_low": "0.0000",
+    "estimate": "0.0000",
+    "rule": "presentation-only fixed-point rounding to 4 decimal places; the unrounded canonical values remain in primary_comparison and are the scientific evidence"
   },
   "rows": [
     {
@@ -68,6 +79,5 @@
     }
   ],
   "schema_version": "0.1",
-  "source": "registry/p08_sg000022_final_evaluation/metrics.json",
   "table_id": "sg23-main-action-selection-v0.1"
 }

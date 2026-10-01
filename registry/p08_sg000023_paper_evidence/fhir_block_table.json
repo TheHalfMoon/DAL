@@ -1,4 +1,7 @@
 {
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json"
+  ],
   "detected_before_final_test_access": true,
   "grain_id": "SG-000023",
   "new_adapter_forbidden": true,
@@ -32,6 +35,5 @@
     }
   ],
   "schema_version": "0.1",
-  "source": "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
   "table_id": "sg23-fhir-block-v0.1"
 }
