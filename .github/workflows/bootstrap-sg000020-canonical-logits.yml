@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ARTIFACT_ID: "11132516977"
           ARTIFACT_ZIP_SHA256: "d08db2e1ab6befd0b0f7182042e08d871bb369161e58932e62abf5cdb2541326"
-          RAW_SHA256: "83a81f1fde20a6d83929b048bd8ff2f17644a9d3e49813feb8dacf888c9873cc"
+          RAW_SHA256: "6aca49fd1a94be649737bc6076a9d818b6b67718fb1dac2412766ea8e286f109"
           TARGET: registry/p08_calibration_raw_logits_sg000020.json
         shell: bash
         run: |
