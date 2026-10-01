@@ -35,22 +35,22 @@ DAL is the current repository and program identity: **Decision Assurance Layer**
 - [x] SG-000019 post-closeout GAXBench `36743845440` SUCCESS
 - [x] SG-000019 post-closeout Real-System Foundation `36743845501` SUCCESS
 
-### SG-000020 — Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze (ACTIVE)
+### SG-000020 — Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze (PROVEN)
 
 Research contract: Issue #69. Canonical dependency: `3ca0dd2aae85a68473849108764a45a538de1019`.
 
 #### Calibration
 
-- [ ] Bind exact calibration manifest `89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230`
-- [ ] Use exactly `temperature-scaling-action+platt-sufficiency-v0.1`
-- [ ] Confirm calibration roles contain exactly 50 PubMedQA + 100 native-abstention + 341 FHIR-AgentBench rows
-- [ ] Fit action temperature parameter(s) on permitted calibration evidence only
-- [ ] Fit sufficiency Platt parameter(s) on permitted calibration evidence only
-- [ ] Persist calibration parameters and canonical digest
-- [ ] Persist pre/post calibration diagnostics
-- [ ] Preserve calibration requested/completed/failure accounting
-- [ ] Prove calibration does not retrain or reselect model/backbone/checkpoint/seed
-- [ ] Keep coverage targets exactly `[0.50, 0.80, 0.90]`
+- [x] Bind exact calibration manifest `89a1657b09e6d9cca6107bc92433baaf563e994fb26c177fe39689cfaf2c0230`
+- [x] Use exactly `temperature-scaling-action+platt-sufficiency-v0.1`
+- [x] Confirm calibration roles contain exactly 50 PubMedQA + 100 native-abstention + 341 FHIR-AgentBench rows
+- [x] Fit action temperature parameter(s) on permitted calibration evidence only
+- [x] Fit sufficiency Platt parameter(s) on permitted calibration evidence only
+- [x] Persist calibration parameters and canonical digest
+- [x] Persist pre/post calibration diagnostics
+- [x] Preserve calibration requested/completed/failure accounting
+- [x] Prove calibration does not retrain or reselect model/backbone/checkpoint/seed
+- [x] Keep coverage targets exactly `[0.50, 0.80, 0.90]`
 
 #### ECAL selection
 
@@ -64,12 +64,12 @@ Frozen candidate set:
 
 Tasks:
 
-- [ ] Persist ECAL selection objective before candidate outcome inspection
-- [ ] Persist deterministic ECAL tie-break rule before candidate outcome inspection
-- [ ] Evaluate every frozen candidate on authorized development/calibration evidence only
-- [ ] Preserve every null/negative/failed ECAL outcome
-- [ ] Freeze selected ECAL configuration
-- [ ] Bind selected ECAL configuration to immutable digest
+- [x] Persist ECAL selection objective before candidate outcome inspection
+- [x] Persist deterministic ECAL tie-break rule before candidate outcome inspection
+- [x] Evaluate every frozen candidate on authorized development/calibration evidence only
+- [x] Preserve every null/negative/failed ECAL outcome
+- [x] Freeze selected ECAL configuration
+- [x] Bind selected ECAL configuration to immutable digest
 
 #### FHIR representation selection
 
@@ -82,40 +82,41 @@ Frozen candidate set:
 
 Tasks:
 
-- [ ] Persist FHIR selection objective before candidate outcome inspection
-- [ ] Persist deterministic FHIR tie-break rule before candidate outcome inspection
-- [ ] Evaluate every frozen representation on authorized development/calibration evidence only
-- [ ] Preserve parse/interface/failure accounting for every representation
-- [ ] Preserve every null/negative FHIR result
-- [ ] Freeze selected FHIR representation
-- [ ] Bind selected FHIR representation to immutable digest
+- [x] Persist FHIR selection objective before candidate outcome inspection
+- [x] Persist deterministic FHIR tie-break rule before candidate outcome inspection
+- [x] Evaluate every frozen representation on authorized development/calibration evidence only
+- [x] Preserve parse/interface/failure accounting for every representation
+- [x] Preserve every null/negative FHIR result
+- [x] Freeze selected FHIR representation
+- [x] Bind selected FHIR representation to immutable digest
 
 #### Final-test authorization candidate
 
-- [ ] Bind canonical DAL paper-candidate bundle digest `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`
-- [ ] Bind canonical clinical-encoder bundle digest `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`
-- [ ] Bind canonical Laya bundle digest `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`
-- [ ] Bind selected calibration evidence digest
-- [ ] Bind selected ECAL configuration digest
-- [ ] Bind selected FHIR representation digest
-- [ ] Bind coverage targets `[0.50, 0.80, 0.90]`
-- [ ] Bind hardware protocol `p08-hardware-stratified-v0.1`
-- [ ] Bind multiplicity policy `holm-primary-family-v0.1`
-- [ ] Preserve explicit `final_test_access = sealed`
-- [ ] Make authorization candidate fail closed on any digest/revision mismatch
-- [ ] Require a separate later SpecGrain/PR before final-test access can be opened
+- [x] Bind canonical DAL paper-candidate bundle digest `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`
+- [x] Bind canonical clinical-encoder bundle digest `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`
+- [x] Bind canonical Laya bundle digest `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`
+- [x] Bind selected calibration evidence digest
+- [x] Bind selected ECAL configuration digest
+- [x] Bind selected FHIR representation digest
+- [x] Bind coverage targets `[0.50, 0.80, 0.90]`
+- [x] Bind hardware protocol `p08-hardware-stratified-v0.1`
+- [x] Bind multiplicity policy `holm-primary-family-v0.1`
+- [x] Preserve explicit `final_test_access = sealed`
+- [x] Make authorization candidate fail closed on any digest/revision mismatch
+- [x] Require a separate later SpecGrain/PR before final-test access can be opened
 
 #### Qualification and closeout
 
-- [ ] Exact-head Linux/Windows Python 3.11/3.12 CI
-- [ ] Affected P08 regression qualification
-- [ ] Checksum-pinned Alibaba OpenCodeReview exact-range evidence
-- [ ] Secure TypeSafe Jev exact-diff review with complete coverage and zero blocking findings
-- [ ] Guarded normal implementation merge with expected-head SHA
-- [ ] Post-main qualification
-- [ ] Separate SG-000020 canonical closeout
+- [x] Exact-head Linux/Windows Python 3.11/3.12 CI
+- [x] Affected P08 regression qualification
+- [x] Checksum-pinned Alibaba OpenCodeReview exact-range evidence
+- [x] Secure TypeSafe Jev exact-diff review with complete coverage and zero blocking findings
+- [x] Guarded normal implementation merge with expected-head SHA
+- [x] Post-main qualification
+- [x] Canonical evidence promotion with byte/semantic digest verification
+- [x] Separate SG-000020 canonical closeout
 
-Final-test access remains **sealed** throughout SG-000020.
+Final-test access remained **sealed** throughout SG-000020.
 
 ### Freeze before final-test access
 
@@ -126,13 +127,27 @@ Final-test access remains **sealed** throughout SG-000020.
 - [x] Freeze multiplicity policy
 - [x] Complete required dataset license/redistribution audit
 - [x] Complete required train/development/calibration/test leakage audit
-- [ ] Execute calibration under frozen method without model retraining
-- [ ] Freeze ECAL component selection
-- [ ] Freeze FHIR representation selection
-- [ ] Bind final selected system/protocol/checkpoint digests into an authorization candidate
-- [ ] Qualify and merge a separate digest-bound final-test opening artifact
+- [x] Execute calibration under frozen method without model retraining
+- [x] Freeze ECAL component selection
+- [x] Freeze FHIR representation selection
+- [x] Bind final selected system/protocol/checkpoint digests into an authorization candidate
+- [ ] Qualify and merge a separate digest-bound final-test opening artifact under SG-000021
 
 Final-test access remains **sealed** until the last item above is satisfied.
+
+### SG-000021 — Final-test authorization qualification (NEXT)
+
+- [ ] Activate a separate research contract and SpecGrain for final-test authorization
+- [ ] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
+- [ ] Re-verify required-system bundle and paper-checkpoint identities
+- [ ] Re-verify immutable final-test split/source manifests and leakage boundaries
+- [ ] Bind frozen coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
+- [ ] Create a machine-readable authorization artifact that fails closed on any mismatch
+- [ ] Qualify exact-head Linux/Windows CI, Alibaba OpenCodeReview, and secure TypeSafe Jev
+- [ ] Merge authorization with normal expected-head guard
+- [ ] Verify post-main authorization state before any final-test inference
+
+No final-test inference is permitted before every SG-000021 authorization item above is proven canonically.
 
 ### Primary paper evaluation — after separate final-test authorization only
 
