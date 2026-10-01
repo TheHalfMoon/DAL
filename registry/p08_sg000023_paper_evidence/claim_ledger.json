@@ -4,7 +4,8 @@
     "registry/p08_sg000022_final_evaluation/metrics.json",
     "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
     "registry/p08_sg000023_derivation_contract.json",
-    "registry/p08_sg000023_evidence_availability_matrix.json"
+    "registry/p08_sg000023_evidence_availability_matrix.json",
+    "registry/p08_sg000023_related_work_refresh.json"
   ],
   "claim_ledger_id": "sg23-claim-ledger-v0.1",
   "claims": [
@@ -110,6 +111,16 @@
       "exportable": false,
       "status": "not-claimed",
       "text": "Superiority, clinical safety, SOTA, final FHIR performance, and direct efficiency superiority are not claimed."
+    },
+    {
+      "canonical_source_paths": [
+        "registry/p08_sg000023_related_work_refresh.json"
+      ],
+      "claim_id": "SG23-C011",
+      "evidence_packet_id": "EP-SG23-LIT-001",
+      "exportable": false,
+      "status": "not-claimed",
+      "text": "After the 2026-10-01 related-work refresh, these novelty claims are removed: first medical abstention system or benchmark; first clinical uncertainty, assurance, or governance layer; first typed-decision or System-One evaluation in medicine or on PubMedQA; typed non-generative readout improves medical accuracy; first pre-registered or frozen-protocol typed-decision evaluation; first deterministic hash-verified provenance for paper numbers, or first evidence/claim ledger; FHIR-aware decision-layer capability; medical counterfactual or evidence-intervention robustness. Narrowed to descriptive only: native abstention outperforms the confidence-only control."
     }
   ],
   "grain_id": "SG-000023",

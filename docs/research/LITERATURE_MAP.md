@@ -231,3 +231,7 @@ Before freezing the paper:
 - inspect citations to and from MedQAbstain, Med-PRM, MedAgentBench, FHIR-AgentBench, and BioClinical ModernBERT;
 - update this file with publication dates, peer-review status, licenses, and overlapping claims;
 - modify the paper contribution statement if a concurrent work closes part of the gap.
+
+### Refresh record — 2026-10-01
+
+The SG-000023 pre-claim-freeze refresh is recorded in `P08_LITERATURE_REFRESH_2026-10-01.md` and machine-readably in `registry/p08_sg000023_related_work_refresh.json` (evidence packet `EP-SG23-LIT-001`). Citation chasing and Semantic Scholar/OpenAlex searches were not performed in that refresh and remain pre-submission work.

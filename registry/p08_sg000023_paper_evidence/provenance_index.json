@@ -12,9 +12,9 @@
     "provenance_index.json"
   ],
   "artifact_sha256": {
-    "claim_ledger.json": "41cd3016a65f0c7448bade0ab66af9e7572edebc126d19bae33afd3c8abe8091",
+    "claim_ledger.json": "0b580cc3d2eb6d6c6453e3d0845bd7fb2f812e5cfa6ac7fdd0bc2a3744080564",
     "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
-    "evidence_packets.json": "56ddc1938101477759be6a2419c023a4a02a38b347e8f5690ff184ad2b53f814",
+    "evidence_packets.json": "f979b02a13249a8c7d6dc3e19c5a6e88d08fa721f062bdc9eea050bcf75980cb",
     "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
     "main_results.json": "402817ff58d3113ba6ddccedd28fc430f03a0e763fa1d416472f134a652b2797",
     "qualitative_examples.json": "14351ed417da3c9b086423aa1726dc7f8dad1cb26e3403c5edb48b83e4d3fb91",
@@ -22,7 +22,7 @@
     "risk_coverage_source_data.json": "c5c5d39c69f43245009e06db1f9aa21af9c1cd9b139d63590569485de738b08c",
     "selective_results.json": "5e065a3307b7beb50ec6dd4b037937276a5b37503c6fbe86b0e7a29bc4b2acab"
   },
-  "canonical_main_dependency": "d676beccfec001fd75d1b157b43068eb49a5733d",
+  "canonical_main_dependency": "a18c1e10a0d9eba16ba8bffc55b29988507772ff",
   "canonical_sources": [
     "registry/p08_calibration_evidence_sg000020.json",
     "registry/p08_ecal_selection_ledger_sg000020.json",
@@ -35,7 +35,8 @@
     "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
     "registry/p08_sg000022_final_evaluation/summary.json",
     "registry/p08_sg000023_derivation_contract.json",
-    "registry/p08_sg000023_evidence_availability_matrix.json"
+    "registry/p08_sg000023_evidence_availability_matrix.json",
+    "registry/p08_sg000023_related_work_refresh.json"
   ],
   "derivation_contract_id": "dal-p08-post-final-derivation-v0.1",
   "frozen_source_digests_verified_before_derivation": true,
@@ -57,6 +58,7 @@
     "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json": "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9",
     "registry/p08_sg000022_final_evaluation/summary.json": "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
     "registry/p08_sg000023_derivation_contract.json": "62982bb53ad8cbe6255825c319528d9f50a893b142fbcffd7c55f6b99294fb38",
-    "registry/p08_sg000023_evidence_availability_matrix.json": "3a319a13dc18dbe49e063479e2698850b6fb7a3b8968d67c6f3f0f0fd43e496b"
+    "registry/p08_sg000023_evidence_availability_matrix.json": "3a319a13dc18dbe49e063479e2698850b6fb7a3b8968d67c6f3f0f0fd43e496b",
+    "registry/p08_sg000023_related_work_refresh.json": "d450cb28c7d5fbbcbf0fc51dd91132b327602c4cdd5c670de41f0d78972cb566"
   }
 }

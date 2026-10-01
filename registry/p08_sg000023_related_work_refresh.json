@@ -1,0 +1,1449 @@
+{
+  "cost": "zero; free public APIs and pages only (arXiv API, NCBI E-utilities, Crossref REST API, GitHub REST API, ACL Anthology, PMLR); no paid services",
+  "excluded_notable": [
+    {
+      "arxiv": "2603.02719",
+      "reason": "Multimodal clinical condition classification centered on imaging; outside the DAL text-decision scope.",
+      "title": "An Empirical Analysis of Calibration and Selective Prediction in Multimodal Clinical Condition Classification",
+      "url": "https://arxiv.org/abs/2603.02719"
+    },
+    {
+      "arxiv": "2606.15910",
+      "reason": "Medical vision-language confidence estimation; imaging modality outside DAL scope.",
+      "title": "Calibrated Triage, Not Autonomy: Confidence Estimation for Medical Vision-Language Models",
+      "url": "https://arxiv.org/abs/2606.15910"
+    },
+    {
+      "arxiv": "2509.10348",
+      "reason": "Chest X-ray rejection mechanisms; imaging only.",
+      "title": "Multi-pathology Chest X-ray Classification with Rejection Mechanisms",
+      "url": "https://arxiv.org/abs/2509.10348"
+    },
+    {
+      "arxiv": "2508.13378",
+      "reason": "Medical-imaging small-model abstention and PACS integration; imaging only.",
+      "title": "Governance-Ready Small Language Models for Medical Imaging: Prompting, Abstention, and PACS Integration",
+      "url": "https://arxiv.org/abs/2508.13378"
+    },
+    {
+      "arxiv": "2508.20148",
+      "reason": "Personal health agent; consumer health rather than clinical decision evaluation.",
+      "title": "The Anatomy of a Personal Health Agent",
+      "url": "https://arxiv.org/abs/2508.20148"
+    },
+    {
+      "arxiv": "2604.02834",
+      "reason": "Synthetic longitudinal health-agent benchmark; general agent evaluation already represented by HealthAgentBench.",
+      "title": "ESL-Bench: An Event-Driven Synthetic Longitudinal Benchmark for Health Agents",
+      "url": "https://arxiv.org/abs/2604.02834"
+    },
+    {
+      "arxiv": "2609.30714",
+      "reason": "Risk-constrained routing for medical-imaging agents; imaging focused and related only through generic deferral.",
+      "title": "CRC-Router: Risk-Constrained Routing for Medical Agentic AI Systems",
+      "url": "https://arxiv.org/abs/2609.30714"
+    },
+    {
+      "arxiv": "2608.03862",
+      "reason": "Selective emergency triage on structured EHR data; tabular triage covered by general selective-prediction prior work.",
+      "title": "CRS-Triage: Confidence- and Reliability-Aware Selective Triage under Incomplete Clinical Evidence",
+      "url": "https://arxiv.org/abs/2608.03862"
+    },
+    {
+      "arxiv": "2606.12702",
+      "reason": "Deployment-centered rejection-risk evaluation of an in-EHR LLM system; deployment telemetry outside the DAL offline-benchmark scope.",
+      "title": "Deployment-Centered Evaluation: Predicting Query-Level Rejection Risk in a Clinical LLM System",
+      "url": "https://arxiv.org/abs/2606.12702"
+    },
+    {
+      "arxiv": "2604.04565",
+      "reason": "Answer/ask/abstain fine-tuning for general QA; not medical.",
+      "title": "PassiveQA: A Three-Action Framework for Epistemically Calibrated Question Answering via Supervised Finetuning",
+      "url": "https://arxiv.org/abs/2604.04565"
+    }
+  ],
+  "grain_id": "SG-000023",
+  "included": [
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026",
+      "first_authors": [
+        "Cocchieri",
+        "Ragazzi",
+        "Tagliavini",
+        "Moro"
+      ],
+      "identifiers": {
+        "doi": "10.18653/v1/2026.acl-long.1365"
+      },
+      "novelty_implication": "Medical abstention is an established benchmark topic; DAL cannot claim novelty for an abstain option or for medical abstention evaluation.",
+      "relationship_to_dal": "Introduces MedQAbstain and reports systematic LLM overcommitment under medical uncertainty. DAL native-abstention rows derive from MedQAbstain under DAL's own frozen protocol.",
+      "title": "LLMs (Almost) Never Abstain Under Medical Uncertainty",
+      "urls": [
+        "https://aclanthology.org/2026.acl-long.1365/"
+      ],
+      "venue": "ACL 2026 (Long Papers)",
+      "verified_via": [
+        "Crossref",
+        "ACL Anthology page"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026-01-18",
+      "first_authors": [
+        "Sravanthi Machcha",
+        "Sushrita Yerra",
+        "Sahil Gupta",
+        "Aishwarya Sahoo"
+      ],
+      "identifiers": {
+        "arxiv": "2601.12471"
+      },
+      "novelty_implication": "Closes any claim that DAL is first to evaluate abstention for discrete medical action selection.",
+      "relationship_to_dal": "MedAbstain: unified abstention benchmark and protocol for medical MCQA with conformal prediction, perturbations, and explicit abstention options; frames discrete choice as generalizing to agentic action selection.",
+      "title": "Knowing When to Abstain: Medical LLMs Under Clinical Uncertainty",
+      "urls": [
+        "https://arxiv.org/abs/2601.12471"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2025-06-10",
+      "first_authors": [
+        "Polina Kirichenko",
+        "Mark Ibrahim",
+        "Kamalika Chaudhuri",
+        "Samuel J. Bell"
+      ],
+      "identifiers": {
+        "arxiv": "2506.09038"
+      },
+      "novelty_implication": "General abstention benchmarking exists; DAL contributes no new abstention benchmark.",
+      "relationship_to_dal": "AbstentionBench: large-scale abstention benchmark across 20 datasets showing reasoning LLMs fail on unanswerable questions.",
+      "title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions",
+      "urls": [
+        "https://arxiv.org/abs/2506.09038"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2025-11-20",
+      "first_authors": [
+        "Elias Hossain",
+        "Md Mehedi Hasan Nipu",
+        "Maleeha Sheikh",
+        "Tasfia Nuzhat"
+      ],
+      "identifiers": {
+        "arxiv": "2511.16625"
+      },
+      "novelty_implication": "Closes novelty for a clinical uncertainty/abstention governance layer; the DAL name (Decision Assurance Layer) must not imply a first such layer.",
+      "relationship_to_dal": "MedBayes-Lite: retraining-free uncertainty governance layer combining MC dropout, calibration, and confidence-guided abstention; reports that it does not improve risk-coverage ranking.",
+      "title": "MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support",
+      "urls": [
+        "https://arxiv.org/abs/2511.16625"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026-06-16",
+      "first_authors": [
+        "Presacan",
+        "Nik",
+        "Ojha",
+        "Thambawita"
+      ],
+      "identifiers": {
+        "doi": "10.1038/s41746-026-02882-1",
+        "pmid": "42298124"
+      },
+      "novelty_implication": "Decision-theoretic abstention framing is established; DAL must cite it and not present that framing as new.",
+      "relationship_to_dal": "Peer-reviewed review and decision-theoretic framing of healthcare LLM abstention.",
+      "title": "When silence is safer: a review and decision-theoretic framework for LLM abstention in healthcare",
+      "urls": [
+        "https://doi.org/10.1038/s41746-026-02882-1"
+      ],
+      "venue": "npj Digital Medicine",
+      "verified_via": [
+        "PubMed E-utilities",
+        "Crossref"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026-08-10",
+      "first_authors": [
+        "Maryam Tahermazandarani",
+        "Adnan Mahmood",
+        "Fahmida Islam",
+        "Quan Z. Sheng"
+      ],
+      "identifiers": {
+        "arxiv": "2608.09080"
+      },
+      "novelty_implication": "Missing-information overconfidence is documented; the DAL native unsafe-commit pathology is consistent with, not novel relative to, this literature.",
+      "relationship_to_dal": "Behavioral analysis of LLM overconfidence under missing clinical information.",
+      "title": "When Confidence Fails: Overconfidence in LLMs under Uncertainty and Missing Clinical Information",
+      "urls": [
+        "https://arxiv.org/abs/2608.09080"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2025-02-25",
+      "first_authors": [
+        "Artem Vazhentsev",
+        "Ivan Sviridov",
+        "Alvard Barseghyan",
+        "Gleb Kuzmin"
+      ],
+      "identifiers": {
+        "arxiv": "2502.18050"
+      },
+      "novelty_implication": "Selective prediction on medical text is established prior work.",
+      "relationship_to_dal": "Uncertainty-aware abstention for diagnosis from medical texts using selective prediction.",
+      "title": "Uncertainty-aware abstention in medical diagnosis based on medical texts",
+      "urls": [
+        "https://arxiv.org/abs/2502.18050"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2025-09-29",
+      "first_authors": [
+        "Xilin Dang",
+        "Kexin Chen",
+        "Xiaorui Su",
+        "Ayush Noori"
+      ],
+      "identifiers": {
+        "arxiv": "2509.24816"
+      },
+      "novelty_implication": "Further prior clinical abstention work; no DAL abstention-method novelty.",
+      "relationship_to_dal": "KnowGuard: knowledge-driven abstention for multi-round clinical reasoning.",
+      "title": "KnowGuard: Knowledge-Driven Abstention for Multi-Round Clinical Reasoning",
+      "urls": [
+        "https://arxiv.org/abs/2509.24816"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026-07-11",
+      "first_authors": [
+        "Xun Liu",
+        "Yi Evie Zhang",
+        "Vira Kasprova",
+        "Parisa Rabbani"
+      ],
+      "identifiers": {
+        "arxiv": "2607.10059"
+      },
+      "novelty_implication": "Agent-level when-not-to-act evaluation exists; DAL taglines must not imply a first agentic abstention evaluation.",
+      "relationship_to_dal": "AgentAbstain: paired should-act/should-abstain benchmark for tool-using agents; abstention is largely independent of task-solving capability.",
+      "title": "AgentAbstain: Do LLM Agents Know When Not to Act?",
+      "urls": [
+        "https://arxiv.org/abs/2607.10059"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2026-06-27",
+      "first_authors": [
+        "Han Luo",
+        "Bingbing Wen",
+        "Lucy Lu Wang"
+      ],
+      "identifiers": {
+        "arxiv": "2606.28733"
+      },
+      "novelty_implication": "Sequential agentic abstention is defined elsewhere; DAL evaluates only single-decision abstention.",
+      "relationship_to_dal": "Agentic Abstention: sequential stop-versus-act decision problem for LLM agents.",
+      "title": "Agentic Abstention: Do Agents Know When to Stop Instead of Act?",
+      "urls": [
+        "https://arxiv.org/abs/2606.28733"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2024-07-01",
+      "first_authors": [
+        "Jeremias Traub",
+        "Till J. Bungert",
+        "Carsten T. Lüth",
+        "Michael Baumgartner"
+      ],
+      "identifiers": {
+        "arxiv": "2407.01032"
+      },
+      "novelty_implication": "Methodology reference for DAL risk-coverage reporting; supports reporting AURC and fixed-coverage risk descriptively.",
+      "relationship_to_dal": "Methodological requirements for multi-threshold selective-classification metrics such as AURC variants, with clinical motivation.",
+      "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems",
+      "urls": [
+        "https://arxiv.org/abs/2407.01032"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-abstention-selective-prediction",
+      "date": "2024-10-20",
+      "first_authors": [
+        "Han Zhou",
+        "Jordy Van Landeghem",
+        "Teodora Popordanoska",
+        "Matthew B. Blaschko"
+      ],
+      "identifiers": {
+        "arxiv": "2410.15361"
+      },
+      "novelty_implication": "Methodology reference; DAL AURC values are finite-sample descriptive estimates.",
+      "relationship_to_dal": "Population AURC characterization and finite-sample estimation rates.",
+      "title": "A Novel Characterization of the Population Area Under the Risk Coverage Curve (AURC) and Rates of Finite Sample Estimators",
+      "urls": [
+        "https://arxiv.org/abs/2410.15361"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026",
+      "first_authors": [
+        "Lee",
+        "Bach",
+        "Yang",
+        "Pollard"
+      ],
+      "identifiers": {
+        "arxiv": "2509.19319"
+      },
+      "novelty_implication": "DAL makes no FHIR performance claim; the blocked result is reported as blocked.",
+      "relationship_to_dal": "Source benchmark for DAL FHIR evaluation; DAL final FHIR action selection was interface-blocked before execution.",
+      "title": "FHIR-AgentBench: Benchmarking LLM Agents for Realistic Interoperable EHR Question Answering",
+      "urls": [
+        "https://proceedings.mlr.press/v297/lee26a.html",
+        "https://arxiv.org/abs/2509.19319",
+        "https://github.com/glee4810/FHIR-AgentBench"
+      ],
+      "venue": "Machine Learning for Health 2026, PMLR 297",
+      "verified_via": [
+        "PMLR page",
+        "arXiv API",
+        "GitHub API (CC-BY-4.0)"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2025-08-28",
+      "first_authors": [
+        "Jiang",
+        "Black",
+        "Geng",
+        "Park"
+      ],
+      "identifiers": {
+        "arxiv": "2501.14654",
+        "doi": "10.1056/AIdbp2500144"
+      },
+      "novelty_implication": "No end-to-end agent claim is possible for DAL.",
+      "relationship_to_dal": "Realistic FHIR-compliant EHR agent environment; DAL is a bounded decision layer, not an end-to-end agent.",
+      "title": "MedAgentBench: A Virtual EHR Environment to Benchmark Medical LLM Agents",
+      "urls": [
+        "https://doi.org/10.1056/AIdbp2500144",
+        "https://github.com/stanfordmlgroup/MedAgentBench"
+      ],
+      "venue": "NEJM AI",
+      "verified_via": [
+        "Crossref",
+        "GitHub API (MIT)"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026-06-30",
+      "first_authors": [
+        "Qianchu Liu",
+        "Sheng Zhang",
+        "Guanghui Qin",
+        "Jeya Maria Jose Valanarasu"
+      ],
+      "identifiers": {
+        "arxiv": "2606.31179"
+      },
+      "novelty_implication": "Healthcare agent evaluation suites exist at much larger scope; DAL is not positioned as an agent benchmark.",
+      "relationship_to_dal": "HealthAgentBench: 54 end-to-end agentic healthcare tasks across 7 categories; the strongest frontier agent reaches about 42% success.",
+      "title": "HealthAgentBench: A Unified Benchmark Suite of Realistic Agentic Healthcare Environments for Challenging Frontier AI Agents",
+      "urls": [
+        "https://arxiv.org/abs/2606.31179",
+        "https://github.com/microsoft/HealthAgentBench"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026-02-26",
+      "first_authors": [
+        "Michael Frew",
+        "Nishit Bheda",
+        "Bryan Tripp"
+      ],
+      "identifiers": {
+        "arxiv": "2602.23479"
+      },
+      "novelty_implication": "FHIR QA benchmarking is active; no DAL FHIR novelty claim.",
+      "relationship_to_dal": "FHIRPath-QA: executable patient-specific QA over FHIR records.",
+      "title": "FHIRPath-QA: Executable Question Answering over FHIR Electronic Health Records",
+      "urls": [
+        "https://arxiv.org/abs/2602.23479"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026-05-13",
+      "first_authors": [
+        "Marius S. Knorr",
+        "Robert Müller",
+        "Jan P. Bremer",
+        "Nils Schweingruber"
+      ],
+      "identifiers": {
+        "arxiv": "2605.14126"
+      },
+      "novelty_implication": "Concurrent FHIR-AgentBench method work; DAL has no comparable FHIR result.",
+      "relationship_to_dal": "Reinforcement learning for tool-calling agents on FHIR-AgentBench, documenting wrong-resource selection and traversal violations.",
+      "title": "Reinforcement Learning for Tool-Calling Agents in Fast Healthcare Interoperability Resources (FHIR)",
+      "urls": [
+        "https://arxiv.org/abs/2605.14126"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026-04-22",
+      "first_authors": [
+        "Sanjoy Pator"
+      ],
+      "identifiers": {
+        "arxiv": "2604.21076"
+      },
+      "novelty_implication": "Supports the DAL rule that serialization-only effects cannot carry FHIR capability claims.",
+      "relationship_to_dal": "Systematic study showing that FHIR serialization strategy changes LLM medication-reconciliation results.",
+      "title": "Serialisation Strategy Matters: How FHIR Data Format Affects LLM Medication Reconciliation",
+      "urls": [
+        "https://arxiv.org/abs/2604.21076"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "fhir-healthcare-agent-evaluation",
+      "date": "2026-08-07",
+      "first_authors": [
+        "Veronica Chatrath",
+        "Bryan Zhu",
+        "George Pu",
+        "Jingxuan Fan"
+      ],
+      "identifiers": {
+        "arxiv": "2608.07796"
+      },
+      "novelty_implication": "Calibrated deferral with evidence grounding in EHR settings exists; DAL cannot claim to be first to combine them.",
+      "relationship_to_dal": "CliniCARE-Bench: calibrated retrospective clinical audit over EHR with evidence grounding and deferral.",
+      "title": "CliniCARE-Bench: Clinical Calibrated Audit of Medical Reasoning in EHR",
+      "urls": [
+        "https://arxiv.org/abs/2608.07796"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evidence-grounded-clinical-qa-verification",
+      "date": "2025",
+      "first_authors": [
+        "Yun",
+        "Sohn",
+        "Park",
+        "Kim"
+      ],
+      "identifiers": {
+        "doi": "10.18653/v1/2025.emnlp-main.837"
+      },
+      "novelty_implication": "Evidence verification is established; DAL has no qualified real-data evidence-intervention result and therefore no grounding claim.",
+      "relationship_to_dal": "Guideline-verified stepwise process rewards; not architecturally equivalent to DAL.",
+      "title": "Med-PRM: Medical Reasoning Models with Stepwise, Guideline-verified Process Rewards",
+      "urls": [
+        "https://aclanthology.org/2025.emnlp-main.837/"
+      ],
+      "venue": "EMNLP 2025",
+      "verified_via": [
+        "Crossref"
+      ]
+    },
+    {
+      "area": "evidence-grounded-clinical-qa-verification",
+      "date": "2025-10-16",
+      "first_authors": [
+        "Yingpeng Ning",
+        "Yuanyuan Sun",
+        "Ling Luo",
+        "Yanhua Wang"
+      ],
+      "identifiers": {
+        "arxiv": "2510.14400"
+      },
+      "novelty_implication": "Evidence-verified biomedical QA exists; no DAL grounding claim.",
+      "relationship_to_dal": "MedTrust-RAG: evidence verification and trust alignment for biomedical QA.",
+      "title": "MedTrust-RAG: Evidence Verification and Trust Alignment for Biomedical Question Answering",
+      "urls": [
+        "https://arxiv.org/abs/2510.14400"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evidence-grounded-clinical-qa-verification",
+      "date": "2026-03-05",
+      "first_authors": [
+        "Qiao Jin",
+        "Yin Fang",
+        "Lauren He",
+        "Yifan Yang"
+      ],
+      "identifiers": {
+        "arxiv": "2603.05308"
+      },
+      "novelty_implication": "Small-model evidence attribution exists; no DAL attribution claim.",
+      "relationship_to_dal": "Med-V1: small models for zero-shot biomedical evidence attribution.",
+      "title": "Med-V1: Small Language Models for Zero-shot and Scalable Biomedical Evidence Attribution",
+      "urls": [
+        "https://arxiv.org/abs/2603.05308"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evidence-grounded-clinical-qa-verification",
+      "date": "2026-06-14",
+      "first_authors": [
+        "Jiyoun Kim",
+        "Muhan Yeo",
+        "Eunhye Jang",
+        "Jeewon Yang"
+      ],
+      "identifiers": {
+        "arxiv": "2606.15735"
+      },
+      "novelty_implication": "Evidence-grounded clinical QA benchmarks exist.",
+      "relationship_to_dal": "EHRNote-ChatQA: evidence-grounded multi-turn clinical QA benchmark.",
+      "title": "EHRNote-ChatQA: A Benchmark for Evidence-Grounded Multi-Turn Clinical Question Answering over Longitudinal Discharge Summaries",
+      "urls": [
+        "https://arxiv.org/abs/2606.15735"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-llm-uncertainty-calibration",
+      "date": "2025-06-12",
+      "first_authors": [
+        "Alberto Testoni",
+        "Iacer Calixto"
+      ],
+      "identifiers": {
+        "arxiv": "2506.10769"
+      },
+      "novelty_implication": "Medical calibration benchmarking is established; DAL reports ECE descriptively only.",
+      "relationship_to_dal": "Benchmark of LLM uncertainty and calibration across clinical specialties and question types.",
+      "title": "Mind the Gap: Benchmarking LLM Uncertainty and Calibration with Specialty-Aware Clinical QA and Reasoning-Based Behavioural Features",
+      "urls": [
+        "https://arxiv.org/abs/2506.10769"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "medical-llm-uncertainty-calibration",
+      "date": "2026-06-26",
+      "first_authors": [
+        "Boie",
+        "Reis",
+        "Frey"
+      ],
+      "identifiers": {
+        "doi": "10.1007/s10916-026-02430-0",
+        "pmid": "42360536"
+      },
+      "novelty_implication": "Confidence-calibration measurement in medical QA is not novel.",
+      "relationship_to_dal": "Peer-reviewed study of medical QA confidence calibration.",
+      "title": "Calibration of Self-Reported Confidence and Accuracy of Large Language Models in Medical Question Answering",
+      "urls": [
+        "https://doi.org/10.1007/s10916-026-02430-0"
+      ],
+      "venue": "Journal of Medical Systems",
+      "verified_via": [
+        "PubMed E-utilities",
+        "Crossref"
+      ]
+    },
+    {
+      "area": "typed-decision-models",
+      "date": "2026-09-27",
+      "first_authors": [
+        "Alfredo Madrid-García",
+        "Beatriz Merino-Barbancho"
+      ],
+      "identifiers": {
+        "arxiv": "2609.34024"
+      },
+      "novelty_implication": "Closes any claim that DAL is the first typed-decision or System-One evaluation in medicine or on PubMedQA.",
+      "relationship_to_dal": "Jev in Medicine: evaluates a typed-decision model on PubMedQA and other medical benchmarks for accuracy, calibration, selective prediction, and unanswerable-question recognition.",
+      "title": "Jev in Medicine: A Benchmark Evaluation. Preliminary Results",
+      "urls": [
+        "https://arxiv.org/abs/2609.34024"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "typed-decision-models",
+      "date": "2026-09-26",
+      "first_authors": [
+        "Lijuan Tang",
+        "Yuemeng Zheng"
+      ],
+      "identifiers": {
+        "arxiv": "2609.32160"
+      },
+      "novelty_implication": "Consistent with the DAL PubMedQA tie; DAL must not claim an accuracy benefit from the typed interface and should be checked against this checklist before submission.",
+      "relationship_to_dal": "Early evidence audit of 28 typed-decision papers: the typed readout shows no independent accuracy advantage over comparable label-probability readouts; proposes a 14-item evaluation checklist.",
+      "title": "Typed Decision Models: An Early Evidence Audit and Evaluation Checklist",
+      "urls": [
+        "https://arxiv.org/abs/2609.32160"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "typed-decision-models",
+      "date": "2026-09-27",
+      "first_authors": [
+        "Keyi Li",
+        "Yihao He",
+        "Quanyi Li"
+      ],
+      "identifiers": {
+        "arxiv": "2609.33209"
+      },
+      "novelty_implication": "Coherence testing exists; DAL does not evaluate coherence.",
+      "relationship_to_dal": "Tests probability-axiom coherence of a typed-decision model on PubMedQA and ChaosNLI.",
+      "title": "Beyond Calibration: Do a Typed-Decision Model's Probabilities Obey the Probability Axioms?",
+      "urls": [
+        "https://arxiv.org/abs/2609.33209"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "typed-decision-models",
+      "date": "2026-09-27",
+      "first_authors": [
+        "Yixuan Liu"
+      ],
+      "identifiers": {
+        "arxiv": "2609.33401"
+      },
+      "novelty_implication": "Selective-automation evaluation of System-One models exists; supports reporting DAL failure concentrations such as the unsafe-commit pathology rather than aggregates only.",
+      "relationship_to_dal": "Evaluates Jev, Laya, Decider, and others for calibration and selective automation in agent-security decisions; aggregate calibration can hide concentrated failures.",
+      "title": "Evaluating System One Models for Agent Security Decisions: Reliability, Calibration, and Selective Automation",
+      "urls": [
+        "https://arxiv.org/abs/2609.33401"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "typed-decision-models",
+      "date": "2026-09-28",
+      "first_authors": [
+        "Rishabh Sharma",
+        "Rishika Lall"
+      ],
+      "identifiers": {
+        "arxiv": "2609.34227"
+      },
+      "novelty_implication": "Closes any claim that DAL is the first pre-registered typed-decision evaluation.",
+      "relationship_to_dal": "Pre-registered evaluation using a typed decision model with non-inferiority margins.",
+      "title": "When Does Selection Replace Extraction? A Pre-Registered Test of Agent Memory with a Typed Decision Model",
+      "urls": [
+        "https://arxiv.org/abs/2609.34227"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evaluation-governance-provenance",
+      "date": "2026-06-08",
+      "first_authors": [
+        "Yoojin Nam",
+        "Jinhoon Jeong",
+        "Namkug Kim"
+      ],
+      "identifiers": {
+        "arxiv": "2606.09500"
+      },
+      "novelty_implication": "Closes broad novelty for deterministic hash-verified paper-number provenance; DAL may describe its claim-ledger and packet binding only as engineering practice of this study, not as a new method.",
+      "relationship_to_dal": "MedSci Skills: deterministic halt-on-failure integrity gates and content-hash manifests verifying that manuscript numbers match source tables.",
+      "title": "Deterministic Integrity Gates for LLM-Assisted Clinical Manuscript Preparation: An Auditable Biomedical Informatics Architecture",
+      "urls": [
+        "https://arxiv.org/abs/2606.09500"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evaluation-governance-provenance",
+      "date": "2026-06-10",
+      "first_authors": [
+        "Dexter Hadley"
+      ],
+      "identifiers": {
+        "arxiv": "2607.05410"
+      },
+      "novelty_implication": "Evidence-ledger governance framing exists; no first-evidence-ledger claim.",
+      "relationship_to_dal": "CANONIC: governance as compilation into an evidence ledger.",
+      "title": "CANONIC: Governance Is Compilation",
+      "urls": [
+        "https://arxiv.org/abs/2607.05410"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "evaluation-governance-provenance",
+      "date": "2026-07-30",
+      "first_authors": [
+        "Enjun Du",
+        "Hange Zhou",
+        "Chenxu Du",
+        "Siyi Liu"
+      ],
+      "identifiers": {
+        "arxiv": "2607.28374"
+      },
+      "novelty_implication": "Claim-to-evidence provenance constraints exist in agent reasoning; DAL claim binding is not novel in principle.",
+      "relationship_to_dal": "LEDGERMIND: structured evidence ledger constraining agent claims to provenance.",
+      "title": "LEDGERMIND: Provenance-Constrained Multimodal Agentic Reasoning with a Structured Evidence Ledger",
+      "urls": [
+        "https://arxiv.org/abs/2607.28374"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    },
+    {
+      "area": "counterfactual-evidence-intervention",
+      "date": "2026-07-15",
+      "first_authors": [
+        "Thanni Adewuyi",
+        "Anuoluwa Sotome",
+        "Samuel Okoko",
+        "Angel Ezendu"
+      ],
+      "identifiers": {
+        "arxiv": "2607.14385"
+      },
+      "novelty_implication": "Real-data clinical counterfactual robustness benchmarks exist; DAL has only synthetic mechanics and makes no counterfactual robustness claim.",
+      "relationship_to_dal": "MamaBench: counterfactual clinical robustness benchmark for maternal and child health diagnosis.",
+      "title": "MamaBench: Benchmarking LLM Robustness in Maternal and Child Health Diagnosis through Counterfactual Clinical Perturbation",
+      "urls": [
+        "https://arxiv.org/abs/2607.14385"
+      ],
+      "venue": "arXiv preprint (not peer reviewed)",
+      "verified_via": [
+        "arXiv API"
+      ]
+    }
+  ],
+  "inclusion_criteria": [
+    "text-based medical abstention, selective prediction, or uncertainty calibration",
+    "FHIR or healthcare agent evaluation",
+    "evidence-grounded clinical QA or verification",
+    "typed-decision or System-One model evaluation",
+    "evaluation governance, claim/evidence provenance, or pre-registration",
+    "clinical counterfactual or evidence-intervention robustness"
+  ],
+  "limitations": [
+    "Not a systematic review; coverage is limited to the listed free sources and queries",
+    "Semantic Scholar and OpenAlex were not queried",
+    "Forward and backward citation chasing from MedQAbstain, Med-PRM, MedAgentBench, FHIR-AgentBench, and BioClinical ModernBERT was not performed",
+    "Screening was performed by a single AI implementation agent without independent human double screening; a human pre-submission check is still required",
+    "arXiv preprints are not peer reviewed and are cited as preprints",
+    "Result sets reflect source relevance ranking on the search date"
+  ],
+  "model_or_protocol_change": "none; the refresh changes no model, threshold, calibration, benchmark, denominator, or result",
+  "novelty_disposition": [
+    {
+      "blocking_work": [
+        "10.18653/v1/2026.acl-long.1365",
+        "2601.12471",
+        "2511.16625",
+        "10.1038/s41746-026-02882-1"
+      ],
+      "candidate_claim": "first medical abstention system or benchmark",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2511.16625",
+        "2608.07796"
+      ],
+      "candidate_claim": "first clinical uncertainty, assurance, or governance layer",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2609.34024",
+        "2609.33209"
+      ],
+      "candidate_claim": "first typed-decision or System-One evaluation in medicine or on PubMedQA",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2609.32160"
+      ],
+      "candidate_claim": "typed non-generative readout improves medical accuracy",
+      "dal_evidence": "PubMedQA paper-minus-control estimate 0.0 with 95% paired-bootstrap interval [0.0, 0.0]",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2609.34227"
+      ],
+      "candidate_claim": "first pre-registered or frozen-protocol typed-decision evaluation",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2606.09500",
+        "2607.05410",
+        "2607.28374"
+      ],
+      "candidate_claim": "first deterministic hash-verified provenance for paper numbers, or first evidence/claim ledger",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2509.19319"
+      ],
+      "candidate_claim": "FHIR-aware decision-layer capability",
+      "dal_evidence": "final FHIR action selection interface-blocked pre-execution",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2607.14385"
+      ],
+      "candidate_claim": "medical counterfactual or evidence-intervention robustness",
+      "dal_evidence": "P06 evidence is synthetic mechanics only",
+      "disposition": "removed"
+    },
+    {
+      "blocking_work": [
+        "2407.01032"
+      ],
+      "candidate_claim": "native abstention outperforms the confidence-only control",
+      "dal_evidence": "risk@80 paper-minus-control -0.0125 (95% paired-bootstrap interval [-0.0200, -0.0050]) is descriptive under the frozen protocol; frozen 0.8 and 0.9 target policies yielded coverage 1.0 and unsafe-commit rate 1.0",
+      "disposition": "narrowed-to-descriptive"
+    },
+    {
+      "blocking_work": [],
+      "candidate_claim": "study-level contribution: one frozen-protocol evaluation of a compact non-generative clinical decision layer that reports null, negative, blocked, and calibration-pathology outcomes with every exported claim mechanically bound to source-hashed evidence packets",
+      "disposition": "retained-as-scoped-description",
+      "permitted_wording": "This study reports a frozen-protocol evaluation in which every exported claim is bound to source-hashed evidence packets and null, negative, and blocked outcomes are reported. We do not claim methodological novelty for abstention, typed decisions, pre-registration, or provenance verification individually.",
+      "scope": "Describes this study only; never phrased as first, as a novel method, or as state of the art."
+    }
+  ],
+  "previous_refresh": "docs/research/P08_LITERATURE_REFRESH_2026-09-26.md",
+  "queries": [
+    {
+      "query": "all:abstention AND all:medical AND all:\"language model\"",
+      "query_id": "q01",
+      "result_count": 23,
+      "result_ids": [
+        "2508.13378",
+        "2509.24816",
+        "2609.05540",
+        "2602.15391",
+        "2609.38810",
+        "2601.12471",
+        "2601.16397",
+        "2608.07796",
+        "2608.02790",
+        "2603.24846",
+        "2605.01011",
+        "2603.11394",
+        "2506.11887",
+        "2608.10725",
+        "2605.15000",
+        "2607.01103",
+        "2511.16625",
+        "2607.13036",
+        "2507.09751",
+        "2609.09696",
+        "2608.18833",
+        "2606.12702",
+        "2605.26147"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"selective prediction\" AND (all:clinical OR all:medical)",
+      "query_id": "q02",
+      "result_count": 25,
+      "result_ids": [
+        "2603.02719",
+        "2508.07617",
+        "2402.10665",
+        "2607.22727",
+        "2502.18050",
+        "2608.14683",
+        "2604.08868",
+        "2507.19098",
+        "2603.10950",
+        "2601.22373",
+        "2607.12075",
+        "2607.16317",
+        "2604.15271",
+        "2603.08459",
+        "2606.15910",
+        "2605.26726",
+        "2506.18162",
+        "1206.6653",
+        "2608.20348",
+        "2509.10348",
+        "1907.11524",
+        "2510.01683",
+        "2609.34024",
+        "2605.19133",
+        "2608.11942"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:FHIR AND (all:agent OR all:benchmark) AND all:\"language model\"",
+      "query_id": "q03",
+      "result_count": 16,
+      "result_ids": [
+        "2507.03067",
+        "2605.30295",
+        "2506.13800",
+        "2604.21076",
+        "2601.21113",
+        "2501.14654",
+        "2603.06902",
+        "2602.23479",
+        "2604.27045",
+        "2607.11175",
+        "2603.08755",
+        "2602.18650",
+        "2607.22448",
+        "2501.13687",
+        "2605.21496",
+        "2512.05365"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"health agent\" AND all:benchmark",
+      "query_id": "q04",
+      "result_count": 7,
+      "result_ids": [
+        "2508.20148",
+        "2604.02834",
+        "2608.27219",
+        "2604.17133",
+        "2607.13940",
+        "2509.16360",
+        "2608.10915"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"evidence-grounded\" AND (all:clinical OR all:medical) AND all:\"question answering\"",
+      "query_id": "q05",
+      "result_count": 22,
+      "result_ids": [
+        "2606.15735",
+        "2506.10751",
+        "2603.27335",
+        "2605.24492",
+        "2608.28360",
+        "2608.27467",
+        "2601.03471",
+        "2609.08364",
+        "2602.14158",
+        "2605.21807",
+        "2606.20164",
+        "2608.17607",
+        "2512.01045",
+        "2410.14948",
+        "2512.08193",
+        "2604.10755",
+        "2609.39566",
+        "2603.21925",
+        "2608.20402",
+        "2609.29075",
+        "2604.14656",
+        "2605.03618"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:citation AND all:verification AND (all:medical OR all:clinical) AND all:LLM",
+      "query_id": "q06",
+      "result_count": 12,
+      "result_ids": [
+        "2609.27844",
+        "2602.16050",
+        "2510.14400",
+        "2601.03418",
+        "2606.09500",
+        "2504.00934",
+        "2604.26953",
+        "2608.31128",
+        "2603.05308",
+        "2609.07595",
+        "2609.08364",
+        "2604.00944"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:calibration AND all:uncertainty AND (all:medical OR all:clinical) AND all:\"large language models\"",
+      "query_id": "q07",
+      "result_count": 25,
+      "result_ids": [
+        "2509.19375",
+        "2506.10769",
+        "2504.05278",
+        "2608.27847",
+        "2407.00499",
+        "2608.14552",
+        "2502.14275",
+        "2608.09080",
+        "2604.06028",
+        "2510.05126",
+        "2604.17316",
+        "2606.27023",
+        "2510.19139",
+        "2502.01691",
+        "2505.03788",
+        "2509.24560",
+        "2402.14259",
+        "2609.20684",
+        "2605.29744",
+        "2601.22373",
+        "2501.16215",
+        "2605.15588",
+        "2605.20772",
+        "2506.00072",
+        "2608.26735"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:counterfactual AND (all:clinical OR all:medical) AND all:robustness AND all:\"language model\"",
+      "query_id": "q08",
+      "result_count": 18,
+      "result_ids": [
+        "2607.14385",
+        "2606.28520",
+        "2511.16333",
+        "2312.11747",
+        "2508.05083",
+        "2601.18356",
+        "2504.14450",
+        "2310.12803",
+        "2407.00557",
+        "2601.14590",
+        "2604.17316",
+        "2609.32817",
+        "2503.06169",
+        "2507.05541",
+        "2504.16273",
+        "2604.15705",
+        "2505.13081",
+        "2601.13590"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:preregistration AND (all:\"machine learning\" OR all:benchmark) AND all:evaluation",
+      "query_id": "q09",
+      "result_count": 6,
+      "result_ids": [
+        "1911.04120",
+        "2607.20864",
+        "2012.04344",
+        "2507.02950",
+        "2011.14696",
+        "2012.02976"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"know when\" AND all:abstain AND all:LLM",
+      "query_id": "q10",
+      "result_count": 11,
+      "result_ids": [
+        "2601.12471",
+        "2607.10059",
+        "2604.02230",
+        "2506.09038",
+        "2606.28733",
+        "2604.18419",
+        "2407.16221",
+        "2605.07769",
+        "2507.16951",
+        "2509.02401",
+        "2605.25133"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"risk-coverage\" AND (all:medical OR all:clinical)",
+      "query_id": "q11",
+      "result_count": 16,
+      "result_ids": [
+        "2511.16625",
+        "2410.15361",
+        "2406.03323",
+        "2609.30714",
+        "2608.03862",
+        "2508.19322",
+        "2602.16019",
+        "2608.11942",
+        "2608.14768",
+        "2603.10950",
+        "2609.09189",
+        "2407.01032",
+        "2607.16317",
+        "2510.24359",
+        "2408.12622",
+        "2609.12892"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"electronic health record\" AND all:agent AND all:benchmark AND all:LLM",
+      "query_id": "q12",
+      "result_count": 25,
+      "result_ids": [
+        "2605.10286",
+        "2507.12774",
+        "2605.02240",
+        "2509.23415",
+        "2405.07960",
+        "2505.12371",
+        "2511.00782",
+        "2601.08988",
+        "2607.15314",
+        "2606.23301",
+        "2608.27856",
+        "2609.39371",
+        "2605.14126",
+        "2507.02616",
+        "2601.03023",
+        "2605.09675",
+        "2608.17051",
+        "2507.15867",
+        "2604.10386",
+        "2511.17559",
+        "2510.24654",
+        "2511.15211",
+        "2605.03476",
+        "2604.23605",
+        "2609.07601"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "ti:HealthAgentBench OR abs:HealthAgentBench",
+      "query_id": "t01",
+      "result_count": 1,
+      "result_ids": [
+        "2606.31179"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "ti:MedAbstain OR abs:MedAbstain OR abs:MedQAbstain",
+      "query_id": "t02",
+      "result_count": 1,
+      "result_ids": [
+        "2601.12471"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "abs:\"FHIR-AgentBench\"",
+      "query_id": "t03",
+      "result_count": 2,
+      "result_ids": [
+        "2509.19319",
+        "2605.14126"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"claim ledger\" OR all:\"evidence ledger\" AND all:evaluation",
+      "query_id": "t04",
+      "result_count": 15,
+      "result_ids": [
+        "2607.28374",
+        "2606.02506",
+        "2608.13867",
+        "2608.00964",
+        "2607.05410",
+        "2605.19337",
+        "2601.03436",
+        "2609.33728",
+        "2607.13967",
+        "2609.18960",
+        "2608.13706",
+        "2605.03042",
+        "2606.17529",
+        "2609.27814",
+        "2608.04957"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:reproducibility AND all:\"medical\" AND all:\"large language model\" AND all:\"reporting guideline\"",
+      "query_id": "t05",
+      "result_count": 0,
+      "result_ids": [],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"test set\" AND all:contamination AND all:\"held-out\" AND all:governance AND all:benchmark",
+      "query_id": "t06",
+      "result_count": 0,
+      "result_ids": [],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:PubMedQA AND all:calibration",
+      "query_id": "t07",
+      "result_count": 6,
+      "result_ids": [
+        "2609.33209",
+        "2609.34024",
+        "2604.05358",
+        "2207.08143",
+        "2606.00971",
+        "2607.20527"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"information sufficiency\" AND (all:abstention OR all:selective)",
+      "query_id": "t08",
+      "result_count": 13,
+      "result_ids": [
+        "2604.04565",
+        "2509.11208",
+        "2603.20286",
+        "2604.17344",
+        "2602.04094",
+        "2609.09510",
+        "2112.15238",
+        "2406.15074",
+        "2012.06893",
+        "2608.27903",
+        "1807.05985",
+        "2512.05373",
+        "2603.25512"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"typed decision\" OR all:\"system one\" AND all:\"language model\"",
+      "query_id": "t09",
+      "result_count": 15,
+      "result_ids": [
+        "2609.33209",
+        "2609.32160",
+        "2609.34227",
+        "2609.36116",
+        "2609.23886",
+        "2609.36965",
+        "2609.24052",
+        "2609.35865",
+        "1909.09010",
+        "2609.28940",
+        "1207.1534",
+        "2609.33401",
+        "2406.08434",
+        "2309.13638",
+        "2203.13001"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "all:\"negative results\" AND all:\"machine learning\" AND all:reporting",
+      "query_id": "t10",
+      "result_count": 15,
+      "result_ids": [
+        "2407.07218",
+        "1904.07633",
+        "2609.31683",
+        "2607.11948",
+        "2608.05944",
+        "2609.36139",
+        "2606.30449",
+        "2604.11867",
+        "2609.34292",
+        "2608.03887",
+        "2609.23102",
+        "2608.01559",
+        "2603.28921",
+        "2209.14113",
+        "1807.00981"
+      ],
+      "source": "arXiv API (export.arxiv.org)"
+    },
+    {
+      "query": "large language model abstention clinical uncertainty",
+      "query_id": "p01",
+      "result_count": 5,
+      "result_ids": [
+        "42298124",
+        "41966058",
+        "42142612",
+        "42485959",
+        "41758129"
+      ],
+      "source": "PubMed via NCBI E-utilities"
+    },
+    {
+      "query": "FHIR large language model agent benchmark",
+      "query_id": "p02",
+      "result_count": 3,
+      "result_ids": [
+        "41758153",
+        "41727598",
+        "42644472"
+      ],
+      "source": "PubMed via NCBI E-utilities"
+    },
+    {
+      "query": "large language model calibration medical question answering",
+      "query_id": "p03",
+      "result_count": 12,
+      "result_ids": [
+        "39405325",
+        "38487804",
+        "42360536",
+        "38366043",
+        "40882190",
+        "40378406",
+        "42262952",
+        "42098878",
+        "42106063",
+        "41264912",
+        "42574942",
+        "41756436"
+      ],
+      "source": "PubMed via NCBI E-utilities"
+    }
+  ],
+  "record_id": "sg23-related-work-refresh-2026-10-01",
+  "schema_version": "0.1",
+  "screened_unique_records": 282,
+  "screening": "title screening of every returned record by one reviewer (the implementation agent); abstract review only for records passing title screening; records outside the inclusion criteria were not retained; notable close-but-excluded records are listed with reasons",
+  "search_date": "2026-10-01",
+  "sources": [
+    "arXiv API",
+    "PubMed via NCBI E-utilities",
+    "Crossref REST API",
+    "ACL Anthology",
+    "PMLR proceedings",
+    "GitHub REST API"
+  ]
+}
