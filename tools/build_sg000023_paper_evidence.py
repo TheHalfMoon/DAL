@@ -960,6 +960,16 @@ def validate_package(artifacts: dict[str, Any], matrix: dict[str, Any]) -> list[
             f"undeclared={sorted(set(packet_ids) - set(declared_ids))}"
         )
     by_id = {packet["packet_id"]: packet for packet in packets}
+    matrix_rows = {row["id"]: row for row in matrix["rows"]}
+    for packet in packets:
+        row = matrix_rows.get(packet["matrix_row_id"])
+        if row is None:
+            errors.append(f"packet {packet['packet_id']} binds unknown matrix row")
+            continue
+        if packet["packet_id"] not in row["evidence_packet_ids"]:
+            errors.append(f"packet {packet['packet_id']} is not declared by matrix row {row['id']}")
+        if packet["matrix_row_status"] != row["status"]:
+            errors.append(f"packet {packet['packet_id']} misstates matrix row status")
 
     covered: set[str] = set()
     for packet in packets:

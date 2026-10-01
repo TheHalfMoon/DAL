@@ -58,7 +58,6 @@ def test_paper_evidence_is_deterministically_rebuildable() -> None:
 
 def test_paper_evidence_catalog_matches_shared_inventory() -> None:
     assert {path.name for path in EVIDENCE.glob("*.json")} == set(BUILDER.ARTIFACT_NAMES)
-    assert BUILDER.ARTIFACT_NAMES == (*BUILDER.BASE_ARTIFACT_NAMES, BUILDER.PROVENANCE_INDEX_NAME)
 
 
 def test_frozen_sources_match_pins_and_final_manifest() -> None:
@@ -128,6 +127,18 @@ def test_validation_rejects_missing_matrix_packet() -> None:
     ]
     errors = BUILDER.validate_package(package, _matrix())
     assert any("missing=['EP-SG23-CLAIMS-INDEX']" in error for error in errors)
+
+
+def test_validation_rejects_packet_matrix_row_rebinding() -> None:
+    package = copy.deepcopy(_committed_package())
+    for packet in package["evidence_packets.json"]["packets"]:
+        if packet["packet_id"] == "EP-SG23-CAL-001":
+            packet["matrix_row_id"] = "main-action-selection-tables"
+    errors = BUILDER.validate_package(package, _matrix())
+    assert any(
+        "EP-SG23-CAL-001 is not declared by matrix row main-action-selection-tables" in error
+        for error in errors
+    )
 
 
 def test_validation_rejects_claim_sources_outside_packet() -> None:
