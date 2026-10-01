@@ -1,21 +1,21 @@
 {
-  "bibliography_record_sha256": "f522792267a9b448b8e7f6ac7dc070e5fae0a6adf8ca75ce897181d379138338",
+  "bibliography_record_sha256": "3c9c36defaade8b58d0a35fac8f0fbfedabb630b72600a75c77bcc3b33ba0b7c",
   "frozen_claim_set_sha256": "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b",
   "generator": "tools/build_sg000024_manuscript_inputs.py",
   "grain_id": "SG-000024",
   "outputs_sha256": {
     "dal_claims.tex": "eb45e84a735d3d1269bc9ccc4a7a39ba7d6d5a65edc44aa42fde2b31f60c1510",
     "dal_numbers.tex": "66790c109a179e5f2302bc08791827d3145592ca79935fc2f03ac1a863bb6070",
-    "fig_reliability.tex": "0eb95b20e0348e67ceb2136e9c5be5e0470a07086db58374878c644217215f5c",
-    "fig_risk_coverage.tex": "39413e5fecb6d13283c5d5111fb57692c2e29f5f88baf293825eea97cc4e2f67",
-    "references.bib": "31996f96f041c121b63f014220b90d69b4c43537ca7b8f9c8cd0db62021d80f8",
+    "fig_reliability.tex": "f97f9e7cc02b58e44e9d74348869a6736874fae1c663a35068fdb7e4e0c14855",
+    "fig_risk_coverage.tex": "cbbf49981c844339baa050e7bfde7818194ead414f53812eafbb9b866d3574ac",
+    "references.bib": "ea5d81b87140a540b4876c6b06d900056d50dfc1e419b7f1e2b85278f23a9c9b",
     "tab_boundaries.tex": "0e9e2a4b8dd59120cfebf8c227530d7555c6d38222a064814005ebd006167db5",
     "tab_claims.tex": "d895ac5bcd91318b9c889f6e088783d3bed10f1832c87fcbb3c0b0f190ad9abe",
     "tab_ecal.tex": "74b0ecd5af09ac8bcb570118f1ab053ba57278b625f22eda85e8ce435eb0a051",
     "tab_errors.tex": "07e1383645fcd59f92e4da11d7d258760f7791f8c36b1467e86661b3cb15cf62",
     "tab_fhir.tex": "0d997329bc106771d7f5afc727d9181cebf9d9f5c6383465f237c926f1359092",
     "tab_main.tex": "e724f987a88ae2585a7e288a061909d7bdc460b7497c4be4037edb5f0d4bc141",
-    "tab_policy.tex": "9dfce124b7d6603b1ce9665680513cc4db846d400ed50631409db499311b0541",
+    "tab_policy.tex": "baa2f781887114794dd2d38b917f7568c3411d28a12cbdbb2fd6b8712be40851",
     "tab_selective.tex": "b750dbf488455398ecdad7a190aaa16f066b4136fb8f074f8bf32c00764da61d"
   },
   "paper_evidence_artifact_sha256": {

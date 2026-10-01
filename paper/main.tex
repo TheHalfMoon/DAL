@@ -1,178 +1,290 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{microtype}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
 
-\title{GAX: Evidence-Calibrated System-One Models for Clinical Decision Making}
-\author{Author list to be finalized before submission}
+% Generated from the frozen SG-000023 evidence package; never edit these by hand.
+\input{generated/dal_numbers.tex}
+\input{generated/dal_claims.tex}
+
+% Manuscript rules (enforced by tests/test_p09_sg000024_manuscript.py):
+% - every result value is a \dalnum{...} macro generated from frozen evidence;
+% - every claim sentence is a \dalclaim{...} (affirmative) or \dallimitation{...} macro;
+% - every citation key exists in generated/references.bib.
+
+\title{A Frozen-Protocol Evaluation of a Decision Assurance Layer for Clinical Typed Decisions:\\
+Null Accuracy, Descriptive Abstention, and Blocked Interoperability Results}
+\author{Author list to be confirmed by the project founder before submission}
 \date{}
 
 \begin{document}
 \maketitle
 
-% IMPORTANT:
-% Do not insert synthetic or placeholder numerical results.
-% Every number in a results sentence/table must trace to a frozen evidence packet.
-
 \begin{abstract}
-GAX studies non-generative, typed clinical decision models that separate action
-beliefs from information sufficiency and abstention. This working manuscript is
-intentionally result-free until the frozen evaluation protocol is complete.
-The final abstract will report only artifact-backed findings.
+We report a single frozen-protocol evaluation of DAL, a Decision Assurance Layer that adds an
+information-sufficiency signal to a compact, non-generative clinical typed-decision model without
+changing that model's action distribution. All model, calibration, threshold, benchmark, and
+statistics choices were fixed before final-test access, and the final evaluation ran once.
+\dalclaim{SG23-C001} \dalclaim{SG23-C014} \dalclaim{SG23-C005} \dalclaim{SG23-C004}
+\dalclaim{SG23-C006} The paper contributes an evaluation record, not a new method:
+\dalclaim{SG23-C012}
 \end{abstract}
 
 \section{Introduction}
 
-Medical AI systems are commonly optimized to generate text, while many
-operational and clinical-support workflows ultimately require bounded decisions:
-select an allowed action, estimate risk, verify evidence support, or defer when
-information is insufficient. GAX investigates whether a dedicated
-System-One-style decision model can improve the accuracy--calibration--selectivity
-trade-off for these tasks while retaining efficient inference.
+Many clinical decision-support workflows end in a bounded choice: select one of a small number of
+allowed actions, or decline to act because the available information is insufficient. Typed-decision
+(``System One'') models return a probability distribution over caller-defined options rather than free
+text~\citep{jev_blog,laya_repo,decider_repo,clm_repo}. For such models, the most probable option is not by itself
+permission to act. A separate signal is needed that says whether the evidence in hand supports any
+decision at all.
 
-The core design principle is that the highest-probability action is not itself
-permission to act. GAX therefore represents action probabilities and information
-sufficiency separately and evaluates selective prediction explicitly.
+DAL (Decision Assurance Layer) studies that separation. Its paper system keeps the action
+distribution of a matched clinical encoder exactly and adds a learned information-sufficiency head
+that is used only to decide whether to commit. This paper reports what a single, prospectively frozen
+evaluation of that design shows, including null, negative, and blocked outcomes.
 
-\paragraph{Contributions.}
-Contribution language remains gated by the experiments in
-\texttt{docs/research/PAPER\_PLAN.md}. Any contribution that fails its ablation
-or held-out evaluation gate must be removed or reframed as a negative result.
+We emphasize what the evaluation does \emph{not} show. It does not establish an accuracy benefit, a
+selective-risk superiority claim, clinical safety, or FHIR capability, and the 2026 literature already
+covers medical abstention, typed-decision evaluation, and deterministic provenance checking
+(Section~\ref{sec:related}). Our contribution is the evaluation record itself: every exported claim is
+bound to a source-hashed evidence packet, and unfavorable outcomes are reported in full.
 
 \section{Related Work}
+\label{sec:related}
 
-\subsection{System-One and Typed Decision Models}
-Discuss Jev, Contrastive Language Models, Laya, decider, and restricted-logit
-one-pass baselines. Distinguish public evidence from unpublished implementation
-details.
+\paragraph{Medical abstention and selective prediction.}
+MedQAbstain~\citep{cocchieri2026medqabstain} and MedAbstain~\citep{arxiv2601_12471} benchmark abstention in medical
+multiple-choice settings, AbstentionBench~\citep{arxiv2506_09038} does so across domains, and a recent review
+frames healthcare abstention decision-theoretically~\citep{presacan2026silence}. MedBayes-Lite~\citep{arxiv2511_16625}
+describes a retraining-free clinical uncertainty governance layer. Further work documents overconfidence
+under missing clinical information~\citep{arxiv2608_09080}, selective prediction on medical text~\citep{arxiv2502_18050},
+knowledge-driven clinical abstention~\citep{arxiv2509_24816}, and agent-level abstention~\citep{arxiv2607_10059,arxiv2606_28733}.
+We follow established selective-classification methodology~\citep{geifman2017selective,arxiv2407_01032,arxiv2410_15361}.
 
-\subsection{Clinical Encoders}
-Discuss Clinical ModernBERT and BioClinical ModernBERT as efficient long-context
-clinical encoders.
+\paragraph{Typed-decision models.}
+Concurrent studies evaluate typed-decision models in medicine~\citep{arxiv2609_34024}, test the coherence of
+their probabilities~\citep{arxiv2609_33209}, evaluate them for selective automation~\citep{arxiv2609_33401}, and run
+pre-registered studies with them~\citep{arxiv2609_34227}. An early evidence audit reports that the typed readout
+has not shown an independent accuracy advantage over comparable label-probability readouts~\citep{arxiv2609_32160}.
 
-\subsection{Medical Agents and FHIR}
-Discuss MedAgentBench and FHIR-AgentBench, focusing on interoperable EHR
-retrieval and action selection.
+\paragraph{Clinical encoders, FHIR, and healthcare agents.}
+DAL builds on BioClinical ModernBERT~\citep{sounack2025bioclinicalmodernbert}; Clinical ModernBERT is a related
+encoder~\citep{lee2025clinicalmodernbert}. Interoperable EHR evaluation includes FHIR-AgentBench~\citep{lee2026fhiragentbench},
+MedAgentBench~\citep{jiang2025medagentbench}, HealthAgentBench~\citep{arxiv2606_31179}, FHIRPath-QA~\citep{arxiv2602_23479},
+CliniCARE-Bench~\citep{arxiv2608_07796}, reinforcement learning for FHIR tool calling~\citep{arxiv2605_14126}, and a study
+showing that FHIR serialization changes model behavior~\citep{arxiv2604_21076}.
 
-\subsection{Evidence-Aware Medical Verification}
-Discuss Med-PRM and related verifier/process-reward approaches.
+\paragraph{Evidence grounding, calibration, and counterfactuals.}
+Evidence verification and attribution are studied by Med-PRM~\citep{yun2025medprm}, MedTrust-RAG~\citep{arxiv2510_14400},
+Med-V1~\citep{arxiv2603_05308}, and EHRNote-ChatQA~\citep{arxiv2606_15735}. Calibration of medical language models is
+benchmarked in~\citep{arxiv2506_10769,boie2026calibration}, building on~\citep{guo2017calibration,gneiting2007proper}. Real-data
+clinical counterfactual robustness is benchmarked by MamaBench~\citep{arxiv2607_14385}.
 
-\subsection{Uncertainty, Calibration, and Abstention}
-Discuss proper scoring rules, neural calibration, selective prediction, and
-MedQAbstain.
+\paragraph{Evaluation governance and provenance.}
+Deterministic integrity gates with content-hash manifests have been proposed for LLM-assisted clinical
+manuscripts~\citep{arxiv2606_09500}, and evidence ledgers for governance and agent reasoning~\citep{arxiv2607_05410,arxiv2607_28374}.
+Our claim-to-evidence binding is engineering practice in this study, not a new method.
 
-\section{Problem Formulation}
+\paragraph{Novelty disposition.}
+The dated related-work refresh is described in Appendix~\ref{app:literature}.
+\dallimitation{SG23-C011}
 
-Let $s$ denote a clinical state, $\mathcal{A}=\{a_1,\ldots,a_K\}$ a finite set of
-caller-permitted actions, and $E$ optional evidence. A GAX model estimates
+\section{The Decision Assurance Layer}
+\label{sec:method}
 
-\begin{equation}
-p(a_i \mid s,E), \qquad i=1,\ldots,K,
-\end{equation}
+\paragraph{Typed decision interface.}
+Each item offers a closed set of candidate actions (for PubMedQA: \emph{yes}, \emph{no}, \emph{maybe}).
+A system returns a probability distribution over those actions and, separately, a selection score that
+decides whether to commit. \emph{Abstain} is never an action; it is the decision not to commit.
 
-and an information-sufficiency quantity
+\paragraph{Architecture.}
+The paper system is the final development architecture (D03, ``shadow assurance critic''). The matched
+clinical control is a BioClinical ModernBERT encoder with a linear action head, trained and selected
+independently for each seed. DAL clones the selected same-seed control head and freezes it, so DAL's
+action probabilities equal the control's exactly by construction. DAL then trains six assurance
+scalars: a typed evidence-critic residual scale, three critic class biases, and the scale and bias of an
+information-sufficiency head driven by the evidence-delta norm. These signals never modify the action
+distribution. Two earlier development architectures (D01, D02), which did alter the action head, were
+rejected on development data before D03 was frozen; no further architecture search was permitted.
 
-\begin{equation}
-p(\mathrm{sufficient}\mid s,E).
-\end{equation}
+\paragraph{Calibration.}
+Action probabilities use scalar temperature scaling and the sufficiency score uses Platt scaling, both
+fit on calibration rows only (method \texttt{temperature-scaling-action}+\allowbreak\texttt{platt-sufficiency-v0.1}). Target
+coverages $0.50$, $0.80$, and $0.90$ and their thresholds were frozen before final-test access.
 
-A separate decision policy maps these quantities to either an allowed action or
-abstention. Calibration parameters and action thresholds are fit without access
-to held-out test labels.
+\paragraph{ECAL.}
+Evidence-Calibrated Action Learning (ECAL) was implemented as a controlled-ablation framework, but no
+paper-level ECAL benefit was measured. \dallimitation{SG23-C013} Table~\ref{tab:ecal} lists the frozen selection.
 
-\section{GAX}
+\section{Frozen Protocol and Benchmarks}
+\label{sec:protocol}
 
-\subsection{Architecture Search}
-Report the winning architecture only after matched experiments across the
-single-encoder, contrastive state/action, and packed one-pass candidates.
+\paragraph{Governance.}
+Each step, from protocol freeze through final-test authorization, the one-shot final evaluation,
+evidence promotion, and the post-final analysis, was a separately reviewed change with exact-revision
+continuous integration on Linux and Windows and Python 3.11 and 3.12, plus two automated
+code-review gates. Final-test access stayed sealed until a digest-bound authorization artifact was merged,
+and the final evaluation ran exactly once. Results were not used to change any model, threshold,
+calibration, benchmark, or statistic.
 
-\subsection{Evidence-Calibrated Action Learning}
-ECAL is a working objective under test:
-\begin{equation}
-\mathcal{L} =
-w_a\mathcal{L}_{\mathrm{action}} +
-w_e\mathcal{L}_{\mathrm{evidence}} +
-w_p\mathcal{L}_{\mathrm{proper}} +
-w_s\mathcal{L}_{\mathrm{selective}} +
-w_c\mathcal{L}_{\mathrm{counterfactual}} +
-w_r\mathcal{L}_{\mathrm{retention}}.
-\end{equation}
-This formulation is not a claimed contribution unless ablations support it.
+\paragraph{Benchmarks.}
+\emph{PubMedQA PQA-L}~\citep{jin2019pubmedqa}: of its 1000 expert-labeled records, 500 form the frozen final test,
+450 were used for training and development selection, and 50 for calibration. \emph{Native abstention}: each
+final-test PubMedQA item appears twice, once with its evidence context present (gold: sufficient) and once with
+the evidence withheld (gold: insufficient, no gold action). Withheld rows count as incorrect actions for every
+system, so selective risk measures whether a selection score commits to evidence-present items. This is a
+constructed evidence-availability intervention, not real-world clinical insufficiency. DAL's selection score
+is its calibrated sufficiency probability; the clinical control's is its maximum action probability.
+\emph{FHIR-AgentBench}~\citep{lee2026fhiragentbench}: the frozen FHIR-AgentBench split.
 
-\subsection{Selective Decision Policy}
-Define confidence-only, learned-sufficiency, and calibrated selective baselines
-at matched coverage.
+\paragraph{Systems.}
+The primary comparison is the DAL paper system versus the matched clinical control. Laya~\citep{laya_repo} is the
+required open typed-decision baseline.
 
-\section{GAXBench}
-
-Describe the benchmark suites for closed actions, abstention, evidence
-interventions, counterfactual sensitivity, FHIR workflows, distribution shift,
-and systems performance. Include data provenance and leakage controls.
-
-\section{Experimental Setup}
-
-\subsection{Models and Baselines}
-Freeze versions before final test evaluation.
-
-\subsection{Datasets and Splits}
-Describe entity-disjoint splitting, transformation lineage, contamination checks,
-and licensing constraints.
-
-\subsection{Metrics}
-Primary metrics include task accuracy where appropriate, negative log
-likelihood, Brier score, calibration error with disclosed binning, area under the
-risk--coverage curve, risk at fixed coverage, abstention metrics, evidence
-discrimination, and systems metrics.
-
-\subsection{Statistical Analysis}
-Use paired comparisons, confidence intervals, multiple training seeds where
-needed, and explicit failure/exclusion accounting.
+\paragraph{Statistics.}
+The primary comparisons use a paired bootstrap with \dalnum{pubmedqa.bootstrap.replicates} replicates (seed
+\dalnum{pubmedqa.bootstrap.seed}) and 95\% percentile intervals. No primary $p$-value construction was
+preregistered, so none is reported, and no significance claim is made.
 
 \section{Results}
+\label{sec:results}
 
-\textbf{TBD after frozen evidence-backed evaluation.}
+\subsection{Action selection on PubMedQA}
 
-\section{Ablations}
+Table~\ref{tab:main} reports the frozen final rows. \dalclaim{SG23-C001} \dalclaim{SG23-C002}
+\dalclaim{SG23-C014} \dalclaim{SG23-C003}
 
-\textbf{TBD after frozen evidence-backed evaluation.}
+\input{generated/tab_main.tex}
 
-\section{FHIR Agent Evaluation}
+\subsection{Calibration}
 
-\textbf{TBD after frozen evidence-backed evaluation.}
+Figure~\ref{fig:reliability} shows reliability diagrams for the DAL paper system and the clinical control.
+Their curves coincide because their action probabilities are identical. Laya is excluded from calibration
+reporting because its pinned runtime emitted invalid-temperature warnings, which mark the affected
+confidence values as uncalibrated.
 
-\section{Calibration and Selective Risk}
+\subsection{Native abstention and selective risk}
 
-\textbf{TBD after frozen evidence-backed evaluation.}
+Table~\ref{tab:selective} and Figure~\ref{fig:riskcoverage} report the native-abstention results.
+\dalclaim{SG23-C005} \dalclaim{SG23-C004} Table~\ref{tab:policy} lists every frozen policy. Laya is blocked on
+this benchmark because its frozen adapter has no information-sufficiency output.
 
-\section{Failure Analysis}
+\input{generated/tab_selective.tex}
+\input{generated/tab_policy.tex}
 
-Report confident errors, over-abstention, evidence-following failures,
-counterfactual insensitivity, irrelevant-edit instability, and FHIR
-representation/retrieval errors without exposing restricted clinical data.
+\begin{figure}[t]
+\centering
+\begin{minipage}{0.49\linewidth}\centering\input{generated/fig_reliability.tex}\end{minipage}
+\begin{minipage}{0.49\linewidth}\centering\input{generated/fig_risk_coverage.tex}\end{minipage}
+\caption{Left: reliability on the PubMedQA final rows (15 equal-width bins, empty bins omitted; Laya
+excluded as uncalibrated). Right: unsmoothed risk-coverage curves on the native-abstention final rows,
+ordered by each system's frozen selection score; dotted lines mark coverage 0.5, 0.8, and 0.9.}
+\label{fig:reliability}
+\label{fig:riskcoverage}
+\end{figure}
 
-\section{Limitations, Ethics, and Intended Use}
+\subsection{FHIR-AgentBench}
 
-GAX is research software and is not a medical device. The initial work does not
-establish autonomous diagnosis, treatment, prescribing, emergency triage, or
-clinical deployment safety. Constrained outputs prevent out-of-schema actions
-but do not prevent clinically incorrect in-schema decisions.
+\dalclaim{SG23-C006} Table~\ref{tab:fhir} reports the block for every required system.
 
-\section{Reproducibility Statement}
+\input{generated/tab_fhir.tex}
 
-Bind the paper to a repository tag, immutable model/data revisions, split
-manifest hashes, commands, seeds, environment locks, hardware, raw metrics, and
-figure/table generation code.
+\subsection{Failure analysis}
+
+Table~\ref{tab:errors} gives content-blind failure strata. Examples were chosen by a rule fixed before any
+example was inspected, and no clinical text was used for selection or exported.
+
+\input{generated/tab_errors.tex}
+
+\section{Limitations}
+\label{sec:limitations}
+
+\begin{itemize}
+\item \dallimitation{SG23-C010}
+\item \dallimitation{SG23-C007}
+\item \dallimitation{SG23-C008}
+\item \dallimitation{SG23-C009}
+\item \dallimitation{SG23-C013}
+\item Because DAL keeps the control's action distribution by construction, PubMedQA accuracy cannot
+      separate the two systems; only the selection score differs.
+\item The native-abstention benchmark is a constructed evidence-withholding intervention on a single
+      public dataset. PubMedQA is public, and contamination of encoder pretraining data with it is unresolved.
+\item The evaluation uses one dataset family, one final run, and no independent third-party reproduction
+      yet. Table~\ref{tab:boundaries} lists every analysis the frozen evidence cannot support.
+\end{itemize}
+
+\input{generated/tab_boundaries.tex}
+
+\section{Ethics, Safety, and Intended Use}
+
+DAL is a research artifact. It is not a medical device, has not been clinically validated, and must not
+be used for diagnosis, treatment, triage, or any patient-care decision. Nothing in this paper supports a
+claim of clinical safety, deployment fitness, or regulatory readiness. No new data were collected
+from people. All datasets are public research datasets whose content is either non-patient (PubMedQA
+abstracts) or de-identified demonstration data (FHIR-AgentBench), and no clinical text is exported in the
+qualitative analysis.
+
+\section{Reproducibility}
+
+All evidence is in the public repository. The final-evaluation artifacts, the evidence-availability
+matrix, the derivation contract, the related-work record, and the paper evidence package are versioned
+under \texttt{registry/}. The package builder pins the byte-level SHA-256 of every canonical input and
+refuses to derive anything on a mismatch. A deterministic \texttt{--check} mode rebuilds the package, and
+a second generator rebuilds every number, table, claim sentence, figure, and bibliography entry in this
+manuscript from it. Continuous integration runs both checks on Linux and Windows with Python 3.11 and
+3.12. The frozen claim set is listed in Table~\ref{tab:claims}.
+
+\section{Data and Model Licensing}
+
+PubMedQA~\citep{jin2019pubmedqa} is distributed under the MIT license of its source repository. The
+FHIR-AgentBench repository is distributed under CC-BY-4.0~\citep{fhiragentbench_repo}; its EHR content derives
+from EHRSQL (CC-BY-4.0) and the openly licensed MIMIC-IV demonstration data (ODbL-1.0). The DAL code is
+Apache-2.0, which does not override any upstream data or model terms. Model weights derived from BioClinical ModernBERT are not redistributed with
+this paper; redistribution awaits a separate license review.
 
 \section{Conclusion}
 
-\textbf{TBD after the central hypotheses are resolved.}
+Under a fully frozen protocol, the DAL paper system matched its clinical control on PubMedQA by
+construction, showed a descriptive selective-risk difference on a constructed evidence-withholding task,
+exhibited an unsafe-commit failure at its frozen high-coverage policies, and could not be evaluated on
+FHIR-AgentBench. We report these outcomes as they are, with every claim bound to versioned evidence.
 
-\bibliographystyle{plain}
-\bibliography{references}
+\bibliographystyle{plainnat}
+\bibliography{generated/references}
+
+\appendix
+
+\section{Frozen Claim Ledger}
+\label{app:claims}
+
+Table~\ref{tab:claims} lists every frozen claim, its status, its public-use class, and its evidence packet.
+Affirmative claims appear in the main text verbatim; limitation statements appear only as limitations.
+
+\input{generated/tab_claims.tex}
+
+\section{ECAL Selection}
+\label{app:ecal}
+
+\input{generated/tab_ecal.tex}
+
+\section{Related-Work Refresh}
+\label{app:literature}
+
+The refresh used only free public sources (arXiv, PubMed, Crossref, ACL Anthology, PMLR, and GitHub). Its
+queries, screened records, inclusions, exclusions, limitations, and novelty dispositions are recorded in
+\texttt{registry/p08\_sg000023\_related\_work\_refresh.json}. Screening was performed by a single automated
+agent without human double screening, so a human pre-submission check remains outstanding.
 
 \end{document}

@@ -1,51 +1,27 @@
-# GAX Paper Workspace
+# DAL Paper Workspace
 
-Working manuscript:
+Manuscript: `main.tex` — *A Frozen-Protocol Evaluation of a Decision Assurance Layer for Clinical Typed Decisions*.
 
-**GAX: Evidence-Calibrated System-One Models for Clinical Decision Making**
+## Rules
 
-This directory is intentionally results-free during the foundation phase.
+- Every result value is a `\dalnum{...}` macro and every claim sentence is a `\dalclaim{...}` or `\dallimitation{...}` macro. All are generated from the frozen SG-000023 evidence package; never type a result by hand.
+- `\dalclaim` exists only for affirmative frozen claims and `\dallimitation` only for limitation statements, so a limitation can never be cited as a positive claim.
+- Every citation key must exist in `generated/references.bib`, which is generated from the verified record `registry/p09_sg000024_bibliography.json`.
+- Changing a frozen claim or result requires a new governed SpecGrain.
 
-## Rule
+`tests/test_p09_sg000024_manuscript.py` enforces these rules.
 
-No placeholder number may be written in a way that could later be mistaken for a measured result.
+## Build
 
-Use `TBD`, `\texttt{TBD}`, or explicit TODO markers until an artifact-backed experiment is frozen.
+```bash
+python tools/build_sg000023_paper_evidence.py --check     # frozen evidence package
+python tools/build_sg000024_manuscript_inputs.py           # regenerate paper/generated/
+python tools/build_sg000024_manuscript_inputs.py --check   # verify committed inputs
+cd paper && latexmk -pdf main.tex
+```
 
-## Planned structure
+The `DAL Manuscript` workflow repeats these steps in a clean Ubuntu runner using signature-verified TeX Live packages and uploads `main.pdf` as an artifact.
 
-1. Abstract
-2. Introduction
-3. Related Work
-4. Problem Formulation
-5. GAX
-   - typed clinical action space
-   - evidence representation
-   - information sufficiency
-   - ECAL candidate objective
-6. GAXBench
-7. Experimental Setup
-8. Results
-9. Ablations
-10. FHIR Agent Evaluation
-11. Calibration and Selective Risk
-12. Failure Analysis
-13. Limitations, Ethics, and Intended Use
-14. Reproducibility Statement
-15. Conclusion
-16. Appendices
+## Not yet done
 
-## ArXiv package
-
-Before submission this folder should contain:
-
-- LaTeX source;
-- bibliography with stable identifiers;
-- generated figures from versioned artifacts;
-- tables generated from results files;
-- appendix;
-- reproducibility checklist;
-- model/data/benchmark statements;
-- no unpublished proprietary source text.
-
-The arXiv version must match a tagged repository revision.
+arXiv submission, the author list, and the release tag are founder decisions and have not been made.
