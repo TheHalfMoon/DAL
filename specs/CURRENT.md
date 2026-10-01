@@ -12,7 +12,7 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000018 — DAL-P08 Native licensed abstention benchmark and pre-results protocol replacement — CLOSED_CANONICAL.**
 - **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — CLOSED_CANONICAL at `3ca0dd2aae85a68473849108764a45a538de1019`.**
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
-- **SG-000021 — DAL-P08 Final-test authorization qualification — PROVEN pending this closeout merge; implementation main is `1daa55d9742050f37fe56d2c84ccf4c8743ef984`.**
+- **SG-000021 — DAL-P08 Final-test authorization qualification — PROVEN by this canonical closeout state transition; implementation main is `1daa55d9742050f37fe56d2c84ccf4c8743ef984`.**
 
 ## SG-000020 canonical evidence
 
