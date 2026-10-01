@@ -20,7 +20,7 @@ This checklist covers reproducing the frozen P08 evidence and the manuscript fro
 - [x] `python tools/build_sg000024_manuscript_inputs.py --check` verifies the package against its provenance index and the frozen claim digest, then reproduces every number, table, claim macro, figure, and bibliography entry.
 - [x] `cd paper && latexmk -pdf main.tex` compiles with no undefined references or citations (`DAL Manuscript` workflow).
 - [x] `tests/test_p09_sg000024_manuscript.py` enforces generated numbers, frozen claim wording, visible limitations, and resolvable citations.
-- [x] The `DAL Manuscript` workflow assembles the arXiv source bundle (`dal-arxiv-source` artifact) with `main.bbl`, because arXiv does not run BibTeX.
+- [x] The `DAL Manuscript` workflow assembles the arXiv source bundle (`dal-arxiv-source` artifact) with `main.bbl`, because arXiv does not run BibTeX, and verifies that the extracted bundle compiles standalone with `pdflatex` alone.
 
 ## Release documents
 

@@ -72,6 +72,20 @@ jobs:
           cat arxiv-files.txt
           sha256sum dal-arxiv-source.tar.gz
 
+      - name: Verify arXiv bundle compiles standalone without BibTeX
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf arxiv-check && mkdir arxiv-check
+          tar -xzf dal-arxiv-source.tar.gz -C arxiv-check
+          cd arxiv-check
+          for pass in 1 2; do pdflatex -interaction=nonstopmode -halt-on-error main.tex > /dev/null; done
+          if grep -E "LaTeX Warning: (Reference|Citation) .* undefined|There were undefined references" main.log; then
+            echo "standalone arXiv build has undefined references or citations"
+            exit 1
+          fi
+          grep -E "Output written on main.pdf" main.log
+
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dal-manuscript-pdf
