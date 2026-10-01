@@ -11,6 +11,7 @@ from pydantic import Field, model_validator
 
 from gaxbench.p08_final_test_authorization import (
     authorization_digest,
+    build_final_test_authorization,
     load_final_test_authorization,
 )
 from gaxbench.schema import StrictModel
@@ -187,6 +188,12 @@ def validate_final_evaluation_preflight(root: str | Path) -> FinalEvaluationCont
         raise ValueError("authorization artifact already records final-test inference")
     if authorization.final_test_rows_used != 0:
         raise ValueError("authorization artifact already records final-test rows")
+
+    rebuilt = build_final_test_authorization(root_path)
+    if authorization_digest(rebuilt) != AUTHORIZATION_DIGEST:
+        raise ValueError("canonical SG-000021 evidence no longer reproduces authorization")
+    if rebuilt.model_dump(mode="json") != authorization.model_dump(mode="json"):
+        raise ValueError("canonical authorization bindings drifted from the frozen artifact")
     return contract
 
 
