@@ -23,8 +23,8 @@ def test_derivation_contract_is_post_final_and_inference_free() -> None:
     assert contract["canonical_dependency"] == (
         "fd77fbab3ebcf9917469ae189b167874b3e058b9"
     )
-    assert contract["evidence_matrix_path"] == str(_MATRIX)
-    assert contract["canonical_final_evidence_root"] == str(_FINAL_ROOT)
+    assert contract["evidence_matrix_path"] == _MATRIX.as_posix()
+    assert contract["canonical_final_evidence_root"] == _FINAL_ROOT.as_posix()
     assert contract["no_new_inference"] is True
     assert contract["no_post_test_tuning"] is True
     assert contract["no_new_threshold_fitting"] is True
