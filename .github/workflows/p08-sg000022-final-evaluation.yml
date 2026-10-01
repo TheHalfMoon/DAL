@@ -1,0 +1,119 @@
+name: DAL P08 SG-000022 Authorized Final Evaluation
+
+on:
+  workflow_dispatch:
+    inputs:
+      authorization_digest:
+        description: Exact SG-000021 authorization digest
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  TOKENIZERS_PARALLELISM: "false"
+  OMP_NUM_THREADS: "2"
+  MKL_NUM_THREADS: "2"
+  PUBMEDQA_SOURCE_REVISION: 1cbae8e92f72f20c8d3747cbb3bf5bc53554d997
+  LAYA_SOURCE_REVISION: 3c68ca2ccf6a83640ab80c20379503fe72c772fd
+  AUTHORIZATION_DIGEST: 626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de
+
+jobs:
+  execute:
+    name: Authorized primary final evaluation / CPU
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Require canonical main and exact authorization token
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "SG-000022 final evaluation may run only from canonical main" >&2
+            exit 1
+          fi
+          if [[ "${{ inputs.authorization_digest }}" != "${AUTHORIZATION_DIGEST}" ]]; then
+            echo "authorization digest mismatch" >&2
+            exit 1
+          fi
+      - name: Install DAL governance runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+      - name: Preflight authorization before any final-test source access
+        run: |
+          python scripts/run_p08_final_evaluation.py --preflight-only
+      - name: Install exact frozen CPU model runtimes
+        run: |
+          python -m pip install \
+            --index-url https://download.pytorch.org/whl/cpu \
+            "torch==2.8.0"
+          python -m pip install \
+            "transformers==4.57.1" \
+            "safetensors==0.6.2" \
+            "huggingface_hub==0.35.3" \
+            "tokenizers==0.22.1" \
+            "numpy==2.2.6"
+          python -m pip install --no-deps \
+            "git+https://github.com/NandhaKishorM/laya.git@${LAYA_SOURCE_REVISION}"
+      - name: Download exact frozen PubMedQA source after authorization preflight
+        shell: bash
+        run: |
+          work="$RUNNER_TEMP/sg000022"
+          mkdir -p "$work/sources" "$work/evidence"
+          curl --fail --location --retry 3 \
+            "https://raw.githubusercontent.com/pubmedqa/pubmedqa/${PUBMEDQA_SOURCE_REVISION}/data/ori_pqal.json" \
+            --output "$work/sources/ori_pqal.json"
+          echo "SG000022_ROOT=$work" >> "$GITHUB_ENV"
+      - name: Execute immutable SG-000022 final evaluation
+        run: |
+          python scripts/run_p08_final_evaluation.py \
+            --source "$SG000022_ROOT/sources/ori_pqal.json" \
+            --split-manifest registry/pubmedqa_pqal_split_manifest.json \
+            --development-manifest registry/p08_development_training_manifest_sg000019.json \
+            --training-contract registry/p08_paper_training_contract_sg000019.json \
+            --source-revision "$GITHUB_SHA" \
+            --output-dir "$SG000022_ROOT/evidence"
+      - name: Upload immutable raw and derived evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000022-final-evaluation-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000022/evidence/
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Require complete governed execution record
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["SG000022_ROOT"]) / "evidence"
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          if summary["authorization_digest"] != os.environ["AUTHORIZATION_DIGEST"]:
+              raise SystemExit("final evaluation authorization digest drift")
+          if summary["pubmedqa_requested"] != 500:
+              raise SystemExit("PubMedQA final-test denominator drift")
+          if summary["native_requested"] != 1000:
+              raise SystemExit("native-abstention denominator drift")
+          if summary["fhir_requested"] != 173:
+              raise SystemExit("FHIR-AgentBench denominator drift")
+          if summary["fhir_status"] != "interface-blocked-preexecution":
+              raise SystemExit("pre-execution FHIR interface limitation was not preserved")
+          if summary["raw_artifacts_persisted_before_metrics"] is not True:
+              raise SystemExit("raw-first evidence invariant failed")
+          if summary["final_test_inference_executed"] is not True:
+              raise SystemExit("final evaluation did not record execution")
+          if summary["zero_founder_cost"] is not True:
+              raise SystemExit("zero-founder-cost boundary drifted")
+          print("SG-000022 final evaluation execution record PASS")
+          PY
