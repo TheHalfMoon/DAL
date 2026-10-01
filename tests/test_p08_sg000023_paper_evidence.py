@@ -302,3 +302,50 @@ def test_figures_are_rendered_from_source_data_and_bind_its_digest() -> None:
         assert f"source={source} source_sha256={digest}" in svg
     assert "Laya excluded" in package["figure_reliability.svg"]
     assert "laya" not in package["figure_reliability.svg"].replace("Laya excluded", "")
+
+
+FROZEN_CLAIM_SET_SHA256 = "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b"
+
+
+def test_claim_set_is_frozen() -> None:
+    # Changing this digest requires a new governed SpecGrain; see change_policy.
+    freeze = _load("claim_freeze_manifest.json")
+    assert freeze["claim_freeze"]["claim_set_sha256"] == FROZEN_CLAIM_SET_SHA256
+    assert "new governed SpecGrain" in freeze["change_policy"]
+
+
+def test_freeze_manifest_binds_final_results() -> None:
+    freeze = _load("claim_freeze_manifest.json")["final_result_freeze"]
+    manifest = json.loads(BUILDER.MANIFEST_PATH.read_text(encoding="utf-8"))
+    assert freeze["results"] == manifest["results"]
+    assert freeze["source_final_evaluation_run"] == 36886952302
+    assert freeze["final_manifest_sha256"] == BUILDER.FROZEN_SOURCE_SHA256[BUILDER.MANIFEST_PATH]
+    assert freeze["post_test_tuning_permitted"] is False
+
+
+def test_every_claim_has_wording_policy() -> None:
+    ledger = _load("claim_ledger.json")
+    ids = [claim["claim_id"] for claim in ledger["claims"]]
+    assert ids == sorted(ids) == sorted(BUILDER.CLAIM_POLICY)
+    for claim in ledger["claims"]:
+        assert claim["prohibited_wording"]
+        assert claim["scope_limitations"]
+        assert claim["exportable"] == (claim["public_use"] == "affirmative-claim")
+    negative = {"SG23-C004", "SG23-C006"}
+    exportable = {claim["claim_id"] for claim in ledger["claims"] if claim["exportable"]}
+    assert negative <= exportable
+
+
+def test_validation_rejects_prohibited_wording_in_exportable_claim() -> None:
+    package = copy.deepcopy(_committed_package())
+    for claim in package["claim_ledger.json"]["claims"]:
+        if claim["claim_id"] == "SG23-C005":
+            claim["text"] = "DAL outperforms the clinical control at risk@80."
+    errors = BUILDER.validate_package(package, _matrix())
+    assert any("SG23-C005 uses prohibited 'outperforms'" in error for error in errors)
+    assert any("claim freeze digest mismatch: SG23-C005" in error for error in errors)
+
+
+def test_whole_word_phrase_matching() -> None:
+    assert BUILDER._contains_phrase("This is the first study.", "first")
+    assert not BUILDER._contains_phrase("We do not claim methodological novelty.", "novel")

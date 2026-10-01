@@ -20,6 +20,13 @@
       "claim_id": "SG23-C001",
       "evidence_packet_id": "EP-SG23-ACTION-001",
       "exportable": true,
+      "prohibited_wording": [
+        "DAL improves accuracy",
+        "DAL is more accurate",
+        "clinically accurate"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Frozen PubMedQA PQA-L final rows only; descriptive accuracy, not clinical correctness.",
       "status": "supported",
       "text": "On the frozen PubMedQA PQA-L final rows, the paper system achieved action accuracy 0.552 and the clinical control achieved action accuracy 0.552."
     },
@@ -30,6 +37,13 @@
       "claim_id": "SG23-C002",
       "evidence_packet_id": "EP-SG23-ACTION-001",
       "exportable": true,
+      "prohibited_wording": [
+        "superior to the control",
+        "non-inferior",
+        "statistically significant"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Frozen paired bootstrap only; no p-value or non-inferiority margin was preregistered.",
       "status": "supported-descriptive-only",
       "text": "The frozen paper-minus-control PubMedQA action-accuracy estimate is 0.0000 with a 95% paired-bootstrap interval [0.0000, 0.0000]; this does not support a superiority claim."
     },
@@ -42,6 +56,13 @@
       "claim_id": "SG23-C003",
       "evidence_packet_id": "EP-SG23-CAL-001",
       "exportable": true,
+      "prohibited_wording": [
+        "Laya is calibrated",
+        "calibrated Laya confidence",
+        "Laya reliability"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Laya action accuracy only; affected Laya confidence is uncalibrated and excluded.",
       "status": "supported-with-calibration-limitation",
       "text": "Laya completed 500 of 500 frozen PubMedQA rows with action accuracy 0.53; affected Laya confidence is excluded from reliability/calibration figures as uncalibrated."
     },
@@ -52,6 +73,13 @@
       "claim_id": "SG23-C004",
       "evidence_packet_id": "EP-SG23-SELECTIVE-001",
       "exportable": true,
+      "prohibited_wording": [
+        "safe abstention",
+        "meets its coverage target",
+        "reliable abstention policy"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Frozen target-coverage policy outcome; a negative result that must remain visible.",
       "status": "supported-negative-result",
       "text": "At the frozen native target-coverage 0.8 policy, the paper system achieved actual coverage 1.0 with unsafe-commit rate 1.0, while the clinical control achieved actual coverage 0.769 with unsafe-commit rate 0.578."
     },
@@ -62,6 +90,13 @@
       "claim_id": "SG23-C005",
       "evidence_packet_id": "EP-SG23-SELECTIVE-001",
       "exportable": true,
+      "prohibited_wording": [
+        "superior abstention",
+        "safer than the control",
+        "better selective risk"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Descriptive frozen-protocol difference; no superiority, significance, or safety claim.",
       "status": "supported-descriptive-only",
       "text": "Frozen native risk@80 is 0.655 for the paper system and 0.6675 for the clinical control (paper-minus-control estimate -0.0125, 95% paired-bootstrap interval [-0.0200, -0.0050], lower is better); this is descriptive and is not exported as a superiority claim."
     },
@@ -72,6 +107,13 @@
       "claim_id": "SG23-C006",
       "evidence_packet_id": "EP-SG23-FHIR-BLOCK-001",
       "exportable": true,
+      "prohibited_wording": [
+        "FHIR performance",
+        "FHIR-capable",
+        "FHIR compliant"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Pre-execution interface block only; no FHIR action-selection result exists.",
       "status": "supported-blocked-result",
       "text": "FHIR-AgentBench final action selection is blocked pre-execution because the frozen adapter cannot represent variable candidate action sets; 0 gold rows were loaded for a requested denominator of 173, and no replacement adapter is permitted."
     },
@@ -82,6 +124,13 @@
       "claim_id": "SG23-C007",
       "evidence_packet_id": null,
       "exportable": false,
+      "prohibited_wording": [
+        "evidence-grounded",
+        "causally grounded",
+        "robust to evidence interventions"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement; P06 evidence is synthetic mechanics only.",
       "status": "blocked",
       "text": "Medical evidence-intervention effectiveness is not supported because canonical P06 evidence is synthetic/mechanics-only."
     },
@@ -92,6 +141,12 @@
       "claim_id": "SG23-C008",
       "evidence_packet_id": null,
       "exportable": false,
+      "prohibited_wording": [
+        "robust to distribution shift",
+        "generalizes across populations"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement; no preregistered slice semantics exist for final rows.",
       "status": "unavailable",
       "text": "Preregistered distribution-shift slice effects are unavailable because no valid frozen slice semantics are bound to final rows."
     },
@@ -102,6 +157,14 @@
       "claim_id": "SG23-C009",
       "evidence_packet_id": null,
       "exportable": false,
+      "prohibited_wording": [
+        "faster",
+        "more efficient",
+        "lower latency",
+        "lower memory"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement; matched hardware evidence under p08-hardware-stratified-v0.1 is absent.",
       "status": "blocked",
       "text": "Direct latency, throughput, and peak-memory superiority are not supported by the canonical final evidence."
     },
@@ -113,6 +176,15 @@
       "claim_id": "SG23-C010",
       "evidence_packet_id": null,
       "exportable": false,
+      "prohibited_wording": [
+        "clinically safe",
+        "deployment-ready",
+        "regulatory-ready",
+        "state of the art",
+        "superior"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement covering superiority, safety, SOTA, FHIR, and efficiency claims.",
       "status": "not-claimed",
       "text": "Superiority, clinical safety, SOTA, final FHIR performance, and direct efficiency superiority are not claimed."
     },
@@ -123,19 +195,33 @@
       "claim_id": "SG23-C011",
       "evidence_packet_id": "EP-SG23-LIT-001",
       "exportable": false,
+      "prohibited_wording": [
+        "first",
+        "novel method",
+        "unique"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement derived from the dated related-work refresh.",
       "status": "not-claimed",
       "text": "After the 2026-10-01 related-work refresh, these novelty claims are removed: first medical abstention system or benchmark; first clinical uncertainty, assurance, or governance layer; first typed-decision or System-One evaluation in medicine or on PubMedQA; typed non-generative readout improves medical accuracy; first pre-registered or frozen-protocol typed-decision evaluation; first deterministic hash-verified provenance for paper numbers, or first evidence/claim ledger; FHIR-aware decision-layer capability; medical counterfactual or evidence-intervention robustness. Narrowed to descriptive reporting with no directional superiority claim: superiority of native abstention over the confidence-only control (risk@80 paper-minus-control -0.0125 (95% paired-bootstrap interval [-0.0200, -0.0050]) is descriptive under the frozen protocol; frozen 0.8 and 0.9 target policies yielded coverage 1.0 and unsafe-commit rate 1.0)."
     },
     {
       "canonical_source_paths": [
-        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
-        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json"
+        "registry/p08_sg000023_related_work_refresh.json"
       ],
-      "claim_id": "SG23-C014",
-      "evidence_packet_id": "EP-SG23-TABLES-001",
+      "claim_id": "SG23-C012",
+      "evidence_packet_id": "EP-SG23-FREEZE-001",
       "exportable": true,
-      "status": "supported-descriptive-only",
-      "text": "The paper system and the clinical control emitted identical action-probability vectors on 500 of 500 frozen PubMedQA rows and identical action correctness on 1000 of 1000 native-abstention rows; the compared systems differ in selection scores (0 identical score rows), so the PubMedQA comparison isolates no action-selection difference."
+      "prohibited_wording": [
+        "first",
+        "novel method",
+        "state of the art",
+        "clinically validated"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Describes this study only; never phrased as first, as a novel method, or as state of the art.",
+      "status": "supported-scoped-description",
+      "text": "This study reports a frozen-protocol evaluation in which every exported claim is bound to source-hashed evidence packets and null, negative, and blocked outcomes are reported. We do not claim methodological novelty for abstention, typed decisions, pre-registration, or provenance verification individually."
     },
     {
       "canonical_source_paths": [
@@ -145,20 +231,52 @@
       "claim_id": "SG23-C013",
       "evidence_packet_id": "EP-SG23-ECAL-001",
       "exportable": false,
+      "prohibited_wording": [
+        "ECAL improves",
+        "evidence-calibrated training improves",
+        "validated ECAL benefit"
+      ],
+      "public_use": "limitation-statement",
+      "scope_limitations": "Limitation statement; no measured ECAL benefit and no final-test ECAL ablation exist.",
       "status": "unavailable",
       "text": "An ECAL benefit is not established: the frozen selection kept evidence for compatibility with the frozen paper checkpoint rather than for a measured ablation benefit, canonical P04 paper decisions are defer-real-data, and no final-test ECAL ablation exists."
     },
     {
       "canonical_source_paths": [
-        "registry/p08_sg000023_related_work_refresh.json"
+        "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+        "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json"
       ],
-      "claim_id": "SG23-C012",
-      "evidence_packet_id": "EP-SG23-LIT-001",
-      "exportable": false,
-      "status": "candidate-scoped-description",
-      "text": "This study reports a frozen-protocol evaluation in which every exported claim is bound to source-hashed evidence packets and null, negative, and blocked outcomes are reported. We do not claim methodological novelty for abstention, typed decisions, pre-registration, or provenance verification individually. Scope: Describes this study only; never phrased as first, as a novel method, or as state of the art."
+      "claim_id": "SG23-C014",
+      "evidence_packet_id": "EP-SG23-TABLES-001",
+      "exportable": true,
+      "prohibited_wording": [
+        "DAL improves action selection",
+        "different action predictions"
+      ],
+      "public_use": "affirmative-claim",
+      "scope_limitations": "Exact equality counts over raw final rows; descriptive only.",
+      "status": "supported-descriptive-only",
+      "text": "The paper system and the clinical control emitted identical action-probability vectors on 500 of 500 frozen PubMedQA rows and identical action correctness on 1000 of 1000 native-abstention rows; the compared systems differ in selection scores (0 identical score rows), so the PubMedQA comparison isolates no action-selection difference."
     }
   ],
   "grain_id": "SG-000023",
-  "schema_version": "0.1"
+  "schema_version": "0.1",
+  "wording_policy": {
+    "affirmative-claim": "may be stated affirmatively in manuscript, README, release, and abstract text",
+    "global_prohibited_phrases": [
+      "state of the art",
+      "sota",
+      "clinically safe",
+      "clinically validated",
+      "deployment-ready",
+      "regulatory",
+      "outperforms",
+      "significant",
+      "significantly",
+      "first",
+      "novel"
+    ],
+    "limitation-statement": "may be stated only as a limitation, null, blocked, or disclaimer statement",
+    "text": "the only permitted public wording for the claim"
+  }
 }

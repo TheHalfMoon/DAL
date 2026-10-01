@@ -115,9 +115,9 @@ def test_literature_packet_and_claim_binding() -> None:
     assert "first medical abstention system or benchmark" in claim["text"]
     assert "no directional superiority claim" in claim["text"]
     scoped = claims["SG23-C012"]
-    assert scoped["status"] == "candidate-scoped-description"
-    assert scoped["exportable"] is False
-    assert scoped["evidence_packet_id"] == "EP-SG23-LIT-001"
+    assert scoped["status"] == "supported-scoped-description"
+    assert scoped["exportable"] is True
+    assert scoped["evidence_packet_id"] == "EP-SG23-FREEZE-001"
     assert "We do not claim methodological novelty" in scoped["text"]
 
 
