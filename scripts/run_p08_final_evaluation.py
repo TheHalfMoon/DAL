@@ -489,7 +489,11 @@ def _classification_metrics(rows: list[dict[str, Any]], prefix: str) -> dict[str
         members = [
             (confidence, is_correct)
             for confidence, is_correct in confidences
-            if confidence >= low and (confidence < high or (index == bins - 1 and confidence <= high))
+            if confidence >= low
+            and (
+                confidence < high
+                or (index == bins - 1 and confidence <= high)
+            )
         ]
         if not members:
             continue
