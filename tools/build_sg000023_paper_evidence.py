@@ -1,11 +1,13 @@
+# ruff: noqa: E501
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import math
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 FINAL_ROOT = ROOT / "registry" / "p08_sg000022_final_evaluation"
@@ -68,7 +70,9 @@ def _metric_row(system_id: str, payload: dict[str, Any], metrics: list[str]) -> 
 def _main_results(metrics: dict[str, Any], contract: dict[str, Any]) -> dict[str, Any]:
     spec = contract["paper_outputs"]["main_results_table"]
     pubmed = metrics["pubmedqa"]
-    rows = [_metric_row(system_id, pubmed[system_id], spec["metrics"]) for system_id in spec["systems"]]
+    rows = [
+        _metric_row(system_id, pubmed[system_id], spec["metrics"]) for system_id in spec["systems"]
+    ]
     comparison = next(
         row
         for row in metrics["primary_comparisons"]
@@ -116,7 +120,10 @@ def _selective_row(system_id: str, payload: dict[str, Any], metrics: list[str]) 
 def _selective_results(metrics: dict[str, Any], contract: dict[str, Any]) -> dict[str, Any]:
     spec = contract["paper_outputs"]["selective_results_table"]
     native = metrics["native_abstention"]
-    rows = [_selective_row(system_id, native[system_id], spec["metrics"]) for system_id in spec["systems"]]
+    rows = [
+        _selective_row(system_id, native[system_id], spec["metrics"])
+        for system_id in spec["systems"]
+    ]
     comparison = next(
         row
         for row in metrics["primary_comparisons"]
@@ -207,10 +214,15 @@ def _reliability(
     raw_pubmed: list[dict[str, Any]], metrics: dict[str, Any], contract: dict[str, Any]
 ) -> dict[str, Any]:
     spec = contract["paper_outputs"]["reliability_figure"]
-    systems = [_reliability_for_system(raw_pubmed, system_id, spec["bin_edges"]) for system_id in spec["systems"]]
+    systems = [
+        _reliability_for_system(raw_pubmed, system_id, spec["bin_edges"])
+        for system_id in spec["systems"]
+    ]
     for system in systems:
         canonical = metrics["pubmedqa"][system["system_id"]]["ece_15_equal_width"]
-        if not math.isclose(system["computed_ece_15_equal_width"], canonical, rel_tol=0.0, abs_tol=1e-12):
+        if not math.isclose(
+            system["computed_ece_15_equal_width"], canonical, rel_tol=0.0, abs_tol=1e-12
+        ):
             raise ValueError(
                 f"reliability derivation mismatch for {system['system_id']}: "
                 f"{system['computed_ece_15_equal_width']} != {canonical}"
@@ -241,10 +253,16 @@ def _risk_curve_for_system(
         points.append({"prefix_length": index, "coverage": index / len(ranked), "risk": risk})
 
     computed_aurc = sum(point["risk"] for point in points) / len(points)
-    checks = {"risk_at_50": points[499]["risk"], "risk_at_80": points[799]["risk"], "risk_at_90": points[899]["risk"]}
+    checks = {
+        "risk_at_50": points[499]["risk"],
+        "risk_at_80": points[799]["risk"],
+        "risk_at_90": points[899]["risk"],
+    }
     for metric, value in checks.items():
         if not math.isclose(value, canonical[metric], rel_tol=0.0, abs_tol=1e-12):
-            raise ValueError(f"risk-coverage mismatch for {system_id} {metric}: {value} != {canonical[metric]}")
+            raise ValueError(
+                f"risk-coverage mismatch for {system_id} {metric}: {value} != {canonical[metric]}"
+            )
     if not math.isclose(computed_aurc, canonical["aurc"], rel_tol=0.0, abs_tol=1e-12):
         raise ValueError(f"AURC mismatch for {system_id}: {computed_aurc} != {canonical['aurc']}")
 
@@ -305,7 +323,9 @@ def _fhir_block(raw_fhir: dict[str, Any]) -> dict[str, Any]:
 
 
 def _select_examples(
-    candidates: list[dict[str, Any]], count: int, payload: Callable[[dict[str, Any]], dict[str, Any]]
+    candidates: list[dict[str, Any]],
+    count: int,
+    payload: Callable[[dict[str, Any]], dict[str, Any]],
 ) -> list[dict[str, Any]]:
     ordered = sorted(candidates, key=lambda row: (str(row["source_id"]), str(row["item_id"])))
     return [payload(row) for row in ordered[:count]]
@@ -323,10 +343,26 @@ def _qualitative(
     laya_by_source = {str(row["source_id"]): row for row in raw_laya["predictions"]}
 
     pubmed_predicates: dict[str, Callable[[dict[str, Any], dict[str, Any]], bool]] = {
-        "paper-control-correct-laya-wrong": lambda row, laya: bool(row["paper_correct"]) and bool(row["clinical_control_correct"]) and not bool(laya["correct"]),
-        "paper-control-wrong-laya-correct": lambda row, laya: not bool(row["paper_correct"]) and not bool(row["clinical_control_correct"]) and bool(laya["correct"]),
-        "all-systems-wrong": lambda row, laya: not bool(row["paper_correct"]) and not bool(row["clinical_control_correct"]) and not bool(laya["correct"]),
-        "all-systems-correct": lambda row, laya: bool(row["paper_correct"]) and bool(row["clinical_control_correct"]) and bool(laya["correct"]),
+        "paper-control-correct-laya-wrong": lambda row, laya: (
+            bool(row["paper_correct"])
+            and bool(row["clinical_control_correct"])
+            and not bool(laya["correct"])
+        ),
+        "paper-control-wrong-laya-correct": lambda row, laya: (
+            not bool(row["paper_correct"])
+            and not bool(row["clinical_control_correct"])
+            and bool(laya["correct"])
+        ),
+        "all-systems-wrong": lambda row, laya: (
+            not bool(row["paper_correct"])
+            and not bool(row["clinical_control_correct"])
+            and not bool(laya["correct"])
+        ),
+        "all-systems-correct": lambda row, laya: (
+            bool(row["paper_correct"])
+            and bool(row["clinical_control_correct"])
+            and bool(laya["correct"])
+        ),
     }
 
     pubmed_strata = []
@@ -340,7 +376,7 @@ def _qualitative(
                 merged["laya"] = laya
                 matches.append(merged)
 
-        def pubmed_payload(row: dict[str, Any]) -> dict[str, Any]:
+        def pubmed_payload(row: dict[str, Any], stratum_id: str = stratum_id) -> dict[str, Any]:
             laya = row["laya"]
             return {
                 "stratum_id": stratum_id,
@@ -348,8 +384,14 @@ def _qualitative(
                 "source_id": row["source_id"],
                 "gold_label": row["gold_action"],
                 "system_predictions_or_correctness": {
-                    "paper": {"prediction": row["paper_predicted_action"], "correct": row["paper_correct"]},
-                    "clinical_control": {"prediction": row["clinical_control_predicted_action"], "correct": row["clinical_control_correct"]},
+                    "paper": {
+                        "prediction": row["paper_predicted_action"],
+                        "correct": row["paper_correct"],
+                    },
+                    "clinical_control": {
+                        "prediction": row["clinical_control_predicted_action"],
+                        "correct": row["clinical_control_correct"],
+                    },
                     "laya": {"prediction": laya["prediction"], "correct": laya["correct"]},
                 },
             }
@@ -364,11 +406,25 @@ def _qualitative(
         )
 
     paper_threshold = metrics["native_abstention"]["paper"]["actual_policy"]["0.8"]["threshold"]
-    control_threshold = metrics["native_abstention"]["clinical_control"]["actual_policy"]["0.8"]["threshold"]
+    control_threshold = metrics["native_abstention"]["clinical_control"]["actual_policy"]["0.8"][
+        "threshold"
+    ]
     native_predicates: dict[str, Callable[[dict[str, Any]], bool]] = {
-        "paper-only-unsafe-on-insufficient": lambda row: not bool(row["gold_sufficient"]) and float(row["paper_selection_score"]) >= paper_threshold and float(row["clinical_control_selection_score"]) < control_threshold,
-        "both-unsafe-on-insufficient": lambda row: not bool(row["gold_sufficient"]) and float(row["paper_selection_score"]) >= paper_threshold and float(row["clinical_control_selection_score"]) >= control_threshold,
-        "both-abstain-on-sufficient": lambda row: bool(row["gold_sufficient"]) and float(row["paper_selection_score"]) < paper_threshold and float(row["clinical_control_selection_score"]) < control_threshold,
+        "paper-only-unsafe-on-insufficient": lambda row: (
+            not bool(row["gold_sufficient"])
+            and float(row["paper_selection_score"]) >= paper_threshold
+            and float(row["clinical_control_selection_score"]) < control_threshold
+        ),
+        "both-unsafe-on-insufficient": lambda row: (
+            not bool(row["gold_sufficient"])
+            and float(row["paper_selection_score"]) >= paper_threshold
+            and float(row["clinical_control_selection_score"]) >= control_threshold
+        ),
+        "both-abstain-on-sufficient": lambda row: (
+            bool(row["gold_sufficient"])
+            and float(row["paper_selection_score"]) < paper_threshold
+            and float(row["clinical_control_selection_score"]) < control_threshold
+        ),
     }
 
     native_strata = []
@@ -376,12 +432,15 @@ def _qualitative(
         stratum_id = declared["id"]
         matches = [row for row in raw_native if native_predicates[stratum_id](row)]
 
-        def native_payload(row: dict[str, Any]) -> dict[str, Any]:
+        def native_payload(row: dict[str, Any], stratum_id: str = stratum_id) -> dict[str, Any]:
             return {
                 "stratum_id": stratum_id,
                 "item_id": row["item_id"],
                 "source_id": row["source_id"],
-                "gold_label": {"gold_action": row["gold_action"], "gold_sufficient": row["gold_sufficient"]},
+                "gold_label": {
+                    "gold_action": row["gold_action"],
+                    "gold_sufficient": row["gold_sufficient"],
+                },
                 "system_predictions_or_correctness": {
                     "paper_action_correct": row["paper_action_correct"],
                     "clinical_control_action_correct": row["clinical_control_action_correct"],
@@ -421,21 +480,30 @@ def _evidence_packets() -> dict[str, Any]:
         {
             "packet_id": "EP-SG23-ACTION-001",
             "status": "supported",
-            "canonical_sources": [_rel(FINAL_ROOT / "metrics.json"), _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json")],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+            ],
             "derived_artifacts": ["main_results.json"],
             "scope": "PubMedQA action-selection descriptive results and frozen paired-bootstrap comparison",
         },
         {
             "packet_id": "EP-SG23-CAL-001",
             "status": "supported",
-            "canonical_sources": [_rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"), _rel(CALIBRATION_PATH)],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(CALIBRATION_PATH),
+            ],
             "derived_artifacts": ["reliability_source_data.json"],
             "scope": "DAL/control reliability only; Laya calibration remains excluded",
         },
         {
             "packet_id": "EP-SG23-SELECTIVE-001",
             "status": "supported",
-            "canonical_sources": [_rel(FINAL_ROOT / "metrics.json"), _rel(FINAL_ROOT / "raw-native-abstention-predictions.json")],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(FINAL_ROOT / "raw-native-abstention-predictions.json"),
+            ],
             "derived_artifacts": ["selective_results.json", "risk_coverage_source_data.json"],
             "scope": "native-abstention risk/coverage and frozen target-policy outcomes",
         },
@@ -449,7 +517,10 @@ def _evidence_packets() -> dict[str, Any]:
         {
             "packet_id": "EP-SG23-FHIR-BLOCK-001",
             "status": "supported-blocked-result",
-            "canonical_sources": [_rel(FINAL_ROOT / "raw-fhir-interface-block.json"), _rel(FHIR_SELECTION_PATH)],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-fhir-interface-block.json"),
+                _rel(FHIR_SELECTION_PATH),
+            ],
             "derived_artifacts": ["fhir_block_table.json"],
             "scope": "pre-execution FHIR interface block only; no final FHIR performance claim",
         },
@@ -468,14 +539,27 @@ def _evidence_packets() -> dict[str, Any]:
         {
             "packet_id": "EP-SG23-TABLES-001",
             "status": "supported",
-            "canonical_sources": [_rel(FINAL_ROOT / "metrics.json"), _rel(MATRIX_PATH), _rel(CONTRACT_PATH)],
-            "derived_artifacts": ["main_results.json", "selective_results.json", "evidence_boundaries.json", "fhir_block_table.json"],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(MATRIX_PATH),
+                _rel(CONTRACT_PATH),
+            ],
+            "derived_artifacts": [
+                "main_results.json",
+                "selective_results.json",
+                "evidence_boundaries.json",
+                "fhir_block_table.json",
+            ],
             "scope": "paper-table source data with blocked/null outcomes preserved",
         },
         {
             "packet_id": "EP-SG23-FIGURES-001",
             "status": "supported",
-            "canonical_sources": [_rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"), _rel(FINAL_ROOT / "raw-native-abstention-predictions.json"), _rel(CONTRACT_PATH)],
+            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(FINAL_ROOT / "raw-native-abstention-predictions.json"),
+                _rel(CONTRACT_PATH),
+            ],
             "derived_artifacts": ["reliability_source_data.json", "risk_coverage_source_data.json"],
             "scope": "paper-figure source data without smoothing or threshold refit",
         },
@@ -598,7 +682,9 @@ def _build_base_artifacts() -> dict[str, Any]:
         "reliability_source_data.json": _reliability(raw_pubmed, metrics, contract),
         "risk_coverage_source_data.json": _risk_coverage(raw_native, metrics, contract),
         "fhir_block_table.json": _fhir_block(raw_fhir),
-        "qualitative_examples.json": _qualitative(raw_pubmed, raw_laya, raw_native, metrics, contract),
+        "qualitative_examples.json": _qualitative(
+            raw_pubmed, raw_laya, raw_native, metrics, contract
+        ),
         "evidence_packets.json": _evidence_packets(),
         "claim_ledger.json": _claim_ledger(metrics),
     }
@@ -621,7 +707,8 @@ def _provenance_index(artifacts: dict[str, Any]) -> dict[str, Any]:
     ]
     source_digests = {_rel(path): _sha256_path(path) for path in source_paths}
     artifact_digests = {
-        filename: _sha256_bytes(_dump(payload).encode("utf-8")) for filename, payload in artifacts.items()
+        filename: _sha256_bytes(_dump(payload).encode("utf-8"))
+        for filename, payload in artifacts.items()
     }
     return {
         "schema_version": "0.1",
@@ -651,9 +738,13 @@ def write_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> None:
 def check_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     expected_names = set(artifacts)
-    actual_names = {path.name for path in output_dir.glob("*.json")} if output_dir.is_dir() else set()
+    actual_names = (
+        {path.name for path in output_dir.glob("*.json")} if output_dir.is_dir() else set()
+    )
     if actual_names != expected_names:
-        errors.append(f"artifact set mismatch: actual={sorted(actual_names)} expected={sorted(expected_names)}")
+        errors.append(
+            f"artifact set mismatch: actual={sorted(actual_names)} expected={sorted(expected_names)}"
+        )
     for filename, payload in artifacts.items():
         path = output_dir / filename
         if not path.is_file():
@@ -667,9 +758,15 @@ def check_artifacts(output_dir: Path, artifacts: dict[str, Any]) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build deterministic SG-000023 paper evidence artifacts")
+    parser = argparse.ArgumentParser(
+        description="Build deterministic SG-000023 paper evidence artifacts"
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--check", action="store_true", help="fail unless committed artifacts match a deterministic rebuild")
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail unless committed artifacts match a deterministic rebuild",
+    )
     args = parser.parse_args()
 
     artifacts = build_artifacts()

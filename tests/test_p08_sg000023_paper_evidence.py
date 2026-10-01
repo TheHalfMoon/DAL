@@ -112,9 +112,7 @@ def test_claim_ledger_blocks_forbidden_affirmative_exports() -> None:
 
 def test_provenance_index_binds_sources_and_derived_artifacts() -> None:
     provenance = _load("provenance_index.json")
-    assert provenance["canonical_main_dependency"] == (
-        "d676beccfec001fd75d1b157b43068eb49a5733d"
-    )
+    assert provenance["canonical_main_dependency"] == ("d676beccfec001fd75d1b157b43068eb49a5733d")
     assert provenance["no_new_inference"] is True
     assert provenance["no_post_test_tuning"] is True
     assert len(provenance["artifact_sha256"]) == 9
