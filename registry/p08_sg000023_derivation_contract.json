@@ -1,0 +1,111 @@
+{
+  "schema_version": "0.1",
+  "grain_id": "SG-000023",
+  "contract_id": "dal-p08-post-final-derivation-v0.1",
+  "canonical_dependency": "fd77fbab3ebcf9917469ae189b167874b3e058b9",
+  "evidence_matrix_path": "registry/p08_sg000023_evidence_availability_matrix.json",
+  "canonical_final_evidence_root": "registry/p08_sg000022_final_evaluation",
+  "no_new_inference": true,
+  "no_post_test_tuning": true,
+  "no_new_threshold_fitting": true,
+  "no_post_hoc_p_values": true,
+  "no_outcome_driven_subgroups": true,
+  "paper_outputs": {
+    "main_results_table": {
+      "source": "metrics.json",
+      "systems": ["paper", "clinical_control", "laya"],
+      "metrics": ["accuracy", "macro_f1", "nll", "multiclass_brier", "ece_15_equal_width"],
+      "missing_metric_policy": "render-null-with-explicit-reason",
+      "primary_comparison_policy": "copy-frozen-paired-bootstrap-only"
+    },
+    "selective_results_table": {
+      "source": "metrics.json",
+      "systems": ["paper", "clinical_control", "laya"],
+      "metrics": ["risk_at_50", "risk_at_80", "risk_at_90", "aurc", "present_action_accuracy"],
+      "frozen_target_policy_levels": [0.5, 0.8, 0.9],
+      "must_report_fields": ["threshold", "actual_coverage", "unsafe_commit_rate", "over_abstain_rate"],
+      "missing_metric_policy": "render-blocked-with-explicit-reason"
+    },
+    "evidence_boundaries_table": {
+      "source": "evidence matrix",
+      "include_statuses": ["blocked", "unavailable", "not-applicable"],
+      "must_preserve_no_packet_reason": true
+    },
+    "reliability_figure": {
+      "source": "raw-pubmedqa-predictions.json",
+      "systems": ["paper", "clinical_control"],
+      "binning": "15-equal-width-v0.1",
+      "bin_edges": [0.0, 0.06666666666666667, 0.13333333333333333, 0.2, 0.26666666666666666, 0.3333333333333333, 0.4, 0.4666666666666667, 0.5333333333333333, 0.6, 0.6666666666666666, 0.7333333333333333, 0.8, 0.8666666666666667, 0.9333333333333333, 1.0],
+      "confidence": "maximum frozen action probability",
+      "accuracy": "fraction correct within bin",
+      "empty_bin_policy": "emit-null",
+      "laya_policy": "exclude-from-calibration-figure-because-runtime-warning-marks-affected-confidence-uncalibrated"
+    },
+    "risk_coverage_figure": {
+      "source": "raw-native-abstention-predictions.json",
+      "systems": ["paper", "clinical_control"],
+      "ordering": "descending-frozen-selection-score-then-item-id-ascending",
+      "curve_points": "every-prefix-from-1-through-1000",
+      "coverage": "prefix_length/1000",
+      "risk": "1-minus-prefix-mean-action-correctness",
+      "no_smoothing": true,
+      "no_threshold_refit": true
+    },
+    "fhir_block_table": {
+      "source": "raw-fhir-interface-block.json",
+      "must_report": ["requested", "completed", "interface_failures", "gold_rows_loaded", "reason"],
+      "new_adapter_forbidden": true
+    }
+  },
+  "qualitative_error_selection": {
+    "selection_rule_id": "sg23-lexicographic-outcome-strata-v0.1",
+    "selection_count_per_stratum": 3,
+    "clinical_text_used_for_selection": false,
+    "ranking_fields": ["source_id"],
+    "ranking_direction": "ascending-lexicographic",
+    "pubmedqa_strata": [
+      {
+        "id": "paper-control-correct-laya-wrong",
+        "predicate": "paper_correct=true AND clinical_control_correct=true AND laya_correct=false"
+      },
+      {
+        "id": "paper-control-wrong-laya-correct",
+        "predicate": "paper_correct=false AND clinical_control_correct=false AND laya_correct=true"
+      },
+      {
+        "id": "all-systems-wrong",
+        "predicate": "paper_correct=false AND clinical_control_correct=false AND laya_correct=false"
+      },
+      {
+        "id": "all-systems-correct",
+        "predicate": "paper_correct=true AND clinical_control_correct=true AND laya_correct=true"
+      }
+    ],
+    "native_strata": [
+      {
+        "id": "paper-only-unsafe-on-insufficient",
+        "predicate": "gold_sufficient=false AND paper_selection_score>=paper_frozen_target_0_8_threshold AND clinical_control_selection_score<control_frozen_target_0_8_threshold"
+      },
+      {
+        "id": "both-unsafe-on-insufficient",
+        "predicate": "gold_sufficient=false AND paper_selection_score>=paper_frozen_target_0_8_threshold AND clinical_control_selection_score>=control_frozen_target_0_8_threshold"
+      },
+      {
+        "id": "both-abstain-on-sufficient",
+        "predicate": "gold_sufficient=true AND paper_selection_score<paper_frozen_target_0_8_threshold AND clinical_control_selection_score<control_frozen_target_0_8_threshold"
+      }
+    ],
+    "threshold_sources": {
+      "paper_frozen_target_0_8_threshold": "metrics.native_abstention.paper.actual_policy.0.8.threshold",
+      "control_frozen_target_0_8_threshold": "metrics.native_abstention.clinical_control.actual_policy.0.8.threshold"
+    },
+    "zero_member_policy": "emit-empty-stratum-with-zero-count",
+    "selected_example_payload": ["stratum_id", "item_id", "source_id", "gold_label", "system_predictions_or_correctness", "selection_scores_if_native"],
+    "raw_clinical_text_export": false
+  },
+  "claim_export_policy": {
+    "affirmative_claim_requires": ["evidence_packet_id", "supported-status", "canonical-source-paths"],
+    "forbidden_claims": ["superiority", "clinical-safety", "SOTA", "FHIR-final-performance", "direct-efficiency-superiority"],
+    "null_negative_blocked_results_must_remain_visible": true
+  }
+}
