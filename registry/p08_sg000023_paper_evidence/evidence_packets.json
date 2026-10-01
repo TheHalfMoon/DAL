@@ -297,6 +297,7 @@
     "canonical_sources": "union of derivation_inputs and supporting_sources",
     "declared-pending-later-stage": "packet declared by the availability matrix whose evidence is produced by a later SG-000023 stage; it supports no claim",
     "derivation_inputs": "exact canonical files read by the derivations of the packet's derived artifacts",
+    "supported-literature-disposition": "dated related-work evidence that may only remove or narrow novelty claims or record a candidate scoped description; it never supports an exportable claim",
     "supporting_sources": "canonical files the packet binds as supporting evidence without a derivation reading them"
   }
 }

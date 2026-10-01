@@ -89,7 +89,17 @@ def test_novelty_dispositions_never_retain_a_first_claim() -> None:
             assert "first" not in wording
             assert "state of the art" not in wording
             assert "we do not claim methodological novelty" in wording
-    removed = {row["candidate_claim"] for row in record["novelty_disposition"]}
+    removed = {
+        row["candidate_claim"]
+        for row in record["novelty_disposition"]
+        if row["disposition"] == "removed"
+    }
+    narrowed = [
+        row
+        for row in record["novelty_disposition"]
+        if row["disposition"] == "narrowed-to-descriptive"
+    ]
+    assert all("outperforms" not in row["candidate_claim"] for row in narrowed)
     assert "first medical abstention system or benchmark" in removed
 
 
@@ -103,6 +113,12 @@ def test_literature_packet_and_claim_binding() -> None:
     assert claim["evidence_packet_id"] == "EP-SG23-LIT-001"
     assert claim["exportable"] is False
     assert "first medical abstention system or benchmark" in claim["text"]
+    assert "no directional superiority claim" in claim["text"]
+    scoped = claims["SG23-C012"]
+    assert scoped["status"] == "candidate-scoped-description"
+    assert scoped["exportable"] is False
+    assert scoped["evidence_packet_id"] == "EP-SG23-LIT-001"
+    assert "We do not claim methodological novelty" in scoped["text"]
 
 
 def test_literature_packet_cannot_support_exportable_claim() -> None:

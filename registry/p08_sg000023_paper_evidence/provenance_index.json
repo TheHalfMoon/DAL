@@ -12,9 +12,9 @@
     "provenance_index.json"
   ],
   "artifact_sha256": {
-    "claim_ledger.json": "0b580cc3d2eb6d6c6453e3d0845bd7fb2f812e5cfa6ac7fdd0bc2a3744080564",
+    "claim_ledger.json": "c8a28eadb97882ce5c0dd21f42e1bcd485a25065cbb5369679e4f259c7c9b2c1",
     "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
-    "evidence_packets.json": "f979b02a13249a8c7d6dc3e19c5a6e88d08fa721f062bdc9eea050bcf75980cb",
+    "evidence_packets.json": "95c713ae59ce83a48bcc4d7483ad52b04b17587d63463bd9e95a3dc216e8fb4f",
     "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
     "main_results.json": "402817ff58d3113ba6ddccedd28fc430f03a0e763fa1d416472f134a652b2797",
     "qualitative_examples.json": "14351ed417da3c9b086423aa1726dc7f8dad1cb26e3403c5edb48b83e4d3fb91",
@@ -59,6 +59,6 @@
     "registry/p08_sg000022_final_evaluation/summary.json": "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
     "registry/p08_sg000023_derivation_contract.json": "62982bb53ad8cbe6255825c319528d9f50a893b142fbcffd7c55f6b99294fb38",
     "registry/p08_sg000023_evidence_availability_matrix.json": "3a319a13dc18dbe49e063479e2698850b6fb7a3b8968d67c6f3f0f0fd43e496b",
-    "registry/p08_sg000023_related_work_refresh.json": "d450cb28c7d5fbbcbf0fc51dd91132b327602c4cdd5c670de41f0d78972cb566"
+    "registry/p08_sg000023_related_work_refresh.json": "4bdb130f470a5913d5ee71d56127bf8e95873ce09411410d683e9d8017421c4c"
   }
 }

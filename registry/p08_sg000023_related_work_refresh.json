@@ -926,7 +926,7 @@
       "blocking_work": [
         "2407.01032"
       ],
-      "candidate_claim": "native abstention outperforms the confidence-only control",
+      "candidate_claim": "superiority of native abstention over the confidence-only control",
       "dal_evidence": "risk@80 paper-minus-control -0.0125 (95% paired-bootstrap interval [-0.0200, -0.0050]) is descriptive under the frozen protocol; frozen 0.8 and 0.9 target policies yielded coverage 1.0 and unsafe-commit rate 1.0",
       "disposition": "narrowed-to-descriptive"
     },

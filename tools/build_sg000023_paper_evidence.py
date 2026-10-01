@@ -47,7 +47,7 @@ FROZEN_SOURCE_SHA256: dict[Path, str] = {
     RAW_NATIVE_PATH: "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da",
     RAW_PUBMED_PATH: "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9",
     SUMMARY_PATH: "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
-    RELATED_WORK_PATH: "d450cb28c7d5fbbcbf0fc51dd91132b327602c4cdd5c670de41f0d78972cb566",
+    RELATED_WORK_PATH: "4bdb130f470a5913d5ee71d56127bf8e95873ce09411410d683e9d8017421c4c",
 }
 
 PROVENANCE_INDEX_NAME = "provenance_index.json"
@@ -764,6 +764,7 @@ def _evidence_packets(src: SourceView) -> dict[str, Any]:
             "supporting_sources": "canonical files the packet binds as supporting evidence without a derivation reading them",
             "canonical_sources": "union of derivation_inputs and supporting_sources",
             PENDING_PACKET_STATUS: "packet declared by the availability matrix whose evidence is produced by a later SG-000023 stage; it supports no claim",
+            LITERATURE_PACKET_STATUS: "dated related-work evidence that may only remove or narrow novelty claims or record a candidate scoped description; it never supports an exportable claim",
         },
         "packets": packets,
     }
@@ -800,10 +801,17 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
         if row["disposition"] == "removed"
     ]
     narrowed = [
-        row["candidate_claim"]
+        f"{row['candidate_claim']} ({row['dal_evidence']})"
         for row in related_work["novelty_disposition"]
         if row["disposition"] == "narrowed-to-descriptive"
     ]
+    retained = [
+        row
+        for row in related_work["novelty_disposition"]
+        if row["disposition"] == "retained-as-scoped-description"
+    ]
+    if len(retained) != 1:
+        raise ValueError("related-work record must retain exactly one scoped description")
     pubmed = metrics["pubmedqa"]
     pubmed_comparison = _primary_comparison(metrics, "pubmedqa-pqal", "action_accuracy")
     pubmed_display = _comparison_display(pubmed_comparison)
@@ -908,9 +916,17 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
             False,
             f"After the {related_work['search_date']} related-work refresh, these novelty claims are removed: "
             + "; ".join(removed)
-            + ". Narrowed to descriptive only: "
+            + ". Narrowed to descriptive reporting with no directional superiority claim: "
             + "; ".join(narrowed)
             + ".",
+            "EP-SG23-LIT-001",
+            [RELATED_WORK_PATH],
+        ),
+        _claim(
+            "SG23-C012",
+            "candidate-scoped-description",
+            False,
+            f"{retained[0]['permitted_wording']} Scope: {retained[0]['scope']}",
             "EP-SG23-LIT-001",
             [RELATED_WORK_PATH],
         ),
