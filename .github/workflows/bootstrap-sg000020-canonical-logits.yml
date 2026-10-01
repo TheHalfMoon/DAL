@@ -1,0 +1,54 @@
+name: Bootstrap SG-000020 canonical calibration logits
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/bootstrap-sg000020-canonical-logits.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Persist exact first-qualified calibration logits
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: "11132516977"
+          ARTIFACT_ZIP_SHA256: "d08db2e1ab6befd0b0f7182042e08d871bb369161e58932e62abf5cdb2541326"
+          RAW_SHA256: "83a81f1fde20a6d83929b048bd8ff2f17644a9d3e49813feb8dacf888c9873cc"
+          TARGET: registry/p08_calibration_raw_logits_sg000020.json
+        shell: bash
+        run: |
+          if [[ -f "$TARGET" ]]; then
+            echo "canonical calibration logits already present"
+            exit 0
+          fi
+          work="$RUNNER_TEMP/sg000020-calibration-bootstrap"
+          mkdir -p "$work/unpacked"
+          curl --fail --location --retry 3 \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" \
+            --output "$work/artifact.zip"
+          echo "${ARTIFACT_ZIP_SHA256}  $work/artifact.zip" | sha256sum --check --strict
+          unzip -q "$work/artifact.zip" -d "$work/unpacked"
+          source_file="$work/unpacked/calibration-raw-logits.json"
+          echo "${RAW_SHA256}  $source_file" | sha256sum --check --strict
+          cp "$source_file" "$TARGET"
+          echo "${RAW_SHA256}  $TARGET" | sha256sum --check --strict
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$TARGET"
+          git commit -m "DAL-P08: persist canonical SG-000020 calibration logits"
+          git push origin "HEAD:repair/sg000020-canonical-calibration-replay"
+          echo "bootstrap committed exact canonical logits; this run is intentionally stale"
+          exit 1
