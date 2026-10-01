@@ -31,13 +31,19 @@ def test_sg000022_promoted_bundle_matches_one_shot_artifact_bytes() -> None:
     manifest = _manifest()
     bundle = Path(manifest["canonical_bundle_path"])
     assert manifest["grain_id"] == "SG-000022"
-    assert manifest["canonical_execution_main"] == "f1955d5beeb2444f1d604626629036196a1dedd5"
+    assert manifest["canonical_execution_main"] == (
+        "f1955d5beeb2444f1d604626629036196a1dedd5"
+    )
     assert manifest["source_workflow_run_id"] == 36886952302
     assert manifest["source_artifact_id"] == 11176566473
-    assert manifest["source_artifact_zip_sha256"] == "8dcd894be6ae184aaf5311417d268a5500b89d0d78d14ee7a79305fbb3071136"
+    assert manifest["source_artifact_zip_sha256"] == (
+        "8dcd894be6ae184aaf5311417d268a5500b89d0d78d14ee7a79305fbb3071136"
+    )
     assert _sha256(bundle) == manifest["source_artifact_zip_sha256"]
     assert manifest["source_post_merge_gaxbench_run_id"] == 36886952212
-    assert manifest["authorization_digest"] == "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de"
+    assert manifest["authorization_digest"] == (
+        "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de"
+    )
     assert manifest["final_test_inference_executed"] is True
     assert manifest["raw_artifacts_persisted_before_metrics"] is True
     assert manifest["zero_founder_cost"] is True
@@ -54,10 +60,17 @@ def test_sg000022_promoted_bundle_matches_one_shot_artifact_bytes() -> None:
         assert _sha256(Path(entry["path"])) == entry["byte_sha256"]
 
 
-def test_sg000022_final_results_preserve_negative_blocked_and_warning_outcomes() -> None:
+def test_sg000022_final_results_preserve_negative_blocked_and_warning_outcomes(
+) -> None:
     manifest = _manifest()
-    metrics = _load(Path(manifest["promoted_readable_artifacts"]["metrics"]["path"]))
-    summary = _load(Path(manifest["promoted_readable_artifacts"]["summary"]["path"]))
+    metrics_path = Path(
+        manifest["promoted_readable_artifacts"]["metrics"]["path"]
+    )
+    summary_path = Path(
+        manifest["promoted_readable_artifacts"]["summary"]["path"]
+    )
+    metrics = _load(metrics_path)
+    summary = _load(summary_path)
     with zipfile.ZipFile(Path(manifest["canonical_bundle_path"])) as archive:
         fhir = json.loads(archive.read("raw-fhir-interface-block.json"))
 
@@ -78,11 +91,19 @@ def test_sg000022_final_results_preserve_negative_blocked_and_warning_outcomes()
     assert pubmed_primary["paired_bootstrap"]["ci_high"] == 0.0
 
     native_primary = metrics["primary_comparisons"][1]
-    assert native_primary["paired_bootstrap"]["estimate"] == -0.012499999999999956
-    assert native_primary["paired_bootstrap"]["ci_low"] == -0.020000000000000018
-    assert native_primary["paired_bootstrap"]["ci_high"] == -0.004999999999999893
+    assert native_primary["paired_bootstrap"]["estimate"] == (
+        -0.012499999999999956
+    )
+    assert native_primary["paired_bootstrap"]["ci_low"] == (
+        -0.020000000000000018
+    )
+    assert native_primary["paired_bootstrap"]["ci_high"] == (
+        -0.004999999999999893
+    )
     assert metrics["native_abstention"]["paper"]["risk_at_80"] == 0.655
-    assert metrics["native_abstention"]["clinical_control"]["risk_at_80"] == 0.6675
+    assert metrics["native_abstention"]["clinical_control"]["risk_at_80"] == (
+        0.6675
+    )
 
     assert metrics["primary_comparisons"][2]["status"] == "blocked"
     assert fhir["detected_before_final_test_access"] is True
@@ -100,4 +121,6 @@ def test_sg000022_final_results_preserve_negative_blocked_and_warning_outcomes()
         "superiority": "not-claimed",
     }
     assert manifest["laya_runtime_warning"]["observed"] is True
-    assert manifest["laya_runtime_warning"]["kind"] == "uncalibrated-confidence-warning"
+    assert manifest["laya_runtime_warning"]["kind"] == (
+        "uncalibrated-confidence-warning"
+    )
