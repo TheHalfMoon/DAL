@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "id": "SG-000022",
+  "title": "DAL-P08 - Authorized primary final evaluation",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000021"],
+  "children": [],
+  "labels": ["p08", "final-test", "evaluation", "paper"],
+  "outcome": "Execute the preregistered P08 final evaluation exactly under the canonical SG-000021 authorization, persist immutable raw result evidence with complete failure accounting, and derive paper-eligible metrics without post-test tuning or reselection.",
+  "rationale": "SG-000021 canonically qualified a digest-bound authorization artifact scoped only to SG-000022. SG-000022 is therefore the first grain permitted to execute final-test inference, but activation itself remains governance-only and does not access final-test rows.",
+  "scope_in": [
+    "Consume only the canonical SG-000021 authorization artifact with digest 626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+    "Execute final-test inference only after this activation is canonically merged and post-main verified",
+    "Evaluate the three authorization-critical final-test surfaces: PubMedQA PQA-L, DAL-native abstention, and FHIR-AgentBench",
+    "Use only the required frozen DAL paper candidate, clinical encoder, and Laya system identities bound by SG-000021",
+    "Preserve frozen calibration, ECAL, FHIR representation, coverage, multiplicity, hardware, interface, comparison-family, and failure-accounting policies",
+    "Persist immutable raw prediction/result artifacts before derived metrics, tables, figures, or claims",
+    "Record requested, completed, timeout, OOM, transport, interface, and parse outcomes without silent exclusion",
+    "Compute preregistered accuracy/calibration/selectivity/FHIR metrics and uncertainty intervals from immutable raw evidence",
+    "Preserve null, negative, blocked, and failure outcomes",
+    "Use zero-founder-cost execution only",
+    "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review for activation and implementation boundaries"
+  ],
+  "scope_out": [
+    "No final-test access or inference in the activation PR",
+    "No model/backbone/checkpoint/seed retraining or reselection",
+    "No architecture search or reopening prior D01-D03 decisions",
+    "No calibration refit or threshold tuning from final-test outcomes",
+    "No ECAL component reselection",
+    "No FHIR representation reselection",
+    "No coverage-target, multiplicity, hardware-protocol, prompt/interface, comparison-family, denominator, exclusion-rule, or failure-accounting changes",
+    "No silent removal of unfavorable, null, failed, timeout, OOM, parse, interface, or access-limited outcomes",
+    "No direct hardware-efficiency superiority claim across unmatched runtime strata",
+    "No autonomous diagnosis, treatment, prescribing, triage, or EHR writes",
+    "No clinical-safety, regulatory-readiness, deployment-fitness, superiority, or SOTA claim without separately qualified evidence",
+    "No paid founder compute, paid APIs, paid SaaS, or paid reviewers"
+  ],
+  "acceptance": [
+    "Canonical dependency is SG-000021 closeout main ef36ae4d050cf2e1bb7ada07f4054b083e886045",
+    "SG-000021 post-closeout GAXBench run 36868102682 is SUCCESS",
+    "Research contract is Issue #84",
+    "Canonical authorization artifact is registry/p08_final_test_authorization_sg000021.json",
+    "Authorization digest is exactly 626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+    "Authorization artifact declares authorized_grain SG-000022",
+    "Activation PR changes governance only and executes zero final-test rows",
+    "Required system bundle digests remain exactly 0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b, b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388, and b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534",
+    "Frozen paper checkpoint binding remains 351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+    "Authorization-critical datasets remain only pubmedqa-pqal, gax-native-abstention-pqal, and fhir-agentbench",
+    "Frozen calibration method remains temperature-scaling-action+platt-sufficiency-v0.1",
+    "Coverage targets remain exactly 0.50, 0.80, and 0.90",
+    "Selected ECAL semantic digest remains 3bfb069bfdd3ee50890f97c3e4744024af14cb9c9a62211cca008eb4c5ef9bb8",
+    "Selected FHIR representation remains canonical-structured bound to 10665e1fec0be7ec6d2bf6e3710f54b26ded79a16dc48d032a15c8862112963b",
+    "Hardware protocol remains p08-hardware-stratified-v0.1",
+    "Multiplicity policy remains holm-primary-family-v0.1",
+    "No-post-test-tuning and no-reselection policies remain binding",
+    "A separate implementation PR is required after canonical activation before any final-test inference",
+    "Implementation must fail closed on any authorization, identity, split, policy, or provenance mismatch",
+    "Raw final-test evidence must be persisted immutably before derived reporting",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI passes on activation",
+    "Checksum-pinned Alibaba OpenCodeReview exact-range evidence passes on activation",
+    "Secure TypeSafe Jev exact-diff review passes on activation",
+    "Activation merges with normal merge semantics and exact expected-head guard",
+    "Post-main activation qualification succeeds before implementation begins"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000022.json",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "critical",
+    "recovery": "Revert SG-000022 activation and retain SG-000021 canonical authorization without executing final-test inference. Any implementation evidence produced outside the canonical authorization path is invalid."
+  },
+  "evidence": {
+    "required": [
+      "issue-84-research-contract",
+      "sg000021-canonical-closeout",
+      "sg000021-post-closeout-success",
+      "authorization-digest-binding",
+      "governance-only-activation-diff",
+      "zero-final-test-rows-during-activation",
+      "exact-head-cross-platform-ci-pass",
+      "alibaba-ocr-exact-range-delegation-evidence",
+      "jev-exact-diff-review-evidence",
+      "expected-head-normal-merge",
+      "post-main-activation-verification"
+    ]
+  },
+  "metadata": {
+    "research_issue": 84,
+    "canonical_dependency": "ef36ae4d050cf2e1bb7ada07f4054b083e886045",
+    "canonical_dependency_post_main_run": 36868102682,
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
+    "authorization_artifact": "registry/p08_final_test_authorization_sg000021.json",
+    "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+    "required_system_bundle_digests": {
+      "gax-paper-candidate": "0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b",
+      "clinical-encoder": "b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388",
+      "laya": "b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534"
+    },
+    "paper_checkpoint_sha256": "351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b",
+    "required_datasets": [
+      "pubmedqa-pqal",
+      "gax-native-abstention-pqal",
+      "fhir-agentbench"
+    ],
+    "coverage_targets": [0.5, 0.8, 0.9],
+    "hardware_protocol_revision": "p08-hardware-stratified-v0.1",
+    "multiplicity_policy": "holm-primary-family-v0.1",
+    "activation_boundary": {
+      "governance_only": true,
+      "final_test_access_forbidden": true,
+      "final_test_inference_forbidden": true,
+      "final_test_rows_used": 0
+    },
+    "execution_boundary": {
+      "separate_implementation_pr_required": true,
+      "post_test_tuning_forbidden": true,
+      "architecture_reopening_forbidden": true,
+      "calibration_refit_forbidden": true,
+      "ecal_reselection_forbidden": true,
+      "fhir_reselection_forbidden": true,
+      "policy_reselection_forbidden": true,
+      "paid_founder_compute_forbidden": true
+    }
+  }
+}
