@@ -1,0 +1,39 @@
+{
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json"
+  ],
+  "detected_before_final_test_access": true,
+  "grain_id": "SG-000023",
+  "new_adapter_forbidden": true,
+  "rows": [
+    {
+      "completed": 0,
+      "gold_rows_loaded": 0,
+      "interface_failures": 173,
+      "reason": "frozen adapter cannot represent variable FHIR candidate action sets",
+      "requested": 173,
+      "status": "blocked",
+      "system_id": "gax-paper-candidate"
+    },
+    {
+      "completed": 0,
+      "gold_rows_loaded": 0,
+      "interface_failures": 173,
+      "reason": "frozen adapter cannot represent variable FHIR candidate action sets",
+      "requested": 173,
+      "status": "blocked",
+      "system_id": "clinical-encoder"
+    },
+    {
+      "completed": 0,
+      "gold_rows_loaded": 0,
+      "interface_failures": 173,
+      "reason": "frozen adapter cannot represent variable FHIR candidate action sets",
+      "requested": 173,
+      "status": "blocked",
+      "system_id": "laya"
+    }
+  ],
+  "schema_version": "0.1",
+  "table_id": "sg23-fhir-block-v0.1"
+}

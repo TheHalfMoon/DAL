@@ -1,0 +1,105 @@
+{
+  "canonical_sources": [
+    "registry/p08_sg000023_evidence_availability_matrix.json"
+  ],
+  "grain_id": "SG-000023",
+  "rows": [
+    {
+      "allowed_artifacts": [
+        "mechanics-only method summary",
+        "synthetic-fixture limitation statement"
+      ],
+      "computation_class": "would-require-forbidden-new-inference",
+      "id": "evidence-interventions",
+      "no_packet_reason": "Canonical P06 evidence is synthetic/mechanics-only and no qualified immutable real-data post-freeze evidence supports a medical intervention result.",
+      "prohibited_interpretation": [
+        "medical evidence-grounding effectiveness claim",
+        "new SG-000022 inference",
+        "synthetic-to-clinical generalization claim"
+      ],
+      "requested_analysis_or_claim": "Medical evidence-intervention reporting beyond mechanics-only synthetic fixtures",
+      "status": "blocked"
+    },
+    {
+      "allowed_artifacts": [
+        "mechanics-only method summary",
+        "synthetic-fixture limitation statement"
+      ],
+      "computation_class": "would-require-forbidden-new-inference",
+      "id": "counterfactual-robustness",
+      "no_packet_reason": "Canonical P06 fixtures prove mechanics only; no qualified immutable real-data post-freeze counterfactual result exists and SG-000022 cannot be rerun.",
+      "prohibited_interpretation": [
+        "medical counterfactual robustness claim",
+        "new final-test inference",
+        "post-test model or policy tuning"
+      ],
+      "requested_analysis_or_claim": "Medical counterfactual material-sensitivity and irrelevant-edit stability reporting",
+      "status": "blocked"
+    },
+    {
+      "allowed_artifacts": [
+        "FHIR representation-qualification summary",
+        "canonical blocked-result table",
+        "interface-failure accounting"
+      ],
+      "computation_class": "would-require-forbidden-new-adapter-or-inference",
+      "id": "fhir-final-action-selection",
+      "no_packet_reason": "The preregistered final result is interface-blocked-preexecution with zero gold rows loaded; a replacement adapter is forbidden.",
+      "prohibited_interpretation": [
+        "final FHIR action-selection accuracy",
+        "FHIR superiority",
+        "new FHIR action adapter"
+      ],
+      "requested_analysis_or_claim": "FHIR-AgentBench final action-selection performance",
+      "status": "blocked"
+    },
+    {
+      "allowed_artifacts": [
+        "explicit unavailable statement",
+        "provenance note"
+      ],
+      "computation_class": "derivation-only-if-predeclared-semantics-exist",
+      "id": "distribution-shift-slices",
+      "no_packet_reason": "No canonical preregistered slice definition with a valid source field and minimum denominator is bound to the SG-000022 final rows.",
+      "prohibited_interpretation": [
+        "post-outcome slice invention",
+        "subgroup effect claim",
+        "implicit denominator changes"
+      ],
+      "requested_analysis_or_claim": "Preregistered distribution-shift slice analysis",
+      "status": "unavailable"
+    },
+    {
+      "allowed_artifacts": [
+        "hardware-protocol limitation statement",
+        "runtime-identity provenance"
+      ],
+      "computation_class": "would-require-new-measurement",
+      "id": "efficiency-hardware",
+      "no_packet_reason": "Canonical evidence records runtime identity but not the matched timed repetitions, wall-time protocol, and peak-memory measurements required by p08-hardware-stratified-v0.1.",
+      "prohibited_interpretation": [
+        "direct latency superiority",
+        "throughput superiority",
+        "peak-memory superiority"
+      ],
+      "requested_analysis_or_claim": "Direct latency, throughput, and peak-memory comparison",
+      "status": "blocked"
+    },
+    {
+      "allowed_artifacts": [
+        "future governance closeout record"
+      ],
+      "computation_class": "later-governance-transition",
+      "id": "canonical-p08-closeout",
+      "no_packet_reason": "This row is a later governance transition and becomes applicable only after SG-000023 implementation, evidence packaging, related-work refresh, and final claim freeze are qualified.",
+      "prohibited_interpretation": [
+        "premature completion claim",
+        "closeout before qualified derivatives and claim freeze"
+      ],
+      "requested_analysis_or_claim": "Canonical P08 closeout after all SG-000023 evidence packaging and claim-freeze prerequisites",
+      "status": "not-applicable"
+    }
+  ],
+  "schema_version": "0.1",
+  "table_id": "sg23-evidence-boundaries-v0.1"
+}

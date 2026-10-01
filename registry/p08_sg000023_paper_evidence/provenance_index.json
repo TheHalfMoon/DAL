@@ -1,0 +1,62 @@
+{
+  "artifact_inventory": [
+    "main_results.json",
+    "selective_results.json",
+    "evidence_boundaries.json",
+    "reliability_source_data.json",
+    "risk_coverage_source_data.json",
+    "fhir_block_table.json",
+    "qualitative_examples.json",
+    "evidence_packets.json",
+    "claim_ledger.json",
+    "provenance_index.json"
+  ],
+  "artifact_sha256": {
+    "claim_ledger.json": "41cd3016a65f0c7448bade0ab66af9e7572edebc126d19bae33afd3c8abe8091",
+    "evidence_boundaries.json": "e30737e70ed976e61bbe613d233c8a7adb908df752463f7716b455bfa9c36003",
+    "evidence_packets.json": "56ddc1938101477759be6a2419c023a4a02a38b347e8f5690ff184ad2b53f814",
+    "fhir_block_table.json": "ed324485e386d60eb4faaa71be9f0fdd6507ba44c285d1f67aa100f07c02ac33",
+    "main_results.json": "402817ff58d3113ba6ddccedd28fc430f03a0e763fa1d416472f134a652b2797",
+    "qualitative_examples.json": "14351ed417da3c9b086423aa1726dc7f8dad1cb26e3403c5edb48b83e4d3fb91",
+    "reliability_source_data.json": "c08450e439f479670e111a983be261a33671ea8f44d2c366799a4bc37855310e",
+    "risk_coverage_source_data.json": "c5c5d39c69f43245009e06db1f9aa21af9c1cd9b139d63590569485de738b08c",
+    "selective_results.json": "5e065a3307b7beb50ec6dd4b037937276a5b37503c6fbe86b0e7a29bc4b2acab"
+  },
+  "canonical_main_dependency": "d676beccfec001fd75d1b157b43068eb49a5733d",
+  "canonical_sources": [
+    "registry/p08_calibration_evidence_sg000020.json",
+    "registry/p08_ecal_selection_ledger_sg000020.json",
+    "registry/p08_fhir_selection_ledger_sg000020.json",
+    "registry/p08_sg000022_final_evaluation/manifest.json",
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
+    "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
+    "registry/p08_sg000022_final_evaluation/summary.json",
+    "registry/p08_sg000023_derivation_contract.json",
+    "registry/p08_sg000023_evidence_availability_matrix.json"
+  ],
+  "derivation_contract_id": "dal-p08-post-final-derivation-v0.1",
+  "frozen_source_digests_verified_before_derivation": true,
+  "grain_id": "SG-000023",
+  "index_id": "sg23-paper-evidence-provenance-v0.1",
+  "no_new_inference": true,
+  "no_post_test_tuning": true,
+  "schema_version": "0.1",
+  "self_hash_exclusion": "provenance_index.json cannot contain its own digest; artifact_sha256 covers every other artifact in artifact_inventory",
+  "source_sha256": {
+    "registry/p08_calibration_evidence_sg000020.json": "1e9ed4558180d07756d4992b6c46963692695ed1fbc8e6ccb01a90a25c003eb6",
+    "registry/p08_ecal_selection_ledger_sg000020.json": "db77c67ed1041fdb21fed771c1de97e134a1635076bc2254bfe8c8512599c793",
+    "registry/p08_fhir_selection_ledger_sg000020.json": "0965e516b642c11d305223ac0725e99af7f4002b3252dc10203bc532ec877647",
+    "registry/p08_sg000022_final_evaluation/manifest.json": "6ac53a51eb6caf373a691333c8241b2b7301cde81caa0dda02871154ba2b6dd1",
+    "registry/p08_sg000022_final_evaluation/metrics.json": "da2e41e7ecda10c2f7dad60b28ad386e160f028b58f76414d7645512633161db",
+    "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json": "b8cb7b96241568f7089291614c2157a2656141be16297b0b81791c6cd71893eb",
+    "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json": "009831a7a404f8cfc44ea83b13d0ecf8d6e9fb4bdd6c511c2835ec2595a69102",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json": "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json": "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9",
+    "registry/p08_sg000022_final_evaluation/summary.json": "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
+    "registry/p08_sg000023_derivation_contract.json": "62982bb53ad8cbe6255825c319528d9f50a893b142fbcffd7c55f6b99294fb38",
+    "registry/p08_sg000023_evidence_availability_matrix.json": "3a319a13dc18dbe49e063479e2698850b6fb7a3b8968d67c6f3f0f0fd43e496b"
+  }
+}

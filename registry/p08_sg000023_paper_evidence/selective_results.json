@@ -1,0 +1,117 @@
+{
+  "canonical_sources": [
+    "registry/p08_sg000022_final_evaluation/metrics.json",
+    "registry/p08_sg000023_derivation_contract.json"
+  ],
+  "grain_id": "SG-000023",
+  "mandatory_warning": "The paper system has unsafe_commit_rate=1.0 at frozen target coverages 0.8 and 0.9; these negative outcomes must remain visible.",
+  "primary_comparison": {
+    "benchmark": "gax-native-abstention-pqal",
+    "direction": "paper-minus-control; lower-is-better",
+    "metric": "risk_at_80",
+    "paired_bootstrap": {
+      "ci_high": -0.004999999999999893,
+      "ci_level": 0.95,
+      "ci_low": -0.020000000000000018,
+      "estimate": -0.012499999999999956,
+      "replicates": 10000,
+      "seed": 1729
+    },
+    "status": "measured"
+  },
+  "primary_comparison_display": {
+    "ci_high": "-0.0050",
+    "ci_level": 0.95,
+    "ci_low": "-0.0200",
+    "estimate": "-0.0125",
+    "rule": "presentation-only fixed-point rounding to 4 decimal places; the unrounded canonical values remain in primary_comparison and are the scientific evidence"
+  },
+  "rows": [
+    {
+      "actual_policy": {
+        "0.5": {
+          "actual_coverage": 0.492,
+          "over_abstain_rate": 0.016,
+          "threshold": 0.9997752419779887,
+          "unsafe_commit_rate": 0.0
+        },
+        "0.8": {
+          "actual_coverage": 1.0,
+          "over_abstain_rate": 0.0,
+          "threshold": 2.276727485459712e-06,
+          "unsafe_commit_rate": 1.0
+        },
+        "0.9": {
+          "actual_coverage": 1.0,
+          "over_abstain_rate": 0.0,
+          "threshold": 2.276727485459712e-06,
+          "unsafe_commit_rate": 1.0
+        }
+      },
+      "completed": 1000,
+      "failed": 0,
+      "metrics": {
+        "aurc": 0.5296075715789592,
+        "present_action_accuracy": 0.552,
+        "risk_at_50": 0.44799999999999995,
+        "risk_at_80": 0.655,
+        "risk_at_90": 0.6933333333333334
+      },
+      "requested": 1000,
+      "status": "measured",
+      "system_id": "paper"
+    },
+    {
+      "actual_policy": {
+        "0.5": {
+          "actual_coverage": 0.491,
+          "over_abstain_rate": 0.272,
+          "threshold": 0.5343338362130221,
+          "unsafe_commit_rate": 0.254
+        },
+        "0.8": {
+          "actual_coverage": 0.769,
+          "over_abstain_rate": 0.04,
+          "threshold": 0.5108642397223772,
+          "unsafe_commit_rate": 0.578
+        },
+        "0.9": {
+          "actual_coverage": 0.852,
+          "over_abstain_rate": 0.02,
+          "threshold": 0.5001335133134222,
+          "unsafe_commit_rate": 0.724
+        }
+      },
+      "completed": 1000,
+      "failed": 0,
+      "metrics": {
+        "aurc": 0.5935214712188372,
+        "present_action_accuracy": 0.552,
+        "risk_at_50": 0.604,
+        "risk_at_80": 0.6675,
+        "risk_at_90": 0.6966666666666667
+      },
+      "requested": 1000,
+      "status": "measured",
+      "system_id": "clinical_control"
+    },
+    {
+      "actual_policy": null,
+      "completed": 0,
+      "failed": 1000,
+      "metrics": {
+        "aurc": null,
+        "present_action_accuracy": null,
+        "risk_at_50": null,
+        "risk_at_80": null,
+        "risk_at_90": null
+      },
+      "reason": "frozen Laya adapter has no information-sufficiency output",
+      "requested": 1000,
+      "status": "blocked",
+      "system_id": "laya"
+    }
+  ],
+  "schema_version": "0.1",
+  "table_id": "sg23-native-selective-v0.1"
+}
