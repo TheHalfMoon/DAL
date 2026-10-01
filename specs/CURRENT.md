@@ -13,7 +13,7 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — CLOSED_CANONICAL at `3ca0dd2aae85a68473849108764a45a538de1019`.**
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
 - **SG-000021 — DAL-P08 Final-test authorization qualification — CLOSED_CANONICAL at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`; post-closeout GAXBench `36868102682` SUCCESS.**
-- **SG-000022 — DAL-P08 Authorized primary final evaluation — PROVEN by this canonical closeout state transition; canonical evidence-promotion main is `4417a0fc294a3d35f76e54958f151884bf8bfe80`.**
+- **SG-000022 — DAL-P08 Authorized primary final evaluation — CLOSED_CANONICAL at `421ad093e1b89df69e10c763ec2474853c09d0e3`; post-closeout GAXBench `36903592739` SUCCESS.**
 
 ## SG-000020 canonical evidence
 
@@ -89,11 +89,15 @@ No model, checkpoint, seed, architecture, calibration, ECAL, FHIR, coverage, har
 
 ## SG-000022 canonical final-evaluation evidence
 
-Research contract: Issue #84 — primary final-evaluation scope completed.
+Research contract: Issue #84 — completed.
 
-Canonical dependency:
+Canonical closeout:
 
-`ef36ae4d050cf2e1bb7ada07f4054b083e886045`
+`421ad093e1b89df69e10c763ec2474853c09d0e3`
+
+Post-closeout GAXBench:
+
+`36903592739` — SUCCESS on Linux/Windows Python 3.11/3.12.
 
 Authorization digest:
 
@@ -109,7 +113,9 @@ Governed execution chain:
 - one-shot final-evaluation run `36886952302` — SUCCESS;
 - execution-main GAXBench `36886952212` — SUCCESS;
 - canonical evidence PR #89 exact head `4ae8b39010a2b55f33258fdbf57ce1abc7a13ff3` passed GAXBench `36902369992`, Alibaba OpenCodeReview `36902369988`, and secure TypeSafe Jev `36902370171`, then merged at `4417a0fc294a3d35f76e54958f151884bf8bfe80`;
-- evidence-promotion post-main GAXBench `36902663435` — SUCCESS.
+- evidence-promotion post-main GAXBench `36902663435` — SUCCESS;
+- canonical closeout PR #90 exact head `b274b97f63caefc7365a1310cc0b032899859153` passed GAXBench `36903313627`, Alibaba OpenCodeReview `36903313590`, and secure TypeSafe Jev `36903313312`, then merged at `421ad093e1b89df69e10c763ec2474853c09d0e3`;
+- closeout post-main GAXBench `36903592739` — SUCCESS.
 
 The execution transport changed prospectively before final-test access because the connected interface could not invoke `workflow_dispatch`. PR #87 changed only transport to a fail-closed one-shot canonical-main sentinel, recorded zero final-test rows and no outcome information before amendment, and changed no scientific binding or policy.
 
@@ -136,17 +142,29 @@ Frozen primary result facts:
 
 All raw artifacts were persisted before derived metrics. Negative, null, blocked, failure, and calibration-pathology outcomes are immutable evidence. SG-000022 must not be rerun or tuned in response to these results.
 
-## Next frontier — SG-000023
+## Active frontier — SG-000023
 
 **P08 immutable post-final analysis, claim freeze, and paper-evidence packaging**
 
-State: **NOT YET ACTIVATED**
+Research contract: Issue #91.
 
-SG-000023 must start only after the SG-000022 canonical closeout reaches `main` and passes post-closeout qualification. It may consume the immutable SG-000022 evidence and existing frozen development/calibration evidence only for analysis, limitations, claim-ledger mapping, reproducibility packets, and paper tables/figures that do not require a new final-test experiment.
+Canonical dependency:
 
-SG-000023 must not rerun SG-000022 final-test inference; retrain or reselect models; refit calibration; create a new FHIR adapter; reselect ECAL/FHIR representations; alter denominators, coverage targets, metrics, bootstrap settings, multiplicity, comparison families, failure accounting, or exclusion rules; or convert blocked/negative outcomes into unsupported positive claims.
+`421ad093e1b89df69e10c763ec2474853c09d0e3`
 
-Remaining P08 tasks not actually executed by SG-000022 remain open. In particular, no completed status is asserted yet for the broader ECAL-ablation reporting, evidence-intervention analysis, counterfactual analysis, FHIR action evaluation beyond the canonical interface block, distribution-shift slices, frozen-hardware efficiency measurements, qualitative error analysis, or complete paper table/figure/claim-ledger packaging.
+Dependency post-closeout qualification:
+
+`36903592739` — SUCCESS.
+
+State: **ACTIVE — governance activation only**
+
+The activation boundary freezes evidence-use rules only. It executes no final-test inference, generates no paper claim, and marks no remaining P08 analysis complete. A separate implementation PR is required after activation is canonically merged and post-main verified.
+
+The first SG-000023 implementation deliverable is a machine-readable evidence-availability matrix. Every remaining P08 task must be classified as `available`, `blocked`, `unavailable`, or `not-applicable`, with the preregistered contract source, exact canonical evidence sources, derivation-vs-new-inference classification, permitted artifacts, prohibited interpretation, and evidence-packet IDs or explicit no-packet reason.
+
+SG-000023 may derive reporting artifacts from immutable evidence but must not rerun SG-000022 final-test inference; retrain or reselect models; refit calibration; create a new FHIR adapter; reselect ECAL/FHIR representations; alter denominators, coverage targets, metrics, bootstrap settings, multiplicity, comparison families, hardware protocol, failure accounting, or exclusions; invent post-hoc p-values; or convert blocked/negative outcomes into unsupported positive claims.
+
+P06 synthetic fixtures remain mechanics-only and do not establish medical counterfactual robustness. ECAL selection evidence may support development/calibration reporting but not unmeasured final-test ablation claims. FHIR final action-selection performance remains blocked. Direct efficiency claims remain unsupported unless already-canonical matched hardware/runtime evidence satisfies `p08-hardware-stratified-v0.1`.
 
 ## Core P08 invariants
 

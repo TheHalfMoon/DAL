@@ -154,9 +154,9 @@ Research contract: Issue #80. Canonical closeout: `ef36ae4d050cf2e1bb7ada07f4054
 
 SG-000021 executed no final-test inference. Its canonical authorization artifact is scoped only to SG-000022.
 
-### SG-000022 — Authorized primary final evaluation (PROVEN by this closeout state transition)
+### SG-000022 — Authorized primary final evaluation (CLOSED_CANONICAL)
 
-Research contract: Issue #84. Canonical dependency: `ef36ae4d050cf2e1bb7ada07f4054b083e886045`.
+Research contract: Issue #84. Canonical closeout: `421ad093e1b89df69e10c763ec2474853c09d0e3`. Post-closeout GAXBench: `36903592739` SUCCESS.
 
 #### Activation and implementation
 
@@ -195,38 +195,77 @@ Research contract: Issue #84. Canonical dependency: `ef36ae4d050cf2e1bb7ada07f40
 - [x] Preserve all null, negative, timeout, OOM, transport, parse, interface-failure, blocked, and calibration-pathology outcomes
 - [x] Preserve no significance, superiority, clinical-safety, regulatory-readiness, or SOTA claim from SG-000022
 
-#### Canonical evidence promotion
+#### Canonical evidence promotion and closeout
 
 - [x] Promote the six exact JSON members as text under `registry/p08_sg000022_final_evaluation/`
 - [x] Bind source run, artifact, authorization digest, exact byte lengths, and SHA-256 values in `manifest.json`
 - [x] Qualify evidence-promotion head `4ae8b39010a2b55f33258fdbf57ce1abc7a13ff3` with GAXBench `36902369992`, Alibaba OpenCodeReview `36902369988`, and secure TypeSafe Jev `36902370171`
 - [x] Merge evidence promotion normally at `4417a0fc294a3d35f76e54958f151884bf8bfe80`
 - [x] Verify evidence-promotion main with GAXBench `36902663435` SUCCESS
-- [x] Start a separate governance-only canonical closeout boundary with no final-test rerun or tuning
+- [x] Qualify canonical closeout head `b274b97f63caefc7365a1310cc0b032899859153` with GAXBench `36903313627`, Alibaba OpenCodeReview `36903313590`, and secure TypeSafe Jev `36903313312`
+- [x] Merge canonical closeout normally at `421ad093e1b89df69e10c763ec2474853c09d0e3`
+- [x] Verify post-closeout GAXBench `36903592739` SUCCESS
 
-### SG-000023 — Remaining P08 immutable post-final analysis and claim freeze (NOT YET ACTIVATED)
+### SG-000023 — Immutable post-final analysis, claim freeze, and paper evidence packaging (ACTIVE — GOVERNANCE ONLY)
 
-The following tasks remain open because SG-000022 did **not** execute or qualify them. They must not be marked complete by inference from the primary final-evaluation run:
+Research contract: Issue #91. Canonical dependency: `421ad093e1b89df69e10c763ec2474853c09d0e3`. Dependency post-closeout GAXBench: `36903592739` SUCCESS.
 
-- [ ] Create SG-000023 research contract and SpecGrain after SG-000022 canonical closeout and post-closeout verification
-- [ ] Determine which remaining analyses are valid derivations from immutable canonical evidence and which must be recorded unavailable/blocked rather than rerun
+Activation does not execute analysis, generate claims, or mark any remaining P08 task complete. A separate implementation PR is mandatory after canonical activation and post-main verification.
+
+#### Activation contract
+
+- [x] Create SG-000023 research contract Issue #91
+- [x] Bind SG-000022 canonical closeout `421ad093e1b89df69e10c763ec2474853c09d0e3`
+- [x] Bind SG-000022 post-closeout GAXBench `36903592739`
+- [x] Bind canonical final-evidence root `registry/p08_sg000022_final_evaluation/`
+- [x] Freeze a permanent no-rerun/no-post-test-tuning/no-reselection boundary
+- [x] Require the evidence-availability matrix as the first implementation deliverable
+- [x] Freeze availability statuses to `available`, `blocked`, `unavailable`, and `not-applicable`
+- [x] Freeze the rule that supported claims require evidence-packet IDs and that null/rejected/blocked/exploratory outcomes remain visible
+- [x] Preserve P06 synthetic fixtures as mechanics-only, not medical counterfactual evidence
+- [x] Preserve FHIR final action-selection performance as blocked and forbid a replacement adapter
+- [x] Preserve Laya affected confidence as uncalibrated
+- [x] Forbid new post-hoc primary p-values/significance tests
+- [x] Require deterministic qualitative-example selection rules before example inspection
+- [x] Require matched canonical hardware/runtime evidence for direct efficiency claims; otherwise mark them blocked/unsupported
+- [ ] Qualify SG-000023 activation exact head with Linux/Windows Python 3.11/3.12 GAXBench CI
+- [ ] Qualify SG-000023 activation exact head with checksum-pinned Alibaba OpenCodeReview
+- [ ] Qualify SG-000023 activation exact head with secure TypeSafe Jev
+- [ ] Merge SG-000023 activation normally with expected-head guard
+- [ ] Verify post-main SG-000023 activation before implementation
+
+#### First implementation deliverable — evidence-availability matrix
+
+- [ ] Create `registry/p08_sg000023_evidence_availability_matrix.json`
+- [ ] Cover every remaining P08 analysis and paper-claim family
+- [ ] Bind each row to the exact preregistered contract source
+- [ ] Bind each row to exact canonical evidence files/run IDs/hashes
+- [ ] Record whether each computation is derivation-only or would require forbidden new inference
+- [ ] Record `available`, `blocked`, `unavailable`, or `not-applicable`
+- [ ] Record permitted metrics/artifacts and prohibited interpretations
+- [ ] Bind evidence-packet IDs or an explicit reason no packet can exist
+- [ ] Prove no task is completed merely because an evaluator or synthetic fixture exists
+
+#### Remaining P08 analysis and reporting work
+
 - [ ] Produce paper-ready main action-selection tables from versioned raw artifacts
 - [ ] Produce reliability plots/analysis from valid calibrated evidence only; preserve the Laya uncalibrated-confidence limitation
 - [ ] Produce risk-coverage curves from canonical native-abstention evidence
-- [ ] Evaluate/report the frozen selected ECAL configuration and declared ablations only where already-authorized immutable evidence supports the analysis, without reselection
-- [ ] Evaluate/report evidence interventions without post-test tuning only where immutable evidence supports them; otherwise record the result unavailable/blocked
-- [ ] Evaluate/report counterfactual material-sensitivity and irrelevant-edit stability without post-test tuning only where immutable evidence supports them; otherwise record the result unavailable/blocked
-- [ ] Preserve the FHIR final-evaluation result as interface-blocked; do not create a new adapter or claim FHIR action-selection performance
+- [ ] Report the frozen selected ECAL configuration and declared development/calibration ablations only where canonical evidence supports them; do not imply unmeasured final-test ablation performance
+- [ ] Report evidence interventions only where qualified immutable evidence supports them; otherwise record unavailable/blocked
+- [ ] Report counterfactual material-sensitivity and irrelevant-edit stability only where qualified immutable real-data evidence supports them; otherwise record unavailable/blocked
+- [ ] Preserve the FHIR final-evaluation result as interface-blocked; do not create a new adapter or claim final FHIR action-selection performance
 - [ ] Produce valid preregistered distribution-shift slices only where canonical source data and pre-result contracts support them
-- [ ] Produce failure taxonomy and qualitative error analysis without silent exclusion or cherry-picking
-- [ ] Measure/report latency, throughput, and peak memory only if the frozen hardware protocol can still be satisfied without rerunning the completed final-test experiment; otherwise mark efficiency claims unsupported
+- [ ] Produce failure taxonomy and qualitative error analysis under deterministic non-cherry-picked selection rules
+- [ ] Report latency, throughput, and peak memory only if already-canonical evidence satisfies the frozen hardware protocol; otherwise mark direct efficiency claims unsupported
 - [ ] Generate every paper table from versioned canonical artifacts with exact provenance
 - [ ] Generate every paper figure from versioned canonical artifacts with exact provenance
 
 ### Reproducibility and claim freeze
 
 - [ ] Complete evidence packet for every paper-table row
-- [ ] Map every manuscript claim to exact evidence or explicit rejection
+- [ ] Map every manuscript/README/release claim to exact evidence or explicit rejection/block reason
+- [ ] Refresh related work before final novelty/claim freeze
 - [ ] Freeze P08 final results without post-test tuning
 - [ ] Canonical P08 closeout
 
