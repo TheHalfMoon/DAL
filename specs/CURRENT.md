@@ -14,6 +14,7 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
 - **SG-000021 — DAL-P08 Final-test authorization qualification — CLOSED_CANONICAL at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`; post-closeout GAXBench `36868102682` SUCCESS.**
 - **SG-000022 — DAL-P08 Authorized primary final evaluation — CLOSED_CANONICAL at `421ad093e1b89df69e10c763ec2474853c09d0e3`; post-closeout GAXBench `36903592739` SUCCESS.**
+- **SG-000023 — DAL-P08 Immutable post-final analysis, claim freeze, and paper evidence packaging — CLOSED_CANONICAL (this closeout); P08 CLOSED_CANONICAL.**
 
 ## SG-000020 canonical evidence
 
@@ -142,29 +143,46 @@ Frozen primary result facts:
 
 All raw artifacts were persisted before derived metrics. Negative, null, blocked, failure, and calibration-pathology outcomes are immutable evidence. SG-000022 must not be rerun or tuned in response to these results.
 
-## Active frontier — SG-000023
+## SG-000023 canonical post-final evidence package and claim freeze
 
-**P08 immutable post-final analysis, claim freeze, and paper-evidence packaging**
+Research contract: Issue #91 — completed.
 
-Research contract: Issue #91.
+Canonical dependency: `421ad093e1b89df69e10c763ec2474853c09d0e3` (SG-000022 closeout; post-closeout GAXBench `36903592739`).
 
-Canonical dependency:
+Governed chain (each step qualified on its exact head with Linux/Windows Python 3.11/3.12 GAXBench, checksum-pinned Alibaba OpenCodeReview, and secure TypeSafe Jev; merged normally with an expected-head guard; post-main GAXBench verified):
 
-`421ad093e1b89df69e10c763ec2474853c09d0e3`
+- activation PR #92 exact head `e3e4ad8305815f5ee6a4cbe3baf1d354d0fe4f90` (GAXBench `36904301087`, OCR `36904301186`, Jev `36904754175`) merged at `7da5e1e2efc17e5fdad42e1d80da25139de74317`; post-main `36904770004`;
+- evidence-availability matrix PR #94 exact head `18b2d36d6a5f4d357132973c0be2812f2db1d6a1` (GAXBench `36906443747`, OCR `36906443642`, Jev `36906444138`) merged at `fd77fbab3ebcf9917469ae189b167874b3e058b9`; post-main `36906737047`;
+- derivation contract PR #95 exact head `ba01ab0beeb800d09008bd0e455a02bf3f8a91be` (GAXBench `36907598649`, OCR `36907598277`, Jev `36907593827`) merged at `d676beccfec001fd75d1b157b43068eb49a5733d`; post-main `36907824212`;
+- paper-evidence package PR #96 exact head `78ac44b42a46e1ebe85e3f36bf04ea0ccd10d7eb` (GAXBench `36918104968`, OCR `36918105124`, Jev `36918100766`) merged at `a18c1e10a0d9eba16ba8bffc55b29988507772ff`; post-main `36918621970`;
+- related-work refresh PR #97 exact head `f80fe231156c4cdc0b3be24cfdae57bfd4c2c135` (GAXBench `36920915256`, OCR `36920915443`, Jev `36920909597`) merged at `5ae1232fd6b66978e13a30a3046e8604bbff68cf`; post-main `36921122600`;
+- ECAL table, figures, and action identity PR #98 exact head `b1ea52ecc78e61ecb9cc90bd9f7d204151d11a02` (GAXBench `36922216630`, OCR `36922216751`, Jev `36922216491`) merged at `fabbfdd9045415d49f91d56e4e1ba3cd24ac5c1d`; post-main `36922469753`;
+- final result and claim freeze PR #99 exact head `3a359e7f8c9692a8798d09a8e1720a4fcc437195` (GAXBench `36922998071`, OCR `36922998021`, Jev `36922998241`) merged at `01831d44123e4db61a1f73116b6654d404b96fd8`; post-main `36923178122`.
 
-Dependency post-closeout qualification:
+Canonical artifacts:
 
-`36903592739` — SUCCESS.
+- evidence-availability matrix: `registry/p08_sg000023_evidence_availability_matrix.json`;
+- derivation contract: `registry/p08_sg000023_derivation_contract.json`;
+- related-work refresh (2026-10-01, free sources only): `registry/p08_sg000023_related_work_refresh.json`;
+- paper evidence package (14 artifacts, deterministic `--check`): `registry/p08_sg000023_paper_evidence/`, built by `tools/build_sg000023_paper_evidence.py`, which pins byte SHA-256 for every canonical input and refuses to derive on mismatch;
+- claim freeze: `registry/p08_sg000023_paper_evidence/claim_freeze_manifest.json`, claim-set SHA-256 `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
 
-State: **ACTIVE — governance activation only**
+Frozen claim set: 8 affirmative claims (SG23-C001–C006, C012, C014) and 6 limitation-only statements (SG23-C007–C011, C013). Every exported claim is bound to an evidence packet whose canonical sources cover the claim's cited sources. Any change to a frozen result or claim requires a new governed SpecGrain and may not be motivated by final-test outcomes.
 
-The activation boundary freezes evidence-use rules only. It executes no final-test inference, generates no paper claim, and marks no remaining P08 analysis complete. A separate implementation PR is required after activation is canonically merged and post-main verified.
+Findings frozen by SG-000023 beyond the SG-000022 headline results:
 
-The first SG-000023 implementation deliverable is a machine-readable evidence-availability matrix. Every remaining P08 task must be classified as `available`, `blocked`, `unavailable`, or `not-applicable`, with the preregistered contract source, exact canonical evidence sources, derivation-vs-new-inference classification, permitted artifacts, prohibited interpretation, and evidence-packet IDs or explicit no-packet reason.
+- the paper system and the clinical control emit identical action-probability vectors on 500/500 PubMedQA final rows and identical action correctness on 1000/1000 native rows; they differ only in selection scores, so the PubMedQA comparison isolates no action-selection difference;
+- no ECAL benefit is established: SG-000020 kept `evidence` for frozen-checkpoint compatibility, not for a measured ablation benefit, and every P04 paper decision is `defer-real-data`;
+- the related-work refresh removed every "first"-style novelty claim (medical abstention, governance/assurance layer, typed-decision evaluation in medicine, typed-readout accuracy benefit, pre-registered typed-decision evaluation, hash-verified provenance / evidence ledger, FHIR capability, counterfactual robustness) and narrowed native-abstention superiority to descriptive reporting;
+- evidence interventions and counterfactual robustness remain blocked (synthetic mechanics only), distribution-shift slices remain unavailable, direct efficiency remains blocked, and FHIR action selection remains interface-blocked.
 
-SG-000023 may derive reporting artifacts from immutable evidence but must not rerun SG-000022 final-test inference; retrain or reselect models; refit calibration; create a new FHIR adapter; reselect ECAL/FHIR representations; alter denominators, coverage targets, metrics, bootstrap settings, multiplicity, comparison families, hardware protocol, failure accounting, or exclusions; invent post-hoc p-values; or convert blocked/negative outcomes into unsupported positive claims.
+## P08 closeout
 
-P06 synthetic fixtures remain mechanics-only and do not establish medical counterfactual robustness. ECAL selection evidence may support development/calibration reporting but not unmeasured final-test ablation claims. FHIR final action-selection performance remains blocked. Direct efficiency claims remain unsupported unless already-canonical matched hardware/runtime evidence satisfies `p08-hardware-stratified-v0.1`.
+P08 is **CLOSED_CANONICAL** at the SG-000023 closeout. The P08 exit gate — all paper figures and tables generated from evidence packets — is met by `EP-SG23-TABLES-001` and `EP-SG23-FIGURES-001`. Closeout does not convert blocked or unavailable analyses into results; those rows stay explicit in `evidence_boundaries.json` and the claim ledger.
+
+## Next frontier — P09 (not activated)
+
+P09 (paper and public release) has **not** been activated. It requires a separate SpecGrain activation that binds this closeout, the frozen claim-set digest, and the rule that manuscript, README, release, and abstract text may only use frozen claim wording. Steps that need the founder's own accounts or legal acts — arXiv submission, Hugging Face publication, release tagging, and any license/redistribution decision for model weights — remain external boundaries and must not be claimed as done until verified.
 
 ## Core P08 invariants
 
