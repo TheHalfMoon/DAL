@@ -37,7 +37,7 @@ DAL is the current repository and program identity: **Decision Assurance Layer**
 
 ### SG-000020 — Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze (PROVEN)
 
-Research contract: Issue #69. Canonical dependency: `3ca0dd2aae85a68473849108764a45a538de1019`.
+Research contract: Issue #69. Canonical closeout: `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.
 
 #### Calibration
 
@@ -54,16 +54,6 @@ Research contract: Issue #69. Canonical dependency: `3ca0dd2aae85a68473849108764
 
 #### ECAL selection
 
-Frozen candidate set:
-
-- `evidence`
-- `hard-negative`
-- `proper-scoring`
-- `replay-retention`
-- `state-action-contrastive`
-
-Tasks:
-
 - [x] Persist ECAL selection objective before candidate outcome inspection
 - [x] Persist deterministic ECAL tie-break rule before candidate outcome inspection
 - [x] Evaluate every frozen candidate on authorized development/calibration evidence only
@@ -72,15 +62,6 @@ Tasks:
 - [x] Bind selected ECAL configuration to immutable digest
 
 #### FHIR representation selection
-
-Frozen candidate set:
-
-- `canonical-structured`
-- `canonical-with-narrative`
-- `flat-text`
-- `source-order-json`
-
-Tasks:
 
 - [x] Persist FHIR selection objective before candidate outcome inspection
 - [x] Persist deterministic FHIR tie-break rule before candidate outcome inspection
@@ -92,9 +73,7 @@ Tasks:
 
 #### Final-test authorization candidate
 
-- [x] Bind canonical DAL paper-candidate bundle digest `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`
-- [x] Bind canonical clinical-encoder bundle digest `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`
-- [x] Bind canonical Laya bundle digest `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`
+- [x] Bind canonical DAL paper-candidate, clinical-encoder, and Laya bundle digests
 - [x] Bind selected calibration evidence digest
 - [x] Bind selected ECAL configuration digest
 - [x] Bind selected FHIR representation digest
@@ -115,6 +94,7 @@ Tasks:
 - [x] Post-main qualification
 - [x] Canonical evidence promotion with byte/semantic digest verification
 - [x] Separate SG-000020 canonical closeout
+- [x] SG-000020 post-closeout GAXBench `36839981925` SUCCESS
 
 Final-test access remained **sealed** throughout SG-000020.
 
@@ -133,23 +113,35 @@ Final-test access remained **sealed** throughout SG-000020.
 - [x] Bind final selected system/protocol/checkpoint digests into an authorization candidate
 - [ ] Qualify and merge a separate digest-bound final-test opening artifact under SG-000021
 
-Final-test access remains **sealed** until the last item above is satisfied.
+Final-test access remains **sealed** until the last item above is satisfied canonically.
 
-### SG-000021 — Final-test authorization qualification (NEXT)
+### SG-000021 — Final-test authorization qualification (ACTIVE)
 
-- [ ] Activate a separate research contract and SpecGrain for final-test authorization
-- [ ] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
-- [ ] Re-verify required-system bundle and paper-checkpoint identities
-- [ ] Re-verify immutable final-test split/source manifests and leakage boundaries
-- [ ] Bind frozen coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
-- [ ] Create a machine-readable authorization artifact that fails closed on any mismatch
-- [ ] Qualify exact-head Linux/Windows CI, Alibaba OpenCodeReview, and secure TypeSafe Jev
+Research contract: Issue #78. Canonical dependency: `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.
+
+- [x] Activate a separate research contract and SpecGrain for final-test authorization
+- [ ] Bind SG-000020 canonical closeout and post-closeout CI
+- [ ] Bind SG-000020 authorization-candidate semantic digest
+- [ ] Re-verify DAL paper-candidate, clinical-encoder, and Laya qualification-bundle digests
+- [ ] Re-verify selected paper checkpoint SHA-256
+- [ ] Re-verify PubMedQA PQA-L source/split/leakage identity and 500-row final-test scope
+- [ ] Re-verify DAL-native abstention source/role/membership/leakage identity and 1000-row final-test scope
+- [ ] Re-verify FHIR-AgentBench source/role/patient-membership/leakage identity and 173-row/40-patient final-test scope
+- [ ] Preserve MedAgentBench/MedQAbstain blocked-secondary and MedMCQA/MedQA/Med-PRM non-authorization states
+- [ ] Bind frozen calibration, ECAL, FHIR, coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
+- [ ] Bind explicit zero-founder-cost requirement
+- [ ] Create a machine-readable authorization artifact with deterministic self-verifying authorization digest
+- [ ] Prove branch-local authorization cannot trigger final-test inference
+- [ ] Qualify exact-head Linux/Windows Python 3.11/3.12 CI
+- [ ] Qualify checksum-pinned Alibaba OpenCodeReview exact-range evidence
+- [ ] Qualify secure TypeSafe Jev exact-diff review with complete coverage and zero blocking findings
 - [ ] Merge authorization with normal expected-head guard
-- [ ] Verify post-main authorization state before any final-test inference
+- [ ] Verify post-main authorization artifact from canonical `main`
+- [ ] Complete separate SG-000021 canonical closeout
 
-No final-test inference is permitted before every SG-000021 authorization item above is proven canonically.
+No final-test inference, prediction generation, metric computation, or final-test error review is permitted inside SG-000021.
 
-### Primary paper evaluation — after separate final-test authorization only
+### Primary paper evaluation — after canonical SG-000021 authorization only
 
 - [ ] Main action-selection tables
 - [ ] NLL, Brier, ECE, and reliability analysis
