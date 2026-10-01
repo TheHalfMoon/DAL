@@ -2,14 +2,14 @@
   "schema_version": 1,
   "id": "SG-000020",
   "title": "DAL-P08 - Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze",
-  "state": "ACTIVE",
+  "state": "PROVEN",
   "method": "research",
   "parent_id": null,
   "dependencies": ["SG-000019"],
   "children": [],
   "labels": ["p08", "calibration", "ecal", "fhir", "authorization-candidate", "pre-final-test"],
   "outcome": "Freeze all remaining development/calibration-only P08 protocol choices and build a digest-bound final-test authorization candidate while keeping final-test access sealed.",
-  "rationale": "SG-000019 closed the paper-candidate and required-system qualification frontier. Inventory readiness is now true, but calibration execution, ECAL component selection, FHIR representation selection, and final selected protocol binding remain incomplete. These choices must be frozen without using final-test evidence before a later authorization grain may open final-test access.",
+  "rationale": "SG-000019 closed the paper-candidate and required-system qualification frontier. SG-000020 executed the frozen calibration method, froze ECAL and FHIR choices, promoted canonical evidence, and bound a non-executable final-test authorization candidate without accessing final-test rows.",
   "scope_in": [
     "Execute temperature-scaling action calibration and Platt sufficiency calibration on the frozen calibration roles only",
     "Persist calibration parameters, diagnostics, calibrated outputs, failure accounting, and canonical digests",
@@ -76,15 +76,17 @@
     "registry/p08_ecal_selection_ledger_sg000020.json",
     "registry/p08_fhir_selection_ledger_sg000020.json",
     "registry/p08_final_test_authorization_candidate_sg000020.json",
+    "registry/p08_sg000020_execution_manifest.json",
     "scripts/qualify_p08_protocol_selection.py",
     "specs/CURRENT.md",
     "specs/tasks.md",
     "src/gaxbench/p08_protocol_selection.py",
-    "tests/test_p08_protocol_selection.py"
+    "tests/test_p08_protocol_selection.py",
+    "tests/test_p08_sg000020_canonical_evidence.py"
   ],
   "risk": {
     "level": "high",
-    "recovery": "Revert SG-000020 changes and retain SG-000019 canonical system/checkpoint identities. Final-test access remains sealed."
+    "recovery": "Revert SG-000020 implementation/promotion/closeout changes and retain SG-000019 canonical system/checkpoint identities. Final-test access remains sealed."
   },
   "evidence": {
     "required": [
@@ -163,6 +165,55 @@
       "calibration_model_retraining_forbidden": true,
       "architecture_reopening_forbidden": true,
       "paid_founder_compute_forbidden": true
+    },
+    "closeout": {
+      "research_issue": 69,
+      "governance_repair_pr": 73,
+      "governance_repair_merge_sha": "522a68fc5c05712de9ce7948cbb539c21e6a8f4a",
+      "implementation_pr": 72,
+      "implementation_head_sha": "24ccb53fc8a03e553aff334e2f871f09138825f1",
+      "implementation_exact_head_ci_run": 36792322376,
+      "implementation_exact_head_alibaba_ocr_run": 36792322347,
+      "implementation_exact_head_jev_run": 36792319234,
+      "implementation_exact_head_execution_run": 36792322288,
+      "implementation_artifact_id": 11132516977,
+      "implementation_artifact_zip_sha256": "d08db2e1ab6befd0b0f7182042e08d871bb369161e58932e62abf5cdb2541326",
+      "implementation_merge_sha": "9180dd5c0fcda3ae619eeffeab3aee0fc04da291",
+      "reproducibility_repair_pr": 74,
+      "reproducibility_repair_head_sha": "9c173c204b1d9e25fd753f9d80adc4679361d6c0",
+      "reproducibility_exact_head_ci_run": 36828687034,
+      "reproducibility_exact_head_alibaba_ocr_run": 36828687159,
+      "reproducibility_exact_head_jev_run": 36828684386,
+      "reproducibility_exact_head_execution_run": 36828687181,
+      "reproducibility_artifact_id": 11146946313,
+      "reproducibility_artifact_zip_sha256": "adaa7e4a72482849cfbb258e8070b5b3258eb155777b7d1ac435199b59afb51b",
+      "reproducibility_merge_sha": "f69eb3ee5b0c0313b10cf8a628f298229b1082ca",
+      "reproducibility_post_main_ci_run": 36829717917,
+      "reproducibility_post_main_execution_run": 36829717808,
+      "promotion_pr": 75,
+      "promotion_head_sha": "043caecc7c3f50d06f40a679a5c701142e89b239",
+      "promotion_exact_head_ci_run": 36838722481,
+      "promotion_exact_head_alibaba_ocr_run": 36838722536,
+      "promotion_exact_head_jev_run": 36838722525,
+      "promotion_merge_sha": "7464393fd955e9653a59d6535f0c46a03522a384",
+      "promotion_post_main_ci_run": 36838925158,
+      "canonical_raw_calibration_logits_sha256": "6aca49fd1a94be649737bc6076a9d818b6b67718fb1dac2412766ea8e286f109",
+      "calibration_evidence_semantic_sha256": "025d92c2d704dfa3889e267be8fac17037d034b5760e635886c536d198c8c8dc",
+      "ecal_selection_semantic_sha256": "3bfb069bfdd3ee50890f97c3e4744024af14cb9c9a62211cca008eb4c5ef9bb8",
+      "fhir_selection_semantic_sha256": "79ddfd4336b5b8a8376ff9761d40ae46fe890eef9962bc6205e8622533b85b9a",
+      "selected_fhir_representation_semantic_sha256": "10665e1fec0be7ec6d2bf6e3710f54b26ded79a16dc48d032a15c8862112963b",
+      "authorization_candidate_semantic_sha256": "3f4000cb5616578332a85d00aeda18e120c2b959d59e32375696cd53486b5484",
+      "qualification": [
+        "calibration executed only on frozen calibration roles and did not retrain or reselect model/backbone/checkpoint/seed",
+        "action temperature and sufficiency Platt parameters are persisted and reproducible from canonical replay",
+        "ECAL selection froze evidence as keep and preserved the four rejected candidates without checkpoint mutation",
+        "FHIR selection froze canonical-structured with complete 7382/7382 reference resolution and zero missing references",
+        "authorization candidate binds frozen system/calibration/ECAL/FHIR/coverage/hardware/multiplicity identities while remaining non-executable",
+        "exact-head implementation, reproducibility-repair, and promotion CI/review qualification succeeded",
+        "post-main reproducibility and promotion qualification succeeded",
+        "final-test access remained sealed and final-test rows used remained zero"
+      ],
+      "next_frontier": "SG-000021 must independently qualify a digest-bound final-test authorization artifact; this closeout does not open final-test access"
     }
   }
 }
