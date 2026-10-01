@@ -57,7 +57,9 @@ class BenchmarkPlan(StrictModel):
             raise ValueError(f"final-test count drift for {self.id}")
         if self.id == "fhir-agentbench":
             if self.primary_status != "interface-blocked-preexecution":
-                raise ValueError("FHIR final evaluation must preserve the pre-execution interface block")
+                raise ValueError(
+                    "FHIR final evaluation must preserve the pre-execution interface block"
+                )
             if self.interface_block is None:
                 raise ValueError("FHIR interface block evidence is required")
         elif self.interface_block is not None:
@@ -66,13 +68,13 @@ class BenchmarkPlan(StrictModel):
 
 
 class StatisticsPlan(StrictModel):
-    ci_level: Literal[0.95] = 0.95
+    ci_level: float = Field(default=0.95, ge=0.95, le=0.95)
     bootstrap_replicates: Literal[10000] = 10000
     bootstrap_seed: Literal[1729] = 1729
     bootstrap_method: Literal["paired-percentile-mean-difference-v0.1"] = (
         "paired-percentile-mean-difference-v0.1"
     )
-    multiplicity_policy: Literal["holm-primary-family-v0.1"] = MULTIPLICITY_POLICY
+    multiplicity_policy: Literal["holm-primary-family-v0.1"] = "holm-primary-family-v0.1"
 
 
 class PreExecutionAmendment(StrictModel):
@@ -104,20 +106,22 @@ class FinalEvaluationContract(StrictModel):
     )
     canonical_activation_sha: Literal[
         "c7ea6fbc81a1dd7526a6c453d12c585db6841cb3"
-    ] = SG000022_ACTIVATION_SHA
+    ] = "c7ea6fbc81a1dd7526a6c453d12c585db6841cb3"
     authorization_artifact: Literal["registry/p08_final_test_authorization_sg000021.json"] = (
         "registry/p08_final_test_authorization_sg000021.json"
     )
     authorization_digest: Literal[
         "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de"
-    ] = AUTHORIZATION_DIGEST
+    ] = "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de"
     pre_execution_amendment: PreExecutionAmendment
     statistics: StatisticsPlan
     coverage_targets: list[float]
     calibration_method: Literal["temperature-scaling-action+platt-sufficiency-v0.1"] = (
-        CALIBRATION_METHOD
+        "temperature-scaling-action+platt-sufficiency-v0.1"
     )
-    hardware_protocol_revision: Literal["p08-hardware-stratified-v0.1"] = HARDWARE_PROTOCOL
+    hardware_protocol_revision: Literal["p08-hardware-stratified-v0.1"] = (
+        "p08-hardware-stratified-v0.1"
+    )
     required_systems: list[str]
     primary_comparison: Literal["gax-paper-candidate-vs-clinical-encoder"] = (
         "gax-paper-candidate-vs-clinical-encoder"
@@ -133,6 +137,8 @@ class FinalEvaluationContract(StrictModel):
 
     @model_validator(mode="after")
     def validate_frozen_contract(self) -> FinalEvaluationContract:
+        if self.statistics.ci_level != CI_LEVEL:
+            raise ValueError("CI-level drift")
         if self.coverage_targets != COVERAGE_TARGETS:
             raise ValueError("coverage-target drift")
         if self.required_systems != ["gax-paper-candidate", "clinical-encoder", "laya"]:
@@ -274,7 +280,10 @@ def paired_bootstrap_difference(
     samples.sort()
     alpha = (1.0 - ci_level) / 2.0
     low_index = max(0, min(replicates - 1, math.floor(alpha * replicates)))
-    high_index = max(0, min(replicates - 1, math.ceil((1.0 - alpha) * replicates) - 1))
+    high_index = max(
+        0,
+        min(replicates - 1, math.ceil((1.0 - alpha) * replicates) - 1),
+    )
     return {
         "estimate": observed,
         "ci_low": samples[low_index],
