@@ -12,6 +12,7 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000018 — DAL-P08 Native licensed abstention benchmark and pre-results protocol replacement — CLOSED_CANONICAL.**
 - **SG-000019 — DAL-P08 Paper-candidate training freeze and required-system qualification foundation — CLOSED_CANONICAL at `3ca0dd2aae85a68473849108764a45a538de1019`.**
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
+- **SG-000021 — DAL-P08 Final-test authorization qualification — PROVEN pending this closeout merge; implementation main is `1daa55d9742050f37fe56d2c84ccf4c8743ef984`.**
 
 ## SG-000020 canonical evidence
 
@@ -49,11 +50,7 @@ Reproducibility is fail-closed: live calibration inference must remain within ab
 
 Qualification evidence includes exact-head Linux/Windows Python 3.11/3.12 CI, checksum-pinned Alibaba OpenCodeReview, secure TypeSafe Jev exact-diff review, real SG-000020 execution, canonical evidence promotion, and post-main verification. No Cubic, CodeRabbit, Qodo, or similar output is qualification evidence.
 
-## Active frontier — SG-000021
-
-**P08 final-test authorization qualification**
-
-State: **ACTIVE**
+## SG-000021 canonical authorization evidence
 
 Research contract: Issue #80.
 
@@ -61,29 +58,39 @@ Canonical dependency:
 
 `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`
 
-Final-test access: **sealed**
+Authorization implementation:
 
-Final-test rows used: **0**
+- activation PR #81 merged at `f8ac88c34557902d760d49b36227010d4fdc46a9`;
+- implementation PR #82 exact head `c88bbac110169a48ae6ce2288c5228a0d2b9980f`;
+- exact-head GAXBench CI `36866528564` — SUCCESS on Linux/Windows Python 3.11/3.12;
+- exact-head Alibaba OpenCodeReview `36866528579` — SUCCESS;
+- exact-head secure TypeSafe Jev `36866521762` — SUCCESS;
+- implementation merged normally at `1daa55d9742050f37fe56d2c84ccf4c8743ef984` with expected-head guard;
+- post-main GAXBench `36866791467` — SUCCESS.
 
-SG-000021 is authorization-only. It must independently validate the complete frozen evidence chain and create a digest-bound authorization artifact for a later final-evaluation grain. It must not execute final-test inference itself.
+Canonical authorization artifact:
 
-Required frozen bindings include:
+`registry/p08_final_test_authorization_sg000021.json`
 
-- DAL paper-candidate bundle `0463662f4cff190150979f000e35562965635f818444ef6e195939457f8bb57b`;
-- clinical-encoder bundle `b7ee4e62c170b8cfa7aa1b65a7d15b2174ba858f4ffc5626021a21b2417e4388`;
-- Laya bundle `b3147eabdb6e66f1622559879581b2b7341df218e587a76e66a4f1d638de4534`;
-- paper checkpoint SHA-256 `351513742474f71e0758854f15bd02ec1b7097c23a1ca17d05c7e95482e4168b`;
-- calibration evidence semantic SHA-256 `025d92c2d704dfa3889e267be8fac17037d034b5760e635886c536d198c8c8dc`;
-- ECAL selection semantic SHA-256 `3bfb069bfdd3ee50890f97c3e4744024af14cb9c9a62211cca008eb4c5ef9bb8`;
-- selected FHIR representation semantic SHA-256 `10665e1fec0be7ec6d2bf6e3710f54b26ded79a16dc48d032a15c8862112963b`;
-- authorization-candidate semantic SHA-256 `3f4000cb5616578332a85d00aeda18e120c2b959d59e32375696cd53486b5484`;
-- coverage targets `[0.50, 0.80, 0.90]`;
-- hardware protocol `p08-hardware-stratified-v0.1`;
-- multiplicity policy `holm-primary-family-v0.1`.
+Authorization SHA-256:
 
-The grain must also re-verify immutable final-test source/split manifests, licenses, and leakage boundaries; bind failure accounting and no-post-test-tuning rules; prove a zero-founder-cost execution route; and pass exact-head Linux/Windows CI, Alibaba OpenCodeReview, and secure TypeSafe Jev.
+`626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
 
-Only a canonical SG-000021 authorization artifact may permit the next separate grain to access final-test rows. Until then, access remains sealed.
+The authorization is scoped **only** to `SG-000022`. SG-000021 itself executed no final-test inference and used exactly zero final-test rows. The authorization binds the required DAL paper candidate, clinical encoder, Laya, paper checkpoint, three authorization-critical dataset identities, frozen calibration, ECAL selection, FHIR selection, coverage targets, hardware protocol, multiplicity policy, failure accounting, and no-post-test-tuning policy.
+
+No model, checkpoint, seed, architecture, calibration, ECAL, FHIR, coverage, hardware, multiplicity, prompt/interface, comparison-family, or failure-accounting reselection is permitted after authorization. Any such change invalidates the authorization and requires a new governed experiment revision.
+
+## Next frontier — SG-000022
+
+**P08 final evaluation under canonical authorization**
+
+State: **NOT YET ACTIVATED**
+
+SG-000022 may be activated only from the canonical SG-000021 closeout. It may consume the SG-000021 authorization artifact and access only the preregistered final-test surfaces bound by that artifact.
+
+The next grain must preserve complete requested/completed/failure accounting; generate immutable raw result artifacts; retain null, negative, timeout, OOM, transport, parse, and interface failures; and prohibit all post-test tuning or reselection.
+
+No paper claim becomes supported merely because SG-000021 authorized evaluation. Claims require SG-000022 result evidence and later claim-ledger qualification.
 
 ## Core P08 invariants
 
@@ -103,6 +110,6 @@ blocked dependency != permission to hide it
 formatting equality != semantic evidence equality
 ```
 
-No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until SG-000021 is canonically qualified and a separate final-evaluation grain runs exactly under the preregistered contract.
+No paper-level claim for ECAL gains, evidence grounding, counterfactual robustness, FHIR gains, efficiency, baseline superiority, clinical safety, regulatory readiness, or SOTA performance is authorized until SG-000022 runs exactly under the canonical SG-000021 authorization and the resulting evidence is qualified.
 
 Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.
