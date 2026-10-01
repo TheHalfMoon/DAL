@@ -191,14 +191,16 @@ def build_final_test_authorization(root: str | Path) -> FinalTestAuthorizationAr
     _verify_sg000020_evidence(root_path)
     _verify_dataset_evidence(root_path)
 
-    payload: dict[str, Any] = {
-        "required_system_bundle_digests": dict(REQUIRED_SYSTEM_DIGESTS),
-        "required_datasets": [
-            {"id": dataset_id, **values} for dataset_id, values in REQUIRED_DATASETS.items()
-        ],
-        "authorization_digest": "0" * 64,
-    }
-    provisional = FinalTestAuthorizationArtifact.model_construct(**payload)
+    normalized_datasets = [
+        DatasetAuthorizationBinding(id=dataset_id, **values)
+        for dataset_id, values in REQUIRED_DATASETS.items()
+    ]
+    provisional = FinalTestAuthorizationArtifact.model_construct(
+        required_system_bundle_digests=dict(REQUIRED_SYSTEM_DIGESTS),
+        required_datasets=normalized_datasets,
+        authorization_digest="0" * 64,
+    )
+    payload = provisional.model_dump(mode="json")
     payload["authorization_digest"] = authorization_digest(provisional)
     return FinalTestAuthorizationArtifact.model_validate(payload)
 
