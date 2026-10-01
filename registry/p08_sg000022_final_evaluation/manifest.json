@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1",
+  "grain_id": "SG-000022",
+  "canonical_execution_main": "f1955d5beeb2444f1d604626629036196a1dedd5",
+  "source_workflow_run_id": 36886952302,
+  "source_artifact_id": 11176566473,
+  "source_artifact_zip_sha256": "8dcd894be6ae184aaf5311417d268a5500b89d0d78d14ee7a79305fbb3071136",
+  "source_post_merge_gaxbench_run_id": 36886952212,
+  "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+  "canonical_evidence_root": "registry/p08_sg000022_final_evaluation",
+  "artifacts": {
+    "metrics.json": {"byte_sha256": "da2e41e7ecda10c2f7dad60b28ad386e160f028b58f76414d7645512633161db", "bytes": 4753},
+    "summary.json": {"byte_sha256": "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426", "bytes": 568},
+    "raw-fhir-interface-block.json": {"byte_sha256": "b8cb7b96241568f7089291614c2157a2656141be16297b0b81791c6cd71893eb", "bytes": 690},
+    "raw-laya-pubmedqa-predictions.json": {"byte_sha256": "009831a7a404f8cfc44ea83b13d0ecf8d6e9fb4bdd6c511c2835ec2595a69102", "bytes": 96314},
+    "raw-native-abstention-predictions.json": {"byte_sha256": "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da", "bytes": 288145},
+    "raw-pubmedqa-predictions.json": {"byte_sha256": "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9", "bytes": 296315}
+  },
+  "final_test_inference_executed": true,
+  "raw_artifacts_persisted_before_metrics": true,
+  "zero_founder_cost": true,
+  "post_test_tuning_permitted": false,
+  "results": {
+    "pubmedqa": {"requested": 500, "paper_accuracy": 0.552, "clinical_control_accuracy": 0.552, "laya_accuracy": 0.53, "paper_minus_control_accuracy": 0.0, "paper_minus_control_accuracy_ci95": [0.0, 0.0]},
+    "native_abstention": {"requested": 1000, "paper_risk_at_80": 0.655, "clinical_control_risk_at_80": 0.6675, "paper_minus_control_risk_at_80": -0.012499999999999956, "paper_minus_control_risk_at_80_ci95": [-0.020000000000000018, -0.004999999999999893]},
+    "fhir_agentbench": {"requested": 173, "status": "interface-blocked-preexecution", "completed_per_required_system": 0, "interface_failures_per_required_system": 173}
+  },
+  "multiplicity": {"policy": "holm-primary-family-v0.1", "status": "no-p-values-emitted"},
+  "claims": {"superiority": "not-claimed", "clinical_safety": "not-claimed", "sota": "not-claimed"},
+  "laya_runtime_warning": {
+    "observed": true,
+    "kind": "uncalibrated-confidence-warning",
+    "summary": "Pinned Laya checkpoint reported invalid/out-of-range temperatures; affected confidence entries are uncalibrated.",
+    "paper_use_boundary": "Do not present affected Laya confidence/calibration outputs as calibrated evidence."
+  }
+}
