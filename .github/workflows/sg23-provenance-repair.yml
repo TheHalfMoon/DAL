@@ -1,0 +1,231 @@
+name: SG-000023 Provenance Repair
+
+on:
+  push:
+    branches:
+      - feat/sg000023-paper-evidence
+    paths:
+      - .github/workflows/sg23-provenance-repair.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.repository == 'TheHalfMoon/DAL' && github.ref == 'refs/heads/feat/sg000023-paper-evidence'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: feat/sg000023-paper-evidence
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Apply bounded provenance repairs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          builder = Path('tools/build_sg000023_paper_evidence.py')
+          text = builder.read_text(encoding='utf-8')
+
+          text = text.replace(
+              'def _evidence_packets() -> dict[str, Any]:\n',
+              'def _evidence_packets(matrix: dict[str, Any]) -> dict[str, Any]:\n',
+          )
+
+          old_cal = '''            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(CALIBRATION_PATH),
+            ],'''
+          new_cal = '''            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(CALIBRATION_PATH),
+                _rel(CONTRACT_PATH),
+            ],'''
+          if old_cal not in text:
+              raise SystemExit('CAL packet source block not found')
+          text = text.replace(old_cal, new_cal, 1)
+
+          old_fig = '''            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(FINAL_ROOT / "raw-native-abstention-predictions.json"),
+                _rel(CONTRACT_PATH),
+            ],'''
+          new_fig = '''            "canonical_sources": [
+                _rel(FINAL_ROOT / "raw-pubmedqa-predictions.json"),
+                _rel(FINAL_ROOT / "raw-native-abstention-predictions.json"),
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(CALIBRATION_PATH),
+                _rel(CONTRACT_PATH),
+            ],'''
+          if old_fig not in text:
+              raise SystemExit('FIGURES packet source block not found')
+          text = text.replace(old_fig, new_fig, 1)
+
+          old_return = '''    ]
+    return {"schema_version": "0.1", "grain_id": "SG-000023", "packets": packets}
+
+
+def _claim_ledger'''
+          new_return = '''    ]
+
+    packets.extend(
+        [
+            {
+                "packet_id": "EP-SG23-PACKETS-INDEX",
+                "status": "supported",
+                "canonical_sources": [_rel(MATRIX_PATH), _rel(CONTRACT_PATH)],
+                "derived_artifacts": [],
+                "scope": "index packet binding the declared SG-000023 evidence-packet namespace",
+            },
+            {
+                "packet_id": "EP-SG23-CLAIMS-INDEX",
+                "status": "supported",
+                "canonical_sources": [
+                    _rel(MATRIX_PATH),
+                    _rel(FINAL_ROOT / "manifest.json"),
+                    _rel(FINAL_ROOT / "metrics.json"),
+                ],
+                "derived_artifacts": ["claim_ledger.json"],
+                "scope": "claim-ledger index with supported and non-exportable dispositions",
+            },
+        ]
+    )
+
+    declared: dict[str, str] = {}
+    for row in matrix["rows"]:
+        for packet_id in row.get("evidence_packet_ids", []):
+            declared[packet_id] = row["id"]
+    present = {packet["packet_id"] for packet in packets}
+    for packet_id in sorted(set(declared) - present):
+        packets.append(
+            {
+                "packet_id": packet_id,
+                "status": "declared-future-stage",
+                "canonical_sources": [_rel(MATRIX_PATH)],
+                "derived_artifacts": [],
+                "scope": (
+                    f"declared by availability-matrix row {declared[packet_id]}; "
+                    "materialization belongs to a later SG-000023 stage"
+                ),
+            }
+        )
+
+    return {"schema_version": "0.1", "grain_id": "SG-000023", "packets": packets}
+
+
+def _claim_ledger'''
+          if old_return not in text:
+              raise SystemExit('evidence packet return block not found')
+          text = text.replace(old_return, new_return, 1)
+
+          old_c003 = '''            "evidence_packet_id": "EP-SG23-ACTION-001",
+            "canonical_source_paths": [
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(CALIBRATION_PATH),
+            ],'''
+          new_c003 = '''            "evidence_packet_id": "EP-SG23-CAL-001",
+            "canonical_source_paths": [
+                _rel(FINAL_ROOT / "metrics.json"),
+                _rel(CALIBRATION_PATH),
+            ],'''
+          if old_c003 not in text:
+              raise SystemExit('C003 binding block not found')
+          text = text.replace(old_c003, new_c003, 1)
+
+          old_artifacts = '''        "evidence_packets.json": _evidence_packets(),'''
+          new_artifacts = '''        "evidence_packets.json": _evidence_packets(matrix),'''
+          if old_artifacts not in text:
+              raise SystemExit('evidence packet builder call not found')
+          text = text.replace(old_artifacts, new_artifacts, 1)
+
+          old_selective = '''    comparison = next(
+        row
+        for row in metrics["primary_comparisons"]
+        if row["benchmark"] == "gax-native-abstention-pqal" and row["metric"] == "risk_at_80"
+    )
+    return {'''
+          new_selective = '''    canonical_comparison = next(
+        row
+        for row in metrics["primary_comparisons"]
+        if row["benchmark"] == "gax-native-abstention-pqal" and row["metric"] == "risk_at_80"
+    )
+    comparison = json.loads(json.dumps(canonical_comparison))
+    for key in ("estimate", "ci_low", "ci_high"):
+        comparison["paired_bootstrap"][key] = round(
+            float(comparison["paired_bootstrap"][key]), 4
+        )
+    return {'''
+          if old_selective not in text:
+              raise SystemExit('selective comparison block not found')
+          text = text.replace(old_selective, new_selective, 1)
+          text = text.replace(
+              '''        "primary_comparison": comparison,
+        "mandatory_warning": (''',
+              '''        "primary_comparison": comparison,
+        "canonical_primary_comparison": canonical_comparison,
+        "mandatory_warning": (''',
+              1,
+          )
+
+          builder.write_text(text, encoding='utf-8', newline='\n')
+
+          tests = Path('tests/test_p08_sg000023_paper_evidence.py')
+          t = tests.read_text(encoding='utf-8')
+          marker = '''EVIDENCE = ROOT / "registry" / "p08_sg000023_paper_evidence"\n'''
+          catalog = '''EVIDENCE = ROOT / "registry" / "p08_sg000023_paper_evidence"\nARTIFACT_NAMES = {\n    "claim_ledger.json",\n    "evidence_boundaries.json",\n    "evidence_packets.json",\n    "fhir_block_table.json",\n    "main_results.json",\n    "provenance_index.json",\n    "qualitative_examples.json",\n    "reliability_source_data.json",\n    "risk_coverage_source_data.json",\n    "selective_results.json",\n}\n'''
+          if marker not in t:
+              raise SystemExit('test evidence marker not found')
+          t = t.replace(marker, catalog, 1)
+          t = t.replace('    assert "10 artifacts" in result.stdout\n', '    assert f"{len(ARTIFACT_NAMES)} artifacts" in result.stdout\n')
+          old_catalog = '''    assert {path.name for path in EVIDENCE.glob("*.json")} == {
+        "claim_ledger.json",
+        "evidence_boundaries.json",
+        "evidence_packets.json",
+        "fhir_block_table.json",
+        "main_results.json",
+        "provenance_index.json",
+        "qualitative_examples.json",
+        "reliability_source_data.json",
+        "risk_coverage_source_data.json",
+        "selective_results.json",
+    }
+'''
+          if old_catalog not in t:
+              raise SystemExit('hardcoded artifact catalog block not found')
+          t = t.replace(old_catalog, '    assert {path.name for path in EVIDENCE.glob("*.json")} == ARTIFACT_NAMES\n', 1)
+          t = t.replace(
+              '    assert len(provenance["artifact_sha256"]) == 9\n',
+              '    # The provenance index cannot include its own digest without self-reference.\n'
+              '    assert len(provenance["artifact_sha256"]) == len(ARTIFACT_NAMES) - 1\n',
+              1,
+          )
+          t += '''\n\ndef test_packet_registry_covers_every_declared_matrix_packet() -> None:\n    matrix = json.loads(\n        (ROOT / "registry" / "p08_sg000023_evidence_availability_matrix.json").read_text(\n            encoding="utf-8"\n        )\n    )\n    declared = {\n        packet_id\n        for row in matrix["rows"]\n        for packet_id in row.get("evidence_packet_ids", [])\n    }\n    packets = _load("evidence_packets.json")["packets"]\n    by_id = {row["packet_id"]: row for row in packets}\n    assert declared <= set(by_id)\n    assert by_id["EP-SG23-PACKETS-INDEX"]["status"] == "supported"\n    assert by_id["EP-SG23-CLAIMS-INDEX"]["status"] == "supported"\n\n\ndef test_laya_calibration_claim_uses_calibration_packet() -> None:\n    ledger = _load("claim_ledger.json")\n    claim = next(row for row in ledger["claims"] if row["claim_id"] == "SG23-C003")\n    assert claim["evidence_packet_id"] == "EP-SG23-CAL-001"\n    packets = {\n        row["packet_id"]: row for row in _load("evidence_packets.json")["packets"]\n    }\n    cal_sources = set(packets["EP-SG23-CAL-001"]["canonical_sources"])\n    assert set(claim["canonical_source_paths"]) <= cal_sources\n    assert "registry/p08_sg000022_final_evaluation/metrics.json" in cal_sources\n\n\ndef test_selective_table_keeps_raw_comparison_and_clean_display_values() -> None:\n    table = _load("selective_results.json")\n    display = table["primary_comparison"]["paired_bootstrap"]\n    canonical = table["canonical_primary_comparison"]["paired_bootstrap"]\n    assert display["estimate"] == -0.0125\n    assert display["ci_low"] == -0.02\n    assert display["ci_high"] == -0.005\n    assert canonical["estimate"] != display["estimate"]\n'''
+          tests.write_text(t, encoding='utf-8', newline='\n')
+          PY
+
+      - name: Install pinned Ruff
+        run: python -m pip install 'ruff==0.16.10'
+
+      - name: Regenerate and validate
+        run: |
+          python -m ruff format tools/build_sg000023_paper_evidence.py tests/test_p08_sg000023_paper_evidence.py
+          python -m ruff check tools/build_sg000023_paper_evidence.py tests/test_p08_sg000023_paper_evidence.py
+          python tools/build_sg000023_paper_evidence.py
+          python tools/build_sg000023_paper_evidence.py --check
+          python -m pytest -q tests/test_p08_sg000023_paper_evidence.py
+          git diff --check
+
+      - name: Commit repaired provenance package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add tools/build_sg000023_paper_evidence.py tests/test_p08_sg000023_paper_evidence.py registry/p08_sg000023_paper_evidence
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'DAL-P08: repair SG-000023 evidence packet provenance'
+          git push origin HEAD:feat/sg000023-paper-evidence
