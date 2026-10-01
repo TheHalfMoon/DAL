@@ -132,27 +132,36 @@ Final-test access remained **sealed** throughout SG-000020.
 - [x] Freeze ECAL component selection
 - [x] Freeze FHIR representation selection
 - [x] Bind final selected system/protocol/checkpoint digests into an authorization candidate
-- [ ] Qualify and merge a separate digest-bound final-test opening artifact under SG-000021
+- [x] Qualify and merge a separate digest-bound final-test opening artifact under SG-000021
 
-Final-test access remains **sealed** until the last item above is satisfied.
-
-### SG-000021 — Final-test authorization qualification (ACTIVE)
+### SG-000021 — Final-test authorization qualification (PROVEN by closeout state transition)
 
 Research contract: Issue #80. Canonical dependency: `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.
 
 - [x] Activate a separate research contract and SpecGrain for final-test authorization
-- [ ] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
-- [ ] Re-verify required-system bundle and paper-checkpoint identities
-- [ ] Re-verify immutable final-test split/source manifests and leakage boundaries
-- [ ] Bind frozen coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
-- [ ] Create a machine-readable authorization artifact that fails closed on any mismatch
-- [ ] Qualify exact-head Linux/Windows CI, Alibaba OpenCodeReview, and secure TypeSafe Jev
-- [ ] Merge authorization with normal expected-head guard
-- [ ] Verify post-main authorization state before any final-test inference
+- [x] Bind SG-000020 canonical closeout and all promoted semantic/byte digests
+- [x] Re-verify required-system bundle and paper-checkpoint identities
+- [x] Re-verify immutable final-test split/source manifests and leakage boundaries
+- [x] Bind frozen coverage, hardware, multiplicity, failure-accounting, and no-post-test-tuning policies
+- [x] Create machine-readable authorization artifact `626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de`
+- [x] Qualify exact head `c88bbac110169a48ae6ce2288c5228a0d2b9980f` with GAXBench `36866528564`, Alibaba OpenCodeReview `36866528579`, and secure TypeSafe Jev `36866521762`
+- [x] Merge authorization normally with expected-head guard at `1daa55d9742050f37fe56d2c84ccf4c8743ef984`
+- [x] Verify post-main authorization state with GAXBench `36866791467` SUCCESS
+- [x] Preserve `final_test_inference_executed=false` and `final_test_rows_used=0`
+- [x] Prepare separate canonical closeout state transition
 
-SG-000021 is authorization-only. No final-test inference is permitted inside the grain. A separate final-evaluation grain is required after canonical authorization.
+SG-000021 is authorization-only. It executed no final-test inference. The canonical authorization artifact is scoped only to SG-000022.
 
-### Primary paper evaluation — after separate final-test authorization only
+### SG-000022 — Primary final evaluation (NOT YET ACTIVATED)
+
+Activation prerequisites:
+
+- [ ] Merge SG-000021 canonical closeout
+- [ ] Create a separate SG-000022 research contract and SpecGrain bound to the SG-000021 authorization digest
+- [ ] Freeze the exact executable final-evaluation plan without changing any authorized model/protocol/policy identity
+- [ ] Prove final-test access occurs only through the canonical authorization artifact
+
+Primary evaluation tasks after SG-000022 activation:
 
 - [ ] Main action-selection tables
 - [ ] NLL, Brier, ECE, and reliability analysis
