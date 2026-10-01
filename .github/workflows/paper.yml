@@ -29,6 +29,7 @@ jobs:
           set -euo pipefail
           python3 tools/build_sg000023_paper_evidence.py --check
           python3 tools/build_sg000024_manuscript_inputs.py --check
+          python3 tools/build_sg000024_release_docs.py --check
 
       - name: Install signature-verified TeX Live packages
         shell: bash
@@ -57,8 +58,28 @@ jobs:
           fi
           sha256sum main.pdf
 
+      - name: Assemble deterministic arXiv source bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf arxiv-src && mkdir -p arxiv-src/generated
+          cp paper/main.tex paper/main.bbl arxiv-src/
+          cp paper/generated/*.tex arxiv-src/generated/
+          (cd arxiv-src && find . -type f | LC_ALL=C sort > ../arxiv-files.txt)
+          tar -C arxiv-src --sort=name --mtime='2026-01-01 00:00:00Z' --owner=0 --group=0 --numeric-owner \
+            -cf dal-arxiv-source.tar -T arxiv-files.txt
+          gzip -n -9 dal-arxiv-source.tar
+          cat arxiv-files.txt
+          sha256sum dal-arxiv-source.tar.gz
+
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dal-manuscript-pdf
           path: paper/main.pdf
           retention-days: 30
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dal-arxiv-source
+          path: dal-arxiv-source.tar.gz
+          retention-days: 90
