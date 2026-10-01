@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -54,6 +56,27 @@ def test_authorization_chain_preflight_is_valid_without_test_access() -> None:
     contract = validate_final_evaluation_preflight(ROOT)
     assert contract.grain_id == "SG-000022"
     assert contract.execution_policy.no_post_test_tuning is True
+
+
+def test_authorization_chain_preflight_fails_closed_on_system_bundle_drift(
+    tmp_path: Path,
+) -> None:
+    shutil.copytree(ROOT / "registry", tmp_path / "registry")
+    bundle_path = (
+        tmp_path
+        / "registry"
+        / "p08_gax_paper_candidate_qualification_bundle_sg000019.json"
+    )
+    payload = json.loads(bundle_path.read_text(encoding="utf-8"))
+    payload["checkpoints"][0]["checkpoint_sha256"] = "0" * 64
+    bundle_path.write_text(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    with pytest.raises(ValueError):
+        validate_final_evaluation_preflight(tmp_path)
 
 
 def test_softmax_is_temperature_scaled_and_normalized() -> None:
