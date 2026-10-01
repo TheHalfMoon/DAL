@@ -298,7 +298,7 @@ Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca16
 - [ ] Paper manuscript (DAL identity, all required sections)
 - [ ] Appendix (protocol, evidence packets, claim ledger, limitations)
 - [ ] Verified bibliography
-- [ ] Clean-room CI manuscript compilation with checksum-pinned zero-cost TeX engine
+- [ ] Clean-room CI manuscript compilation with supply-chain-verified (checksum-pinned or package-signature-verified) zero-cost TeX toolchain
 - [ ] Reproducibility bundle and checklist
 - [ ] arXiv source-bundle manifest (no submission)
 - [ ] README alignment, `CITATION.cff`, tool/model and Hugging Face card drafts, release-notes draft, licensing statement
