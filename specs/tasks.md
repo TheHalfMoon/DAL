@@ -276,42 +276,29 @@ Package: `registry/p08_sg000023_paper_evidence/`, built and checked by `tools/bu
 
 P08 closes with blocked/unavailable rows kept explicit: ECAL ablation benefit, evidence interventions, counterfactual robustness, distribution shift, direct efficiency, and FHIR action-selection performance. Closing P08 does not complete those analyses; it records that the frozen evidence cannot support them.
 
-## P09 — arXiv and release
+## P09 — Study 0 (pilot) paper and release package
 
-### SG-000024 — Manuscript, reproducibility bundle, and release-candidate packaging (ACTIVE — GOVERNANCE ONLY)
+On 2026-10-02 the founder authorized a scientific restart. The P08 evaluation (SG-000018 to SG-000023) and its SG-000024 package are preserved unchanged as **DAL Pilot Study / Study 0**. They are immutable historical evidence and no longer constrain the architecture of the definitive DAL study (Study 1). The SG-000022 PubMedQA final test has been inspected and can never serve as a blind final evaluation for Study 1.
 
-Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca163e0f7db56e35da`. Dependency post-main GAXBench: `36923984783` SUCCESS. Frozen claim-set SHA-256: `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
+### SG-000024 — Study 0 manuscript, reproducibility bundle, and release-candidate packaging (CLOSED_CANONICAL)
 
-#### Activation
+Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca163e0f7db56e35da`. Frozen claim-set SHA-256: `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
 
-- [x] Create SG-000024 research contract Issue #101
-- [x] Bind SG-000023/P08 closeout and the frozen claim-set digest
-- [x] Forbid new inference, claim-set mutation, and manual result transcription
-- [x] Record arXiv, Hugging Face, release tag, and model-weight redistribution as founder boundaries
-- [ ] Qualify activation exact head (GAXBench, Alibaba OpenCodeReview, secure Jev)
-- [ ] Merge activation normally with expected-head guard
-- [ ] Verify post-main activation before implementation
+- [x] Activation PR #102 exact head `307aff9ac865e8ee4dea0f870f668c02b9eb866b` (GAXBench `36924631199`, OCR `36924631206`, Jev `36924628705`); merged `51a39994834d0a0d56cfb35079d5737d4bf88b33`; post-main `36924929802`
+- [x] Manuscript-input generator and verified bibliography: PR #103 exact head `584973f0fa6b23b18e5006971b5afbc73288668a` (GAXBench `36925726225`, OCR `36925725824`, Jev `36925725052`); merged `f3a917c27ff647c4f3468186ef8c1633acbfbded`; post-main `36925949948`
+- [x] Manuscript, appendix, lint tests, and clean-room compile workflow: PR #104 exact head `82f6b4b33d64cc4aa289ce36c56bd3e0a14320c6` (GAXBench `36927926410`, OCR `36927926437`, Jev `36927924247`, Manuscript `36927926425`); merged `29d1d17176a4e7a4c17c644682adca43f6e94090`; post-main GAXBench `36928142149`, Manuscript `36928142095`
+- [x] Release-candidate documents and deterministic arXiv bundle (SHA-256 `94c91de9912f188df6b6e56782b8f9f99c43c59b66eb8a72c29d607787c029a3`, reproduced in three runs, compiles standalone without BibTeX): PR #105 exact head `c6af7122393bc15da0efe42082f62c4b0c8e61a5` (GAXBench `36928966622`, OCR `36928966639`, Jev `36928963962`, Manuscript `36928966643`); merged `cf9212eca4c37be3c9b8af65db703f7b40341c9b`; post-main GAXBench `36931619661`, Manuscript `36931619705`
+- [x] Canonical SG-000024 closeout and Study 0 designation (this closeout)
 
-#### Implementation
+### Study 0 items intentionally not pursued
 
-- [ ] Deterministic manuscript-input generator with `--check` (numbers, tables, claim macros, figure coordinates)
-- [ ] Paper manuscript (DAL identity, all required sections)
-- [ ] Appendix (protocol, evidence packets, claim ledger, limitations)
-- [ ] Verified bibliography
-- [ ] Clean-room CI manuscript compilation with supply-chain-verified (checksum-pinned or package-signature-verified) zero-cost TeX toolchain
-- [ ] Reproducibility bundle and checklist
-- [ ] arXiv source-bundle manifest (no submission)
-- [ ] README alignment, `CITATION.cff`, tool/model and Hugging Face card drafts, release-notes draft, licensing statement
-- [ ] Canonical SG-000024 closeout
+- Study 0 is not developed further as the definitive paper. Whether to post it on arXiv as a pilot report is a founder decision; the packaged bundle stays available.
+- Model release, fine-tuning notebooks, Hugging Face release, and release tag for Study 0 are not pursued.
+- The governed DAL naming migration / GAXBench compatibility release moves to the Study 1 program.
 
-### Remaining P09 items outside SG-000024
+## Study 1 — Definitive DAL study (not yet activated)
 
-- [ ] Governed DAL naming migration / GAXBench compatibility release
-- [ ] Model release — blocked pending founder license/redistribution decision
-- [ ] Fine-tuning notebooks — deferred; require execution evidence
-- [ ] Hugging Face release — founder-account boundary
-- [ ] arXiv submission — founder-account boundary
-- [ ] Public release tag — founder decision
+Study 1 needs its own research contract and SpecGrain activation. Its first stage is research redesign only: literature refresh, a non-destructive pilot forensic diagnosis, benchmark and licensing review, and a preregistered protocol with an untouched final-evaluation boundary. No training or final evaluation may start before the protocol is frozen.
 
 ## P10 — Peer review / external validation
 

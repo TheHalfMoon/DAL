@@ -8,7 +8,7 @@ DAL (historical identifier: GAX) studies one design question: if a compact, non-
 
 Historical `GAX` / `GAXBench` identifiers remain where they name frozen artifacts, schemas, workflows, or evidence chains.
 
-## Frozen results
+## Frozen results (Study 0 pilot)
 
 The P08 final evaluation ran once under a protocol frozen before final-test access. Results were not used to change any model, threshold, calibration, benchmark, or statistic.
 
@@ -40,8 +40,8 @@ Frozen P08 results. Each statement is copied verbatim from the frozen claim ledg
 
 ## Status
 
-- **P00–P08:** canonically closed. P08 closed at the SG-000023 closeout with blocked and unavailable analyses kept explicit.
-- **P09 (SG-000024, active):** manuscript, reproducibility bundle, and release-candidate packaging. arXiv submission, Hugging Face publication, release tagging, and model-weight redistribution are founder decisions and have **not** happened.
+- **DAL Pilot Study / Study 0 (closed):** the P08 frozen evaluation and its SG-000024 manuscript and release package. The results above are Study 0 results. They stay immutable but no longer constrain the definitive study. Nothing has been submitted or published.
+- **Study 1 (definitive study, not yet activated):** begins with a literature refresh, pilot diagnosis, and a preregistered protocol with an untouched final-evaluation boundary. The Study 0 PubMedQA test has been inspected and will not be reused as a blind final test.
 - **P10:** independent reproduction and peer review, not started.
 
 See [specs/CURRENT.md](specs/CURRENT.md) and [specs/tasks.md](specs/tasks.md).

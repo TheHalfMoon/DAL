@@ -14,7 +14,8 @@ Historical `GAX` / `GAXBench` identifiers remain immutable compatibility and pro
 - **SG-000020 — DAL-P08 Calibration, ECAL, FHIR selection, and final-test authorization candidate freeze — CLOSED_CANONICAL at `ebe981db8b2554a2b52037b8d3cdfc48ef42ba78`.**
 - **SG-000021 — DAL-P08 Final-test authorization qualification — CLOSED_CANONICAL at `ef36ae4d050cf2e1bb7ada07f4054b083e886045`; post-closeout GAXBench `36868102682` SUCCESS.**
 - **SG-000022 — DAL-P08 Authorized primary final evaluation — CLOSED_CANONICAL at `421ad093e1b89df69e10c763ec2474853c09d0e3`; post-closeout GAXBench `36903592739` SUCCESS.**
-- **SG-000023 — DAL-P08 Immutable post-final analysis, claim freeze, and paper evidence packaging — CLOSED_CANONICAL (this closeout); P08 CLOSED_CANONICAL.**
+- **SG-000023 — DAL-P08 Immutable post-final analysis, claim freeze, and paper evidence packaging — CLOSED_CANONICAL at `f8e075c7620d32614ad0d6ca163e0f7db56e35da`; P08 CLOSED_CANONICAL.**
+- **SG-000024 — DAL-P09 Study 0 manuscript and release-candidate packaging — CLOSED_CANONICAL; P08 and SG-000024 together form DAL Pilot Study / Study 0.**
 
 ## SG-000020 canonical evidence
 
@@ -180,21 +181,19 @@ Findings frozen by SG-000023 beyond the SG-000022 headline results:
 
 P08 is **CLOSED_CANONICAL** at the SG-000023 closeout. The P08 exit gate — all paper figures and tables generated from evidence packets — is met by `EP-SG23-TABLES-001` and `EP-SG23-FIGURES-001`. Closeout does not convert blocked or unavailable analyses into results; those rows stay explicit in `evidence_boundaries.json` and the claim ledger.
 
-## Active frontier — SG-000024
+## DAL Pilot Study / Study 0 — closed
 
-**P09 manuscript, reproducibility bundle, and release-candidate packaging**
+On 2026-10-02 the founder authorized a scientific restart. The complete P08 evaluation (SG-000018 to SG-000023) and the SG-000024 manuscript and release package are preserved, unchanged, as **DAL Pilot Study / Study 0**.
 
-Research contract: Issue #101.
+- SG-000024 is **CLOSED_CANONICAL**. Its chain is PRs #102 to #105, each qualified on its exact head with GAXBench, Alibaba OpenCodeReview, and secure Jev and verified post-main. The final merge is `cf9212eca4c37be3c9b8af65db703f7b40341c9b`.
+- The deterministic arXiv source bundle (SHA-256 `94c91de9912f188df6b6e56782b8f9f99c43c59b66eb8a72c29d607787c029a3`) compiles standalone. Nothing was submitted or published.
+- Study 0 results, including the PubMedQA 0.552 tie, the identical action probabilities, the descriptive risk@80 difference, the unsafe-commit failure, the Laya calibration limitation, and the FHIR block, remain immutable historical evidence under the frozen claim set `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
+- Study 0 no longer constrains the architecture of the definitive study.
+- **The SG-000022 PubMedQA PQA-L final test has been inspected. It may be used only as pilot evidence and never as a blind final evaluation for any later study.**
 
-Canonical dependency: `f8e075c7620d32614ad0d6ca163e0f7db56e35da` (SG-000023/P08 closeout; post-main GAXBench `36923984783` SUCCESS).
+## Next frontier — Study 1 (not activated)
 
-State: **ACTIVE — governance activation only**
-
-Frozen inputs: `registry/p08_sg000023_paper_evidence/` and claim-set SHA-256 `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
-
-Activation writes no manuscript and publishes nothing. Implementation PRs follow only after activation is canonically merged and post-main verified. Every manuscript number, table, and figure coordinate must be generated from the frozen package with a `--check` mode. Every manuscript, README, card, and release claim must reuse frozen claim wording. Changing a frozen claim or result requires a new governed grain.
-
-External boundaries (prepared but not crossed): arXiv submission, Hugging Face publication, release tag/GitHub release, and model-weight redistribution. Fine-tuning notebooks are deferred; independent third-party reproduction belongs to P10.
+The definitive DAL study needs its own research contract and SpecGrain. Its first stage is research redesign only: a current literature refresh, a non-destructive pilot forensic diagnosis, benchmark and licensing review, and a preregistered protocol with an untouched final-evaluation boundary. Training and final evaluation cannot start before the protocol is frozen.
 
 ## Core P08 invariants
 
