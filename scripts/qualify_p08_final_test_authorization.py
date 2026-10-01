@@ -12,7 +12,10 @@ from gaxbench.p08_final_test_authorization import (
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Qualify the SG-000021 final-test authorization artifact without running final-test inference."
+        description=(
+            "Qualify the SG-000021 final-test authorization artifact without running "
+            "final-test inference."
+        )
     )
     parser.add_argument("--root", type=Path, default=Path("."))
     parser.add_argument(
