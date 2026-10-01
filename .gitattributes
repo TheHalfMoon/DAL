@@ -2,3 +2,5 @@ registry/p08_*sg000020*.json text eol=lf
 registry/p08_sg000022_final_evaluation/*.json text eol=lf
 registry/p08_*sg000023*.json text eol=lf
 experiments/p04/decision_ledger.json text eol=lf
+registry/p09_*sg000024*.json text eol=lf
+paper/generated/* text eol=lf
