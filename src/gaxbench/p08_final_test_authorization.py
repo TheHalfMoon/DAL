@@ -280,12 +280,17 @@ def _verify_sg000020_evidence(root: Path) -> None:
         raise ValueError("calibration semantic digest drift")
     if canonical_json_sha256(ecal.model_dump(mode="json")) != ECAL_SEMANTIC_SHA256:
         raise ValueError("ECAL semantic digest drift")
-    if canonical_json_sha256(fhir.model_dump(mode="json")) != FHIR_SEMANTIC_SHA256:
+    fhir_digest = canonical_json_sha256(fhir.model_dump(mode="json"))
+    if fhir_digest != FHIR_SEMANTIC_SHA256:
         raise ValueError("FHIR semantic digest drift")
-    selected = next(
-        row for row in fhir.representations if row.representation == fhir.selected_representation
+    selected_fhir_digest = canonical_json_sha256(
+        {
+            "representation": fhir.selected_representation,
+            "fhir_representation_revision": "gax-fhir-v0.1",
+            "selection_evidence_sha256": fhir_digest,
+        }
     )
-    if canonical_json_sha256(selected.model_dump(mode="json")) != FHIR_SELECTED_SEMANTIC_SHA256:
+    if selected_fhir_digest != FHIR_SELECTED_SEMANTIC_SHA256:
         raise ValueError("selected FHIR representation semantic digest drift")
     candidate_digest = canonical_json_sha256(candidate.model_dump(mode="json"))
     if candidate_digest != AUTHORIZATION_CANDIDATE_SEMANTIC_SHA256:
