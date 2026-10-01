@@ -1,0 +1,55 @@
+name: SG-000023 Paper Evidence Generation
+
+on:
+  push:
+    branches:
+      - feat/sg000023-paper-evidence
+    paths:
+      - tools/build_sg000023_paper_evidence.py
+      - .github/workflows/sg23-paper-evidence-generate.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sg23-paper-evidence-generation
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.repository == 'TheHalfMoon/DAL' && github.ref == 'refs/heads/feat/sg000023-paper-evidence'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: feat/sg000023-paper-evidence
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Build deterministic SG-000023 paper evidence
+        run: python tools/build_sg000023_paper_evidence.py
+
+      - name: Verify generated tree
+        run: |
+          python tools/build_sg000023_paper_evidence.py --check
+          git diff --check
+
+      - name: Commit generated evidence when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add registry/p08_sg000023_paper_evidence
+          if git diff --cached --quiet; then
+            echo "Generated evidence already matches the deterministic builder."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "DAL-P08: generate SG-000023 paper evidence [generated]"
+          git push origin HEAD:feat/sg000023-paper-evidence
