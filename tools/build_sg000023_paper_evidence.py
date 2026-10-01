@@ -186,7 +186,7 @@ def _reliability_for_system(
     ece = 0.0
     for index, members in enumerate(bins):
         if members:
-            mean_confidence = sum(item[0] for item in members) / len(members)
+            mean_confidence = math.fsum(item[0] for item in members) / len(members)
             accuracy = sum(1 for item in members if item[1]) / len(members)
             ece += (len(members) / total) * abs(accuracy - mean_confidence)
         else:
@@ -252,7 +252,7 @@ def _risk_curve_for_system(
         risk = 1.0 - (cumulative_correct / index)
         points.append({"prefix_length": index, "coverage": index / len(ranked), "risk": risk})
 
-    computed_aurc = sum(point["risk"] for point in points) / len(points)
+    computed_aurc = math.fsum(point["risk"] for point in points) / len(points)
     checks = {
         "risk_at_50": points[499]["risk"],
         "risk_at_80": points[799]["risk"],
