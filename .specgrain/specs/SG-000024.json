@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "id": "SG-000024",
+  "title": "DAL-P09 - Manuscript, reproducibility bundle, and release-candidate packaging",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000023"],
+  "children": [],
+  "labels": ["p09", "paper", "reproducibility", "release-candidate"],
+  "outcome": "Produce a submission-quality DAL manuscript and a reproducible release-candidate package in which every number, table, figure, and claim is generated from the canonically frozen SG-000023 evidence package and claim freeze, and prepare arXiv and Hugging Face material up to, but not across, founder-account boundaries.",
+  "rationale": "SG-000023 closed P08 with a deterministic paper-evidence package, a dated related-work refresh, and a frozen claim set. P09 must publish that evidence faithfully. Because the claim set is frozen, the manuscript and release text may only reuse frozen claim wording, and manuscript numbers must be generated rather than transcribed so that the paper cannot drift from the evidence.",
+  "scope_in": [
+    "LaTeX manuscript under paper/ using the DAL identity with all required sections and an appendix",
+    "Deterministic generator with --check that emits manuscript numbers, tables, claim macros, and figure coordinates from registry/p08_sg000023_paper_evidence",
+    "Mechanical claim binding of manuscript claim sentences to frozen claim text and a prohibited-phrase lint",
+    "Bibliography restricted to identifiers verified in canonical literature records",
+    "Clean-room CI reproduction of the evidence package and manuscript compilation with a supply-chain-verified (checksum-pinned or package-signature-verified) zero-cost TeX toolchain",
+    "Deterministic arXiv source-bundle manifest without submission",
+    "README alignment, CITATION.cff, tool/model and Hugging Face card drafts with research-only disclaimer, release-notes draft, licensing statement, and reproducibility checklist",
+    "Zero-founder-cost tooling and execution only",
+    "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev review for activation, implementation, and closeout"
+  ],
+  "scope_out": [
+    "No SG-000022 rerun, new inference, retraining, recalibration, threshold change, or benchmark/denominator change",
+    "No manuscript, README, card, or release claim outside the frozen SG-000023 claim set",
+    "No clinical-safety, correctness, deployment-fitness, regulatory, superiority, significance, SOTA, or first-of-kind claim",
+    "No fabricated or unverified citation metadata",
+    "No arXiv submission, Hugging Face publication, release tag, GitHub release, or model-weight redistribution",
+    "No fine-tuning notebook claimed as qualified without execution evidence",
+    "No founder-paid compute, APIs, SaaS, or reviewers"
+  ],
+  "acceptance": [
+    "Research contract is Issue #101",
+    "Canonical dependency is SG-000023/P08 closeout main f8e075c7620d32614ad0d6ca163e0f7db56e35da with post-main GAXBench 36923984783 SUCCESS",
+    "Frozen claim-set SHA-256 ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b is bound and unchanged",
+    "Activation is governance-only and produces no manuscript, release, or publication artifact",
+    "Every manuscript number and table cell is generated from the frozen package and reproduced by --check",
+    "Every manuscript claim sentence is a generated frozen-claim macro; limitation statements stay limitation-only",
+    "The manuscript compiles in clean-room CI with a supply-chain-verified (checksum-pinned or package-signature-verified) zero-cost TeX toolchain",
+    "Every bibliography entry carries a verified DOI, arXiv identifier, or canonical URL",
+    "Release-candidate documents contain only frozen claim wording and the research-only disclaimer",
+    "External publication steps are recorded as founder-account boundaries with the exact remaining user action",
+    "Exact-head Linux/Windows Python 3.11/3.12 CI, checksum-pinned Alibaba OpenCodeReview, and secure TypeSafe Jev pass on activation and on every implementation and closeout head",
+    "Normal merges with an exact expected-head guard and post-main verification after every merge"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000024.json",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "high",
+    "recovery": "If any manuscript or release text would need a number or claim not present in the frozen package, do not write it. Record it as unsupported, or open a new governed grain; never edit frozen evidence to fit the text."
+  },
+  "evidence": {
+    "required": [
+      "issue-101-research-contract",
+      "sg000023-p08-canonical-closeout",
+      "frozen-claim-set-binding",
+      "activation-exact-head-cross-platform-ci-pass",
+      "activation-alibaba-ocr-exact-range-evidence",
+      "activation-jev-exact-diff-review-evidence",
+      "activation-expected-head-normal-merge",
+      "activation-post-main-verification",
+      "generated-manuscript-numbers-check",
+      "frozen-claim-macro-binding",
+      "verified-bibliography",
+      "clean-room-manuscript-compilation",
+      "release-candidate-documents",
+      "external-boundary-record",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 101,
+    "canonical_dependency": "f8e075c7620d32614ad0d6ca163e0f7db56e35da",
+    "canonical_dependency_post_main_run": 36923984783,
+    "program_identity": "DAL",
+    "program_name": "Decision Assurance Layer",
+    "legacy_compatibility_identity": "GAX",
+    "frozen_paper_evidence_root": "registry/p08_sg000023_paper_evidence",
+    "frozen_claim_set_sha256": "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b",
+    "activation_boundary": {
+      "governance_only": true,
+      "manuscript_generation_permitted": false,
+      "publication_permitted": false,
+      "implementation_requires_separate_pr": true
+    },
+    "permanent_boundaries": {
+      "new_inference_forbidden": true,
+      "claim_set_mutation_forbidden": true,
+      "manual_result_transcription_forbidden": true,
+      "arxiv_submission_requires_founder": true,
+      "huggingface_publication_requires_founder": true,
+      "release_tag_requires_founder": true,
+      "model_weight_redistribution_requires_license_decision": true
+    },
+    "deferred_p09_items": {
+      "fine_tuning_notebooks": "deferred; unexecuted notebooks cannot be qualified",
+      "model_weights": "blocked pending founder license/redistribution decision",
+      "independent_reproduction": "P10; SG-000024 provides checklist and automated clean-room reproduction only"
+    }
+  }
+}

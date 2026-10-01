@@ -180,9 +180,21 @@ Findings frozen by SG-000023 beyond the SG-000022 headline results:
 
 P08 is **CLOSED_CANONICAL** at the SG-000023 closeout. The P08 exit gate — all paper figures and tables generated from evidence packets — is met by `EP-SG23-TABLES-001` and `EP-SG23-FIGURES-001`. Closeout does not convert blocked or unavailable analyses into results; those rows stay explicit in `evidence_boundaries.json` and the claim ledger.
 
-## Next frontier — P09 (not activated)
+## Active frontier — SG-000024
 
-P09 (paper and public release) has **not** been activated. It requires a separate SpecGrain activation that binds this closeout, the frozen claim-set digest, and the rule that manuscript, README, release, and abstract text may only use frozen claim wording. Steps that need the founder's own accounts or legal acts — arXiv submission, Hugging Face publication, release tagging, and any license/redistribution decision for model weights — remain external boundaries and must not be claimed as done until verified.
+**P09 manuscript, reproducibility bundle, and release-candidate packaging**
+
+Research contract: Issue #101.
+
+Canonical dependency: `f8e075c7620d32614ad0d6ca163e0f7db56e35da` (SG-000023/P08 closeout; post-main GAXBench `36923984783` SUCCESS).
+
+State: **ACTIVE — governance activation only**
+
+Frozen inputs: `registry/p08_sg000023_paper_evidence/` and claim-set SHA-256 `ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b`.
+
+Activation writes no manuscript and publishes nothing. Implementation PRs follow only after activation is canonically merged and post-main verified. Every manuscript number, table, and figure coordinate must be generated from the frozen package with a `--check` mode. Every manuscript, README, card, and release claim must reuse frozen claim wording. Changing a frozen claim or result requires a new governed grain.
+
+External boundaries (prepared but not crossed): arXiv submission, Hugging Face publication, release tag/GitHub release, and model-weight redistribution. Fine-tuning notebooks are deferred; independent third-party reproduction belongs to P10.
 
 ## Core P08 invariants
 
