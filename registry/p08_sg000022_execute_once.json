@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "grain_id": "SG-000022",
+  "trigger_mode": "canonical-main-merge-once-v0.1",
+  "implementation_main_sha": "42e09ca1b1431340b26fe57ae318ff1b1b662fc3",
+  "implementation_post_main_run": 36886206716,
+  "authorization_digest": "626aa097085649ebe6e70faf613f343b9ae7a69c337b76aa4b08ad6b7c0352de",
+  "execute_once": true,
+  "final_test_rows_used_before_trigger": 0,
+  "outcome_information_used": false,
+  "scientific_policy_changed": false
+}
