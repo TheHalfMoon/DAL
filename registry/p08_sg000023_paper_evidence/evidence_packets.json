@@ -208,7 +208,8 @@
         "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000022_final_evaluation/summary.json",
         "registry/p08_sg000023_derivation_contract.json",
-        "registry/p08_sg000023_evidence_availability_matrix.json"
+        "registry/p08_sg000023_evidence_availability_matrix.json",
+        "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derivation_inputs": [
         "registry/p08_calibration_evidence_sg000020.json",
@@ -222,7 +223,8 @@
         "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json",
         "registry/p08_sg000022_final_evaluation/summary.json",
         "registry/p08_sg000023_derivation_contract.json",
-        "registry/p08_sg000023_evidence_availability_matrix.json"
+        "registry/p08_sg000023_evidence_availability_matrix.json",
+        "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derived_artifacts": [
         "evidence_packets.json",
@@ -241,14 +243,16 @@
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
         "registry/p08_sg000023_derivation_contract.json",
-        "registry/p08_sg000023_evidence_availability_matrix.json"
+        "registry/p08_sg000023_evidence_availability_matrix.json",
+        "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derivation_inputs": [
         "registry/p08_sg000022_final_evaluation/manifest.json",
         "registry/p08_sg000022_final_evaluation/metrics.json",
         "registry/p08_sg000022_final_evaluation/raw-fhir-interface-block.json",
         "registry/p08_sg000023_derivation_contract.json",
-        "registry/p08_sg000023_evidence_availability_matrix.json"
+        "registry/p08_sg000023_evidence_availability_matrix.json",
+        "registry/p08_sg000023_related_work_refresh.json"
       ],
       "derived_artifacts": [
         "claim_ledger.json"
@@ -261,16 +265,19 @@
       "supporting_sources": []
     },
     {
-      "canonical_sources": [],
+      "canonical_sources": [
+        "registry/p08_sg000023_related_work_refresh.json"
+      ],
       "derivation_inputs": [],
       "derived_artifacts": [],
       "matrix_row_id": "related-work-refresh",
       "matrix_row_status": "available",
       "packet_id": "EP-SG23-LIT-001",
-      "pending_reason": "Related-work refresh evidence is produced by a later SG-000023 stage; this package contains no literature evidence and supports no novelty claim.",
-      "scope": "dated related-work refresh and novelty disposition",
-      "status": "declared-pending-later-stage",
-      "supporting_sources": []
+      "scope": "dated related-work refresh and novelty disposition; supports only removal or narrowing of novelty claims, never a new affirmative novelty claim",
+      "status": "supported-literature-disposition",
+      "supporting_sources": [
+        "registry/p08_sg000023_related_work_refresh.json"
+      ]
     },
     {
       "canonical_sources": [],
@@ -290,6 +297,7 @@
     "canonical_sources": "union of derivation_inputs and supporting_sources",
     "declared-pending-later-stage": "packet declared by the availability matrix whose evidence is produced by a later SG-000023 stage; it supports no claim",
     "derivation_inputs": "exact canonical files read by the derivations of the packet's derived artifacts",
+    "supported-literature-disposition": "dated related-work evidence that may only remove or narrow novelty claims or record a candidate scoped description; it never supports an exportable claim",
     "supporting_sources": "canonical files the packet binds as supporting evidence without a derivation reading them"
   }
 }

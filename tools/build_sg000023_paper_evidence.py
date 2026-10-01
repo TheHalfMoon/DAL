@@ -17,6 +17,7 @@ CALIBRATION_PATH = ROOT / "registry" / "p08_calibration_evidence_sg000020.json"
 ECAL_PATH = ROOT / "registry" / "p08_ecal_selection_ledger_sg000020.json"
 FHIR_SELECTION_PATH = ROOT / "registry" / "p08_fhir_selection_ledger_sg000020.json"
 DEFAULT_OUTPUT = ROOT / "registry" / "p08_sg000023_paper_evidence"
+RELATED_WORK_PATH = ROOT / "registry" / "p08_sg000023_related_work_refresh.json"
 
 MANIFEST_PATH = FINAL_ROOT / "manifest.json"
 METRICS_PATH = FINAL_ROOT / "metrics.json"
@@ -26,9 +27,11 @@ RAW_LAYA_PATH = FINAL_ROOT / "raw-laya-pubmedqa-predictions.json"
 RAW_NATIVE_PATH = FINAL_ROOT / "raw-native-abstention-predictions.json"
 RAW_PUBMED_PATH = FINAL_ROOT / "raw-pubmedqa-predictions.json"
 
-CANONICAL_MAIN_DEPENDENCY = "d676beccfec001fd75d1b157b43068eb49a5733d"
+CANONICAL_MAIN_DEPENDENCY = "a18c1e10a0d9eba16ba8bffc55b29988507772ff"
 
-# Byte-level SHA-256 of every canonical input, pinned at the canonical main dependency.
+# Byte-level SHA-256 of every canonical input. Final-evaluation and SG-000020/SG-000023 contract
+# inputs are pinned as of the canonical main dependency; the dated related-work record is the
+# SG-000023 literature evidence introduced alongside this package.
 # The builder refuses to derive anything when a checkout input differs from these digests,
 # so a mutated post-test input cannot be regenerated into a passing ``--check``.
 FROZEN_SOURCE_SHA256: dict[Path, str] = {
@@ -44,6 +47,7 @@ FROZEN_SOURCE_SHA256: dict[Path, str] = {
     RAW_NATIVE_PATH: "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da",
     RAW_PUBMED_PATH: "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9",
     SUMMARY_PATH: "49b9f84830afed365b45c4e23f7ff38e5894c990f0af1cd26bf8160612aa0426",
+    RELATED_WORK_PATH: "4bdb130f470a5913d5ee71d56127bf8e95873ce09411410d683e9d8017421c4c",
 }
 
 PROVENANCE_INDEX_NAME = "provenance_index.json"
@@ -80,11 +84,20 @@ ARTIFACT_INPUTS: dict[str, tuple[Path, ...]] = {
         CONTRACT_PATH,
     ),
     "evidence_packets.json": (MATRIX_PATH,),
-    "claim_ledger.json": (METRICS_PATH, MANIFEST_PATH, RAW_FHIR_PATH, CONTRACT_PATH, MATRIX_PATH),
+    "claim_ledger.json": (
+        METRICS_PATH,
+        MANIFEST_PATH,
+        RAW_FHIR_PATH,
+        CONTRACT_PATH,
+        MATRIX_PATH,
+        RELATED_WORK_PATH,
+    ),
     PROVENANCE_INDEX_NAME: tuple(FROZEN_SOURCE_SHA256),
 }
 
 PENDING_PACKET_STATUS = "declared-pending-later-stage"
+# Literature evidence may only remove or narrow claims; it never supports an exportable claim.
+LITERATURE_PACKET_STATUS = "supported-literature-disposition"
 
 # Packet registry specification. ``canonical_sources`` of a packet is the union of the exact
 # derivation inputs of its derived artifacts plus explicitly bound supporting sources that the
@@ -178,11 +191,10 @@ PACKET_SPECS: tuple[dict[str, Any], ...] = (
     {
         "packet_id": "EP-SG23-LIT-001",
         "matrix_row_id": "related-work-refresh",
-        "status": PENDING_PACKET_STATUS,
+        "status": LITERATURE_PACKET_STATUS,
         "derived_artifacts": [],
-        "supporting_sources": [],
-        "scope": "dated related-work refresh and novelty disposition",
-        "pending_reason": "Related-work refresh evidence is produced by a later SG-000023 stage; this package contains no literature evidence and supports no novelty claim.",
+        "supporting_sources": [RELATED_WORK_PATH],
+        "scope": "dated related-work refresh and novelty disposition; supports only removal or narrowing of novelty claims, never a new affirmative novelty claim",
     },
     {
         "packet_id": "EP-SG23-FREEZE-001",
@@ -752,6 +764,7 @@ def _evidence_packets(src: SourceView) -> dict[str, Any]:
             "supporting_sources": "canonical files the packet binds as supporting evidence without a derivation reading them",
             "canonical_sources": "union of derivation_inputs and supporting_sources",
             PENDING_PACKET_STATUS: "packet declared by the availability matrix whose evidence is produced by a later SG-000023 stage; it supports no claim",
+            LITERATURE_PACKET_STATUS: "dated related-work evidence that may only remove or narrow novelty claims or record a candidate scoped description; it never supports an exportable claim",
         },
         "packets": packets,
     }
@@ -781,6 +794,24 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
     raw_fhir = src[RAW_FHIR_PATH]
     laya_policy = src[CONTRACT_PATH]["paper_outputs"]["reliability_figure"]["laya_policy"]
     src[MATRIX_PATH]  # C007-C009 cite matrix dispositions
+    related_work = src[RELATED_WORK_PATH]
+    removed = [
+        row["candidate_claim"]
+        for row in related_work["novelty_disposition"]
+        if row["disposition"] == "removed"
+    ]
+    narrowed = [
+        f"{row['candidate_claim']} ({row['dal_evidence']})"
+        for row in related_work["novelty_disposition"]
+        if row["disposition"] == "narrowed-to-descriptive"
+    ]
+    retained = [
+        row
+        for row in related_work["novelty_disposition"]
+        if row["disposition"] == "retained-as-scoped-description"
+    ]
+    if len(retained) != 1:
+        raise ValueError("related-work record must retain exactly one scoped description")
     pubmed = metrics["pubmedqa"]
     pubmed_comparison = _primary_comparison(metrics, "pubmedqa-pqal", "action_accuracy")
     pubmed_display = _comparison_display(pubmed_comparison)
@@ -878,6 +909,26 @@ def _claim_ledger(src: SourceView) -> dict[str, Any]:
             "Superiority, clinical safety, SOTA, final FHIR performance, and direct efficiency superiority are not claimed.",
             None,
             [METRICS_PATH, CONTRACT_PATH],
+        ),
+        _claim(
+            "SG23-C011",
+            "not-claimed",
+            False,
+            f"After the {related_work['search_date']} related-work refresh, these novelty claims are removed: "
+            + "; ".join(removed)
+            + ". Narrowed to descriptive reporting with no directional superiority claim: "
+            + "; ".join(narrowed)
+            + ".",
+            "EP-SG23-LIT-001",
+            [RELATED_WORK_PATH],
+        ),
+        _claim(
+            "SG23-C012",
+            "candidate-scoped-description",
+            False,
+            f"{retained[0]['permitted_wording']} Scope: {retained[0]['scope']}",
+            "EP-SG23-LIT-001",
+            [RELATED_WORK_PATH],
         ),
     ]
     return {
@@ -1008,6 +1059,10 @@ def validate_package(artifacts: dict[str, Any], matrix: dict[str, Any]) -> list[
             continue
         if packet["status"] == PENDING_PACKET_STATUS:
             errors.append(f"claim {claim['claim_id']} binds pending packet {packet_id}")
+        if packet["status"] == LITERATURE_PACKET_STATUS and claim["exportable"]:
+            errors.append(
+                f"claim {claim['claim_id']} exports an affirmative claim from literature packet {packet_id}"
+            )
         missing = set(claim["canonical_source_paths"]) - set(packet["canonical_sources"])
         if missing:
             errors.append(
