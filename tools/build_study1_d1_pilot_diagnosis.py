@@ -50,22 +50,34 @@ def _classification(pairs: list[tuple[str, str]]) -> dict[str, Any]:
         precision = tp / (tp + fp) if tp + fp else 0.0
         recall = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-        per_class[label] = {"support": tp + fn, "predicted": tp + fp, "precision": precision, "recall": recall, "f1": f1}
+        per_class[label] = {
+            "support": tp + fn,
+            "predicted": tp + fp,
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+        }
     n = len(pairs)
     gold_counts = Counter(gold for gold, _ in pairs)
     majority_label, majority_count = max(gold_counts.items(), key=lambda item: (item[1], item[0]))
     return {
         "n": n,
         "gold_distribution": {label: gold_counts[label] for label in LABELS},
-        "prediction_distribution": {label: sum(1 for _, p in pairs if p == label) for label in LABELS},
+        "prediction_distribution": {
+            label: sum(1 for _, p in pairs if p == label) for label in LABELS
+        },
         "confusion_rows_gold_columns_predicted": confusion,
         "per_class": per_class,
         "accuracy": sum(confusion[label][label] for label in LABELS) / n,
         "macro_f1": math.fsum(per_class[label]["f1"] for label in LABELS) / len(LABELS),
-        "balanced_accuracy": math.fsum(per_class[label]["recall"] for label in LABELS) / len(LABELS),
+        "balanced_accuracy": math.fsum(per_class[label]["recall"] for label in LABELS)
+        / len(LABELS),
         "majority_class_baseline": {"label": majority_label, "accuracy": majority_count / n},
         "error_taxonomy": {
-            f"{gold}->{pred}": confusion[gold][pred] for gold in LABELS for pred in LABELS if gold != pred and confusion[gold][pred]
+            f"{gold}->{pred}": confusion[gold][pred]
+            for gold in LABELS
+            for pred in LABELS
+            if gold != pred and confusion[gold][pred]
         },
     }
 
@@ -79,7 +91,11 @@ def _class_calibration(rows: list[dict[str, Any]], key: str, gold_key: str) -> d
             p = float(row[key][label])
             bins[min(int(p * BINS), BINS - 1)].append((p, row[gold_key] == label))
         ece = math.fsum(
-            (len(members) / len(rows)) * abs(math.fsum(m[0] for m in members) / len(members) - sum(m[1] for m in members) / len(members))
+            (len(members) / len(rows))
+            * abs(
+                math.fsum(m[0] for m in members) / len(members)
+                - sum(m[1] for m in members) / len(members)
+            )
             for members in bins
             if members
         )
@@ -116,7 +132,8 @@ def _native(rows: list[dict[str, Any]], metrics: dict[str, Any]) -> dict[str, An
             "distinct_withheld_scores": len(set(withheld)),
             "present_vs_withheld_auroc": _auroc(present, withheld),
             "withheld_rows_at_or_above_frozen_threshold": {
-                target: sum(1 for w in withheld if w >= policy[target]["threshold"]) for target in sorted(policy)
+                target: sum(1 for w in withheld if w >= policy[target]["threshold"])
+                for target in sorted(policy)
             },
         }
     out["answerable_fraction"] = sum(1 for r in rows if r["gold_sufficient"]) / len(rows)
@@ -125,12 +142,19 @@ def _native(rows: list[dict[str, Any]], metrics: dict[str, Any]) -> dict[str, An
 
 def build() -> dict[str, Any]:
     pubmed = _load("raw-pubmedqa-predictions.json")
-    laya = {str(row["source_id"]): row for row in _load("raw-laya-pubmedqa-predictions.json")["predictions"]}
+    laya = {
+        str(row["source_id"]): row
+        for row in _load("raw-laya-pubmedqa-predictions.json")["predictions"]
+    }
     native = _load("raw-native-abstention-predictions.json")
     metrics = _load("metrics.json")
     paper = _classification([(r["gold_action"], r["paper_predicted_action"]) for r in pubmed])
-    control = _classification([(r["gold_action"], r["clinical_control_predicted_action"]) for r in pubmed])
-    laya_cls = _classification([(r["gold_action"], laya[str(r["source_id"])]["prediction"]) for r in pubmed])
+    control = _classification(
+        [(r["gold_action"], r["clinical_control_predicted_action"]) for r in pubmed]
+    )
+    laya_cls = _classification(
+        [(r["gold_action"], laya[str(r["source_id"])]["prediction"]) for r in pubmed]
+    )
     confidences = [max(float(v) for v in r["paper_action_probabilities"].values()) for r in pubmed]
     native_diag = _native(native, metrics)
     paper_target = native_diag["paper"]["withheld_rows_at_or_above_frozen_threshold"]
@@ -141,23 +165,31 @@ def build() -> dict[str, Any]:
         ),
         "F2-paper-equals-control": paper == control,
         "F3-trivial-sufficiency-separation": (
-            native_diag["paper"]["present_vs_withheld_auroc"] == 1.0 and native_diag["paper"]["distinct_withheld_scores"] == 1
+            native_diag["paper"]["present_vs_withheld_auroc"] == 1.0
+            and native_diag["paper"]["distinct_withheld_scores"] == 1
         ),
-        "F4-coverage-targets-exceed-answerable-fraction": max(float(t) for t in paper_target) > native_diag["answerable_fraction"],
-        "F5-constant-score-tie-forced-full-commit": paper_target["0.8"] == native_diag["paper"]["withheld_rows"],
+        "F4-coverage-targets-exceed-answerable-fraction": max(float(t) for t in paper_target)
+        > native_diag["answerable_fraction"],
+        "F5-constant-score-tie-forced-full-commit": paper_target["0.8"]
+        == native_diag["paper"]["withheld_rows"],
     }
     return {
         "schema_version": "0.1",
         "grain_id": "SG-000025",
         "record_id": "study1-d1-pilot-diagnosis-v0.1",
         "scope": "Diagnostic only. Computed from immutable Study 0 raw predictions; Study 0 evidence, claims, and results are unchanged.",
-        "sources_sha256": {f"registry/p08_sg000022_final_evaluation/{name}": digest for name, digest in sorted(PINNED.items())},
+        "sources_sha256": {
+            f"registry/p08_sg000022_final_evaluation/{name}": digest
+            for name, digest in sorted(PINNED.items())
+        },
         "pubmedqa": {
             "paper_system": paper,
             "clinical_control": control,
             "laya": laya_cls,
             "paper_confidence_range": {"min": min(confidences), "max": max(confidences)},
-            "paper_class_calibration": _class_calibration(pubmed, "paper_action_probabilities", "gold_action"),
+            "paper_class_calibration": _class_calibration(
+                pubmed, "paper_action_probabilities", "gold_action"
+            ),
             "laya_class_calibration_note": "Not computed: Laya affected confidence is uncalibrated (Study 0 runtime warning).",
         },
         "native_abstention": native_diag,
