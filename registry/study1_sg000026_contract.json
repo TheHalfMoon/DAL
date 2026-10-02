@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.1",
+  "grain": "SG-000026",
+  "study_stage": "D2",
+  "title": "Baseline qualification and local FHIR compatibility",
+  "status": "active-governance-only",
+  "research_contract_issue": 115,
+  "canonical_dependency": {
+    "sg000025_closeout_merge": "16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167",
+    "post_main_gaxbench_run": 37073433197,
+    "post_main_manuscript_run": 37073433188,
+    "protocol_path": "registry/study1_preregistered_protocol_2026-10-02.json",
+    "protocol_sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192"
+  },
+  "scope": {
+    "allowed": [
+      "B0-QA semantic and matched-input qualification",
+      "B1-QA-CAL score-interface plumbing and matched base-answer identity",
+      "B2-QA-CONF-ABSTAIN confidence-only action-wrapper mechanics",
+      "deterministic denominator and failure accounting",
+      "read-only local FHIR R4 search compatibility on governed calibration and validation roles",
+      "development-role resource-ID semantic qualification",
+      "sealed-final firewall tests",
+      "zero-cost reproducibility evidence"
+    ],
+    "forbidden": [
+      "final base-model selection",
+      "DAL architecture or candidate development",
+      "training or fine-tuning",
+      "objective experiments or checkpoint selection",
+      "final calibration-function fitting",
+      "development-fitted threshold selection",
+      "DAL assurance or DAL-R development",
+      "sealed-final access or inference",
+      "final evaluation",
+      "paid APIs, paid compute, paid cloud, paid datasets, or paid reviewers",
+      "clinical-safety, deployment-readiness, SOTA, superiority, or first-style novelty claims"
+    ]
+  },
+  "mandatory_baselines": [
+    {
+      "id": "B0-QA",
+      "base_answer_identity": "shared",
+      "d2_role": "commit base answer; no calibration action policy; no DAL"
+    },
+    {
+      "id": "B1-QA-CAL",
+      "base_answer_identity": "shared",
+      "d2_role": "expose correctness-score interface while committing identical base answer; no final calibration fit"
+    },
+    {
+      "id": "B2-QA-CONF-ABSTAIN",
+      "base_answer_identity": "shared",
+      "d2_role": "exercise confidence-only abstention wrapper mechanics; no final fitted thresholds"
+    }
+  ],
+  "fhir_development_roles": {
+    "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+    "calibration_patients": 14,
+    "calibration_rows": 341,
+    "validation_patients": 40,
+    "validation_rows": 1122,
+    "source": "MIMIC-IV Clinical Database Demo on FHIR v2.1.0",
+    "license": "ODbL-1.0"
+  },
+  "sealed_final_firewall": {
+    "test_patients": 40,
+    "test_rows": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "d2_use": "forbidden"
+  },
+  "exit_criteria": [
+    "B0/B1/B2 matched-input base-answer identity mechanically proven",
+    "B1/B2 differ from B0 only by preregistered score/action wrapper semantics",
+    "deterministic complete denominator and failure accounting",
+    "every governed development-role FHIR query pattern is supported or explicitly blocking",
+    "local retrieval matches governed development-role expected resource IDs with no unresolved behavior-changing semantic drift",
+    "sealed-final firewall mechanically proven",
+    "all negative and unsupported results retained",
+    "zero-cost reproducibility proven",
+    "no model selection, training, DAL development, final calibration fitting, or sealed-final access occurred"
+  ],
+  "qualification": {
+    "gaxbench": "Linux/Windows Python 3.11/3.12 exact-head",
+    "alibaba_opencodereview": "required",
+    "typesafe_jev": "required",
+    "manuscript": "required",
+    "merge": "normal merge with expected-head guard",
+    "post_main": "required",
+    "not_evidence": [
+      "Cubic",
+      "Qodo",
+      "CodeRabbit"
+    ]
+  }
+}
