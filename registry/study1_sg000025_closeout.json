@@ -25,7 +25,8 @@
       "merge_sha": "a81a69e878535d3812bde4235798577f83e16651",
       "post_main_gaxbench_run": 37057211210,
       "post_main_manuscript_run": 37057211027
-    },    {
+    },
+    {
       "id": "literature-refresh",
       "pr": 110,
       "merge_sha": "0b6e9dcabc558ee7c8fd61fc39c6a68050bda1c0",
@@ -48,7 +49,8 @@
       "artifact": "registry/study1_zero_cost_compute_plan_2026-10-02.json",
       "post_main_gaxbench_run": 37063390389,
       "post_main_manuscript_run": 37063390221
-    },    {
+    },
+    {
       "id": "preregistered-protocol",
       "pr": 113,
       "qualified_head": "ec9e5253e17c10a8ef9525a5b6f138d5378dc75b",
@@ -72,7 +74,8 @@
     "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
     "test_gold_serialized": false,
     "access": "sealed"
-  },  "frozen_protocol_decisions": {
+  },
+  "frozen_protocol_decisions": {
     "primary_comparator": "qa-plus-confidence-abstention",
     "primary_endpoint": "failure-aware-answer-correctness-aurc",
     "final_denominator": 173,
@@ -80,7 +83,11 @@
     "bootstrap_replicates": 10000,
     "bootstrap_seed": 20261002,
     "dal_r_revision_cap": 1,
-    "target_coverages": [0.5, 0.7, 0.8]
+    "target_coverages": [
+      0.5,
+      0.7,
+      0.8
+    ]
   },
   "closeout_assertions": [
     "All SG-000025 deliverables required by Issue #107 are canonical on main.",
