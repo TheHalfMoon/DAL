@@ -15,6 +15,11 @@ def _load(path: Path) -> dict[str, object]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _repository_text_sha256(path: Path) -> str:
+    canonical_lf = path.read_text(encoding="utf-8").replace("\r\n", "\n")
+    return hashlib.sha256(canonical_lf.encode("utf-8")).hexdigest()
+
+
 def test_sg000025_closeout_preserves_sealed_final_boundary() -> None:
     closeout = _load(CLOSEOUT)
     boundary = closeout["sealed_final_boundary"]
@@ -36,7 +41,7 @@ def test_sg000025_closeout_binds_protocol_and_role_manifests() -> None:
     role_manifest = _load(ROLE_MANIFEST)
     qualification = _load(QUALIFICATION)
 
-    assert hashlib.sha256(PROTOCOL.read_bytes()).hexdigest() == protocol_record["artifact_sha256"]
+    assert _repository_text_sha256(PROTOCOL) == protocol_record["artifact_sha256"]
     assert boundary["role_manifest_sha256"] == qualification["role_manifest_sha256"]
     assert boundary["membership_sha256"] == role_manifest["membership_sha256"]
     assert boundary["test_patient_count"] == role_manifest["test_patient_count"]
