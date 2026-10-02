@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1",
+  "study": "DAL Study 1",
+  "specgrain": "SG-000026",
+  "stage": "D2",
+  "evidence_class": "synthetic-mechanics-only",
+  "kernel_scope": [
+    "relative read-only FHIR GET parsing",
+    "frozen FHIR-AgentBench supported resource-type identity",
+    "id and _id lookup mechanics",
+    "patient-reference lookup mechanics",
+    "_count request-surface mechanics",
+    "deterministic ResourceType/id serialization",
+    "request-get grouped response mechanics",
+    "resource-search text/meta stripping mechanics",
+    "explicit unsupported-parameter reporting",
+    "calibration/validation-only role firewall"
+  ],
+  "frozen_upstream": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "commit": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "fhir_client_git_blob_sha1": "ade7e32ff4f97f5db7368850d42a88b17c50f222",
+    "request_tools_git_blob_sha1": "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0",
+    "resource_tools_git_blob_sha1": "1cd2382441d1de9f607688dc694ab665e5d49d1d"
+  },
+  "development_role_qualification": {
+    "status": "blocked-input-unavailable-under-firewall",
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "reason": "Canonical DAL artifacts retain metadata-only role evidence and do not serialize a development-only row projection or patient-role membership map. The frozen public source CSV contains test supervision, so SG-000026 does not reopen that full source to reconstruct development rows.",
+    "not_claimed": [
+      "coverage of every governed development-role query pattern",
+      "resource-ID equivalence on 341 calibration rows",
+      "resource-ID equivalence on 1122 validation rows",
+      "absence of semantic drift on real development rows"
+    ]
+  },
+  "sealed_final_boundary": {
+    "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+    "patients": 40,
+    "rows": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "accessed_by_this_grain": false
+  }
+}
