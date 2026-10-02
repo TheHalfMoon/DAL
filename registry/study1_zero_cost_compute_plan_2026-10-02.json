@@ -1,0 +1,157 @@
+{
+  "schema_version": "study1-zero-cost-compute-plan-v1",
+  "study": "DAL Study 1",
+  "grain": "SG-000025",
+  "captured_on": "2026-10-02",
+  "status": "candidate-preprotocol-compute-policy",
+  "purpose": "Freeze a zero-founder-cost compute boundary before preregistration, training, or final-split access.",
+  "hard_rules": [
+    "No paid compute, paid API, paid SaaS, or paid accelerator may be required by the Study 1 protocol.",
+    "Free accelerator capacity is optional and must never be a single point of failure for protocol completion.",
+    "Final evaluation must remain reproducible without purchasing compute.",
+    "No final-test labels may be opened or inspected while compute planning is active.",
+    "Any experiment that exceeds the frozen compute envelope must be rejected or separately re-governed before execution."
+  ],
+  "observed_local_host": {
+    "device": "Abdulaziz",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13420H",
+    "physical_cores": 8,
+    "logical_processors": 12,
+    "ram_gb": 15.73,
+    "gpu": "Intel(R) UHD Graphics",
+    "reported_gpu_adapter_ram_bytes": 1073741824,
+    "c_drive_free_gb": 24.99,
+    "observation_method": "Windows CIM queries executed through the authorized Remote Desktop Commander connection"
+  },
+  "compute_classes": [
+    {
+      "id": "local-windows-cpu",
+      "cost": "zero-founder-cost",
+      "availability": "founder-controlled",
+      "role": "primary development and reproducibility baseline",
+      "allowed": ["data validation", "feature extraction", "unit tests", "CPU baselines", "small-model inference", "deterministic artifact builds"]
+    },
+    {
+      "id": "github-actions-standard-public",
+      "cost": "zero-founder-cost",
+      "availability": "service-dependent",
+      "role": "cross-platform CI and reproducibility qualification",
+      "official_source": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+      "verified_fact": "Standard GitHub-hosted runners are free and unlimited for public repositories; standard Linux and Windows public runners currently expose 4 CPUs, 16 GB RAM, and 14 GB SSD.",
+      "allowed": ["CI", "cross-version tests", "CPU reference runs", "packaging", "deterministic checks"],
+      "not_allowed_as_dependency": ["GPU training", "large persistent datasets", "long-lived state"]
+    },
+    {
+      "id": "kaggle-free-gpu",
+      "cost": "zero-founder-cost",
+      "availability": "non-guaranteed-queueable",
+      "founder_account_required": true,
+      "role": "optional development accelerator only",
+      "official_source": "https://www.kaggle.com/docs/notebooks",
+      "verified_fact": "Kaggle documents a free NVIDIA Tesla P100 option, while noting that GPU availability is limited and busy periods may place sessions in a queue.",
+      "allowed": ["bounded development training", "bounded representation experiments", "reproducibility spot checks"],
+      "not_allowed_as_dependency": ["guaranteed final evaluation", "unbounded hyperparameter search", "protocol success condition"]
+    },
+    {
+      "id": "colab-free",
+      "cost": "zero-founder-cost",
+      "availability": "dynamic-not-guaranteed",
+      "founder_account_required": true,
+      "role": "optional development accelerator fallback",
+      "official_source": "https://research.google.com/colaboratory/faq.html",
+      "verified_fact": "Colab is free, but resource limits and GPU types vary over time and are not guaranteed or published as fixed quotas.",
+      "allowed": ["bounded development training", "small reproducibility checks"],
+      "not_allowed_as_dependency": ["guaranteed accelerator availability", "fixed GPU identity", "final protocol completion"]
+    },
+    {
+      "id": "paid-or-credit-cloud",
+      "cost": "excluded",
+      "role": "not part of Study 1",
+      "examples": ["paid Runpod", "paid GCP", "paid AWS", "paid Azure", "paid hosted inference APIs"],
+      "policy": "Do not use as qualification evidence or as a required execution path. Promotional credits do not make a paid service a protocol dependency."
+    }
+  ],
+  "founder_account_boundaries": {
+    "assistant_can_execute_without_founder_interaction": [
+      "local Windows/WSL commands on the authorized device",
+      "GitHub repository work and standard public-repository Actions",
+      "open-web literature and metadata verification"
+    ],
+    "requires_founder_owned_login_or_acceptance": [
+      "Kaggle accelerator sessions",
+      "Google Colab accelerator sessions",
+      "credentialed or data-use-agreement datasets such as MIMIC-derived resources",
+      "author-issued benchmark credentials such as the full CSEDB verification-prompt path"
+    ],
+    "rule": "Founder interaction may unlock an optional resource, but no ungranted account action may be fabricated or treated as completed."
+  },
+  "stage_envelope": {
+    "D2_baseline_qualification": {
+      "required_compute": "local CPU plus public GitHub Actions",
+      "accelerator": "not required",
+      "policy": "Qualify simple and matched baselines before architecture expansion."
+    },
+    "D3_architecture_candidates": {
+      "required_compute": "local CPU for construction and smoke qualification",
+      "accelerator": "optional",
+      "policy": "Reject candidates that cannot support CPU inference or a zero-cost reproducible inference path."
+    },
+    "D4_training_objective_experiments": {
+      "required_compute": "bounded CPU experiments first",
+      "accelerator": "optional Kaggle or Colab free tier",
+      "policy": "Use accelerator time only after a written candidate set and stopping rule exist; do not run open-ended search."
+    },
+    "D5_to_D7_development": {
+      "required_compute": "same frozen zero-cost envelope",
+      "accelerator": "optional",
+      "policy": "Calibration, assurance, ablation, and model selection may use only development/calibration evidence and must log every attempted candidate."
+    },
+    "D8_protocol_freeze": {
+      "required_compute": "no new training requirement",
+      "policy": "Bind model/checkpoint digests, environment, seeds, benchmark manifests, metrics, stopping rules, and final-evaluation execution path before final access."
+    },
+    "D9_untouched_final_evaluation": {
+      "required_compute": "zero-cost reproducible path",
+      "accelerator": "permitted only if the exact free execution path was frozen before final access and remains available without purchase",
+      "fallback": "If the frozen accelerator path is unavailable, do not substitute paid compute or a different model; record the block and re-govern before any final-label access."
+    }
+  },
+  "experiment_budget_policy": {
+    "hyperparameter_search": "bounded-and-preregistered",
+    "default_strategy": "small candidate grids, fixed seeds, early rejection on development evidence",
+    "prohibited": [
+      "open-ended sweeps",
+      "paid API model search",
+      "post-hoc expansion after seeing final results",
+      "quietly dropping failed or negative trials"
+    ]
+  },
+  "protocol_implications": [
+    "Study 1 must prefer architectures whose inference can run on the founder-controlled CPU host, even if optional free GPU acceleration is used during development.",
+    "Public GitHub Actions may qualify software and CPU reproducibility but cannot substitute for scientific independence or final-test sealing.",
+    "Kaggle and Colab are convenience accelerators, not availability guarantees.",
+    "Any credentialed dataset or account-bound accelerator must have an explicit founder-action boundary before use.",
+    "The final benchmark suite and final split remain unfrozen in this compute-plan artifact."
+  ],
+  "next_gate": {
+    "name": "preregistered-study1-protocol",
+    "may_start_after": [
+      "this compute plan is exact-head qualified and canonical",
+      "benchmark dossier remains unchanged or any revision is separately evidenced",
+      "final-test labels remain unopened"
+    ],
+    "must_freeze": [
+      "primary and secondary hypotheses",
+      "benchmark suite and dataset versions",
+      "train/development/calibration/final split construction and hashes",
+      "contamination controls",
+      "model and baseline candidate classes",
+      "metrics and primary endpoint hierarchy",
+      "statistical analysis and multiplicity policy",
+      "training and stopping budgets",
+      "compute execution path",
+      "final-access authorization rule",
+      "claim boundaries"
+    ]
+  }
+}
