@@ -1,0 +1,582 @@
+{
+  "schema_version": "study1-preregistered-protocol-v1",
+  "record_id": "study1-preregistered-protocol-2026-10-02",
+  "study": "DAL Study 1",
+  "grain": "SG-000025",
+  "research_contract": "Issue #107",
+  "preregistered_on": "2026-10-02",
+  "status": "preregistered-predevelopment",
+  "scope": "Research design only. No Study 1 model training, tuning, final evaluation, or sealed-final label inspection is authorized by this artifact.",
+  "canonical_inputs": {
+    "study0_closeout": "4e6ed79aebffce10d812bf6871888eb028b8af09",
+    "pilot_diagnosis": "registry/study1_d1_pilot_diagnosis.json",
+    "literature_refresh": "registry/study1_literature_refresh_2026-10-02.json",
+    "benchmark_dossier": "registry/study1_benchmark_dossier_2026-10-02.json",
+    "compute_plan": "registry/study1_zero_cost_compute_plan_2026-10-02.json",
+    "fhir_qualification": "registry/fhir_agentbench_qualification.json",
+    "fhir_role_manifest": "registry/fhir_agentbench_role_manifest.json"
+  },
+  "research_question": "Can an evidence-bound Decision Assurance Layer improve selective reliability and reduce unsafe clinical-task commitments while preserving useful coverage, relative to matched non-DAL baselines, on an untouched external FHIR medical-QA evaluation?",
+  "claim_boundary": {
+    "candidate_contribution": "A preregistered evidence-bound decision-assurance system integrating bounded action authorization, evidence-aware assurance, optional single-cycle controlled revision, and machine-verifiable evidence/claim governance.",
+    "not_claimed_as_novel": [
+      "medical abstention",
+      "decision-theoretic abstention",
+      "uncertainty estimation or calibration alone",
+      "conformal or selective risk control alone",
+      "medical RAG or evidence provenance alone",
+      "FHIR or healthcare-agent evaluation alone"
+    ],
+    "first_style_claims": "prohibited"
+  },
+  "late_breaking_methods_delta": [
+    {
+      "id": "score-2026",
+      "title": "Conformal Selective Prediction with General Risk Control",
+      "venue": "arXiv preprint",
+      "arxiv": "2603.24704",
+      "role": "methodological risk-control comparator and design reference",
+      "implication": "Finite-sample selective risk control is prior art; DAL may not claim risk-control novelty merely from thresholding or conformal selection."
+    },
+    {
+      "id": "hg-crc-2026",
+      "title": "Hierarchical Group-Conditional Conformal Risk Control for Selective Prediction in Language Models",
+      "venue": "arXiv preprint",
+      "arxiv": "2607.24562",
+      "role": "subgroup-risk design reference",
+      "implication": "Marginal risk can conceal subgroup over-exposure; Study 1 must report group-conditional or worst-group descriptive risk where sample size permits."
+    },
+    {
+      "id": "confidence-causal-2026",
+      "title": "Causal evidence that language models use confidence to drive behaviour",
+      "venue": "Nature Machine Intelligence",
+      "doi": "10.1038/s42256-026-01293-x",
+      "role": "metacognition and abstention mechanism reference",
+      "implication": "Internal calibrated confidence and verbal confidence are distinct; verbal self-confidence cannot be treated as a sufficient reliability signal."
+    },
+    {
+      "id": "evidence-challenge-2026",
+      "title": "The evidence challenge facing large language models in medicine",
+      "venue": "npj Digital Medicine",
+      "doi": "10.1038/s41746-026-03262-5",
+      "role": "clinical-evidence evaluation context",
+      "implication": "Rapid model change and heterogeneous evaluation require explicit versioning, bounded claims, and reproducible evidence generation."
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1-primary",
+      "statement": "The D7-selected DAL-family system will have lower answer-correctness AURC than the matched QA-plus-confidence-abstention baseline on the sealed FHIR-AgentBench final split.",
+      "direction": "lower-is-better",
+      "success_rule": "The paired patient-cluster bootstrap estimate for DAL minus matched confidence-abstention AURC is below zero and its two-sided 95% percentile interval lies entirely below zero."
+    },
+    {
+      "id": "H2-selective-risk",
+      "statement": "At prespecified target coverages 0.50, 0.70, and 0.80, the D7-selected DAL-family system will not increase selective risk relative to the matched confidence-abstention baseline.",
+      "direction": "lower-is-better",
+      "status": "secondary"
+    },
+    {
+      "id": "H3-evidence-stress",
+      "statement": "Under preregistered gold-resource suppression stress conditions, the D7-selected DAL-family system will reduce unsafe-commit rate relative to the matched non-DAL selective baseline while preserving the full-evidence reference condition.",
+      "direction": "lower-unsafe-commit-is-better",
+      "status": "secondary"
+    },
+    {
+      "id": "H4-subgroup-risk",
+      "statement": "Template- and resource-family subgroup reporting will not reveal a concentrated failure mode that is hidden by the marginal primary result.",
+      "status": "exploratory-descriptive",
+      "no_formal_superiority_claim": true
+    }
+  ],
+  "final_split": {
+    "dataset_id": "fhir-agentbench",
+    "source_commit": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "source_blob_sha1": "b2225370feeaefe962c27c4d90f911584e098ac2",
+    "source_sha256": "e2045692fef7f5f4f77496935160f5fc727e162d213e94feed61401948e512a0",
+    "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "assignment_rule": "first-40-upstream-test-patients-by-sha256-test;remaining-first-14-calibration;remaining-40-validation",
+    "test_patient_count": 40,
+    "test_row_count": 173,
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "public_source_contains_test_supervision": true,
+    "human_label_access": "sealed"
+  },
+  "final_split_rationale": [
+    "The patient-level role assignment was created deterministically before final-label inspection and remains digest-bound.",
+    "Study 0 requested the 173-row FHIR final surface but completed zero rows because execution was interface-blocked-preexecution; no final performance was observed.",
+    "The 54 non-test patients contributed Study 0 calibration/validation rows and therefore cannot provide a cleaner blind final patient cohort than the preserved 40-patient test role.",
+    "The upstream benchmark is public, so foundation-model pretraining contamination remains a reported validity threat even though DAL development remains blind to the governed final labels.",
+    "Study 1 reuses the exact governed membership and does not create a favorable replacement split."
+  ],
+  "development_data": {
+    "fhir_calibration": {
+      "patient_count": 14,
+      "row_count": 341,
+      "role": "development calibration only"
+    },
+    "fhir_validation": {
+      "patient_count": 40,
+      "row_count": 1122,
+      "role": "development validation and model selection only"
+    },
+    "study0_pubmedqa": {
+      "role": "pilot diagnosis and optional development diagnostics only",
+      "blind_final_eligibility": "prohibited"
+    },
+    "additional_public_data": {
+      "eligibility": "development-only unless separately governed before use",
+      "requirements": [
+        "license-compatible",
+        "zero-founder-cost",
+        "exact revision or digest recorded",
+        "no overlap with governed FHIR final patients",
+        "no use to alter the sealed final membership"
+      ]
+    }
+  },
+  "local_fhir_execution": {
+    "goal": "Remove the Study 0 GCP interface blocker without changing FHIR-AgentBench task semantics.",
+    "authorized_stage": "D2 or later, never SG-000025",
+    "data_source": "MIMIC-IV Clinical Database Demo on FHIR v2.1.0",
+    "data_license": "ODbL-1.0",
+    "adapter_scope": "read-only FHIR R4 search compatibility for query patterns actually exercised by the benchmark",
+    "qualification_surface": "calibration and validation roles only",
+    "final_role_use": "forbidden until D9 final authorization",
+    "qualification_acceptance": [
+      "Use only the 341 calibration and 1122 validation rows during adapter qualification.",
+      "Exercise every FHIR query pattern observed on governed non-test roles.",
+      "Require deterministic request parsing and stable resource-ID serialization.",
+      "Compare local retrieval against governed development-role expected FHIR resource IDs without consulting sealed-test supervision.",
+      "Any unsupported query semantic that can change benchmark behavior blocks D2 closeout until resolved without final-row access."
+    ],
+    "semantic_drift_rule": "If local compatibility cannot be proven on non-test roles, the FHIR final path remains blocked; paid GCP is not an automatic substitute."
+  },
+  "mandatory_baselines": [
+    {
+      "id": "B0-QA",
+      "name": "QA",
+      "definition": "The matched base QA system produces an answer on every evaluable row with no calibration-derived action policy and no DAL layer."
+    },
+    {
+      "id": "B1-QA-CAL",
+      "name": "QA + calibration",
+      "definition": "The identical base QA system exposes a held-out-calibrated correctness score but still commits its base answer; this isolates calibration quality from action selection."
+    },
+    {
+      "id": "B2-QA-CONF-ABSTAIN",
+      "name": "QA + confidence abstention",
+      "definition": "The identical base QA system uses only its frozen calibrated correctness score and calibration-derived thresholds to abstain at prespecified target coverages. No evidence-assurance features or revision are permitted.",
+      "primary_comparator": true
+    },
+    {
+      "id": "B3-QA-DAL",
+      "name": "QA + DAL assurance",
+      "definition": "The matched QA system is wrapped by the D7-selected evidence-bound DAL assurance policy. The base answer generator, retrieval surface, and final-row inputs remain matched to the non-DAL comparators."
+    },
+    {
+      "id": "B4-QA-DAL-R",
+      "name": "QA + DAL-R controlled revision",
+      "definition": "DAL may trigger at most one additional bounded evidence-retrieval/revision cycle before final commit, abstain, or escalate.",
+      "revision_cap": 1,
+      "activation_rule": "DAL-R may remain inactive if D5 development evidence does not support it; that decision must be frozen before D8 and cannot change after final access."
+    }
+  ],
+  "methodological_comparators": [
+    {
+      "id": "M1-risk-control",
+      "definition": "A reproducible post-hoc conformal/selective risk-control comparator, using a published method such as SCoRE or a technically equivalent open implementation, must be assessed during D5 if its assumptions and implementation can be validated without paid resources.",
+      "final_status_rule": "By D8 it must be either exact-method-frozen or explicitly not-applicable with evidence; it may never be improvised after final access."
+    },
+    {
+      "id": "M2-verbal-confidence",
+      "definition": "Verbalized self-confidence may be reported as exploratory only and cannot replace probability/logit-derived or validated assurance signals."
+    }
+  ],
+  "primary_endpoint": {
+    "name": "answer-correctness AURC",
+    "unit": "row-level prediction with patient-clustered uncertainty analysis",
+    "definition": "Area under the risk-coverage curve formed by ranking evaluable final rows by the system's frozen authorization/confidence score; risk is answer error among committed rows and coverage is committed rows divided by the fixed final denominator.",
+    "comparison": "D7-selected DAL-family system minus B2-QA-CONF-ABSTAIN",
+    "direction": "lower-is-better",
+    "fixed_final_denominator": 173,
+    "failure_aware_ranking": "Rows without a valid output are assigned correctness 0 and a deterministic score below every valid output solely for primary metric construction, so failures cannot lower AURC by disappearing from the fixed denominator. Operational commit coverage is reported separately.",
+    "tie_handling": "Equal authorization/confidence scores enter the risk-coverage curve as one block; no favorable row-order tie breaking is permitted.",
+    "integration": "Trapezoidal area over the blockwise risk-coverage points from coverage 0 to 1 under the failure-aware ranking rule."
+  },
+  "secondary_endpoints": [
+    {
+      "name": "selective risk at target coverage",
+      "target_coverages": [
+        0.5,
+        0.7,
+        0.8
+      ],
+      "rule": "Report target and achieved coverage; never relabel an unattained target as attained.",
+      "threshold_source": "Thresholds are fitted and frozen from the calibration role only; final labels never choose or adjust thresholds."
+    },
+    {
+      "name": "unsafe-commit rate",
+      "definition": "incorrect committed answers divided by the fixed eligible-row denominator",
+      "direction": "lower-is-better"
+    },
+    {
+      "name": "coverage",
+      "definition": "committed answers divided by the fixed eligible-row denominator"
+    },
+    {
+      "name": "full-commit answer correctness",
+      "definition": "upstream-normalized answer correctness for systems/conditions that commit",
+      "role": "utility context, not a replacement for selective metrics"
+    },
+    {
+      "name": "FHIR resource retrieval precision and recall",
+      "definition": "upstream FHIR-AgentBench resource-retrieval metrics using the frozen evaluator"
+    },
+    {
+      "name": "calibration",
+      "metrics": [
+        "negative log-likelihood",
+        "Brier score",
+        "ECE"
+      ],
+      "eligibility": "only when the compared score is a valid probability-like confidence and the calibration procedure was frozen before final access"
+    }
+  ],
+  "exploratory_endpoints": [
+    "template-level selective risk",
+    "resource-family selective risk",
+    "worst eligible subgroup risk",
+    "revision-trigger rate and revision success when DAL-R is active",
+    "latency and CPU resource use on the frozen local execution path",
+    "verbal-confidence discrimination"
+  ],
+  "evidence_stress_protocol": {
+    "status": "secondary-preregistered",
+    "purpose": "Test whether assurance behavior changes when benchmark-linked evidence availability is mechanically degraded, without claiming that the transformation fully represents real clinical ambiguity.",
+    "conditions": [
+      {
+        "id": "E0-full",
+        "definition": "Unmodified benchmark evidence surface."
+      },
+      {
+        "id": "E1-partial-gold-suppression",
+        "definition": "For rows with at least two benchmark gold FHIR resource IDs, remove a deterministic hash-ordered half of those gold resources before the system receives evidence; rows with fewer than two gold resources are not assigned to this condition."
+      },
+      {
+        "id": "E2-all-gold-suppression",
+        "definition": "Remove all benchmark gold FHIR resource IDs from the evidence presented to the system."
+      },
+      {
+        "id": "E3-distractor-augmentation",
+        "definition": "Add a fixed-size deterministic hash-selected set of non-gold same-patient FHIR resources available through the frozen local store, without removing the original evidence."
+      }
+    ],
+    "construction_boundary": "The transformation algorithm is frozen before D9. Gold IDs for sealed rows may be consumed only by the final-evaluation harness after final authorization and must not be exposed to model selection, threshold fitting, prompt tuning, or human inspection.",
+    "interpretation_boundary": "These are benchmark-linked evidence-availability stress conditions, not proof of clinical contradiction robustness or real-world causal evidence sufficiency."
+  },
+  "action_semantics": {
+    "commit": "Return the current answer as authorized.",
+    "abstain": "Withhold an answer because the frozen authorization policy does not permit commitment.",
+    "revise": "If DAL-R is active and its single revision budget is unused, trigger exactly one bounded evidence/reasoning revision cycle.",
+    "escalate": "Return a bounded non-answer indicating that human or external review is required; escalation counts as non-commit for coverage metrics.",
+    "revision_cap": 1
+  },
+  "failure_accounting": {
+    "fixed_denominator": true,
+    "interface_failures": "counted and reported; never silently removed",
+    "parse_failures": "counted and reported; never silently removed",
+    "timeouts": "counted and reported; never silently removed",
+    "oom": "counted and reported; never silently removed",
+    "missing_outputs": "counted as failed rows for completion accounting",
+    "denominator_mutation_after_final_access": "prohibited"
+  },
+  "statistical_plan": {
+    "independence_unit": "patient",
+    "primary_resampling": "paired patient-cluster bootstrap",
+    "bootstrap_replications": 10000,
+    "bootstrap_seed": 20261002,
+    "bootstrap_rule": "Sample the 40 sealed patients with replacement and retain all eligible rows belonging to each sampled patient; compute paired system differences within the same resample.",
+    "interval": "two-sided 95% percentile bootstrap interval",
+    "primary_inference": "H1 uses the preregistered directional success rule on the paired AURC difference.",
+    "secondary_inference": "Report paired estimates and 95% patient-cluster bootstrap intervals without converting post-hoc secondary findings into primary significance claims.",
+    "p_values": "No primary p-value is required or may be invented post hoc. If a later exact p-value construction is desired, it must be separately preregistered before D9.",
+    "multiplicity": "One primary endpoint. Secondary and exploratory endpoints are clearly labeled and are not promoted based on favorable results.",
+    "small_groups": "Subgroups with fewer than 10 sealed rows are reported only descriptively or pooled under a preregistered parent grouping; no unstable subgroup superiority claim is permitted."
+  },
+  "candidate_model_policy": {
+    "final_model_identity": "not selected in SG-000025",
+    "allowed_candidate_requirements": [
+      "open-weight or otherwise fully zero-cost locally runnable",
+      "license compatible with research release and reproducibility",
+      "inference has a founder-zero-cost path",
+      "exact model revision and tokenizer revision can be frozen",
+      "base-model release date and known benchmark exposure are recorded",
+      "architecture fits the compute envelope or has a validated quantized CPU inference path"
+    ],
+    "preferred_scale": "small enough for reproducible CPU inference; approximately <=4B dense parameters is the default design envelope unless D3 proves an alternative zero-cost path",
+    "contamination_policy": "A model released before the FHIR-AgentBench public benchmark release is preferred when technically competitive, but release date is only a contamination-risk proxy and not proof of non-exposure.",
+    "closed_paid_models": "not eligible as mandatory Study 1 comparators or final systems"
+  },
+  "training_policy": {
+    "SG-000025_training": "prohibited",
+    "future_training": "D4 only after D2 and D3 close canonically",
+    "training_data": "development roles only",
+    "final_rows_in_training": "prohibited",
+    "final_rows_in_prompt_tuning": "prohibited",
+    "final_rows_in_threshold_fitting": "prohibited",
+    "search": "bounded-and-logged",
+    "negative_trials": "must be retained",
+    "optional_accelerator": "Kaggle or Colab free tier only under the canonical compute plan; accelerator availability cannot change scientific selection rules"
+  },
+  "ablation_plan": [
+    {
+      "id": "A0-full-selected-system",
+      "definition": "The complete D7-selected DAL-family system."
+    },
+    {
+      "id": "A1-no-evidence-assurance",
+      "definition": "Remove evidence-derived assurance features while preserving the same base QA model and calibrated score."
+    },
+    {
+      "id": "A2-no-risk-control",
+      "definition": "Remove the calibrated selective authorization threshold while preserving evidence features; report as a development ablation only unless exact semantics are frozen at D8."
+    },
+    {
+      "id": "A3-no-revision",
+      "definition": "If DAL-R is active, disable revision while leaving initial assurance unchanged."
+    },
+    {
+      "id": "A4-confidence-only",
+      "definition": "Use calibrated base-model confidence without evidence-assurance features; this must coincide mechanically with or be reconciled against B2-QA-CONF-ABSTAIN."
+    }
+  ],
+  "ablation_boundary": "Ablations are executed and interpreted on development/calibration evidence in D6. No final-test ablation may be invented after final access; only ablations explicitly frozen at D8 may run on D9 final data.",
+  "selection_rule": {
+    "stage": "D7",
+    "eligible_candidates": "Only candidates that passed D2-D6 governance, reproducibility, zero-cost, and leakage checks.",
+    "primary_development_criterion": "lowest validation AURC on the governed FHIR validation role",
+    "guardrails": [
+      "no unresolved interface or denominator failure",
+      "no use of sealed final rows or labels",
+      "calibration fitted only on the calibration role",
+      "all candidate attempts and negative results retained",
+      "selected system must retain a zero-cost final inference path"
+    ],
+    "tie_breaks_in_order": [
+      "lower validation unsafe-commit rate at achieved coverage nearest 0.70",
+      "higher full-evidence validation coverage subject to no higher selective risk",
+      "smaller reproducible compute footprint",
+      "lexicographically smaller immutable candidate identifier"
+    ],
+    "selection_output": "One final DAL-family system plus frozen mandatory comparator identities and digests."
+  },
+  "development_stages": [
+    {
+      "id": "D2",
+      "name": "baseline qualification",
+      "allowed": "Implement and qualify B0, B1, and B2 plus local FHIR read-only compatibility infrastructure on calibration/validation roles only.",
+      "exit": "Matched-input baseline equivalence, denominator accounting, local FHIR semantics, and zero-cost reproducibility are proven."
+    },
+    {
+      "id": "D3",
+      "name": "architecture candidates",
+      "allowed": "Define a bounded candidate family for assurance scoring/evidence features and record exact base-model revisions.",
+      "exit": "Candidate set and compute envelope are frozen before objective experiments."
+    },
+    {
+      "id": "D4",
+      "name": "training/objective experiments",
+      "allowed": "Bounded training or fitting on development data only under the zero-cost plan.",
+      "exit": "All attempted objectives, checkpoints, seeds, and negative outcomes are recorded."
+    },
+    {
+      "id": "D5",
+      "name": "calibration and assurance development",
+      "allowed": "Fit frozen calibration methods and selective authorization policies on calibration data; test DAL-R activation criteria without final data.",
+      "exit": "Calibration family, coverage targets, risk-control method status, and DAL-R activation status are fixed for D6."
+    },
+    {
+      "id": "D6",
+      "name": "ablations",
+      "allowed": "Run preregistered ablations on development/calibration evidence only.",
+      "exit": "Ablation evidence is immutable and no new component may be added merely because an ablation is unfavorable."
+    },
+    {
+      "id": "D7",
+      "name": "model selection",
+      "allowed": "Apply the preregistered selection rule using validation evidence only.",
+      "exit": "One final DAL-family system and every mandatory comparator are selected without sealed-final access."
+    },
+    {
+      "id": "D8",
+      "name": "final protocol freeze and authorization candidate",
+      "allowed": "Bind immutable model/checkpoint/tokenizer digests, prompts, retrieval adapter, thresholds, evaluators, seeds, environments, metric code, compute path, and final manifest.",
+      "exit": "A separately qualified digest-bound authorization artifact exists; final access remains sealed until that artifact is canonical."
+    },
+    {
+      "id": "D9",
+      "name": "untouched final evaluation",
+      "allowed": "Exactly one governed evaluation of the frozen systems on the sealed 173-row role plus preregistered secondary stress conditions.",
+      "exit": "Raw outputs and failure accounting are persisted before derived metrics; no rerun/tuning is permitted because of the observed result."
+    }
+  ],
+  "D8_freeze_rules": {
+    "must_bind_before_final_access": [
+      "selected DAL-family system identifier and source revision",
+      "base-model and tokenizer immutable revisions",
+      "all trainable checkpoint SHA-256 digests",
+      "mandatory comparator identities",
+      "prompt and tool schemas",
+      "local FHIR adapter revision and qualification evidence",
+      "MIMIC-IV FHIR Demo source version and digest inventory",
+      "calibration method and fitted parameters",
+      "authorization/risk-control policy and target coverages",
+      "DAL-R active/inactive status and revision cap",
+      "FHIR role manifest and membership digests",
+      "evidence-stress transformation implementation digest",
+      "metric/evaluator implementation digests",
+      "bootstrap seed and statistical code revision",
+      "Python/dependency lock and execution environment",
+      "zero-cost final execution path"
+    ],
+    "forbidden_after_freeze": [
+      "model or checkpoint reselection",
+      "prompt changes",
+      "threshold refitting",
+      "calibration refitting",
+      "adapter semantic changes",
+      "metric changes",
+      "target-coverage changes",
+      "benchmark denominator changes",
+      "new primary hypotheses",
+      "new final-test ablations"
+    ]
+  },
+  "final_access_authorization": {
+    "default": "sealed",
+    "opening_requires": [
+      "D2 through D7 canonical closeout",
+      "D8 exact-head GAXBench qualification",
+      "D8 checksum-pinned Alibaba OpenCodeReview success",
+      "D8 secure TypeSafe Jev exact-diff success",
+      "normal expected-head merge of the authorization artifact",
+      "post-main verification on the authorization merge",
+      "exact digest match for every D8-bound dependency"
+    ],
+    "mismatch_behavior": "fail-closed; do not open final rows and do not silently regenerate or substitute artifacts",
+    "manual_label_inspection_before_D9": "prohibited"
+  },
+  "external_secondary_policy": {
+    "mandatory_for_primary_claim": false,
+    "candidates": [
+      {
+        "id": "agentclinic-open-variant",
+        "status": "conditional",
+        "activation_requirements": [
+          "source-data terms verified",
+          "zero-cost local execution",
+          "exact variant frozen before D8"
+        ]
+      },
+      {
+        "id": "healthcontradict",
+        "status": "license-clearance-required",
+        "activation_requirements": [
+          "explicit reusable code/data terms verified before D8"
+        ]
+      },
+      {
+        "id": "bridge-open-subset",
+        "status": "conditional",
+        "activation_requirements": [
+          "task-level license/DUA compatibility",
+          "bounded zero-cost compute",
+          "exact subset frozen before D8"
+        ]
+      }
+    ],
+    "rule": "Failure to clear an optional external secondary candidate does not permit replacing it after D9 or weakening the primary FHIR protocol."
+  },
+  "contamination_controls": [
+    "Treat public benchmark exposure as a validity threat, not as proof of contamination or proof of cleanliness.",
+    "Record model release date, training-data disclosures when available, and benchmark publication/repository dates.",
+    "Prefer candidate base models released before public FHIR-AgentBench availability when technically competitive.",
+    "Never use final-row correctness, gold FHIR IDs, or derived final metrics for prompt design, architecture selection, training, calibration, or model selection.",
+    "Preserve Study 0 PubMedQA as non-blind pilot evidence only.",
+    "Any discovered overlap or inadvertent final-label access must be recorded immediately and triggers re-governance rather than silent exclusion."
+  ],
+  "reproducibility": {
+    "required": [
+      "immutable source revisions and SHA-256 digests",
+      "deterministic seeds wherever the underlying operation supports them",
+      "raw output persistence before metrics",
+      "exact requested/completed/failure accounting",
+      "Linux and Windows CI qualification for project code",
+      "machine-readable claim/evidence provenance in D10",
+      "zero-founder-cost execution documentation"
+    ],
+    "nondeterminism_rule": "Any irreducible runtime nondeterminism must be measured, documented, and bounded before D8; it may not be hidden by rerunning until favorable."
+  },
+  "reporting_rules": [
+    "Report all preregistered mandatory baselines, including null and unfavorable results.",
+    "Report achieved coverage next to every target-coverage metric.",
+    "Report the fixed denominator and every interface, parse, timeout, OOM, and missing-output count.",
+    "Do not convert exploratory subgroup findings into primary claims.",
+    "Do not claim clinical safety, deployment readiness, SOTA status, or universal risk guarantees from this benchmark alone.",
+    "Distinguish peer-reviewed evidence from preprints in related work.",
+    "If the local FHIR compatibility path cannot be validated without semantic drift, report the final FHIR evaluation as blocked rather than substituting a paid cloud path."
+  ],
+  "tools_and_cost_boundary": {
+    "required_review_tools": [
+      "Alibaba OpenCodeReview",
+      "TypeSafe Jev"
+    ],
+    "prohibited_as_qualification_evidence": [
+      "CodeRabbit",
+      "Cubic",
+      "Qodo"
+    ],
+    "literature_tools": {
+      "scite": "not used because available MCP access required a paid plan/trial",
+      "consensus": "free monthly search quota exhausted during SG-000025; no paid upgrade used",
+      "substitutes": [
+        "original publisher pages",
+        "arXiv",
+        "PubMed/PMC where available",
+        "OpenAlex/citation chasing",
+        "official GitHub repositories"
+      ]
+    },
+    "paid_compute": "prohibited"
+  },
+  "protocol_freeze_effect": {
+    "effective_when": "this artifact is exact-head qualified, normally merged with expected-head guard, and post-main verified",
+    "what_is_frozen_now": [
+      "research question and primary hypothesis family",
+      "sealed final role identity and denominator",
+      "mandatory baseline classes",
+      "primary and secondary endpoint definitions",
+      "patient-cluster bootstrap design",
+      "target coverages",
+      "revision cap",
+      "development stage order and final-access governance",
+      "evidence-stress condition semantics",
+      "zero-cost and claim boundaries"
+    ],
+    "what_remains_for_D2_to_D8": [
+      "exact base-model identity",
+      "exact DAL architecture and trained parameters",
+      "exact calibration function",
+      "exact risk-control implementation",
+      "DAL-R active/inactive decision",
+      "exact local FHIR adapter implementation",
+      "optional external-secondary activation",
+      "immutable environment and checkpoint digests"
+    ]
+  },
+  "final_test_access": "sealed"
+}
