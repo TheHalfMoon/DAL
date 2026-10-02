@@ -254,10 +254,73 @@
       "url": "https://www.nature.com/articles/s41591-026-04638-6",
       "verified_primary": true,
       "dal_implication": "Public-benchmark contamination, evaluator affinity, small real-world samples and underspecified inference settings can invalidate broad superiority claims."
+    },
+    {
+      "id": "evidence-sufficiency-benchmark-2026",
+      "area": "evidence sufficiency and abstention",
+      "title": "Do LLMs Know When Evidence is Insufficient? An Evidence Sufficiency Benchmark for Answer-Abstention Calibration in Retrieval-Augmented Generation",
+      "venue": "Computers, Materials & Continua 2026",
+      "doi": "10.32604/cmc.2026.086343",
+      "url": "https://www.techscience.com/cmc/v89n1/68467",
+      "verified_primary": true,
+      "dal_implication": "Full, partial, irrelevant, absent and conflicting evidence gradients with answer/abstain calibration are prior art; DAL cannot claim novelty for an evidence-sufficiency gradient alone."
+    },
+    {
+      "id": "healthcontradict-2026",
+      "area": "contradictory biomedical evidence",
+      "title": "HealthContradict: Evaluating biomedical knowledge conflicts in language models",
+      "venue": "npj Digital Medicine 2026",
+      "doi": "10.1038/s41746-025-02336-0",
+      "url": "https://www.nature.com/articles/s41746-025-02336-0",
+      "verified_primary": true,
+      "dal_implication": "Expert-verified biomedical contradictory-context evaluation is prior art; DAL must go beyond conflict detection or context-resistance alone."
+    },
+    {
+      "id": "egda-2026",
+      "area": "evidence-bound decision authorization",
+      "title": "Evidence-Graded Decision Authorization for Safe Clinical AI: A Constrained Reasoning Framework",
+      "venue": "medRxiv preprint 2026",
+      "doi": "10.64898/2026.05.19.26353565",
+      "url": "https://www.medrxiv.org/content/10.64898/2026.05.19.26353565v1",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "A framework separating evidence extraction, sufficiency assessment and claim-level authorization is already described; DAL cannot claim evidence-bound authorization itself as first or uniquely novel."
+    },
+    {
+      "id": "cic-risk-control-2026",
+      "area": "statistical risk control",
+      "title": "Uncertainty-Aware Abstention in Large Language Models with Provable Alignment Guarantees",
+      "venue": "arXiv preprint 2026",
+      "arxiv": "2607.04430",
+      "url": "https://arxiv.org/abs/2607.04430",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "Held-out-calibration thresholding with finite-sample risk guarantees is prior art in general QA; DAL must not claim generic statistical risk control as novel."
+    },
+    {
+      "id": "clinical-diagnostics-grounding-2026",
+      "area": "clinical diagnostic robustness",
+      "title": "Grounding large language models in clinical diagnostics",
+      "venue": "Nature Communications 2026",
+      "doi": "10.1038/s41467-026-70274-w",
+      "url": "https://www.nature.com/articles/s41467-026-70274-w",
+      "verified_primary": true,
+      "dal_implication": "Contradictory evidence, confirmation bias, incomplete information gathering and uncertainty limitations are documented in multi-stage clinical diagnosis."
+    },
+    {
+      "id": "sup-mimic-2026",
+      "area": "contradictory clinical evidence",
+      "title": "SUP-MIMIC: A Multi-Task Clinical Diagnosis Benchmark for Evaluating LLMs' Robustness to Contradictory Evidence",
+      "venue": "arXiv preprint 2026",
+      "arxiv": "2608.29582",
+      "url": "https://arxiv.org/abs/2608.29582",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "Clinical ambiguity and contradictory-evidence robustness are active benchmark areas; any DAL stress-test novelty must be narrower and empirically distinguished."
     }
   ],
   "novelty_gap_candidate": {
-    "status": "candidate-not-frozen",
+    "status": "materially-narrowed-candidate-not-frozen",
     "not_novel": [
       "medical abstention or explicit abstain options",
       "decision-theoretic abstention",
@@ -265,7 +328,7 @@
       "medical RAG or evidence provenance alone",
       "FHIR or healthcare-agent evaluation alone"
     ],
-    "candidate": "A risk-controlled, evidence-bound action policy that jointly measures strong medical QA utility, calibrated uncertainty, semantic evidence sufficiency and contradiction, abstain/escalate behavior, bounded revision, and auditable provenance under adversarial information insufficiency and realistic external evaluation."
+    "candidate": "Potential contribution only: a preregistered cross-setting medical decision-assurance system that combines statistically bounded action authorization, semantic evidence sufficiency/contradiction, bounded revise-or-escalate behavior, and machine-verifiable provenance/claim constraints, with realistic external evaluation. This integration claim remains unfrozen and must be tested directly against EGDA, CIC, evidence-sufficiency, contradiction, and medical-abstention baselines."
   },
   "protocol_implications": [
     "Select QA candidates with macro-F1 and balanced accuracy in addition to accuracy to prevent majority-class collapse.",
@@ -277,7 +340,8 @@
     "Include adversarial information removal or perturbation and realistic EHR/FHIR or agentic evaluation where licenses and compute permit.",
     "Track benchmark contamination risk and treat previously inspected Study 0 rows as pilot-only evidence.",
     "Keep model-only benchmark performance separate from clinician- or user-rated external utility.",
-    "Apply TRIPOD+AI and DECIDE-AI principles where applicable to reporting and later external evaluation."
+    "Apply TRIPOD+AI and DECIDE-AI principles where applicable to reporting and later external evaluation.",
+    "Include direct conceptual and empirical baselines for Evidence Sufficiency Benchmark, HealthContradict-style conflict conditions, EGDA-style authorization, and CIC-style risk control where technically reproducible."
   ],
   "limitations": [
     "This is a pre-protocol targeted refresh, not yet a PRISMA systematic review.",
@@ -313,5 +377,11 @@
         "implication": "Contamination, evaluator affinity, sample scope, and inference controls must be preregistered and reported."
       }
     ]
-  }
+  },
+  "novelty_collisions": [
+    "Evidence-sufficiency gradients and abstention calibration are established.",
+    "Biomedical conflicting-context evaluation is established.",
+    "Evidence extraction plus sufficiency plus claim-level authorization has a 2026 clinical preprint analogue (EGDA).",
+    "Finite-sample risk-controlled abstention has a 2026 general-QA preprint analogue (CIC)."
+  ]
 }
