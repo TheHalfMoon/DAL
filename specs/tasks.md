@@ -306,7 +306,7 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Qualify and merge activation; verify post-main - PR #108 merged `d1d2728d3472b0384a40210ff509fa596e297234`; post-main GAXBench and Manuscript SUCCESS
 - [x] D1 pilot forensic diagnosis artifact (deterministic, from immutable Study 0 raw predictions) - PR #109 merged `a81a69e878535d3812bde4235798577f83e16651`; post-main GAXBench and Manuscript SUCCESS
 - [x] Literature refresh with citation chasing, tool-substitution record, and candidate novelty-gap statement - `registry/study1_literature_refresh_2026-10-02.json` (this PR); novelty remains unfrozen until the protocol grain closes
-- [ ] Benchmark dossier (versions, hashes, licenses, Study 0 exposure, contamination risk)
+- [x] Benchmark dossier (versions, hashes, licenses, Study 0 exposure, contamination risk) ? `registry/study1_benchmark_dossier_2026-10-02.json` (this PR); final benchmark selection remains unfrozen
 - [ ] Zero-cost compute plan with founder-account boundaries
 - [ ] Preregistered Study 1 protocol with sealed final split
 - [ ] Canonical SG-000025 closeout
