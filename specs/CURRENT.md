@@ -201,7 +201,17 @@ State: **CLOSED_CANONICAL**
 
 SG-000025 completed the Study 1 redesign without model training, tuning, Study 1 evaluation, or sealed-final label inspection. Canonical outputs are the D1 pilot forensic diagnosis, literature refresh and novelty-gap boundary, benchmark/licensing/contamination dossier, zero-cost compute plan, preregistered protocol, and `registry/study1_sg000025_closeout.json`. The FHIR-AgentBench final role remains sealed at 40 patients / 173 rows with `test_gold_serialized=false`. Study 0 PubMedQA PQA-L rows remain pilot-only and can never be a blind final evaluation.
 
-The next possible stage is D2 baseline qualification, but it is **not activated by SG-000025 closeout**. D2 requires a separate governed contract and must use only permitted development roles. Study 1 stages remain D2 baseline qualification, D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging. After D8 there is no tuning, reselection, threshold change from final labels, or final rerun.
+D2 baseline qualification is now activated separately as **SG-000026** under Issue #115, with canonical dependency `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. D2 is limited to B0/B1/B2 semantic/interface qualification, deterministic denominator accounting, and read-only local FHIR R4 compatibility on the governed 341-row calibration and 1122-row validation roles. The 40-patient / 173-row final role remains sealed and forbidden to D2.
+
+## Active frontier ? Study 1, SG-000026 / D2
+
+**Baseline qualification and local FHIR compatibility**
+
+Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`.
+
+State: **ACTIVE ? GOVERNANCE ACTIVATION ONLY**
+
+Activation itself performs no model selection, training, calibration fitting, DAL architecture work, or Study 1 evaluation. Implementation may begin only after the activation grain is exact-head qualified, normally merged, and post-main verified. D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. After D8 there is no tuning, reselection, threshold change from final labels, or final rerun.
 
 ## Core P08 invariants
 
