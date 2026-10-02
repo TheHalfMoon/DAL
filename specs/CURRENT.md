@@ -191,17 +191,17 @@ On 2026-10-02 the founder authorized a scientific restart. The complete P08 eval
 - Study 0 no longer constrains the architecture of the definitive study.
 - **The SG-000022 PubMedQA PQA-L final test has been inspected. It may be used only as pilot evidence and never as a blind final evaluation for any later study.**
 
-## Active frontier — Study 1, SG-000025
+## Study 1 redesign foundation — SG-000025 closed
 
 **Research redesign, pilot diagnosis, and preregistered protocol**
 
 Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871888eb028b8af09` (Study 0 closeout).
 
-State: **ACTIVE — governance activation only**
+State: **CLOSED_CANONICAL**
 
-SG-000025 trains no model and runs no evaluation. It produces the D1 pilot forensic diagnosis, a literature refresh with a novelty-gap statement, a benchmark/licensing/contamination dossier, a zero-cost compute plan, and a preregistered protocol that seals an untouched final split before any label inspection. Study 0 PubMedQA PQA-L rows can never be a blind final evaluation.
+SG-000025 completed the Study 1 redesign without model training, tuning, Study 1 evaluation, or sealed-final label inspection. Canonical outputs are the D1 pilot forensic diagnosis, literature refresh and novelty-gap boundary, benchmark/licensing/contamination dossier, zero-cost compute plan, preregistered protocol, and `registry/study1_sg000025_closeout.json`. The FHIR-AgentBench final role remains sealed at 40 patients / 173 rows with `test_gold_serialized=false`. Study 0 PubMedQA PQA-L rows remain pilot-only and can never be a blind final evaluation.
 
-Study 1 stages: D1 pilot diagnosis, D2 baseline qualification, D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, D10 paper evidence and publication package. After D8 there is no tuning, no reselection, no threshold change from final labels, and no final rerun.
+The next possible stage is D2 baseline qualification, but it is **not activated by SG-000025 closeout**. D2 requires a separate governed contract and must use only permitted development roles. Study 1 stages remain D2 baseline qualification, D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging. After D8 there is no tuning, reselection, threshold change from final labels, or final rerun.
 
 ## Core P08 invariants
 

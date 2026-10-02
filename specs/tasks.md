@@ -298,7 +298,7 @@ Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca16
 
 ## Study 1 — Definitive DAL study
 
-### SG-000025 — Research redesign, pilot diagnosis, and preregistered protocol (ACTIVE — GOVERNANCE ONLY)
+### SG-000025 — Research redesign, pilot diagnosis, and preregistered protocol (CLOSED_CANONICAL)
 
 Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871888eb028b8af09`.
 
@@ -308,8 +308,8 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Literature refresh with citation chasing, tool-substitution record, and candidate novelty-gap statement - `registry/study1_literature_refresh_2026-10-02.json`; PR #110 merged `0b6e9dcabc558ee7c8fd61fc39c6a68050bda1c0`; post-main GAXBench `37058978862` and Manuscript `37058978882` SUCCESS; novelty remains unfrozen until the protocol grain closes
 - [x] Benchmark dossier (versions, hashes, licenses, Study 0 exposure, contamination risk) - `registry/study1_benchmark_dossier_2026-10-02.json`; PR #111 merged `1c816fafb67c9b6813caecf4051e29ef1adae9dd`; post-main GAXBench `37062757509` and Manuscript `37062757512` SUCCESS; final benchmark selection remains unfrozen
 - [x] Zero-cost compute plan with founder-account boundaries - `registry/study1_zero_cost_compute_plan_2026-10-02.json`; PR #112 merged `defff28527260c81d4482925cd43a47f12a21e25`; post-main GAXBench `37063390389` and Manuscript `37063390221` SUCCESS; final benchmark suite and final split remained sealed until this protocol grain
-- [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json` (this PR); final-test access remains `sealed`
-- [ ] Canonical SG-000025 closeout
+- [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json`; PR #113 merged `535efada86f7c5863b6eeda18b76d17a78e36b4e`; post-main GAXBench `37065781852` and Manuscript `37065781811` SUCCESS; final-test access remains `sealed`
+- [x] Canonical SG-000025 closeout (this closeout PR; evidence record `registry/study1_sg000025_closeout.json`)
 
 ### Later Study 1 stages (not activated)
 
