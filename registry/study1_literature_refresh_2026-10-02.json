@@ -1,0 +1,387 @@
+{
+  "schema_version": "0.1",
+  "record_id": "study1-literature-refresh-2026-10-02",
+  "grain_id": "SG-000025",
+  "search_date": "2026-10-02",
+  "scope": "Study 1 pre-protocol literature refresh; no novelty claim is frozen by this record alone.",
+  "cost": "zero founder cost",
+  "tooling": {
+    "discovery_used": [
+      "Consensus",
+      "OpenAlex",
+      "public web search"
+    ],
+    "primary_verification": [
+      "ACL Anthology",
+      "Nature Portfolio",
+      "JAMA Network",
+      "BMJ",
+      "PMLR",
+      "Oxford Academic",
+      "PubMed",
+      "arXiv"
+    ],
+    "semantic_scholar": "attempted as a discovery layer; no unique canonical claim accepted from it in this pass",
+    "scite": "unavailable: MCP requires a paid plan or active trial; excluded under zero-cost policy",
+    "gemini_notebook": "reserved for deep reading of selected PDFs; not a primary-source authority",
+    "final_verifier": "original paper or official publication record"
+  },
+  "search_domains": [
+    "medical QA and reasoning",
+    "abstention and selective prediction",
+    "uncertainty and calibration",
+    "medical metacognition",
+    "evidence-grounded QA and medical RAG",
+    "clinical agents and FHIR agents",
+    "real-world and clinician-rated evaluation",
+    "reporting and evaluation methodology"
+  ],
+  "included": [
+    {
+      "id": "medabstain-2026",
+      "area": "medical abstention",
+      "title": "Knowing When to Abstain: Medical LLMs Under Clinical Uncertainty",
+      "venue": "EACL 2026",
+      "doi": "10.18653/v1/2026.eacl-long.291",
+      "url": "https://aclanthology.org/2026.eacl-long.291/",
+      "verified_primary": true,
+      "dal_implication": "Explicit medical abstention, conformal prediction, and adversarial uncertainty evaluation are prior art; DAL must contribute beyond an abstain option."
+    },
+    {
+      "id": "medqabstain-2026",
+      "area": "medical abstention",
+      "title": "LLMs (Almost) Never Abstain Under Medical Uncertainty",
+      "venue": "ACL 2026",
+      "doi": "10.18653/v1/2026.acl-long.1365",
+      "url": "https://aclanthology.org/2026.acl-long.1365/",
+      "verified_primary": true,
+      "dal_implication": "Missing-answer medical MCQA and overcommitment evaluation are established; Study 1 must test richer evidence insufficiency and action policies."
+    },
+    {
+      "id": "metamedqa-2025",
+      "area": "medical metacognition",
+      "title": "Large Language Models lack essential metacognition for reliable medical reasoning",
+      "venue": "Nature Communications 2025",
+      "doi": "10.1038/s41467-024-55628-6",
+      "url": "https://www.nature.com/articles/s41467-024-55628-6",
+      "verified_primary": true,
+      "dal_implication": "Accuracy and knowing-when-not-to-answer must be evaluated separately."
+    },
+    {
+      "id": "uncertainty-proxies-2025",
+      "area": "uncertainty and calibration",
+      "title": "Large language model uncertainty proxies: discrimination and calibration for medical diagnosis and treatment",
+      "venue": "JAMIA 2025",
+      "doi": "10.1093/jamia/ocae254",
+      "url": "https://academic.oup.com/jamia/article/32/1/139/7819854",
+      "verified_primary": true,
+      "dal_implication": "Self-reported confidence is insufficient; Study 1 should compare multiple uncertainty signals and measure both discrimination and calibration."
+    },
+    {
+      "id": "probabilistic-medical-predictions-2024",
+      "area": "probability reliability",
+      "title": "Probabilistic medical predictions of large language models",
+      "venue": "npj Digital Medicine 2024",
+      "doi": "10.1038/s41746-024-01366-4",
+      "url": "https://www.nature.com/articles/s41746-024-01366-4",
+      "verified_primary": true,
+      "dal_implication": "Explicit confidence can be inferior to implicit probability signals, especially with smaller models and imbalanced datasets."
+    },
+    {
+      "id": "medsafe-review-2026",
+      "area": "decision-theoretic abstention",
+      "title": "When silence is safer: a review and decision-theoretic framework for LLM abstention in healthcare",
+      "venue": "npj Digital Medicine 2026",
+      "doi": "10.1038/s41746-026-02882-1",
+      "url": "https://www.nature.com/articles/s41746-026-02882-1",
+      "verified_primary": true,
+      "dal_implication": "Decision-theoretic abstention is established prior work; DAL cannot claim this concept alone as novel."
+    },
+    {
+      "id": "medhelm-2026",
+      "area": "holistic medical evaluation",
+      "title": "Holistic evaluation of large language models for medical tasks with MedHELM",
+      "venue": "Nature Medicine 2026",
+      "doi": "10.1038/s41591-025-04151-2",
+      "url": "https://www.nature.com/articles/s41591-025-04151-2",
+      "verified_primary": true,
+      "dal_implication": "A definitive DAL study cannot rely on one exam-style QA dataset; evaluation should span complementary clinical task classes."
+    },
+    {
+      "id": "jama-evaluation-review-2025",
+      "area": "evaluation methodology",
+      "title": "Testing and Evaluation of Health Care Applications of Large Language Models: A Systematic Review",
+      "venue": "JAMA 2025",
+      "doi": "10.1001/jama.2024.21700",
+      "url": "https://jamanetwork.com/journals/jama/fullarticle/2825147",
+      "verified_primary": true,
+      "dal_implication": "Accuracy-dominant, exam-style evaluation is insufficient; real clinical data, broader metrics, bias and deployment considerations strengthen Study 1."
+    },
+    {
+      "id": "meaningful-clinical-evaluation-2026",
+      "area": "evaluation methodology",
+      "title": "How to meaningfully evaluate AI in clinical medicine",
+      "venue": "Nature Medicine 2026",
+      "doi": "10.1038/s41591-026-04350-5",
+      "url": "https://www.nature.com/articles/s41591-026-04350-5",
+      "verified_primary": true,
+      "dal_implication": "Study claims must be bounded to what the evaluation setup truly measures; benchmark score alone is not application readiness."
+    },
+    {
+      "id": "frontier-v-clinical-ai-2026",
+      "area": "real-world clinician-rated evaluation",
+      "title": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
+      "venue": "Nature Medicine 2026",
+      "doi": "10.1038/s41591-026-04431-5",
+      "url": "https://www.nature.com/articles/s41591-026-04431-5",
+      "verified_primary": true,
+      "dal_implication": "Blinded clinician review of de-identified real clinical queries is a strong external-validation model, while public benchmarks remain contamination-prone."
+    },
+    {
+      "id": "benchmark-robustness-2026",
+      "area": "robustness and benchmark validity",
+      "title": "Evaluating the robustness and readiness of large frontier models in health AI applications",
+      "venue": "Nature Medicine 2026",
+      "url": "https://www.nature.com/articles/s41591-026-04501-8",
+      "verified_primary": true,
+      "dal_implication": "Study 1 should include adversarial or information-removal stress tests and avoid equating high benchmark scores with robust reasoning."
+    },
+    {
+      "id": "clinical-decision-limitations-2024",
+      "area": "realistic clinical decision making",
+      "title": "Evaluation and mitigation of the limitations of large language models in clinical decision-making",
+      "venue": "Nature Medicine 2024",
+      "doi": "10.1038/s41591-024-03097-1",
+      "url": "https://www.nature.com/articles/s41591-024-03097-1",
+      "verified_primary": true,
+      "dal_implication": "Realistic clinical workflows expose failures hidden by licensing-exam QA; evidence order, missing information and guideline adherence matter."
+    },
+    {
+      "id": "agentclinic-2026",
+      "area": "clinical agents",
+      "title": "AgentClinic: a multimodal benchmark for tool-using clinical AI agents",
+      "venue": "npj Digital Medicine 2026",
+      "doi": "10.1038/s41746-026-02674-7",
+      "url": "https://www.nature.com/articles/s41746-026-02674-7",
+      "verified_primary": true,
+      "dal_implication": "Static QA alone is insufficient for agentic clinical decision evaluation; sequential tool use is established benchmark territory."
+    },
+    {
+      "id": "fhir-agentbench-2026",
+      "area": "FHIR agents",
+      "title": "FHIR-AgentBench: Benchmarking LLM Agents for Interoperable Electronic Health Records",
+      "venue": "ML4H 2026 / PMLR",
+      "url": "https://proceedings.mlr.press/v297/lee26a.html",
+      "verified_primary": true,
+      "dal_implication": "FHIR-grounded agent evaluation is prior art; DAL must treat interoperability as an evaluation setting, not a novelty claim."
+    },
+    {
+      "id": "bridge-2026",
+      "area": "real-world clinical text",
+      "title": "BRIDGE: benchmarking large language models for understanding real-world clinical practice texts",
+      "venue": "Nature Biomedical Engineering 2026",
+      "doi": "10.1038/s41551-026-01719-2",
+      "url": "https://www.nature.com/articles/s41551-026-01719-2",
+      "verified_primary": true,
+      "dal_implication": "Real-world EHR-derived multilingual evaluation provides a stronger external-validity target than exam-style QA alone."
+    },
+    {
+      "id": "real-world-clinical-rag-2025",
+      "area": "evidence-grounded clinical QA",
+      "title": "Answering real-world clinical questions using large language model, retrieval-augmented generation, and agentic systems",
+      "venue": "Digital Health 2025",
+      "doi": "10.1177/20552076251348850",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40510193/",
+      "verified_primary": true,
+      "dal_implication": "Evidence-grounded answers and physician-rated actionability are prior art; DAL should evaluate whether assurance changes justified action, not merely citation presence."
+    },
+    {
+      "id": "public-assistant-rct-2026",
+      "area": "human-AI evaluation",
+      "title": "Reliability of LLMs as medical assistants for the general public: a randomized preregistered study",
+      "venue": "Nature Medicine 2026",
+      "doi": "10.1038/s41591-025-04074-y",
+      "url": "https://www.nature.com/articles/s41591-025-04074-y",
+      "verified_primary": true,
+      "dal_implication": "Strong model-only performance need not translate to human benefit; external user or clinician evaluation should be separated from benchmark performance."
+    },
+    {
+      "id": "tripod-ai-2024",
+      "area": "reporting guidance",
+      "title": "TRIPOD+AI statement",
+      "venue": "BMJ 2024",
+      "doi": "10.1136/bmj-2023-078378",
+      "url": "https://www.bmj.com/content/385/bmj-2023-078378",
+      "verified_primary": true,
+      "dal_implication": "Study 1 reporting should explicitly document data sources, model development, evaluation and limitations."
+    },
+    {
+      "id": "medgraphrag-2025",
+      "area": "medical RAG and provenance",
+      "title": "Medical Graph RAG: Evidence-based Medical Large Language Model via Graph Retrieval-Augmented Generation",
+      "venue": "ACL 2025",
+      "doi": "10.18653/v1/2025.acl-long.1381",
+      "url": "https://aclanthology.org/2025.acl-long.1381/",
+      "verified_primary": true,
+      "dal_implication": "Evidence-grounded retrieval and credible sourcing are established; provenance alone is not sufficient DAL novelty."
+    },
+    {
+      "id": "decide-ai-2022",
+      "area": "clinical evaluation reporting",
+      "title": "Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI",
+      "venue": "Nature Medicine 2022",
+      "doi": "10.1038/s41591-022-01772-9",
+      "url": "https://www.nature.com/articles/s41591-022-01772-9",
+      "verified_primary": true,
+      "dal_implication": "Any later live or clinician-facing DAL evaluation should follow established early-stage clinical AI reporting principles."
+    },
+    {
+      "id": "csedb-2026",
+      "area": "safety-effectiveness evaluation",
+      "title": "A novel evaluation benchmark for medical LLMs illuminating safety and effectiveness in clinical domains",
+      "venue": "npj Digital Medicine 2026",
+      "url": "https://www.nature.com/articles/s41746-025-02277-8",
+      "verified_primary": true,
+      "dal_implication": "Safety and effectiveness require multidimensional, consequence-aware evaluation beyond accuracy and calibration alone.",
+      "doi": "10.1038/s41746-025-02277-8"
+    },
+    {
+      "id": "benchmark-limitations-2026",
+      "area": "benchmark contamination and inference control",
+      "title": "Limited benchmarks constrain the conclusions of a general-purpose versus clinical AI comparison",
+      "venue": "Nature Medicine 2026 Matters Arising",
+      "doi": "10.1038/s41591-026-04638-6",
+      "url": "https://www.nature.com/articles/s41591-026-04638-6",
+      "verified_primary": true,
+      "dal_implication": "Public-benchmark contamination, evaluator affinity, small real-world samples and underspecified inference settings can invalidate broad superiority claims."
+    },
+    {
+      "id": "evidence-sufficiency-benchmark-2026",
+      "area": "evidence sufficiency and abstention",
+      "title": "Do LLMs Know When Evidence is Insufficient? An Evidence Sufficiency Benchmark for Answer-Abstention Calibration in Retrieval-Augmented Generation",
+      "venue": "Computers, Materials & Continua 2026",
+      "doi": "10.32604/cmc.2026.086343",
+      "url": "https://www.techscience.com/cmc/v89n1/68467",
+      "verified_primary": true,
+      "dal_implication": "Full, partial, irrelevant, absent and conflicting evidence gradients with answer/abstain calibration are prior art; DAL cannot claim novelty for an evidence-sufficiency gradient alone."
+    },
+    {
+      "id": "healthcontradict-2026",
+      "area": "contradictory biomedical evidence",
+      "title": "HealthContradict: Evaluating biomedical knowledge conflicts in language models",
+      "venue": "npj Digital Medicine 2026",
+      "doi": "10.1038/s41746-025-02336-0",
+      "url": "https://www.nature.com/articles/s41746-025-02336-0",
+      "verified_primary": true,
+      "dal_implication": "Expert-verified biomedical contradictory-context evaluation is prior art; DAL must go beyond conflict detection or context-resistance alone."
+    },
+    {
+      "id": "egda-2026",
+      "area": "evidence-bound decision authorization",
+      "title": "Evidence-Graded Decision Authorization for Safe Clinical AI: A Constrained Reasoning Framework",
+      "venue": "medRxiv preprint 2026",
+      "doi": "10.64898/2026.05.19.26353565",
+      "url": "https://www.medrxiv.org/content/10.64898/2026.05.19.26353565v1",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "A framework separating evidence extraction, sufficiency assessment and claim-level authorization is already described; DAL cannot claim evidence-bound authorization itself as first or uniquely novel."
+    },
+    {
+      "id": "cic-risk-control-2026",
+      "area": "statistical risk control",
+      "title": "Uncertainty-Aware Abstention in Large Language Models with Provable Alignment Guarantees",
+      "venue": "arXiv preprint 2026",
+      "arxiv": "2607.04430",
+      "url": "https://arxiv.org/abs/2607.04430",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "Held-out-calibration thresholding with finite-sample risk guarantees is prior art in general QA; DAL must not claim generic statistical risk control as novel."
+    },
+    {
+      "id": "clinical-diagnostics-grounding-2026",
+      "area": "clinical diagnostic robustness",
+      "title": "Grounding large language models in clinical diagnostics",
+      "venue": "Nature Communications 2026",
+      "doi": "10.1038/s41467-026-70274-w",
+      "url": "https://www.nature.com/articles/s41467-026-70274-w",
+      "verified_primary": true,
+      "dal_implication": "Contradictory evidence, confirmation bias, incomplete information gathering and uncertainty limitations are documented in multi-stage clinical diagnosis."
+    },
+    {
+      "id": "sup-mimic-2026",
+      "area": "contradictory clinical evidence",
+      "title": "SUP-MIMIC: A Multi-Task Clinical Diagnosis Benchmark for Evaluating LLMs' Robustness to Contradictory Evidence",
+      "venue": "arXiv preprint 2026",
+      "arxiv": "2608.29582",
+      "url": "https://arxiv.org/abs/2608.29582",
+      "verified_primary": true,
+      "peer_reviewed": false,
+      "dal_implication": "Clinical ambiguity and contradictory-evidence robustness are active benchmark areas; any DAL stress-test novelty must be narrower and empirically distinguished."
+    }
+  ],
+  "novelty_gap_candidate": {
+    "status": "materially-narrowed-candidate-not-frozen",
+    "not_novel": [
+      "medical abstention or explicit abstain options",
+      "decision-theoretic abstention",
+      "uncertainty estimation or calibration alone",
+      "medical RAG or evidence provenance alone",
+      "FHIR or healthcare-agent evaluation alone"
+    ],
+    "candidate": "Potential contribution only: a preregistered cross-setting medical decision-assurance system that combines statistically bounded action authorization, semantic evidence sufficiency/contradiction, bounded revise-or-escalate behavior, and machine-verifiable provenance/claim constraints, with realistic external evaluation. This integration claim remains unfrozen and must be tested directly against EGDA, CIC, evidence-sufficiency, contradiction, and medical-abstention baselines."
+  },
+  "protocol_implications": [
+    "Select QA candidates with macro-F1 and balanced accuracy in addition to accuracy to prevent majority-class collapse.",
+    "Evaluate uncertainty discrimination and calibration separately; do not rely on verbalized confidence alone.",
+    "Construct evidence-insufficiency cases that cannot be solved by detecting context presence or absence.",
+    "Constrain target coverage by the answerable fraction and preregister deterministic tie handling.",
+    "Use a held-out calibration set for any risk-control threshold; final labels cannot tune thresholds.",
+    "Use multiple complementary evaluation settings rather than one public medical QA benchmark.",
+    "Include adversarial information removal or perturbation and realistic EHR/FHIR or agentic evaluation where licenses and compute permit.",
+    "Track benchmark contamination risk and treat previously inspected Study 0 rows as pilot-only evidence.",
+    "Keep model-only benchmark performance separate from clinician- or user-rated external utility.",
+    "Apply TRIPOD+AI and DECIDE-AI principles where applicable to reporting and later external evaluation.",
+    "Include direct conceptual and empirical baselines for Evidence Sufficiency Benchmark, HealthContradict-style conflict conditions, EGDA-style authorization, and CIC-style risk control where technically reproducible."
+  ],
+  "limitations": [
+    "This is a pre-protocol targeted refresh, not yet a PRISMA systematic review.",
+    "Scite MCP was unavailable under the zero-cost constraint because it required a paid plan or active trial.",
+    "ResearchRabbit, Connected Papers, Litmaps, Elicit, SciSpace, Zotero and Gemini Notebook were not treated as primary evidence authorities in this pass.",
+    "Citation chasing and benchmark licensing/contamination screening remain separate SG-000025 work before novelty freeze.",
+    "Preprints, if later included, must remain explicitly distinguished from peer-reviewed evidence."
+  ],
+  "search_log": [
+    "medical LLM abstention selective prediction uncertainty calibration 2024-2026",
+    "medical LLM evidence-grounded QA retrieval augmented generation provenance 2024-2026",
+    "healthcare agent benchmark FHIR clinical agents medical LLM evaluation 2024-2026",
+    "real-world clinical LLM evaluation clinician-rated benchmarks 2024-2026",
+    "medical LLM benchmark contamination robustness adversarial evaluation 2024-2026"
+  ],
+  "citation_chasing": {
+    "backward": [
+      {
+        "seed": "Holistic evaluation of large language models for medical tasks with MedHELM",
+        "method": "OpenAlex referenced-works graph followed to original sources",
+        "retained": "Data Contamination: From Memorization to Exploitation",
+        "doi": "10.18653/v1/2022.acl-short.18",
+        "url": "https://aclanthology.org/2022.acl-short.18/",
+        "implication": "Contamination must be treated as a validity threat rather than a footnote."
+      }
+    ],
+    "forward_or_response_chain": [
+      {
+        "seed": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
+        "retained": "Limited benchmarks constrain the conclusions of a general-purpose versus clinical AI comparison",
+        "doi": "10.1038/s41591-026-04638-6",
+        "url": "https://www.nature.com/articles/s41591-026-04638-6",
+        "implication": "Contamination, evaluator affinity, sample scope, and inference controls must be preregistered and reported."
+      }
+    ]
+  },
+  "novelty_collisions": [
+    "Evidence-sufficiency gradients and abstention calibration are established.",
+    "Biomedical conflicting-context evaluation is established.",
+    "Evidence extraction plus sufficiency plus claim-level authorization has a 2026 clinical preprint analogue (EGDA).",
+    "Finite-sample risk-controlled abstention has a 2026 general-QA preprint analogue (CIC)."
+  ]
+}
