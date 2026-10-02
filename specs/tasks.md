@@ -296,9 +296,32 @@ Research contract: Issue #101. Canonical dependency: `f8e075c7620d32614ad0d6ca16
 - Model release, fine-tuning notebooks, Hugging Face release, and release tag for Study 0 are not pursued.
 - The governed DAL naming migration / GAXBench compatibility release moves to the Study 1 program.
 
-## Study 1 — Definitive DAL study (not yet activated)
+## Study 1 — Definitive DAL study
 
-Study 1 needs its own research contract and SpecGrain activation. Its first stage is research redesign only: literature refresh, a non-destructive pilot forensic diagnosis, benchmark and licensing review, and a preregistered protocol with an untouched final-evaluation boundary. No training or final evaluation may start before the protocol is frozen.
+### SG-000025 — Research redesign, pilot diagnosis, and preregistered protocol (ACTIVE — GOVERNANCE ONLY)
+
+Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871888eb028b8af09`.
+
+- [x] Create research contract Issue #107
+- [ ] Qualify and merge activation; verify post-main
+- [ ] D1 pilot forensic diagnosis artifact (deterministic, from immutable Study 0 raw predictions)
+- [ ] Literature refresh with citation chasing, tool-substitution record, and novelty-gap statement
+- [ ] Benchmark dossier (versions, hashes, licenses, Study 0 exposure, contamination risk)
+- [ ] Zero-cost compute plan with founder-account boundaries
+- [ ] Preregistered Study 1 protocol with sealed final split
+- [ ] Canonical SG-000025 closeout
+
+### Later Study 1 stages (not activated)
+
+- [ ] D2 baseline qualification
+- [ ] D3 architecture candidates
+- [ ] D4 training/objective experiments
+- [ ] D5 calibration/assurance development (including DAL-R controlled revision if development evidence supports it)
+- [ ] D6 ablations
+- [ ] D7 model selection
+- [ ] D8 protocol freeze
+- [ ] D9 untouched final evaluation
+- [ ] D10 paper evidence, claim ledger, manuscript, Hugging Face and arXiv packages
 
 ## P10 — Peer review / external validation
 

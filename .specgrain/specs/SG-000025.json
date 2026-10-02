@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "SG-000025",
+  "title": "DAL Study 1 - Research redesign, pilot diagnosis, and preregistered protocol",
+  "state": "ACTIVE",
+  "method": "research",
+  "parent_id": null,
+  "dependencies": ["SG-000024"],
+  "children": [],
+  "labels": ["study-1", "redesign", "literature", "protocol", "preregistration"],
+  "outcome": "Produce a canonical pilot forensic diagnosis, a current literature refresh with a novelty-gap statement, a benchmark/licensing/contamination dossier, a zero-cost compute plan, and a preregistered Study 1 protocol with a sealed untouched final-evaluation split, before any Study 1 training or evaluation.",
+  "rationale": "The founder authorized a scientific restart on 2026-10-02. Study 0 showed a null, majority-class-like action result and a constructed abstention benchmark. A definitive study must first diagnose the pilot, re-establish the literature gap, choose benchmarks it has never inspected, and preregister hypotheses and endpoints so that later development cannot drift toward a convenient result.",
+  "scope_in": [
+    "Non-destructive D1 forensic diagnosis of immutable Study 0 raw predictions",
+    "Literature refresh across medical QA, reasoning, abstention, selective prediction, calibration, uncertainty, metacognition, evidence-grounded QA, medical RAG, claim verification, clinical agents, and FHIR agents, with citation chasing and original-source verification",
+    "Novelty-gap statement derived from the refresh",
+    "Benchmark dossier with versions, hashes, licenses, inclusion/exclusion rules, Study 0 exposure, and contamination risk",
+    "Zero-cost compute plan with explicit founder-account boundaries",
+    "Preregistered Study 1 protocol with research questions, hypotheses, primary/secondary/exploratory endpoints, baselines, ablations, metrics, statistics, development stages D2-D7, D8 freeze rules, and a sealed final split",
+    "Exact-head cross-platform CI plus Alibaba OpenCodeReview and secure TypeSafe Jev qualification"
+  ],
+  "scope_out": [
+    "No Study 1 model training, tuning, or evaluation",
+    "No inspection of sealed final-split labels",
+    "No change to Study 0 evidence, claims, or frozen digests",
+    "No reuse of any Study 0 PubMedQA PQA-L row as a blind final evaluation",
+    "No novelty claim unsupported by the refresh",
+    "No founder-paid tools, APIs, compute, datasets, or reviewers"
+  ],
+  "acceptance": [
+    "Research contract is Issue #107",
+    "Canonical dependency is Study 0 closeout main 4e6ed79aebffce10d812bf6871888eb028b8af09",
+    "Activation is governance-only",
+    "Pilot diagnosis is generated deterministically from immutable Study 0 raw predictions and changes no Study 0 artifact",
+    "Literature refresh records sources, queries, dates, screening, citation chasing, tool substitutions, and verified identifiers",
+    "Benchmark dossier records license and Study 0 exposure for every candidate",
+    "Protocol freezes a primary endpoint and seals the final split by deterministic hashing before any label inspection",
+    "Exact-head GAXBench, Alibaba OpenCodeReview, and secure Jev pass on every head; normal merges with expected-head guards; post-main verification after every merge"
+  ],
+  "change_surface": [
+    ".specgrain/specs/SG-000025.json",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "risk": {
+    "level": "critical",
+    "recovery": "If any redesign step would require inspecting sealed final labels, reusing Study 0 test rows as blind evidence, or paid resources, stop and record the blocker instead."
+  },
+  "evidence": {
+    "required": [
+      "issue-107-research-contract",
+      "study0-canonical-closeout",
+      "activation-exact-head-cross-platform-ci-pass",
+      "activation-alibaba-ocr-exact-range-evidence",
+      "activation-jev-exact-diff-review-evidence",
+      "activation-expected-head-normal-merge",
+      "activation-post-main-verification",
+      "pilot-forensic-diagnosis",
+      "literature-refresh-and-novelty-gap",
+      "benchmark-licensing-contamination-dossier",
+      "zero-cost-compute-plan",
+      "preregistered-protocol-with-sealed-final-split",
+      "canonical-closeout-pass"
+    ]
+  },
+  "metadata": {
+    "research_issue": 107,
+    "program": "DAL Study 1",
+    "canonical_dependency": "4e6ed79aebffce10d812bf6871888eb028b8af09",
+    "study0_frozen_claim_set_sha256": "ef2e347d9ef4298deb68a422c063aa92e9968ae5d00fb0c511576448eb7a2b9b",
+    "study0_final_test_reusable_as_blind_final": false,
+    "development_stages": ["D1 pilot diagnosis", "D2 baseline qualification", "D3 architecture candidates", "D4 training/objective experiments", "D5 calibration/assurance development", "D6 ablations", "D7 model selection", "D8 protocol freeze", "D9 untouched final evaluation", "D10 paper evidence and publication package"],
+    "activation_boundary": {
+      "governance_only": true,
+      "training_permitted": false,
+      "final_split_label_access_permitted": false
+    }
+  }
+}

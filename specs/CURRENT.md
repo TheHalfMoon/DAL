@@ -191,9 +191,17 @@ On 2026-10-02 the founder authorized a scientific restart. The complete P08 eval
 - Study 0 no longer constrains the architecture of the definitive study.
 - **The SG-000022 PubMedQA PQA-L final test has been inspected. It may be used only as pilot evidence and never as a blind final evaluation for any later study.**
 
-## Next frontier — Study 1 (not activated)
+## Active frontier — Study 1, SG-000025
 
-The definitive DAL study needs its own research contract and SpecGrain. Its first stage is research redesign only: a current literature refresh, a non-destructive pilot forensic diagnosis, benchmark and licensing review, and a preregistered protocol with an untouched final-evaluation boundary. Training and final evaluation cannot start before the protocol is frozen.
+**Research redesign, pilot diagnosis, and preregistered protocol**
+
+Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871888eb028b8af09` (Study 0 closeout).
+
+State: **ACTIVE — governance activation only**
+
+SG-000025 trains no model and runs no evaluation. It produces the D1 pilot forensic diagnosis, a literature refresh with a novelty-gap statement, a benchmark/licensing/contamination dossier, a zero-cost compute plan, and a preregistered protocol that seals an untouched final split before any label inspection. Study 0 PubMedQA PQA-L rows can never be a blind final evaluation.
+
+Study 1 stages: D1 pilot diagnosis, D2 baseline qualification, D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, D10 paper evidence and publication package. After D8 there is no tuning, no reselection, no threshold change from final labels, and no final rerun.
 
 ## Core P08 invariants
 
