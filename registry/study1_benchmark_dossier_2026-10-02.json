@@ -1,0 +1,180 @@
+{
+  "schema_version": "0.1",
+  "record_id": "study1-benchmark-dossier-2026-10-02",
+  "grain_id": "SG-000025",
+  "as_of": "2026-10-02",
+  "purpose": "Pre-protocol eligibility dossier. This record does not select or unseal a Study 1 final benchmark.",
+  "selection_rules": {
+    "required": [
+      "scientifically relevant to the Study 1 research question",
+      "license and data-use terms separately recorded for code and data",
+      "Study 0 exposure explicitly recorded",
+      "foundation-model contamination risk explicitly recorded",
+      "zero-founder-cost execution status explicitly recorded",
+      "no final labels inspected during protocol design"
+    ],
+    "disqualifiers_for_primary_final_without_resolution": [
+      "Study 0 blind-final reuse",
+      "unclear or incompatible data-use rights",
+      "paid-only execution path",
+      "required inaccessible credentials or regulated data",
+      "final-label inspection before protocol freeze"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "study0-pubmedqa-pqal",
+      "name": "PubMedQA PQA-L rows used in DAL Study 0",
+      "role": "pilot-only",
+      "eligibility": "excluded-from-blind-final",
+      "study0_exposure": "directly inspected and used in Study 0 training/development/calibration/final evaluation",
+      "contamination_risk": "irrelevant to eligibility because Study 0 exposure alone disqualifies blind-final use",
+      "license_status": "existing Study 0 provenance applies",
+      "zero_cost": true,
+      "reason": "Issue #107 explicitly forbids any Study 0 PubMedQA PQA-L row from serving as a blind Study 1 final evaluation."
+    },
+    {
+      "id": "agentclinic",
+      "name": "AgentClinic",
+      "paper_doi": "10.1038/s41746-026-02674-7",
+      "repository": "https://github.com/SamuelSchmidgall/AgentClinic",
+      "repository_revision": "b6570edefb940857a7c334350656b29f9d984f24",
+      "code_license": "MIT",
+      "data_license": "component-dependent; MedQA/NEJM/MIMIC variants require source-specific review",
+      "access": "public code; MIMIC-IV variants require PhysioNet credentialed access",
+      "study0_exposure": "not used as Study 0 final benchmark",
+      "contamination_risk": "high-to-moderate for public benchmark-derived variants; model-cutoff dependent",
+      "zero_cost": "conditional-local-open-model",
+      "scientific_value": "sequential/agentic medical diagnosis and tool-use behavior",
+      "recommended_role": "secondary-agentic-stress-test",
+      "eligibility": "conditional",
+      "blocking_items": ["choose a source variant with compatible data terms", "avoid paid API-only configurations", "record base-model cutoff and public-benchmark exposure"]
+    },
+    {
+      "id": "fhir-agentbench",
+      "name": "FHIR-AgentBench",
+      "paper_url": "https://proceedings.mlr.press/v297/lee26a.html",
+      "repository": "https://github.com/glee4810/FHIR-AgentBench",
+      "repository_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+      "code_and_repo_license": "CC-BY-4.0",
+      "data_access": "benchmark files are public in the repository; official workflow uses MIMIC-IV FHIR demo resources and a Google Cloud Healthcare FHIR store",
+      "study0_exposure": "Study 0 attempted the benchmark but ended interface-blocked-preexecution; that result remains immutable",
+      "contamination_risk": "public benchmark; model-cutoff dependent",
+      "zero_cost": "unresolved-for-official-execution",
+      "scientific_value": "interoperable EHR/FHIR agent evaluation",
+      "recommended_role": "secondary-external-agentic-evaluation-if-local-reproduction-is-protocol-compatible",
+      "eligibility": "conditional-blocked",
+      "blocking_items": ["official cloud execution is not automatically zero-cost", "any local/offline execution must preserve benchmark semantics and be frozen before evaluation"]
+    },
+    {
+      "id": "healthcontradict",
+      "name": "HealthContradict",
+      "paper_doi": "10.1038/s41746-025-02336-0",
+      "repository": "https://github.com/tinaboya/HealthContradict",
+      "repository_revision": "97925bfb8680721be9d36e43397f988a6d499634",
+      "code_license": "no repository license detected",
+      "data_access": "processed dataset and prompts are publicly present in the repository",
+      "study0_exposure": "not used in Study 0",
+      "contamination_risk": "public 2026 benchmark; model-cutoff dependent",
+      "zero_cost": "technically local, legally unresolved for reuse",
+      "scientific_value": "expert-verified contradictory biomedical context and context-reliance stress testing",
+      "recommended_role": "high-value-secondary-contradiction-test-after-license-clarification",
+      "eligibility": "license-clearance-required",
+      "blocking_items": ["paper open-access terms do not automatically establish a software/data repository license", "clarify reuse terms before canonical benchmark selection"]
+    },
+    {
+      "id": "bridge-open",
+      "name": "BRIDGE / BRIDGE-Open",
+      "paper_doi": "10.1038/s41551-026-01719-2",
+      "repository": "https://github.com/YLab-Open/BRIDGE",
+      "repository_revision": "481d48f374571a21c90c637fc62fa865319601d9",
+      "repository_license": "NOASSERTION/Other in GitHub metadata",
+      "data_license": "source-specific data-use agreements; regulated sources require original access",
+      "access": "open subset plus regulated benchmark components",
+      "study0_exposure": "not used in Study 0",
+      "contamination_risk": "variable across component datasets; must be tracked per task",
+      "zero_cost": "conditional; local inference supported but full-suite compute may exceed local CPU feasibility",
+      "scientific_value": "large real-world clinical-text evaluation across tasks and languages",
+      "recommended_role": "candidate-realistic-external-evaluation-on-a-small-license-compatible-open-subset",
+      "eligibility": "conditional",
+      "blocking_items": ["select only source tasks with compatible DUA/license", "quantify compute before protocol freeze", "record task-level contamination risk"]
+    },
+    {
+      "id": "csedb",
+      "name": "Clinical Safety-Effectiveness Dual-Track Benchmark (CSEDB)",
+      "paper_doi": "10.1038/s41746-025-02277-8",
+      "repository": "https://github.com/Medlinker-MG/CSEDB",
+      "repository_revision": "221b34bbfe661d0e47105784abe5a37e1d400f7c",
+      "code_license": "Apache-2.0",
+      "data_access": "repository contains evaluation assets, but full evaluation capability requires author-issued API keys and verification-prompt permissions",
+      "study0_exposure": "not used in Study 0",
+      "contamination_risk": "public benchmark publication; model-cutoff dependent",
+      "zero_cost": "access-gated; paid founder resources are forbidden",
+      "scientific_value": "physician-developed open-ended safety/effectiveness evaluation across clinical departments",
+      "recommended_role": "external-safety-benchmark-only-if-free-permission-is-granted-and-protocol-is-reproducible",
+      "eligibility": "access-gated",
+      "blocking_items": ["verification prompts are permission-gated", "API/access terms must be obtained without founder cost", "scoring reproducibility must be verified before selection"]
+    },
+    {
+      "id": "evidence-sufficiency-benchmark",
+      "name": "Evidence Sufficiency Benchmark for answer-abstention calibration",
+      "paper_doi": "10.32604/cmc.2026.086343",
+      "repository": null,
+      "code_license": "not verified",
+      "data_access": "no canonical public code/data release verified in this pass",
+      "study0_exposure": "not used in Study 0",
+      "contamination_risk": "unknown until a reproducible dataset release is identified",
+      "zero_cost": "conceptual-baseline-only-at-present",
+      "scientific_value": "direct prior work for full/partial/irrelevant/absent/conflicting evidence and abstention calibration",
+      "recommended_role": "conceptual-and-methodological-baseline",
+      "eligibility": "not-executable-yet",
+      "blocking_items": ["verify canonical dataset/code availability and reuse terms before executable inclusion"]
+    },
+    {
+      "id": "sup-mimic",
+      "name": "SUP-MIMIC",
+      "paper": "SUP-MIMIC: A Multi-Task Clinical Diagnosis Benchmark for Evaluating LLMs' Robustness to Contradictory Evidence",
+      "repository": "https://github.com/EileenYYY/SUP-MIMIC",
+      "publication_status": "preprint/under-review as of dossier date",
+      "data_access": "code/synthetic examples may be public; MIMIC-IV patient data require PhysioNet credentialed access and applicable agreements",
+      "study0_exposure": "not used in Study 0",
+      "contamination_risk": "lower for newly constructed task framing but source-data/model exposure remains model-dependent",
+      "zero_cost": "credential-gated",
+      "scientific_value": "clinical ambiguity and contradictory-evidence robustness",
+      "recommended_role": "future-secondary-benchmark-if-credentialed-access-exists",
+      "eligibility": "access-gated",
+      "blocking_items": ["MIMIC-IV credentialed access", "preprint status", "verify exact data and code license before selection"]
+    },
+    {
+      "id": "public-medical-mcqa",
+      "name": "Public medical MCQA benchmarks (for example MedQA-family tasks)",
+      "role": "development-and-comparability-only-unless-a-newly-sealed-split-is-justified",
+      "eligibility": "high-contamination-risk",
+      "study0_exposure": "varies; PubMedQA Study 0 rows are specifically excluded from blind-final use",
+      "contamination_risk": "high because popular public QA benchmarks may appear in foundation-model pretraining or post-training",
+      "zero_cost": "generally yes for open datasets",
+      "scientific_value": "baseline comparability and development diagnostics",
+      "blocking_items": ["must not be the sole primary final endpoint", "model-specific contamination uncertainty must be reported"]
+    }
+  ],
+  "recommended_preprotocol_structure": {
+    "primary_final": "not selected in SG-000025 dossier; must be sealed only after protocol and contamination review",
+    "development": ["license-compatible public medical QA/reasoning data excluding Study 0 blind-final reuse"],
+    "secondary_stress_tests": ["HealthContradict if reuse terms are clarified", "AgentClinic compatible open variant", "FHIR-AgentBench only if a zero-cost protocol-compatible execution path is frozen"],
+    "realistic_external": ["small BRIDGE-Open subset with source-specific license/DUA and feasible compute", "CSEDB only if free author permission and reproducible scoring are obtained"],
+    "conceptual_baselines": ["MedAbstain/MedQAbstain protocols", "Evidence Sufficiency Benchmark", "EGDA authorization framework", "CIC finite-sample risk-control framework"]
+  },
+  "protocol_constraints": [
+    "Do not inspect labels of any candidate sealed final split before protocol freeze.",
+    "Record code license and data-use terms separately; an open repository license does not automatically license benchmark data from external sources.",
+    "Record exact repository/data revisions or hashes before any selected benchmark is used.",
+    "Treat public-benchmark contamination as a validity threat rather than assuming independence from model training.",
+    "Prefer a complementary suite: utility/reasoning, semantic evidence insufficiency or contradiction, selective risk, and realistic external evaluation.",
+    "No benchmark may require founder-paid APIs, cloud, datasets, reviewers, or compute.",
+    "Any local adaptation of an official benchmark must preserve semantics, be documented, and be frozen before evaluation."
+  ],
+  "decision": {
+    "status": "dossier-complete-selection-not-frozen",
+    "summary": "No single currently reviewed benchmark satisfies novelty, contamination, licensing, realistic-validity, and zero-cost requirements strongly enough to serve alone as the Study 1 primary final endpoint. The preregistered protocol should therefore define a complementary evaluation suite and a genuinely sealed final boundary rather than reuse one familiar public benchmark as the sole primary test."
+  }
+}
