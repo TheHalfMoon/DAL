@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1",
+  "grain": "SG-000025",
+  "program": "Study 1",
+  "title": "Research redesign, pilot diagnosis, and preregistered protocol",
+  "status": "closed-canonical",
+  "research_contract_issue": 107,
+  "canonical_dependency": "4e6ed79aebffce10d812bf6871888eb028b8af09",
+  "pre_closeout_main": "535efada86f7c5863b6eeda18b76d17a78e36b4e",
+  "governance_scope": "research-design-only",
+  "training_performed": false,
+  "study1_evaluation_performed": false,
+  "sealed_final_labels_inspected": false,
+  "deliverables": [
+    {
+      "id": "activation",
+      "pr": 108,
+      "merge_sha": "d1d2728d3472b0384a40210ff509fa596e297234",
+      "post_main_gaxbench_run": 37056588637,
+      "post_main_manuscript_run": 37056588702
+    },
+    {
+      "id": "d1-pilot-forensic-diagnosis",
+      "pr": 109,
+      "merge_sha": "a81a69e878535d3812bde4235798577f83e16651",
+      "post_main_gaxbench_run": 37057211210,
+      "post_main_manuscript_run": 37057211027
+    },    {
+      "id": "literature-refresh",
+      "pr": 110,
+      "merge_sha": "0b6e9dcabc558ee7c8fd61fc39c6a68050bda1c0",
+      "artifact": "registry/study1_literature_refresh_2026-10-02.json",
+      "post_main_gaxbench_run": 37058978862,
+      "post_main_manuscript_run": 37058978882
+    },
+    {
+      "id": "benchmark-dossier",
+      "pr": 111,
+      "merge_sha": "1c816fafb67c9b6813caecf4051e29ef1adae9dd",
+      "artifact": "registry/study1_benchmark_dossier_2026-10-02.json",
+      "post_main_gaxbench_run": 37062757509,
+      "post_main_manuscript_run": 37062757512
+    },
+    {
+      "id": "zero-cost-compute-plan",
+      "pr": 112,
+      "merge_sha": "defff28527260c81d4482925cd43a47f12a21e25",
+      "artifact": "registry/study1_zero_cost_compute_plan_2026-10-02.json",
+      "post_main_gaxbench_run": 37063390389,
+      "post_main_manuscript_run": 37063390221
+    },    {
+      "id": "preregistered-protocol",
+      "pr": 113,
+      "qualified_head": "ec9e5253e17c10a8ef9525a5b6f138d5378dc75b",
+      "merge_sha": "535efada86f7c5863b6eeda18b76d17a78e36b4e",
+      "artifact": "registry/study1_preregistered_protocol_2026-10-02.json",
+      "artifact_sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192",
+      "gaxbench_run": 37065463824,
+      "alibaba_review_run": 37065463764,
+      "jev_review_run": 37065463798,
+      "manuscript_run": 37065463823,
+      "post_main_gaxbench_run": 37065781852,
+      "post_main_manuscript_run": 37065781811
+    }
+  ],
+  "sealed_final_boundary": {
+    "dataset": "FHIR-AgentBench",
+    "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+    "test_patient_count": 40,
+    "test_row_count": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed"
+  },  "frozen_protocol_decisions": {
+    "primary_comparator": "qa-plus-confidence-abstention",
+    "primary_endpoint": "failure-aware-answer-correctness-aurc",
+    "final_denominator": 173,
+    "bootstrap_unit": "patient",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261002,
+    "dal_r_revision_cap": 1,
+    "target_coverages": [0.5, 0.7, 0.8]
+  },
+  "closeout_assertions": [
+    "All SG-000025 deliverables required by Issue #107 are canonical on main.",
+    "No Study 1 model training, tuning, or final evaluation occurred in SG-000025.",
+    "The sealed FHIR-AgentBench final role remains untouched and test gold remains unserialized.",
+    "Study 0 evidence and its frozen claim set remain immutable historical evidence.",
+    "Novelty remains bounded by the literature refresh and no first-style claim is authorized.",
+    "D2 and all later stages require separate activation and may use only permitted development roles until the D8 freeze authorizes D9."
+  ],
+  "closeout_qualification": {
+    "required": [
+      "linux-windows-python-3.11-3.12-gaxbench",
+      "checksum-pinned-alibaba-opencodereview",
+      "secure-typesafe-jev",
+      "manuscript-clean-room-build",
+      "normal-merge-with-expected-head-guard",
+      "post-main-verification"
+    ],
+    "state": "bound-by-closeout-pr-and-post-main-verification"
+  }
+}
