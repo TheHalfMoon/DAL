@@ -1,0 +1,292 @@
+{
+  "finding_definitions": {
+    "F1-majority-class-collapse": "paper system predicts the majority class on every PubMedQA row and its accuracy equals the majority-class baseline",
+    "F2-paper-equals-control": "paper and control classification reports are identical",
+    "F3-trivial-sufficiency-separation": "sufficiency score separates evidence-present from evidence-withheld rows perfectly while assigning every withheld row one constant score",
+    "F4-coverage-targets-exceed-answerable-fraction": "a frozen coverage target exceeds the fraction of answerable rows, so meeting it forces commits on insufficient rows",
+    "F5-constant-score-tie-forced-full-commit": "at target 0.8 every withheld row ties at or above the frozen threshold, so the policy commits on all rows"
+  },
+  "findings": {
+    "F1-majority-class-collapse": true,
+    "F2-paper-equals-control": true,
+    "F3-trivial-sufficiency-separation": true,
+    "F4-coverage-targets-exceed-answerable-fraction": true,
+    "F5-constant-score-tie-forced-full-commit": true
+  },
+  "grain_id": "SG-000025",
+  "native_abstention": {
+    "answerable_fraction": 0.5,
+    "clinical_control": {
+      "distinct_withheld_scores": 500,
+      "present_rows": 500,
+      "present_score_max": 0.6163146078066999,
+      "present_score_min": 0.48477082888664214,
+      "present_vs_withheld_auroc": 0.813944,
+      "withheld_rows": 500,
+      "withheld_rows_at_or_above_frozen_threshold": {
+        "0.5": 127,
+        "0.8": 289,
+        "0.9": 362
+      },
+      "withheld_score_max": 0.5969715252055514,
+      "withheld_score_min": 0.43840621821044223
+    },
+    "paper": {
+      "distinct_withheld_scores": 1,
+      "present_rows": 500,
+      "present_score_max": 1.0,
+      "present_score_min": 0.9975303824261866,
+      "present_vs_withheld_auroc": 1.0,
+      "withheld_rows": 500,
+      "withheld_rows_at_or_above_frozen_threshold": {
+        "0.5": 0,
+        "0.8": 500,
+        "0.9": 500
+      },
+      "withheld_score_max": 2.276727485459712e-06,
+      "withheld_score_min": 2.276727485459712e-06
+    }
+  },
+  "pubmedqa": {
+    "clinical_control": {
+      "accuracy": 0.552,
+      "balanced_accuracy": 0.3333333333333333,
+      "confusion_rows_gold_columns_predicted": {
+        "maybe": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 55
+        },
+        "no": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 169
+        },
+        "yes": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 276
+        }
+      },
+      "error_taxonomy": {
+        "maybe->yes": 55,
+        "no->yes": 169
+      },
+      "gold_distribution": {
+        "maybe": 55,
+        "no": 169,
+        "yes": 276
+      },
+      "macro_f1": 0.2371134020618557,
+      "majority_class_baseline": {
+        "accuracy": 0.552,
+        "label": "yes"
+      },
+      "n": 500,
+      "per_class": {
+        "maybe": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 55
+        },
+        "no": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 169
+        },
+        "yes": {
+          "f1": 0.711340206185567,
+          "precision": 0.552,
+          "predicted": 500,
+          "recall": 1.0,
+          "support": 276
+        }
+      },
+      "prediction_distribution": {
+        "maybe": 0,
+        "no": 0,
+        "yes": 500
+      }
+    },
+    "laya": {
+      "accuracy": 0.53,
+      "balanced_accuracy": 0.32795981424743964,
+      "confusion_rows_gold_columns_predicted": {
+        "maybe": {
+          "maybe": 1,
+          "no": 2,
+          "yes": 52
+        },
+        "no": {
+          "maybe": 7,
+          "no": 4,
+          "yes": 158
+        },
+        "yes": {
+          "maybe": 14,
+          "no": 2,
+          "yes": 260
+        }
+      },
+      "error_taxonomy": {
+        "maybe->no": 2,
+        "maybe->yes": 52,
+        "no->maybe": 7,
+        "no->yes": 158,
+        "yes->maybe": 14,
+        "yes->no": 2
+      },
+      "gold_distribution": {
+        "maybe": 55,
+        "no": 169,
+        "yes": 276
+      },
+      "macro_f1": 0.256074234808274,
+      "majority_class_baseline": {
+        "accuracy": 0.552,
+        "label": "yes"
+      },
+      "n": 500,
+      "per_class": {
+        "maybe": {
+          "f1": 0.025974025974025976,
+          "precision": 0.045454545454545456,
+          "predicted": 22,
+          "recall": 0.01818181818181818,
+          "support": 55
+        },
+        "no": {
+          "f1": 0.04519774011299435,
+          "precision": 0.5,
+          "predicted": 8,
+          "recall": 0.023668639053254437,
+          "support": 169
+        },
+        "yes": {
+          "f1": 0.6970509383378016,
+          "precision": 0.5531914893617021,
+          "predicted": 470,
+          "recall": 0.9420289855072463,
+          "support": 276
+        }
+      },
+      "prediction_distribution": {
+        "maybe": 22,
+        "no": 8,
+        "yes": 470
+      }
+    },
+    "laya_class_calibration_note": "Not computed: Laya affected confidence is uncalibrated (Study 0 runtime warning).",
+    "paper_class_calibration": {
+      "maybe": {
+        "empirical_frequency": 0.11,
+        "max_probability": 0.17236561915499032,
+        "mean_predicted_probability": 0.1342850389713941,
+        "min_probability": 0.10010794014683,
+        "one_vs_rest_ece_15_bins": 0.0242850389713941
+      },
+      "no": {
+        "empirical_frequency": 0.338,
+        "max_probability": 0.38381908425369904,
+        "mean_predicted_probability": 0.31705026767679473,
+        "min_probability": 0.24629371669977088,
+        "one_vs_rest_ece_15_bins": 0.03845783823822575
+      },
+      "yes": {
+        "empirical_frequency": 0.552,
+        "max_probability": 0.6163146078066999,
+        "mean_predicted_probability": 0.5486646933518111,
+        "min_probability": 0.48477082888664214,
+        "one_vs_rest_ece_15_bins": 0.03600030976653697
+      }
+    },
+    "paper_confidence_range": {
+      "max": 0.6163146078066999,
+      "min": 0.48477082888664214
+    },
+    "paper_system": {
+      "accuracy": 0.552,
+      "balanced_accuracy": 0.3333333333333333,
+      "confusion_rows_gold_columns_predicted": {
+        "maybe": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 55
+        },
+        "no": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 169
+        },
+        "yes": {
+          "maybe": 0,
+          "no": 0,
+          "yes": 276
+        }
+      },
+      "error_taxonomy": {
+        "maybe->yes": 55,
+        "no->yes": 169
+      },
+      "gold_distribution": {
+        "maybe": 55,
+        "no": 169,
+        "yes": 276
+      },
+      "macro_f1": 0.2371134020618557,
+      "majority_class_baseline": {
+        "accuracy": 0.552,
+        "label": "yes"
+      },
+      "n": 500,
+      "per_class": {
+        "maybe": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 55
+        },
+        "no": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 169
+        },
+        "yes": {
+          "f1": 0.711340206185567,
+          "precision": 0.552,
+          "predicted": 500,
+          "recall": 1.0,
+          "support": 276
+        }
+      },
+      "prediction_distribution": {
+        "maybe": 0,
+        "no": 0,
+        "yes": 500
+      }
+    }
+  },
+  "record_id": "study1-d1-pilot-diagnosis-v0.1",
+  "schema_version": "0.1",
+  "scope": "Diagnostic only. Computed from immutable Study 0 raw predictions; Study 0 evidence, claims, and results are unchanged.",
+  "sources_sha256": {
+    "registry/p08_sg000022_final_evaluation/metrics.json": "da2e41e7ecda10c2f7dad60b28ad386e160f028b58f76414d7645512633161db",
+    "registry/p08_sg000022_final_evaluation/raw-laya-pubmedqa-predictions.json": "009831a7a404f8cfc44ea83b13d0ecf8d6e9fb4bdd6c511c2835ec2595a69102",
+    "registry/p08_sg000022_final_evaluation/raw-native-abstention-predictions.json": "5f6b593396dd426eee479bec0aaaadba90e0e44b4ef3e55266ba8c7c702ba8da",
+    "registry/p08_sg000022_final_evaluation/raw-pubmedqa-predictions.json": "402c655da798085d68fa54fbcd63c140a0c0cea389113b684315fcbd1e9fbed9"
+  },
+  "study1_design_implications": [
+    "Train and select the QA component against macro-F1 and balanced accuracy, not accuracy alone, and report the majority-class baseline.",
+    "Use class-aware objectives or sampling; a head that reproduces class priors must be rejected in development.",
+    "Construct insufficiency that cannot be detected from context presence alone (partial, irrelevant, contradictory evidence, and genuinely unanswerable questions).",
+    "Keep coverage targets at or below the answerable fraction, or report risk-coverage without forcing commits, and define deterministic tie handling.",
+    "Evaluate whether the assurance layer changes decisions, not only whether it ranks inputs."
+  ]
+}
