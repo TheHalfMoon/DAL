@@ -335,7 +335,7 @@ Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b3
 - [ ] Post-D3/pre-D4 observed governed query/search-pattern qualification - mandatory after prospective D3 model/agent freeze; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes
 - [ ] D4 activation remains blocked until the observed query/search-pattern gate passes
 
-### SG-000027 - D3 architecture candidates (ACTIVE - TRACE_PRODUCER_IDENTITY_FROZEN / PENDING_D3_CLOSEOUT)
+### SG-000027 - D3 architecture candidates (CLOSED_CANONICAL)
 
 Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `07ad6a3f0af0f5a460cd469e029b26274f1a7416`.
 
@@ -346,7 +346,7 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Bind candidate model/tokenizer revisions, license, release date, provenance, contamination-risk metadata, and zero-cost compute-path status in the bounded inventory
 - [x] Prospectively freeze one trace-producing base-model + FHIR-agent-strategy identity before query-trace qualification - `registry/study1_sg000027_trace_producer_freeze.json`
 - [ ] Run the mandatory post-D3/pre-D4 development query-trace gate after the identity freeze
-- [ ] Canonical SG-000027 / D3 closeout
+- [x] Record SG-000027 / D3 closeout - `registry/study1_sg000027_closeout.json` (becomes canonical only after this closeout PR qualifies, merges, and passes post-main verification)
 
 - [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
 - [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes

@@ -1,0 +1,206 @@
+{
+  "schema_version": "0.1",
+  "grain": "SG-000027",
+  "program": "Study 1",
+  "stage": "D3",
+  "title": "Architecture candidates and prospective trace-producer freeze",
+  "status": "closed-canonical",
+  "research_contract_issue": 132,
+  "pre_closeout_main": "01c28e582e7d3399581078b306a32369ab12a79c",
+  "canonical_inputs": {
+    "contract": {
+      "path": "registry/study1_sg000027_contract.json",
+      "lf_sha256": "a129640c1fde2430a3a0f2dc9deb5fed0d4c7654320953238191552d5b6b3cc0"
+    },
+    "candidate_inventory": {
+      "path": "registry/study1_sg000027_candidate_inventory.json",
+      "lf_sha256": "285fa2595ff16db7565897ecd13c1fcb87b5c87eb32d5d3f456523fff447fba0"
+    },
+    "transport_repair": {
+      "path": "registry/study1_sg000027_transport_repair_contract.json",
+      "lf_sha256": "29261a7d672930dae809a098c47c987aee4a2e3fcec3e7e5331f8f5f69090799"
+    },
+    "trace_producer_freeze": {
+      "path": "registry/study1_sg000027_trace_producer_freeze.json",
+      "lf_sha256": "2dc7159d84772aeb775e605e6bbaf79187ce3293331764a6f9f2fc9e66feeec5"
+    },
+    "freeze_merge": "01c28e582e7d3399581078b306a32369ab12a79c",
+    "freeze_post_main_gaxbench_run": 37144865657,
+    "freeze_post_main_manuscript_run": 37144865687
+  },
+  "canonical_deliverables": [
+    {
+      "id": "d3-activation",
+      "pr": 133,
+      "merge_sha": "aba35ac15fd56ed255565327c059a22104012f4e",
+      "post_main_gaxbench_run": 37136490532,
+      "post_main_manuscript_run": 37136490509
+    },
+    {
+      "id": "bounded-candidate-inventory-and-agent-strategy-freeze",
+      "pr": 134,
+      "merge_sha": "4768d6067c8235b2fe8babaecd3b71fb64911d0f",
+      "post_main_gaxbench_run": 37139619241,
+      "post_main_manuscript_run": 37139619224
+    },
+    {
+      "id": "cpu-smoke-contract-and-initial-negative-evidence",
+      "pr": 135,
+      "merge_sha": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+      "cpu_smoke_run": 37140291946,
+      "post_main_gaxbench_run": 37140292043,
+      "post_main_manuscript_run": 37140292025
+    },
+    {
+      "id": "transport-diagnostic",
+      "pr": 136,
+      "merge_sha": "08fec6e8a990adaff5163e8ed93226aab7371e3b",
+      "diagnostic_run": 37142304592,
+      "result": "parser-transport-mismatch"
+    },
+    {
+      "id": "minimal-structured-tool-transport-repair",
+      "pr": 137,
+      "merge_sha": "26069715534ba693049795fdb5dc6929ab807a7d",
+      "post_main_gaxbench_run": 37143422761,
+      "post_main_manuscript_run": 37143422745,
+      "repaired_cpu_smoke_run": 37143422780,
+      "repaired_cpu_smoke_artifact_id": 11281697095,
+      "repaired_cpu_smoke_artifact_digest": "sha256:3ce4e9e5fd7dda6ec0cbcccafef8d5264103a4e76550caf1cbab202cdab43dc2"
+    },
+    {
+      "id": "prospective-trace-producer-freeze",
+      "pr": 138,
+      "merge_sha": "01c28e582e7d3399581078b306a32369ab12a79c",
+      "post_main_gaxbench_run": 37144865657,
+      "post_main_manuscript_run": 37144865687
+    }
+  ],
+  "d3_exit_criteria": [
+    {
+      "id": "D3-E1",
+      "criterion": "candidate family is bounded and mechanically recorded",
+      "status": "proven",
+      "evidence": [
+        "registry/study1_sg000027_candidate_inventory.json",
+        "PR #134 merge 4768d6067c8235b2fe8babaecd3b71fb64911d0f"
+      ]
+    },
+    {
+      "id": "D3-E2",
+      "criterion": "exact eligible model and tokenizer revisions and provenance are bound",
+      "status": "proven",
+      "evidence": [
+        "registry/study1_sg000027_trace_producer_freeze.json",
+        "Qwen/Qwen3-4B-Instruct-2507@cdbee75f17c01a7cc42f958dc650907174af0554",
+        "Q8 GGUF SHA-256 ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1"
+      ]
+    },
+    {
+      "id": "D3-E3",
+      "criterion": "FHIR agent strategy is prospectively frozen",
+      "status": "proven",
+      "evidence": [
+        "single_turn_request",
+        "FHIR-AgentBench bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+        "agent source blob 1188a4053560924c3ed801e9b1aaa91ccd6d010d"
+      ]
+    },
+    {
+      "id": "D3-E4",
+      "criterion": "compute, license, release-date, and contamination-risk evidence is recorded",
+      "status": "proven",
+      "evidence": [
+        "bounded candidate inventory",
+        "canonical zero-cost CPU smoke runs 37140291946 and 37143422780",
+        "release date is treated only as a contamination-risk proxy"
+      ]
+    },
+    {
+      "id": "D3-E5",
+      "criterion": "every rejected or blocked candidate remains visible as negative evidence",
+      "status": "proven",
+      "evidence": [
+        "Phi-4-mini and SmolLM3 provider-routing blocks retained",
+        "Qwen3.5/Gemma/Llama exclusions retained in candidate inventory",
+        "initial Qwen blocked-behavior-changing smoke retained"
+      ]
+    },
+    {
+      "id": "D3-E6",
+      "criterion": "sealed-final non-access is mechanically asserted",
+      "status": "proven",
+      "evidence": [
+        "all D3 smoke/diagnostic/freeze evidence records benchmark_development_or_final_data_accessed=false",
+        "40-patient / 173-row final role remains sealed",
+        "final_role_accessed=false"
+      ]
+    },
+    {
+      "id": "D3-E7",
+      "criterion": "one prospectively frozen trace-producing base-model plus FHIR-agent-strategy identity exists",
+      "status": "proven",
+      "evidence": [
+        "PR #138 canonical freeze",
+        "Qwen3-4B-Instruct-2507 + same-revision tokenizer + exact Q8 artifact + pinned llama.cpp + patched frozen FHIR-AgentBench + single_turn_request"
+      ]
+    },
+    {
+      "id": "D3-E8",
+      "criterion": "no D4 training or objective fitting occurred",
+      "status": "proven",
+      "evidence": [
+        "training_performed=false",
+        "d7_model_selection_performed=false",
+        "calibration_or_threshold_fitting_performed=false",
+        "D4 remains inactive"
+      ]
+    }
+  ],
+  "frozen_trace_producer_summary": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507@cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "quantized_artifact_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "runtime_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
+    "agent_strategy": "single_turn_request",
+    "d7_model_selection": false
+  },
+  "mandatory_next_gate": {
+    "name": "post-D3-pre-D4-observed-query-trace-qualification",
+    "authorization_issue": 126,
+    "authorization_comment_id": 5970310150,
+    "stage_order_authorization_issue": 128,
+    "stage_order_authorization_comment_id": 5970595978,
+    "roles": [
+      "calibration",
+      "validation"
+    ],
+    "required_result": "every observed normalized FHIR query/search pattern from the exact frozen D3 trace producer is exercised and either supported or recorded as a behavior-changing blocker",
+    "invalid_substitutes": [
+      "SQL proc_query",
+      "expected resource IDs",
+      "static source inspection",
+      "invented traces"
+    ],
+    "d4_blocked_until_pass": true,
+    "activated_by_this_closeout": false
+  },
+  "sealed_final_boundary": {
+    "test_patient_count": 40,
+    "test_row_count": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "accessed_in_D3": false
+  },
+  "closeout_assertions": [
+    "All D3 exit criteria are proven by canonical evidence without benchmark-performance model selection.",
+    "The frozen Qwen identity is the technical trace producer for the mandatory query-trace gate and is not the D7 final DAL-family model-selection result.",
+    "The query-trace gate is not executed or activated by this closeout.",
+    "D4 remains blocked until the separately governed post-D3/pre-D4 query-trace gate passes.",
+    "No training, fine-tuning, objective fitting, calibration fitting, threshold fitting, D7 selection, or sealed-final access occurred in D3."
+  ]
+}
