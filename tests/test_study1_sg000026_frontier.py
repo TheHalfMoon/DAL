@@ -109,14 +109,19 @@ def test_query_trace_governance_records_authorization_and_stage_order_block() ->
 
     upstream = record["frozen_upstream_trace_dependency"]
     assert upstream["commit"] == "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
-    assert upstream["single_turn_request_agent_blob_sha"] == "1188a4053560924c3ed801e9b1aaa91ccd6d010d"
+    assert upstream["single_turn_request_agent_blob_sha"] == (
+        "1188a4053560924c3ed801e9b1aaa91ccd6d010d"
+    )
     assert upstream["core_utils_blob_sha"] == "6544570985916074f40a5fb469243aa5ced22f65"
 
     conflict = record["stage_order_conflict"]
     assert conflict["status"] == "blocked-requires-founder-decision"
     assert conflict["issue"] == 128
     assert record["invariants"]["model_selection_performed"] is False
-    assert record["invariants"]["development_question_text_accessed_for_this_governance_record"] is False
+    assert (
+        record["invariants"]["development_question_text_accessed_for_this_governance_record"]
+        is False
+    )
     assert record["invariants"]["final_role_content_accessed"] is False
     assert record["invariants"]["d3_activated"] is False
     assert record["d2_closeout_allowed"] is False
