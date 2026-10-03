@@ -8,6 +8,8 @@ on:
       - .github/workflows/study1-sg000027-cpu-smoke.yml
       - registry/study1_sg000027_cpu_smoke_contract.json
       - registry/study1_sg000027_transport_diagnostic_contract.json
+      - registry/study1_sg000027_transport_repair_contract.json
+      - patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch
   workflow_dispatch:
 
 permissions:
@@ -59,6 +61,13 @@ jobs:
           )
           assert diagnostic["repair_boundary"]["this_grain_may_modify_frozen_upstream_parser"] is False
           assert diagnostic["repair_boundary"]["this_grain_may_freeze_model_or_tokenizer"] is False
+          repair = json.loads(
+              Path("registry/study1_sg000027_transport_repair_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          assert repair["canonical_dependency"]["diagnosis"] == "parser-transport-mismatch"
+          assert repair["governance"]["this_grain_may_freeze_model_or_tokenizer"] is False
 
       - name: Install frozen upstream smoke dependencies
         run: >-
@@ -78,6 +87,63 @@ jobs:
           test "$(git -C "$RUNNER_TEMP/fhir-agentbench" rev-parse HEAD)" = "$FHIR_AGENTBENCH_REVISION"
           test "$(git -C "$RUNNER_TEMP/fhir-agentbench" hash-object utils/core_utils.py)" = "6544570985916074f40a5fb469243aa5ced22f65"
           test "$(git -C "$RUNNER_TEMP/fhir-agentbench" hash-object tools/request_tools.py)" = "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
+
+      - name: Apply governed Qwen structured-tool transport patch
+        shell: python
+        run: |
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          workspace = Path(os.environ["GITHUB_WORKSPACE"])
+          upstream = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench"
+          contract = json.loads(
+              (workspace / "registry/study1_sg000027_transport_repair_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          repair = contract["repair"]
+          patch = workspace / repair["patch_path"]
+          patch_sha = hashlib.sha256(patch.read_bytes()).hexdigest()
+          if patch_sha != repair["patch_sha256"]:
+              raise SystemExit(f"transport patch SHA-256 drift: {patch_sha}")
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", "--check", str(patch)],
+              check=True,
+          )
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", str(patch)],
+              check=True,
+          )
+          core = upstream / contract["frozen_upstream"]["core_utils_path"]
+          patched_blob = subprocess.check_output(
+              ["git", "-C", str(upstream), "hash-object", str(core)],
+              text=True,
+          ).strip()
+          patched_sha = hashlib.sha256(core.read_bytes()).hexdigest()
+          if patched_blob != repair["patched_core_utils_blob_sha"]:
+              raise SystemExit(f"patched blob drift: {patched_blob}")
+          if patched_sha != repair["patched_core_utils_sha256"]:
+              raise SystemExit(f"patched SHA-256 drift: {patched_sha}")
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          evidence.mkdir(parents=True, exist_ok=True)
+          receipt = {
+              "schema_version": "0.1",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "patch_sha256": patch_sha,
+              "patched_core_utils_blob_sha": patched_blob,
+              "patched_core_utils_sha256": patched_sha,
+              "changes_prompt": False,
+              "changes_tool_schema": False,
+              "changes_model_or_tokenizer": False,
+              "changes_agent_strategy": False,
+          }
+          (evidence / "transport_patch_receipt.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
 
       - name: Record frozen provider-routing preflight
         shell: python
@@ -440,6 +506,10 @@ jobs:
           smoke = json.loads((evidence / "qwen_cpu_smoke.json").read_text())
           raw = json.loads((evidence / "raw_transport_probe.json").read_text())
           diagnosis = json.loads((evidence / "transport_diagnosis.json").read_text())
+          patch_receipt = json.loads((evidence / "transport_patch_receipt.json").read_text())
+          repair = json.loads(
+              Path("registry/study1_sg000027_transport_repair_contract.json").read_text()
+          )
           expected = {
               "phi4-mini-instruct": "blocked-unrecognized-provider",
               "qwen3-4b-instruct-2507": "eligible-qwen-provider",
@@ -467,3 +537,9 @@ jobs:
               raise SystemExit(f"invalid transport diagnosis: {diagnosis['status']}")
           if diagnosis["model_or_tokenizer_frozen"] is not False:
               raise SystemExit("diagnostic grain cannot freeze model or tokenizer")
+          if smoke["status"] != "pass":
+              raise SystemExit(f"repaired Qwen smoke did not pass: {smoke['status']}")
+          if diagnosis["status"] != repair["qualification"]["required_transport_diagnosis_after_repair"]:
+              raise SystemExit(f"transport repair did not qualify: {diagnosis['status']}")
+          if patch_receipt["patch_sha256"] != repair["repair"]["patch_sha256"]:
+              raise SystemExit("transport patch receipt drift")

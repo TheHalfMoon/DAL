@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "grain": "qwen-structured-tool-call-transport-compatibility-repair",
+  "research_contract_issue": 132,
+  "canonical_dependency": {
+    "diagnostic_merge": "08fec6e8a990adaff5163e8ed93226aab7371e3b",
+    "diagnostic_run_id": 37142304592,
+    "diagnostic_artifact_id": 11281350383,
+    "diagnostic_artifact_digest": "sha256:862584211b8d1cc871bd5ad3ee3f0561cb6ae19defa3474371fdfa54d8df319d",
+    "diagnosis": "parser-transport-mismatch"
+  },
+  "frozen_upstream": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "core_utils_path": "utils/core_utils.py",
+    "original_core_utils_blob_sha": "6544570985916074f40a5fb469243aa5ced22f65"
+  },
+  "repair": {
+    "patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+    "patch_sha256": "4d47448b7d3be5af94ac6a2ef05dee4338360728a2d05c03b54689e6da1b8537",
+    "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+    "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
+    "semantic_rule": "for Qwen only, preserve an already-structured OpenAI-compatible message.tool_calls response; otherwise execute the frozen textual qwen_parse_tool_calls fallback unchanged",
+    "changes_prompt": false,
+    "changes_tool_schema": false,
+    "changes_model_or_tokenizer": false,
+    "changes_temperature": false,
+    "changes_agent_strategy": false,
+    "changes_fhir_request_arguments": false,
+    "fallback_parser_preserved": true
+  },
+  "qualification": {
+    "synthetic_case_id": "DAL-SMOKE-0001",
+    "required_raw_tool_call_count": 1,
+    "required_repaired_tool_call_count": 1,
+    "required_tool_name": "fhir_request_get",
+    "required_query_marker": "DAL-SMOKE-0001",
+    "required_transport_diagnosis_after_repair": "transport-compatible",
+    "benchmark_development_or_final_data_allowed": false
+  },
+  "governance": {
+    "this_grain_may_freeze_model_or_tokenizer": false,
+    "selection_performed": false,
+    "training_allowed": false,
+    "d4_allowed": false,
+    "final_role_access_allowed": false,
+    "zero_founder_cost": true,
+    "separate_freeze_grain_required_after_canonical_repair_pass": true
+  }
+}

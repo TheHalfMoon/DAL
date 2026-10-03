@@ -351,7 +351,8 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
 - [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes
 - [x] Execute canonical zero-cost CPU smoke run `37140291946`; Qwen retained `blocked-behavior-changing`, Phi/Smol retained provider-routing blocks, and no model/tokenizer was frozen
-- [ ] Diagnose raw OpenAI-compatible structured tool transport versus the frozen Qwen parser using synthetic input only
+- [x] Diagnose raw OpenAI-compatible structured tool transport versus the frozen Qwen parser - canonical run `37142304592` proved `parser-transport-mismatch`
+- [ ] Canonically qualify the minimal Qwen structured-tool transport compatibility repair; no model/tokenizer freeze in the repair grain
 - [ ] Prospectively freeze one base-model + tokenizer identity using preregistered non-final, non-query-trace-outcome criteria
 - [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
 - [ ] D4 remains blocked until the observed query/search-pattern gate passes
