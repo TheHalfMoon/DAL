@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1",
+  "amendment_id": "SG-000026-G3",
+  "study_id": "study1",
+  "governed_stage": "D2-to-D4-stage-order",
+  "title": "Stage-order repair for model-dependent observed FHIR query-trace coverage",
+  "founder_authorization": {
+    "issue": 128,
+    "comment_id": 5970595978,
+    "option": "A",
+    "authorized": true,
+    "scope": "protocol stage-order repair only; does not itself close D2, select a model, activate training, or authorize final-role access"
+  },
+  "immutable_parent_protocol": {
+    "path": "registry/study1_preregistered_protocol_2026-10-02.json",
+    "sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192",
+    "modified_by_this_amendment": false
+  },
+  "pre_amendment_d2_contract": {
+    "path": "registry/study1_sg000026_contract.json",
+    "sha256": "5842560ada2e73e4d078d39cf556b26306a76e1b2739566ff920acd7fcb7b42c",
+    "modified_by_this_amendment_grain": false
+  },
+  "rationale": {
+    "verified_fact": "At frozen FHIR-AgentBench revision bbb42909a5a7eb907d1cd91f72a560729e7037ea, observed direct-request FHIR query arguments are produced through safe_llm_call with an explicit model and an explicit agent strategy.",
+    "circular_dependency": "The original D2 contract requires observed governed query-pattern coverage before D2 closeout while also forbidding model selection and keeping D3 inactive.",
+    "repair_type": "pre-results stage-order repair; no criterion is removed, weakened, waived, or reinterpreted"
+  },
+  "effective_stage_order": {
+    "D2": {
+      "closeout_rule": "D2 may close only after every model-independent D2 exit criterion is genuinely satisfied and canonically qualified.",
+      "model_independent_exit_criteria": [
+        "B0/B1/B2 matched-input base-answer identity mechanically proven",
+        "B1/B2 differ from B0 only by preregistered score/action wrapper semantics",
+        "deterministic complete denominator and failure accounting",
+        "local retrieval matches governed development-role expected resource IDs with no unresolved behavior-changing semantic drift",
+        "sealed-final firewall mechanically proven",
+        "all negative and unsupported results retained",
+        "zero-cost reproducibility proven",
+        "no model selection, training, DAL development, final calibration fitting, or sealed-final access occurred"
+      ],
+      "deferred_but_mandatory_criterion": "every governed development-role FHIR query pattern is supported or explicitly blocking"
+    },
+    "D3": {
+      "preconditions": [
+        "this amendment is canonical and post-main verified",
+        "D2 is separately closed canonically on model-independent evidence only"
+      ],
+      "allowed_after_preconditions": "prospectively select and freeze the Study 1 base model and FHIR agent strategy without final-role data",
+      "prohibitions": [
+        "no final-role data, supervision, traces, outputs, or labels",
+        "no performance-driven choice from development query-trace outcomes"
+      ]
+    },
+    "post_D3_pre_D4_query_trace_gate": {
+      "mandatory": true,
+      "producer_identity": "the prospectively frozen D3 base model plus FHIR agent strategy",
+      "roles": [
+        "calibration",
+        "validation"
+      ],
+      "custodian": "founder-authorized blind development-only query-trace custodian from Issue #126",
+      "required_result": "every observed normalized FHIR query/search pattern is exercised and either supported or recorded as a behavior-changing blocker",
+      "invalid_substitutes": [
+        "SQL proc_query",
+        "expected resource IDs",
+        "static source inspection",
+        "invented traces"
+      ],
+      "D4_blocked_until_pass": true
+    },
+    "D4": {
+      "training_or_fine_tuning_allowed_before_query_trace_gate_pass": false
+    }
+  },
+  "sealed_final_invariants": {
+    "patients": 40,
+    "rows": 173,
+    "access_before_D9": "forbidden",
+    "question_text_exposure": false,
+    "trace_exposure": false,
+    "true_answer_exposure": false,
+    "proc_query_exposure": false,
+    "true_fhir_ids_exposure": false,
+    "model_output_exposure": false
+  },
+  "governance": {
+    "zero_founder_cost": true,
+    "exact_head_qualification_required": [
+      "GAXBench",
+      "Alibaba OpenCodeReview",
+      "TypeSafe Jev",
+      "DAL Manuscript"
+    ],
+    "normal_merge_with_expected_head_guard_required": true,
+    "post_main_verification_required": true,
+    "D2_closeout_requires_separate_grain": true,
+    "D3_activation_requires_separate_grain": true,
+    "query_trace_qualification_requires_separate_grain": true
+  },
+  "current_effects": {
+    "D2_closed": false,
+    "D3_activated": false,
+    "model_selected": false,
+    "training_activated": false,
+    "final_role_access_authorized": false
+  }
+}

@@ -19,11 +19,11 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_sg000026_frontier_records_direct_id_proof_and_query_trace_gate() -> None:
+def test_sg000026_frontier_records_stage_order_repair_and_closeout_gate() -> None:
     status = _status()
-    assert status["state"] == "direct-id-proven-query-trace-producer-governance-blocked"
+    assert status["state"] == "direct-id-proven-stage-order-repaired-d2-closeout-pending"
     assert status["recovery_governance_gate_issue"] == 120
-    assert status["governance_gate_issue"] == 128
+    assert status["governance_gate_issue"] is None
     assert status["query_trace_recovery_gate_issue"] == 126
     assert status["canonical_frontier_sha"] == "8eee15506a48dd03428363d8b5e7234d50f4a960"
     recovery = status["authorized_recovery"]
@@ -53,6 +53,12 @@ def test_sg000026_frontier_records_direct_id_proof_and_query_trace_gate() -> Non
     assert isinstance(query_recovery, dict)
     assert query_recovery["authorization_comment_id"] == 5970310150
     assert query_recovery["authorized"] is True
+    amendment = status["protocol_stage_order_amendment"]
+    assert isinstance(amendment, dict)
+    assert amendment["issue"] == 128
+    assert amendment["authorization_comment_id"] == 5970595978
+    assert amendment["observed_query_pattern_criterion_preserved"] is True
+    assert amendment["execution_gate"] == "post-D3-pre-D4"
     assert status["d2_closeout_allowed"] is False
     assert status["later_stages_activated"] is False
 
@@ -83,7 +89,7 @@ def test_sg000026_human_frontier_matches_machine_state() -> None:
     current = CURRENT_PATH.read_text(encoding="utf-8")
     tasks = TASKS_PATH.read_text(encoding="utf-8")
 
-    marker = "REAL_DIRECT_ID_PROVEN / QUERY_TRACE_PRODUCER_GOVERNANCE_BLOCKED"
+    marker = "REAL_DIRECT_ID_PROVEN / STAGE_ORDER_REPAIRED / D2_CLOSEOUT_PENDING"
     assert marker in current
     assert marker in tasks
     assert "Issue #126" in current
@@ -93,7 +99,7 @@ def test_sg000026_human_frontier_matches_machine_state() -> None:
     assert "run `37088504254` SUCCESS" in tasks
     assert "21,527/21,527" in current
     assert "21,527/21,527" in tasks
-    assert "invented traces are not acceptable substitutes" in tasks
+    assert "invented traces remain invalid substitutes" in tasks
     assert "Canonical SG-000026 / D2 closeout" in tasks
 
 
