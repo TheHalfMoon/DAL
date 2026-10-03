@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "stage": "post-D3-pre-D4",
+  "state": "activation-pending-canonical-main-only-query-trace-execution",
+  "research_contract_issue": 141,
+  "contract_path": "registry/study1_sg000028_contract.json",
+  "canonical_dependency": {
+    "d3_closeout_merge": "13ac5bc7412fe38cdd575c3e621ad4c09ebd776a",
+    "d3_post_main_gaxbench_run": 37145288600,
+    "d3_post_main_manuscript_run": 37145288944
+  },
+  "trace_producing_system_frozen": true,
+  "query_trace_gate_status": "activation-pending",
+  "main_only_execution_required": true,
+  "d4_activation_allowed": false,
+  "training_allowed": false,
+  "later_stages_activated": false,
+  "sealed_final_role": {
+    "access": "sealed-and-forbidden-before-d9",
+    "patients": 40,
+    "rows": 173
+  },
+  "development_roles": {
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "rows": 1463,
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15"
+  },
+  "answer_correctness_scored": false,
+  "second_turn_reasoning_executed": false,
+  "training_performed": false,
+  "d7_model_selection_performed": false,
+  "final_role_accessed": false,
+  "zero_founder_cost": true,
+  "next_governed_action": "qualify-and-merge-SG-000028-activation-runner-then-execute-main-only-gate"
+}
