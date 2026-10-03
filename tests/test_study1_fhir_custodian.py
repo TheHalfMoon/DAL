@@ -108,9 +108,11 @@ def test_non_development_role_is_rejected_before_sensitive_field_access() -> Non
 
 
 def test_expected_resource_id_parser_is_deterministic() -> None:
-    assert _parse_expected_resource_ids(
-        "{'Observation': ['z'], 'Encounter': ['b', 'a']}"
-    ) == ["Encounter/a", "Encounter/b", "Observation/z"]
+    assert _parse_expected_resource_ids("{'Observation': ['z'], 'Encounter': ['b', 'a']}") == [
+        "Encounter/a",
+        "Encounter/b",
+        "Observation/z",
+    ]
 
     with pytest.raises(ValueError, match="literal mapping"):
         _parse_expected_resource_ids("not-a-mapping")

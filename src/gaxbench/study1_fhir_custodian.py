@@ -4,8 +4,9 @@ import ast
 import csv
 import hashlib
 import json
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Literal, Mapping
+from typing import Literal
 
 from pydantic import Field, model_validator
 
@@ -14,18 +15,17 @@ from gaxbench.fhir_agentbench_qualification import (
     FHIR_AGENTBENCH_SOURCE_BLOB_SHA1,
     FHIR_AGENTBENCH_SOURCE_COMMIT,
     FHIR_AGENTBENCH_SOURCE_SHA256,
-    _SourceRow,
+    GAXRole,
     _assign_patient_roles,
     _exclusion_reason,
     _identifier_digest,
+    _SourceRow,
     verify_frozen_source,
 )
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import StrictModel
 
-CANONICAL_MEMBERSHIP_SHA256 = (
-    "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15"
-)
+CANONICAL_MEMBERSHIP_SHA256 = "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15"
 CANONICAL_CALIBRATION_ROWS = 341
 CANONICAL_VALIDATION_ROWS = 1122
 CANONICAL_FINAL_ROWS = 173
@@ -177,7 +177,7 @@ def _read_metadata_only(source_path: Path) -> list[dict[str, str]]:
 
 def _membership_payload(
     rows: list[_SourceRow],
-    roles_by_patient: Mapping[str, str],
+    roles_by_patient: Mapping[str, GAXRole],
 ) -> tuple[list[dict[str, str]], dict[str, int]]:
     payload: list[dict[str, str]] = []
     counts = {"calibration": 0, "validation": 0, "test": 0}
@@ -211,7 +211,7 @@ def _membership_payload(
 
 def _project_development_rows(
     source_path: Path,
-    roles_by_patient: Mapping[str, str],
+    roles_by_patient: Mapping[str, GAXRole],
 ) -> list[D2FHIRDevelopmentProjectionRow]:
     rows: list[D2FHIRDevelopmentProjectionRow] = []
     with source_path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -234,16 +234,20 @@ def _project_development_rows(
 def _project_development_row(
     raw: Mapping[str, str],
     *,
-    role: str,
+    role: GAXRole,
     question_id: str,
 ) -> D2FHIRDevelopmentProjectionRow:
-    if role not in {"calibration", "validation"}:
+    if role == "calibration":
+        projection_role: D2ProjectionRole = "calibration"
+    elif role == "validation":
+        projection_role = "validation"
+    else:
         raise ValueError("custodian may materialize development roles only")
     proc_query = (raw.get("proc_query") or "").strip()
     if not proc_query:
         raise ValueError("development row has empty proc_query")
     return D2FHIRDevelopmentProjectionRow(
-        role=role,
+        role=projection_role,
         question_id_sha256=_identifier_digest(question_id),
         proc_query=proc_query,
         expected_resource_ids=_parse_expected_resource_ids(raw.get("true_fhir_ids") or ""),
@@ -272,7 +276,6 @@ def _parse_expected_resource_ids(value: str) -> list[str]:
 
 def _projection_bytes(rows: list[D2FHIRDevelopmentProjectionRow]) -> bytes:
     return "".join(
-        json.dumps(row.model_dump(mode="json"), sort_keys=True, separators=(",", ":"))
-        + "\n"
+        json.dumps(row.model_dump(mode="json"), sort_keys=True, separators=(",", ":")) + "\n"
         for row in rows
     ).encode("utf-8")
