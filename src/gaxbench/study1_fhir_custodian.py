@@ -11,6 +11,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from gaxbench.fhir_agentbench_qualification import (
+    _EXPECTED_HEADERS,
     FHIR_AGENTBENCH_ROLE_REVISION,
     FHIR_AGENTBENCH_SOURCE_BLOB_SHA1,
     FHIR_AGENTBENCH_SOURCE_COMMIT,
@@ -18,7 +19,6 @@ from gaxbench.fhir_agentbench_qualification import (
     GAXRole,
     _assign_patient_roles,
     _exclusion_reason,
-    _EXPECTED_HEADERS,
     _identifier_digest,
     _SourceRow,
     verify_frozen_source,
@@ -108,9 +108,7 @@ def build_blind_development_projection(
         raise ValueError("FHIR-AgentBench header order drifted from the frozen source")
     index = {name: headers.index(name) for name in headers}
 
-    metadata_fields = frozenset(
-        {index["split"], index["question_id"], index["patient_fhir_id"]}
-    )
+    metadata_fields = frozenset({index["split"], index["question_id"], index["patient_fhir_id"]})
     metadata_rows = _scan_selected_rows(
         body,
         field_count=len(headers),
@@ -120,9 +118,7 @@ def build_blind_development_projection(
     row_metadata: dict[int, tuple[str, str, str]] = {}
     for row_number, selected in metadata_rows:
         split = _required_selected(selected, index["split"], row_number, "split")
-        question_id = _required_selected(
-            selected, index["question_id"], row_number, "question_id"
-        )
+        question_id = _required_selected(selected, index["question_id"], row_number, "question_id")
         patient_id = _required_selected(
             selected, index["patient_fhir_id"], row_number, "patient_fhir_id"
         )
@@ -169,9 +165,7 @@ def build_blind_development_projection(
     rows: list[D2FHIRDevelopmentProjectionRow] = []
     for row_number, selected in selected_projection_rows:
         role, question_id = development_rows[row_number]
-        proc_query = _required_selected(
-            selected, index["proc_query"], row_number, "proc_query"
-        )
+        proc_query = _required_selected(selected, index["proc_query"], row_number, "proc_query")
         true_fhir_ids = _required_selected(
             selected, index["true_fhir_ids"], row_number, "true_fhir_ids"
         )
