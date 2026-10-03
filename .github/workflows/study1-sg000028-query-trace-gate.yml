@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/study1-sg000028-query-trace-gate.yml
       - registry/study1_sg000028_contract.json
+      - registry/study1_sg000028_trace_producer_provenance_correction.json
       - registry/study1_sg000027_trace_producer_freeze.json
       - src/gaxbench/study1_query_trace_gate.py
       - scripts/study1_sg000028_query_trace_runner.py
@@ -98,7 +99,7 @@ jobs:
           test "$(git -C "$upstream" hash-object tools/request_tools.py)" = \
             "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
 
-      - name: Apply and verify frozen structured-tool transport patch
+      - name: Apply canonical provenance correction and verify transport patch
         shell: python
         run: |
           import hashlib
@@ -112,11 +113,45 @@ jobs:
                   encoding="utf-8"
               )
           )
-          identity = freeze["trace_producer_identity"]["fhir_agentbench"]
+          correction = json.loads(
+              Path(
+                  "registry/study1_sg000028_trace_producer_provenance_correction.json"
+              ).read_text(encoding="utf-8")
+          )
+          repair_contract = json.loads(
+              Path("registry/study1_sg000027_transport_repair_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          sg28_contract = json.loads(
+              Path("registry/study1_sg000028_contract.json").read_text(encoding="utf-8")
+          )
+          frozen_transport = freeze["trace_producer_identity"]["fhir_agentbench"]
+          incorrect = correction["incorrect_freeze_provenance"]
+          corrected = correction["correct_canonical_repair_provenance"]
+          repair = repair_contract["repair"]
+          sg28 = sg28_contract["trace_producer"]
+          keys = (
+              "transport_patch_sha256",
+              "patched_core_utils_blob_sha",
+              "patched_core_utils_sha256",
+          )
+          for key in keys:
+              if frozen_transport[key] != incorrect[key]:
+                  raise SystemExit(f"historical D3 freeze provenance drift: {key}")
+              if repair[key] != corrected[key] or sg28[key] != corrected[key]:
+                  raise SystemExit(f"canonical provenance overlay drift: {key}")
+          if repair["patch_path"] != corrected["patch_path"]:
+              raise SystemExit("canonical transport patch path drift")
+          if correction["semantic_invariants"]["behavior_changed"] is not False:
+              raise SystemExit("provenance correction cannot change behavior")
+          if correction["semantic_invariants"]["post_outcome_trace_producer_switching"] is not False:
+              raise SystemExit("provenance correction cannot switch trace producer")
+
           upstream = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench"
-          patch = Path(identity["transport_patch_path"])
+          patch = Path(corrected["patch_path"])
           patch_sha = hashlib.sha256(patch.read_bytes()).hexdigest()
-          if patch_sha != identity["transport_patch_sha256"]:
+          if patch_sha != corrected["transport_patch_sha256"]:
               raise SystemExit(f"transport patch SHA-256 drift: {patch_sha}")
           subprocess.run(
               ["git", "-C", str(upstream), "apply", "--check", str(patch.resolve())],
@@ -132,10 +167,11 @@ jobs:
               text=True,
           ).strip()
           digest = hashlib.sha256(core.read_bytes()).hexdigest()
-          if blob != identity["patched_core_utils_blob_sha"]:
+          if blob != corrected["patched_core_utils_blob_sha"]:
               raise SystemExit(f"patched core blob drift: {blob}")
-          if digest != identity["patched_core_utils_sha256"]:
+          if digest != corrected["patched_core_utils_sha256"]:
               raise SystemExit(f"patched core SHA-256 drift: {digest}")
+          print("trace_producer_provenance_overlay=VERIFIED")
 
       - name: Download exact frozen benchmark source without row logging
         shell: python
