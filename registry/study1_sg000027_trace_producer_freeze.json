@@ -83,9 +83,9 @@
       "agent_source_blob_sha": "1188a4053560924c3ed801e9b1aaa91ccd6d010d",
       "core_utils_base_blob_sha": "6544570985916074f40a5fb469243aa5ced22f65",
       "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
-      "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
-      "patched_core_utils_blob_sha": "e43534f7396585515f76cf6a1da1134977990e7a",
-      "patched_core_utils_sha256": "4cc31a6beb485870814fed47c5670d85a0dc37444617e26152c73ad4fedbc7ef",
+      "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
+      "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+      "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
       "tool_name": "fhir_request_get",
       "tool_schema_semantics": "frozen upstream request_tools.py schema; repair does not change tool schema or prompt"
     }
