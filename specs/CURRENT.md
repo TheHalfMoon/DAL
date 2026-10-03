@@ -209,7 +209,7 @@ D2 baseline qualification is now activated separately as **SG-000026** under Iss
 
 Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Recovery governance gate: Issue #120.
 
-State: **ACTIVE — BLOCKED_AT_GOVERNANCE_GATE #120**
+State: **ACTIVE — OPTION_A_AUTHORIZED / CUSTODIAN_PENDING_CANONICALIZATION**
 
 Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), the B0/B1/B2 semantic and exact denominator-accounting kernel (PR #117, merge `0cfc2db`), the synthetic read-only FHIR compatibility kernel and sealed-role firewall (PR #118, merge `5ea436e`), and the zero-cost MIMIC-IV FHIR Demo v2.1.0 runtime/checksum manifest (PR #119, merge `aa59981`). Each grain was exact-head qualified before normal merge and post-main verified.
 
