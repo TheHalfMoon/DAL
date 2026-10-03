@@ -311,11 +311,14 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json`; PR #113 merged `535efada86f7c5863b6eeda18b76d17a78e36b4e`; post-main GAXBench `37065781852` and Manuscript `37065781811` SUCCESS; final-test access remains `sealed`
 - [x] Canonical SG-000025 closeout (this closeout PR; evidence record `registry/study1_sg000025_closeout.json`)
 
-### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — BLOCKED_AT_GOVERNANCE_GATE #120)
+### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — OPTION_A_AUTHORIZED / CUSTODIAN_PENDING_CANONICALIZATION)
 
 Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. Recovery governance gate: Issue #120.
 
 - [x] Create research contract Issue #115
+- [x] Founder-authorize Option A blind metadata-only custodian under Issue #120 — comment 5963555775
+- [x] Record and merge the governed D2 frontier — PR #121 merge `b46d3de2`; post-main GAXBench `37081145272` and Manuscript `37081145291` SUCCESS
+- [ ] Exact-head qualify and normally merge the Option A custodian implementation; verify post-main before consuming its projection
 - [x] Qualify and merge SG-000026 activation; verify post-main — PR #116 merge `e4b9e22`
 - [x] Prove B0/B1/B2 matched-input base-answer identity and wrapper semantics — PR #117 merge `0cfc2db`
 - [x] Implement deterministic denominator and failure accounting for D2 baselines — PR #117 merge `0cfc2db`
