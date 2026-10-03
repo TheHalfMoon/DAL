@@ -1,12 +1,17 @@
 {
-  "authorized_recovery": null,
+  "authorized_recovery": {
+    "authorization_comment_id": 5963555775,
+    "authorization_issue": 120,
+    "option": "option-a-blind-metadata-only-custodian",
+    "scope": "minimum cross-role metadata for frozen role reconstruction; development-only projection output; no final supervision/content exposure"
+  },
   "blocked_capability": "real-fhir-agentbench-development-role-qualification",
   "blocked_development_rows": {
     "calibration": 341,
     "validation": 1122
   },
-  "blocker_reason": "Canonical DAL artifacts do not serialize a development-only FHIR-AgentBench row projection or patient-role membership map; the frozen public source CSV also contains sealed final-role supervision. Recovery requires an explicit governance decision under Issue #120.",
-  "canonical_frontier_sha": "aa59981148692c3524e66fb5e27d2dfce83533ae",
+  "blocker_reason": "Option A is founder-authorized, but the blind development-only custodian implementation and generated projection are not canonical yet. Real development-role FHIR qualification remains blocked until the custodian implementation is exact-head qualified, normally merged, post-main verified, and its development-only artifact is provenance-qualified.",
+  "canonical_frontier_sha": "b46d3de2c5722b43f6ff6354a9f7fb5917c60283",
   "canonical_grains": [
     {
       "kind": "activation",
@@ -35,6 +40,13 @@
       "post_main_gaxbench_run": 37077874241,
       "post_main_manuscript_run": 37077874208,
       "pull_request": 119
+    },
+    {
+      "kind": "blocked-frontier-record",
+      "merge_sha": "b46d3de2",
+      "post_main_gaxbench_run": 37081145272,
+      "post_main_manuscript_run": 37081145291,
+      "pull_request": 121
     }
   ],
   "completed_capabilities": [
@@ -48,7 +60,7 @@
   "governance_gate_issue": 120,
   "later_stages_activated": false,
   "research_contract_issue": 115,
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "sealed_final_role": {
     "access": "sealed-and-forbidden-to-d2",
     "patients": 40,
@@ -56,6 +68,6 @@
   },
   "specgrain_id": "SG-000026",
   "stage": "D2",
-  "state": "blocked-at-governance-gate",
+  "state": "option-a-authorized-custodian-pending-canonicalization",
   "study_id": "study1"
 }
