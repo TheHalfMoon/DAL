@@ -47,15 +47,23 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install DAL and frozen upstream dependencies
+      - name: Install DAL and exact frozen upstream dependencies
         run: >-
           python -m pip install -e .
+          dask==2024.8.2
+          ijson==3.4.0
           litellm==1.75.9
-          tiktoken==0.8.0
-          pandas==2.3.2
           numpy==2.3.2
+          pandas==2.3.2
+          protobuf==6.32.0
+          python_dateutil==2.9.0.post0
           PyYAML==6.0.2
           requests==2.32.5
+          sqlglot==26.9.0
+          sqlparse==0.5.3
+          streamlit==1.48.1
+          tiktoken==0.8.0
+          tqdm==4.66.5
           google-auth==2.40.3
 
       - name: Verify SG-000028 governance boundary
@@ -92,6 +100,10 @@ jobs:
           git clone --filter=blob:none https://github.com/glee4810/FHIR-AgentBench.git "$upstream"
           git -C "$upstream" checkout --detach "$FHIR_AGENTBENCH_REVISION"
           test "$(git -C "$upstream" rev-parse HEAD)" = "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$upstream" hash-object requirements.txt)" = \
+            "861933a033df5c0c3521bd44d5e3e1952acbb301"
+          test "$(git -C "$upstream" rev-parse HEAD:requirements.txt)" = \
+            "861933a033df5c0c3521bd44d5e3e1952acbb301"
           test "$(git -C "$upstream" hash-object utils/core_utils.py)" = \
             "6544570985916074f40a5fb469243aa5ced22f65"
           test "$(git -C "$upstream" hash-object agent/single_turn_request_agent.py)" = \
@@ -180,6 +192,23 @@ jobs:
           if digest != corrected["patched_core_utils_sha256"]:
               raise SystemExit(f"patched core SHA-256 drift: {digest}")
           print("trace_producer_provenance_overlay=VERIFIED")
+
+      - name: Preflight frozen upstream imports before benchmark-source download
+        shell: python
+        run: |
+          import os
+          import sys
+          from pathlib import Path
+
+          upstream = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench"
+          sys.path.insert(0, str(upstream))
+          try:
+              from agent.single_turn_request_agent import SingleTurnRequestAgent  # noqa: F401
+              from utils import safe_llm_call  # noqa: F401
+          finally:
+              if sys.path and sys.path[0] == str(upstream):
+                  sys.path.pop(0)
+          print("frozen_upstream_import_preflight=PASS")
 
       - name: Download exact frozen benchmark source without row logging
         shell: python
@@ -353,6 +382,7 @@ jobs:
             --shard-count "$TRACE_SHARD_COUNT"
 
       - name: Delete raw benchmark source before artifact upload
+        if: always()
         shell: python
         run: |
           import os
