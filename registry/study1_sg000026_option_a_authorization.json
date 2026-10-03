@@ -1,0 +1,38 @@
+{
+  "authorization_comment_id": 5963555775,
+  "authorization_issue": 120,
+  "authorized_option": "option-a-blind-metadata-only-custodian",
+  "cross_role_metadata_allowlist": [
+    "split",
+    "question_id",
+    "patient_fhir_id"
+  ],
+  "development_projection_fields": [
+    "role",
+    "question_id_sha256",
+    "proc_query",
+    "expected_resource_ids"
+  ],
+  "development_rows": {
+    "calibration": 341,
+    "validation": 1122
+  },
+  "final_boundary": {
+    "final_model_outputs_allowed": false,
+    "final_proc_query_allowed": false,
+    "final_question_text_allowed": false,
+    "final_supervision_allowed": false,
+    "final_true_answer_allowed": false,
+    "final_true_fhir_ids_allowed": false,
+    "patients": 40,
+    "rows": 173
+  },
+  "later_stages_activated": false,
+  "role_identity_mutation_allowed": false,
+  "schema_version": "0.1",
+  "source_csv_may_be_persisted": false,
+  "specgrain_id": "SG-000026",
+  "state": "founder-authorized-for-option-a-implementation",
+  "study_id": "study1",
+  "zero_founder_cost": true
+}
