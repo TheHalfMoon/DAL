@@ -7,6 +7,7 @@ OBS = ROOT / "registry/study1_sg000027_transport_diagnosis_observation.json"
 CONTRACT = ROOT / "registry/study1_sg000027_transport_repair_contract.json"
 PATCH = ROOT / "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch"
 WORKFLOW = ROOT / ".github/workflows/study1-sg000027-cpu-smoke.yml"
+GITATTRIBUTES = ROOT / ".gitattributes"
 
 
 def _load(path: Path) -> dict:
@@ -24,6 +25,11 @@ def test_diagnostic_proves_parser_transport_mismatch_without_data_access() -> No
     assert obs["frozen_qwen_parser"]["tool_call_count"] == 0
     assert obs["development_or_final_data_accessed"] is False
     assert obs["model_or_tokenizer_frozen"] is False
+
+
+def test_transport_patch_is_forced_to_lf_cross_platform() -> None:
+    attributes = GITATTRIBUTES.read_text(encoding="utf-8")
+    assert "patches/*.patch text eol=lf" in attributes
 
 
 def test_transport_patch_is_exactly_bounded_and_digest_bound() -> None:

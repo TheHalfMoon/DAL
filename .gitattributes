@@ -7,3 +7,4 @@ paper/generated/* text eol=lf
 docs/release/*.md text eol=lf
 registry/study1_sg000026_real_direct_id_qualification.json text eol=lf
 registry/study1_sg000026_real_direct_id_execution_receipt.json text eol=lf
+patches/*.patch text eol=lf

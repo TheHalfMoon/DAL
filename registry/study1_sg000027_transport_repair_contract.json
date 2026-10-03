@@ -20,7 +20,7 @@
   },
   "repair": {
     "patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
-    "patch_sha256": "4d47448b7d3be5af94ac6a2ef05dee4338360728a2d05c03b54689e6da1b8537",
+    "patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
     "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
     "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
     "semantic_rule": "for Qwen only, preserve an already-structured OpenAI-compatible message.tool_calls response; otherwise execute the frozen textual qwen_parse_tool_calls fallback unchanged",

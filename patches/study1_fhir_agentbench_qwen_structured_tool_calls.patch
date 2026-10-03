@@ -2,9 +2,7 @@ diff --git a/utils/core_utils.py b/utils/core_utils.py
 index 6544570..e43534f 100644
 --- a/utils/core_utils.py
 +++ b/utils/core_utils.py
-@@ -375,7 +375,11 @@ def safe_llm_call(model, messages, tools=None, temperature=0.0, parallel_tool_ca
-             }
- 
+@@ -377,3 +377,7 @@ def safe_llm_call(model, messages, tools=None, temperature=0.0, parallel_tool_ca
              if 'qwen' in model.lower():
 -                response = litellm.Message(**qwen_parse_tool_calls(output.choices[0].message.content))
 +                native_message = output.choices[0].message
@@ -13,5 +11,3 @@ index 6544570..e43534f 100644
 +                else:
 +                    response = litellm.Message(**qwen_parse_tool_calls(native_message.content))
              else:
-                 if len(output.choices) == 0 or (output.choices[0].finish_reason == "stop" and output.choices[0].message.content is None):
-                     messages = messages + [{"role": "user", "content": "I got an empty response. Please try again to generate a valid response."}]
