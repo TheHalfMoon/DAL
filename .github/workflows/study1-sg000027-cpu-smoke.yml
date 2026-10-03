@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/study1-sg000027-cpu-smoke.yml
       - registry/study1_sg000027_cpu_smoke_contract.json
+      - registry/study1_sg000027_transport_diagnostic_contract.json
   workflow_dispatch:
 
 permissions:
@@ -51,6 +52,13 @@ jobs:
           assert contract["governance"]["d4_allowed"] is False
           assert contract["governance"]["training_allowed"] is False
           assert contract["governance"]["final_role_access_allowed"] is False
+          diagnostic = json.loads(
+              Path("registry/study1_sg000027_transport_diagnostic_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          assert diagnostic["repair_boundary"]["this_grain_may_modify_frozen_upstream_parser"] is False
+          assert diagnostic["repair_boundary"]["this_grain_may_freeze_model_or_tokenizer"] is False
 
       - name: Install frozen upstream smoke dependencies
         run: >-
@@ -155,6 +163,89 @@ jobs:
           cat "$RUNNER_TEMP/llama-server.log"
           exit 1
 
+      - name: Diagnose raw OpenAI-compatible tool transport on synthetic input
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          import litellm
+
+          tools = [{
+              "type": "function",
+              "function": {
+                  "name": "fhir_request_get",
+                  "description": "FHIR GET request",
+                  "parameters": {
+                      "type": "object",
+                      "properties": {
+                          "query_string": {"type": "string", "description": "FHIR query string"}
+                      },
+                      "required": ["query_string"],
+                  },
+              },
+          }]
+          messages = [
+              {
+                  "role": "system",
+                  "content": (
+                      "Synthetic interface smoke only. Call fhir_request_get exactly once. "
+                      "Do not answer from memory and do not invent a second tool."
+                  ),
+              },
+              {
+                  "role": "user",
+                  "content": (
+                      "Retrieve the Patient resource for synthetic identifier DAL-SMOKE-0001. "
+                      "Use the provided tool only."
+                  ),
+              },
+          ]
+          output = litellm.completion(
+              model=os.environ["QWEN_MODEL_ID"],
+              messages=messages,
+              tools=tools,
+              temperature=0.0,
+              parallel_tool_calls=True,
+              base_url="http://127.0.0.1:8080/v1",
+              custom_llm_provider="openai",
+          )
+          choice = output.choices[0]
+          message = choice.message
+          calls = list(getattr(message, "tool_calls", None) or [])
+          structured = []
+          for call in calls:
+              structured.append({
+                  "name": call.function.name,
+                  "arguments": call.function.arguments,
+              })
+          content = getattr(message, "content", None)
+          result = {
+              "schema_version": "0.1",
+              "study_id": "study1",
+              "specgrain_id": "SG-000027",
+              "stage": "D3",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "synthetic_case_id": "DAL-SMOKE-0001",
+              "finish_reason": getattr(choice, "finish_reason", None),
+              "content": content,
+              "structured_tool_call_count": len(structured),
+              "structured_tool_calls": structured,
+              "content_has_tool_call_marker": "<tool_call>" in (content or ""),
+              "development_or_final_data_accessed": False,
+              "selection_performed": False,
+              "training_performed": False,
+              "zero_founder_cost": True,
+          }
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          evidence.mkdir(parents=True, exist_ok=True)
+          (evidence / "raw_transport_probe.json").write_text(
+              json.dumps(result, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(result, sort_keys=True))
+
       - name: Execute synthetic tool-call smoke through frozen safe_llm_call
         shell: python
         run: |
@@ -254,6 +345,50 @@ jobs:
           )
           print(json.dumps(result, sort_keys=True))
 
+      - name: Classify synthetic tool-call transport
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          raw = json.loads((evidence / "raw_transport_probe.json").read_text())
+          frozen = json.loads((evidence / "qwen_cpu_smoke.json").read_text())
+          raw_count = int(raw["structured_tool_call_count"])
+          frozen_count = int(frozen["tool_call_count"])
+          if raw_count == 1 and frozen_count == 0:
+              status = "parser-transport-mismatch"
+          elif raw_count == 0 and not raw["content_has_tool_call_marker"]:
+              status = "model-or-template-no-tool-call"
+          elif raw_count == 1 and frozen_count == 1:
+              raw_name = raw["structured_tool_calls"][0]["name"]
+              status = (
+                  "transport-compatible"
+                  if raw_name == frozen["tool_name"] == "fhir_request_get"
+                  else "blocked-requires-separate-review"
+              )
+          else:
+              status = "blocked-requires-separate-review"
+          result = {
+              "schema_version": "0.1",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "status": status,
+              "raw_structured_tool_call_count": raw_count,
+              "raw_content_has_tool_call_marker": raw["content_has_tool_call_marker"],
+              "frozen_tool_call_count": frozen_count,
+              "model_or_tokenizer_frozen": False,
+              "development_or_final_data_accessed": False,
+              "selection_performed": False,
+              "training_performed": False,
+              "d4_allowed": False,
+          }
+          (evidence / "transport_diagnosis.json").write_text(
+              json.dumps(result, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(result, sort_keys=True))
+
       - name: Write execution receipt
         if: always()
         shell: python
@@ -303,6 +438,8 @@ jobs:
           evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
           preflight = json.loads((evidence / "provider_preflight.json").read_text())
           smoke = json.loads((evidence / "qwen_cpu_smoke.json").read_text())
+          raw = json.loads((evidence / "raw_transport_probe.json").read_text())
+          diagnosis = json.loads((evidence / "transport_diagnosis.json").read_text())
           expected = {
               "phi4-mini-instruct": "blocked-unrecognized-provider",
               "qwen3-4b-instruct-2507": "eligible-qwen-provider",
@@ -318,3 +455,15 @@ jobs:
               raise SystemExit("forbidden benchmark data access recorded")
           if smoke["selection_performed"] is not False or smoke["training_performed"] is not False:
               raise SystemExit("forbidden D3 activity recorded")
+          if raw["development_or_final_data_accessed"] is not False:
+              raise SystemExit("forbidden data access in raw transport diagnostic")
+          allowed_diagnoses = {
+              "parser-transport-mismatch",
+              "model-or-template-no-tool-call",
+              "transport-compatible",
+              "blocked-requires-separate-review",
+          }
+          if diagnosis["status"] not in allowed_diagnoses:
+              raise SystemExit(f"invalid transport diagnosis: {diagnosis['status']}")
+          if diagnosis["model_or_tokenizer_frozen"] is not False:
+              raise SystemExit("diagnostic grain cannot freeze model or tokenizer")

@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "grain": "synthetic-tool-transport-diagnostic",
+  "research_contract_issue": 132,
+  "canonical_dependency": {
+    "cpu_smoke_contract_merge": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+    "cpu_smoke_run_id": 37140291946,
+    "cpu_smoke_observation_path": "registry/study1_sg000027_cpu_smoke_observation.json",
+    "blocked_status": "blocked-behavior-changing"
+  },
+  "purpose": "distinguish model/template tool-call failure from structured OpenAI transport loss in the frozen Qwen parser using synthetic inputs only",
+  "inputs_allowed": [
+    "synthetic prompt DAL-SMOKE-0001",
+    "the same frozen fhir_request_get tool schema",
+    "the exact Qwen GGUF and pinned llama.cpp identity from the canonical CPU smoke",
+    "direct LiteLLM observation of the local OpenAI-compatible response before frozen qwen_parse_tool_calls",
+    "frozen safe_llm_call observation on the identical synthetic contract"
+  ],
+  "inputs_forbidden": [
+    "FHIR-AgentBench calibration questions or answers",
+    "FHIR-AgentBench validation questions or answers",
+    "FHIR-AgentBench final-role content, traces, labels, gold IDs, or outputs",
+    "any QA correctness or benchmark performance outcome",
+    "training, fine-tuning, calibration fitting, threshold fitting, or objective experiments"
+  ],
+  "classification_rule": {
+    "raw_structured_call_and_frozen_zero_calls": "parser-transport-mismatch",
+    "raw_zero_calls_and_no_content_tool_marker": "model-or-template-no-tool-call",
+    "raw_and_frozen_each_one_matching_call": "transport-compatible",
+    "other": "blocked-requires-separate-review"
+  },
+  "repair_boundary": {
+    "this_grain_may_modify_frozen_upstream_parser": false,
+    "this_grain_may_freeze_model_or_tokenizer": false,
+    "if_parser_transport_mismatch": "a separately qualified compatibility-repair grain is required before any model/tokenizer freeze",
+    "if_model_or_template_no_tool_call": "retain the Qwen block and evaluate the next preregistered candidate or separately re-govern the candidate family without using benchmark outcomes"
+  },
+  "governance": {
+    "synthetic_inputs_only": true,
+    "selection_performed": false,
+    "training_allowed": false,
+    "d4_allowed": false,
+    "final_role_access_allowed": false,
+    "zero_founder_cost": true
+  }
+}

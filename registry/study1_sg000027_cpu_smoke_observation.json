@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "evidence_kind": "canonical-synthetic-cpu-smoke-observation",
+  "canonical_main_sha": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+  "workflow_run_id": 37140291946,
+  "workflow_conclusion": "success",
+  "artifact": {
+    "id": 11280346690,
+    "name": "sg000027-d3-cpu-smoke-5fbf4f30788688014cf29ef9d238a93af2d706fc",
+    "digest": "sha256:40ffcbcb2366fa0a6381ab48abafe7b9a7c957021a3b4be523af2b5fe29054f9",
+    "expired": false
+  },
+  "provider_preflight": {
+    "phi4-mini-instruct": "blocked-unrecognized-provider",
+    "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+    "smollm3-3b": "blocked-unrecognized-provider"
+  },
+  "qwen_cpu_smoke": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "status": "blocked-behavior-changing",
+    "tool_call_count": 0,
+    "tool_name": null,
+    "query_string": null,
+    "error": null,
+    "synthetic_inputs_only": true,
+    "development_or_final_data_accessed": false,
+    "selection_performed": false,
+    "training_performed": false,
+    "zero_founder_cost": true
+  },
+  "conclusion": "no-base-model-or-tokenizer-freeze-permitted",
+  "next_governed_action": "synthetic-only-openai-transport-vs-frozen-qwen-parser-diagnostic"
+}
