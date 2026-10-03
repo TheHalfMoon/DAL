@@ -165,8 +165,8 @@
   "d4_activation_allowed": false,
   "closeout_artifact": {
     "path": "registry/study1_sg000026_closeout.json",
-    "sha256": "1e4702687e40f59c98be4972c6458e133c30f16508d86df0873ab679072d666f",
-    "pre_closeout_main": "c1bc808d6381f8cab02da8adfc9ba519370cc0f8"
+    "pre_closeout_main": "c1bc808d6381f8cab02da8adfc9ba519370cc0f8",
+    "lf_sha256": "1e4702687e40f59c98be4972c6458e133c30f16508d86df0873ab679072d666f"
   },
   "next_governed_action": "separate-D3-activation-grain"
 }

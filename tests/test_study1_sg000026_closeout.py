@@ -22,10 +22,6 @@ def _lf_sha(path: Path) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def _raw_sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def test_d2_closeout_binds_immutable_contract_and_canonical_amendment() -> None:
     closeout = _load(CLOSEOUT)
     assert closeout["status"] == "closed-canonical"
@@ -90,4 +86,4 @@ def test_closeout_keeps_final_sealed_and_d3_inactive() -> None:
     assert frontier["d3_activation_eligible"] is True
     assert frontier["later_stages_activated"] is False
     assert frontier["d4_activation_allowed"] is False
-    assert frontier["closeout_artifact"]["sha256"] == _raw_sha(CLOSEOUT)
+    assert frontier["closeout_artifact"]["lf_sha256"] == _lf_sha(CLOSEOUT)
