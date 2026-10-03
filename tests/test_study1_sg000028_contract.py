@@ -97,13 +97,29 @@ def test_gate_cannot_activate_training_or_final_access() -> None:
     assert governance["trace_producer_switching_after_gate_outcomes"] is False
 
 
-def test_frontier_allows_only_main_only_query_trace_execution_next() -> None:
+def test_frontier_records_canonical_dependency_blocker_without_stage_progression() -> None:
     frontier = _load(FRONTIER)
+    dependency = frontier["canonical_dependency"]
+    failure = frontier["dependency_failure"]
     assert frontier["specgrain_id"] == "SG-000028"
-    assert frontier["query_trace_gate_status"] == "blocked-pre-data-provenance-mismatch"
+    assert frontier["state"] == "blocked-pre-trace-frozen-upstream-dependency-missing"
+    assert (
+        frontier["query_trace_gate_status"]
+        == "blocked-pre-trace-frozen-upstream-dependency-missing"
+    )
+    assert dependency["provenance_repair_merge"] == (
+        "d01f6eaf22ae11b44cff7a979526596c36e6ac03"
+    )
+    assert dependency["provenance_repair_post_main_gaxbench_run"] == 37153192785
+    assert dependency["provenance_repair_post_main_manuscript_run"] == 37153192731
+    assert dependency["blocked_dependency_run"] == 37153192763
+    assert failure["exception"] == "ModuleNotFoundError: No module named 'sqlglot'"
+    assert failure["trace_generation_started"] is False
+    assert failure["development_question_content_accessed"] is False
+    assert failure["final_question_content_accessed"] is False
+    assert failure["raw_benchmark_source_downloaded_to_ephemeral_runner"] is True
+    assert failure["raw_benchmark_source_cleanup_step_executed"] is False
     assert frontier["query_trace_evidence_generated"] is False
-    assert frontier["development_data_accessed_by_blocked_run"] is False
-    assert frontier["final_data_accessed_by_blocked_run"] is False
     assert frontier["main_only_execution_required"] is True
     assert frontier["d4_activation_allowed"] is False
     assert frontier["training_allowed"] is False
@@ -118,3 +134,20 @@ def test_workflow_is_main_only_and_uses_exact_eight_shard_denominator() -> None:
     assert "study1_sg000028_query_trace_runner.py" in text
     assert "study1_sg000028_query_trace_aggregate.py" in text
     assert "raw gate run cannot itself activate D4" in text
+
+
+def test_workflow_pins_required_frozen_upstream_import_dependencies() -> None:
+    text = WORKFLOW.read_text(encoding="utf-8")
+    assert "sqlglot==26.9.0" in text
+    assert "sqlparse==0.5.3" in text
+    assert "tqdm==4.66.5" in text
+
+
+def test_raw_benchmark_source_cleanup_runs_even_after_shard_failure() -> None:
+    text = WORKFLOW.read_text(encoding="utf-8")
+    marker = "- name: Delete raw benchmark source before artifact upload"
+    cleanup = text.split(marker, maxsplit=1)[1].split(
+        "- name: Upload normalized shard evidence only", maxsplit=1
+    )[0]
+    assert "if: always()" in cleanup
+    assert "source.unlink(missing_ok=True)" in cleanup
