@@ -1,0 +1,13 @@
+diff --git a/utils/core_utils.py b/utils/core_utils.py
+index 6544570..e43534f 100644
+--- a/utils/core_utils.py
++++ b/utils/core_utils.py
+@@ -377,3 +377,7 @@ def safe_llm_call(model, messages, tools=None, temperature=0.0, parallel_tool_ca
+             if 'qwen' in model.lower():
+-                response = litellm.Message(**qwen_parse_tool_calls(output.choices[0].message.content))
++                native_message = output.choices[0].message
++                if getattr(native_message, "tool_calls", None):
++                    response = native_message
++                else:
++                    response = litellm.Message(**qwen_parse_tool_calls(native_message.content))
+             else:

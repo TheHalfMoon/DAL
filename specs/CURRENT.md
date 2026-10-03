@@ -235,6 +235,8 @@ The founder-authorized Issue #128 stage-order amendment remains binding. The tra
 
 Canonical CPU smoke run `37140291946` on merge `5fbf4f30788688014cf29ef9d238a93af2d706fc` retained Qwen3-4B-Instruct-2507 as `blocked-behavior-changing`: the exact local CPU runtime was healthy and zero-cost, but frozen `safe_llm_call` returned zero tool calls on the synthetic DAL-SMOKE-0001 contract. Phi-4-mini and SmolLM3 remain blocked by frozen provider routing before model load. No model/tokenizer is frozen. The immediate D3 action is a synthetic-only transport diagnostic that compares the raw OpenAI-compatible response against the frozen Qwen parser; it cannot modify upstream parsing or freeze a model.
 
+Canonical diagnostic run `37142304592` on merge `08fec6e8a990adaff5163e8ed93226aab7371e3b` proved `parser-transport-mismatch`: the raw local OpenAI-compatible response contained exactly one structured `fhir_request_get` call with `Patient/DAL-SMOKE-0001`, while the frozen Qwen branch returned zero calls because it parsed only textual `<tool_call>` content. The active repair grain is restricted to preserving already-structured tool calls before falling back unchanged to the frozen text parser. It cannot freeze a model/tokenizer, access benchmark development/final data, train, or activate D4.
+
 ## Core P08 invariants
 
 ```text

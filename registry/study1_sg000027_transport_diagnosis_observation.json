@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "evidence_kind": "canonical-synthetic-tool-transport-diagnosis",
+  "canonical_main_sha": "08fec6e8a990adaff5163e8ed93226aab7371e3b",
+  "workflow_run_id": 37142304592,
+  "artifact": {
+    "id": 11281350383,
+    "name": "sg000027-d3-cpu-smoke-08fec6e8a990adaff5163e8ed93226aab7371e3b",
+    "digest": "sha256:862584211b8d1cc871bd5ad3ee3f0561cb6ae19defa3474371fdfa54d8df319d",
+    "expired": false
+  },
+  "raw_transport": {
+    "finish_reason": "tool_calls",
+    "structured_tool_call_count": 1,
+    "tool_name": "fhir_request_get",
+    "arguments": {
+      "query_string": "Patient/DAL-SMOKE-0001"
+    },
+    "content": "",
+    "content_has_tool_call_marker": false
+  },
+  "frozen_qwen_parser": {
+    "tool_call_count": 0,
+    "status": "blocked-behavior-changing"
+  },
+  "diagnosis": "parser-transport-mismatch",
+  "development_or_final_data_accessed": false,
+  "selection_performed": false,
+  "training_performed": false,
+  "model_or_tokenizer_frozen": false,
+  "d4_allowed": false
+}
