@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FREEZE = ROOT / "registry/study1_sg000027_trace_producer_freeze.json"
+CLOSEOUT = ROOT / "registry/study1_sg000027_closeout.json"
 REPAIR = ROOT / "registry/study1_sg000027_transport_repair_contract.json"
 CONTRACT = ROOT / "registry/study1_sg000028_contract.json"
 CORRECTION = ROOT / "registry/study1_sg000028_trace_producer_provenance_correction.json"
@@ -17,11 +18,25 @@ def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_transport_provenance_cross_binding_matches_canonical_repair_bytes() -> None:
+def _lf_sha256(path: Path) -> str:
+    normalized = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(normalized).hexdigest()
+
+
+def test_d3_freeze_bytes_remain_bound_to_canonical_closeout() -> None:
+    closeout = _load(CLOSEOUT)
+    expected = closeout["canonical_inputs"]["trace_producer_freeze"]["lf_sha256"]
+    assert expected == "2dc7159d84772aeb775e605e6bbaf79187ce3293331764a6f9f2fc9e66feeec5"
+    assert _lf_sha256(FREEZE) == expected
+
+
+def test_provenance_overlay_matches_canonical_repair_bytes() -> None:
     freeze = _load(FREEZE)["trace_producer_identity"]["fhir_agentbench"]
     repair = _load(REPAIR)["repair"]
     contract = _load(CONTRACT)["trace_producer"]
-    correction = _load(CORRECTION)["correct_canonical_repair_provenance"]
+    correction = _load(CORRECTION)
+    correct = correction["correct_canonical_repair_provenance"]
+    incorrect = correction["incorrect_freeze_provenance"]
 
     actual_patch_sha256 = hashlib.sha256(PATCH.read_bytes()).hexdigest()
     expected = {
@@ -35,7 +50,7 @@ def test_transport_provenance_cross_binding_matches_canonical_repair_bytes() -> 
         "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757"
     )
 
-    for source in (freeze, repair, contract, correction):
+    for source in (repair, contract, correct):
         assert source["transport_patch_sha256"] == expected["transport_patch_sha256"]
         assert source["patched_core_utils_blob_sha"] == expected[
             "patched_core_utils_blob_sha"
@@ -43,6 +58,10 @@ def test_transport_provenance_cross_binding_matches_canonical_repair_bytes() -> 
         assert source["patched_core_utils_sha256"] == expected[
             "patched_core_utils_sha256"
         ]
+
+    for key in expected:
+        assert freeze[key] == incorrect[key]
+        assert freeze[key] != correct[key]
 
 
 def test_correction_is_provenance_only_and_does_not_switch_trace_producer() -> None:
@@ -59,13 +78,13 @@ def test_correction_is_provenance_only_and_does_not_switch_trace_producer() -> N
 
 
 def test_blocked_run_is_explicitly_pre_data_and_not_query_trace_evidence() -> None:
-    correction = _load(CORRECTION)["discovery"]
+    discovery = _load(CORRECTION)["discovery"]
     frontier = _load(FRONTIER)
-    assert correction["query_trace_run_id"] == 37150279061
-    assert correction["failure_class"] == "pre-data-provenance-mismatch"
-    assert correction["development_data_accessed"] is False
-    assert correction["final_data_accessed"] is False
-    assert correction["query_trace_evidence_generated"] is False
+    assert discovery["query_trace_run_id"] == 37150279061
+    assert discovery["failure_class"] == "pre-data-provenance-mismatch"
+    assert discovery["development_data_accessed"] is False
+    assert discovery["final_data_accessed"] is False
+    assert discovery["query_trace_evidence_generated"] is False
     assert frontier["query_trace_gate_status"] == "blocked-pre-data-provenance-mismatch"
     assert frontier["query_trace_evidence_generated"] is False
     assert frontier["development_data_accessed_by_blocked_run"] is False
