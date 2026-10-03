@@ -1,0 +1,407 @@
+name: DAL Study 1 SG-000028 Query-Trace Gate
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/study1-sg000028-query-trace-gate.yml
+      - registry/study1_sg000028_contract.json
+      - registry/study1_sg000027_trace_producer_freeze.json
+      - src/gaxbench/study1_query_trace_gate.py
+      - scripts/study1_sg000028_query_trace_runner.py
+      - scripts/study1_sg000028_query_trace_aggregate.py
+      - patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch
+      - registry/study1_sg000026_fhir_runtime_manifest.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FHIR_AGENTBENCH_REVISION: "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
+  LLAMA_CPP_REVISION: "d2e54583c7452353eb35d40431281f6ee984332f"
+  QWEN_MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+  QWEN_GGUF_URL: "https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/resolve/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf"
+  QWEN_GGUF_SHA256: "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1"
+  OPENAI_API_KEY: "dal-local-query-trace-gate"
+  TRACE_SHARD_COUNT: "8"
+
+jobs:
+  trace-shard:
+    name: Development trace shard ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install DAL and frozen upstream dependencies
+        run: >-
+          python -m pip install -e .
+          litellm==1.75.9
+          tiktoken==0.8.0
+          pandas==2.3.2
+          numpy==2.3.2
+          PyYAML==6.0.2
+          requests==2.32.5
+          google-auth==2.40.3
+
+      - name: Verify SG-000028 governance boundary
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          contract = json.loads(
+              Path("registry/study1_sg000028_contract.json").read_text(encoding="utf-8")
+          )
+          if contract["stage"] != "post-D3-pre-D4":
+              raise SystemExit("SG-000028 stage drift")
+          if contract["execution"]["main_only"] is not True:
+              raise SystemExit("SG-000028 must remain main-only")
+          if contract["execution"]["trace_shards"] != 8:
+              raise SystemExit("SG-000028 shard-count drift")
+          if contract["execution"]["first_turn_only"] is not True:
+              raise SystemExit("SG-000028 must remain first-turn-only")
+          if contract["execution"]["answer_correctness_scored"] is not False:
+              raise SystemExit("answer correctness is outside SG-000028")
+          if contract["governance"]["d4_activated"] is not False:
+              raise SystemExit("D4 activation is forbidden in SG-000028")
+          if contract["governance"]["training_allowed"] is not False:
+              raise SystemExit("training is forbidden in SG-000028")
+          if contract["governance"]["final_role_access_allowed"] is not False:
+              raise SystemExit("sealed-final access is forbidden in SG-000028")
+
+      - name: Checkout and verify frozen FHIR-AgentBench source
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream="$RUNNER_TEMP/fhir-agentbench"
+          git clone --filter=blob:none https://github.com/glee4810/FHIR-AgentBench.git "$upstream"
+          git -C "$upstream" checkout --detach "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$upstream" rev-parse HEAD)" = "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$upstream" hash-object utils/core_utils.py)" = \
+            "6544570985916074f40a5fb469243aa5ced22f65"
+          test "$(git -C "$upstream" hash-object agent/single_turn_request_agent.py)" = \
+            "1188a4053560924c3ed801e9b1aaa91ccd6d010d"
+          test "$(git -C "$upstream" hash-object tools/request_tools.py)" = \
+            "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
+
+      - name: Apply and verify frozen structured-tool transport patch
+        shell: python
+        run: |
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          freeze = json.loads(
+              Path("registry/study1_sg000027_trace_producer_freeze.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          identity = freeze["trace_producer_identity"]["fhir_agentbench"]
+          upstream = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench"
+          patch = Path(identity["transport_patch_path"])
+          patch_sha = hashlib.sha256(patch.read_bytes()).hexdigest()
+          if patch_sha != identity["transport_patch_sha256"]:
+              raise SystemExit(f"transport patch SHA-256 drift: {patch_sha}")
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", "--check", str(patch.resolve())],
+              check=True,
+          )
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", str(patch.resolve())],
+              check=True,
+          )
+          core = upstream / "utils/core_utils.py"
+          blob = subprocess.check_output(
+              ["git", "-C", str(upstream), "hash-object", str(core)],
+              text=True,
+          ).strip()
+          digest = hashlib.sha256(core.read_bytes()).hexdigest()
+          if blob != identity["patched_core_utils_blob_sha"]:
+              raise SystemExit(f"patched core blob drift: {blob}")
+          if digest != identity["patched_core_utils_sha256"]:
+              raise SystemExit(f"patched core SHA-256 drift: {digest}")
+
+      - name: Download exact frozen benchmark source without row logging
+        shell: python
+        run: |
+          import hashlib
+          import os
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          from gaxbench.fhir_agentbench_qualification import (
+              FHIR_AGENTBENCH_RAW_URL,
+              FHIR_AGENTBENCH_SOURCE_SHA256,
+          )
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000028"
+          root.mkdir(parents=True, exist_ok=True)
+          target = root / "source.csv"
+          request = Request(
+              FHIR_AGENTBENCH_RAW_URL,
+              headers={"User-Agent": "DAL-research/0.1"},
+          )
+          with urlopen(request, timeout=60) as response:
+              payload = response.read()
+          digest = hashlib.sha256(payload).hexdigest()
+          if digest != FHIR_AGENTBENCH_SOURCE_SHA256:
+              raise SystemExit(f"FHIR-AgentBench source SHA-256 drift: {digest}")
+          target.write_bytes(payload)
+          print(f"frozen_source_sha256={digest}")
+          print(f"frozen_source_bytes={len(payload)}")
+
+      - name: Download and verify frozen zero-cost FHIR runtime
+        shell: python
+        run: |
+          import concurrent.futures
+          import hashlib
+          import json
+          import os
+          import time
+          from pathlib import Path
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          work = Path(os.environ["RUNNER_TEMP"]) / "sg000028"
+          root = work / "runtime"
+          root.mkdir(parents=True, exist_ok=True)
+          manifest = json.loads(
+              Path("registry/study1_sg000026_fhir_runtime_manifest.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          source = manifest["source"]
+          base = str(source["official_files_root"]).rstrip("/")
+          sums = root / "official-SHA256SUMS.txt"
+          with urlopen(
+              Request(
+                  str(source["checksum_manifest_url"]),
+                  headers={"User-Agent": "DAL-research/0.1"},
+              ),
+              timeout=60,
+          ) as response:
+              sums.write_bytes(response.read())
+          sums_sha = hashlib.sha256(sums.read_bytes()).hexdigest()
+          if sums_sha != source["checksum_manifest_sha256"]:
+              raise SystemExit(f"official SHA256SUMS drift: {sums_sha}")
+
+          def download(entry: dict[str, str]) -> str:
+              relative = entry["path"]
+              expected = entry["sha256"]
+              target = root / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              encoded = "/".join(quote(part) for part in Path(relative).parts)
+              url = f"{base}/{encoded}"
+              last_error: BaseException | None = None
+              for attempt in range(1, 4):
+                  part = target.with_suffix(target.suffix + ".part")
+                  part.unlink(missing_ok=True)
+                  try:
+                      request = Request(
+                          url,
+                          headers={"User-Agent": "DAL-research/0.1"},
+                      )
+                      with urlopen(request, timeout=180) as response, part.open(
+                          "wb"
+                      ) as handle:
+                          while chunk := response.read(1024 * 1024):
+                              handle.write(chunk)
+                      actual = hashlib.sha256(part.read_bytes()).hexdigest()
+                      if actual != expected:
+                          raise RuntimeError(
+                              f"SHA-256 mismatch for {relative}: {actual}"
+                          )
+                      part.replace(target)
+                      return relative
+                  except BaseException as error:
+                      last_error = error
+                      part.unlink(missing_ok=True)
+                      if attempt < 3:
+                          time.sleep(attempt)
+              assert last_error is not None
+              raise last_error
+
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+              completed = list(executor.map(download, manifest["files"]))
+          if len(completed) != len(manifest["files"]):
+              raise SystemExit("FHIR runtime download coverage incomplete")
+          print(f"runtime_files_verified={len(completed)}")
+
+      - name: Build pinned llama.cpp CPU server
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/ggml-org/llama.cpp.git \
+            "$RUNNER_TEMP/llama.cpp"
+          git -C "$RUNNER_TEMP/llama.cpp" checkout --detach "$LLAMA_CPP_REVISION"
+          test "$(git -C "$RUNNER_TEMP/llama.cpp" rev-parse HEAD)" = \
+            "$LLAMA_CPP_REVISION"
+          cmake -S "$RUNNER_TEMP/llama.cpp" -B "$RUNNER_TEMP/llama.cpp/build" \
+            -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+          cmake --build "$RUNNER_TEMP/llama.cpp/build" \
+            --config Release -j 2 --target llama-server
+
+      - name: Download and verify exact frozen Qwen CPU artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --output "$model" "$QWEN_GGUF_URL"
+          actual="$(sha256sum "$model" | awk '{print $1}')"
+          test "$actual" = "$QWEN_GGUF_SHA256"
+          echo "qwen_gguf_sha256=$actual"
+
+      - name: Start exact local OpenAI-compatible trace-producer server
+        shell: bash
+        run: |
+          set -euo pipefail
+          server="$RUNNER_TEMP/llama.cpp/build/bin/llama-server"
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          nohup "$server" \
+            -m "$model" \
+            --alias "$QWEN_MODEL_ID" \
+            --host 127.0.0.1 \
+            --port 8080 \
+            -c 4096 \
+            --jinja \
+            > "$RUNNER_TEMP/llama-server.log" 2>&1 &
+          echo $! > "$RUNNER_TEMP/llama-server.pid"
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "local trace-producer server did not become healthy"
+          exit 1
+
+      - name: Execute blind development-only first-turn query-trace shard
+        shell: bash
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/sg000028"
+          python scripts/study1_sg000028_query_trace_runner.py \
+            --source "$work/source.csv" \
+            --upstream-root "$RUNNER_TEMP/fhir-agentbench" \
+            --runtime-root "$work/runtime" \
+            --runtime-manifest registry/study1_sg000026_fhir_runtime_manifest.json \
+            --output-dir "$work/output" \
+            --model "$QWEN_MODEL_ID" \
+            --base-url http://127.0.0.1:8080/v1 \
+            --shard-index "${{ matrix.shard }}" \
+            --shard-count "$TRACE_SHARD_COUNT"
+
+      - name: Delete raw benchmark source before artifact upload
+        shell: python
+        run: |
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_TEMP"]) / "sg000028/source.csv"
+          source.unlink(missing_ok=True)
+          if source.exists():
+              raise SystemExit("raw benchmark source deletion failed")
+          print("raw_benchmark_source_deleted=true")
+
+      - name: Upload normalized shard evidence only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000028-query-trace-shard-${{ matrix.shard }}-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000028/output/
+          if-no-files-found: error
+          retention-days: 14
+
+  aggregate:
+    name: Aggregate query-trace gate evidence
+    needs: trace-shard
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install DAL
+        run: python -m pip install -e .
+
+      - name: Download all normalized shard artifacts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          pattern: sg000028-query-trace-shard-*-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000028-aggregate/shards
+          merge-multiple: true
+
+      - name: Aggregate complete denominator and classify gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/sg000028-aggregate"
+          mkdir -p "$root/evidence"
+          python scripts/study1_sg000028_query_trace_aggregate.py \
+            --input-dir "$root/shards" \
+            --output "$root/evidence/query_trace_qualification.json" \
+            --receipt "$root/evidence/execution_receipt.json"
+
+      - name: Enforce durable artifact allowlist
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000028-aggregate/evidence"
+          names = sorted(path.name for path in root.iterdir() if path.is_file())
+          if names != ["execution_receipt.json", "query_trace_qualification.json"]:
+              raise SystemExit(f"unexpected durable evidence files: {names}")
+          report = json.loads(
+              (root / "query_trace_qualification.json").read_text(encoding="utf-8")
+          )
+          if report["development_rows"] != 1463:
+              raise SystemExit("development denominator incomplete")
+          if report["sealed_final_rows"] != 173:
+              raise SystemExit("sealed-final denominator drift")
+          if report["final_rows_materialized"] != 0:
+              raise SystemExit("sealed-final materialization detected")
+          if report["final_question_content_accessed"] is not False:
+              raise SystemExit("sealed-final question access detected")
+          if report["raw_questions_emitted"] is not False:
+              raise SystemExit("raw question emission detected")
+          if report["raw_patient_ids_emitted"] is not False:
+              raise SystemExit("raw patient identifier emission detected")
+          if report["raw_query_values_emitted"] is not False:
+              raise SystemExit("raw FHIR query value emission detected")
+          if report["raw_traces_emitted"] is not False:
+              raise SystemExit("raw trace emission detected")
+          if report["d4_activation_allowed"] is not False:
+              raise SystemExit("raw gate run cannot itself activate D4")
+          print(f"query_trace_gate_result={report['query_trace_gate_result']}")
+
+      - name: Upload final normalized qualification evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000028-query-trace-qualification-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000028-aggregate/evidence/
+          if-no-files-found: error
+          retention-days: 14
