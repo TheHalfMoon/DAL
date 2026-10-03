@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "state": "active-governance-only",
+  "research_contract_issue": 132,
+  "contract_path": "registry/study1_sg000027_contract.json",
+  "canonical_dependency": {
+    "sg000026_closeout_merge": "07ad6a3f0af0f5a460cd469e029b26274f1a7416",
+    "post_main_gaxbench_run": 37135893667,
+    "post_main_manuscript_run": 37135893641
+  },
+  "current_capability": "bounded-architecture-candidate-definition-and-prospective-trace-producer-freeze",
+  "candidate_family_defined": false,
+  "trace_producing_system_frozen": false,
+  "query_trace_gate_status": "required-after-d3-freeze-before-d4",
+  "d4_activation_allowed": false,
+  "training_allowed": false,
+  "later_stages_activated": false,
+  "sealed_final_role": {
+    "access": "sealed-and-forbidden-before-d9",
+    "patients": 40,
+    "rows": 173
+  },
+  "model_selection_performed": false,
+  "training_performed": false,
+  "final_role_accessed": false,
+  "zero_founder_cost": true,
+  "next_governed_action": "bounded-D3-candidate-family-and-trace-producer-freeze-grain"
+}
