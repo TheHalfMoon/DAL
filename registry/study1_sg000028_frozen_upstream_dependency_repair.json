@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "stage": "post-D3-pre-D4",
+  "grain_kind": "frozen-upstream-execution-environment-repair",
+  "research_contract_issue": 141,
+  "discovery": {
+    "canonical_main": "d01f6eaf22ae11b44cff7a979526596c36e6ac03",
+    "query_trace_run_id": 37153192763,
+    "failure_class": "pre-inference-frozen-upstream-dependency-missing",
+    "failure_reproduced_on_multiple_shards": true,
+    "minimum_observed_failed_shards": 6,
+    "missing_module": "sqlglot",
+    "failed_import": "utils.sql_to_fhir_utils",
+    "completed_safe_llm_calls": 0,
+    "observed_tool_calls_generated": false,
+    "normalized_query_trace_evidence_generated": false,
+    "aggregate_qualification_generated": false,
+    "sealed_final_accessed": false
+  },
+  "frozen_upstream": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "requirements_path": "requirements.txt",
+    "requirements_git_blob_sha": "861933a033df5c0c3521bd44d5e3e1952acbb301",
+    "requirements_sha256": "6f706d137bfecf7fdf59c620cff2b756d3b2eeb5adac0f3aa58ad0bcbe845664",
+    "requirements": [
+      "dask==2024.8.2",
+      "ijson==3.4.0",
+      "litellm==1.75.9",
+      "numpy==2.3.2",
+      "pandas==2.3.2",
+      "protobuf==6.32.0",
+      "python_dateutil==2.9.0.post0",
+      "PyYAML==6.0.2",
+      "PyYAML==6.0.2",
+      "Requests==2.32.5",
+      "sqlglot==26.9.0",
+      "sqlparse==0.5.3",
+      "streamlit==1.48.1",
+      "tiktoken==0.8.0",
+      "tqdm==4.66.5",
+      "google-auth==2.40.3"
+    ]
+  },
+  "repair": {
+    "install_exact_frozen_upstream_dependencies": true,
+    "verify_frozen_requirements_blob": true,
+    "preflight_agent_import_before_benchmark_source_download": true,
+    "raw_benchmark_source_cleanup_always": true,
+    "query_trace_gate_must_rerun_after_canonical_repair": true
+  },
+  "semantic_invariants": {
+    "base_model_changed": false,
+    "tokenizer_changed": false,
+    "quantized_artifact_changed": false,
+    "llama_cpp_revision_changed": false,
+    "fhir_agentbench_revision_changed": false,
+    "agent_strategy_changed": false,
+    "prompt_changed": false,
+    "tool_schema_changed": false,
+    "temperature_changed": false,
+    "query_trace_pass_rule_changed": false,
+    "development_role_membership_changed": false,
+    "sealed_final_role_changed": false,
+    "trace_producer_switched_after_outcomes": false
+  },
+  "governance": {
+    "repair_scope": "execution-environment-completeness-and-failure-cleanup-only",
+    "d4_activation_allowed": false,
+    "training_allowed": false,
+    "fine_tuning_allowed": false,
+    "model_selection_performed": false,
+    "final_role_access_allowed": false,
+    "zero_founder_cost": true
+  }
+}
