@@ -61,7 +61,7 @@ def test_d4_stays_blocked_until_post_d3_query_trace_gate() -> None:
 
 def test_frontier_allows_only_d3_closeout_next() -> None:
     frontier = _load(FRONTIER)
-    assert frontier["state"] == "trace-producer-identity-frozen-pending-d3-closeout"
+    assert frontier["state"] == "d3-closed-query-trace-gate-not-yet-activated"
     assert frontier["trace_producing_system_frozen"] is True
     assert frontier["base_model_frozen"] is True
     assert frontier["tokenizer_frozen"] is True
@@ -69,4 +69,6 @@ def test_frontier_allows_only_d3_closeout_next() -> None:
     assert frontier["d4_activation_allowed"] is False
     assert frontier["training_allowed"] is False
     assert frontier["final_role_accessed"] is False
-    assert frontier["next_governed_action"] == "canonical-SG-000027-D3-closeout-grain"
+    assert frontier["next_governed_action"] == (
+        "activate-post-D3-pre-D4-query-trace-qualification-grain"
+    )
