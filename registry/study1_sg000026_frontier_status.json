@@ -1,0 +1,61 @@
+{
+  "authorized_recovery": null,
+  "blocked_capability": "real-fhir-agentbench-development-role-qualification",
+  "blocked_development_rows": {
+    "calibration": 341,
+    "validation": 1122
+  },
+  "blocker_reason": "Canonical DAL artifacts do not serialize a development-only FHIR-AgentBench row projection or patient-role membership map; the frozen public source CSV also contains sealed final-role supervision. Recovery requires an explicit governance decision under Issue #120.",
+  "canonical_frontier_sha": "aa59981148692c3524e66fb5e27d2dfce83533ae",
+  "canonical_grains": [
+    {
+      "kind": "activation",
+      "merge_sha": "e4b9e22",
+      "post_main_gaxbench_run": 37074487329,
+      "post_main_manuscript_run": 37074487342,
+      "pull_request": 116
+    },
+    {
+      "kind": "baseline-semantics-and-accounting",
+      "merge_sha": "0cfc2db",
+      "post_main_gaxbench_run": 37075637455,
+      "post_main_manuscript_run": 37075637504,
+      "pull_request": 117
+    },
+    {
+      "kind": "synthetic-fhir-compatibility-and-firewall",
+      "merge_sha": "5ea436e",
+      "post_main_gaxbench_run": 37076978487,
+      "post_main_manuscript_run": 37076978436,
+      "pull_request": 118
+    },
+    {
+      "kind": "zero-cost-fhir-runtime-identity",
+      "merge_sha": "aa59981",
+      "post_main_gaxbench_run": 37077874241,
+      "post_main_manuscript_run": 37077874208,
+      "pull_request": 119
+    }
+  ],
+  "completed_capabilities": [
+    "b0-b1-b2-shared-base-answer-identity",
+    "deterministic-failure-aware-denominator-accounting",
+    "synthetic-read-only-fhir-r4-compatibility-mechanics",
+    "sealed-final-role-rejection-in-d2-compatibility-surface",
+    "zero-cost-fhir-runtime-source-and-checksum-identity"
+  ],
+  "d2_closeout_allowed": false,
+  "governance_gate_issue": 120,
+  "later_stages_activated": false,
+  "research_contract_issue": 115,
+  "schema_version": "0.1",
+  "sealed_final_role": {
+    "access": "sealed-and-forbidden-to-d2",
+    "patients": 40,
+    "rows": 173
+  },
+  "specgrain_id": "SG-000026",
+  "stage": "D2",
+  "state": "blocked-at-governance-gate",
+  "study_id": "study1"
+}

@@ -203,15 +203,19 @@ SG-000025 completed the Study 1 redesign without model training, tuning, Study 1
 
 D2 baseline qualification is now activated separately as **SG-000026** under Issue #115, with canonical dependency `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. D2 is limited to B0/B1/B2 semantic/interface qualification, deterministic denominator accounting, and read-only local FHIR R4 compatibility on the governed 341-row calibration and 1122-row validation roles. The 40-patient / 173-row final role remains sealed and forbidden to D2.
 
-## Active frontier ? Study 1, SG-000026 / D2
+## Active frontier — Study 1, SG-000026 / D2
 
 **Baseline qualification and local FHIR compatibility**
 
-Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`.
+Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Recovery governance gate: Issue #120.
 
-State: **ACTIVE ? GOVERNANCE ACTIVATION ONLY**
+State: **ACTIVE — BLOCKED_AT_GOVERNANCE_GATE #120**
 
-Activation itself performs no model selection, training, calibration fitting, DAL architecture work, or Study 1 evaluation. Implementation may begin only after the activation grain is exact-head qualified, normally merged, and post-main verified. D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. After D8 there is no tuning, reselection, threshold change from final labels, or final rerun.
+Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), the B0/B1/B2 semantic and exact denominator-accounting kernel (PR #117, merge `0cfc2db`), the synthetic read-only FHIR compatibility kernel and sealed-role firewall (PR #118, merge `5ea436e`), and the zero-cost MIMIC-IV FHIR Demo v2.1.0 runtime/checksum manifest (PR #119, merge `aa59981`). Each grain was exact-head qualified before normal merge and post-main verified.
+
+The remaining D2 blocker is real FHIR-AgentBench qualification on the governed 341-row calibration + 1122-row validation projection. Canonical DAL artifacts intentionally do not serialize a development-only row projection or patient-role membership map, while the frozen public source CSV also contains the sealed 40-patient / 173-row final role. Reconstructing the development projection therefore requires an explicit governance decision under Issue #120; no metadata-only custodian exception, protocol amendment, or final-role access is authorized yet.
+
+D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden to D2.
 
 ## Core P08 invariants
 

@@ -311,18 +311,19 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json`; PR #113 merged `535efada86f7c5863b6eeda18b76d17a78e36b4e`; post-main GAXBench `37065781852` and Manuscript `37065781811` SUCCESS; final-test access remains `sealed`
 - [x] Canonical SG-000025 closeout (this closeout PR; evidence record `registry/study1_sg000025_closeout.json`)
 
-### SG-000026 ? D2 baseline qualification and local FHIR compatibility (ACTIVE ? GOVERNANCE ONLY)
+### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — BLOCKED_AT_GOVERNANCE_GATE #120)
 
-Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`.
+Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. Recovery governance gate: Issue #120.
 
 - [x] Create research contract Issue #115
-- [ ] Qualify and merge SG-000026 activation; verify post-main
-- [ ] Prove B0/B1/B2 matched-input base-answer identity and wrapper semantics
-- [ ] Implement deterministic denominator and failure accounting for D2 baselines
-- [ ] Implement read-only local FHIR R4 compatibility for governed development-role query patterns only
-- [ ] Qualify local FHIR retrieval on 341 calibration + 1122 validation rows without sealed-test supervision
-- [ ] Prove the 40-patient / 173-row sealed-final firewall mechanically
-- [ ] Persist zero-cost D2 qualification evidence, including unsupported/blocked semantics
+- [x] Qualify and merge SG-000026 activation; verify post-main — PR #116 merge `e4b9e22`
+- [x] Prove B0/B1/B2 matched-input base-answer identity and wrapper semantics — PR #117 merge `0cfc2db`
+- [x] Implement deterministic denominator and failure accounting for D2 baselines — PR #117 merge `0cfc2db`
+- [x] Implement synthetic read-only local FHIR R4 compatibility mechanics and explicit unsupported-semantics handling — PR #118 merge `5ea436e`
+- [x] Prove the 40-patient / 173-row sealed-final firewall mechanically in the D2 compatibility surface — PR #118 merge `5ea436e`
+- [x] Pin and offline-verify the zero-cost MIMIC-IV Clinical Database Demo on FHIR v2.1.0 runtime identity — PR #119 merge `aa59981`
+- [ ] Qualify local FHIR retrieval on the governed 341 calibration + 1122 validation rows without sealed-test supervision — **BLOCKED_AT_GOVERNANCE_GATE #120** until an authorized development-only projection path exists
+- [ ] Persist real development-row D2 FHIR equivalence evidence (query-pattern coverage, resource-ID equivalence, semantic-drift accounting); synthetic mechanics and runtime availability evidence are already canonical
 - [ ] Canonical SG-000026 / D2 closeout
 
 ### Later Study 1 stages (not activated)
