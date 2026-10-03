@@ -335,22 +335,23 @@ Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b3
 - [ ] Post-D3/pre-D4 observed governed query/search-pattern qualification - mandatory after prospective D3 model/agent freeze; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes
 - [ ] D4 activation remains blocked until the observed query/search-pattern gate passes
 
-### SG-000027 - D3 architecture candidates (ACTIVE - GOVERNANCE_ONLY / CANDIDATE_FAMILY_NOT_YET_FROZEN)
+### SG-000027 - D3 architecture candidates (ACTIVE - CANDIDATE_FAMILY_BOUNDED / AGENT_STRATEGY_FROZEN / BASE_MODEL_NOT_YET_FROZEN)
 
 Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `07ad6a3f0af0f5a460cd469e029b26274f1a7416`.
 
 - [x] Create D3 research contract Issue #132
 - [x] Record governance-only D3 activation contract in `registry/study1_sg000027_contract.json`
-- [ ] Canonically qualify and merge SG-000027 activation; verify post-main
-- [ ] Define a bounded candidate family and retain every rejected/blocked candidate
-- [ ] Bind exact eligible model/tokenizer revisions, license, release date, provenance, contamination-risk metadata, and zero-founder-cost compute path
+- [x] Canonically qualify and merge SG-000027 activation; PR #133 merge `aba35ac15fd56ed255565327c059a22104012f4e`, post-main verified
+- [x] Define a bounded candidate family and retain every rejected/blocked candidate
+- [x] Bind candidate model/tokenizer revisions, license, release date, provenance, contamination-risk metadata, and zero-cost compute-path status in the bounded inventory
 - [ ] Prospectively freeze one trace-producing base-model + FHIR-agent-strategy identity before query-trace qualification
 - [ ] Run the mandatory post-D3/pre-D4 development query-trace gate after the identity freeze
 - [ ] Canonical SG-000027 / D3 closeout
 
 - [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
 - [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes
-- [ ] Qualify the bounded base-model family on zero-cost CPU smoke criteria only; contract/runner is `registry/study1_sg000027_cpu_smoke_contract.json` + `.github/workflows/study1-sg000027-cpu-smoke.yml`; do not use FHIR QA correctness or final-role data
+- [x] Execute canonical zero-cost CPU smoke run `37140291946`; Qwen retained `blocked-behavior-changing`, Phi/Smol retained provider-routing blocks, and no model/tokenizer was frozen
+- [ ] Diagnose raw OpenAI-compatible structured tool transport versus the frozen Qwen parser using synthetic input only
 - [ ] Prospectively freeze one base-model + tokenizer identity using preregistered non-final, non-query-trace-outcome criteria
 - [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
 - [ ] D4 remains blocked until the observed query/search-pattern gate passes

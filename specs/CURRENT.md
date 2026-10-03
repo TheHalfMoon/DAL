@@ -233,6 +233,8 @@ The D3 CPU smoke contract is `registry/study1_sg000027_cpu_smoke_contract.json`.
 
 The founder-authorized Issue #128 stage-order amendment remains binding. The trace-producing identity is not yet complete because no base model/tokenizer is frozen. The next D3 grain is bounded zero-cost CPU smoke qualification followed by a prospective non-benchmark-outcome base-model/tokenizer freeze. Only after that full identity is frozen may the blind development-only custodian qualify observed normalized calibration/validation FHIR query/search patterns. D4 and all training remain blocked until that gate passes.
 
+Canonical CPU smoke run `37140291946` on merge `5fbf4f30788688014cf29ef9d238a93af2d706fc` retained Qwen3-4B-Instruct-2507 as `blocked-behavior-changing`: the exact local CPU runtime was healthy and zero-cost, but frozen `safe_llm_call` returned zero tool calls on the synthetic DAL-SMOKE-0001 contract. Phi-4-mini and SmolLM3 remain blocked by frozen provider routing before model load. No model/tokenizer is frozen. The immediate D3 action is a synthetic-only transport diagnostic that compares the raw OpenAI-compatible response against the frozen Qwen parser; it cannot modify upstream parsing or freeze a model.
+
 ## Core P08 invariants
 
 ```text
