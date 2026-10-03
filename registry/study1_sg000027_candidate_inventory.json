@@ -1,0 +1,205 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "grain_kind": "bounded-candidate-inventory-and-agent-strategy-freeze",
+  "research_contract_issue": 132,
+  "canonical_dependency": "aba35ac15fd56ed255565327c059a22104012f4e",
+  "evidence_class": "public-metadata-and-compute-feasibility-only-no-development-or-final-outcomes",
+  "observed_on": "2026-10-03",
+  "selection_performed": false,
+  "training_performed": false,
+  "development_benchmark_outcomes_used": false,
+  "final_role_accessed": false,
+  "benchmark_public_boundary": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "repository_created_at": "2025-09-12T05:06:56Z",
+    "earliest_verified_commit": "9467654e233af708f343c5f5cc786be76866d498",
+    "earliest_verified_commit_at": "2025-09-12T08:44:12Z",
+    "pmlr_volume_publication_date": "2026-05-05",
+    "rule": "release date is a contamination-risk proxy only; it is not proof of exposure or non-exposure"
+  },
+  "host_compute_observation": {
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13420H",
+    "ram_gb": 15.73,
+    "discrete_gpu": false,
+    "c_drive_free_gb_observed": 8.63,
+    "implication": "do not download full precision candidate weights merely to inventory them; require a bounded quantized or otherwise CPU-safe path before trace-producer freeze"
+  },
+  "bounded_base_model_family": [
+    {
+      "candidate_id": "phi4-mini-instruct",
+      "repo": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "parameter_count": 3836021760,
+      "license": "MIT",
+      "gated": false,
+      "hf_created_at": "2025-02-19T01:00:58Z",
+      "official_release_date": "2025-02-26",
+      "pipeline": "text-generation",
+      "tool_calling_evidence": "Microsoft release documentation explicitly reports function-calling support",
+      "contamination_proxy": "pre-FHIR-AgentBench-public-repository",
+      "cpu_path": {
+        "status": "official-int4-cpu-artifact-observed",
+        "repo": "microsoft/Phi-4-mini-instruct-onnx",
+        "revision": "fc04c8f93df696602fd9f300a30d1bf2e3081347",
+        "variant": "cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4",
+        "runtime": "ONNX Runtime GenAI",
+        "reported_model_data_size": "4.86 GB",
+        "size_semantics": "human-readable size reported by the artifact host; not treated as an exact byte digest"
+      },
+      "inventory_status": "eligible-preferred-for-cpu-smoke",
+      "not_selected": true
+    },
+    {
+      "candidate_id": "qwen3-4b-instruct-2507",
+      "repo": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "parameter_count": 4022468096,
+      "license": "Apache-2.0",
+      "gated": false,
+      "hf_created_at": "2025-08-05T10:58:03Z",
+      "official_release_date": "2025-08-06",
+      "pipeline": "text-generation",
+      "tool_calling_evidence": "Qwen3-2507 release documentation reports improved tool usage",
+      "contamination_proxy": "pre-FHIR-AgentBench-public-repository",
+      "cpu_path": {
+        "status": "requires-lineage-qualified-quantized-artifact-before-freeze",
+        "official_gguf_repo_observed": false,
+        "raw_repo_size_class": "approximately-8GB-bf16-weights",
+        "rule": "community quantization is not sufficient until its lineage and file digest are independently bound"
+      },
+      "inventory_status": "eligible-conditional-cpu-path-proof",
+      "not_selected": true
+    },
+    {
+      "candidate_id": "smollm3-3b",
+      "repo": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "parameter_count": 3075098624,
+      "license": "Apache-2.0",
+      "gated": false,
+      "hf_created_at": "2025-07-08T10:11:45Z",
+      "official_release_date": "2025-07-08",
+      "pipeline": "text-generation",
+      "tool_calling_evidence": "official SmolLM3 documentation includes agentic usage; exact FHIR tool-call compatibility still requires smoke qualification",
+      "contamination_proxy": "pre-FHIR-AgentBench-public-repository",
+      "cpu_path": {
+        "status": "ggml-org-q4-cpu-artifact-observed",
+        "repo": "ggml-org/SmolLM3-3B-GGUF",
+        "revision": "4965cb60b150737b68a0408c36aeefb65078f894",
+        "variant": "SmolLM3-Q4_K_M.gguf",
+        "runtime": "llama.cpp",
+        "reported_size": "1.92 GB",
+        "file_sha256": "8334b850b7bd46238c16b0c550df2138f0889bf433809008cc17a8b05761863e",
+        "size_semantics": "human-readable size reported by the artifact host; SHA-256 binds the exact Q4_K_M file"
+      },
+      "inventory_status": "eligible-for-cpu-smoke",
+      "not_selected": true
+    }
+  ],
+  "retained_negative_or_excluded_candidates": [
+    {
+      "candidate_id": "qwen3.5-4b",
+      "repo": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "parameter_count": 4659865088,
+      "license": "Apache-2.0",
+      "gated": false,
+      "hf_created_at": "2026-02-27T14:45:03Z",
+      "official_small-model_release_date": "2026-03-02",
+      "tool_calling_evidence": "model card explicitly documents OpenAI-compatible tool calling",
+      "reason_excluded_from_bounded_family": [
+        "release is after verified public FHIR-AgentBench repository availability, increasing contamination risk by the preregistered release-date proxy",
+        "parameter count exceeds the approximately <=4B default dense envelope",
+        "no official Qwen GGUF repository was observed in this inventory pass",
+        "full-precision repository size is not compatible with the currently observed 8.63 GB free C-drive headroom"
+      ],
+      "reintroduction": "requires separate D3 re-governance before any development outcome is used"
+    },
+    {
+      "candidate_id": "gemma-3-4b-it",
+      "repo": "google/gemma-3-4b-it",
+      "revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "parameter_count": 4300079472,
+      "license": "Gemma Terms",
+      "gated": "manual",
+      "hf_created_at": "2025-02-20T21:20:07Z",
+      "reason_excluded_from_bounded_family": [
+        "manual license-acceptance gate adds a founder-account dependency avoided by the bounded primary family",
+        "parameter count exceeds the approximately <=4B default dense envelope"
+      ]
+    },
+    {
+      "candidate_id": "llama-3.2-3b-instruct",
+      "repo": "meta-llama/Llama-3.2-3B-Instruct",
+      "revision": "0cb88a4f764b7a12671c53f0838cd831a0843b95",
+      "parameter_count": 3212749824,
+      "license": "Llama-3.2-Community-License",
+      "gated": "manual",
+      "hf_created_at": "2024-09-18T15:19:20Z",
+      "reason_excluded_from_bounded_family": [
+        "manual access gate adds a founder-account dependency avoided by the bounded primary family",
+        "custom redistribution obligations are unnecessary when ungated permissively licensed alternatives satisfy the same D3 envelope"
+      ]
+    }
+  ],
+  "assurance_architecture_family": {
+    "shared_feature_vector_v0": [
+      "base-model probability-or-logit-derived correctness signal when the frozen runtime exposes it",
+      "tool-call parse success and interface-failure indicators",
+      "FHIR query count and normalized request/search pattern class",
+      "retrieved resource count and unique resource-type count",
+      "empty-retrieval and unsupported-query indicators",
+      "bounded evidence-availability counts derived from retrieved development-role resources"
+    ],
+    "forbidden_feature": "verbalized confidence may be exploratory only and cannot replace a probability/logit-derived or validated assurance signal",
+    "candidates": [
+      {
+        "id": "dal-linear-v0",
+        "form": "regularized linear/logistic correctness estimator over the frozen feature vector",
+        "trainable_before_D4": false
+      },
+      {
+        "id": "dal-mlp32-v0",
+        "form": "single-hidden-layer MLP with at most 32 hidden units over the identical frozen feature vector",
+        "trainable_before_D4": false
+      }
+    ],
+    "dal_r_status": "not-decided-in-D3; D5 activation rule remains binding; revision cap remains 1"
+  },
+  "fhir_agent_strategy_family": {
+    "frozen_strategy": "single_turn_request",
+    "repository": "glee4810/FHIR-AgentBench",
+    "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "source_path": "agent/single_turn_request_agent.py",
+    "source_blob_sha": "1188a4053560924c3ed801e9b1aaa91ccd6d010d",
+    "rationale": "pre-performance scope choice: it directly exercises fhir_request_get, is the strategy already used to establish the D2 trace dependency, and keeps the trace surface bounded to the read-only request path qualified in D2",
+    "performance_outcomes_used": false
+  },
+  "freeze_state": {
+    "candidate_family_bounded": true,
+    "assurance_architecture_family_bounded": true,
+    "fhir_agent_strategy_frozen": true,
+    "base_model_frozen": false,
+    "tokenizer_frozen": false,
+    "trace_producing_system_frozen": false,
+    "post_d3_pre_d4_query_trace_gate_may_run": false,
+    "d4_allowed": false
+  },
+  "next_gate": "zero-cost CPU smoke qualification of the three bounded base-model candidates, followed by a prospective non-benchmark-outcome base-model/tokenizer freeze grain",
+  "evidence_sources": {
+    "fhir_agentbench_repository": "https://github.com/glee4810/FHIR-AgentBench",
+    "fhir_agentbench_paper": "https://proceedings.mlr.press/v297/lee26a.html",
+    "phi4_model": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+    "phi4_cpu_artifact": "https://huggingface.co/microsoft/Phi-4-mini-instruct-onnx",
+    "qwen3_4b_model": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+    "qwen3_agentic_reference": "https://qwenlm.github.io/blog/qwen3/",
+    "smollm3_model": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+    "smollm3_cpu_artifact": "https://huggingface.co/ggml-org/SmolLM3-3B-GGUF",
+    "qwen35_model": "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "gemma_model": "https://huggingface.co/google/gemma-3-4b-it",
+    "llama_model": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct"
+  }
+}

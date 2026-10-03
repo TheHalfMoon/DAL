@@ -225,11 +225,11 @@ D3 activation now proceeds separately as SG-000027 under Issue #132. D4 training
 
 Research contract: Issue #132. Contract artifact: `registry/study1_sg000027_contract.json`. Canonical prerequisite: SG-000026 closeout merge `07ad6a3f0af0f5a460cd469e029b26274f1a7416`, with post-main GAXBench `37135893667` and Manuscript `37135893641` SUCCESS.
 
-State: **ACTIVE - GOVERNANCE_ONLY / CANDIDATE_FAMILY_NOT_YET_FROZEN**
+State: **ACTIVE - CANDIDATE_FAMILY_BOUNDED / AGENT_STRATEGY_FROZEN / BASE_MODEL_NOT_YET_FROZEN**
 
-This activation grain does not select a model, tokenizer, or FHIR agent strategy. D3 may define a bounded candidate family, verify zero-cost/license/provenance/contamination-risk constraints, and prospectively freeze exact trace-producing model/tokenizer/agent identities in a later D3 grain. The 40-patient / 173-row final role remains sealed.
+The bounded D3 inventory is `registry/study1_sg000027_candidate_inventory.json`. It retains three ungated candidates within the preregistered approximately <=4B design envelope for CPU smoke qualification: `microsoft/Phi-4-mini-instruct`, `Qwen/Qwen3-4B-Instruct-2507`, and `HuggingFaceTB/SmolLM3-3B`. Qwen3.5-4B, Gemma 3 4B IT, and Llama 3.2 3B Instruct remain visible as excluded/negative candidates with explicit contamination, envelope, gating, or license/reproducibility reasons. No base model or tokenizer is selected. The FHIR agent strategy is prospectively frozen to the frozen-upstream `single_turn_request` strategy as a pre-performance scope choice; no development benchmark outcome informed that freeze. The 40-patient / 173-row final role remains sealed.
 
-The founder-authorized Issue #128 stage-order amendment remains binding: immediately after the D3 trace-producing identity is prospectively frozen, the blind development-only custodian must qualify every observed normalized calibration/validation FHIR query/search pattern before D4. D4 and all training remain blocked until that gate passes.
+The founder-authorized Issue #128 stage-order amendment remains binding. The trace-producing identity is not yet complete because no base model/tokenizer is frozen. The next D3 grain is bounded zero-cost CPU smoke qualification followed by a prospective non-benchmark-outcome base-model/tokenizer freeze. Only after that full identity is frozen may the blind development-only custodian qualify observed normalized calibration/validation FHIR query/search patterns. D4 and all training remain blocked until that gate passes.
 
 ## Core P08 invariants
 

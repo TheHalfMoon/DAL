@@ -348,6 +348,13 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [ ] Run the mandatory post-D3/pre-D4 development query-trace gate after the identity freeze
 - [ ] Canonical SG-000027 / D3 closeout
 
+- [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
+- [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes
+- [ ] Qualify the bounded base-model family on zero-cost CPU smoke criteria only; do not use FHIR QA correctness or final-role data
+- [ ] Prospectively freeze one base-model + tokenizer identity using preregistered non-final, non-query-trace-outcome criteria
+- [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
+- [ ] D4 remains blocked until the observed query/search-pattern gate passes
+
 ### Later Study 1 stages (not activated)
 
 - [ ] D4 training/objective experiments
