@@ -100,7 +100,10 @@ def test_gate_cannot_activate_training_or_final_access() -> None:
 def test_frontier_allows_only_main_only_query_trace_execution_next() -> None:
     frontier = _load(FRONTIER)
     assert frontier["specgrain_id"] == "SG-000028"
-    assert frontier["query_trace_gate_status"] == "activation-pending"
+    assert frontier["query_trace_gate_status"] == "blocked-pre-data-provenance-mismatch"
+    assert frontier["query_trace_evidence_generated"] is False
+    assert frontier["development_data_accessed_by_blocked_run"] is False
+    assert frontier["final_data_accessed_by_blocked_run"] is False
     assert frontier["main_only_execution_required"] is True
     assert frontier["d4_activation_allowed"] is False
     assert frontier["training_allowed"] is False
