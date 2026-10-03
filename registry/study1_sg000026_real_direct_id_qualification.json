@@ -1,0 +1,40 @@
+{
+  "calibration_rows": 341,
+  "d2_closeout_allowed": false,
+  "evidence_class": "real-development-direct-id-only",
+  "exact_match_rows": 1087,
+  "exercised_query_patterns": [
+    "resource-search:ResourceType?id=<expected-resource-id>"
+  ],
+  "later_stages_activated": false,
+  "mismatch_rows": 0,
+  "missing_reference_count": 0,
+  "missing_reference_sha256s": [],
+  "model_selection_performed": false,
+  "projection_sha256": "a09357620e811de49dd868773854e4f48e742a3882110c2f6228633ad161aae7",
+  "query_trace_blocker_reason": "The founder-authorized Option A projection contains development proc_query SQL and expected resource IDs, but no development question text or benchmark agent tool-call traces. Upstream FHIR-AgentBench agents generate query strings dynamically. D2 therefore cannot honestly claim coverage of every query/search pattern observed on governed roles from this projection alone.",
+  "query_trace_coverage": "blocked-unavailable-from-authorized-projection",
+  "requested_reference_count": 21527,
+  "resolved_reference_count": 21527,
+  "resource_type_reference_counts": {
+    "Condition": 564,
+    "Encounter": 190,
+    "Medication": 3033,
+    "MedicationRequest": 3953,
+    "Observation": 13640,
+    "Patient": 18,
+    "Procedure": 129
+  },
+  "rows_with_expected_ids": 1087,
+  "rows_without_expected_ids": 376,
+  "runtime_parse_failure_count": 0,
+  "schema_version": "0.1",
+  "sealed_final_rows_accessed": false,
+  "specgrain": "SG-000026",
+  "stage": "D2",
+  "status": "partial-pass-direct-id-only",
+  "study": "DAL Study 1",
+  "training_performed": false,
+  "unique_expected_resource_count": 14178,
+  "validation_rows": 1122
+}

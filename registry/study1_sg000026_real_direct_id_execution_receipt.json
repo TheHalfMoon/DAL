@@ -1,0 +1,19 @@
+{
+  "canonical_main_sha": "8eee15506a48dd03428363d8b5e7234d50f4a960",
+  "custodian_artifact_digest": "sha256:5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114",
+  "custodian_artifact_id": 11260661014,
+  "custodian_artifact_name": "sg000026-option-a-development-projection-e1db1efe6f42523d3b02feec4458f0da6612eb77",
+  "custodian_head_sha": "e1db1efe6f42523d3b02feec4458f0da6612eb77",
+  "custodian_run_id": 37084890139,
+  "development_projection_sha256": "a09357620e811de49dd868773854e4f48e742a3882110c2f6228633ad161aae7",
+  "model_selection_performed": false,
+  "official_sha256s_sha256": "582688e274af7523f4db1cdebcd88395628a0256084bc0cc20b14884a418b69c",
+  "runtime_manifest_sha256": "744cc639e0d9f703869846636263d5e1d77c73c1c68d68aebd6d7d4a5485d57e",
+  "schema_version": "0.1",
+  "sealed_final_rows_accessed": false,
+  "specgrain": "SG-000026",
+  "stage": "D2",
+  "study": "DAL Study 1",
+  "training_performed": false,
+  "zero_founder_cost": true
+}
