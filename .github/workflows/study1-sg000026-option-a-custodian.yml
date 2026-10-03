@@ -1,0 +1,133 @@
+name: DAL Study 1 FHIR Custodian Projection
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/study1-sg000026-option-a-custodian.yml
+      - src/gaxbench/study1_fhir_custodian.py
+      - registry/study1_sg000026_option_a_authorization.json
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+
+jobs:
+  blind-development-projection:
+    name: Blind metadata-only development projection
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout base-controlled main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install DAL
+        run: python -m pip install -e .
+
+      - name: Download exact frozen FHIR-AgentBench source without logging rows
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          import os
+
+          from gaxbench.fhir_agentbench_qualification import FHIR_AGENTBENCH_RAW_URL
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-option-a"
+          root.mkdir(parents=True, exist_ok=True)
+          target = root / "source.csv"
+          request = Request(FHIR_AGENTBENCH_RAW_URL, headers={"User-Agent": "DAL-research/0.1"})
+          with urlopen(request, timeout=60) as response:
+              payload = response.read()
+          target.write_bytes(payload)
+          print(f"downloaded_bytes={len(payload)}")
+
+      - name: Build blind development-only projection
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          from gaxbench.study1_fhir_custodian import build_blind_development_projection
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-option-a"
+          output = root / "output"
+          output.mkdir(parents=True, exist_ok=True)
+          manifest = build_blind_development_projection(
+              root / "source.csv",
+              output / "development_projection.jsonl",
+              output / "projection_manifest.json",
+          )
+          print(json.dumps({
+              "calibration_rows": manifest.calibration_rows,
+              "validation_rows": manifest.validation_rows,
+              "sealed_final_rows": manifest.sealed_final_rows,
+              "projection_rows": manifest.projection_rows,
+              "projection_sha256": manifest.projection_sha256,
+              "membership_sha256": manifest.membership_sha256,
+              "final_rows_materialized": manifest.final_rows_materialized,
+              "final_sensitive_fields_accessed": manifest.final_sensitive_fields_accessed,
+          }, sort_keys=True, separators=(",", ":")))
+
+      - name: Enforce artifact allowlist and sealed-final invariants
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-option-a" / "output"
+          allowed = {
+              "schema_version",
+              "role",
+              "question_id_sha256",
+              "proc_query",
+              "expected_resource_ids",
+          }
+          rows = [json.loads(line) for line in (root / "development_projection.jsonl").read_text(encoding="utf-8").splitlines() if line]
+          if len(rows) != 1463:
+              raise SystemExit(f"unexpected development projection size: {len(rows)}")
+          for row in rows:
+              if set(row) != allowed:
+                  raise SystemExit(f"projection field allowlist drift: {sorted(row)}")
+              if row["role"] not in {"calibration", "validation"}:
+                  raise SystemExit("non-development role escaped custodian")
+          manifest = json.loads((root / "projection_manifest.json").read_text(encoding="utf-8"))
+          if manifest["final_rows_materialized"] != 0:
+              raise SystemExit("sealed final row materialization detected")
+          if manifest["final_sensitive_fields_accessed"] is not False:
+              raise SystemExit("sealed final supervision access detected")
+          if manifest["raw_question_ids_emitted"] is not False:
+              raise SystemExit("raw question IDs must not be emitted")
+          if manifest["raw_patient_ids_emitted"] is not False:
+              raise SystemExit("raw patient IDs must not be emitted")
+          print("option_a_artifact_firewall=PASS")
+
+      - name: Delete frozen source before artifact upload
+        shell: python
+        run: |
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_TEMP"]) / "sg000026-option-a" / "source.csv"
+          source.unlink(missing_ok=True)
+          print(f"source_deleted={not source.exists()}")
+
+      - name: Upload development-only projection
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000026-option-a-development-projection-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000026-option-a/output/
+          if-no-files-found: error
+          retention-days: 14
