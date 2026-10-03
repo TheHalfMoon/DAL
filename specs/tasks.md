@@ -335,7 +335,7 @@ Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b3
 - [ ] Post-D3/pre-D4 observed governed query/search-pattern qualification - mandatory after prospective D3 model/agent freeze; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes
 - [ ] D4 activation remains blocked until the observed query/search-pattern gate passes
 
-### SG-000027 - D3 architecture candidates (ACTIVE - CANDIDATE_FAMILY_BOUNDED / AGENT_STRATEGY_FROZEN / BASE_MODEL_NOT_YET_FROZEN)
+### SG-000027 - D3 architecture candidates (ACTIVE - TRACE_PRODUCER_IDENTITY_FROZEN / PENDING_D3_CLOSEOUT)
 
 Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `07ad6a3f0af0f5a460cd469e029b26274f1a7416`.
 
@@ -344,7 +344,7 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Canonically qualify and merge SG-000027 activation; PR #133 merge `aba35ac15fd56ed255565327c059a22104012f4e`, post-main verified
 - [x] Define a bounded candidate family and retain every rejected/blocked candidate
 - [x] Bind candidate model/tokenizer revisions, license, release date, provenance, contamination-risk metadata, and zero-cost compute-path status in the bounded inventory
-- [ ] Prospectively freeze one trace-producing base-model + FHIR-agent-strategy identity before query-trace qualification
+- [x] Prospectively freeze one trace-producing base-model + FHIR-agent-strategy identity before query-trace qualification - `registry/study1_sg000027_trace_producer_freeze.json`
 - [ ] Run the mandatory post-D3/pre-D4 development query-trace gate after the identity freeze
 - [ ] Canonical SG-000027 / D3 closeout
 
@@ -352,8 +352,8 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes
 - [x] Execute canonical zero-cost CPU smoke run `37140291946`; Qwen retained `blocked-behavior-changing`, Phi/Smol retained provider-routing blocks, and no model/tokenizer was frozen
 - [x] Diagnose raw OpenAI-compatible structured tool transport versus the frozen Qwen parser - canonical run `37142304592` proved `parser-transport-mismatch`
-- [ ] Canonically qualify the minimal Qwen structured-tool transport compatibility repair; no model/tokenizer freeze in the repair grain
-- [ ] Prospectively freeze one base-model + tokenizer identity using preregistered non-final, non-query-trace-outcome criteria
+- [x] Canonically qualify the minimal Qwen structured-tool transport compatibility repair; PR #137 merge `26069715534ba693049795fdb5dc6929ab807a7d`, repaired CPU smoke `37143422780` PASS
+- [x] Prospectively freeze Qwen3-4B-Instruct-2507 base-model + tokenizer identity using only preregistered non-final, non-query-trace-outcome technical criteria
 - [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
 - [ ] D4 remains blocked until the observed query/search-pattern gate passes
 

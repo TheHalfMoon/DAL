@@ -52,10 +52,11 @@ def test_agent_strategy_is_frozen_but_trace_producer_is_not() -> None:
     assert freeze["tokenizer_frozen"] is False
     assert freeze["trace_producing_system_frozen"] is False
     assert freeze["post_d3_pre_d4_query_trace_gate_may_run"] is False
-    assert frontier["trace_producing_system_frozen"] is False
-    assert frontier["query_trace_gate_status"] == (
-        "blocked-until-base-model-and-tokenizer-are-prospectively-frozen"
+    assert frontier["trace_producing_system_frozen"] is True
+    assert frontier["trace_producer_freeze_path"] == (
+        "registry/study1_sg000027_trace_producer_freeze.json"
     )
+    assert frontier["query_trace_gate_status"] == "required-after-d3-closeout-before-d4"
 
 
 def test_assurance_candidates_are_structural_only_and_d4_remains_blocked() -> None:

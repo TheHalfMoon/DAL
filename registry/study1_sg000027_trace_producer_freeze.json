@@ -1,0 +1,126 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "grain_kind": "prospective-trace-producer-identity-freeze",
+  "research_contract_issue": 132,
+  "status": "frozen-pending-d3-closeout",
+  "canonical_dependencies": {
+    "candidate_inventory_merge": "4768d6067c8235b2fe8babaecd3b71fb64911d0f",
+    "transport_diagnostic_merge": "08fec6e8a990adaff5163e8ed93226aab7371e3b",
+    "transport_repair_merge": "26069715534ba693049795fdb5dc6929ab807a7d",
+    "transport_repair_post_main_gaxbench_run": 37143422761,
+    "transport_repair_post_main_manuscript_run": 37143422745,
+    "repaired_cpu_smoke_run": 37143422780,
+    "repaired_cpu_smoke_artifact_id": 11281697095,
+    "repaired_cpu_smoke_artifact_name": "sg000027-d3-cpu-smoke-26069715534ba693049795fdb5dc6929ab807a7d",
+    "repaired_cpu_smoke_artifact_digest": "sha256:3ce4e9e5fd7dda6ec0cbcccafef8d5264103a4e76550caf1cbab202cdab43dc2"
+  },
+  "freeze_basis": {
+    "kind": "prospective-technical-eligibility-not-benchmark-performance-selection",
+    "allowed_evidence": [
+      "candidate-family membership frozen before this grain",
+      "license and ungated-access status",
+      "release-date contamination-risk proxy",
+      "frozen FHIR-AgentBench provider-routing compatibility",
+      "exact zero-founder-cost CPU artifact and runtime reproducibility",
+      "synthetic-only structured tool-call compatibility"
+    ],
+    "forbidden_evidence": [
+      "FHIR-AgentBench calibration correctness or answer quality",
+      "FHIR-AgentBench validation correctness or answer quality",
+      "development query-trace coverage outcomes",
+      "sealed-final question text, labels, traces, gold IDs, outputs, or metrics",
+      "Study 0 performance as a selection criterion"
+    ],
+    "d7_model_selection_performed": false,
+    "training_performed": false,
+    "calibration_or_threshold_fitting_performed": false
+  },
+  "bounded_family_disposition": [
+    {
+      "candidate_id": "phi4-mini-instruct",
+      "disposition": "retained-negative-blocked-before-model-load",
+      "reason": "frozen FHIR-AgentBench get_model_provider rejects this model identifier"
+    },
+    {
+      "candidate_id": "qwen3-4b-instruct-2507",
+      "disposition": "prospectively-frozen-trace-producer",
+      "reason": "only bounded-family candidate passing the frozen provider route plus exact zero-cost synthetic tool-call qualification without benchmark outcomes"
+    },
+    {
+      "candidate_id": "smollm3-3b",
+      "disposition": "retained-negative-blocked-before-model-load",
+      "reason": "frozen FHIR-AgentBench get_model_provider rejects this model identifier"
+    }
+  ],
+  "trace_producer_identity": {
+    "base_model_repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "quantized_runtime_artifact": {
+      "repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+      "repo_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+      "file": "qwen3-4b-instruct-2507-q8_0.gguf",
+      "size_bytes": 4280403520,
+      "sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1"
+    },
+    "runtime": {
+      "repo": "ggml-org/llama.cpp",
+      "revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+      "protocol": "local OpenAI-compatible HTTP",
+      "context_tokens": 4096,
+      "temperature": 0.0,
+      "zero_founder_cost": true
+    },
+    "fhir_agentbench": {
+      "repository": "glee4810/FHIR-AgentBench",
+      "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+      "agent_strategy": "single_turn_request",
+      "agent_source_path": "agent/single_turn_request_agent.py",
+      "agent_source_blob_sha": "1188a4053560924c3ed801e9b1aaa91ccd6d010d",
+      "core_utils_base_blob_sha": "6544570985916074f40a5fb469243aa5ced22f65",
+      "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+      "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
+      "patched_core_utils_blob_sha": "e43534f7396585515f76cf6a1da1134977990e7a",
+      "patched_core_utils_sha256": "4cc31a6beb485870814fed47c5670d85a0dc37444617e26152c73ad4fedbc7ef",
+      "tool_name": "fhir_request_get",
+      "tool_schema_semantics": "frozen upstream request_tools.py schema; repair does not change tool schema or prompt"
+    }
+  },
+  "synthetic_qualification": {
+    "case_id": "DAL-SMOKE-0001",
+    "run": 37143422780,
+    "raw_structured_tool_call_count": 1,
+    "safe_llm_call_tool_call_count": 1,
+    "tool_name": "fhir_request_get",
+    "query_string": "Patient/DAL-SMOKE-0001",
+    "smoke_status": "pass",
+    "transport_status": "transport-compatible",
+    "cost": 0.0,
+    "benchmark_development_or_final_data_accessed": false
+  },
+  "governance_invariants": {
+    "candidate_family_bounded": true,
+    "base_model_frozen_for_trace_production": true,
+    "tokenizer_frozen_for_trace_production": true,
+    "fhir_agent_strategy_frozen": true,
+    "trace_producing_system_frozen": true,
+    "d7_model_selection_performed": false,
+    "training_performed": false,
+    "development_query_trace_gate_executed": false,
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173,
+    "final_role_accessed": false,
+    "zero_founder_cost": true,
+    "d4_allowed": false
+  },
+  "next_gate": {
+    "name": "canonical-D3-closeout",
+    "rule": "D3 must close canonically in a separate grain before the founder-authorized blind development-only post-D3/pre-D4 query-trace gate executes.",
+    "after_closeout": "execute observed calibration/validation FHIR query/search-pattern qualification with the exact frozen trace producer",
+    "d4_remains_blocked": true
+  }
+}
