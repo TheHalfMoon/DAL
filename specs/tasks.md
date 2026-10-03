@@ -311,7 +311,7 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json`; PR #113 merged `535efada86f7c5863b6eeda18b76d17a78e36b4e`; post-main GAXBench `37065781852` and Manuscript `37065781811` SUCCESS; final-test access remains `sealed`
 - [x] Canonical SG-000025 closeout (this closeout PR; evidence record `registry/study1_sg000025_closeout.json`)
 
-### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — REAL_DIRECT_ID_PROVEN / STAGE_ORDER_REPAIRED / D2_CLOSEOUT_PENDING)
+### SG-000026 - D2 baseline qualification and local FHIR compatibility (CLOSED_CANONICAL - MODEL_INDEPENDENT_D2_PROVEN)
 
 Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. Option A projection recovery gate: Issue #120. Query-trace recovery authorization: Issue #126, founder comment `5970310150`. Stage-order repair authorization: Issue #128, founder comment `5970595978`.
 
@@ -331,7 +331,7 @@ Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b3
 - [x] Verify from frozen upstream source that direct-request query traces are model/strategy dependent; record governance evidence in `registry/study1_sg000026_query_trace_governance.json` without accessing development question text or final-role content
 - [x] Founder-authorize Issue #128 Option A stage-order repair - comment `5970595978`; the observed-query-pattern criterion is preserved and moved to a mandatory post-D3/pre-D4 gate
 - [x] Record the preregistered stage-order amendment in `registry/study1_sg000026_stage_order_amendment.json` while leaving the immutable parent protocol unchanged
-- [ ] Canonical SG-000026 / D2 closeout using model-independent exit criteria only; this must be a separate qualified grain
+- [x] Canonical SG-000026 / D2 closeout using model-independent exit criteria only - `registry/study1_sg000026_closeout.json`; closeout qualification is bound by this closeout PR and required post-main verification
 - [ ] Post-D3/pre-D4 observed governed query/search-pattern qualification - mandatory after prospective D3 model/agent freeze; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes
 - [ ] D4 activation remains blocked until the observed query/search-pattern gate passes
 

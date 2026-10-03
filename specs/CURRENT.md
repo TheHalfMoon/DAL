@@ -203,21 +203,21 @@ SG-000025 completed the Study 1 redesign without model training, tuning, Study 1
 
 D2 baseline qualification is now activated separately as **SG-000026** under Issue #115, with canonical dependency `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. D2 is limited to B0/B1/B2 semantic/interface qualification, deterministic denominator accounting, and read-only local FHIR R4 compatibility on the governed 341-row calibration and 1122-row validation roles. The 40-patient / 173-row final role remains sealed and forbidden to D2.
 
-## Active frontier — Study 1, SG-000026 / D2
+## Closed frontier - Study 1, SG-000026 / D2
 
 **Baseline qualification and local FHIR compatibility**
 
 Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Option A projection recovery gate: Issue #120. Query-trace recovery authorization: Issue #126, founder comment `5970310150`. Stage-order repair authorization: Issue #128, founder comment `5970595978`.
 
-State: **ACTIVE — REAL_DIRECT_ID_PROVEN / STAGE_ORDER_REPAIRED / D2_CLOSEOUT_PENDING**
+State: **CLOSED_CANONICAL - MODEL_INDEPENDENT_D2_PROVEN / QUERY_TRACE_GATE_DEFERRED_POST_D3_PRE_D4**
 
-Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), B0/B1/B2 semantics/accounting (PR #117, merge `0cfc2db`), the synthetic FHIR compatibility/firewall kernel (PR #118, merge `5ea436e`), the zero-cost runtime identity (PR #119, merge `aa59981`), the founder-authorized blind development custodian and transport repair (PRs #122–#123, merges `654e76f8` and `e1db1efe`), and real direct-ID qualification plus transport/provenance repair (PRs #124–#125, merges `3f6048dc` and `8eee1550`).
+Canonical D2 grains include activation (PR #116, merge `e4b9e22`), B0/B1/B2 semantics/accounting (PR #117, merge `0cfc2db`), the synthetic FHIR compatibility/firewall kernel (PR #118, merge `5ea436e`), the zero-cost runtime identity (PR #119, merge `aa59981`), the founder-authorized blind development custodian and transport repair (PRs #122-#123, merges `654e76f8` and `e1db1efe`), real direct-ID qualification plus transport/provenance repair (PRs #124-#125, merges `3f6048dc` and `8eee1550`), and the founder-authorized stage-order amendment (PR #130, merge `c1bc808`).
 
 Main-only run `37088504254` proved the governed development direct-ID surface: 341 calibration + 1122 validation rows, 21,527/21,527 expected references resolved, 1,087/1,087 rows with expected IDs exact, zero missing references, zero mismatches, and zero runtime parse failures. `sealed_final_rows_accessed=false`; no model selection or training occurred. Durable evidence is `registry/study1_sg000026_real_direct_id_qualification.json` plus its execution receipt.
 
-D2 is not closed. Founder comment `5970595978` on Issue #128 authorizes Option A, a pre-results stage-order repair that preserves rather than removes the observed-query-pattern criterion. The immutable parent protocol remains unchanged; `registry/study1_sg000026_stage_order_amendment.json` records that model-independent D2 criteria must close first, D3 may then prospectively freeze the Study 1 base model and FHIR agent strategy without final-role access, and observed development-role query/search-pattern coverage becomes an immediate mandatory post-D3/pre-D4 gate. D4 remains blocked until every observed normalized pattern is supported or recorded as behavior-changing blocking evidence. SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes.
+D2 is closed canonically by `registry/study1_sg000026_closeout.json` on model-independent evidence only. B0/B1/B2 matched-input semantics, failure-aware denominator accounting, deterministic local FHIR mechanics, real development direct-ID resource equivalence, sealed-final firewalling, negative/unsupported retention, and zero-cost reproducibility are proven. The founder-authorized Issue #128 amendment preserves the model-dependent observed query/search-pattern criterion as an immediate mandatory post-D3/pre-D4 gate. D4 remains blocked until every observed normalized pattern from the prospectively frozen D3 model/agent identity is supported or recorded as behavior-changing blocking evidence; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes.
 
-D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden to D2.
+D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The next permissible action is a separate governed D3 activation grain. The sealed final role remains untouched and forbidden before D9.
 
 ## Core P08 invariants
 

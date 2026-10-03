@@ -7,7 +7,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AMENDMENT = ROOT / "registry" / "study1_sg000026_stage_order_amendment.json"
 PROTOCOL = ROOT / "registry" / "study1_preregistered_protocol_2026-10-02.json"
-FRONTIER = ROOT / "registry" / "study1_sg000026_frontier_status.json"
 
 
 def _load(path: Path) -> dict[str, object]:
@@ -55,11 +54,10 @@ def test_query_pattern_criterion_is_deferred_but_not_removed() -> None:
     }
 
 
-def test_amendment_does_not_close_d2_or_activate_later_stages() -> None:
+def test_amendment_itself_does_not_close_d2_or_activate_later_stages() -> None:
     amendment = _load(AMENDMENT)
     effects = amendment["current_effects"]
     final = amendment["sealed_final_invariants"]
-    frontier = _load(FRONTIER)
 
     assert effects == {
         "D2_closed": False,
@@ -71,9 +69,3 @@ def test_amendment_does_not_close_d2_or_activate_later_stages() -> None:
     assert final["patients"] == 40
     assert final["rows"] == 173
     assert final["access_before_D9"] == "forbidden"
-    assert frontier["state"] == "direct-id-proven-stage-order-repaired-d2-closeout-pending"
-    assert frontier["d2_closeout_allowed"] is False
-    assert frontier["later_stages_activated"] is False
-    assert frontier["real_direct_id_evidence"]["query_trace_coverage"] == (
-        "deferred-mandatory-post-d3-pre-d4"
-    )
