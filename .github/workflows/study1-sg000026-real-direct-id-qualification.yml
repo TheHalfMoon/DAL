@@ -17,7 +17,9 @@ env:
   PYTHONHASHSEED: "0"
   CUSTODIAN_RUN_ID: "37084890139"
   CUSTODIAN_ARTIFACT_ID: "11260661014"
-  CUSTODIAN_ZIP_SHA256: "5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114"
+  CUSTODIAN_HEAD_SHA: "e1db1efe6f42523d3b02feec4458f0da6612eb77"
+  CUSTODIAN_ARTIFACT_NAME: "sg000026-option-a-development-projection-e1db1efe6f42523d3b02feec4458f0da6612eb77"
+  CUSTODIAN_ARTIFACT_DIGEST: "sha256:5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114"
   PROJECTION_SHA256: "a09357620e811de49dd868773854e4f48e742a3882110c2f6228633ad161aae7"
   RUNTIME_SUMS_SHA256: "582688e274af7523f4db1cdebcd88395628a0256084bc0cc20b14884a418b69c"
 
@@ -41,47 +43,70 @@ jobs:
 
       - name: Download exact founder-authorized development projection artifact
         env:
-          GITHUB_TOKEN: ${{ github.token }}
-        shell: python
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/sg000026-real-direct-id"
+          mkdir -p "$root"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "repos/$GITHUB_REPOSITORY/actions/artifacts/$CUSTODIAN_ARTIFACT_ID" \
+            > "$root/custodian-artifact.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-real-direct-id"
+          metadata = json.loads(
+              (root / "custodian-artifact.json").read_text(encoding="utf-8")
+          )
+          workflow_run = metadata.get("workflow_run") or {}
+          actual = {
+              "id": metadata.get("id"),
+              "name": metadata.get("name"),
+              "digest": metadata.get("digest"),
+              "run_id": workflow_run.get("id"),
+              "head_sha": workflow_run.get("head_sha"),
+              "expired": metadata.get("expired"),
+          }
+          expected = {
+              "id": int(os.environ["CUSTODIAN_ARTIFACT_ID"]),
+              "name": os.environ["CUSTODIAN_ARTIFACT_NAME"],
+              "digest": os.environ["CUSTODIAN_ARTIFACT_DIGEST"],
+              "run_id": int(os.environ["CUSTODIAN_RUN_ID"]),
+              "head_sha": os.environ["CUSTODIAN_HEAD_SHA"],
+              "expired": False,
+          }
+          if actual != expected:
+              raise SystemExit(f"custodian artifact metadata drift: {actual}")
+          print("custodian_artifact_metadata=VERIFIED")
+          PY
+          gh run download "$CUSTODIAN_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "$CUSTODIAN_ARTIFACT_NAME" \
+            --dir "$root/projection"
+          python - <<'PY'
           import hashlib
           import os
           from pathlib import Path
-          from urllib.request import Request, urlopen
-          from zipfile import ZipFile
 
           root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-real-direct-id"
-          root.mkdir(parents=True, exist_ok=True)
-          archive = root / "projection.zip"
-          url = (
-              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/"
-              f"{os.environ['CUSTODIAN_ARTIFACT_ID']}/zip"
-          )
-          request = Request(
-              url,
-              headers={
-                  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
-                  "Accept": "application/vnd.github+json",
-                  "X-GitHub-Api-Version": "2022-11-28",
-                  "User-Agent": "DAL-research/0.1",
-              },
-          )
-          with urlopen(request, timeout=60) as response:
-              archive.write_bytes(response.read())
-          actual_zip = hashlib.sha256(archive.read_bytes()).hexdigest()
-          if actual_zip != os.environ["CUSTODIAN_ZIP_SHA256"]:
-              raise SystemExit(f"custodian artifact ZIP SHA-256 mismatch: {actual_zip}")
           output = root / "projection"
-          output.mkdir()
-          with ZipFile(archive) as zip_file:
-              names = sorted(zip_file.namelist())
-              if names != ["development_projection.jsonl", "projection_manifest.json"]:
-                  raise SystemExit(f"unexpected custodian artifact files: {names}")
-              zip_file.extractall(output)
+          names = sorted(path.name for path in output.iterdir() if path.is_file())
+          if names != ["development_projection.jsonl", "projection_manifest.json"]:
+              raise SystemExit(f"unexpected custodian artifact files: {names}")
           projection = output / "development_projection.jsonl"
           actual_projection = hashlib.sha256(projection.read_bytes()).hexdigest()
           if actual_projection != os.environ["PROJECTION_SHA256"]:
-              raise SystemExit(f"development projection SHA-256 mismatch: {actual_projection}")
+              raise SystemExit(
+                  f"development projection SHA-256 mismatch: {actual_projection}"
+              )
+          print(f"development_projection_sha256={actual_projection}")
+          PY
+
       - name: Download and verify frozen zero-cost FHIR runtime
         shell: python
         run: |
@@ -176,7 +201,9 @@ jobs:
               "canonical_main_sha": os.environ["GITHUB_SHA"],
               "custodian_run_id": int(os.environ["CUSTODIAN_RUN_ID"]),
               "custodian_artifact_id": int(os.environ["CUSTODIAN_ARTIFACT_ID"]),
-              "custodian_zip_sha256": os.environ["CUSTODIAN_ZIP_SHA256"],
+              "custodian_head_sha": os.environ["CUSTODIAN_HEAD_SHA"],
+              "custodian_artifact_name": os.environ["CUSTODIAN_ARTIFACT_NAME"],
+              "custodian_artifact_digest": os.environ["CUSTODIAN_ARTIFACT_DIGEST"],
               "development_projection_sha256": os.environ["PROJECTION_SHA256"],
               "runtime_manifest_sha256": hashlib.sha256(runtime_manifest.read_bytes()).hexdigest(),
               "official_sha256s_sha256": os.environ["RUNTIME_SUMS_SHA256"],

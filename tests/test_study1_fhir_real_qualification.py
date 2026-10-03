@@ -130,12 +130,17 @@ def test_real_qualification_workflow_is_main_only_and_digest_bound() -> None:
     assert "actions: read" in workflow
     assert 'CUSTODIAN_ARTIFACT_ID: "11260661014"' in workflow
     assert (
-        'CUSTODIAN_ZIP_SHA256: "5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114"'
-        in workflow
+        'CUSTODIAN_ARTIFACT_DIGEST: "sha256:'
+        '5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114"' in workflow
     )
     assert (
         'PROJECTION_SHA256: "a09357620e811de49dd868773854e4f48e742a3882110c2f6228633ad161aae7"'
         in workflow
     )
+    assert 'CUSTODIAN_RUN_ID: "37084890139"' in workflow
+    assert 'CUSTODIAN_HEAD_SHA: "e1db1efe6f42523d3b02feec4458f0da6612eb77"' in workflow
+    assert "gh api" in workflow
+    assert "gh run download" in workflow
+    assert "custodian_zip_sha256" not in workflow
     assert "blocked-unavailable-from-authorized-projection" in workflow
     assert "d2_closeout_allowed" in workflow
