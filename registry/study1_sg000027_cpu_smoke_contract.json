@@ -1,0 +1,90 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "grain": "cpu-smoke-contract-and-runner",
+  "research_contract_issue": 132,
+  "canonical_dependency": {
+    "candidate_inventory_merge": "4768d6067c8235b2fe8babaecd3b71fb64911d0f",
+    "post_main_gaxbench_run": 37139619241,
+    "post_main_manuscript_run": 37139619224,
+    "candidate_inventory_path": "registry/study1_sg000027_candidate_inventory.json"
+  },
+  "purpose": "qualify non-benchmark zero-cost CPU compatibility before any base-model/tokenizer freeze",
+  "inputs_allowed": [
+    "public model and runtime metadata",
+    "synthetic prompt DAL-SMOKE-0001",
+    "frozen FHIR-AgentBench safe_llm_call source",
+    "frozen fhir_request_get tool schema"
+  ],
+  "inputs_forbidden": [
+    "FHIR-AgentBench calibration questions or answers",
+    "FHIR-AgentBench validation questions or answers",
+    "FHIR-AgentBench final-role question text, labels, traces, gold IDs, or outputs",
+    "Study 0 outcome evidence for model choice",
+    "any training, fine-tuning, calibration fitting, threshold fitting, or objective experiment"
+  ],
+  "frozen_upstream": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "core_utils_path": "utils/core_utils.py",
+    "core_utils_blob_sha": "6544570985916074f40a5fb469243aa5ced22f65",
+    "request_tools_path": "tools/request_tools.py",
+    "request_tools_blob_sha": "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
+  },
+  "provider_routing_preflight": {
+    "rule": "use frozen upstream get_model_provider semantics before downloading candidate weights",
+    "expected": {
+      "phi4-mini-instruct": "blocked-unrecognized-provider",
+      "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+      "smollm3-3b": "blocked-unrecognized-provider"
+    },
+    "blocked_candidates_are_negative_evidence": true
+  },
+  "qwen_cpu_execution_identity": {
+    "base_model_repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "quantized_repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+    "quantized_repo_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+    "quantized_file": "qwen3-4b-instruct-2507-q8_0.gguf",
+    "quantized_file_size_bytes": 4280403520,
+    "quantized_file_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "conversion_lineage_claim": "ggml-org model card states conversion from Qwen/Qwen3-4B-Instruct-2507 using llama.cpp",
+    "runtime_repo": "ggml-org/llama.cpp",
+    "runtime_tag": "v0.5.0",
+    "runtime_commit": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "server_protocol": "local OpenAI-compatible HTTP",
+    "zero_founder_cost": true
+  },
+  "synthetic_tool_call_contract": {
+    "synthetic_case_id": "DAL-SMOKE-0001",
+    "tool_name": "fhir_request_get",
+    "required_argument": "query_string",
+    "required_synthetic_marker": "DAL-SMOKE-0001",
+    "must_execute_through_frozen_safe_llm_call": true,
+    "must_not_execute_real_fhir_request": true,
+    "pass_condition": "frozen safe_llm_call returns exactly one parseable fhir_request_get tool call whose query_string contains DAL-SMOKE-0001"
+  },
+  "freeze_rule": {
+    "automatic_freeze_allowed_by_this_grain": false,
+    "qwen_eligible_for_separate_freeze_grain_only_if": [
+      "provider routing preflight matches contract",
+      "exact quantized artifact SHA-256 verifies",
+      "pinned llama.cpp CPU server becomes healthy",
+      "synthetic tool-call contract passes through frozen safe_llm_call",
+      "no benchmark development or final data is accessed"
+    ],
+    "if_qwen_smoke_blocks": "retain blocker and do not freeze any base model/tokenizer",
+    "tie_break_performance_metrics_allowed": false
+  },
+  "governance": {
+    "workflow_main_only": true,
+    "artifact_retention_days": 14,
+    "zero_founder_cost": true,
+    "d4_allowed": false,
+    "training_allowed": false,
+    "final_role_access_allowed": false
+  }
+}

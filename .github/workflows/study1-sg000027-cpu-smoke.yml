@@ -1,0 +1,320 @@
+name: DAL Study 1 D3 CPU Smoke Qualification
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/study1-sg000027-cpu-smoke.yml
+      - registry/study1_sg000027_cpu_smoke_contract.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FHIR_AGENTBENCH_REVISION: "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
+  LLAMA_CPP_REVISION: "d2e54583c7452353eb35d40431281f6ee984332f"
+  QWEN_MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+  QWEN_GGUF_URL: "https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/resolve/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf"
+  QWEN_GGUF_SHA256: "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1"
+  OPENAI_API_KEY: "dal-local-cpu-smoke"
+
+jobs:
+  cpu-smoke:
+    name: Frozen-agent synthetic CPU tool-call smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Verify governance contract
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          contract = json.loads(
+              Path("registry/study1_sg000027_cpu_smoke_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          assert contract["stage"] == "D3"
+          assert contract["freeze_rule"]["automatic_freeze_allowed_by_this_grain"] is False
+          assert contract["governance"]["d4_allowed"] is False
+          assert contract["governance"]["training_allowed"] is False
+          assert contract["governance"]["final_role_access_allowed"] is False
+
+      - name: Install frozen upstream smoke dependencies
+        run: >-
+          python -m pip install
+          litellm==1.75.9
+          tiktoken==0.8.0
+          pandas==2.3.2
+          numpy==2.3.2
+          PyYAML==6.0.2
+
+      - name: Checkout frozen FHIR-AgentBench source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/glee4810/FHIR-AgentBench.git "$RUNNER_TEMP/fhir-agentbench"
+          git -C "$RUNNER_TEMP/fhir-agentbench" checkout --detach "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$RUNNER_TEMP/fhir-agentbench" rev-parse HEAD)" = "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$RUNNER_TEMP/fhir-agentbench" hash-object utils/core_utils.py)" = "6544570985916074f40a5fb469243aa5ced22f65"
+          test "$(git -C "$RUNNER_TEMP/fhir-agentbench" hash-object tools/request_tools.py)" = "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
+
+      - name: Record frozen provider-routing preflight
+        shell: python
+        run: |
+          import importlib.util
+          import json
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench/utils/core_utils.py"
+          spec = importlib.util.spec_from_file_location("frozen_core_utils", source)
+          assert spec and spec.loader
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          candidates = {
+              "phi4-mini-instruct": "microsoft/Phi-4-mini-instruct",
+              "qwen3-4b-instruct-2507": os.environ["QWEN_MODEL_ID"],
+              "smollm3-3b": "HuggingFaceTB/SmolLM3-3B",
+          }
+          observed = {}
+          for candidate_id, model_id in candidates.items():
+              try:
+                  provider = module.get_model_provider(model_id)
+                  observed[candidate_id] = f"eligible-{provider}-provider"
+              except NotImplementedError:
+                  observed[candidate_id] = "blocked-unrecognized-provider"
+          expected = {
+              "phi4-mini-instruct": "blocked-unrecognized-provider",
+              "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+              "smollm3-3b": "blocked-unrecognized-provider",
+          }
+          if observed != expected:
+              raise SystemExit(f"provider routing drift: {observed}")
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          evidence.mkdir(parents=True, exist_ok=True)
+          (evidence / "provider_preflight.json").write_text(
+              json.dumps(observed, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+      - name: Build pinned llama.cpp CPU server
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/ggml-org/llama.cpp.git "$RUNNER_TEMP/llama.cpp"
+          git -C "$RUNNER_TEMP/llama.cpp" checkout --detach "$LLAMA_CPP_REVISION"
+          test "$(git -C "$RUNNER_TEMP/llama.cpp" rev-parse HEAD)" = "$LLAMA_CPP_REVISION"
+          cmake -S "$RUNNER_TEMP/llama.cpp" -B "$RUNNER_TEMP/llama.cpp/build" \
+            -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+          cmake --build "$RUNNER_TEMP/llama.cpp/build" --config Release -j 2 --target llama-server
+
+      - name: Download and verify exact Qwen CPU artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          curl --fail --location --retry 3 --retry-delay 2 --output "$model" "$QWEN_GGUF_URL"
+          actual="$(sha256sum "$model" | awk '{print $1}')"
+          test "$actual" = "$QWEN_GGUF_SHA256"
+          echo "qwen_gguf_sha256=$actual"
+
+      - name: Start pinned local OpenAI-compatible CPU server
+        shell: bash
+        run: |
+          set -euo pipefail
+          server="$RUNNER_TEMP/llama.cpp/build/bin/llama-server"
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          nohup "$server" \
+            -m "$model" \
+            --alias "$QWEN_MODEL_ID" \
+            --host 127.0.0.1 \
+            --port 8080 \
+            -c 4096 \
+            --jinja \
+            > "$RUNNER_TEMP/llama-server.log" 2>&1 &
+          echo $! > "$RUNNER_TEMP/llama-server.pid"
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat "$RUNNER_TEMP/llama-server.log"
+          exit 1
+
+      - name: Execute synthetic tool-call smoke through frozen safe_llm_call
+        shell: python
+        run: |
+          import importlib.util
+          import json
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench/utils/core_utils.py"
+          spec = importlib.util.spec_from_file_location("frozen_core_utils", source)
+          assert spec and spec.loader
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          tools = [{
+              "type": "function",
+              "function": {
+                  "name": "fhir_request_get",
+                  "description": "FHIR GET request",
+                  "parameters": {
+                      "type": "object",
+                      "properties": {
+                          "query_string": {"type": "string", "description": "FHIR query string"}
+                      },
+                      "required": ["query_string"],
+                  },
+              },
+          }]
+          messages = [
+              {
+                  "role": "system",
+                  "content": (
+                      "Synthetic interface smoke only. Call fhir_request_get exactly once. "
+                      "Do not answer from memory and do not invent a second tool."
+                  ),
+              },
+              {
+                  "role": "user",
+                  "content": (
+                      "Retrieve the Patient resource for synthetic identifier DAL-SMOKE-0001. "
+                      "Use the provided tool only."
+                  ),
+              },
+          ]
+          response, error, usage = module.safe_llm_call(
+              model=os.environ["QWEN_MODEL_ID"],
+              messages=messages,
+              tools=tools,
+              temperature=0.0,
+              max_retries=1,
+              max_tokens=4096,
+              base_url="http://127.0.0.1:8080/v1",
+          )
+          result = {
+              "schema_version": "0.1",
+              "study_id": "study1",
+              "specgrain_id": "SG-000027",
+              "stage": "D3",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "synthetic_case_id": "DAL-SMOKE-0001",
+              "model_id": os.environ["QWEN_MODEL_ID"],
+              "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+              "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+              "gguf_sha256": os.environ["QWEN_GGUF_SHA256"],
+              "llama_cpp_revision": os.environ["LLAMA_CPP_REVISION"],
+              "fhir_agentbench_revision": os.environ["FHIR_AGENTBENCH_REVISION"],
+              "error": error,
+              "tool_call_count": 0,
+              "tool_name": None,
+              "query_string": None,
+              "usage": usage,
+              "development_or_final_data_accessed": False,
+              "training_performed": False,
+              "selection_performed": False,
+              "zero_founder_cost": True,
+          }
+          try:
+              calls = list(getattr(response, "tool_calls", None) or []) if response else []
+              result["tool_call_count"] = len(calls)
+              if len(calls) == 1:
+                  call = calls[0]
+                  result["tool_name"] = call.function.name
+                  args = json.loads(call.function.arguments)
+                  result["query_string"] = args.get("query_string")
+          except Exception as exc:
+              result["parse_error"] = str(exc)
+          passed = (
+              result["error"] is None
+              and result["tool_call_count"] == 1
+              and result["tool_name"] == "fhir_request_get"
+              and "DAL-SMOKE-0001" in str(result["query_string"])
+          )
+          result["status"] = "pass" if passed else "blocked-behavior-changing"
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          (evidence / "qwen_cpu_smoke.json").write_text(
+              json.dumps(result, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(result, sort_keys=True))
+
+      - name: Write execution receipt
+        if: always()
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          evidence.mkdir(parents=True, exist_ok=True)
+          receipt = {
+              "schema_version": "0.1",
+              "study_id": "study1",
+              "specgrain_id": "SG-000027",
+              "stage": "D3",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "fhir_agentbench_revision": os.environ["FHIR_AGENTBENCH_REVISION"],
+              "llama_cpp_revision": os.environ["LLAMA_CPP_REVISION"],
+              "qwen_gguf_sha256": os.environ["QWEN_GGUF_SHA256"],
+              "synthetic_inputs_only": True,
+              "development_or_final_data_accessed": False,
+              "training_performed": False,
+              "selection_performed": False,
+              "zero_founder_cost": True,
+          }
+          (evidence / "execution_receipt.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+      - name: Upload CPU smoke evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000027-d3-cpu-smoke-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000027-cpu-smoke/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Enforce evidence completeness without freezing a model
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "sg000027-cpu-smoke"
+          preflight = json.loads((evidence / "provider_preflight.json").read_text())
+          smoke = json.loads((evidence / "qwen_cpu_smoke.json").read_text())
+          expected = {
+              "phi4-mini-instruct": "blocked-unrecognized-provider",
+              "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+              "smollm3-3b": "blocked-unrecognized-provider",
+          }
+          if preflight != expected:
+              raise SystemExit(f"provider preflight drift: {preflight}")
+          if smoke["canonical_main_sha"] != os.environ["GITHUB_SHA"]:
+              raise SystemExit("smoke evidence not bound to canonical main")
+          if smoke["status"] not in {"pass", "blocked-behavior-changing"}:
+              raise SystemExit(f"invalid smoke result: {smoke['status']}")
+          if smoke["development_or_final_data_accessed"] is not False:
+              raise SystemExit("forbidden benchmark data access recorded")
+          if smoke["selection_performed"] is not False or smoke["training_performed"] is not False:
+              raise SystemExit("forbidden D3 activity recorded")
