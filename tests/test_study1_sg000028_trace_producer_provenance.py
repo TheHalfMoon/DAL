@@ -50,7 +50,17 @@ def test_provenance_overlay_matches_canonical_repair_bytes() -> None:
         "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757"
     )
 
-    for source in (repair, contract, correct):
+    assert repair["patch_path"] == correct["patch_path"]
+    assert contract["transport_patch_path"] == correct["patch_path"]
+    assert repair["patch_sha256"] == expected["transport_patch_sha256"]
+    assert repair["patched_core_utils_blob_sha"] == expected[
+        "patched_core_utils_blob_sha"
+    ]
+    assert repair["patched_core_utils_sha256"] == expected[
+        "patched_core_utils_sha256"
+    ]
+
+    for source in (contract, correct):
         assert source["transport_patch_sha256"] == expected["transport_patch_sha256"]
         assert source["patched_core_utils_blob_sha"] == expected[
             "patched_core_utils_blob_sha"
