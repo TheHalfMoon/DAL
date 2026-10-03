@@ -1,0 +1,217 @@
+{
+  "schema_version": "0.1",
+  "grain": "SG-000026",
+  "program": "Study 1",
+  "stage": "D2",
+  "title": "Baseline qualification and local FHIR compatibility",
+  "status": "closed-canonical",
+  "research_contract_issue": 115,
+  "canonical_dependency": "16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167",
+  "pre_closeout_main": "c1bc808d6381f8cab02da8adfc9ba519370cc0f8",
+  "original_contract": {
+    "path": "registry/study1_sg000026_contract.json",
+    "sha256": "5842560ada2e73e4d078d39cf556b26306a76e1b2739566ff920acd7fcb7b42c",
+    "preserved_unchanged": true
+  },
+  "effective_protocol": {
+    "parent_path": "registry/study1_preregistered_protocol_2026-10-02.json",
+    "parent_sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192",
+    "amendment_path": "registry/study1_sg000026_stage_order_amendment.json",
+    "amendment_sha256": "49adbe6972c20aa54346480cb08dee8ab03e41ab214424ebee361793c26a28e5",
+    "amendment_issue": 128,
+    "authorization_comment_id": 5970595978,
+    "amendment_pr": 130,
+    "amendment_merge_sha": "c1bc808d6381f8cab02da8adfc9ba519370cc0f8",
+    "post_main_gaxbench_run": 37134290437,
+    "post_main_manuscript_run": 37134290428,
+    "observed_query_pattern_criterion_preserved": true,
+    "observed_query_pattern_execution_gate": "post-D3-pre-D4"
+  },
+  "canonical_deliverables": [
+    {
+      "id": "baseline-semantics-and-accounting",
+      "pr": 117,
+      "merge_sha": "0cfc2dbe0b7489c266da0dadd25963da18ac2314",
+      "post_main_gaxbench_run": 37075637455,
+      "post_main_manuscript_run": 37075637504
+    },
+    {
+      "id": "synthetic-fhir-compatibility-and-firewall",
+      "pr": 118,
+      "merge_sha": "5ea436e16a32b4d6e10f12deeabc69a8699101b0",
+      "artifact": "registry/study1_sg000026_fhir_compatibility_status.json",
+      "artifact_sha256": "fb9ba6e4ff50e0e26fde2fed937d54a10cdfbabd71254f8c51be23302d6d4291",
+      "post_main_gaxbench_run": 37076978487,
+      "post_main_manuscript_run": 37076978436
+    },
+    {
+      "id": "zero-cost-fhir-runtime-identity",
+      "pr": 119,
+      "merge_sha": "aa59981148692c3524e66fb5e27d2dfce83533ae",
+      "artifact": "registry/study1_sg000026_fhir_runtime_manifest.json",
+      "artifact_sha256": "744cc639e0d9f703869846636263d5e1d77c73c1c68d68aebd6d7d4a5485d57e",
+      "post_main_gaxbench_run": 37077874241,
+      "post_main_manuscript_run": 37077874208
+    },
+    {
+      "id": "blind-development-custodian",
+      "pr": 123,
+      "merge_sha": "e1db1efe6f42523d3b02feec4458f0da6612eb77",
+      "custodian_run": 37084890139,
+      "post_main_gaxbench_run": 37084890154,
+      "post_main_manuscript_run": 37084890807
+    },
+    {
+      "id": "real-development-direct-id-qualification",
+      "pr": 125,
+      "merge_sha": "8eee15506a48dd03428363d8b5e7234d50f4a960",
+      "qualification_run": 37088504254,
+      "report_path": "registry/study1_sg000026_real_direct_id_qualification.json",
+      "report_sha256": "d9c6187b205c7406ef61843835f0b792b763be250972c47e5c704eae686a74ad",
+      "receipt_path": "registry/study1_sg000026_real_direct_id_execution_receipt.json",
+      "receipt_sha256": "73d762283f7a7111a3bb0304bb130f510f4af336e455af890f96b9683443c2ea",
+      "post_main_gaxbench_run": 37088504160,
+      "post_main_manuscript_run": 37088504250
+    },
+    {
+      "id": "stage-order-repair",
+      "pr": 130,
+      "merge_sha": "c1bc808d6381f8cab02da8adfc9ba519370cc0f8",
+      "artifact": "registry/study1_sg000026_stage_order_amendment.json",
+      "artifact_sha256": "49adbe6972c20aa54346480cb08dee8ab03e41ab214424ebee361793c26a28e5",
+      "post_main_gaxbench_run": 37134290437,
+      "post_main_manuscript_run": 37134290428
+    }
+  ],
+  "model_independent_exit_criteria": [
+    {
+      "id": "D2-E1",
+      "criterion": "B0/B1/B2 matched-input base-answer identity mechanically proven",
+      "status": "proven",
+      "evidence": [
+        "PR #117 merge 0cfc2dbe0b7489c266da0dadd25963da18ac2314",
+        "tests/test_study1_baselines.py::test_b0_b1_b2_preserve_exact_base_answer_identity",
+        "post-main GAXBench 37075637455 SUCCESS"
+      ]
+    },
+    {
+      "id": "D2-E2",
+      "criterion": "B1/B2 differ from B0 only by preregistered score/action wrapper semantics",
+      "status": "proven",
+      "evidence": [
+        "PR #117 merge 0cfc2dbe0b7489c266da0dadd25963da18ac2314",
+        "tests/test_study1_baselines.py wrapper/tie/range guards",
+        "post-main GAXBench 37075637455 SUCCESS"
+      ]
+    },
+    {
+      "id": "D2-E3",
+      "criterion": "deterministic complete denominator and failure accounting",
+      "status": "proven",
+      "evidence": [
+        "PR #117 merge 0cfc2dbe0b7489c266da0dadd25963da18ac2314",
+        "tests/test_study1_baselines.py::test_execution_accounting_is_failure_aware_and_exact",
+        "post-main GAXBench 37075637455 SUCCESS"
+      ]
+    },
+    {
+      "id": "D2-E4",
+      "criterion": "local retrieval matches governed development-role expected resource IDs with no unresolved model-independent behavior-changing semantic drift",
+      "status": "proven",
+      "scope_note": "Observed model-dependent agent-generated query/search patterns are not claimed here and remain mandatory post-D3/pre-D4.",
+      "evidence": [
+        "PR #118 deterministic read-only FHIR parser/search mechanics",
+        "PR #125 canonical real direct-ID qualification",
+        "run 37088504254: 21527/21527 references resolved, 1087/1087 rows with expected IDs exact, zero missing, zero mismatch, zero parse failures"
+      ]
+    },
+    {
+      "id": "D2-E5",
+      "criterion": "sealed-final firewall mechanically proven",
+      "status": "proven",
+      "evidence": [
+        "PR #118 calibration/validation-only compatibility firewall",
+        "PR #123 blind custodian success without final materialization",
+        "role manifest membership SHA-256 b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+        "40 patients / 173 rows remain sealed"
+      ]
+    },
+    {
+      "id": "D2-E6",
+      "criterion": "all negative and unsupported results retained",
+      "status": "proven",
+      "evidence": [
+        "PR #118 explicit unsupported-parameter reporting and fail-closed tests",
+        "tests/test_study1_fhir_real_qualification.py::test_missing_real_resource_is_retained_as_negative_evidence",
+        "canonical real run reports zero missing rather than excluding rows"
+      ]
+    },
+    {
+      "id": "D2-E7",
+      "criterion": "zero-cost reproducibility proven",
+      "status": "proven",
+      "evidence": [
+        "PR #119 checksum-pinned MIMIC-IV FHIR Demo v2.1.0 runtime identity",
+        "runtime checksum manifest SHA-256 582688e274af7523f4db1cdebcd88395628a0256084bc0cc20b14884a418b69c",
+        "real direct-ID execution receipt zero_founder_cost=true"
+      ]
+    },
+    {
+      "id": "D2-E8",
+      "criterion": "no model selection, training, DAL development, final calibration fitting, or sealed-final access occurred",
+      "status": "proven",
+      "evidence": [
+        "real direct-ID report model_selection_performed=false and training_performed=false",
+        "execution receipt sealed_final_rows_accessed=false",
+        "Issue #128 amendment current_effects keeps D3 inactive/model unselected/training inactive/final access unauthorized"
+      ]
+    }
+  ],
+  "deferred_mandatory_gate": {
+    "criterion": "every governed development-role FHIR query pattern is supported or explicitly blocking",
+    "status": "preserved-not-executed-in-D2",
+    "execution_stage": "immediate-post-D3-pre-D4",
+    "producer_identity": "prospectively frozen D3 base model plus FHIR agent strategy",
+    "roles": [
+      "calibration",
+      "validation"
+    ],
+    "D4_blocked_until_pass": true,
+    "invalid_substitutes": [
+      "SQL proc_query",
+      "expected resource IDs",
+      "static source inspection",
+      "invented traces"
+    ]
+  },
+  "sealed_final_boundary": {
+    "dataset": "FHIR-AgentBench",
+    "role_revision": "gax-fhir-agentbench-patient-disjoint-v0.2",
+    "test_patient_count": 40,
+    "test_row_count": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "accessed_in_D2": false
+  },
+  "closeout_assertions": [
+    "All model-independent D2 exit criteria are proven by canonical evidence.",
+    "The observed model-dependent query/search-pattern criterion is preserved and deferred only by the founder-authorized Issue #128 stage-order amendment.",
+    "D3 is not activated by this closeout and requires a separate activation grain.",
+    "D4 remains blocked until the mandatory post-D3/pre-D4 query-trace gate passes.",
+    "No model selection, training, fine-tuning, final calibration fitting, DAL architecture development, or sealed-final access occurred in D2.",
+    "The 40-patient / 173-row final role remains sealed with unchanged role and membership hashes."
+  ],
+  "closeout_qualification": {
+    "required": [
+      "linux-windows-python-3.11-3.12-gaxbench",
+      "checksum-pinned-alibaba-opencodereview",
+      "secure-typesafe-jev",
+      "manuscript-clean-room-build",
+      "normal-merge-with-expected-head-guard",
+      "post-main-verification"
+    ],
+    "state": "bound-by-closeout-pr-and-post-main-verification"
+  }
+}

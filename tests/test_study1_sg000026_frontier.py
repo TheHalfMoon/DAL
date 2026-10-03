@@ -19,13 +19,13 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_sg000026_frontier_records_stage_order_repair_and_closeout_gate() -> None:
+def test_sg000026_frontier_records_canonical_d2_closeout_and_next_gate() -> None:
     status = _status()
-    assert status["state"] == "direct-id-proven-stage-order-repaired-d2-closeout-pending"
+    assert status["state"] == "closed-canonical-model-independent-d2"
     assert status["recovery_governance_gate_issue"] == 120
     assert status["governance_gate_issue"] is None
     assert status["query_trace_recovery_gate_issue"] == 126
-    assert status["canonical_frontier_sha"] == "8eee15506a48dd03428363d8b5e7234d50f4a960"
+    assert status["canonical_frontier_sha"] == "c1bc808d6381f8cab02da8adfc9ba519370cc0f8"
     recovery = status["authorized_recovery"]
     assert isinstance(recovery, dict)
     assert recovery["option"] == "option-a-blind-metadata-only-custodian"
@@ -42,10 +42,11 @@ def test_sg000026_frontier_records_stage_order_repair_and_closeout_gate() -> Non
         123,
         124,
         125,
+        130,
     ]
     assert status["blocked_development_rows"] == {"calibration": 341, "validation": 1122}
     assert status["sealed_final_role"] == {
-        "access": "sealed-and-forbidden-to-d2",
+        "access": "sealed-and-forbidden-before-d9",
         "patients": 40,
         "rows": 173,
     }
@@ -59,7 +60,10 @@ def test_sg000026_frontier_records_stage_order_repair_and_closeout_gate() -> Non
     assert amendment["authorization_comment_id"] == 5970595978
     assert amendment["observed_query_pattern_criterion_preserved"] is True
     assert amendment["execution_gate"] == "post-D3-pre-D4"
-    assert status["d2_closeout_allowed"] is False
+    assert status["d2_closeout_allowed"] is True
+    assert status["d2_closed"] is True
+    assert status["d3_activation_eligible"] is True
+    assert status["d4_activation_allowed"] is False
     assert status["later_stages_activated"] is False
 
 
@@ -89,9 +93,10 @@ def test_sg000026_human_frontier_matches_machine_state() -> None:
     current = CURRENT_PATH.read_text(encoding="utf-8")
     tasks = TASKS_PATH.read_text(encoding="utf-8")
 
-    marker = "REAL_DIRECT_ID_PROVEN / STAGE_ORDER_REPAIRED / D2_CLOSEOUT_PENDING"
-    assert marker in current
-    assert marker in tasks
+    assert "CLOSED_CANONICAL" in current
+    assert "CLOSED_CANONICAL" in tasks
+    assert "MODEL_INDEPENDENT_D2_PROVEN" in current
+    assert "MODEL_INDEPENDENT_D2_PROVEN" in tasks
     assert "Issue #126" in current
     assert "Issue #126" in tasks
     assert "Issue #128" in current
