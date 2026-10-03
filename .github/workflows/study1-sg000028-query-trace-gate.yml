@@ -139,10 +139,18 @@ jobs:
           for key in keys:
               if frozen_transport[key] != incorrect[key]:
                   raise SystemExit(f"historical D3 freeze provenance drift: {key}")
-              if repair[key] != corrected[key] or sg28[key] != corrected[key]:
-                  raise SystemExit(f"canonical provenance overlay drift: {key}")
+              if sg28[key] != corrected[key]:
+                  raise SystemExit(f"SG-000028 provenance overlay drift: {key}")
+          if repair["patch_sha256"] != corrected["transport_patch_sha256"]:
+              raise SystemExit("canonical transport patch SHA-256 drift")
+          if repair["patched_core_utils_blob_sha"] != corrected["patched_core_utils_blob_sha"]:
+              raise SystemExit("canonical patched core blob drift")
+          if repair["patched_core_utils_sha256"] != corrected["patched_core_utils_sha256"]:
+              raise SystemExit("canonical patched core SHA-256 drift")
           if repair["patch_path"] != corrected["patch_path"]:
               raise SystemExit("canonical transport patch path drift")
+          if sg28["transport_patch_path"] != corrected["patch_path"]:
+              raise SystemExit("SG-000028 transport patch path drift")
           if correction["semantic_invariants"]["behavior_changed"] is not False:
               raise SystemExit("provenance correction cannot change behavior")
           if correction["semantic_invariants"]["post_outcome_trace_producer_switching"] is not False:
