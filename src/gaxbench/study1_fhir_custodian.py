@@ -18,6 +18,7 @@ from gaxbench.fhir_agentbench_qualification import (
     GAXRole,
     _assign_patient_roles,
     _exclusion_reason,
+    _EXPECTED_HEADERS,
     _identifier_digest,
     _SourceRow,
     verify_frozen_source,
@@ -102,17 +103,40 @@ def build_blind_development_projection(
             f"FHIR-AgentBench SHA-256 mismatch: {source_sha256} != {expected_source_sha256}"
         )
 
-    metadata_rows = _read_metadata_only(source_path)
-    source_rows = [
-        _SourceRow(
-            upstream_split=row["split"],
-            question_id=row["question_id"],
-            question="",
-            template="",
-            patient_digest=_identifier_digest(row["patient_fhir_id"]),
+    headers, body = _split_header(source_bytes)
+    if tuple(headers) != _EXPECTED_HEADERS:
+        raise ValueError("FHIR-AgentBench header order drifted from the frozen source")
+    index = {name: headers.index(name) for name in headers}
+
+    metadata_fields = frozenset(
+        {index["split"], index["question_id"], index["patient_fhir_id"]}
+    )
+    metadata_rows = _scan_selected_rows(
+        body,
+        field_count=len(headers),
+        selected_columns=metadata_fields,
+    )
+    source_rows: list[_SourceRow] = []
+    row_metadata: dict[int, tuple[str, str, str]] = {}
+    for row_number, selected in metadata_rows:
+        split = _required_selected(selected, index["split"], row_number, "split")
+        question_id = _required_selected(
+            selected, index["question_id"], row_number, "question_id"
         )
-        for row in metadata_rows
-    ]
+        patient_id = _required_selected(
+            selected, index["patient_fhir_id"], row_number, "patient_fhir_id"
+        )
+        patient_digest = _identifier_digest(patient_id)
+        row_metadata[row_number] = (split, question_id, patient_digest)
+        source_rows.append(
+            _SourceRow(
+                upstream_split=split,
+                question_id=question_id,
+                question="",
+                template="",
+                patient_digest=patient_digest,
+            )
+        )
     if len({row.question_id for row in source_rows}) != len(source_rows):
         raise ValueError("FHIR-AgentBench question_id values must be unique")
 
@@ -125,7 +149,41 @@ def build_blind_development_projection(
             f"{membership_sha256} != {expected_membership_sha256}"
         )
 
-    rows = _project_development_rows(source_path, roles_by_patient)
+    development_rows: dict[int, tuple[D2ProjectionRole, str]] = {}
+    for row_number, (split, question_id, patient_digest) in row_metadata.items():
+        role = roles_by_patient[patient_digest]
+        if split == "test":
+            continue
+        if role == "calibration":
+            development_rows[row_number] = ("calibration", question_id)
+        elif role == "validation":
+            development_rows[row_number] = ("validation", question_id)
+
+    projection_fields = frozenset({index["proc_query"], index["true_fhir_ids"]})
+    selected_projection_rows = _scan_selected_rows(
+        body,
+        field_count=len(headers),
+        selected_columns=projection_fields,
+        selected_rows=frozenset(development_rows),
+    )
+    rows: list[D2FHIRDevelopmentProjectionRow] = []
+    for row_number, selected in selected_projection_rows:
+        role, question_id = development_rows[row_number]
+        proc_query = _required_selected(
+            selected, index["proc_query"], row_number, "proc_query"
+        )
+        true_fhir_ids = _required_selected(
+            selected, index["true_fhir_ids"], row_number, "true_fhir_ids"
+        )
+        rows.append(
+            _project_development_values(
+                role=role,
+                question_id=question_id,
+                proc_query=proc_query,
+                true_fhir_ids=true_fhir_ids,
+            )
+        )
+
     calibration_rows = sum(row.role == "calibration" for row in rows)
     validation_rows = sum(row.role == "validation" for row in rows)
     if calibration_rows != expected_calibration_rows:
@@ -158,21 +216,150 @@ def build_blind_development_projection(
     return manifest
 
 
-def _read_metadata_only(source_path: Path) -> list[dict[str, str]]:
-    required = {"split", "question_id", "patient_fhir_id"}
-    rows: list[dict[str, str]] = []
-    with source_path.open("r", encoding="utf-8-sig", newline="") as handle:
-        reader = csv.DictReader(handle)
-        headers = set(reader.fieldnames or ())
-        missing = required - headers
-        if missing:
-            raise ValueError(f"missing custodian metadata columns: {sorted(missing)}")
-        for row_number, raw in enumerate(reader, start=1):
-            row = {name: (raw.get(name) or "").strip() for name in required}
-            if not all(row.values()):
-                raise ValueError(f"empty custodian metadata at row {row_number}")
-            rows.append(row)
-    return rows
+def _split_header(source_bytes: bytes) -> tuple[list[str], bytes]:
+    line_end = source_bytes.find(b"\n")
+    if line_end < 0:
+        raise ValueError("FHIR-AgentBench CSV is missing a header line")
+    header_bytes = source_bytes[:line_end].rstrip(b"\r")
+    header_text = header_bytes.decode("utf-8-sig")
+    headers = next(csv.reader([header_text]))
+    if not headers or any(not header for header in headers):
+        raise ValueError("FHIR-AgentBench CSV has invalid headers")
+    return headers, source_bytes[line_end + 1 :]
+
+
+def _scan_selected_rows(
+    body: bytes,
+    *,
+    field_count: int,
+    selected_columns: frozenset[int],
+    selected_rows: frozenset[int] | None = None,
+) -> list[tuple[int, dict[int, str]]]:
+    outputs: list[tuple[int, dict[int, str]]] = []
+    row_number = 1
+    field_index = 0
+    row_values: dict[int, str] = {}
+    in_quotes = False
+    after_quote = False
+    field_started = False
+    buffer: bytearray | None = _selected_buffer(
+        row_number, field_index, selected_columns, selected_rows
+    )
+
+    def finish_field() -> None:
+        nonlocal field_index, buffer, field_started, after_quote
+        if buffer is not None:
+            row_values[field_index] = bytes(buffer).decode("utf-8").strip()
+        field_index += 1
+        field_started = False
+        after_quote = False
+        buffer = _selected_buffer(row_number, field_index, selected_columns, selected_rows)
+
+    def finish_row() -> None:
+        nonlocal row_number, field_index, row_values, buffer
+        if field_index != field_count:
+            raise ValueError(
+                f"CSV row {row_number} field count drift: {field_index} != {field_count}"
+            )
+        if selected_rows is None or row_number in selected_rows:
+            outputs.append((row_number, row_values))
+        row_number += 1
+        field_index = 0
+        row_values = {}
+        buffer = _selected_buffer(row_number, field_index, selected_columns, selected_rows)
+
+    position = 0
+    while position < len(body):
+        byte = body[position]
+        if in_quotes:
+            if byte == 34:
+                if position + 1 < len(body) and body[position + 1] == 34:
+                    if buffer is not None:
+                        buffer.append(34)
+                    position += 2
+                    continue
+                in_quotes = False
+                after_quote = True
+                position += 1
+                continue
+            if buffer is not None:
+                buffer.append(byte)
+            position += 1
+            continue
+
+        if after_quote:
+            if byte == 44:
+                finish_field()
+                position += 1
+                continue
+            if byte in {10, 13}:
+                finish_field()
+                finish_row()
+                if byte == 13 and position + 1 < len(body) and body[position + 1] == 10:
+                    position += 2
+                else:
+                    position += 1
+                continue
+            if byte in {9, 32}:
+                position += 1
+                continue
+            raise ValueError(f"unexpected byte after quoted CSV field at row {row_number}")
+
+        if byte == 34 and not field_started:
+            in_quotes = True
+            field_started = True
+            position += 1
+            continue
+        if byte == 34:
+            raise ValueError(f"unexpected quote in unquoted CSV field at row {row_number}")
+        if byte == 44:
+            finish_field()
+            position += 1
+            continue
+        if byte in {10, 13}:
+            finish_field()
+            finish_row()
+            if byte == 13 and position + 1 < len(body) and body[position + 1] == 10:
+                position += 2
+            else:
+                position += 1
+            continue
+        field_started = True
+        if buffer is not None:
+            buffer.append(byte)
+        position += 1
+
+    if in_quotes:
+        raise ValueError("unterminated quoted CSV field")
+    if field_started or field_index or row_values:
+        finish_field()
+        finish_row()
+    return outputs
+
+
+def _selected_buffer(
+    row_number: int,
+    field_index: int,
+    selected_columns: frozenset[int],
+    selected_rows: frozenset[int] | None,
+) -> bytearray | None:
+    if field_index not in selected_columns:
+        return None
+    if selected_rows is not None and row_number not in selected_rows:
+        return None
+    return bytearray()
+
+
+def _required_selected(
+    selected: Mapping[int, str],
+    field_index: int,
+    row_number: int,
+    field_name: str,
+) -> str:
+    value = selected.get(field_index, "")
+    if not value:
+        raise ValueError(f"empty {field_name} at row {row_number}")
+    return value
 
 
 def _membership_payload(
@@ -209,48 +396,18 @@ def _membership_payload(
     return payload, counts
 
 
-def _project_development_rows(
-    source_path: Path,
-    roles_by_patient: Mapping[str, GAXRole],
-) -> list[D2FHIRDevelopmentProjectionRow]:
-    rows: list[D2FHIRDevelopmentProjectionRow] = []
-    with source_path.open("r", encoding="utf-8-sig", newline="") as handle:
-        reader = csv.DictReader(handle)
-        required = {"split", "question_id", "patient_fhir_id", "proc_query", "true_fhir_ids"}
-        missing = required - set(reader.fieldnames or ())
-        if missing:
-            raise ValueError(f"missing development projection columns: {sorted(missing)}")
-        for raw in reader:
-            split = (raw.get("split") or "").strip()
-            question_id = (raw.get("question_id") or "").strip()
-            patient_id = (raw.get("patient_fhir_id") or "").strip()
-            role = roles_by_patient[_identifier_digest(patient_id)]
-            if role not in {"calibration", "validation"} or split == "test":
-                continue
-            rows.append(_project_development_row(raw, role=role, question_id=question_id))
-    return rows
-
-
-def _project_development_row(
-    raw: Mapping[str, str],
+def _project_development_values(
     *,
-    role: GAXRole,
+    role: D2ProjectionRole,
     question_id: str,
+    proc_query: str,
+    true_fhir_ids: str,
 ) -> D2FHIRDevelopmentProjectionRow:
-    if role == "calibration":
-        projection_role: D2ProjectionRole = "calibration"
-    elif role == "validation":
-        projection_role = "validation"
-    else:
-        raise ValueError("custodian may materialize development roles only")
-    proc_query = (raw.get("proc_query") or "").strip()
-    if not proc_query:
-        raise ValueError("development row has empty proc_query")
     return D2FHIRDevelopmentProjectionRow(
-        role=projection_role,
+        role=role,
         question_id_sha256=_identifier_digest(question_id),
         proc_query=proc_query,
-        expected_resource_ids=_parse_expected_resource_ids(raw.get("true_fhir_ids") or ""),
+        expected_resource_ids=_parse_expected_resource_ids(true_fhir_ids),
     )
 
 
