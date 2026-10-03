@@ -81,12 +81,10 @@ def test_post_d3_query_trace_gate_blocks_d4_and_final_remains_sealed() -> None:
 
 def test_d3_frontier_is_active_but_has_not_frozen_trace_producer() -> None:
     frontier = _load(FRONTIER)
-    assert frontier["state"] == (
-        "candidate-family-bounded-agent-strategy-frozen-model-not-yet-frozen"
-    )
+    assert frontier["state"] == "trace-producer-identity-frozen-pending-d3-closeout"
     assert frontier["candidate_family_defined"] is True
     assert frontier["fhir_agent_strategy_frozen"] is True
-    assert frontier["trace_producing_system_frozen"] is False
+    assert frontier["trace_producing_system_frozen"] is True
     assert frontier["d4_activation_allowed"] is False
     assert frontier["training_allowed"] is False
     assert frontier["later_stages_activated"] is False
