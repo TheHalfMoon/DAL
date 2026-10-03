@@ -1,0 +1,234 @@
+name: DAL Study 1 FHIR Real Direct-ID Qualification
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/study1-sg000026-real-direct-id-qualification.yml
+      - src/gaxbench/study1_fhir_real_qualification.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  PYTHONHASHSEED: "0"
+  CUSTODIAN_RUN_ID: "37084890139"
+  CUSTODIAN_ARTIFACT_ID: "11260661014"
+  CUSTODIAN_ZIP_SHA256: "5de5bcb8c7a3f37d23da503f40362ef1a7bc7e7d143c5876a0e0992f21428114"
+  PROJECTION_SHA256: "a09357620e811de49dd868773854e4f48e742a3882110c2f6228633ad161aae7"
+  RUNTIME_SUMS_SHA256: "582688e274af7523f4db1cdebcd88395628a0256084bc0cc20b14884a418b69c"
+
+jobs:
+  real-direct-id-qualification:
+    name: Real development direct-ID qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install DAL
+        run: python -m pip install -e .
+
+      - name: Download exact founder-authorized development projection artifact
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          import hashlib
+          import os
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from zipfile import ZipFile
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000026-real-direct-id"
+          root.mkdir(parents=True, exist_ok=True)
+          archive = root / "projection.zip"
+          url = (
+              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/"
+              f"{os.environ['CUSTODIAN_ARTIFACT_ID']}/zip"
+          )
+          request = Request(
+              url,
+              headers={
+                  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                  "Accept": "application/vnd.github+json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "User-Agent": "DAL-research/0.1",
+              },
+          )
+          with urlopen(request, timeout=60) as response:
+              archive.write_bytes(response.read())
+          actual_zip = hashlib.sha256(archive.read_bytes()).hexdigest()
+          if actual_zip != os.environ["CUSTODIAN_ZIP_SHA256"]:
+              raise SystemExit(f"custodian artifact ZIP SHA-256 mismatch: {actual_zip}")
+          output = root / "projection"
+          output.mkdir()
+          with ZipFile(archive) as zip_file:
+              names = sorted(zip_file.namelist())
+              if names != ["development_projection.jsonl", "projection_manifest.json"]:
+                  raise SystemExit(f"unexpected custodian artifact files: {names}")
+              zip_file.extractall(output)
+          projection = output / "development_projection.jsonl"
+          actual_projection = hashlib.sha256(projection.read_bytes()).hexdigest()
+          if actual_projection != os.environ["PROJECTION_SHA256"]:
+              raise SystemExit(f"development projection SHA-256 mismatch: {actual_projection}")
+      - name: Download and verify frozen zero-cost FHIR runtime
+        shell: python
+        run: |
+          import concurrent.futures
+          import hashlib
+          import json
+          import os
+          import time
+          from pathlib import Path
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          work = Path(os.environ["RUNNER_TEMP"]) / "sg000026-real-direct-id"
+          root = work / "runtime"
+          root.mkdir(parents=True, exist_ok=True)
+          manifest = json.loads(
+              Path("registry/study1_sg000026_fhir_runtime_manifest.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          base = str(manifest["source"]["official_files_root"]).rstrip("/")
+          sums_url = str(manifest["source"]["checksum_manifest_url"])
+          sums = root / "official-SHA256SUMS.txt"
+          with urlopen(Request(sums_url, headers={"User-Agent": "DAL-research/0.1"}), timeout=60) as r:
+              sums.write_bytes(r.read())
+          actual_sums = hashlib.sha256(sums.read_bytes()).hexdigest()
+          if actual_sums != os.environ["RUNTIME_SUMS_SHA256"]:
+              raise SystemExit(f"official SHA256SUMS drift: {actual_sums}")
+
+          def download(entry: dict[str, str]) -> str:
+              relative = entry["path"]
+              expected = entry["sha256"]
+              target = root / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              encoded = "/".join(quote(part) for part in Path(relative).parts)
+              url = f"{base}/{encoded}"
+              last_error: BaseException | None = None
+              for attempt in range(1, 4):
+                  part = target.with_suffix(target.suffix + ".part")
+                  part.unlink(missing_ok=True)
+                  try:
+                      request = Request(url, headers={"User-Agent": "DAL-research/0.1"})
+                      with urlopen(request, timeout=180) as response, part.open("wb") as handle:
+                          while chunk := response.read(1024 * 1024):
+                              handle.write(chunk)
+                      actual = hashlib.sha256(part.read_bytes()).hexdigest()
+                      if actual != expected:
+                          raise RuntimeError(f"SHA-256 mismatch for {relative}: {actual}")
+                      part.replace(target)
+                      return relative
+                  except BaseException as error:
+                      last_error = error
+                      part.unlink(missing_ok=True)
+                      if attempt < 3:
+                          time.sleep(attempt)
+              assert last_error is not None
+              raise last_error
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+              completed = list(executor.map(download, manifest["files"]))
+          if len(completed) != len(manifest["files"]):
+              raise SystemExit("FHIR runtime download coverage incomplete")
+          print(f"runtime_files_verified={len(completed)}")
+
+      - name: Execute real development direct-ID qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/sg000026-real-direct-id"
+          mkdir -p "$work/evidence"
+          python -m gaxbench.study1_fhir_real_qualification \
+            --projection "$work/projection/development_projection.jsonl" \
+            --runtime-root "$work/runtime" \
+            --runtime-manifest registry/study1_sg000026_fhir_runtime_manifest.json \
+            --output "$work/evidence/direct_id_qualification.json"
+
+      - name: Write provenance receipt
+        shell: python
+        run: |
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          work = Path(os.environ["RUNNER_TEMP"]) / "sg000026-real-direct-id"
+          evidence = work / "evidence"
+          runtime_manifest = Path("registry/study1_sg000026_fhir_runtime_manifest.json")
+          receipt = {
+              "schema_version": "0.1",
+              "study": "DAL Study 1",
+              "specgrain": "SG-000026",
+              "stage": "D2",
+              "canonical_main_sha": os.environ["GITHUB_SHA"],
+              "custodian_run_id": int(os.environ["CUSTODIAN_RUN_ID"]),
+              "custodian_artifact_id": int(os.environ["CUSTODIAN_ARTIFACT_ID"]),
+              "custodian_zip_sha256": os.environ["CUSTODIAN_ZIP_SHA256"],
+              "development_projection_sha256": os.environ["PROJECTION_SHA256"],
+              "runtime_manifest_sha256": hashlib.sha256(runtime_manifest.read_bytes()).hexdigest(),
+              "official_sha256s_sha256": os.environ["RUNTIME_SUMS_SHA256"],
+              "zero_founder_cost": True,
+              "sealed_final_rows_accessed": False,
+              "model_selection_performed": False,
+              "training_performed": False,
+          }
+          (evidence / "execution_receipt.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+              newline="\n",
+          )
+
+      - name: Upload exact qualification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000026-real-direct-id-qualification-${{ github.sha }}
+          path: ${{ runner.temp }}/sg000026-real-direct-id/evidence/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce direct-ID evidence result without closing D2
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(
+              (
+                  Path(os.environ["RUNNER_TEMP"])
+                  / "sg000026-real-direct-id/evidence/direct_id_qualification.json"
+              ).read_text(encoding="utf-8")
+          )
+          required = {
+              "status": "partial-pass-direct-id-only",
+              "calibration_rows": 341,
+              "validation_rows": 1122,
+              "rows_with_expected_ids": 1087,
+              "rows_without_expected_ids": 376,
+              "requested_reference_count": 21527,
+              "unique_expected_resource_count": 14178,
+              "resolved_reference_count": 21527,
+              "missing_reference_count": 0,
+              "exact_match_rows": 1087,
+              "mismatch_rows": 0,
+              "runtime_parse_failure_count": 0,
+              "query_trace_coverage": "blocked-unavailable-from-authorized-projection",
+              "d2_closeout_allowed": False,
+          }
+          drift = {key: (report.get(key), value) for key, value in required.items() if report.get(key) != value}
+          if drift:
+              raise SystemExit(f"direct-ID qualification evidence drift: {drift}")
+          print("real_development_direct_id_qualification=PASS_PARTIAL_D2")
