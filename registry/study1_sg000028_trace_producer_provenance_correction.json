@@ -1,0 +1,64 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "stage": "post-D3-pre-D4",
+  "grain_kind": "trace-producer-provenance-transcription-correction",
+  "research_contract_issue": 141,
+  "discovery": {
+    "canonical_main_sha": "423d4c58f835692ebef7c217e84490d59a8443de",
+    "query_trace_run_id": 37150279061,
+    "failure_step": "Apply and verify frozen structured-tool transport patch",
+    "failure_class": "pre-data-provenance-mismatch",
+    "development_data_accessed": false,
+    "final_data_accessed": false,
+    "query_trace_evidence_generated": false
+  },
+  "canonical_repair_execution": {
+    "transport_repair_pr": 137,
+    "transport_repair_exact_head": "5e7df4b4f2ce2a003b97fa31e7d03a80680771fd",
+    "transport_repair_merge": "26069715534ba693049795fdb5dc6929ab807a7d",
+    "repaired_cpu_smoke_run": 37143422780,
+    "artifact_id": 11281697095,
+    "artifact_name": "sg000027-d3-cpu-smoke-26069715534ba693049795fdb5dc6929ab807a7d",
+    "artifact_digest": "sha256:3ce4e9e5fd7dda6ec0cbcccafef8d5264103a4e76550caf1cbab202cdab43dc2",
+    "receipt_path": "transport_patch_receipt.json",
+    "smoke_status": "pass",
+    "transport_status": "transport-compatible"
+  },
+  "incorrect_freeze_provenance": {
+    "introduced_by_pr": 138,
+    "freeze_merge": "01c28e582e7d3399581078b306a32369ab12a79c",
+    "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
+    "patched_core_utils_blob_sha": "e43534f7396585515f76cf6a1da1134977990e7a",
+    "patched_core_utils_sha256": "4cc31a6beb485870814fed47c5670d85a0dc37444617e26152c73ad4fedbc7ef"
+  },
+  "correct_canonical_repair_provenance": {
+    "repair_contract_path": "registry/study1_sg000027_transport_repair_contract.json",
+    "patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+    "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
+    "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+    "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da"
+  },
+  "semantic_invariants": {
+    "behavior_changed": false,
+    "base_model_changed": false,
+    "tokenizer_changed": false,
+    "quantized_artifact_changed": false,
+    "runtime_changed": false,
+    "agent_strategy_changed": false,
+    "prompt_changed": false,
+    "tool_schema_changed": false,
+    "temperature_changed": false,
+    "candidate_selection_changed": false,
+    "post_outcome_trace_producer_switching": false
+  },
+  "governance": {
+    "correction_scope": "provenance-fields-only-to-match-already-canonical-repair-bytes",
+    "query_trace_gate_must_rerun_after_correction": true,
+    "d4_activation_allowed": false,
+    "training_allowed": false,
+    "final_role_access_allowed": false,
+    "zero_founder_cost": true
+  }
+}
