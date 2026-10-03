@@ -207,15 +207,15 @@ D2 baseline qualification is now activated separately as **SG-000026** under Iss
 
 **Baseline qualification and local FHIR compatibility**
 
-Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Option A recovery gate: Issue #120. Current query-trace governance gate: Issue #126.
+Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Option A projection recovery gate: Issue #120. Query-trace recovery authorization: Issue #126, founder comment `5970310150`. Current model-dependent trace-producer stage-order gate: Issue #128.
 
-State: **ACTIVE — REAL_DIRECT_ID_PROVEN / QUERY_TRACE_GOVERNANCE_BLOCKED**
+State: **ACTIVE — REAL_DIRECT_ID_PROVEN / QUERY_TRACE_PRODUCER_GOVERNANCE_BLOCKED**
 
 Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), B0/B1/B2 semantics/accounting (PR #117, merge `0cfc2db`), the synthetic FHIR compatibility/firewall kernel (PR #118, merge `5ea436e`), the zero-cost runtime identity (PR #119, merge `aa59981`), the founder-authorized blind development custodian and transport repair (PRs #122–#123, merges `654e76f8` and `e1db1efe`), and real direct-ID qualification plus transport/provenance repair (PRs #124–#125, merges `3f6048dc` and `8eee1550`).
 
 Main-only run `37088504254` proved the governed development direct-ID surface: 341 calibration + 1122 validation rows, 21,527/21,527 expected references resolved, 1,087/1,087 rows with expected IDs exact, zero missing references, zero mismatches, and zero runtime parse failures. `sealed_final_rows_accessed=false`; no model selection or training occurred. Durable evidence is `registry/study1_sg000026_real_direct_id_qualification.json` plus its execution receipt.
 
-D2 is not closed. The founder-authorized projection contains SQL `proc_query` and expected resource IDs but no development question text or benchmark-agent tool-call traces. Because upstream FHIR query strings are generated dynamically, the preregistered requirement to exercise every query/search pattern observed on governed non-test roles remains blocked. Issue #126 is a decision-only governance gate for a possible development-only query-trace recovery path; no new data boundary is authorized yet.
+D2 is not closed. Founder comment `5970310150` on Issue #126 now explicitly authorizes the blind development-only query-trace recovery boundary, while preserving the ban on model selection and D3 activation. Frozen upstream source verification shows that `SingleTurnRequestAgent` obtains `fhir_request_get` arguments from `safe_llm_call(...)`; observed direct-request traces therefore depend on an explicit model and agent strategy. This creates a preregistered stage-order conflict: D2 requires observed query-pattern coverage but cannot freeze the trace-producing model/strategy. Issue #128 is the current decision-only governance gate. SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes for observed benchmark tool calls.
 
 D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden to D2.
 

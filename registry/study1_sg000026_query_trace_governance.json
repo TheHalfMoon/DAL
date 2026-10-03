@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000026",
+  "stage": "D2",
+  "query_trace_recovery_authorization": {
+    "issue": 126,
+    "comment_id": 5970310150,
+    "authorized_option": "option-a-blind-development-only-query-trace-custodian",
+    "authorized": true,
+    "raw_development_question_text_may_be_ephemeral_only": true,
+    "raw_development_question_text_may_be_emitted": false,
+    "final_role_content_or_trace_access_allowed": false
+  },
+  "frozen_upstream_trace_dependency": {
+    "repository": "glee4810/FHIR-AgentBench",
+    "commit": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "single_turn_request_agent_path": "agent/single_turn_request_agent.py",
+    "single_turn_request_agent_blob_sha": "1188a4053560924c3ed801e9b1aaa91ccd6d010d",
+    "core_utils_path": "utils/core_utils.py",
+    "core_utils_blob_sha": "6544570985916074f40a5fb469243aa5ced22f65",
+    "observed_fact": "FHIR request tool arguments are produced by safe_llm_call using an explicit model; run_agent also requires an explicit agent strategy.",
+    "implication": "Observed query/search traces are model-and-strategy dependent and cannot be reproduced truthfully by static SQL, expected resource IDs, or invented deterministic traces."
+  },
+  "stage_order_conflict": {
+    "status": "blocked-requires-founder-decision",
+    "issue": 128,
+    "reason": "D2 requires observed governed query-pattern coverage while D2 simultaneously forbids model selection and keeps D3 inactive. A trace-producing model/agent identity is therefore not currently authorized.",
+    "recommended_option": "preserve the query-trace criterion but move its model-dependent execution to an immediate post-D3/pre-D4 gate after prospective system freeze"
+  },
+  "invariants": {
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173,
+    "sealed_final_access": "forbidden-before-D9",
+    "model_selection_performed": false,
+    "training_performed": false,
+    "development_question_text_accessed_for_this_governance_record": false,
+    "final_role_content_accessed": false,
+    "d3_activated": false,
+    "zero_founder_cost": true
+  },
+  "d2_closeout_allowed": false
+}
