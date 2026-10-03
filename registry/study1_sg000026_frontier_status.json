@@ -5,13 +5,13 @@
     "option": "option-a-blind-metadata-only-custodian",
     "scope": "minimum cross-role metadata for frozen role reconstruction; development-only projection output; no final supervision/content exposure"
   },
-  "blocked_capability": "real-fhir-agentbench-development-role-qualification",
+  "blocked_capability": "observed-development-query-trace-coverage",
   "blocked_development_rows": {
     "calibration": 341,
     "validation": 1122
   },
-  "blocker_reason": "Option A is founder-authorized, but the blind development-only custodian implementation and generated projection are not canonical yet. Real development-role FHIR qualification remains blocked until the custodian implementation is exact-head qualified, normally merged, post-main verified, and its development-only artifact is provenance-qualified.",
-  "canonical_frontier_sha": "b46d3de2c5722b43f6ff6354a9f7fb5917c60283",
+  "blocker_reason": "Real development direct-ID resource equivalence is proven, but the founder-authorized Option A projection contains no development question text or benchmark agent tool-call traces. The preregistered observed-query-pattern criterion therefore remains blocked pending a separate founder decision under Issue #126; proc_query is SQL and is not reinterpreted as FHIR GET evidence.",
+  "canonical_frontier_sha": "8eee15506a48dd03428363d8b5e7234d50f4a960",
   "canonical_grains": [
     {
       "kind": "activation",
@@ -47,6 +47,42 @@
       "post_main_gaxbench_run": 37081145272,
       "post_main_manuscript_run": 37081145291,
       "pull_request": 121
+    },
+    {
+      "kind": "option-a-custodian-implementation",
+      "pull_request": 122,
+      "merge_sha": "654e76f8",
+      "post_main_gaxbench_run": 37084632268,
+      "post_main_manuscript_run": 37084632206,
+      "custodian_run": 37084632341,
+      "custodian_result": "transport-failed-before-source-read"
+    },
+    {
+      "kind": "option-a-custodian-transport-repair",
+      "pull_request": 123,
+      "merge_sha": "e1db1efe",
+      "post_main_gaxbench_run": 37084890154,
+      "post_main_manuscript_run": 37084890807,
+      "custodian_run": 37084890139,
+      "custodian_result": "success"
+    },
+    {
+      "kind": "real-development-direct-id-qualification",
+      "pull_request": 124,
+      "merge_sha": "3f6048dc",
+      "post_main_gaxbench_run": 37086538235,
+      "post_main_manuscript_run": 37086538221,
+      "real_qualification_run": 37086538218,
+      "real_qualification_result": "transport-failed-before-runtime"
+    },
+    {
+      "kind": "direct-id-artifact-transport-provenance-repair",
+      "pull_request": 125,
+      "merge_sha": "8eee1550",
+      "post_main_gaxbench_run": 37088504160,
+      "post_main_manuscript_run": 37088504250,
+      "real_qualification_run": 37088504254,
+      "real_qualification_result": "success-partial-d2"
     }
   ],
   "completed_capabilities": [
@@ -54,13 +90,16 @@
     "deterministic-failure-aware-denominator-accounting",
     "synthetic-read-only-fhir-r4-compatibility-mechanics",
     "sealed-final-role-rejection-in-d2-compatibility-surface",
-    "zero-cost-fhir-runtime-source-and-checksum-identity"
+    "zero-cost-fhir-runtime-source-and-checksum-identity",
+    "founder-authorized-development-only-fhir-projection",
+    "real-development-direct-id-resource-equivalence",
+    "real-development-resource-id-denominator-accounting"
   ],
   "d2_closeout_allowed": false,
-  "governance_gate_issue": 120,
+  "governance_gate_issue": 126,
   "later_stages_activated": false,
   "research_contract_issue": 115,
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "sealed_final_role": {
     "access": "sealed-and-forbidden-to-d2",
     "patients": 40,
@@ -68,6 +107,27 @@
   },
   "specgrain_id": "SG-000026",
   "stage": "D2",
-  "state": "option-a-authorized-custodian-pending-canonicalization",
-  "study_id": "study1"
+  "state": "direct-id-proven-query-trace-governance-blocked",
+  "study_id": "study1",
+  "recovery_governance_gate_issue": 120,
+  "real_direct_id_evidence": {
+    "source_main_sha": "8eee15506a48dd03428363d8b5e7234d50f4a960",
+    "workflow_run": 37088504254,
+    "artifact_id": 11261144886,
+    "artifact_digest": "sha256:79df7e0f4efb73119e174d3a1a7475b71c1f77ee102f4ef6df078e43c8e28f10",
+    "report_path": "registry/study1_sg000026_real_direct_id_qualification.json",
+    "report_sha256": "d9c6187b205c7406ef61843835f0b792b763be250972c47e5c704eae686a74ad",
+    "receipt_path": "registry/study1_sg000026_real_direct_id_execution_receipt.json",
+    "receipt_sha256": "73d762283f7a7111a3bb0304bb130f510f4af336e455af890f96b9683443c2ea",
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "requested_reference_count": 21527,
+    "resolved_reference_count": 21527,
+    "exact_match_rows": 1087,
+    "mismatch_rows": 0,
+    "missing_reference_count": 0,
+    "runtime_parse_failure_count": 0,
+    "sealed_final_rows_accessed": false,
+    "query_trace_coverage": "blocked-unavailable-from-authorized-projection"
+  }
 }

@@ -207,13 +207,15 @@ D2 baseline qualification is now activated separately as **SG-000026** under Iss
 
 **Baseline qualification and local FHIR compatibility**
 
-Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Recovery governance gate: Issue #120.
+Research contract: Issue #115. Contract artifact: `registry/study1_sg000026_contract.json`. Option A recovery gate: Issue #120. Current query-trace governance gate: Issue #126.
 
-State: **ACTIVE — OPTION_A_AUTHORIZED / CUSTODIAN_PENDING_CANONICALIZATION**
+State: **ACTIVE — REAL_DIRECT_ID_PROVEN / QUERY_TRACE_GOVERNANCE_BLOCKED**
 
-Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), the B0/B1/B2 semantic and exact denominator-accounting kernel (PR #117, merge `0cfc2db`), the synthetic read-only FHIR compatibility kernel and sealed-role firewall (PR #118, merge `5ea436e`), and the zero-cost MIMIC-IV FHIR Demo v2.1.0 runtime/checksum manifest (PR #119, merge `aa59981`). Each grain was exact-head qualified before normal merge and post-main verified.
+Canonical D2 grains now include activation (PR #116, merge `e4b9e22`), B0/B1/B2 semantics/accounting (PR #117, merge `0cfc2db`), the synthetic FHIR compatibility/firewall kernel (PR #118, merge `5ea436e`), the zero-cost runtime identity (PR #119, merge `aa59981`), the founder-authorized blind development custodian and transport repair (PRs #122–#123, merges `654e76f8` and `e1db1efe`), and real direct-ID qualification plus transport/provenance repair (PRs #124–#125, merges `3f6048dc` and `8eee1550`).
 
-The remaining D2 blocker is real FHIR-AgentBench qualification on the governed 341-row calibration + 1122-row validation projection. Canonical DAL artifacts intentionally do not serialize a development-only row projection or patient-role membership map, while the frozen public source CSV also contains the sealed 40-patient / 173-row final role. Reconstructing the development projection therefore requires an explicit governance decision under Issue #120; no metadata-only custodian exception, protocol amendment, or final-role access is authorized yet.
+Main-only run `37088504254` proved the governed development direct-ID surface: 341 calibration + 1122 validation rows, 21,527/21,527 expected references resolved, 1,087/1,087 rows with expected IDs exact, zero missing references, zero mismatches, and zero runtime parse failures. `sealed_final_rows_accessed=false`; no model selection or training occurred. Durable evidence is `registry/study1_sg000026_real_direct_id_qualification.json` plus its execution receipt.
+
+D2 is not closed. The founder-authorized projection contains SQL `proc_query` and expected resource IDs but no development question text or benchmark-agent tool-call traces. Because upstream FHIR query strings are generated dynamically, the preregistered requirement to exercise every query/search pattern observed on governed non-test roles remains blocked. Issue #126 is a decision-only governance gate for a possible development-only query-trace recovery path; no new data boundary is authorized yet.
 
 D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden to D2.
 
