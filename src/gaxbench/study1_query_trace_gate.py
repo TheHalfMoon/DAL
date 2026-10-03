@@ -18,8 +18,8 @@ from gaxbench.fhir import validate_fhir_resource
 from gaxbench.provenance import canonical_json_sha256
 from gaxbench.schema import StrictModel
 from gaxbench.study1_fhir_compat import (
-    D2FHIRLocalStore,
     FHIR_AGENTBENCH_SUPPORTED_RESOURCE_TYPES,
+    D2FHIRLocalStore,
     parse_relative_fhir_get,
 )
 from gaxbench.study1_fhir_runtime import (
