@@ -217,7 +217,19 @@ Main-only run `37088504254` proved the governed development direct-ID surface: 3
 
 D2 is closed canonically by `registry/study1_sg000026_closeout.json` on model-independent evidence only. B0/B1/B2 matched-input semantics, failure-aware denominator accounting, deterministic local FHIR mechanics, real development direct-ID resource equivalence, sealed-final firewalling, negative/unsupported retention, and zero-cost reproducibility are proven. The founder-authorized Issue #128 amendment preserves the model-dependent observed query/search-pattern criterion as an immediate mandatory post-D3/pre-D4 gate. D4 remains blocked until every observed normalized pattern from the prospectively frozen D3 model/agent identity is supported or recorded as behavior-changing blocking evidence; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces remain invalid substitutes.
 
-D3 architecture candidates, D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The next permissible action is a separate governed D3 activation grain. The sealed final role remains untouched and forbidden before D9.
+D3 activation now proceeds separately as SG-000027 under Issue #132. D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden before D9.
+
+## Active frontier - Study 1, SG-000027 / D3
+
+**Architecture candidates**
+
+Research contract: Issue #132. Contract artifact: `registry/study1_sg000027_contract.json`. Canonical prerequisite: SG-000026 closeout merge `07ad6a3f0af0f5a460cd469e029b26274f1a7416`, with post-main GAXBench `37135893667` and Manuscript `37135893641` SUCCESS.
+
+State: **ACTIVE - GOVERNANCE_ONLY / CANDIDATE_FAMILY_NOT_YET_FROZEN**
+
+This activation grain does not select a model, tokenizer, or FHIR agent strategy. D3 may define a bounded candidate family, verify zero-cost/license/provenance/contamination-risk constraints, and prospectively freeze exact trace-producing model/tokenizer/agent identities in a later D3 grain. The 40-patient / 173-row final role remains sealed.
+
+The founder-authorized Issue #128 stage-order amendment remains binding: immediately after the D3 trace-producing identity is prospectively frozen, the blind development-only custodian must qualify every observed normalized calibration/validation FHIR query/search pattern before D4. D4 and all training remain blocked until that gate passes.
 
 ## Core P08 invariants
 

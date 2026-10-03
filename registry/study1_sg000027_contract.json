@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.1",
+  "grain": "SG-000027",
+  "study_stage": "D3",
+  "title": "Architecture-candidate activation",
+  "status": "active-governance-only",
+  "research_contract_issue": 132,
+  "canonical_dependency": {
+    "sg000026_closeout_merge": "07ad6a3f0af0f5a460cd469e029b26274f1a7416",
+    "sg000026_closeout_path": "registry/study1_sg000026_closeout.json",
+    "sg000026_closeout_lf_sha256": "1e4702687e40f59c98be4972c6458e133c30f16508d86df0873ab679072d666f",
+    "post_main_gaxbench_run": 37135893667,
+    "post_main_manuscript_run": 37135893641,
+    "protocol_path": "registry/study1_preregistered_protocol_2026-10-02.json",
+    "protocol_sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192",
+    "stage_order_amendment_path": "registry/study1_sg000026_stage_order_amendment.json",
+    "stage_order_amendment_sha256": "49adbe6972c20aa54346480cb08dee8ab03e41ab214424ebee361793c26a28e5",
+    "stage_order_authorization_issue": 128,
+    "stage_order_authorization_comment_id": 5970595978
+  },
+  "activation_grain_effects": {
+    "d3_activated": true,
+    "candidate_family_defined": false,
+    "base_model_selected": false,
+    "tokenizer_selected": false,
+    "fhir_agent_strategy_selected": false,
+    "query_trace_gate_executed": false,
+    "d4_activated": false,
+    "training_performed": false,
+    "final_role_accessed": false
+  },
+  "scope": {
+    "allowed_after_activation": [
+      "define a bounded candidate family for assurance scoring and evidence features",
+      "inventory eligible open-weight or otherwise fully zero-founder-cost locally runnable base-model candidates",
+      "verify exact model and tokenizer revisions, licenses, release dates, provenance, and known benchmark exposure",
+      "verify founder-zero-cost inference and compute paths",
+      "prospectively freeze exact base-model, tokenizer, and FHIR-agent-strategy identities before post-D3 query-trace qualification",
+      "retain every candidate attempt, rejection, and negative result",
+      "produce the frozen trace-producing system identity required by the mandatory post-D3/pre-D4 query-trace gate"
+    ],
+    "forbidden": [
+      "sealed-final question text, traces, true_answer, proc_query, true_fhir_ids, model outputs, labels, or supervision access",
+      "training or fine-tuning",
+      "objective fitting or checkpoint selection",
+      "calibration-function or threshold fitting",
+      "D4-D10 activation",
+      "performance-driven model or agent switching after the prospective D3 trace-producing identity freeze",
+      "using post-D3 query-trace outcomes to select a different trace-producing model or agent strategy",
+      "paid APIs, paid compute, paid cloud, paid datasets, or paid reviewers"
+    ]
+  },
+  "candidate_requirements": [
+    "open-weight or otherwise fully zero-cost locally runnable",
+    "license compatible with research release and reproducibility",
+    "founder-zero-cost inference path exists",
+    "exact model and tokenizer revisions can be frozen",
+    "release date and known benchmark exposure are recorded",
+    "fits the compute envelope or has a validated quantized CPU or otherwise zero-founder-cost execution path"
+  ],
+  "compute_policy": {
+    "default_dense_parameter_envelope": "approximately <=4B",
+    "larger_candidate_rule": "eligible only if D3 proves another reproducible zero-founder-cost path",
+    "closed_paid_models": "ineligible as mandatory Study 1 systems"
+  },
+  "sealed_final_firewall": {
+    "test_patients": 40,
+    "test_rows": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "access": "sealed",
+    "d3_use": "forbidden"
+  },
+  "d3_exit_criteria": [
+    "candidate family is bounded and mechanically recorded",
+    "exact eligible model and tokenizer revisions and provenance are bound",
+    "FHIR agent strategy is prospectively frozen",
+    "compute, license, release-date, and contamination-risk evidence is recorded",
+    "every rejected or blocked candidate remains visible as negative evidence",
+    "sealed-final non-access is mechanically asserted",
+    "one prospectively frozen trace-producing base-model plus FHIR-agent-strategy identity exists for the mandatory immediate post-D3/pre-D4 query-trace gate",
+    "no D4 training or objective fitting occurred"
+  ],
+  "mandatory_post_d3_pre_d4_gate": {
+    "status": "required-not-yet-executed",
+    "roles": [
+      "calibration",
+      "validation"
+    ],
+    "custodian": "founder-authorized blind development-only query-trace custodian from Issue #126",
+    "required_result": "every observed normalized FHIR query/search pattern is exercised and either supported or recorded as a behavior-changing blocker",
+    "invalid_substitutes": [
+      "SQL proc_query",
+      "expected resource IDs",
+      "static source inspection",
+      "invented traces"
+    ],
+    "d4_blocked_until_pass": true
+  },
+  "activation_grain_boundary": {
+    "selects_or_freezes_model": false,
+    "selects_or_freezes_agent_strategy": false,
+    "runs_query_trace_custodian": false,
+    "activates_training": false,
+    "authorizes_final_access": false
+  },
+  "qualification": {
+    "gaxbench": "Linux/Windows Python 3.11/3.12 exact-head",
+    "alibaba_opencodereview": "required",
+    "typesafe_jev": "required",
+    "manuscript": "required",
+    "merge": "normal merge with expected-head guard",
+    "post_main": "required",
+    "not_evidence": [
+      "Cubic",
+      "Qodo",
+      "CodeRabbit"
+    ]
+  }
+}
