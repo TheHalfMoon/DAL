@@ -54,7 +54,7 @@ def test_agent_strategy_is_frozen_but_trace_producer_is_not() -> None:
     assert freeze["post_d3_pre_d4_query_trace_gate_may_run"] is False
     assert frontier["trace_producing_system_frozen"] is False
     assert frontier["query_trace_gate_status"] == (
-        "blocked-until-base-model-and-tokenizer-are-prospectively-frozen"
+        "blocked-until-trace-producer-identity-is-frozen"
     )
 
 

@@ -350,7 +350,8 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 
 - [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
 - [x] Freeze the D3 FHIR agent strategy prospectively to frozen-upstream `single_turn_request` without using development outcomes
-- [ ] Qualify the bounded base-model family on zero-cost CPU smoke criteria only; contract/runner is `registry/study1_sg000027_cpu_smoke_contract.json` + `.github/workflows/study1-sg000027-cpu-smoke.yml`; do not use FHIR QA correctness or final-role data
+- [x] Run the preregistered zero-cost CPU smoke on canonical main ? run `37140291946`, artifact `11280346690`; evidence complete but Qwen result is `blocked-behavior-changing` with zero parsed tool calls; no model/tokenizer freeze
+- [ ] Diagnose the Qwen blocker with a synthetic-only raw OpenAI-compatible response vs frozen `safe_llm_call` parsed-response comparison; do not use benchmark development/final data
 - [ ] Prospectively freeze one base-model + tokenizer identity using preregistered non-final, non-query-trace-outcome criteria
 - [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
 - [ ] D4 remains blocked until the observed query/search-pattern gate passes

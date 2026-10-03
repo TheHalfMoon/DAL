@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "evidence_kind": "zero-cost-cpu-smoke-blocker",
+  "source_canonical_main": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+  "workflow_run": 37140291946,
+  "workflow_conclusion": "success-evidence-complete",
+  "artifact": {
+    "id": 11280346690,
+    "name": "sg000027-d3-cpu-smoke-5fbf4f30788688014cf29ef9d238a93af2d706fc",
+    "digest": "sha256:40ffcbcb2366fa0a6381ab48abafe7b9a7c957021a3b4be523af2b5fe29054f9",
+    "size_bytes": 1435
+  },
+  "persisted_files": {
+    "qualification": {
+      "path": "registry/study1_sg000027_cpu_smoke_qualification.json",
+      "sha256": "7bc58c01039923edb534db30d0fbfd870ded2f1015ff64aebdd9cf6b49092a0a"
+    },
+    "execution_receipt": {
+      "path": "registry/study1_sg000027_cpu_smoke_execution_receipt.json",
+      "sha256": "d84e06c511e0e391ea2233fe0ef5fa15ebb3e40bfca9e69caa0149026dbdc4a4"
+    },
+    "provider_preflight": {
+      "path": "registry/study1_sg000027_cpu_smoke_provider_preflight.json",
+      "sha256": "61218fd37e2a75a61af7f74700d629ce30804cfd8400e3f7ce7fb87f8374be7a"
+    }
+  },
+  "provider_preflight": {
+    "phi4-mini-instruct": "blocked-unrecognized-provider",
+    "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+    "smollm3-3b": "blocked-unrecognized-provider"
+  },
+  "qwen_smoke_result": {
+    "status": "blocked-behavior-changing",
+    "error": null,
+    "tool_call_count": 0,
+    "tool_name": null,
+    "query_string": null,
+    "prompt_tokens": 208,
+    "completion_tokens": 33,
+    "total_tokens": 241,
+    "cost": 0.0
+  },
+  "execution_identity": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
+  },
+  "diagnosis": {
+    "causal_status": "undetermined",
+    "known": "The exact Qwen artifact loaded successfully, the pinned local server became healthy, and frozen safe_llm_call completed without API error but exposed zero parsed tool calls for the synthetic required-tool case.",
+    "not_yet_distinguishable": [
+      "model emitted no tool-call representation",
+      "OpenAI-compatible server emitted a structured tool call that frozen Qwen-specific text parsing did not preserve",
+      "another transport/parser representation mismatch inside the frozen safe_llm_call path"
+    ],
+    "static_source_risk": "Frozen safe_llm_call reparses Qwen output from message.content through qwen_parse_tool_calls; the current evidence did not persist the raw pre-reparse response, so this is a plausible mechanism rather than a causal finding.",
+    "required_next_evidence": "synthetic-only dual-view diagnostic that records the raw local OpenAI-compatible response and the frozen safe_llm_call parsed response without benchmark development or final data"
+  },
+  "governance_effects": {
+    "base_model_frozen": false,
+    "tokenizer_frozen": false,
+    "trace_producing_system_frozen": false,
+    "query_trace_gate_ready": false,
+    "d4_allowed": false,
+    "training_allowed": false,
+    "final_role_accessed": false,
+    "development_benchmark_outcomes_used": false
+  }
+}

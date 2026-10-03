@@ -1,0 +1,15 @@
+{
+  "canonical_main_sha": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+  "development_or_final_data_accessed": false,
+  "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+  "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+  "qwen_gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+  "schema_version": "0.1",
+  "selection_performed": false,
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "study_id": "study1",
+  "synthetic_inputs_only": true,
+  "training_performed": false,
+  "zero_founder_cost": true
+}

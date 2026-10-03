@@ -1,0 +1,5 @@
+{
+  "phi4-mini-instruct": "blocked-unrecognized-provider",
+  "qwen3-4b-instruct-2507": "eligible-qwen-provider",
+  "smollm3-3b": "blocked-unrecognized-provider"
+}

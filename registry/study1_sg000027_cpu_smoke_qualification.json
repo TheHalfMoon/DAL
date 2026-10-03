@@ -1,0 +1,29 @@
+{
+  "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "canonical_main_sha": "5fbf4f30788688014cf29ef9d238a93af2d706fc",
+  "development_or_final_data_accessed": false,
+  "error": null,
+  "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+  "gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+  "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+  "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "query_string": null,
+  "schema_version": "0.1",
+  "selection_performed": false,
+  "specgrain_id": "SG-000027",
+  "stage": "D3",
+  "status": "blocked-behavior-changing",
+  "study_id": "study1",
+  "synthetic_case_id": "DAL-SMOKE-0001",
+  "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "tool_call_count": 0,
+  "tool_name": null,
+  "training_performed": false,
+  "usage": {
+    "completion_tokens": 33,
+    "cost": 0.0,
+    "prompt_tokens": 208,
+    "total_tokens": 241
+  },
+  "zero_founder_cost": true
+}
