@@ -11,6 +11,7 @@
     "d3_post_main_gaxbench_run": 37145288600,
     "d3_post_main_manuscript_run": 37145288944,
     "trace_producer_freeze_path": "registry/study1_sg000027_trace_producer_freeze.json",
+    "trace_producer_provenance_correction_path": "registry/study1_sg000028_trace_producer_provenance_correction.json",
     "query_trace_authorization_issue": 126,
     "query_trace_authorization_comment_id": 5970310150,
     "stage_order_authorization_issue": 128,
@@ -18,10 +19,7 @@
   },
   "state_after_canonical_merge": "active-main-only-query-trace-execution",
   "development_roles": {
-    "allowed": [
-      "calibration",
-      "validation"
-    ],
+    "allowed": ["calibration", "validation"],
     "calibration_rows": 341,
     "validation_rows": 1122,
     "development_rows": 1463,
@@ -48,9 +46,9 @@
     "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
     "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
     "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
-    "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
-    "patched_core_utils_blob_sha": "e43534f7396585515f76cf6a1da1134977990e7a",
-    "patched_core_utils_sha256": "4cc31a6beb485870814fed47c5670d85a0dc37444617e26152c73ad4fedbc7ef",
+    "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
+    "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+    "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
     "agent_strategy": "single_turn_request",
     "context_tokens": 4096,
     "temperature": 0.0
@@ -112,10 +110,6 @@
     "manuscript": "required",
     "merge": "normal merge with expected-head guard",
     "post_main": "required",
-    "not_evidence": [
-      "Cubic",
-      "Qodo",
-      "CodeRabbit"
-    ]
+    "not_evidence": ["Cubic", "Qodo", "CodeRabbit"]
   }
 }

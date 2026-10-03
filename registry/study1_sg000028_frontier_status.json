@@ -1,18 +1,25 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "study_id": "study1",
   "specgrain_id": "SG-000028",
   "stage": "post-D3-pre-D4",
-  "state": "activation-pending-canonical-main-only-query-trace-execution",
+  "state": "blocked-pre-data-trace-producer-provenance-repair-pending-canonical-merge",
   "research_contract_issue": 141,
   "contract_path": "registry/study1_sg000028_contract.json",
   "canonical_dependency": {
     "d3_closeout_merge": "13ac5bc7412fe38cdd575c3e621ad4c09ebd776a",
     "d3_post_main_gaxbench_run": 37145288600,
-    "d3_post_main_manuscript_run": 37145288944
+    "d3_post_main_manuscript_run": 37145288944,
+    "sg000028_activation_merge": "423d4c58f835692ebef7c217e84490d59a8443de",
+    "blocked_main_only_run": 37150279061,
+    "trace_producer_provenance_correction_path": "registry/study1_sg000028_trace_producer_provenance_correction.json"
   },
   "trace_producing_system_frozen": true,
-  "query_trace_gate_status": "activation-pending",
+  "trace_producer_semantics_changed_by_correction": false,
+  "query_trace_gate_status": "blocked-pre-data-provenance-mismatch",
+  "query_trace_evidence_generated": false,
+  "development_data_accessed_by_blocked_run": false,
+  "final_data_accessed_by_blocked_run": false,
   "main_only_execution_required": true,
   "d4_activation_allowed": false,
   "training_allowed": false,
@@ -34,5 +41,5 @@
   "d7_model_selection_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "qualify-and-merge-SG-000028-activation-runner-then-execute-main-only-gate"
+  "next_governed_action": "qualify-and-merge-provenance-only-correction-then-rerun-canonical-main-only-query-trace-gate"
 }
