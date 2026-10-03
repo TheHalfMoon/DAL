@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "study_id": "study1",
   "specgrain_id": "SG-000027",
   "stage": "D3",
-  "state": "active-governance-only",
+  "state": "candidate-family-bounded-agent-strategy-frozen-model-not-yet-frozen",
   "research_contract_issue": 132,
   "contract_path": "registry/study1_sg000027_contract.json",
   "canonical_dependency": {
@@ -11,10 +11,10 @@
     "post_main_gaxbench_run": 37135893667,
     "post_main_manuscript_run": 37135893641
   },
-  "current_capability": "bounded-architecture-candidate-definition-and-prospective-trace-producer-freeze",
-  "candidate_family_defined": false,
+  "current_capability": "zero-cost-cpu-smoke-and-prospective-base-model-tokenizer-freeze",
+  "candidate_family_defined": true,
   "trace_producing_system_frozen": false,
-  "query_trace_gate_status": "required-after-d3-freeze-before-d4",
+  "query_trace_gate_status": "blocked-until-base-model-and-tokenizer-are-prospectively-frozen",
   "d4_activation_allowed": false,
   "training_allowed": false,
   "later_stages_activated": false,
@@ -27,5 +27,13 @@
   "training_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "bounded-D3-candidate-family-and-trace-producer-freeze-grain"
+  "next_governed_action": "zero-cost-cpu-smoke-and-prospective-base-model-tokenizer-freeze-grain",
+  "candidate_inventory_path": "registry/study1_sg000027_candidate_inventory.json",
+  "bounded_base_model_candidate_ids": [
+    "phi4-mini-instruct",
+    "qwen3-4b-instruct-2507",
+    "smollm3-3b"
+  ],
+  "fhir_agent_strategy_frozen": true,
+  "fhir_agent_strategy": "single_turn_request"
 }
