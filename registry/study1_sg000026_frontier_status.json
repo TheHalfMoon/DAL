@@ -5,12 +5,12 @@
     "option": "option-a-blind-metadata-only-custodian",
     "scope": "minimum cross-role metadata for frozen role reconstruction; development-only projection output; no final supervision/content exposure"
   },
-  "blocked_capability": "observed-development-query-trace-coverage",
+  "blocked_capability": "model-dependent-observed-development-query-trace-coverage",
   "blocked_development_rows": {
     "calibration": 341,
     "validation": 1122
   },
-  "blocker_reason": "Real development direct-ID resource equivalence is proven, but the founder-authorized Option A projection contains no development question text or benchmark agent tool-call traces. The preregistered observed-query-pattern criterion therefore remains blocked pending a separate founder decision under Issue #126; proc_query is SQL and is not reinterpreted as FHIR GET evidence.",
+  "blocker_reason": "Issue #126 Option A is founder-authorized, but the frozen FHIR-AgentBench direct-request trace is produced by an explicit LLM model and agent strategy. SG-000026 simultaneously forbids model selection and keeps D3 inactive, so no trace-producer identity can be frozen truthfully inside D2 without a separate protocol/stage-order decision. Issue #128 is the decision-only gate; proc_query SQL, expected resource IDs, and invented traces remain invalid substitutes.",
   "canonical_frontier_sha": "8eee15506a48dd03428363d8b5e7234d50f4a960",
   "canonical_grains": [
     {
@@ -93,13 +93,14 @@
     "zero-cost-fhir-runtime-source-and-checksum-identity",
     "founder-authorized-development-only-fhir-projection",
     "real-development-direct-id-resource-equivalence",
-    "real-development-resource-id-denominator-accounting"
+    "real-development-resource-id-denominator-accounting",
+    "founder-authorized-development-only-query-trace-recovery-boundary"
   ],
   "d2_closeout_allowed": false,
-  "governance_gate_issue": 126,
+  "governance_gate_issue": 128,
   "later_stages_activated": false,
   "research_contract_issue": 115,
-  "schema_version": "0.3",
+  "schema_version": "0.4",
   "sealed_final_role": {
     "access": "sealed-and-forbidden-to-d2",
     "patients": 40,
@@ -107,7 +108,7 @@
   },
   "specgrain_id": "SG-000026",
   "stage": "D2",
-  "state": "direct-id-proven-query-trace-governance-blocked",
+  "state": "direct-id-proven-query-trace-producer-governance-blocked",
   "study_id": "study1",
   "recovery_governance_gate_issue": 120,
   "real_direct_id_evidence": {
@@ -129,5 +130,13 @@
     "runtime_parse_failure_count": 0,
     "sealed_final_rows_accessed": false,
     "query_trace_coverage": "blocked-unavailable-from-authorized-projection"
-  }
+  },
+  "query_trace_recovery_authorization": {
+    "authorization_issue": 126,
+    "authorization_comment_id": 5970310150,
+    "option": "option-a-blind-development-only-query-trace-custodian",
+    "authorized": true,
+    "scope": "development-only minimum input may be used ephemerally to generate normalized query-pattern evidence; no final-role content or trace access"
+  },
+  "query_trace_recovery_gate_issue": 126
 }

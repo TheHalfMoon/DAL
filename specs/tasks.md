@@ -311,9 +311,9 @@ Research contract: Issue #107. Canonical dependency: `4e6ed79aebffce10d812bf6871
 - [x] Preregistered Study 1 protocol with sealed final split - `registry/study1_preregistered_protocol_2026-10-02.json`; PR #113 merged `535efada86f7c5863b6eeda18b76d17a78e36b4e`; post-main GAXBench `37065781852` and Manuscript `37065781811` SUCCESS; final-test access remains `sealed`
 - [x] Canonical SG-000025 closeout (this closeout PR; evidence record `registry/study1_sg000025_closeout.json`)
 
-### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — REAL_DIRECT_ID_PROVEN / QUERY_TRACE_GOVERNANCE_BLOCKED)
+### SG-000026 — D2 baseline qualification and local FHIR compatibility (ACTIVE — REAL_DIRECT_ID_PROVEN / QUERY_TRACE_PRODUCER_GOVERNANCE_BLOCKED)
 
-Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. Option A recovery gate: Issue #120. Query-trace governance gate: Issue #126.
+Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b352eaaa0ccdc167`. Option A projection recovery gate: Issue #120. Query-trace recovery authorization: Issue #126, founder comment `5970310150`. Current trace-producer stage-order gate: Issue #128.
 
 - [x] Create research contract Issue #115
 - [x] Founder-authorize Option A blind metadata-only custodian under Issue #120 — comment 5963555775
@@ -327,7 +327,10 @@ Research contract: Issue #115. Canonical dependency: `16682ea9dff2f3ccfb0ed818b3
 - [x] Pin and offline-verify the zero-cost MIMIC-IV Clinical Database Demo on FHIR v2.1.0 runtime identity — PR #119 merge `aa59981`
 - [x] Qualify real direct-ID FHIR retrieval on the governed 341 calibration + 1122 validation rows without sealed-test supervision — run `37088504254` SUCCESS; 21,527/21,527 references resolved; zero mismatch/missing/parse failures
 - [x] Persist real development direct-ID resource-equivalence evidence and exact provenance (`study1_sg000026_real_direct_id_qualification.json`, execution receipt)
-- [ ] Prove observed governed query/search-pattern coverage - **BLOCKED_AT_GOVERNANCE_GATE #126**; current Option A projection has no development question text or agent tool-call traces, and SQL `proc_query` is not FHIR GET evidence
+- [x] Founder-authorize the blind development-only query-trace recovery boundary under Issue #126 - comment `5970310150`; no D3 activation or model selection authorized
+- [x] Verify from frozen upstream source that direct-request query traces are model/strategy dependent; record governance evidence in `registry/study1_sg000026_query_trace_governance.json` without accessing development question text or final-role content
+- [ ] Resolve trace-producer/stage-order conflict - **BLOCKED_AT_GOVERNANCE_GATE #128**; D2 requires observed query-pattern coverage while model selection remains forbidden
+- [ ] Prove observed governed query/search-pattern coverage - remains required; SQL `proc_query`, expected resource IDs, static source inspection, and invented traces are not acceptable substitutes
 - [ ] Canonical SG-000026 / D2 closeout
 
 ### Later Study 1 stages (not activated)
