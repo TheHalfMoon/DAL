@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "stage": "post-D3-pre-D4",
+  "grain_kind": "observed-fhir-query-trace-qualification",
+  "research_contract_issue": 141,
+  "activation_dependency": {
+    "d3_closeout_merge": "13ac5bc7412fe38cdd575c3e621ad4c09ebd776a",
+    "d3_closeout_path": "registry/study1_sg000027_closeout.json",
+    "d3_post_main_gaxbench_run": 37145288600,
+    "d3_post_main_manuscript_run": 37145288944,
+    "trace_producer_freeze_path": "registry/study1_sg000027_trace_producer_freeze.json",
+    "query_trace_authorization_issue": 126,
+    "query_trace_authorization_comment_id": 5970310150,
+    "stage_order_authorization_issue": 128,
+    "stage_order_authorization_comment_id": 5970595978
+  },
+  "state_after_canonical_merge": "active-main-only-query-trace-execution",
+  "development_roles": {
+    "allowed": [
+      "calibration",
+      "validation"
+    ],
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "development_rows": 1463,
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15"
+  },
+  "sealed_final_firewall": {
+    "patients": 40,
+    "rows": 173,
+    "role_manifest_sha256": "7065cede39bdfea3db33d025687210f30f26683a38063f7150a807cd89f5e76c",
+    "membership_sha256": "b90e774067d0a0e4251e32584b3aeea9629a01df9201fc550988e70d17dbda15",
+    "test_gold_serialized": false,
+    "question_content_access": "forbidden",
+    "trace_generation": "forbidden",
+    "model_output_access": "forbidden"
+  },
+  "trace_producer": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "quantized_repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+    "quantized_repo_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+    "quantized_file": "qwen3-4b-instruct-2507-q8_0.gguf",
+    "quantized_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+    "transport_patch_sha256": "ef9a990509063187aea13958c37959c5e8fd06adc9a3574455b91693fb0d19da",
+    "patched_core_utils_blob_sha": "e43534f7396585515f76cf6a1da1134977990e7a",
+    "patched_core_utils_sha256": "4cc31a6beb485870814fed47c5670d85a0dc37444617e26152c73ad4fedbc7ef",
+    "agent_strategy": "single_turn_request",
+    "context_tokens": 4096,
+    "temperature": 0.0
+  },
+  "execution": {
+    "workflow_path": ".github/workflows/study1-sg000028-query-trace-gate.yml",
+    "main_only": true,
+    "trace_shards": 8,
+    "shard_rule": "first 64 bits of question_id_sha256 modulo trace_shards",
+    "first_turn_only": true,
+    "second_turn_reasoning": false,
+    "answer_correctness_scored": false,
+    "runtime_manifest_path": "registry/study1_sg000026_fhir_runtime_manifest.json",
+    "zero_founder_cost": true
+  },
+  "normalization": {
+    "raw_question_text_emitted": false,
+    "raw_patient_ids_emitted": false,
+    "raw_query_values_emitted": false,
+    "raw_traces_emitted": false,
+    "question_id_sha256_allowed": true,
+    "normalized_pattern_classes_allowed": true,
+    "reason_codes_allowed": true
+  },
+  "pass_rule": {
+    "required_development_row_accounting": 1463,
+    "every_observed_tool_call_must_be_normalized": true,
+    "every_observed_query_must_be_exercised": true,
+    "no_tool_call_is_blocker": true,
+    "unexpected_tool_is_blocker": true,
+    "malformed_arguments_are_blocker": true,
+    "unsupported_semantics_are_blocker": true,
+    "unresolved_behavior_changing_blockers_allowed_for_pass": false,
+    "d4_allowed_only_after_canonical_pass": true
+  },
+  "invalid_substitutes": [
+    "SQL proc_query",
+    "expected resource IDs",
+    "static source inspection",
+    "invented or templated traces",
+    "synthetic-only smoke evidence",
+    "benchmark answer correctness",
+    "sealed-final behavior"
+  ],
+  "governance": {
+    "d4_activated": false,
+    "training_allowed": false,
+    "fine_tuning_allowed": false,
+    "objective_fitting_allowed": false,
+    "calibration_or_threshold_fitting_allowed": false,
+    "d7_model_selection_performed": false,
+    "final_role_access_allowed": false,
+    "trace_producer_switching_after_gate_outcomes": false
+  },
+  "qualification": {
+    "gaxbench": "Linux/Windows Python 3.11/3.12 exact-head",
+    "alibaba_opencodereview": "required",
+    "typesafe_jev": "required",
+    "manuscript": "required",
+    "merge": "normal merge with expected-head guard",
+    "post_main": "required",
+    "not_evidence": [
+      "Cubic",
+      "Qodo",
+      "CodeRabbit"
+    ]
+  }
+}
