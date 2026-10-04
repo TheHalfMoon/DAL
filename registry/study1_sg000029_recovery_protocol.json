@@ -1,0 +1,234 @@
+{
+  "schema_version": "study1-recovery-protocol-v1",
+  "record_id": "study1-sg000029-recovery-protocol-2026-10-04",
+  "study": "DAL Study 1",
+  "specgrain_id": "SG-000029",
+  "research_contract_issue": 150,
+  "founder_decision_issue": 147,
+  "founder_authorization_comment": 5981658161,
+  "status": "prospective-protocol-draft-for-qualification",
+  "scope": "Governance and protocol qualification only. This artifact does not authorize new inference, training, D4 activation, model switching, or final-role access.",
+  "canonical_parent": {
+    "main_sha": "139056bd74521f5555126f24f3d9a3c43c300a1d",
+    "tree_sha": "dc42bc487936fcf29ba20db26db2cae008ce60af",
+    "original_protocol_path": "registry/study1_preregistered_protocol_2026-10-02.json",
+    "original_protocol_sha256": "d4947d8db42494684bd0c4e67d590f9ef13b52c68e13766faaeb0dcb55cf1192",
+    "sg000028_contract_path": "registry/study1_sg000028_contract.json",
+    "sg000028_execution_path": "registry/study1_sg000028_execution_37156028113.json",
+    "sg000028_investigation_path": "registry/study1_sg000028_blocker_investigation.json",
+    "sg000028_closeout_path": "registry/study1_sg000028_governance_gate_closeout.json",
+    "trace_producer_freeze_path": "registry/study1_sg000027_trace_producer_freeze.json",
+    "trace_producer_provenance_correction_path": "registry/study1_sg000028_trace_producer_provenance_correction.json"
+  },
+  "immutable_original_result": {
+    "scientific_state": "BLOCKED",
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "development_rows": 1463,
+    "pass_rows": 224,
+    "behavior_changing_blocker_rows": 1239,
+    "observed_calls": 1623,
+    "source_pattern_identities": 248,
+    "may_be_relabelled_pass": false,
+    "may_be_omitted_from_publication_record": false
+  },
+  "development_exposure_disclosure": {
+    "calibration_and_validation_are_now_exposed_development": true,
+    "rows": 1463,
+    "blind_development_claim_permitted": false,
+    "independent_confirmation_claim_permitted": false,
+    "known_information": [
+      "SG-000028 row-level structural pass/block classifications",
+      "aggregate blocker taxonomy",
+      "safe normalized source-pattern identities",
+      "bounded investigation class counts"
+    ],
+    "human_or_repository_exposure_of_raw_question_text_by_this_protocol": false,
+    "interpretation": "All recovery engineering and model-development decisions before final evaluation must be described as outcome-exposed development. The sealed final role remains the only governed untouched evaluation role."
+  },
+  "sealed_final_role": {
+    "patients": 40,
+    "rows": 173,
+    "access": "sealed-and-forbidden-before-separately-qualified-D9-authorization",
+    "question_text_access_allowed": false,
+    "trace_access_allowed": false,
+    "labels_or_true_answer_access_allowed": false,
+    "proc_query_access_allowed": false,
+    "true_fhir_ids_access_allowed": false,
+    "outputs_or_supervision_access_allowed": false,
+    "debugging_use_allowed": false,
+    "protocol_design_use_allowed": false,
+    "model_selection_use_allowed": false,
+    "training_use_allowed": false
+  },
+  "recovery_trace_producer_identity": {
+    "identity_policy": "retain-current-frozen-producer-unless-later-founder-authorized-prospective-amendment",
+    "base_model_repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "tokenizer_repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "gguf_repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+    "gguf_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+    "gguf_file": "qwen3-4b-instruct-2507-q8_0.gguf",
+    "gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "agent_strategy": "single_turn_request",
+    "temperature": 0.0,
+    "transport_provenance_source": "registry/study1_sg000028_trace_producer_provenance_correction.json",
+    "model_switch_authorized_by_sg000029": false,
+    "tokenizer_switch_authorized_by_sg000029": false,
+    "prompt_change_authorized_by_sg000029": false,
+    "agent_strategy_change_authorized_by_sg000029": false,
+    "runtime_switch_authorized_by_sg000029": false
+  },
+  "recovery_system_boundary": {
+    "original_request_behavior_preserved_as_historical_evidence": true,
+    "new_recovery_behavior_must_be_versioned_separately": true,
+    "recovery_canonicalizer_is_part_of_new_system_not_old_result": true,
+    "raw_and_recovery_request_identity_must_remain_linked": true,
+    "durable_linkage": "opaque/hash-safe only; raw development question text and raw request literals are not durable artifacts unless separately authorized",
+    "no_silent_reinterpretation": true,
+    "no_favorable_row_omission": true,
+    "no_retry_until_favorable": true,
+    "no_sql_proc_query_substitution": true,
+    "no_expected_resource_id_substitution": true,
+    "no_final_role_debugging": true
+  },
+  "prospective_compatibility_policy": {
+    "r1_manifest_required_before_execution": true,
+    "r1_manifest_must_be_finite_deterministic_versioned": true,
+    "r1_may_use_only_already_persisted_safe_structural_evidence": true,
+    "r1_new_model_inference_allowed": false,
+    "permitted_rule_classes": [
+      {
+        "id": "empty-parameter-handling",
+        "rule": "An empty-valued search parameter may be ignored only when parsing is unambiguous and the recovery manifest explicitly binds the FHIR R4 empty-parameter rule. Non-empty sibling parameters must remain unchanged.",
+        "old_sg000028_classification_changes": false
+      },
+      {
+        "id": "comparison-modifier-to-value-prefix",
+        "rule": "A recognized FHIR comparison token emitted in modifier position may be mapped to the corresponding value prefix only if R1 prospectively freezes the exact token mapping before R2 execution. Every affected request must be labelled recovery-transformed and linked to its original structural identity.",
+        "old_sg000028_classification_changes": false,
+        "acknowledged_behavior_change_in_new_recovery_system": true
+      },
+      {
+        "id": "resource-specific-valid-search-support",
+        "rule": "A valid resource-specific FHIR search parameter may be added to the local compatibility surface only after R1 records resource-specific FHIR R4 semantics and deterministic local-runtime equivalence evidence.",
+        "old_sg000028_classification_changes": false
+      }
+    ],
+    "hard_blocker_classes": [
+      "unknown-or-nonstandard-search-semantics-without-normative-proof",
+      "development-role-target-rejection-requiring-patient-identity-rewrite",
+      "request-requiring-sealed-final-role-expansion",
+      "missing-tool-call-without-prospectively-frozen-rule",
+      "inference-exception-without-prospectively-frozen-rule",
+      "malformed-json-without-prospectively-frozen-rule",
+      "non-relative-get-outside-frozen-contract-without-prospectively-frozen-rule"
+    ],
+    "patient_identity_rewrite_allowed": false,
+    "sealed_final_role_expansion_allowed": false,
+    "unknown_semantics_guessing_allowed": false
+  },
+  "stage_order": [
+    {
+      "stage": "R0",
+      "specgrain": "SG-000029",
+      "purpose": "Draft, test, review, and canonically qualify this prospective recovery protocol.",
+      "new_inference_allowed": false,
+      "training_allowed": false,
+      "final_role_access_allowed": false
+    },
+    {
+      "stage": "R1",
+      "purpose": "Build and exact-head qualify a finite recovery compatibility/canonicalization manifest and implementation using only already-persisted safe structural evidence.",
+      "new_inference_allowed": false,
+      "requires_separate_grain": true,
+      "exit_requirement": "The exact transformation/support manifest and implementation are canonical before any R2 execution authorization."
+    },
+    {
+      "stage": "R2",
+      "purpose": "Main-only recovery query-trace qualification on all 1463 exposed-development rows under the exact frozen recovery identity and canonical R1 rules.",
+      "requires_new_founder_execution_authorization": true,
+      "authorized_by_sg000029": false,
+      "exit_gate": {
+        "development_rows_accounted": 1463,
+        "unresolved_behavior_changing_blockers": 0,
+        "final_rows_materialized": 0,
+        "final_question_content_accessed": false,
+        "row_omission_allowed": false,
+        "workflow_success_alone_sufficient": false,
+        "complete_transformation_audit_required": true
+      }
+    },
+    {
+      "stage": "D4",
+      "purpose": "Training/objective experiments under the recovery program.",
+      "requires_r2_canonical_pass": true,
+      "requires_separate_governed_activation": true,
+      "authorized_by_sg000029": false
+    },
+    {
+      "stage": "D5-D8",
+      "purpose": "Calibration/assurance development, ablations, model selection, and complete pre-final protocol freeze.",
+      "requires_separate_governed_grains": true,
+      "final_role_access_allowed": false
+    },
+    {
+      "stage": "D9",
+      "purpose": "Untouched final evaluation on the frozen 40-patient / 173-row role.",
+      "requires_separate_final_evaluation_authorization": true,
+      "authorized_by_sg000029": false
+    },
+    {
+      "stage": "D10",
+      "purpose": "Evidence, manuscript, and publication packaging after final evaluation.",
+      "requires_separate_governed_closeout": true
+    }
+  ],
+  "r2_reporting_requirements": {
+    "all_rows_accounted": true,
+    "original_sg000028_result_reported_alongside_recovery_result": true,
+    "recovery_transformed_rows_reported_separately": true,
+    "untransformed_pass_rows_reported_separately": true,
+    "hard_blocker_rows_reported_separately": true,
+    "unique_original_pattern_identities_preserved": true,
+    "new_observed_pattern_identities_preserved": true,
+    "final_firewall_proof_required": true,
+    "raw_question_text_durable_artifact_allowed": false,
+    "answer_correctness_scored": false,
+    "second_turn_reasoning_allowed": false
+  },
+  "governance": {
+    "zero_founder_cost": true,
+    "alibaba_open_code_review_required": true,
+    "alibaba_tool": "alibaba/open-code-review@v1.12.9",
+    "typesafe_jev_exact_diff_required": true,
+    "gaxbench_linux_windows_python_311_312_required": true,
+    "dal_manuscript_required": true,
+    "zero_unresolved_active_review_threads_required": true,
+    "normal_merge_only": true,
+    "expected_head_guard_required": true,
+    "post_main_gaxbench_required": true,
+    "post_main_manuscript_required": true,
+    "rebase_allowed": false,
+    "force_push_allowed": false
+  },
+  "non_authorizations": {
+    "new_inference": false,
+    "rerun_sg000028": false,
+    "model_switch": false,
+    "model_selection": false,
+    "tokenizer_change": false,
+    "prompt_change": false,
+    "agent_strategy_change": false,
+    "training_or_finetuning": false,
+    "d4_activation": false,
+    "final_role_access": false,
+    "failed_row_omission": false,
+    "gate_waiver": false,
+    "rerun_until_favorable": false
+  },
+  "next_gate_after_protocol_canonicalization": "R1 recovery compatibility/canonicalization manifest and implementation; no new model inference"
+}
