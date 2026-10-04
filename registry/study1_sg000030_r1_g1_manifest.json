@@ -1,0 +1,166 @@
+{
+  "schema_version": "study1-r1-recovery-manifest-v1",
+  "record_id": "study1-sg000030-r1-g1-recovery-manifest-2026-10-04",
+  "study": "DAL Study 1",
+  "specgrain_id": "SG-000030",
+  "grain_id": "SG-000030-R1-G1",
+  "research_issue": 154,
+  "founder_authorization_issue": 153,
+  "founder_authorization_comment": 5982001184,
+  "status": "implementation-grain-for-exact-head-qualification",
+  "canonical_base": "352569f2461815a6dfc5628a6373901178b95dbf",
+  "scope": "Deterministic recovery canonicalizer foundation only. No new inference, R2 execution, training, D4 activation, or final-role access.",
+  "canonical_inputs": {
+    "sg000028_execution_path": "registry/study1_sg000028_execution_37156028113.json",
+    "sg000028_execution_sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+    "sg000028_blocker_investigation_path": "registry/study1_sg000028_blocker_investigation.json",
+    "sg000029_protocol_path": "registry/study1_sg000029_recovery_protocol.json",
+    "sg000029_protocol_git_blob_sha": "60e1f2df4f5fd514ecade416537ecea2565fb36f",
+    "sg000029_frontier_path": "registry/study1_sg000029_frontier_status.json"
+  },
+  "immutable_original_result": {
+    "scientific_state": "BLOCKED",
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "exposed_development_rows": 1463,
+    "pass_rows": 224,
+    "behavior_changing_blocker_rows": 1239,
+    "source_pattern_identities": 248,
+    "opaque_safe_patterns": 39,
+    "may_be_relabelled_pass": false
+  },
+  "source_pattern_inventory_policy": {
+    "inventory_source": "registry/study1_sg000028_execution_37156028113.json#pattern_support_evidence",
+    "expected_exact_pattern_count": 248,
+    "raw_trace_regeneration_allowed": false,
+    "classification_algorithm": "gaxbench.study1_recovery_compat.classify_persisted_source_pattern",
+    "classification_must_cover_every_pattern": true,
+    "call_level_causal_attribution_claimed": false,
+    "finite_dispositions": [
+      "observed-pass-through",
+      "comparison-transform-candidate",
+      "resource-specific-support-pending",
+      "hard-block-opaque-pattern",
+      "hard-block-unproven-semantics",
+      "hard-block-role-firewall",
+      "hard-block-inference-or-shape",
+      "hard-block-unattributed"
+    ]
+  },
+  "canonicalizer": {
+    "module": "src/gaxbench/study1_recovery_compat.py",
+    "rule_version": "sg000030-r1-g1-v1",
+    "relative_get_only": true,
+    "parameter_order_policy": "preserve-input-order-after-authorized-transformations",
+    "unknown_semantics_policy": "fail-closed",
+    "blocked_request_canonical_query_emitted": false,
+    "original_request_linkage": "sha256-only",
+    "durable_raw_original_request_allowed": false
+  },
+  "permitted_rule_classes": [
+    {
+      "id": "empty-parameter-handling",
+      "behavior": "Drop an unambiguously parsed query pair only when its decoded value is empty. Preserve every non-empty sibling unchanged.",
+      "historical_sg000028_classification_changes": false,
+      "recovery_transformed_label_required": true,
+      "normative_reference": {
+        "url": "https://hl7.org/fhir/R4/search.html",
+        "page_sha256": "7db9490e5723cf44a6c998471f229575d7a00d76db52ee2684014049f8e0524d",
+        "rule": "Empty parameters are not an error - they are just ignored by the server."
+      }
+    },
+    {
+      "id": "comparison-modifier-to-value-prefix",
+      "behavior": "Map only the frozen recognized date modifier tokens to FHIR value prefixes. Fail closed if the value already carries a recognized comparison prefix.",
+      "historical_sg000028_classification_changes": false,
+      "recovery_transformed_label_required": true,
+      "acknowledged_behavior_change_in_new_recovery_system": true,
+      "exact_mappings": {
+        "date:gt": {"parameter": "date", "value_prefix": "gt"},
+        "date:gte": {"parameter": "date", "value_prefix": "ge"},
+        "date:lt": {"parameter": "date", "value_prefix": "lt"},
+        "date:lte": {"parameter": "date", "value_prefix": "le"}
+      },
+      "normative_reference": {
+        "url": "https://hl7.org/fhir/R4/search.html",
+        "page_sha256": "7db9490e5723cf44a6c998471f229575d7a00d76db52ee2684014049f8e0524d",
+        "permitted_prefixes_used_here": ["gt", "ge", "lt", "le"]
+      }
+    }
+  ],
+  "g1_qualified_pass_through_parameters": {
+    "names": ["_count", "_id", "id", "patient"],
+    "basis": "Existing canonical D2 local compatibility surface only; this grain does not broaden resource-specific semantics.",
+    "patient_resource_types": [
+      "Condition",
+      "Encounter",
+      "MedicationAdministration",
+      "MedicationRequest",
+      "Observation",
+      "Procedure",
+      "Specimen"
+    ]
+  },
+  "resource_specific_support": {
+    "new_support_claimed_by_g1": false,
+    "pending_parameters_include": [
+      "_include",
+      "_sort",
+      "category",
+      "code",
+      "date",
+      "encounter",
+      "specimen",
+      "status",
+      "type"
+    ],
+    "qualification_requirement": "A later R1 grain must bind resource-specific FHIR R4 semantics and deterministic local-runtime equivalence before any such parameter becomes executable."
+  },
+  "hard_blocker_policy": {
+    "opaque_pattern": "hard-block",
+    "opaque_or_unproven_reason": "hard-block",
+    "role_firewall_target_rejection": "hard-block",
+    "missing_tool_call": "hard-block",
+    "inference_failure": "hard-block",
+    "non_relative_request": "hard-block",
+    "patient_identity_rewrite": "forbidden",
+    "sealed_final_role_expansion": "forbidden",
+    "sql_proc_query_substitution": "forbidden",
+    "expected_resource_id_substitution": "forbidden",
+    "unknown_semantics_guessing": "forbidden"
+  },
+  "sealed_final_role": {
+    "patients": 40,
+    "rows": 173,
+    "access_allowed": false
+  },
+  "authorization_boundary": {
+    "new_model_inference": false,
+    "r2_execution": false,
+    "rerun_sg000028": false,
+    "model_switch_or_selection": false,
+    "tokenizer_or_gguf_change": false,
+    "llama_cpp_revision_change": false,
+    "fhir_agentbench_revision_change": false,
+    "prompt_or_tool_schema_change": false,
+    "agent_strategy_or_temperature_change": false,
+    "training_or_finetuning": false,
+    "d4_activation": false,
+    "final_role_access": false,
+    "final_evaluation": false,
+    "gate_waiver": false
+  },
+  "qualification": {
+    "gaxbench_linux_windows_python_311_312_required": true,
+    "alibaba_open_code_review_required": true,
+    "typesafe_jev_exact_diff_required": true,
+    "dal_manuscript_required": true,
+    "zero_unresolved_active_review_threads_required": true,
+    "normal_merge_only": true,
+    "expected_head_guard_required": true,
+    "post_main_gaxbench_required": true,
+    "post_main_manuscript_required": true
+  },
+  "zero_founder_cost": true,
+  "next_governed_action_after_g1": "R1-G2 resource-specific FHIR search support qualification; still no new inference"
+}
