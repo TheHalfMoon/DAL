@@ -71,14 +71,15 @@ def test_source_pattern_inventory_is_exhaustively_classified_without_trace_regen
     evidence = _load(SOURCE_EVIDENCE)
     entries = evidence["pattern_support_evidence"]
 
-    assert len(entries) == manifest["source_pattern_inventory_policy"]["expected_exact_pattern_count"]
+    inventory = manifest["source_pattern_inventory_policy"]
+    assert len(entries) == inventory["expected_exact_pattern_count"]
     assert len(entries) == 248
     assert len({entry["source_pattern_sha256"] for entry in entries}) == 248
     assert evidence["artifact_firewall"]["raw_traces_emitted_by_persistence"] is False
-    assert manifest["source_pattern_inventory_policy"]["raw_trace_regeneration_allowed"] is False
+    assert inventory["raw_trace_regeneration_allowed"] is False
 
     classifications = [classify_persisted_source_pattern(entry) for entry in entries]
-    permitted = set(manifest["source_pattern_inventory_policy"]["finite_dispositions"])
+    permitted = set(inventory["finite_dispositions"])
     assert set(classifications) <= permitted
     assert len(classifications) == 248
 
@@ -187,7 +188,8 @@ def test_r1_g1_manifest_matches_persisted_blocker_investigation_limits() -> None
     assert investigation["development_rows_investigated"] == 1463
     assert investigation["blocked_rows_retained"] == 1239
     assert investigation["malformed_name_rows_with_empty_parameter"] == 24
-    assert investigation["blocker_class_row_counts"]["comparison-prefix-used-as-search-modifier"] == 41
+    class_counts = investigation["blocker_class_row_counts"]
+    assert class_counts["comparison-prefix-used-as-search-modifier"] == 41
     assert investigation["raw_traces_accessed"] is False
     assert investigation["final_role_content_accessed"] is False
     assert manifest["resource_specific_support"]["new_support_claimed_by_g1"] is False
