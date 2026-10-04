@@ -64,7 +64,7 @@
   "d7_model_selection_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "repair-artifact-output-firewall-and-investigate-complete-blocker-set",
+  "next_governed_action": "investigate-complete-blocker-set-without-changing-frozen-producer-or-gate",
   "historical_pre_execution_frontier_path": "registry/study1_sg000028_pre_execution_frontier_37153192763.json",
   "execution_evidence_path": "registry/study1_sg000028_execution_37156028113.json",
   "observed_result": {
@@ -77,5 +77,8 @@
     "final_rows_materialized": 0,
     "final_question_content_accessed": false
   },
-  "artifact_output_firewall_repair_required": true
+  "artifact_output_firewall_repair_required": false,
+  "artifact_output_firewall_repair_contract_path": "registry/study1_sg000028_output_firewall_repair_contract.json",
+  "artifact_output_firewall_replay_path": "registry/study1_sg000028_output_firewall_replay.json",
+  "compatibility_requalification_authorized": false
 }

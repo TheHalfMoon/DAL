@@ -264,9 +264,9 @@ row-associated: the source did not retain per-call reason attribution.
 The earlier pre-trace provenance and dependency failures remain historical;
 the pre-execution frontier is preserved separately without overwriting it.
 SG-000028 is open. D4-D10 remain unactivated. The next governed action is an
-artifact-output firewall repair and complete blocker investigation, preserving
+complete blocker investigation after the bounded SG-000028-R1 output firewall repair, preserving
 the frozen producer and every gate criterion. A workflow SUCCESS is not a
-scientific PASS; no compatibility repair may normalize invalid requests into
+scientific PASS. The output-only repair replays all 1463 structural rows with unchanged classifications; it does not authorize new inference. No compatibility repair may normalize invalid requests into
 valid ones or expand access to the sealed final role.
 
 ## Core P08 invariants

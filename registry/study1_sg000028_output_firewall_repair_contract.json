@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "grain_id": "SG-000028-R1",
+  "research_contract_issue": 141,
+  "scope": "Output masking and validation only; preserve the complete canonical negative experiment",
+  "source_run": 37156028113,
+  "defect": "Malformed generated parameter names can contain literal content in normalized patterns and blocker reason keys",
+  "repair": "Export only finite structural vocabulary or opaque SHA-256 identities; aggregate rejects unmasked keys",
+  "source_pattern_identities_preserved": true,
+  "observed_requests_changed": false,
+  "compatibility_search_semantics_changed": false,
+  "trace_producer_changed": false,
+  "gate_criteria_changed": false,
+  "final_role_access_allowed": false,
+  "training_allowed": false,
+  "d4_activation_allowed": false,
+  "output_only_repair_authorizes_new_inference": false,
+  "requalification_policy": "Initial execution is allowed; after complete evidence, new inference requires compatibility_requalification_authorized=true in a separately qualified governed compatibility grain",
+  "zero_founder_cost": true,
+  "qualification": ["targeted adversarial masking tests", "offline all-row structural replay", "exact-head GAXBench Linux/Windows Python 3.11/3.12", "checksum-pinned Alibaba OpenCodeReview", "secure TypeSafe Jev", "DAL Manuscript", "normal merge and post-main verification"]
+}

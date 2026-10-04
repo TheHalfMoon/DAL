@@ -12,6 +12,8 @@ on:
       - src/gaxbench/study1_query_trace_gate.py
       - scripts/study1_sg000028_query_trace_runner.py
       - scripts/study1_sg000028_query_trace_aggregate.py
+      - src/gaxbench/study1_query_trace_evidence.py
+      - registry/study1_sg000028_frontier_status.json
       - patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch
       - registry/study1_sg000026_fhir_runtime_manifest.json
   workflow_dispatch:
@@ -29,8 +31,35 @@ env:
   TRACE_SHARD_COUNT: "8"
 
 jobs:
+  execution-scope:
+    name: Verify governed query-trace execution scope
+    runs-on: ubuntu-latest
+    outputs:
+      execute: ${{ steps.scope.outputs.execute }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Require initial execution or separately governed compatibility requalification
+        id: scope
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          frontier = json.loads(Path("registry/study1_sg000028_frontier_status.json").read_text())
+          initial = frontier.get("query_trace_evidence_generated") is False
+          repair = frontier.get("compatibility_requalification_authorized") is True
+          execute = initial or repair
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              handle.write(f"execute={str(execute).lower()}\n")
+          print(f"query_trace_execution_authorized={str(execute).lower()}")
+          if not execute:
+              print("Complete canonical evidence retained; output-only repair does not rerun inference.")
+
   trace-shard:
     name: Development trace shard ${{ matrix.shard }}
+    needs: execution-scope
+    if: needs.execution-scope.outputs.execute == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 360
     strategy:

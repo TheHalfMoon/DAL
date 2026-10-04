@@ -13,6 +13,7 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -103,15 +104,20 @@ def build(source: Path) -> dict[str, Any]:
         raise ValueError("canonical receipt mismatch")
 
     # Recompute the original aggregate without printing or persisting its literal keys.
-    spec = importlib.util.spec_from_file_location(
-        "sg28_aggregate", ROOT / "scripts/study1_sg000028_query_trace_aggregate.py"
-    )
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    import tempfile
-
     with tempfile.TemporaryDirectory() as directory:
+        legacy_path = Path(directory) / "canonical_aggregate.py"
+        legacy_path.write_bytes(
+            subprocess.run(
+                ["git", "show", f"{MAIN}:scripts/study1_sg000028_query_trace_aggregate.py"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+            ).stdout
+        )
+        spec = importlib.util.spec_from_file_location("sg28_aggregate", legacy_path)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
         previous_sha = os.environ.get("GITHUB_SHA")
         os.environ["GITHUB_SHA"] = MAIN
         try:

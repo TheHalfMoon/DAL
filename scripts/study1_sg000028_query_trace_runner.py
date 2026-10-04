@@ -10,6 +10,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from gaxbench.study1_query_trace_evidence import safe_pattern, safe_reason
 from gaxbench.study1_query_trace_gate import (
     build_development_trace_inputs,
     exercise_observed_query,
@@ -124,7 +125,8 @@ def run_shard(
             patterns.append(exercise.pattern)
             reasons.extend(exercise.reason_codes)
 
-        reasons = sorted(set(reasons))
+        reasons = sorted({safe_reason(reason) for reason in reasons})
+        patterns = [safe_pattern(pattern) for pattern in patterns]
         patterns = sorted(patterns)
         row_status = "pass" if not reasons and calls else "behavior-changing-blocker"
         status_counts[row_status] += 1
