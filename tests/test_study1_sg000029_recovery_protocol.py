@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL = ROOT / "registry/study1_sg000029_recovery_protocol.json"
 CONTRACT = ROOT / "registry/study1_sg000029_contract.json"
 FRONTIER = ROOT / "registry/study1_sg000029_frontier_status.json"
+CLOSEOUT = ROOT / "registry/study1_sg000029_closeout.json"
 PARENT_FRONTIER = ROOT / "registry/study1_sg000028_frontier_status.json"
 PARENT_CLOSEOUT = ROOT / "registry/study1_sg000028_governance_gate_closeout.json"
 PROVENANCE_CORRECTION = (
@@ -138,3 +139,47 @@ def test_parent_frontier_records_authorized_protocol_only() -> None:
     assert parent["d4_activation_allowed"] is False
     assert parent["training_allowed"] is False
     assert parent["final_role_accessed"] is False
+
+
+def test_sg000029_closeout_binds_exact_qualification_and_post_main() -> None:
+    frontier = _load(FRONTIER)
+    closeout = _load(CLOSEOUT)
+
+    assert frontier["state"] == "CLOSED_CANONICAL_PROTOCOL_QUALIFIED"
+    assert closeout["state"] == "CLOSED_CANONICAL_PROTOCOL_QUALIFIED"
+    assert closeout["canonical_protocol_merge"]["pull_request"] == 151
+    assert closeout["canonical_protocol_merge"]["qualified_head"] == (
+        "7d4d35bac7e8e20c662760bbb5ad8e3265b0789a"
+    )
+    assert closeout["canonical_protocol_merge"]["merge_sha"] == (
+        "75be47489254b9a284ee15cfc2b9f825876ee965"
+    )
+    assert closeout["canonical_protocol_merge"]["unresolved_active_review_threads"] == 0
+    qualification = closeout["exact_head_qualification"]
+    assert qualification["gaxbench_run"] == 37214381168
+    assert qualification["alibaba_open_code_review_run"] == 37214381176
+    assert qualification["typesafe_jev_run"] == 37214379624
+    assert qualification["dal_manuscript_run"] == 37214381179
+    post_main = closeout["post_main_verification"]
+    assert post_main["gaxbench_run"] == 37214543313
+    assert post_main["dal_manuscript_run"] == 37214543243
+    assert post_main["sg000028_scope_verification_run"] == 37214543291
+    assert post_main["sg000028_trace_shards_executed"] is False
+    assert post_main["sg000028_aggregate_executed"] is False
+    assert post_main["new_model_inference_performed"] is False
+
+
+def test_closeout_requires_new_founder_authorization_before_r1_implementation() -> None:
+    frontier = _load(FRONTIER)
+    closeout = _load(CLOSEOUT)
+    boundary = closeout["authorization_boundary"]
+
+    assert frontier["r1_protocol_stage_available"] is True
+    assert frontier["r1_implementation_authorized"] is False
+    assert frontier["r2_execution_authorized"] is False
+    assert boundary["r0_protocol_drafting_and_qualification_complete"] is True
+    assert boundary["r1_recovery_implementation_authorized"] is False
+    assert boundary["r2_recovery_execution_authorized"] is False
+    assert boundary["d4_activation_authorized"] is False
+    assert boundary["training_authorized"] is False
+    assert boundary["final_evaluation_authorized"] is False
