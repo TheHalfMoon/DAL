@@ -1,0 +1,1202 @@
+{
+  "case_count": 106,
+  "cases": [
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3f609162bff19f1823635b16756063086481778ae2d0cfa6714bce0eb7af29da",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "079d829647666c71676e2f0c57093fd141724528c778adf3b8d9a4f10f505008",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "aca6636d84b74fef13be29118ddaa7c6ff7cbfcf47ec7461425c4c28287f11dc",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "d5051c7e77c1b9547ff65b8be41293c4345fc29f0c5532ca48b0d64079eb02a6",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4eba4eef815c58e7278337a072e0851680bc2fcbe8ca5a2f4dd3b0129c5fc337",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "42e6ea219a50c78f31b4c6fe647f321c49ebd67654aa0add54495a61c500caf3",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "31a1c785f9a0e9e08354a378a59f0efea7fef9c7b76e871343198b8b3c968570",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "6344ad0aa9e392aa1b2232678f572df5f2146d1997196a7ed8115369bede7ea3",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "38240c4d81a9f6dd25186be75dddb09850adebfae1d9c820d23fbdab7c365233",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "b031ec00660f3fb02bc062c66038811a40a87e67488ef4e136b20f808a33fcdd",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "db9acbc01ab40cc237dfd8b4788ddeb0fb0b87d7c18fa26edafb44c6c9c0fabb",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "fdf1a2eaa64a40a7f6a0ce76fc71d08aaa2924a81c7f4ce048a4f506b91d7585",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "712b91ea8902319587cacfe14606a02abdcae8930f32fcc4b54321010c1057a9",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "bb8091fa4ec2b986c3416075411ddd0e7dae56b81a5af7ed89d494b25724959d",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ed3a5441cf7f30aae2bdb824f0f267e6eb1bc5e9305288d1729fecf4af516850",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3632f61af5c4191b821fb64166d03f1ce047d0efa41df245dbf9ca8bf0615ae4",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "1516f4dfc5aa74c2b184e0f6b6b96e72e51c744c0e4f6f541b86aa61807f94ab",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "6abe01b38b89efa87e9a898df57b3c43980171db3db1e3f031318814856a8f01",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "9aa9415164848ec5f58033e51e14dffa6218bd68aa6d0d9e398f392139aa3189",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "b3c8ef3565efc09a63b3237a9bdfea677bbd874e073685f42e3cb128423fe2c2",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "deed38225a8978f1ded5d7bc8eb6a1749423e64e35210615bcda0fd6aea3b3ad",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "c20c0c77b4dc908aa537e0fb7893178e9a61fece4c1fcf8693880172fad7e520",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "58df966be7edd4e1c694f3340b3ca152685ad7ee3558ee559a76a919d1168b63",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "e1b176fe368513192268753f11ba7142365897c5a67bcd296a33860544746e19",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "9af643f0c4cf806917d0c76fac0fd3d03984e879e16928b10500576985fcdac6",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "c9f4444ab3e6c26534f5cb7177686c75232e8c3cb8bf2579a32186fed98a1392",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "2f281e573f3a5b5b01d55c2bf31fd49f4504aee15aeb066808ed6b2a75b85274",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "a5512cf09fb699f7e88299e68485f052530cbe011493cd60f8415ec586d62e55",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "e1e04535ca093e351de23d148073359a4c97982bb0959bbdaede33a93d3cdcac",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "779ffe288bdb369e4ebf940648d8303cedd45b44a87fde850a656c287692702e",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "1188a98637f5d26a890cb0476070ddeb94fe1871e5be5d3b1abc96df42b0cfd6",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "7dfe6b0243661e785caccd544c66c46148aa4a0f84a9b404026a92018b49d624",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "d471e6f1bb4c156dab46c76671a7072ea3b33c4debb228f0f8ad1e9f983bb28f",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "1b68316e5fe3a24f63c6b34df1a4c09a9fa123bfa15834e7bd72feb939ea59e6",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0c0fb8cd7b3e10b069c413ae368d17208c19e15efd586f53ec72834c34307c4d",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "a578428482aed8ecbaa9df71480483486ab1360d42d76fdc50a15891f1db6f23",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4ecb4e38245a2fdf498edef2fcecffd7f0bdd0d7406f20771ca4506376a69915",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "62e36148a4d4176dfb27f5832800a35b6adcd4efe758a92fb2c2304eb374033a",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4f3abb42c8c717999c23fc913da5643fc5fc69bce8caf349bd2a073baa859d93",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "065e28f3037c17d1c93316031ddd87e1776af74797e2a147de374f39b5eb9825",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ab47ca0a5928787c179d0a210afb42c2ccbd0230ba43b9dc1f1e5b8e8924cc25",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ce98d7fdde575cae29c257e3b8d5e451dda9fc9b1d74a2429cccafb30f59dc1f",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "f8402e83862ad516e07ecb6d6b1f6e8d0ebe1ef93f208e091594686c93c7d7b2",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "8bda491e9eb8036f54bac5d5dbced7ec9722bb04e3f8215658c54257f628fe4e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4e04f7d51baf8aa9e02a777b7163a3092ca4883fda46de5b13642ee8e009daf8",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f73e77d768093fc0f374a14a93c09a646c6febe49161dba6464c82f578781940",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "c23ae9a609f457a2cbf98c4a571977073242eee554622b8edfa1106d79075b96",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3bc6fbb1b16db0f29b96e73ba19ac3cf4b0654f4b0693391074d4dda325f5d37",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "01451ee7c13cd32dd3322e8e4bb7710fb5fc44caac02d129155b6f41cdd4a7cd",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9447b899ae698f12ac64e0701c293a0ac7859d6b7b95d21844267e5a29aca666",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "811357c572c6ae341c1b4841d2a948b3523b0d04270f5404170531041a381c36",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "0fa515069d72682a097aeb14979ab7ae3b3f65cd0385fd5fab5d493c44e9e66f",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "5131592731a3c07e2d6180a7865ffcc963320743ec7577162acad98ac98c7a5d",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3c68a155704cc69cb3370d3a16cd15312ca573c5c4f04459ee8ba278fab3ed9a",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "7f9356692328796543011dfdd50756ae1017e30be31738f3e42f1f98232ba190",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "f0da64048e04ad99681e5756054984e10b8a6689c0829e61d12b31a070734a57",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "1f251e490ae8d3664c4845514546a30bf413e886a58b83e69ee9ec041209f178",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "22d38bcd7c50776dad51c3a02e51643c9e18a377875bc016b1952ae5405de558",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "97a3663f7c16d2b50a7c34de7aea27a87d1946e4ce172a46a82ec81e27f08ce2",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ca848569ec878a42cebb0a7bd77683d1d6fcacb3c12c4fdeebf939dbe8268c93",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3e14b48d5eed88ca344facf677980417d6f0079b274f5d3aa73ffaf660171261",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "df5e873e0d871686cf58358c1a1775d0956f75c8aa0cb313c3029788f69e736e",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "1e15b17c46b9b37ab70239da49a8d83409ec088b8008d0dd3ca7e0158f9d506f",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "51553ff2592e2b4ef5b8dac038c07ab02ebfc6fe839031d2097892fddb014c5d",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0913900400fbe74a62a8d0f983fbfc9be578468297aa12b0a9c68f1711a6b8c9",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "6bf5c60f75da107f4bd6622bd9987e8078147e85ddb684eaaa496f999920453f",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "2524ee8a1cdec52a316850bf8c4dcde96208a399c4187866fe5581045b2fb0be",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ae119408e1e2ac0a6ea06ba0fe200d14b3f7fd6bd2f941a7397522cd49ea1942",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "a450696623306c2484b2ddb637dba4a3f2fc7f274ef581fdbe05cbe93819708b",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "b1a12af50b8a3746c9322845930f1ac90ec66a777c4b720c1bb3cf33b8f89ff3",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "a462f938b93df57391ad26aaaa16c123861e2c4aa3479325098471baa026944c",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "6325d8b6bc0b84794b99bbcffe6ae20172904c20a3594467a6f6e46bdeb4d4ad",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "604c1b0d931d42806b884e2dee7ee6dd41497927b3ff7aa3fbd17c777b92ead1",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "454809930869a3a3df3fe8a3ef10299ceb4af9916debbcdca6de2a09080808bd",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "9aea8b3f41be7abb3939bec7279e965a514e4f2a94aac9eff49aeb585d53ecf7",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ae4949da3cd22d599ea9a2ff5dc68714649194d848df00cd06916085b0b00720",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "264d5b5b8e6d3263027a93537dda449ae1671f5b6fecbc33721a36d335e0ef5d",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "50629ef6d0162bae875222063688ae0a50f43674551158adbb924fe07dc6d803",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "dbcae3940dba100d65565de4e1ba32633fbb412e5c4536623fb40b73be6963e2",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0c471d6a9d89e947ef23156b6b623e3d65a8008efb28d959986bd8ca281e6607",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0191f632068869f1bc18c993efcb60d3c6d7c3e4c95c0f94c7e7821069ae764c",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4ce9681e9a5b53e82cb00a1608e03c5991175b7b7d114e9cf065d7b7edd0a131",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "ef46af02f942d31dea5ef82074f9519b21a447919cc3755a52736bfe92acb193",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "dd6ab48e9c9019cad0ea5778ae64737fec23fe23ce08a6a23791030f861c763e",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4ca228ce4812c722911de6625f46988b0d91e6fb0b4ae5804e316015a1c1d362",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "3875540fb9045ecfd9572b70e4b4aad66ea46fc375006e64d200fc3fe9e8b5b6",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "e4258f67242c3abd76f9ebb11eebc796b1cda9f3ad3a8c0add5a91673915c6c2",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0f75326c88561feaee1dc1cf2bb3fc6086973829cdf6f256b2795db4aa49bbf7",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "5c721119afb85f8c1cf5a85aaf96ba956f8d3894f78ca5ad7219251a6ec0df79",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "0db88bc0b91d59007bb5f1ed4fc700479a498e2ff5db66d915bb53d1af237e53",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "52e605945e3d47e1d87bbc9467db6f666475e4162e762a096b061baf123766fc",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "c4166cd5b44c612fa8c88c978700f0d9cdad5be3f590a7d03a04c12ea0da1def",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "88db9412b9a24fab59983a8de37885827070084b6e8904ef179d0ceabaaeef59",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "38dcb03ee663d31a148a33cbe0944f8142fbd5af2fe468be601fbf0c3eea662f",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "69113335d881b084fbe1a085f3f208a9187477862939572c6af8f07baad6c2ab",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "4eb93127fe51d2435c38fc9c99e6ea3326bb4b0c813fc3d39e98291793ae2cd4",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9d5368a971abe68fd44859e2ab6324d4f9fa9e0c02672224816ed9cffcbcd354",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "21367cace6828a495683824b4ba62404323ad867828cc060825b33ed84d7aef1",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "74402dcfac89904bf7c081e524347dd9d567f2c556e86d2713673bf71ea34428",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "41ad528d60f2d005680a6a649a9df67b74a46fa56894d6b7adeb4a3b6ee89d94",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "82972629976dedbf6062f5e2c1d44d1c9db2be7847d8fbdc4ca47182a2d3a448",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "qualified-pass-through",
+      "original_request_sha256": "205a1e466983849ed5fd6610402a8cb5b79fdfdd4ab80fd9c41627b04e327922",
+      "recovery_transformed": false,
+      "returned_resource_count": 1,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "db58420d642326d10aaf4e7d6cb186e88d0974b3a702fd15beb0f168bf895132",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "search-target-outside-development-role"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "8f5526d005e50184b90c35bbb3c5c8cb61904ed96527e45865267ba891a9f4c5",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f04f8496f367a51acb199c6529d1161b3d7db32356ab677ff5e2a412a8af2192",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "unscoped-search-role-firewall"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "bc4b0094993db1ed9ba8dcd143a06097707d0f70a572cc53e2619dea7e23d78a",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f5f5969b0a04eec9151f4ec144e00e442ea44836e5f9c5f070b845991ddf7d56",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "unqualified-status-token-shape-or-resource"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "92dacbd294b8f832adeafe065ad13c60c548e174ef22dbacff440ae1b3bdbd68",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "5d6a7d2e828f97ce5f407eb5ae5067934091ca30ab76503a4f7afdbb737643bb",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "unqualified-status-token-shape-or-resource"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "b44cfc7cdad004d1b8a97ba045565cfaa4c3fff01c2591eb2a48a1f68e06cb67",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "9472e32f443c14eab50d0cdbb9bc3631213090ed84e53930f67c8aa6276e0213",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "unqualified-status-token-shape-or-resource"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "b7dbab846903219d412f87950b0ce8c843c7375e30c29d5a18146f5e64b610be",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "1c4701a781f1fc06876fb647aa0fb886ebd84b9b3692e7e17aae78cfa1ef4d03",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "unqualified-status-token-shape-or-resource"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "5ea3ee73eb19b56a3c5158b69b1c81f6b597be3a039730e772a81e9a6a105cf9",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "cbd00bbfcfbe30d12789125b8b10e526cbd4af4ff2644194a10207b69f7864f8",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "resource-specific-semantics-not-yet-qualified:date"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "5a6ccc561dea84c56eb77f9b4df45e5c04fd173c75386a2aa384a4cf5bcf80b6",
+      "recovery_transformed": true,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "43a08138abc003df23c530ae4c41eca3f32653b81cfb6d351d57f3fb1fad6a9e",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": [
+        "comparison-modifier-to-value-prefix"
+      ]
+    },
+    {
+      "blocker_codes": [
+        "resource-specific-semantics-not-yet-qualified:code"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "1a58997df2fb6011fc7a4a982256ff4fa4234e5b26d67c971388e871d3621db8",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "1ed4cfc0509341447ee92d5ba962f2ab0241bc357b3fa165cce61d58f0712bd7",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [
+        "source-pattern-linkage-not-qualified"
+      ],
+      "disposition": "hard-blocked",
+      "original_request_sha256": "d54be0dc98d45ae9e99762588daf56c2bd71dcec18ba158f75d916cdf8bba862",
+      "recovery_transformed": false,
+      "returned_resource_count": 0,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "f7884954d7737d03d62743ba2c0a67a29ad83b65a80961b7e75397abbbc78782",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": []
+    },
+    {
+      "blocker_codes": [],
+      "disposition": "recovery-transformed",
+      "original_request_sha256": "c638a0aa2ed7d941515e1507213d6f7740b266d1aa30a03f646f396106a76028",
+      "recovery_transformed": true,
+      "returned_resource_count": 2,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "source_pattern_sha256": "530721c74394d6fd97da736920edf4646c9edb9dade5e04d5a87bec8eac630e8",
+      "synthetic_qualification": true,
+      "transformation_rule_ids": [
+        "empty-parameter-handling"
+      ]
+    }
+  ],
+  "cloud_fhir_server_equivalence_claimed": false,
+  "final_role_content_accessed": false,
+  "inherited_d2_equivalence_cases": 2,
+  "new_model_inference_performed": false,
+  "normative_oracle_scope": "Two exact scalar status code searches only; no token systems, OR, modifiers, repeated non-empty status, dates, sorting, includes, or references added.",
+  "raw_benchmark_source_accessed": false,
+  "runtime_version": "sg000030-r1-g2-v1",
+  "scalar_token_oracle_equivalence_cases": 96,
+  "synthetic_only": true
+}

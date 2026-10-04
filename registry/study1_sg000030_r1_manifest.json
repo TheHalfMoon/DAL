@@ -1,0 +1,161 @@
+{
+  "R1_exit": "Exact finite manifest and implementation qualified and canonical; residual blockers retained. R1 completion does not assert that R2 can pass.",
+  "attribution_limit": "Persisted reasons are row-associated, not call-causal. Pattern candidates are not recovered-row claims.",
+  "bound_files": {
+    "registry/study1_sg000030_r1_normative_evidence.json": "ce9e91c085048e3c771eb318fdda3a7d4ea617bbb253357c956fcb5c082bb4dc",
+    "registry/study1_sg000030_r1_pattern_inventory.json": "2854fe914d6c0c0a27cfff44313c3a19723ab17445f85407fd86d52c8027365d",
+    "registry/study1_sg000030_r1_runtime_qualification.json": "b58c507908b91e96f2ecec817dfc9f07842bb717ac49a6e29b86ff91edc69a96",
+    "src/gaxbench/study1_fhir_compat.py": "2ca4cf6078a514c18484869ec931bd17c8944970326c0bcf1dda49f101040bdc",
+    "src/gaxbench/study1_query_trace_gate.py": "529b67730920b03123d7a4054a0969f96b38aa9b07d455167ea1090e348dc0a9",
+    "src/gaxbench/study1_recovery_compat.py": "71a15425f41f7d9c039e50e61b0b7723c0d8788e5cc77d03bf811e25184abcce",
+    "src/gaxbench/study1_recovery_runtime.py": "7bafe8a685cd0f4465109f752647c9f1f26b9b0f3c62f02f4ebd6fea32466dba",
+    "tools/qualify_sg000030_r1.py": "c756af0a7992e5d35166c9094189afbf737a4d998ccb397e6c0889d21ca61718"
+  },
+  "execution_boundary": {
+    "D4": false,
+    "R2": false,
+    "final_role": false,
+    "new_inference": false,
+    "original_result_relabel": false,
+    "training": false
+  },
+  "founder_authorization": {
+    "comment": 5982001184,
+    "issue": 153
+  },
+  "g1_canonical_merge": "38ae36e80209beab0c5e7209c09d0e3c25d49f2e",
+  "hash_binding_policy": "sha256-of-UTF8-files-with-LF-line-endings",
+  "immutable_original": {
+    "blocked_rows": 1239,
+    "calibration_rows": 341,
+    "development_rows": 1463,
+    "pass_rows": 224,
+    "scientific_state": "BLOCKED",
+    "validation_rows": 1122
+  },
+  "inherited_support": {
+    "parameters": [
+      "id",
+      "_id",
+      "patient",
+      "_count"
+    ],
+    "qualification": "existing canonical D2 restrictions, including resource-specific patient support",
+    "resource_types": [
+      "Patient",
+      "Encounter",
+      "Condition",
+      "MedicationRequest",
+      "Procedure",
+      "Observation",
+      "MedicationAdministration",
+      "Location",
+      "Specimen",
+      "Medication"
+    ]
+  },
+  "lineage": {
+    "caller_obligation": "Supply the canonical hash-bound inventory entry and role-scoped custodian runtime; synthetic entries are qualification fixtures only.",
+    "durable_audit": "hashes, version, disposition, transformations, blocker codes, returned count only",
+    "original_request": "immutable UTF8 sha256 before transformations",
+    "original_sg000028_pattern": "sha256 of frozen original normalizer identity; exact safe inventory entry match required"
+  },
+  "manifest_id": "sg000030-r1-g2-v1",
+  "new_resource_parameter_pairs": [
+    {
+      "expression": "Observation.status",
+      "parameter": "status",
+      "resource": "Observation",
+      "values": [
+        "registered",
+        "preliminary",
+        "final",
+        "amended",
+        "corrected",
+        "cancelled",
+        "entered-in-error",
+        "unknown"
+      ]
+    },
+    {
+      "expression": "MedicationRequest.status",
+      "parameter": "status",
+      "resource": "MedicationRequest",
+      "values": [
+        "active",
+        "on-hold",
+        "cancelled",
+        "completed",
+        "entered-in-error",
+        "stopped",
+        "draft",
+        "unknown"
+      ]
+    }
+  ],
+  "remaining_blockers": {
+    "historical_blocked_rows": 1239,
+    "historical_rows_accounted": 1463,
+    "pattern_disposition_counts": {
+      "comparison-transform-candidate": 20,
+      "hard-block-inference-or-shape": 1,
+      "hard-block-opaque-pattern": 39,
+      "hard-block-role-firewall": 7,
+      "hard-block-unproven-semantics": 1,
+      "observed-pass-through": 3,
+      "resource-specific-support-pending": 177
+    },
+    "policy": "Every unqualified pair, unsupported value shape, opaque identity, scope rejection, or missing-call/inference failure remains blocked. No wildcards.",
+    "post_recovery_blocked_rows": null,
+    "post_recovery_count_requires_R2": true,
+    "unqualified_parameters": [
+      "date",
+      "code",
+      "category",
+      "encounter",
+      "specimen",
+      "type",
+      "_sort",
+      "_include"
+    ]
+  },
+  "runtime_equivalence": {
+    "cloud_runtime_equivalence_claimed": false,
+    "inherited_frozen_D2_cases": 2,
+    "invented_synthetic_fixtures_only": true,
+    "normative_scalar_projection_cases": 96,
+    "total_audit_cases": 106
+  },
+  "scalar_status_contract": {
+    "exact_case_sensitive": true,
+    "filter_before_count": true,
+    "identity_rewrite_allowed": false,
+    "one_nonempty_value_only": true,
+    "system_or_OR_or_modifier_or_escape_syntax_allowed": false
+  },
+  "schema_version": "study1-r1-finite-manifest-v1",
+  "sealed_final": {
+    "accessed": false,
+    "patients": 40,
+    "rows": 173
+  },
+  "source_evidence": {
+    "path": "registry/study1_sg000028_execution_37156028113.json",
+    "patterns": 248,
+    "raw_trace_regeneration_allowed": false,
+    "sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785"
+  },
+  "status": "finite-bounded-support-frozen-for-exact-head-qualification",
+  "transformations": {
+    "altered_request_label": "recovery-transformed",
+    "ambiguous_already_prefixed_value": "hard-block",
+    "date:gt": "date=gt<value>",
+    "date:gte": "date=ge<value>",
+    "date:lt": "date=lt<value>",
+    "date:lte": "date=le<value>",
+    "date_execution_qualified": false,
+    "empty_value": "drop unambiguous empty pair; unchanged siblings",
+    "version": "sg000030-r1-g1-v1"
+  },
+  "zero_founder_cost": true
+}
