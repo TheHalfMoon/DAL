@@ -9,8 +9,8 @@ from pydantic import Field, model_validator
 
 from gaxbench.schema import StrictModel
 from gaxbench.study1_fhir_compat import (
-    D2FHIRRole,
     FHIR_AGENTBENCH_SUPPORTED_RESOURCE_TYPES,
+    D2FHIRRole,
     parse_relative_fhir_get,
 )
 
