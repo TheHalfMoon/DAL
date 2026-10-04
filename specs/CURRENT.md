@@ -241,7 +241,7 @@ The minimal transport repair is canonical via PR #137 merge `26069715534ba693049
 
 ## Active frontier - Study 1, SG-000028 / post-D3-pre-D4
 
-Research contract: Issue #141. State: **BLOCKED_OBSERVED_BEHAVIOR_CHANGING**.
+Research contract: Issue #141. Scientific state: **BLOCKED_OBSERVED_BEHAVIOR_CHANGING**. Program progression: **BLOCKED_REQUIRES_FOUNDER_DECISION** under Issue #147.
 
 The complete canonical main-only run `37156028113` on
 `f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d` completed all eight shards and the
@@ -263,11 +263,33 @@ row-associated: the source did not retain per-call reason attribution.
 
 The earlier pre-trace provenance and dependency failures remain historical;
 the pre-execution frontier is preserved separately without overwriting it.
-SG-000028 is open. D4-D10 remain unactivated. The next governed action is an
-complete blocker investigation after the bounded SG-000028-R1 output firewall repair, preserving
-the frozen producer and every gate criterion. A workflow SUCCESS is not a
-scientific PASS. The output-only repair replays all 1463 structural rows with unchanged classifications; it does not authorize new inference. No compatibility repair may normalize invalid requests into
-valid ones or expand access to the sealed final role.
+SG-000028-E1 persistence and SG-000028-R1 output repair are CLOSED_CANONICAL,
+through PRs #145/#146 with all required exact-head and post-main checks passed.
+The output-only repair replayed all 1463 structural rows without changing any
+classification and did not rerun inference. A workflow SUCCESS is not a scientific PASS.
+
+The full investigation is `registry/study1_sg000028_blocker_investigation.json`.
+All 106 observed reason keys are classified. Classes overlap: 61 rows have
+anomalous parameter-name structure, 41 use comparison syntax as modifiers,
+620 have candidate compatibility deficiencies, 374 have nonstandard/unproven
+semantics, 428 have role-firewall target rejection, two have inference failures
+and missing calls, and one violates the relative-GET contract. The union of
+naming anomalies and invalid comparison modifiers is 102 rows. This is an
+immutable observation count, not a claim that all 102 are irreparable: 24 of
+the naming-anomaly rows contain empty parameters, which FHIR R4 permits ignoring.
+Valid deterministic compatibility improvements remain permitted in separate
+governed grains; they cannot waive or reinterpret the original malformed-behavior
+blockers. Target identities and exception causes were not retained and are not invented.
+
+The strict original gate cannot be relabeled PASS by converting the 41 rows
+with unsupported comparison modifiers into intended valid requests, by treating
+their failures as supported success, by dropping rows, or by switching the frozen
+producer after outcomes. The next scientific progression therefore requires the
+concrete decision in Issue #147: a separately prospective recovery protocol with
+disclosed development-outcome exposure (recommended), or retaining the current
+program as scientifically blocked. Neither option is authorized by this record.
+SG-000028 stays open; D4-D10 stay inactive; the 40-patient / 173-row final role
+stays sealed. No new experiment, training, criterion waiver, or final access is authorized.
 
 ## Core P08 invariants
 

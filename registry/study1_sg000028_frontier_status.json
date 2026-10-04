@@ -3,7 +3,7 @@
   "study_id": "study1",
   "specgrain_id": "SG-000028",
   "stage": "post-D3-pre-D4",
-  "state": "blocked-observed-behavior-changing",
+  "state": "blocked-requires-founder-program-decision",
   "research_contract_issue": 141,
   "contract_path": "registry/study1_sg000028_contract.json",
   "canonical_dependency": {
@@ -20,7 +20,13 @@
     "dependency_repair_merge": "f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d",
     "dependency_repair_post_main_gaxbench_run": 37156028081,
     "dependency_repair_post_main_manuscript_run": 37156028118,
-    "complete_query_trace_run": 37156028113
+    "complete_query_trace_run": 37156028113,
+    "evidence_persistence_merge": "48b73aa6ba75b2b1c6e1b11f26e762ca8d010200",
+    "evidence_persistence_post_main_gaxbench_run": 37210488257,
+    "evidence_persistence_post_main_manuscript_run": 37210488214,
+    "output_firewall_repair_merge": "9d214072fab31e2ad0c754c24f695a8bbd157843",
+    "output_firewall_post_main_gaxbench_run": 37211146267,
+    "output_firewall_post_main_manuscript_run": 37211146262
   },
   "trace_producing_system_frozen": true,
   "trace_producer_semantics_changed_by_correction": false,
@@ -64,7 +70,7 @@
   "d7_model_selection_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "investigate-complete-blocker-set-without-changing-frozen-producer-or-gate",
+  "next_governed_action": "founder-program-direction-decision-under-issue-147-no-new-experiment-authorized",
   "historical_pre_execution_frontier_path": "registry/study1_sg000028_pre_execution_frontier_37153192763.json",
   "execution_evidence_path": "registry/study1_sg000028_execution_37156028113.json",
   "observed_result": {
@@ -80,5 +86,10 @@
   "artifact_output_firewall_repair_required": false,
   "artifact_output_firewall_repair_contract_path": "registry/study1_sg000028_output_firewall_repair_contract.json",
   "artifact_output_firewall_replay_path": "registry/study1_sg000028_output_firewall_replay.json",
-  "compatibility_requalification_authorized": false
+  "compatibility_requalification_authorized": false,
+  "blocker_investigation_path": "registry/study1_sg000028_blocker_investigation.json",
+  "governance_decision_issue": 147,
+  "governance_decision_authorization_received": false,
+  "bounded_behavior_preserving_compatibility_improvements_permitted": true,
+  "compatibility_improvements_alone_waive_original_malformed_behavior_blockers": false
 }

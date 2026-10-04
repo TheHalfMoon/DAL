@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "grain_id": "SG-000028-G1",
+  "research_contract_issue": 141,
+  "decision_issue": 147,
+  "scope": "Complete normalized development blocker investigation and a decision-only future program frontier",
+  "source_run": 37156028113,
+  "canonical_predecessors": [
+    "48b73aa6ba75b2b1c6e1b11f26e762ca8d010200",
+    "9d214072fab31e2ad0c754c24f695a8bbd157843"
+  ],
+  "acceptance": [
+    "Investigate all 1463 development rows and retain all 1239 blocked rows",
+    "Classify all 106 observed blocker reason keys using safe vocabulary or opaque identity",
+    "Separate proven structure from unproven upstream, target, and exception semantics",
+    "Distinguish FHIR R4 empty-parameter handling from comparison modifier reinterpretation",
+    "Retain all final-role, producer, no-training, no-scoring, zero-cost, and strict-gate constraints",
+    "Record concrete options without self-authorizing a new program or experiment",
+    "Require exact-head Linux/Windows Python 3.11/3.12 CI, pinned Alibaba OpenCodeReview, Jev, and Manuscript",
+    "Normal merge with expected-head guard and successful post-main verification"
+  ],
+  "new_experiment_authorized": false,
+  "producer_switch_authorized": false,
+  "gate_waiver_authorized": false,
+  "d4_activation_allowed": false,
+  "final_role_access_allowed": false,
+  "founder_authorization_received": false
+}
