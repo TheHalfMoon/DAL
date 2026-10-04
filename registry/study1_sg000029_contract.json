@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000029",
+  "stage": "R0-prospective-recovery-protocol",
+  "research_contract_issue": 150,
+  "founder_decision_issue": 147,
+  "founder_authorization_comment": 5981658161,
+  "canonical_base": "139056bd74521f5555126f24f3d9a3c43c300a1d",
+  "protocol_path": "registry/study1_sg000029_recovery_protocol.json",
+  "purpose": "Qualify a separate prospective recovery protocol while preserving the immutable blocked SG-000028 result and sealed final role.",
+  "entry_conditions": {
+    "sg000028_scientific_state": "BLOCKED",
+    "sg000028_development_rows": 1463,
+    "sg000028_pass_rows": 224,
+    "sg000028_behavior_changing_blocker_rows": 1239,
+    "founder_option_a_authorized": true,
+    "development_outcome_exposure_disclosed": true
+  },
+  "execution_boundary": {
+    "protocol_drafting_allowed": true,
+    "protocol_tests_allowed": true,
+    "governance_review_allowed": true,
+    "new_inference_allowed": false,
+    "rerun_sg000028_allowed": false,
+    "training_allowed": false,
+    "model_selection_allowed": false,
+    "model_switch_allowed": false,
+    "prompt_change_allowed": false,
+    "agent_strategy_change_allowed": false,
+    "d4_activation_allowed": false,
+    "final_role_access_allowed": false
+  },
+  "sealed_final_role": {
+    "patients": 40,
+    "rows": 173,
+    "access": "sealed-and-forbidden-before-separately-qualified-D9-authorization"
+  },
+  "qualification": {
+    "gaxbench_matrix": "Linux/Windows Python 3.11/3.12",
+    "alibaba_open_code_review": "required-checksum-pinned-v1.12.9",
+    "typesafe_jev": "required-secure-exact-diff",
+    "dal_manuscript": "required",
+    "zero_unresolved_active_review_threads": true,
+    "normal_merge_only": true,
+    "expected_head_guard": true,
+    "post_main_gaxbench": true,
+    "post_main_manuscript": true
+  },
+  "exit_conditions": {
+    "recovery_protocol_canonical": true,
+    "original_sg000028_remains_blocked": true,
+    "r1_may_activate_separately": true,
+    "r2_execution_authorized": false,
+    "d4_activated": false,
+    "final_role_accessed": false
+  }
+}
