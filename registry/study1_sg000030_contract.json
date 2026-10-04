@@ -10,6 +10,8 @@
   "canonical_protocol": "registry/study1_sg000029_recovery_protocol.json",
   "r1_g1_manifest": "registry/study1_sg000030_r1_g1_manifest.json",
   "implementation_module": "src/gaxbench/study1_recovery_compat.py",
+  "r1_finite_manifest": "registry/study1_sg000030_r1_manifest.json",
+  "r1_runtime_module": "src/gaxbench/study1_recovery_runtime.py",
   "immutable_parent": {
     "specgrain_id": "SG-000028",
     "scientific_state": "BLOCKED",

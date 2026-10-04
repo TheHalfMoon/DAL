@@ -3,13 +3,16 @@
   "study_id": "study1",
   "specgrain_id": "SG-000030",
   "stage": "R1-recovery-compatibility-canonicalization",
-  "state": "R1-G1-IMPLEMENTATION_ACTIVE",
+  "state": "R1-G2-EXACT-HEAD-QUALIFICATION",
   "research_issue": 154,
   "founder_authorization_issue": 153,
   "founder_authorization_comment": 5982001184,
   "canonical_base": "352569f2461815a6dfc5628a6373901178b95dbf",
   "contract_path": "registry/study1_sg000030_contract.json",
-  "manifest_path": "registry/study1_sg000030_r1_g1_manifest.json",
+  "manifest_path": "registry/study1_sg000030_r1_manifest.json",
+  "pattern_inventory_path": "registry/study1_sg000030_r1_pattern_inventory.json",
+  "runtime_qualification_path": "registry/study1_sg000030_r1_runtime_qualification.json",
+  "runtime_implementation_path": "src/gaxbench/study1_recovery_runtime.py",
   "implementation_path": "src/gaxbench/study1_recovery_compat.py",
   "immutable_parent_sg000028": {
     "scientific_state": "BLOCKED",
@@ -29,5 +32,5 @@
     "rows": 173
   },
   "zero_founder_cost": true,
-  "next_governed_action": "exact-head-qualify-R1-G1-then-continue-R1-resource-specific-support"
+  "next_governed_action": "exact-head-qualify-G2-and-post-main-then-qualified-R1-closeout-before-founder-R2-decision"
 }

@@ -1,0 +1,31 @@
+{
+  "cloud_server_execution_performed": false,
+  "final_role_content_accessed": false,
+  "references": [
+    {
+      "excerpt": "status TU token The status of the observation Observation.status",
+      "expression": "Observation.status",
+      "page_sha256": "1388e9c5df3495fc5307376f23f178f5ff7d06366a0b79bee12aaa135a652480",
+      "parameter": "status",
+      "resource_type": "Observation",
+      "type": "token",
+      "url": "https://hl7.org/fhir/R4/observation.html#search"
+    },
+    {
+      "excerpt": "status token Status of the prescription MedicationRequest.status 3 Resources",
+      "expression": "MedicationRequest.status",
+      "page_sha256": "581527e8bbbbe0359bf9ef11981fa92367fc06eca7df716e679e4f3ca9a3f3d0",
+      "parameter": "status",
+      "resource_type": "MedicationRequest",
+      "type": "token",
+      "url": "https://hl7.org/fhir/R4/medicationrequest.html#search"
+    },
+    {
+      "page_sha256": "7db9490e5723cf44a6c998471f229575d7a00d76db52ee2684014049f8e0524d",
+      "qualified_subset": "Exact case-sensitive primitive code without system or modifiers; every other token form is rejected.",
+      "url": "https://hl7.org/fhir/R4/search.html#token"
+    }
+  ],
+  "retrieved_at_utc": "2026-10-04",
+  "schema_version": "study1-r1-normative-v1"
+}

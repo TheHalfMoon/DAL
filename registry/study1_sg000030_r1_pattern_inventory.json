@@ -1,0 +1,3879 @@
+{
+  "call_level_causal_attribution_claimed": false,
+  "candidate_means_executable_or_recovered": false,
+  "disposition_pattern_counts": {
+    "comparison-transform-candidate": 20,
+    "hard-block-inference-or-shape": 1,
+    "hard-block-opaque-pattern": 39,
+    "hard-block-role-firewall": 7,
+    "hard-block-unproven-semantics": 1,
+    "observed-pass-through": 3,
+    "resource-specific-support-pending": 177
+  },
+  "historical_blocker_rows_retained": 1239,
+  "inventory": [
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 2,
+        "unsupported-parameter:status": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?_since=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "027df1076baac3c4da03b72b6c1379304c1edbc9a0bb7834de4eedb917311822",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:sort": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Encounter?patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "028a43ce29fb9dcda632bf6785a3318940d9a5506e99c1c8bf901fdb88d49367",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_sort=<value>&date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "041deb0f49924e321727e8276936ae5a6973c866b363bc2298ac2d693ca7e2e5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:0099817c66d1b40a1650d03eb79f16692f2dd4bff4c2ac9ca564818066a0b407": 1,
+        "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:0523ac1030b88856e37e3f177958c5cd1dd2cb1492ed9a1e4b7c0c284a548369",
+      "source_pattern_sha256": "0523ac1030b88856e37e3f177958c5cd1dd2cb1492ed9a1e4b7c0c284a548369",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 19,
+        "unsupported-parameter:code": 19
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 19,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 19
+      },
+      "safe_pattern": "opaque-pattern-sha256:05634e497b22609ee70fe0919e1c2ae255dd016311698bc19ba16c3cc4390d07",
+      "source_pattern_sha256": "05634e497b22609ee70fe0919e1c2ae255dd016311698bc19ba16c3cc4390d07",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:06a77cd93e61a42a0dc37b2485fb3c56f198f5e30f828193b5e05d0aa193b12c",
+      "source_pattern_sha256": "06a77cd93e61a42a0dc37b2485fb3c56f198f5e30f828193b5e05d0aa193b12c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 8,
+        "unsupported-parameter:code": 8,
+        "unsupported-parameter:date": 8
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "07557e6fa91dc0e8eb6ecb597f66d5bb2790ec1dd1750bf5aef24333feedb67c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date.ge": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?date.ge=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "07951bd4a9efa4a6ff11db273bdca99aaa967aedd58320c7dc4989f41b26879f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:effectiveDateTime": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&effectiveDateTime=<comparator>&effectiveDateTime=<comparator>&patient=<patient-id>",
+      "source_pattern_sha256": "0a3b3387af02145cb331fa560c9d803b380d28024bce456b4ff0a1cdb2d9cefc",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 2,
+        "unsupported-parameter:medicationAdministration.route": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&medicationAdministration.route=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "0ba6b6d536c124a48f6c4a85077b51a0a4d235bd5d5a6e803ea45bc15a33fe60",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 4,
+        "unsupported-parameter:_limit": 21,
+        "unsupported-parameter:_sort": 21
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 21,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 21
+      },
+      "safe_pattern": "search:Encounter?_limit=<value>&_sort=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "0bf368c7f835100c8ac09c70ac53de81296e4b9bb54343e350c6a960c4bdcec0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.code": 3,
+        "unsupported-parameter:code.system": 3,
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:route": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?code.code=<value>&code.system=<reference>&date=<value>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "0d09c5ce66f8e9b922673a284b7103673bf0e0e92fa7ea483e1ea74abac631eb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:limit": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_sort=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "0d867edf6b6730295f800d6e142343ab031dd9ffa24d3875da4182c675e0f5bb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {},
+      "call_level_support_attribution_available": false,
+      "occurrences": 4,
+      "r1_disposition": "observed-pass-through",
+      "row_status_associations": {
+        "pass": 4
+      },
+      "safe_pattern": "search:Encounter?_count=<positive-int>&patient=<patient-id>",
+      "source_pattern_sha256": "0dd0eb2214daf37c9b6e6d22664c3e07f313845cf398afe1f235ba4b66e86ee6",
+      "support_status": "observed-only-in-passing-rows"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?_since=<value>&code=<token>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "0e110c684f9a5c840082d0882d219a8a67d7e602dc88a4ca0a2f297a441f0c70",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_include": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:identifier.system": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_include=<value>&code=<token>&patient=<patient-id>",
+      "source_pattern_sha256": "0ece3a21cb989ecf724fbba9214dfec5c8f4047bb55d4ab31978ef4a29c12e0c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationCodeableConcept": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?medicationCodeableConcept=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "10bb11a9aed77d3c33c284cb780df471bfa64686202fce0814425049e02e97dd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:category": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?category=<value>&date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "13a0a96bd25e3a29ca0252ead3aba0b44fa2a0f09ea6602ee4858bf6bf112fc2",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 3,
+        "unsupported-parameter:sort": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "13c84efb9e74339e212222215d4f29702e6e763bf60620d17943ba7f48e748af",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.code": 1,
+        "unsupported-parameter:code.system": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code.code=<reference>&code.system=<reference>&date=<reference>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "157b357efdd9633f81b22147236160e5d9d893cd7e03c590de39058d7968be07",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 2,
+        "unsupported-parameter:sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?date=<reference>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "1624c88f7d854e7370dddc887e9109ea3ec93e6941e1b4a278da7ea53349a84b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "1663ffc9c87081d8cbb6483d4adaffa037b4d3daad5751d99e663dd91fea262f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:0099817c66d1b40a1650d03eb79f16692f2dd4bff4c2ac9ca564818066a0b407": 1,
+        "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:167f1c123b40d25189383b4150bbe1db6ef523e3c89fd2a7c5053dc1a626c08c",
+      "source_pattern_sha256": "167f1c123b40d25189383b4150bbe1db6ef523e3c89fd2a7c5053dc1a626c08c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 11
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 11,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 11
+      },
+      "safe_pattern": "search:Encounter?_sort=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "1824d0ca41e3452b744aa077965e041088b72cbca9c3e9c579627c719aa7a5de",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 98,
+        "unsupported-parameter:date": 98
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 98,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 98
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "18ca8c506ffe8b080693310eca4a46a4ebb019b7e8288ecddbfa586faa06d783",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.system=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "1a51ef2bd00c403ec71a42afdffe0e1169a73b4d4020e47504dec25e2decaf1c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?_count=<positive-int>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "1ab2abaffe2ac68aed7cbd1bff3b76580b47c95d2b5d8a49661765211f9cb6c3",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:c9aec7b5df195eedfef2c5b8416dc3b238431599089b03ca105c1d42e5d22ee8": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:1ac9aa32f02d2d96b7dcf3e0f039b4d89fdb12850d080d4be1640473ea9dbd31",
+      "source_pattern_sha256": "1ac9aa32f02d2d96b7dcf3e0f039b4d89fdb12850d080d4be1640473ea9dbd31",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_count=<positive-int>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "1b390efd9c7ee27ff9248d37c3c615f207484d940c6ae977de139b75daba5548",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:fadec3f981e3de9d5feda94756daf4872629c325e7b37c89a2358228e649397d": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:1c33eb3905cf2d110a116fba366157c3d9d7a9be44b7d68eab84d6a1569df215",
+      "source_pattern_sha256": "1c33eb3905cf2d110a116fba366157c3d9d7a9be44b7d68eab84d6a1569df215",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.system": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code.system=<reference>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "1d661b94246d9d6c111ba412fe33d7296f9cd1d3a914bd6455e27c4e98c66f9c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:6b55bbc8c50b8f6525de4f442b25bad8b16343460e4cfb3be04a34316671f6ca": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:1eb9dbfe9f2090d4fc208dde3e347cfb733ca5b0e7e0e185776470c16e5d8441",
+      "source_pattern_sha256": "1eb9dbfe9f2090d4fc208dde3e347cfb733ca5b0e7e0e185776470c16e5d8441",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "1ed4cfc0509341447ee92d5ba962f2ab0241bc357b3fa165cce61d58f0712bd7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:effectivePeriod.end": 1,
+        "unsupported-parameter:effectivePeriod.start": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&effectivePeriod.end=<value>&effectivePeriod.start=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "1effcb8d3b91164335aca695ed7d86e11c1eef172515d18b726ef5310d603567",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?date:gte=<reference>&identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "1f12109070aa1a26348c17c0f349a1dec194a99369350c79755c0f85d936a457",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_count=<positive-int>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "2103bb10347ef8df2d3dace6864f1fc82e90025ef39141ff858b1b6f1bf31736",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:limit": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_since=<value>&_sort=<value>&code=<token>&date=<value>&date=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "222c62def6a2f819dde954e77592a01ba44b22ce913100894cd1982ef205f41d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationAdministration.route": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&medicationAdministration.route=<value>&patient=<patient-id>&sort=<list>",
+      "source_pattern_sha256": "2304487abe11d47a283222bbb4c11263969b73a120b18cad14815f8ded67863e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 1,
+        "unsupported-parameter:specimen": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?specimen=<value>",
+      "source_pattern_sha256": "23cf30b5cb8520250bef75e65f3fedc30142a9c6b44625095ae6925b124ee105",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:43b2a4159abfb21fe9a4c2c8b21288501bb7742fc68721203093ad34c34bd5fc": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:24ff9c6dfc864c65d9893e899b96975da9ed5ac47d39d89107a88e420277e238",
+      "source_pattern_sha256": "24ff9c6dfc864c65d9893e899b96975da9ed5ac47d39d89107a88e420277e238",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "25506500e78a6df5bc513116a63ed9ec5474e3e31c4b8efdd5208e2353ccce5f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1,
+        "unsupported-parameter:route:contains": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&date:lte=<value>&patient=<patient-id>&route:contains=<reference>",
+      "source_pattern_sha256": "25cd5edff83dd57e3d421b3ba5e53d6c8f06fbdb66db8b379f8f0170ef21ffa0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {},
+      "call_level_support_attribution_available": false,
+      "occurrences": 10,
+      "r1_disposition": "observed-pass-through",
+      "row_status_associations": {
+        "pass": 10
+      },
+      "safe_pattern": "search:Condition?patient=<patient-id>",
+      "source_pattern_sha256": "2672468c5505df482f81242bb0df2da2afa0705b3773db06d059c8e42488fc67",
+      "support_status": "observed-only-in-passing-rows"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:effectivePeriod.start": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Observation?code=<token>&effectivePeriod.start=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "274304e79459a8a2904b57db0b6a7c0ddfcb584f78109e5c77e7a64a69e9efb1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 2,
+        "opaque-reason-sha256:781d504aa0aa805ff91ce97e9e41dca2ebc48be52f40d5f1609f5e291f80a5ce": 2,
+        "unsupported-parameter:code": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:27610cfac13aa95ee722c4536d1b171e81e9a3a363cdcf2c5b91103c19d45631",
+      "source_pattern_sha256": "27610cfac13aa95ee722c4536d1b171e81e9a3a363cdcf2c5b91103c19d45631",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 2,
+        "unsupported-parameter:sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&date=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "27a1974ab1442851f43fb5191f1a74c6f8085369a798b232ab998f40a5421266",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c": 2,
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:effectiveDateTime": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:28d3c17b8741e172ecd91308e62083f224b3a9af109605e75eb4964c87195db3",
+      "source_pattern_sha256": "28d3c17b8741e172ecd91308e62083f224b3a9af109605e75eb4964c87195db3",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 4,
+        "unsupported-parameter:status": 4
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 4,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 4
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "28de0d9892af0236c4221da60e7a0452f39327945f240e17a397e66a72e2c04f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:reference": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?date=<value>&patient=<patient-id>&reference=<value>&status=<value>",
+      "source_pattern_sha256": "2959ab544b975d329aba549156631ef35b058a0883aaf6ddc4c2a064b2639a6e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 5,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 5
+      },
+      "safe_pattern": "search:Procedure?_since=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "29e5cc2bb1e03d05e72a6305fbf963708a7ecc8539f42951248f1eb1a79e6ddc",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&date=<reference>&medicationCodeableConcept=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "2b39714c5ff2228939ca5aaa6c3a6c2f78c63485936834456d39f0cda0e406f3",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:sort": 1,
+        "unsupported-parameter:status": 1,
+        "unsupported-parameter:valueLow": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_since=<value>&code=<token>&patient=<patient-id>&sort=<value>&status=<value>&valueLow=<value>",
+      "source_pattern_sha256": "2cfb305c6f1fdcd055bef414671cdb8747fb3b16138d7f75431002ceab71a51c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:2db893355d21f4e2a8418a5e651622c316cd0fed6438dca2657329250df6198c",
+      "source_pattern_sha256": "2db893355d21f4e2a8418a5e651622c316cd0fed6438dca2657329250df6198c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&encounter=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "2f75ac34b2e4564bc96e6ba2118d40d63c35b7be6fda8b72aae248404f54ad6e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "306ec3b7319c6e386c579df98046a607974b7855df6678e9ae368bbaf42a8935",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:5e451ece99d66ff4e37b79c6d412ab36716564b6c01798cbd563c581c3676f0e": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:3140ee068fc8db100936b3357302f2c206767b89761fb2fee639f05d2df378e5",
+      "source_pattern_sha256": "3140ee068fc8db100936b3357302f2c206767b89761fb2fee639f05d2df378e5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 6,
+        "unsupported-parameter:_sort": 6,
+        "unsupported-parameter:status": 6
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 6,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 6
+      },
+      "safe_pattern": "search:Encounter?_limit=<value>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "3224cf0db0094b8d2e321e34c7197e05b43c9d647cd4d18dd81eb4832e2ae8c0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:dateToday": 1,
+        "unsupported-parameter:valueLessThan": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&dateToday=<value>&patient=<patient-id>&valueLessThan=<value>",
+      "source_pattern_sha256": "33c10bfb235d3e0a34f3f5c90047977f7c99b2243b40bbdb3d99eba3a85ddbf8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_date=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "34281a211c22fc47240db8fdb13a3a16f5a7f2ce7420ca4ca3c5043c7b25a370",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_since=<value>&_sort=<value>&medicationCodeableConcept=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "364ce84520b21235a42056f5a1410923d96e24057b59988a8f12e02b1844ed0a",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 2,
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:identifier.system": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&patient=<patient-id>",
+      "source_pattern_sha256": "36d1724b400cd9bad1c09361409da56203c210241b82542445c9bb9328742452",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationRequest.route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?medicationRequest.route=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "393b867a300d04daec7ce91f32ea4316bab32a547766a43b53875f831096f001",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationCodeableConcept": 9,
+        "unsupported-parameter:status": 9
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 9,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 9
+      },
+      "safe_pattern": "search:MedicationRequest?medicationCodeableConcept=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "3967417ea0936a685f14758535d0a44319f548301a2b11c2a06c7fee63e8bf76",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:_sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1,
+        "pass": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?patient=<patient-id>",
+      "source_pattern_sha256": "39a750e16f20fa27041c1b17dd02de6f4a3c55cd21d10164bfe403a5ed5a4c14",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:43c5303c64cd0701bb4b7ffeb26dacb2a50ab5f86bd190fe709635a659b1d65b": 2,
+        "unsupported-parameter:_include": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 9,
+        "unsupported-parameter:encounter": 3,
+        "unsupported-parameter:identifier.system": 66
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 66,
+      "r1_disposition": "hard-block-unproven-semantics",
+      "row_status_associations": {
+        "behavior-changing-blocker": 66
+      },
+      "safe_pattern": "search:Encounter?identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "3c9206b536b127824ef052aaee08715006ac43bf97862fa187dbec18a0f4ee05",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 1,
+        "opaque-reason-sha256:c8dd3c4608dcaf7f98e1c2debc62cb3806e4159b8c528a21a4ee790d90f3e775": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:3d89b13d69059ddc5b2240f618c8693bcfbe54b500e72a428be7ad270f2ed216",
+      "source_pattern_sha256": "3d89b13d69059ddc5b2240f618c8693bcfbe54b500e72a428be7ad270f2ed216",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 19
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 19,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 19
+      },
+      "safe_pattern": "search:Specimen?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "3da60120a84b14cca53b2bd441fa9012b3e64658a8f66ef78400bc1e3bb41af4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:d5dad65ba99b0fcf95622608a82fee0a6f8cfbf947e502a64f005405a3b5955f": 1,
+        "opaque-reason-sha256:fadec3f981e3de9d5feda94756daf4872629c325e7b37c89a2358228e649397d": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:3e12cf1575fc8a527e521b034902b9e4c252c1a599169d7aca22edf32b391500",
+      "source_pattern_sha256": "3e12cf1575fc8a527e521b034902b9e4c252c1a599169d7aca22edf32b391500",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:cc413e2ea661f64fdb74a84bf942bb0e775620208f08a50c2a6d0aba55aff644": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:3e715b25818e0454ae13b0413f94307ec686cf856abb9de12d0d3a2b830e0c2e",
+      "source_pattern_sha256": "3e715b25818e0454ae13b0413f94307ec686cf856abb9de12d0d3a2b830e0c2e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:type": 27
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 27,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 27
+      },
+      "safe_pattern": "search:Encounter?patient=<patient-id>&type=<value>",
+      "source_pattern_sha256": "4024385ecc14052d1bc422a91e699b8a3d57b2b9f7dd8e6d61f3b5afe69ceb83",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "446dc14771d1ca2ae7591cf2aee067dcce4e0752143d62e9792531dd12293d9d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?date=<value>&identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "44b9a0baa8804178ce49639419ac33096c82cd42bb2aff81825475c43068ddcf",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?_count=<positive-int>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "4557c7201f57ae01c7160324489e4d05d70a0186d6231b8db25979a9a78de533",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "invalid-non-relative-query": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-inference-or-shape",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "invalid:invalid-non-relative-query",
+      "source_pattern_sha256": "456cb86686240fa0756907c1ff72f0285ef37a641f0380ca1efcc164fb0111d0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:0a0e4f5d723333be290f1c38f6a839968a0feb9b84603772efe71543d23fe3b1": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:45df792fe8388dd40d4cfeac21b8d194ea8008910c7794bb9e29b78b2f5adcaa",
+      "source_pattern_sha256": "45df792fe8388dd40d4cfeac21b8d194ea8008910c7794bb9e29b78b2f5adcaa",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "48283705df7a8d0b20e8da666c824b792efdf15278c4bdbfc0c0d4223bceaf74",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 3,
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?_limit=<value>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "48dc3784ef72bba645e2b6ebe01942ab98268fb5fd58ba5736058534cdd363ca",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.coding.code": 1,
+        "unsupported-parameter:code.coding.system": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?code.coding.code=<value>&code.coding.system=<reference>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "4ab521108aa3acfd99da7cbf88e6562bad5d9c547b9b7f1035175782b786b4e6",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "4c79485a4c54bce432ba420da05e78352537d0eede3a8ee5a95ff612861cc2b6",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationAdministration.route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_limit=<value>&_sort=<value>&date=<value>&medicationAdministration.route=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "4c99aa2585d33a2bab5c623c1bc0fb5db9ffac108c22cf44476517e57559099f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_sort=<value>&date=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "4e3bba9fbd20d3ca63fb4e5fd1a4bfa3754f095a87551c909ad23a812e01667a",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 38,
+        "unsupported-parameter:specimen": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 50,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 38,
+        "pass": 12
+      },
+      "safe_pattern": "search:Specimen?patient=<patient-id>",
+      "source_pattern_sha256": "54152de238f85bf30baabe97132ba78b52e92fdf83e26c2d9f28a8ed00ea616e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:sort": 1,
+        "unsupported-parameter:type": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_limit=<value>&patient=<patient-id>&sort=<value>&type=<value>",
+      "source_pattern_sha256": "573e1b8036a9eaac9cf53bb01588b1591cc6cb11c528db5ebc0cd6c38e8415b6",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:display": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&display=<value>&medicationCodeableConcept=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "57d507a11c226202457ca47409cea9c562f16c3c6d36573889f2bdfc09faaa2e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 10,
+        "unsupported-parameter:sort": 10
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 10,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 10
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "57fb422bd6997f10ce0a86191d3799ad12e19ceabb74ae9fb9e905806b115419",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 2,
+        "unsupported-parameter:date:lte": 2,
+        "unsupported-parameter:route": 2,
+        "unsupported-parameter:route.code": 2,
+        "unsupported-parameter:route.system": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&date:lte=<value>&patient=<patient-id>&route.code=<value>&route.system=<reference>&route=<value>",
+      "source_pattern_sha256": "5898aae1b173ca1369ff1ce476c22f4a7839ecfcb933c52afea8f4b4d647b49b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 2,
+        "unsupported-parameter:code.code": 2,
+        "unsupported-parameter:code.system": 2,
+        "unsupported-parameter:route": 2,
+        "unsupported-parameter:status": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&_sort=<value>&code.code=<value>&code.system=<reference>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "590004fb94043afd9ecd237978c20f7003d6188a548274d4d2d9e050fd858b55",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Specimen?_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "5a1863119347c6d9cee4821330842ed3e9a9219be0bb05e229f1939e5503fa14",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:date-gt": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_since=<value>&code=<token>&date-gt=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "5a5c70b177a62e18c0fccd445a2df51a218690eb0150f916a16272e044009037",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date.ge": 1,
+        "unsupported-parameter:date.lt": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?date.ge=<value>&date.lt=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "5bbc06709ec4058060a232684484c4de2930e914c69e789ec16945df5c765899",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 6,
+        "unsupported-parameter:effectiveDateTime": 6,
+        "unsupported-parameter:limit": 6
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 6,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 6
+      },
+      "safe_pattern": "search:Observation?code=<token>&effectiveDateTime=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "5d049a61d57790a6c98ecd7d4153153589e616136a480b0d5ba5e2869c7340de",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&_since=<value>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "5e0d2d12ec2f6ffbed30ca0f182d625b992494c4917a850bd5b6585b95c6278c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 5,
+        "unsupported-parameter:status": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 5,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 5
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "5fc3ab51a5d43d14f6118a818219e2cb8ddf0ddacfe6cfe0db046e5f10f3b9af",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 5,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 5
+      },
+      "safe_pattern": "search:Encounter?_since=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "62cc075aaed4cb0bbd2559dcfc0a7ff5fde9e3f81f4542f194cc6b1905c4dc1d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:limit": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "63017115b938f16b90177cd15753ead38a9ba00a78938f53843d55acb9449579",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.display": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_date=<reference>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.display=<value>&medicationCodeableConcept.coding.system=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "6315ca2f7b20fd6573dd1d8c75bd5eac3c0c513aa10fab0a6e23dc27f9e9e8a1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.code": 1,
+        "unsupported-parameter:code.system": 1,
+        "unsupported-parameter:date.ge": 1,
+        "unsupported-parameter:date.lt": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code.code=<value>&code.system=<reference>&date.ge=<value>&date.lt=<value>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "63ec1fbbeee4d00bb1e61b26ee5d21561e4a9c9b8856e893c34b756eec49bdf5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?_sort=<value>&date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "64708b69836944c4270b877e8991efe0cc6ab3e0a1a3f95bfafb0b7a7f8d878c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:b5c4248c68969f20e8b07c5b17285da4c2a4a1412ff7339f351ece0c40c10a0c": 1,
+        "search-target-outside-development-role": 112,
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 281,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 113,
+        "pass": 168
+      },
+      "safe_pattern": "search:Encounter?patient=<patient-id>",
+      "source_pattern_sha256": "65971f6e7362733f69126af3d49dc1ba53909b8b568df190f2c5a590dd98ca66",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 13,
+        "unsupported-parameter:status": 13
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 13,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 13
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "66d9c584199309322daed4acea44ed7d25196eeebedf2abdebc0e94c7c0cc50b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:limit": 2,
+        "unsupported-parameter:sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Encounter?_count=<positive-int>&limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "670e749f4346026d7d51bba466744688038af79db42238372bccaf72f6400698",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.display": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&_sort=<value>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.display=<value>&medicationCodeableConcept.coding.system=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "6773d85f8222b45aa9e29e08b7269572210fbdcca7d4651dd410022c6714c6e4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:2f0002e556c9be68489fa2d3f72d65b9f0e0bada524af14807570f126f9cebc4": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:67ac9a21159f1fadf5ef1072045122e180da7bea4575df90e2fd9a38e40e63cb",
+      "source_pattern_sha256": "67ac9a21159f1fadf5ef1072045122e180da7bea4575df90e2fd9a38e40e63cb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:effectiveDateTime.ge": 1,
+        "unsupported-parameter:effectiveDateTime.lt": 1,
+        "unsupported-parameter:limit": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&effectiveDateTime.ge=<value>&effectiveDateTime.lt=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "67c12e650526de11e235ce3498fbbf3014e4f2d2fb5f5660e0503443820e8c9d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:identifier.system": 2,
+        "unsupported-parameter:identifier.value": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "689dc4769b126374d4ddeb7dba83cd3761a01a6915f4673d0e4cc6c4edcf1ca1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:criteria": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?criteria=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "69280b24ce207f56d2b1c7c9dc46dfe5e0527e7ee59cf898b0679cd6578b72fd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:valueLow": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&patient=<patient-id>&valueLow=<value>",
+      "source_pattern_sha256": "6a4ada7f79cb5b6df9de43eddc912b4676272a1f0762eeaa01a5c0c18071f928",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:type": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?code=<token>&encounter=<value>",
+      "source_pattern_sha256": "6ac85b1147c11e5b31646b204ac00588048c21a83c0628175baabe04c6ad4006",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?identifier.system=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "6c8c8e2fce5ed0d55e5d59aa00be3cd91daca92463b760c46b4288fc9e505bd5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 22,
+        "unsupported-parameter:_limit": 5,
+        "unsupported-parameter:_sort": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 44,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 25,
+        "pass": 19
+      },
+      "safe_pattern": "search:MedicationRequest?patient=<patient-id>",
+      "source_pattern_sha256": "6c98e3b7faae6b44843ee0df3a189ef8d544d78e9d6891e9cfdadd145658f0c3",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 6,
+        "unsupported-parameter:date:gte": 6,
+        "unsupported-parameter:date:lte": 6
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 6,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 6
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "6ee1b07d1a619a3cb1c54fbfa013b3371da465f833b30c5672455734bbc6eb22",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:e72c0aa3585864f60c8c2910e4b0eec1f0bf2f8e85bde60fc91d1f86423edde5": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:valueLow": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:6f67e610489db31cc7851ea6dfa166ccb2f1faf0193cba76ce74f217f9cbdecb",
+      "source_pattern_sha256": "6f67e610489db31cc7851ea6dfa166ccb2f1faf0193cba76ce74f217f9cbdecb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:85173411085ffc1e4f7f21152bbb9271044c401ed92a478964e4dad70e6d5efa": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:70c6b9cbab8912175180eccdd5645859cac0b533128ab9b3c13a61e4470e264e",
+      "source_pattern_sha256": "70c6b9cbab8912175180eccdd5645859cac0b533128ab9b3c13a61e4470e264e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "73906b5e25798b92d6b1bcb9734a6cc3aba2558b5c68a3042d7f89d426b6a7ae",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 1,
+        "opaque-reason-sha256:781d504aa0aa805ff91ce97e9e41dca2ebc48be52f40d5f1609f5e291f80a5ce": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:740c493d78d17e95b70af84caec9b5d6f5910c2e0c52ace8e00c3473e5815ffb",
+      "source_pattern_sha256": "740c493d78d17e95b70af84caec9b5d6f5910c2e0c52ace8e00c3473e5815ffb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:12b9861fa6cfeb9f75dafcad8a5ad5ac5f07bcf28f57bc4c7edf9d82ad017a9b": 1,
+        "opaque-reason-sha256:4464cf4d06acfaa5a56ac8f872ca724420c591178bbea79304d08b9aa611e42b": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:7413824fc3f8353d93eedae083ecc5acff18b184b18cbaf4fbdcb9a44ee0f777",
+      "source_pattern_sha256": "7413824fc3f8353d93eedae083ecc5acff18b184b18cbaf4fbdcb9a44ee0f777",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 3,
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:limit": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "74f89b36441d41c322a0ba27fa2db956b2c2dd159f30938f3822937b009d23b1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&medicationCodeableConcept=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "757a66a06a4ccc91c50b3e9cb676c27bf70a687f5fa0974aae5202e6cd4d530a",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.coding.code": 1,
+        "unsupported-parameter:code.coding.system": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?code.coding.code=<value>&code.coding.system=<reference>&date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "75b396895e4885208593258f3d5557325200f71cb12f7b2758db36f5012b03dd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 4,
+        "unsupported-parameter:effectiveDateTime": 4
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 4,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 4
+      },
+      "safe_pattern": "search:Observation?code=<token>&effectiveDateTime=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "77a9d3bf75742c866a55c7988300f3ae34ce08fab6c0b4441cad139dd4f09074",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 1,
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:786e0f9c6c35e75778c49d6a3f7deb95e12e1841784b138a581f1f0bfa1ce1b8",
+      "source_pattern_sha256": "786e0f9c6c35e75778c49d6a3f7deb95e12e1841784b138a581f1f0bfa1ce1b8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_limit=<value>&_sort=<value>&date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "79a616d5236734243cb5e0ed7a5506154036844c081b4a6af9711e55d9297bf8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 5,
+        "unsupported-parameter:identifier.system": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 5,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 5
+      },
+      "safe_pattern": "search:Encounter?_since=<value>&identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7a19985cdcafb0d1a004df70eb8f9bf8da525966eca3238743e5b5d9fd84e351",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7a753e1d807c08e1c6197963c68c91cc6980d885670e4b3577ca17f15b4036d7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<list>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "7a7bb25bd3247f95d73264808dca7c22646971c6c70876022fb1c863ff79ee84",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:code": 3,
+        "unsupported-parameter:date": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Observation?_count=<positive-int>&_sort=<value>&code=<token>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7ad11dc92619efd679ab3e84c627cc744c43836274de124e3f4148c374235b24",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7b2f4b55685583ad52e5b4d65327a5ec009228e2c6115ddff16dbf106b380e03",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:7bb593369314f21aacdd23898d105aca505d09c24c23227130bbc18d70726600",
+      "source_pattern_sha256": "7bb593369314f21aacdd23898d105aca505d09c24c23227130bbc18d70726600",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationCodeableConcept": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?medicationCodeableConcept=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7be5ea5a7907dc5bd23be0a3c3145f0baa2a04705b124595a4cb5857e7d20df5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationAdministration.route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&date=<value>&medicationAdministration.route=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7c0ec71319af9f47a652821e4197865030f87cf8e20e0d3885aef08517bc8ceb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 2,
+        "unsupported-parameter:date": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7dd110fd8c7ea4d7e57902c467c3c0bc24c49b60d0994d55c55df68e9d874e0d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:limit": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:7e967506077834680bfed0d925b23882697eaf764bce7daa00a66dada9cb8ad4",
+      "source_pattern_sha256": "7e967506077834680bfed0d925b23882697eaf764bce7daa00a66dada9cb8ad4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 14
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 14,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 14
+      },
+      "safe_pattern": "search:Observation?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "7f202bc42d55d511501574c110c7eb3c9feed80e20f2422afaeb60ef22a1b171",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:coding.code": 1,
+        "unsupported-parameter:coding.system": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?coding.code=<value>&coding.system=<reference>&date=<value>&patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "7f3a2721288bf4f1d4f3738a14cabe7a718316d9a5b17b16f4bf62682fabe995",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:90be8746fc7841e86fbbea2550ea435f74aab0c2e16bc1edbb890d71e01b009b": 4,
+        "unsupported-parameter:code": 4,
+        "unsupported-parameter:effectiveDateTime": 4
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 4,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 4
+      },
+      "safe_pattern": "opaque-pattern-sha256:7fdad4be5ad2b1edce834ba847170d4766fb12b3fc493706a4e842bf045e2f57",
+      "source_pattern_sha256": "7fdad4be5ad2b1edce834ba847170d4766fb12b3fc493706a4e842bf045e2f57",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "82400b44144dcd7ee873bca7dacad5c06ed27218facb3c6248fd9c605c4ba184",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 2,
+        "unsupported-parameter:identifier.system": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "82d36843d039cf01ea4ffebfaaa13001b68b59361362644a6f898f3c4e60287c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:identifier.system": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_limit=<value>&_sort=<value>&code=<token>&patient=<patient-id>",
+      "source_pattern_sha256": "84174542f04db0ad88c681a613837a690c14cfeb16ddf65050dfc7496835bb01",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?identifier.system=<value>&identifier.value=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "847465656263799e1d332b15ea18000c83d535f19a14c00d59690d9f9f3de55a",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:d1a8ff48a7a0ea897d534f923b1e0a7c8bd7609e1f7180c4a5ef0aa3cf094336": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueQuantity": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:865b68ef3d9643df7b9f144c7095959320619937b6fba736dd546449fe3274d9",
+      "source_pattern_sha256": "865b68ef3d9643df7b9f144c7095959320619937b6fba736dd546449fe3274d9",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 9
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 9,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 9
+      },
+      "safe_pattern": "search:MedicationAdministration?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "86ec789b7e4765fa01efbb7d0b7a319d4472ffb5096076e2d469c0903b48a477",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationReference.display": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?medicationReference.display=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "8794a15fa5edbbe743506f734f71e7c2c3dd4e239d144c290d763c5053e2e125",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:848bb96815f9c34d920d3ab0cedcb933be327230127752c038f5e3dbc5ca00df": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:87b11c14a31e070333e0fd7406126b8aa09e31417005ceafa758846f8996c7f2",
+      "source_pattern_sha256": "87b11c14a31e070333e0fd7406126b8aa09e31417005ceafa758846f8996c7f2",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&date:lte=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "886ddb756678a54c153c8eb69158aa47909a241a1acc5056989b767a3db64ec1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c": 1,
+        "unsupported-parameter:_sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:8c1b2a89e3a8abc8de66eed57f32e267c61d1a2b98d496678615b862e1550e7c",
+      "source_pattern_sha256": "8c1b2a89e3a8abc8de66eed57f32e267c61d1a2b98d496678615b862e1550e7c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&identifier.system=<value>&identifier.value=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "908636d58f5301d4e873f5fa61d1e648841f2e1debb4a4632fbbad4dc3032984",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_count=<positive-int>&_sort=<value>&code=<token>&date=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "90a7a275a763ae7fdd90767b8adb5c6ea1f54d38a2e7295426dffeda715fa7c7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 8,
+        "unsupported-parameter:effectiveDateTime": 8
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Observation?_count=<positive-int>&code=<token>&effectiveDateTime=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "910c66a92bc4940700ffa3527159a22a3037fc52479fde36dda4c22e249f5384",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 8,
+        "unsupported-parameter:_sort": 8,
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:identifier.system": 8
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Encounter?_limit=<value>&_sort=<value>&identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "91e0b4f4f98a505cebe5f61725ea2d68452d4ede6361edf36a9337e271dddce5",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:code": 12,
+        "unsupported-parameter:identifier.system": 2,
+        "unsupported-parameter:sort": 1,
+        "unsupported-parameter:type": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 12,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 12
+      },
+      "safe_pattern": "search:Observation?code=<token>&patient=<patient-id>",
+      "source_pattern_sha256": "922b4180e08d72bf1e73372e46b64463667cc74be25d15a5ccc0e0f7c0682303",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 3,
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:sort": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Observation?_count=<positive-int>&code=<token>&date=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "924582abe4e80ab4294de5a93aeefbce3996fbe5cc40b6130d1f0543ff10781d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?encounter=<value>&patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "936badee48031ce780e55393c379bed5a64639fbe9c1e5747351c4adc8510694",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:93f1601ce4e3ca4ab819d0468a68917fbcf55d67b1f879c7945388dc272b2eb7",
+      "source_pattern_sha256": "93f1601ce4e3ca4ab819d0468a68917fbcf55d67b1f879c7945388dc272b2eb7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?patient=<patient-id>&route=<reference>",
+      "source_pattern_sha256": "955279726def64258dd26be69201584ccb5919743838a9430bdf35af2a7c2bff",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "9c5000c56cd777ec4f51a2cc9efa51cf60a9498d48bc653ab6ae65c6d33d3e89",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "9cf6f6194ff6a93ab0bc2c0d7c3ccd7184c85ac704d7f485518a10496e6bed2c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:encounter": 1,
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:identifier.value": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?encounter=<value>&identifier.system=<value>&identifier.value=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "9d8ac750c3352bafa017e1be077e81172d81d16f7b6dcbe670478512df1e4a2b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 13,
+        "unsupported-parameter:date": 13
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 13,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 13
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "9de17507f16936dc2227dfa751488278ea05db1d042de6f1291197afa3ccf31d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:identifier.system": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_limit=<value>&_sort=<value>&code=<reference>&code=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "9fd42ea8d11e518fe5ca4b4defda224017637a213c32f9e4edfab1342b502894",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_sort=<value>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.system=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "a0a98aa7f25d183d1626e139c84d68930d8377d91544dbf672c0a2231668c86f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?code=<token>&patient=<patient-id>",
+      "source_pattern_sha256": "a0b211afca810b92f8c0642e28e95253cce4dae8c99b0bd8e55f42afbcd4d17c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "a14c2dbf2fa7a48ba1b439c48ea7532e6a9c1e7c15a85645a65c61b42576f815",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "a2240b61e6051f80c0da63b3233d237c6674b33647a27d9756b6f001ee7d7a1c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationAdministration.route": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?medicationAdministration.route=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "a23dd56a5fd88e14cfa971c3b4b47a77329f9788970630804fd94ed71329548d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:limit": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "a33f37d8a4772c8b1b27a9103454d3b6d330c531abd72255aff38050a2c5f3c8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "a494074335d1f8dd05a9b5bf1bff58778b9f8e12290d2f3f0eb42f7b371fd35e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 8
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Procedure?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "a4b3efdb6074d6498232c223f6497902bf40e1466b7b1cdeff85e71d094195ca",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 13,
+        "unsupported-parameter:date:lte": 13
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 13,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 13
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "a6397266cc78c9a95f7da3cae66a291cb019d281e47f7185675fb60dbe9b2356",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 28
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 28,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 28
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "a67394372eb46bb6e7edc85b53c1bc9304610fec2be0336df474ba0e263a989b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:a417885e8dcb7b45a9a6132c4393524691b19ec05b8ef6783940b858d0d4111a": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:a7bb60bd3f68976dd7523f2e4e5f64d50964b27d0aa7e4415e9124ab97824de3",
+      "source_pattern_sha256": "a7bb60bd3f68976dd7523f2e4e5f64d50964b27d0aa7e4415e9124ab97824de3",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:aace8c81465752039de45885d5a69ff58b42347c6f7821788b8a25f592d8553b",
+      "source_pattern_sha256": "aace8c81465752039de45885d5a69ff58b42347c6f7821788b8a25f592d8553b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.code": 1,
+        "unsupported-parameter:code.system": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code.code=<value>&code.system=<reference>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "ac157d0feb2d26ddbcdb07c159b913f916e2c042e40c8f7d8f416c6f5cfa8428",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 6
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 16,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 6,
+        "pass": 10
+      },
+      "safe_pattern": "search:Procedure?patient=<patient-id>",
+      "source_pattern_sha256": "acbb3bf2caadb5e6787042f0b710e571a9a7648fe18c9bb28cf3ddebc4934c5b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 1,
+        "unsupported-parameter:medicationAdministration.route": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_date=<value>&medicationAdministration.route=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "acdd30404c8dec3aa911366c5f1a3311bbce96e3d991a0721c0ceae7904f55bd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:325a1d0823d7cbad297fc1bd091938b111f16267656dbffa2bf756abb6e216a3": 1,
+        "opaque-reason-sha256:59ec46aed1a8f4b1673c7ec9f9ccfb8253d9a6ea0bf2fb8b0a5de358df300c3f": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:route.coding.code": 1,
+        "unsupported-parameter:route.coding.display": 1,
+        "unsupported-parameter:route.coding.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:ad2eac6cd17d8146337f485a9cb3fd7084d63303b6b055b663f4afdbdf41af0d",
+      "source_pattern_sha256": "ad2eac6cd17d8146337f485a9cb3fd7084d63303b6b055b663f4afdbdf41af0d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_limit": 2,
+        "unsupported-parameter:_sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Specimen?_limit=<value>&_sort=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "ade33e58d9ff85e9e39202dd3bf7dca25147513dc6269174390dab1d5198b8c4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 5
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 5,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 5
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "ae99086aa41ff4ef273fae2252bb107b48bb3457ed6f319949c95907b655a6fb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 3,
+        "unsupported-parameter:identifier.system": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Encounter?_date=<value>&identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "af322ddc25b4332282c2736047f1b7b5731e74d0f3a121e4295a0f0cd7e3a665",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 2,
+        "unsupported-parameter:route": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?_since=<value>&patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "afaa7072f9247e426561b9445d212a905120d16a570155d2d8be00fa159d83a7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 1,
+        "unsupported-parameter:medicationReference": 1,
+        "unsupported-parameter:method": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_date=<reference>&medicationReference=<value>&method=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "b0848a7ddf52145ec04e0e78a63bae35ad16f6a0bd1a5ea3b83ae6502ec14e78",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_until": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:route.code": 1,
+        "unsupported-parameter:route.display": 1,
+        "unsupported-parameter:route.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_since=<value>&_until=<value>&patient=<patient-id>&route.code=<value>&route.display=<reference>&route.system=<reference>&route=<value>&status=<value>",
+      "source_pattern_sha256": "b15dc9aca5575cc75b31268c7e4bcaf9c80b5d640f4f288594e24aac70ea4904",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:effectivePeriod.end": 1,
+        "unsupported-parameter:effectivePeriod.start": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?effectivePeriod.end=<value>&effectivePeriod.start=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "b1a449a9eec59e63956d00da970111d3467e6f11846ee0095fafb5f1e2e309bd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_until": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_since=<value>&_until=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "b3aa7254c8b23c9f98cf4e1bb4ebd164496050f40079b86bf9d6307b75a91654",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:21bd3da086063cc347f69e79564a3b78dc8380a21bf1027731879718682870a8": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:b3b651d78a778e8a9ad4226ae6cbcb220936c710c246eee71e24b97802f90257",
+      "source_pattern_sha256": "b3b651d78a778e8a9ad4226ae6cbcb220936c710c246eee71e24b97802f90257",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?date:gte=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "b54488d83f14174f54c2bfacb91d7f3029417bc03d50b122ff99bcfce684c288",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "b572124e828a702f28c583ed893e22a256a34f727f3869fc42a4f18260c46786",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:system": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&patient=<patient-id>&route=<value>&system=<reference>",
+      "source_pattern_sha256": "b85a39b088d37321df30cf6bf0755997e2b51377a3f99ea9644af891d9a192ff",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:date": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Procedure?code=<token>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "bc654c254dee2c2f30a169e9f724649601df7de0a65312e5327045caad4f8761",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:request.method": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:route.code": 1,
+        "unsupported-parameter:route.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_count=<positive-int>&_since=<value>&patient=<patient-id>&request.method=<value>&route.code=<value>&route.system=<reference>&route=<value>&status=<value>",
+      "source_pattern_sha256": "bd610f161f58a8e6a34e533d7287e35b175363fb22f2c943f14af0d0f4ffeec1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:5bbca674faaec4e3c3d356fc655d983a894e9a2583a682f440def6aa5c4107b4": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:bdcd4e91b43a1b67773d218de2fce00a12ebc7e8ca8c22f52d4eb733417d0cd6",
+      "source_pattern_sha256": "bdcd4e91b43a1b67773d218de2fce00a12ebc7e8ca8c22f52d4eb733417d0cd6",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:limit": 4,
+        "unsupported-parameter:sort": 4
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 4,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 4
+      },
+      "safe_pattern": "search:MedicationRequest?limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "bed257a8fbaf67b207963fbad6fbdc41f3db1b5f27eff9e10e4850fdfec6559f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 2,
+        "unsupported-parameter:status": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Encounter?_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "bf3cae35f348a2fc2fa1095abf71ee16a13f06a145997698349ef00d6671d916",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:date:lte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_count=<positive-int>&_sort=<value>&date:gte=<value>&date:lte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "bfc6e8c2dae3e194ca22e4e55f6b86e256c32262d8bd635f1c966199ab18e4fb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:limit": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&_sort=<value>&limit=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "c1b42f0e5e4228ff85c8f883d6c5229652641f0ad2ac61340d8da8abf4448822",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "c29d9739b7f48c1aba78057a7e17e7897b221920c0b68517267030d77c68a1d9",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&date=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "c2cd197ac9172b435190c11d32a4027b1e975f1ac977109d592dc8d96a37419b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:identifier.system": 1,
+        "unsupported-parameter:type": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?identifier.system=<value>&patient=<patient-id>&type=<value>",
+      "source_pattern_sha256": "c3140993990d6a713e756bbdefc4b5cf33d433fa09777e4e4a4097e8cc8b004b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 3,
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:valueBelow": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&patient=<patient-id>&valueBelow=<value>",
+      "source_pattern_sha256": "c32061b173786d95e0f289719e00da493d455ae731884e742a754d080da86a19",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Procedure?_since=<value>&code=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "c6be66de8ad134f8f4631753cf9290cecf99fc286dea1bb5b3ef30618e5915ed",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueLow": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&patient=<patient-id>&valueLow=<value>",
+      "source_pattern_sha256": "c8168e2de5c8ec86de0a9139aa6ae1d00cfd82b2b8d9a926bd65a3e6882cf401",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date.ge": 1,
+        "unsupported-parameter:date.lt": 1,
+        "unsupported-parameter:valueQuantity.lt": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&date.ge=<value>&date.lt=<value>&patient=<patient-id>&valueQuantity.lt=<value>",
+      "source_pattern_sha256": "cb3897ecde3320f6da38e7f22feccad4e9acf92373e6412a1e41a0e4d5f21579",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:status": 8
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Encounter?patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "cbd00bbfcfbe30d12789125b8b10e526cbd4af4ff2644194a10207b69f7864f8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:code": 3,
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:limit": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&date=<value>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "cbd29ec718ef91c0d11695245f5bb064cdc3f05add66c7b855c159de7fd62281",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:date": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Specimen?code=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "ccbd333a0e0b8a75fd7fe932e209a35a190682e3d16b6becefd64ed98f7c36c9",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "cdc49b04bd7235aa10da2c0281eb698725dd3eb8e834424db6aead4e3758c753",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "cf37f3a1b022ea8c189278c4aa5467847b562b2d0746734461c490f4f25033fe",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 41
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 41,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 41
+      },
+      "safe_pattern": "search:Encounter?date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "cfcc1dd31a62491f2491fcb6cd8c8b79cd3b2278b29f8afa4f84f2e81f3f2b14",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?_since=<value>&patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "d0ad748e15be15f990a6f44829e5b9e0be042986ecbd8651b35b1ecb6721c4c0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationCodeableConcept": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&date=<reference>&medicationCodeableConcept=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "d51482022f4d26f4663bf583dd17dcfc54af549555cb4a54424fd19b8ae9e280",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 7,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:identifier.system": 7
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 7,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 7
+      },
+      "safe_pattern": "search:Encounter?_sort=<value>&identifier.system=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "d5c5100197090a7b46f679f34984ff8e6ed06b3b16233ccfd2a234ca5a3bd0d0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_date": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?_date=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "d637c8652a3869389a950090ba4f138a391a9ca7b97cda5f1980bea50eba4944",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Encounter?_count=<positive-int>&_sort=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "d65f8f4dfd6a4c04e61e58fdac940cfbf2bb2225d6a7e501d4ff252c99da3ad6",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.display": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1,
+        "unsupported-parameter:sort": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.display=<value>&medicationCodeableConcept.coding.system=<reference>&patient=<patient-id>&sort=<value>&status=<value>",
+      "source_pattern_sha256": "d6f8b77fb43ca6468f3ce6dd2ef6f9c12c2e9d5fc41d5f46e811c9a2d09af33b",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueLessThan": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<reference>&patient=<patient-id>&valueLessThan=<value>",
+      "source_pattern_sha256": "d7a784e670893b533a1bbe1789e314cc5f1de75337eb2a2af8773172819242a8",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueLessThan": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?code=<token>&date=<value>&patient=<patient-id>&valueLessThan=<value>",
+      "source_pattern_sha256": "d8db7a0988159737f657d992c9caa1e612544712d97101693abf809dcaf566d1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:413fe59c97cc0db68d3c2fd9466785cbadc580fcf7261d3131d89a76e3ae22e4": 1,
+        "opaque-reason-sha256:b0d5b2304ce15e9618760d2cbcf6881c332e4f72593e70021d40deaffe57e17b": 1,
+        "opaque-reason-sha256:bf66143a4a7c635d4bb8e88e4b4048c2996a77fccef7cdee188ed2a30f4b6e31": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:d92087bc0aa5840a3c9534e98d66c13f8cbb828f3e5bf0d27238fa088b8c45d7",
+      "source_pattern_sha256": "d92087bc0aa5840a3c9534e98d66c13f8cbb828f3e5bf0d27238fa088b8c45d7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:medicationReference": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&medicationReference=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "d9997ab38a2dcae81c39e0cb4ae6a7c3a514ef71873148267fcd4db3c4dc367c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:sort": 29
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 29,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 29
+      },
+      "safe_pattern": "search:Encounter?_count=<positive-int>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "da04248bb55ad3ffb1368a7bef5af637538f781534a234847f55af3f6b586d27",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:encounter:reference": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?_count=<positive-int>&_sort=<value>&encounter:reference=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "da3e823f7a5152eb864d3950aa903aaaeeb4d242f0f2db25c5b6a20163ae6e5f",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gte": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gte=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "daae6e9dded4d5cedb51514d771a354a7030c7e817b318f8f2cff77afd34ae4d",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 1,
+        "unsupported-parameter:_until": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Encounter?_since=<value>&_until=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "dab21c3845882a14e3281374c455a5ed0d9a7d43bee6064f520d3d0003a90a53",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:medicationAdministration.route": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?medicationAdministration.route=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "dc89528ff4589b146d98d89bf3c7099f7fb79ef9b00384fe9dad8573e9a03f02",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Encounter?_since=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "dd36f023a2be29cc3edcfb6846bede740b9191225358716832a737ccdb424063",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "search-target-outside-development-role": 367,
+        "unsupported-parameter:_limit": 2,
+        "unsupported-parameter:_sort": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 371,
+      "r1_disposition": "hard-block-role-firewall",
+      "row_status_associations": {
+        "behavior-changing-blocker": 367,
+        "pass": 4
+      },
+      "safe_pattern": "search:Observation?patient=<patient-id>",
+      "source_pattern_sha256": "dfdcc157e8f1b4670cc8b964acf0783d5f8984ee91dba1bfec74e25e4c3c3de4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code.code": 1,
+        "unsupported-parameter:code.system": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code.code=<value>&code.system=<reference>&date=<reference>&patient=<patient-id>&route=<value>&status=<value>",
+      "source_pattern_sha256": "e096f33fa66243e023ce107f6727703cd6e24173e6d330ba4b7f681a919913aa",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:type": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?patient=<patient-id>&type=<value>",
+      "source_pattern_sha256": "e161e67018325507ac5d5af79a72d5971cdc13101804cb3424f73eb1d13ec64a",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?_sort=<value>&code=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "e2e60b08ca5169d7d2f462733f5ae78ca037100acf0bfa180d51c0e553cbd389",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:b5c4248c68969f20e8b07c5b17285da4c2a4a1412ff7339f351ece0c40c10a0c": 1,
+        "search-target-outside-development-role": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:e33d58d53ed27ff4f46661a9ed1453b12193a6fe48966f9fa4fb5ffd65c52cb1",
+      "source_pattern_sha256": "e33d58d53ed27ff4f46661a9ed1453b12193a6fe48966f9fa4fb5ffd65c52cb1",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:446cad0febcbfc047a30e9e39f616dd45991765b28f27a557db306073d032dd5": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueQuantity": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:e3dc4ef428735c47a3c2995054d5bb394c378a0fb7d1bab197dcadb5b08c63bb",
+      "source_pattern_sha256": "e3dc4ef428735c47a3c2995054d5bb394c378a0fb7d1bab197dcadb5b08c63bb",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:d46b807cacfbe49aa56bf4e0d2e4f19b37e7333ed69b2185c1543d2ed7caca47": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "opaque-pattern-sha256:e4f699e4c5dcf4d48d6282f63d18c4a4a7d0bcb3680faf0da806c97e95ba38f0",
+      "source_pattern_sha256": "e4f699e4c5dcf4d48d6282f63d18c4a4a7d0bcb3680faf0da806c97e95ba38f0",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Specimen?date=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "e5601a4e22ee41d44e4c923aed5ed99755412aa54bd399558d35e1a41f1b90e4",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_sort": 1,
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:limit": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_sort=<value>&code=<token>&limit=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "e610e94eaf0c3aa4694cf85ffd35db30d32146ed4de5d9de5db9e5a34a2392dd",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1,
+        "unsupported-parameter:route.code": 1,
+        "unsupported-parameter:route.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&patient=<patient-id>&route.code=<value>&route.system=<reference>&route=<value>&status=<value>",
+      "source_pattern_sha256": "e6f95dc1c1f29de6dac5b7a456960db70d9af760cce7c161d15293c0b861eafc",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?code=<value>&date=<value>&patient=<patient-id>&route=<value>",
+      "source_pattern_sha256": "e7634309cc751be0d4ba0c161085b98d76193875a5948c411ca36d886c9532e7",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:entryMode": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.code": 1,
+        "unsupported-parameter:medicationCodeableConcept.coding.system": 1,
+        "unsupported-parameter:status": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?entryMode=<value>&medicationCodeableConcept.coding.code=<value>&medicationCodeableConcept.coding.system=<reference>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "e825fca9af95699679c3c175e9e96b59a4d1717fc2d18f0e868e0a91df37bc00",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:patient": 16
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 16,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 16
+      },
+      "safe_pattern": "search:Patient?patient=<patient-id>",
+      "source_pattern_sha256": "ea67cb31baee6636f2ed5aa2c9df9447e1fbc7e1e37b49b6a68540ddd533173e",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gt": 1,
+        "unsupported-parameter:limit": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gt=<value>&limit=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "eb7931249c36f415308570ac804a3825c58bde85da5c662b78a3ecdde667ce37",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date:gt": 1,
+        "unsupported-parameter:date:lt": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "comparison-transform-candidate",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?date:gt=<value>&date:lt=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "ecc9d4999a22b52fdfa4811debe442f9ed61d77f40a7aff698ad3c34cc7626c9",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "opaque-reason-sha256:43c5303c64cd0701bb4b7ffeb26dacb2a50ab5f86bd190fe709635a659b1d65b": 2,
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:identifier.system": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "hard-block-opaque-pattern",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "opaque-pattern-sha256:ecd1e9b373f940254f1aac22a68ee6046432a33cad8fd9147d63f27d86238c40",
+      "source_pattern_sha256": "ecd1e9b373f940254f1aac22a68ee6046432a33cad8fd9147d63f27d86238c40",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:route": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationAdministration?date=<value>&patient=<patient-id>&route=<reference>",
+      "source_pattern_sha256": "edac6bf780270822be527115efa458ca1171f0bd6f66a214ea9e4590d8a4c352",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:date": 3,
+        "unsupported-parameter:medicationCodeableConcept": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:MedicationRequest?date=<value>&medicationCodeableConcept=<reference>&patient=<patient-id>",
+      "source_pattern_sha256": "ee591786cdc1d7d5ffe77ffc348ed0ea58bc446fc82bffe47da3c2aca40ef061",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:category": 1,
+        "unsupported-parameter:date": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?category=<value>&date=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "ef79a428ebed4d5c0110126940e1775bd607a300fa404eeae5611ce2949bf562",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 2,
+        "unsupported-parameter:effectiveDateTime": 2
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 2,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 2
+      },
+      "safe_pattern": "search:Observation?code=<token>&code=<token>&effectiveDateTime=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "f07abbbd4d802e0fcca331d87689b572855f0addc0c250cb10a9dca95a4dfe55",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:_since": 3,
+        "unsupported-parameter:_sort": 3,
+        "unsupported-parameter:status": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 3,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 3
+      },
+      "safe_pattern": "search:Specimen?_since=<value>&_sort=<value>&patient=<patient-id>&status=<value>",
+      "source_pattern_sha256": "f239f6719488e24512e5d85ef28213c112797a1082038c8e9916239117e9a535",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:criteria": 1,
+        "unsupported-parameter:sort": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:MedicationRequest?criteria=<value>&patient=<patient-id>&sort=<value>",
+      "source_pattern_sha256": "f3949d3bf3e756e857c24ac0cd038e864dd94c6b7c9549d444e13fa36def4a0c",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {},
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "observed-pass-through",
+      "row_status_associations": {
+        "pass": 1
+      },
+      "safe_pattern": "search:Specimen?_count=<positive-int>&patient=<patient-id>",
+      "source_pattern_sha256": "f4d3eddf9b9daf00ba90644e9b9babe0c3b2deb981ab20ddf77a568e240b3838",
+      "support_status": "observed-only-in-passing-rows"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 8,
+        "unsupported-parameter:encounter": 8,
+        "unsupported-parameter:identifier.system": 3
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 8,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 8
+      },
+      "safe_pattern": "search:Observation?code=<token>&encounter=<value>&patient=<patient-id>",
+      "source_pattern_sha256": "faeb8dde5806afed4b68784dc47b54164c63655a3aa68b73b8d3f503630ab045",
+      "support_status": "blocked-row-associated-not-qualified"
+    },
+    {
+      "blocker_reason_associations": {
+        "unsupported-parameter:code": 1,
+        "unsupported-parameter:date": 1,
+        "unsupported-parameter:valueLow": 1
+      },
+      "call_level_support_attribution_available": false,
+      "occurrences": 1,
+      "r1_disposition": "resource-specific-support-pending",
+      "row_status_associations": {
+        "behavior-changing-blocker": 1
+      },
+      "safe_pattern": "search:Observation?_count=<positive-int>&code=<token>&date=<value>&patient=<patient-id>&valueLow=<value>",
+      "source_pattern_sha256": "fbb6222bc245652b47dd494ea2fc705c74cdf7d213016c8307bc3b45fe3d6469",
+      "support_status": "blocked-row-associated-not-qualified"
+    }
+  ],
+  "pattern_count": 248,
+  "post_recovery_blocker_count_requires_separately_authorized_r2": true,
+  "post_recovery_blocker_row_count": null,
+  "runtime_version": "sg000030-r1-g2-v1",
+  "schema_version": "study1-r1-safe-inventory-v1",
+  "source_path": "registry/study1_sg000028_execution_37156028113.json",
+  "source_sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785"
+}
