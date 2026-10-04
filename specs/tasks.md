@@ -385,6 +385,15 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [x] Preserve earlier provenance/dependency failures as historical records
 - [x] Exact-head qualify persistence: PR #145 merged 48b73aa6ba75b2b1c6e1b11f26e762ca8d010200; all required exact-head and post-main checks passed
 - [x] Implement bounded SG-000028-R1 output firewall; all 1463 structural rows replay with unchanged classifications (canonical only after qualification, merge, and post-main verification)
-- [ ] Investigate the full 1239-row blocker set without changing the frozen producer, role boundary, or gate criteria
+- [x] Investigate all 106 reason keys across the full 1239-row blocker set; preserve unknown target/runtime causes and distinguish empty-parameter repair candidates from invalid comparison modifiers
 - [ ] SG-000028 PASS / closeout remains blocked
 - [ ] D4 separate activation remains blocked
+
+### SG-000028-G1 - Complete blocker investigation and program-direction decision gate
+
+- [x] Classify every observed reason key from complete canonical development evidence
+- [x] Verify FHIR R4 prefix placement and distinguish standard empty-parameter handling
+- [x] Preserve the negative result and keep producer, pass criteria, roles, and final firewall unchanged
+- [x] Create decision-only Issue #147 with concrete options and scientific consequences
+- [ ] Exact-head qualify the investigation/frontier record, merge normally, and verify post-main
+- [ ] Founder program-direction decision under Issue #147; no replacement experiment is authorized

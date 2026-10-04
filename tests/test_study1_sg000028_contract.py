@@ -102,7 +102,7 @@ def test_frontier_records_canonical_dependency_blocker_without_stage_progression
     dependency = frontier["canonical_dependency"]
     failure = frontier["dependency_failure"]
     assert frontier["specgrain_id"] == "SG-000028"
-    assert frontier["state"] == "blocked-observed-behavior-changing"
+    assert frontier["state"] == "blocked-requires-founder-program-decision"
     assert (
         frontier["query_trace_gate_status"]
         == "blocked-behavior-changing"

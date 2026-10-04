@@ -1,0 +1,925 @@
+{
+  "all_observed_reason_keys_classified": true,
+  "answer_correctness_scored": false,
+  "blocked_rows_retained": 1239,
+  "blocker_class_row_counts": {
+    "comparison-prefix-used-as-search-modifier": 41,
+    "compatibility-surface-deficiency-candidate": 620,
+    "inference-runtime-response-failure": 2,
+    "malformed-fhir-search-parameter-name": 61,
+    "missing-observed-tool-call": 2,
+    "nonstandard-or-unproven-search-semantics": 374,
+    "request-outside-relative-get-contract": 1,
+    "role-firewall-target-rejection": 428
+  },
+  "class_counts_overlap": true,
+  "current_protocol_conclusion": "Faithful compatibility repairs may address valid search semantics, including empty-parameter handling. Naming anomalies alone do not prove all 61 affected rows irreparable. Turning the 41 rows with comparison syntax used as unsupported modifiers into intended valid comparisons would require forbidden request reinterpretation. Faithful error retention does not make the original strict no-malformed-behavior gate PASS. The strict gate remains blocked.",
+  "d4_activation_allowed": false,
+  "development_rows_investigated": 1463,
+  "empty_parameter_semantic_repair_candidate": true,
+  "final_role_content_accessed": false,
+  "gate_criteria_changed": false,
+  "governance_gate": {
+    "authorization_received": false,
+    "decision_scope": "Future program direction after an immutable negative qualification; no waiver, PASS claim, or producer switch within SG-000028 is authorized.",
+    "options": [
+      {
+        "consequence": "Current SG-000028 stays BLOCKED; current D4 stays inactive. The sealed final role stays untouched and may be carried forward only under a separately qualified final-evaluation authorization.",
+        "description": "Preserve this negative Study 1 frontier and authorize a separate prospective recovery/restart protocol with disclosed development outcome exposure; freeze new rules and identities before any new execution.",
+        "id": "A"
+      },
+      {
+        "consequence": "No D4-D10 execution or final evaluation can proceed under the current strict gate; no new experiment is authorized.",
+        "description": "Retain the current protocol and document the program as scientifically blocked at this negative qualification.",
+        "id": "B"
+      }
+    ],
+    "recommendation_reason": "A separate prospective protocol can address the feasibility failure without retroactively weakening the original result or claiming blindness to already-observed development outcomes.",
+    "recommended_option": "A",
+    "state": "BLOCKED_REQUIRES_FOUNDER_DECISION"
+  },
+  "grain_id": "SG-000028-G1",
+  "immutable_malformed_or_invalid_modifier_row_count": 102,
+  "immutable_obstruction_question_hash_set_sha256": "27af0152f3507878cffc6400858b0b70df3d4d32dca688df0abb71ee1e9c3443",
+  "limits": [
+    "Blocker reasons are row-associated; multiple tool calls cannot be individually attributed.",
+    "Normalization discarded parameter values, target identities, absolute origins, and exception classes.",
+    "Unsupported names were checked before role scope; reported classes are not a complete census of latent blockers.",
+    "Candidate standard FHIR names do not prove resource-specific support or frozen benchmark equivalence.",
+    "No final patient, resource, question, trace, label, or model output was consulted."
+  ],
+  "malformed_name_rows_with_empty_parameter": 24,
+  "missing_tool_call_rows_with_inference_error": 2,
+  "model_selection_performed": false,
+  "normative_reference": {
+    "empty_parameter_rule": "Empty parameters are not an error - they are just ignored by the server.",
+    "limit": "This establishes prefix placement and empty-parameter handling, not the frozen server's complete handling of unknown parameters. Unsupported-parameter handling remains unproven; no lenient-ignore equivalence is claimed or used to waive the strict gate.",
+    "page_sha256": "7db9490e5723cf44a6c998471f229575d7a00d76db52ee2684014049f8e0524d",
+    "section": "3.1.1.4.5 Prefixes",
+    "url": "https://hl7.org/fhir/R4/search.html",
+    "verified_quote": "For the ordered parameter types of number, date, and quantity, a prefix to the parameter value may be used to control the nature of the matching."
+  },
+  "persisted_evidence_sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+  "producer_changed": false,
+  "raw_benchmark_source_accessed": false,
+  "raw_traces_accessed": false,
+  "reason_investigation": [
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "proven-observed-contract-rejection",
+      "class": "request-outside-relative-get-contract",
+      "governed_action": "Retain blocker; the evidence does not preserve an absolute origin or fragment and cannot justify rewriting the request.",
+      "safe_reason": "invalid-non-relative-query",
+      "source_reason_sha256": "52e0c88893f3d6bd352f3b7d7936014e20716d2dc18a95f0fc4dc75ec5e5e8c1"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "exception-class-not-retained",
+      "class": "inference-runtime-response-failure",
+      "governed_action": "Investigate runtime only in a separately governed diagnostic; do not fabricate calls or switch the producer. Existing evidence cannot identify the underlying exception.",
+      "safe_reason": "llm-call-error",
+      "source_reason_sha256": "dfb7ca8ebbce10dd93450add4bda01b203f70bc3d3349893716bd05fbe536665"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "exception-class-not-retained",
+      "class": "inference-runtime-response-failure",
+      "governed_action": "Investigate runtime only in a separately governed diagnostic; do not fabricate calls or switch the producer. Existing evidence cannot identify the underlying exception.",
+      "safe_reason": "no-response",
+      "source_reason_sha256": "b93d50144b644669fbadaaf6107a59351448e53b247ec6effe1eeb35b4c22deb"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "observed-with-inference-error-in-this-run",
+      "class": "missing-observed-tool-call",
+      "governed_action": "Retain failed row. Compatibility code cannot supply an unobserved tool call.",
+      "safe_reason": "no-tool-call",
+      "source_reason_sha256": "5f4c6f9735d7c6d673309f1f5cdba507fc7df22e6b8694b61ff03d66af38a6a9"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:0099817c66d1b40a1650d03eb79f16692f2dd4bff4c2ac9ca564818066a0b407",
+      "source_reason_sha256": "0099817c66d1b40a1650d03eb79f16692f2dd4bff4c2ac9ca564818066a0b407"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "opaque-reason-sha256:0a0e4f5d723333be290f1c38f6a839968a0feb9b84603772efe71543d23fe3b1",
+      "source_reason_sha256": "0a0e4f5d723333be290f1c38f6a839968a0feb9b84603772efe71543d23fe3b1"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:12b9861fa6cfeb9f75dafcad8a5ad5ac5f07bcf28f57bc4c7edf9d82ad017a9b",
+      "source_reason_sha256": "12b9861fa6cfeb9f75dafcad8a5ad5ac5f07bcf28f57bc4c7edf9d82ad017a9b"
+    },
+    {
+      "affected_row_occurrences": 6,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2",
+      "source_reason_sha256": "193f377d4be8c98c2029cde7ee1baf30a6f7e3963950b53c29be22959be964c2"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:21bd3da086063cc347f69e79564a3b78dc8380a21bf1027731879718682870a8",
+      "source_reason_sha256": "21bd3da086063cc347f69e79564a3b78dc8380a21bf1027731879718682870a8"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:2f0002e556c9be68489fa2d3f72d65b9f0e0bada524af14807570f126f9cebc4",
+      "source_reason_sha256": "2f0002e556c9be68489fa2d3f72d65b9f0e0bada524af14807570f126f9cebc4"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:325a1d0823d7cbad297fc1bd091938b111f16267656dbffa2bf756abb6e216a3",
+      "source_reason_sha256": "325a1d0823d7cbad297fc1bd091938b111f16267656dbffa2bf756abb6e216a3"
+    },
+    {
+      "affected_row_occurrences": 25,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5",
+      "source_reason_sha256": "396348ebf797c70cf50cc207e219aa817f2afa1bb5db0d72c7434929782503c5"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:413fe59c97cc0db68d3c2fd9466785cbadc580fcf7261d3131d89a76e3ae22e4",
+      "source_reason_sha256": "413fe59c97cc0db68d3c2fd9466785cbadc580fcf7261d3131d89a76e3ae22e4"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:43b2a4159abfb21fe9a4c2c8b21288501bb7742fc68721203093ad34c34bd5fc",
+      "source_reason_sha256": "43b2a4159abfb21fe9a4c2c8b21288501bb7742fc68721203093ad34c34bd5fc"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:43c5303c64cd0701bb4b7ffeb26dacb2a50ab5f86bd190fe709635a659b1d65b",
+      "source_reason_sha256": "43c5303c64cd0701bb4b7ffeb26dacb2a50ab5f86bd190fe709635a659b1d65b"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:4464cf4d06acfaa5a56ac8f872ca724420c591178bbea79304d08b9aa611e42b",
+      "source_reason_sha256": "4464cf4d06acfaa5a56ac8f872ca724420c591178bbea79304d08b9aa611e42b"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:446cad0febcbfc047a30e9e39f616dd45991765b28f27a557db306073d032dd5",
+      "source_reason_sha256": "446cad0febcbfc047a30e9e39f616dd45991765b28f27a557db306073d032dd5"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:59ec46aed1a8f4b1673c7ec9f9ccfb8253d9a6ea0bf2fb8b0a5de358df300c3f",
+      "source_reason_sha256": "59ec46aed1a8f4b1673c7ec9f9ccfb8253d9a6ea0bf2fb8b0a5de358df300c3f"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:5bbca674faaec4e3c3d356fc655d983a894e9a2583a682f440def6aa5c4107b4",
+      "source_reason_sha256": "5bbca674faaec4e3c3d356fc655d983a894e9a2583a682f440def6aa5c4107b4"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:5e451ece99d66ff4e37b79c6d412ab36716564b6c01798cbd563c581c3676f0e",
+      "source_reason_sha256": "5e451ece99d66ff4e37b79c6d412ab36716564b6c01798cbd563c581c3676f0e"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:6b55bbc8c50b8f6525de4f442b25bad8b16343460e4cfb3be04a34316671f6ca",
+      "source_reason_sha256": "6b55bbc8c50b8f6525de4f442b25bad8b16343460e4cfb3be04a34316671f6ca"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:781d504aa0aa805ff91ce97e9e41dca2ebc48be52f40d5f1609f5e291f80a5ce",
+      "source_reason_sha256": "781d504aa0aa805ff91ce97e9e41dca2ebc48be52f40d5f1609f5e291f80a5ce"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:848bb96815f9c34d920d3ab0cedcb933be327230127752c038f5e3dbc5ca00df",
+      "source_reason_sha256": "848bb96815f9c34d920d3ab0cedcb933be327230127752c038f5e3dbc5ca00df"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:85173411085ffc1e4f7f21152bbb9271044c401ed92a478964e4dad70e6d5efa",
+      "source_reason_sha256": "85173411085ffc1e4f7f21152bbb9271044c401ed92a478964e4dad70e6d5efa"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:90be8746fc7841e86fbbea2550ea435f74aab0c2e16bc1edbb890d71e01b009b",
+      "source_reason_sha256": "90be8746fc7841e86fbbea2550ea435f74aab0c2e16bc1edbb890d71e01b009b"
+    },
+    {
+      "affected_row_occurrences": 4,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c",
+      "source_reason_sha256": "a106630221e6473a65dc142c07b1a2a0b0c033b11c994e61ac64da6e7bdee58c"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:a417885e8dcb7b45a9a6132c4393524691b19ec05b8ef6783940b858d0d4111a",
+      "source_reason_sha256": "a417885e8dcb7b45a9a6132c4393524691b19ec05b8ef6783940b858d0d4111a"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:b0d5b2304ce15e9618760d2cbcf6881c332e4f72593e70021d40deaffe57e17b",
+      "source_reason_sha256": "b0d5b2304ce15e9618760d2cbcf6881c332e4f72593e70021d40deaffe57e17b"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:b5c4248c68969f20e8b07c5b17285da4c2a4a1412ff7339f351ece0c40c10a0c",
+      "source_reason_sha256": "b5c4248c68969f20e8b07c5b17285da4c2a4a1412ff7339f351ece0c40c10a0c"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:bf66143a4a7c635d4bb8e88e4b4048c2996a77fccef7cdee188ed2a30f4b6e31",
+      "source_reason_sha256": "bf66143a4a7c635d4bb8e88e4b4048c2996a77fccef7cdee188ed2a30f4b6e31"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:c8dd3c4608dcaf7f98e1c2debc62cb3806e4159b8c528a21a4ee790d90f3e775",
+      "source_reason_sha256": "c8dd3c4608dcaf7f98e1c2debc62cb3806e4159b8c528a21a4ee790d90f3e775"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:c9aec7b5df195eedfef2c5b8416dc3b238431599089b03ca105c1d42e5d22ee8",
+      "source_reason_sha256": "c9aec7b5df195eedfef2c5b8416dc3b238431599089b03ca105c1d42e5d22ee8"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:cc413e2ea661f64fdb74a84bf942bb0e775620208f08a50c2a6d0aba55aff644",
+      "source_reason_sha256": "cc413e2ea661f64fdb74a84bf942bb0e775620208f08a50c2a6d0aba55aff644"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:d1a8ff48a7a0ea897d534f923b1e0a7c8bd7609e1f7180c4a5ef0aa3cf094336",
+      "source_reason_sha256": "d1a8ff48a7a0ea897d534f923b1e0a7c8bd7609e1f7180c4a5ef0aa3cf094336"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:d46b807cacfbe49aa56bf4e0d2e4f19b37e7333ed69b2185c1543d2ed7caca47",
+      "source_reason_sha256": "d46b807cacfbe49aa56bf4e0d2e4f19b37e7333ed69b2185c1543d2ed7caca47"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:d5dad65ba99b0fcf95622608a82fee0a6f8cfbf947e502a64f005405a3b5955f",
+      "source_reason_sha256": "d5dad65ba99b0fcf95622608a82fee0a6f8cfbf947e502a64f005405a3b5955f"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:e72c0aa3585864f60c8c2910e4b0eec1f0bf2f8e85bde60fc91d1f86423edde5",
+      "source_reason_sha256": "e72c0aa3585864f60c8c2910e4b0eec1f0bf2f8e85bde60fc91d1f86423edde5"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "name-structure-anomaly-not-complete-server-semantics-proof",
+      "class": "malformed-fhir-search-parameter-name",
+      "governed_action": "Retain blocker pending faithful semantics proof; do not rewrite the name. FHIR R4 permits ignoring empty parameters, so empty-value cases are potential compatibility or exerciser deficiencies rather than proven irreparable requests.",
+      "safe_reason": "opaque-reason-sha256:fadec3f981e3de9d5feda94756daf4872629c325e7b37c89a2358228e649397d",
+      "source_reason_sha256": "fadec3f981e3de9d5feda94756daf4872629c325e7b37c89a2358228e649397d"
+    },
+    {
+      "affected_row_occurrences": 428,
+      "certainty": "rejection-proven-underlying-target-identity-unavailable",
+      "class": "role-firewall-target-rejection",
+      "governed_action": "Retain firewall. Normalized evidence cannot distinguish a malformed identifier, hallucinated target, or forbidden-role target. Never expand to final-role resources.",
+      "safe_reason": "search-target-outside-development-role",
+      "source_reason_sha256": "049aaba5c9072e314019adce87d14c35cc37994fcd4e8b8165de95ef2b5a85f9"
+    },
+    {
+      "affected_row_occurrences": 8,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:_date",
+      "source_reason_sha256": "728304670413d9efce0caa351607a455ac9dbcdd5e510b48290277018922b42a"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:_include",
+      "source_reason_sha256": "2ff0739b9ff6f23baedfee1bd7320ad10513fd36241ee7c25a3482d884ad510f"
+    },
+    {
+      "affected_row_occurrences": 44,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:_limit",
+      "source_reason_sha256": "19cfcc096c644d5783407c1f26a71349a04263b9c676043b0884887dee3ea6af"
+    },
+    {
+      "affected_row_occurrences": 59,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:_since",
+      "source_reason_sha256": "d0ec1c7f5f5d3fe14bb4e79d35e48bfc1c50b2579aad66dac1696d9a7a98c9fb"
+    },
+    {
+      "affected_row_occurrences": 129,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:_sort",
+      "source_reason_sha256": "7b3d48e048d57fcbf0829504c70bc9af927f49b30aeef3643dcb7368a8a51819"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:_until",
+      "source_reason_sha256": "8a323e03a94182b043d57c87276c0045532403c2c556f5e169fa5f20aece1d90"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:category",
+      "source_reason_sha256": "3e7fee0dcf114d09fa671fff11e4280956e48a86d3bac0aa012390d6fd960aea"
+    },
+    {
+      "affected_row_occurrences": 245,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:code",
+      "source_reason_sha256": "7bf8c68b1f4c78c430d74fced0ca840442ce354b7694d4559ce544d849d61e56"
+    },
+    {
+      "affected_row_occurrences": 9,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:code.code",
+      "source_reason_sha256": "ee3684ec80ccca41a1d13e93f94f75dc4a382edcf3f51e6435715b9a19eb5be1"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:code.coding.code",
+      "source_reason_sha256": "924df45e9c8e650d7250f1c0ac68b5d276db7ffbf6cd4f10b68663c594af5634"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:code.coding.system",
+      "source_reason_sha256": "dc9fba8a99c7c2fba631fcf920f25ffde8ef26a63902e5cda2bb96fec00eb0d9"
+    },
+    {
+      "affected_row_occurrences": 10,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:code.system",
+      "source_reason_sha256": "03c8a6098660c1f904195e1f9aa1414e9f85fdbf164d84c82c41e1e9b9415d0f"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:coding.code",
+      "source_reason_sha256": "58d194e577252c815f823bdbf033c8906c1684b1f95da70012a3658ed7a0a270"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:coding.system",
+      "source_reason_sha256": "5448a4a7983f70679312cd65d07e03c7782baeef1ed0b9c088d8006564763e6b"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:criteria",
+      "source_reason_sha256": "2610333ab18257e2d870278c489313784957dd48880ad5afc3087d2c570213e6"
+    },
+    {
+      "affected_row_occurrences": 332,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:date",
+      "source_reason_sha256": "304340a3ab9ac3f121804c311b4abf43241ad36b026e333b6a64b39357a713b8"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:date-gt",
+      "source_reason_sha256": "f45cf98deaa5f5bae19a7c8bc98f5c676eccb61273f85e83241d1c71a17b7274"
+    },
+    {
+      "affected_row_occurrences": 4,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:date.ge",
+      "source_reason_sha256": "59931118ea297a178f6c55358debfdbbc04906d892aa4bb5284995c520d5bb28"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:date.lt",
+      "source_reason_sha256": "e51360f3bc7aa227df27dd5ea3eca6cad05434b634b6fafa8acf1206aeca330d"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "proven-structural-prefix-misplacement",
+      "class": "comparison-prefix-used-as-search-modifier",
+      "governed_action": "Retain blocker; FHIR comparison prefixes belong in values, not these modifiers.",
+      "safe_reason": "unsupported-parameter:date:gt",
+      "source_reason_sha256": "39b3622afa22ddf51a87d97926acf8db61d9e8d260d21a095f3952530a6af00f"
+    },
+    {
+      "affected_row_occurrences": 39,
+      "certainty": "proven-structural-prefix-misplacement",
+      "class": "comparison-prefix-used-as-search-modifier",
+      "governed_action": "Retain blocker; FHIR comparison prefixes belong in values, not these modifiers.",
+      "safe_reason": "unsupported-parameter:date:gte",
+      "source_reason_sha256": "bba63e9869ce3c640cf0671441415893f40d45bdb9a23e271f5c91efd27a8751"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "proven-structural-prefix-misplacement",
+      "class": "comparison-prefix-used-as-search-modifier",
+      "governed_action": "Retain blocker; FHIR comparison prefixes belong in values, not these modifiers.",
+      "safe_reason": "unsupported-parameter:date:lt",
+      "source_reason_sha256": "67922d81bc6eac94ad7eb819d5c97f786b11bacafe5c7d5256292a8d4a1056fa"
+    },
+    {
+      "affected_row_occurrences": 29,
+      "certainty": "proven-structural-prefix-misplacement",
+      "class": "comparison-prefix-used-as-search-modifier",
+      "governed_action": "Retain blocker; FHIR comparison prefixes belong in values, not these modifiers.",
+      "safe_reason": "unsupported-parameter:date:lte",
+      "source_reason_sha256": "d05da0138b01082c3c7b0a883616efd1816ca4bea9b07aaef0c1b665f26bb160"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:dateToday",
+      "source_reason_sha256": "3ea7ad412da2409fbde16fbd15c21f9052acb987e5b1dbc6228d8f945070e600"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:display",
+      "source_reason_sha256": "0b53db5feab06623f63a588f8ab3abd00b0e6dee3a816dae6c331fdebd403168"
+    },
+    {
+      "affected_row_occurrences": 17,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:effectiveDateTime",
+      "source_reason_sha256": "b2619e65fa5999c2b28d1bea0fee383aae10523ed09ef8bae01d6dbd548ade4e"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:effectiveDateTime.ge",
+      "source_reason_sha256": "d7dbc9706983b164f4d92c3b896f1dab96b41d8444d003b4abde35f5c50de3a0"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:effectiveDateTime.lt",
+      "source_reason_sha256": "9df50ba5b4c64a6ffbdd2c64ec71b46048be575c8c6af554d264170d2b917a8f"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:effectivePeriod.end",
+      "source_reason_sha256": "00f12d0f2d990714596204f0754a4730f165ab9c0481c4e09817df8c32cc612a"
+    },
+    {
+      "affected_row_occurrences": 4,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:effectivePeriod.start",
+      "source_reason_sha256": "fb3d4d8818606780fc86089b3ea73e10eefbc1dc571011cbbc2bd838c2dd06cf"
+    },
+    {
+      "affected_row_occurrences": 12,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:encounter",
+      "source_reason_sha256": "691134de0e734f9080b76242d7852ad2bf179c19483dbab08eabaa2ec3cdebef"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:encounter:reference",
+      "source_reason_sha256": "fd4de3991e28b35434d884235d0dd56160892df832b9940020c7e2535ebce304"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:entryMode",
+      "source_reason_sha256": "50fd94b36714ea827ebeb1f7469b9b6802cd163e1d5a2e1d8dcbe0a485d482af"
+    },
+    {
+      "affected_row_occurrences": 102,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:identifier.system",
+      "source_reason_sha256": "4548cd6bd05054bdc98857f1a0755c4bd757bf7a585d490a5a4c51ce08b62234"
+    },
+    {
+      "affected_row_occurrences": 9,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:identifier.value",
+      "source_reason_sha256": "96a5149a8876ede29eb8e3a8df006d387dfc17e024c7be0f47d507875c5a423b"
+    },
+    {
+      "affected_row_occurrences": 23,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:limit",
+      "source_reason_sha256": "37b9ba813a10b6e305dc759d813eba7f16c008873e59ab6a9fa619142ea6bf79"
+    },
+    {
+      "affected_row_occurrences": 10,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationAdministration.route",
+      "source_reason_sha256": "b8b1f86c2731acec1ac4309fd316dd022571a23872e78c91382f1177fe153694"
+    },
+    {
+      "affected_row_occurrences": 20,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationCodeableConcept",
+      "source_reason_sha256": "b59f3aa02a9b0ad9f83b3c67a9bb78a1ad62d739b8d827a64a1e4460ceef5251"
+    },
+    {
+      "affected_row_occurrences": 6,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationCodeableConcept.coding.code",
+      "source_reason_sha256": "774b59f56fe2f5f88b5d470e6c9ea008e1efbdb42c02fa63f46b2dd6c8c89f62"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationCodeableConcept.coding.display",
+      "source_reason_sha256": "3b339b941500c6421fe41bffd3040ea841ffb0268d1fca4be59b4bd55519e686"
+    },
+    {
+      "affected_row_occurrences": 6,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationCodeableConcept.coding.system",
+      "source_reason_sha256": "a75dd24015cea1842d34fc1103c5464aba629bf518652d6fc4b09140e8c3053d"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationReference",
+      "source_reason_sha256": "9d76c3bf361e01f50f2828cffecd183a169ded0deef172ae59cf2765b0eab21c"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationReference.display",
+      "source_reason_sha256": "7f548930e57661b5b2105f26ec6b90dbd238a33dbcfe1f39f7bb04fde0afcf7a"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:medicationRequest.route",
+      "source_reason_sha256": "c74be7ebd66396ddcf424f0853dddbb144c3dd165676a61e4f046c02a257c560"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:method",
+      "source_reason_sha256": "e0d5617b95ae9303ea278071460a6a5d554a4389fb20b18a690f002df9fc4b03"
+    },
+    {
+      "affected_row_occurrences": 16,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:patient",
+      "source_reason_sha256": "e6aed32fe01c3ce00e0566f386cded20f7dc9de42616bd867d70ac244f77637f"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:reference",
+      "source_reason_sha256": "856486f9cf391d19986ce1f17029e93cb856fef3641582ffc926798b751deaa1"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:request.method",
+      "source_reason_sha256": "e7af10c3a313aef7bef5ed64903c94370ae05242d8c1d4045465dde1fc5ba2e4"
+    },
+    {
+      "affected_row_occurrences": 25,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route",
+      "source_reason_sha256": "eb85ef04ef61c94d04b5d42b42d6c4a1a287e0f83506523a96427732990b36a1"
+    },
+    {
+      "affected_row_occurrences": 5,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.code",
+      "source_reason_sha256": "4f5526746ff8f68b5a00ff44e672a8ad8eedc2e370799b275ba1eedb421fac83"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.coding.code",
+      "source_reason_sha256": "ab9797d369980dd339282b83d07cfee2483e2f19303f9c56dd9e6805cc3e65dc"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.coding.display",
+      "source_reason_sha256": "00fe5b2c6b0b696b3f395b401ee1aea5e3354f9c3e06539c61e2a7ab221582e9"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.coding.system",
+      "source_reason_sha256": "504db3a1521ec7e8204cf829da55eb8fd1220ac189e441c6c0299a5a577886a2"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.display",
+      "source_reason_sha256": "577b31819666e84f796f9f736351da4df865b509a78c04419a0af74fc09d8140"
+    },
+    {
+      "affected_row_occurrences": 5,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route.system",
+      "source_reason_sha256": "6107dd3c3cc1693a75d4839e47eb96b96452c4a276bed37f250c8c79f443f50b"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:route:contains",
+      "source_reason_sha256": "1e6908596514dc803b51587af3e30091c6be9c1d8c024382fdf6ca1fc028f050"
+    },
+    {
+      "affected_row_occurrences": 74,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:sort",
+      "source_reason_sha256": "5897e8d9a31b0e03dc67f8ea2a8ae00e8ef2f1b4c7ac50869600179925e7e926"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:specimen",
+      "source_reason_sha256": "727d71c42ce8fb1bf13adf12f59a79b0f508d8dd9f73892cb57ba3929dd48b7e"
+    },
+    {
+      "affected_row_occurrences": 111,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:status",
+      "source_reason_sha256": "9c569acd0ad0b0c789743193725c76848418cbbee2892fb3eefc5946b6dd6ac7"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:system",
+      "source_reason_sha256": "c4201848076872aed39c2cb0f8ba20eaaff675f30626363223c59d5be972ea82"
+    },
+    {
+      "affected_row_occurrences": 30,
+      "certainty": "resource-specific-semantics-unproven",
+      "class": "compatibility-surface-deficiency-candidate",
+      "governed_action": "A separately governed deterministic repair may support valid resource-specific search semantics only after benchmark equivalence is proven.",
+      "safe_reason": "unsupported-parameter:type",
+      "source_reason_sha256": "efc8f9cd253383674a426f85777340d07907eb4c7182c7b4d74a3f1e1ff3d8fd"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:value",
+      "source_reason_sha256": "b92b216ea567e7fef47e0048e184ec10ae5050066cde7f1ae7d8ba0a6341fa2e"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:valueBelow",
+      "source_reason_sha256": "aeb0a6381b43c2112277b579a9d11b40c0256f888805814588ffaeea266b1145"
+    },
+    {
+      "affected_row_occurrences": 3,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:valueLessThan",
+      "source_reason_sha256": "bc3d9c277bd1045de5ac83d41bb3f0032dae7837f084721e0a299fc4cf2e05c6"
+    },
+    {
+      "affected_row_occurrences": 5,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:valueLow",
+      "source_reason_sha256": "ed08c593d0960ca6eba45a77f1fbc0a8a9c5e19e39e97fe59c05846d93cd7c62"
+    },
+    {
+      "affected_row_occurrences": 2,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:valueQuantity",
+      "source_reason_sha256": "94c49c8d4cfcc3ae9e7d0a3ad62da489a6c619a801469bc5426744a6da3f561f"
+    },
+    {
+      "affected_row_occurrences": 1,
+      "certainty": "upstream-benchmark-semantics-required",
+      "class": "nonstandard-or-unproven-search-semantics",
+      "governed_action": "Do not alias, drop, ignore, or reinterpret the parameter; retain blocker until the exact frozen benchmark meaning can be supported faithfully.",
+      "safe_reason": "unsupported-parameter:valueQuantity.lt",
+      "source_reason_sha256": "db6a5bdf90c424a33089567804f22a870096dd9410db13e72ecd44552ef8dad0"
+    }
+  ],
+  "research_contract_issue": 141,
+  "schema_version": "0.1",
+  "source_main": "f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d",
+  "source_run": 37156028113,
+  "specgrain_id": "SG-000028",
+  "study_id": "study1",
+  "training_performed": false,
+  "unique_reason_keys": 106,
+  "zero_founder_cost": true
+}
