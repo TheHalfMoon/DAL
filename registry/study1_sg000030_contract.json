@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000030",
+  "stage": "R1-recovery-compatibility-canonicalization",
+  "research_issue": 154,
+  "founder_authorization_issue": 153,
+  "founder_authorization_comment": 5982001184,
+  "canonical_parent_main": "352569f2461815a6dfc5628a6373901178b95dbf",
+  "canonical_protocol": "registry/study1_sg000029_recovery_protocol.json",
+  "r1_g1_manifest": "registry/study1_sg000030_r1_g1_manifest.json",
+  "implementation_module": "src/gaxbench/study1_recovery_compat.py",
+  "immutable_parent": {
+    "specgrain_id": "SG-000028",
+    "scientific_state": "BLOCKED",
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "development_rows": 1463,
+    "pass_rows": 224,
+    "behavior_changing_blocker_rows": 1239,
+    "source_pattern_identities": 248,
+    "may_be_relabelled_pass": false
+  },
+  "development_exposure": {
+    "status": "exposed-development",
+    "blind_claim_allowed": false,
+    "independent_confirmation_claim_allowed": false
+  },
+  "r1_authorized_actions": {
+    "deterministic_manifest_and_canonicalizer": true,
+    "empty_parameter_handling": true,
+    "comparison_modifier_to_value_prefix": true,
+    "resource_specific_support_after_normative_and_runtime_equivalence": true,
+    "safe_structural_evidence_only": true
+  },
+  "execution_boundary": {
+    "new_model_inference_allowed": false,
+    "r2_execution_allowed": false,
+    "rerun_sg000028_allowed": false,
+    "model_or_tokenizer_change_allowed": false,
+    "prompt_or_agent_strategy_change_allowed": false,
+    "training_allowed": false,
+    "d4_activation_allowed": false,
+    "final_role_access_allowed": false,
+    "row_omission_allowed": false,
+    "retry_until_favorable_allowed": false,
+    "gate_waiver_allowed": false
+  },
+  "sealed_final_role": {
+    "patients": 40,
+    "rows": 173,
+    "access_allowed": false
+  },
+  "qualification": {
+    "gaxbench_linux_windows_python_311_312": "required",
+    "alibaba_open_code_review": "required",
+    "typesafe_jev_exact_diff": "required",
+    "dal_manuscript": "required",
+    "zero_unresolved_active_review_threads": "required",
+    "normal_merge": "required",
+    "expected_head_guard": "required",
+    "post_main_gaxbench": "required",
+    "post_main_manuscript": "required"
+  },
+  "zero_founder_cost": true
+}
