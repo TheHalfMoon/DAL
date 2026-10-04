@@ -3,7 +3,7 @@
   "study_id": "study1",
   "specgrain_id": "SG-000028",
   "stage": "post-D3-pre-D4",
-  "state": "blocked-requires-founder-program-decision",
+  "state": "blocked-prospective-recovery-protocol-authorized",
   "research_contract_issue": 141,
   "contract_path": "registry/study1_sg000028_contract.json",
   "canonical_dependency": {
@@ -70,7 +70,7 @@
   "d7_model_selection_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "founder-program-direction-decision-under-issue-147-no-new-experiment-authorized",
+  "next_governed_action": "qualify-separate-prospective-recovery-protocol-under-SG-000029-no-new-experiment-authorized",
   "historical_pre_execution_frontier_path": "registry/study1_sg000028_pre_execution_frontier_37153192763.json",
   "execution_evidence_path": "registry/study1_sg000028_execution_37156028113.json",
   "observed_result": {
@@ -89,7 +89,11 @@
   "compatibility_requalification_authorized": false,
   "blocker_investigation_path": "registry/study1_sg000028_blocker_investigation.json",
   "governance_decision_issue": 147,
-  "governance_decision_authorization_received": false,
+  "governance_decision_authorization_received": true,
+  "governance_decision_authorization_comment": 5981658161,
+  "prospective_recovery_protocol_issue": 150,
+  "prospective_recovery_protocol_specgrain": "SG-000029",
+  "prospective_recovery_execution_authorized": false,
   "bounded_behavior_preserving_compatibility_improvements_permitted": true,
   "compatibility_improvements_alone_waive_original_malformed_behavior_blockers": false
 }
