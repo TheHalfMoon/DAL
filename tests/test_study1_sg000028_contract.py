@@ -102,11 +102,13 @@ def test_frontier_records_canonical_dependency_blocker_without_stage_progression
     dependency = frontier["canonical_dependency"]
     failure = frontier["dependency_failure"]
     assert frontier["specgrain_id"] == "SG-000028"
-    assert frontier["state"] == "blocked-requires-founder-program-decision"
-    assert (
-        frontier["query_trace_gate_status"]
-        == "blocked-behavior-changing"
-    )
+    assert frontier["state"] == "blocked-prospective-recovery-protocol-authorized"
+    assert frontier["query_trace_gate_status"] == "blocked-behavior-changing"
+    assert frontier["governance_decision_authorization_received"] is True
+    assert frontier["governance_decision_authorization_comment"] == 5981658161
+    assert frontier["prospective_recovery_protocol_issue"] == 150
+    assert frontier["prospective_recovery_protocol_specgrain"] == "SG-000029"
+    assert frontier["prospective_recovery_execution_authorized"] is False
     assert dependency["provenance_repair_merge"] == (
         "d01f6eaf22ae11b44cff7a979526596c36e6ac03"
     )

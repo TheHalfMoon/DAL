@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000029",
+  "stage": "R0-prospective-recovery-protocol",
+  "state": "protocol-drafting-authorized-not-yet-canonical",
+  "research_contract_issue": 150,
+  "founder_decision_issue": 147,
+  "founder_authorization_comment": 5981658161,
+  "canonical_base": "139056bd74521f5555126f24f3d9a3c43c300a1d",
+  "contract_path": "registry/study1_sg000029_contract.json",
+  "protocol_path": "registry/study1_sg000029_recovery_protocol.json",
+  "parent_sg000028": {
+    "scientific_state": "BLOCKED",
+    "development_rows": 1463,
+    "pass_rows": 224,
+    "behavior_changing_blocker_rows": 1239,
+    "immutable": true,
+    "may_be_relabelled_pass": false
+  },
+  "development_exposure": {
+    "status": "exposed-development",
+    "rows": 1463,
+    "blind_claim_allowed": false,
+    "independent_confirmation_claim_allowed": false
+  },
+  "sealed_final_role": {
+    "patients": 40,
+    "rows": 173,
+    "access": "sealed-and-forbidden-before-separately-qualified-D9-authorization"
+  },
+  "new_inference_authorized": false,
+  "rerun_sg000028_authorized": false,
+  "model_switch_authorized": false,
+  "model_selection_authorized": false,
+  "tokenizer_change_authorized": false,
+  "prompt_change_authorized": false,
+  "agent_strategy_change_authorized": false,
+  "training_authorized": false,
+  "d4_activation_allowed": false,
+  "final_role_access_allowed": false,
+  "r1_activation_allowed_after_sg000029_canonical": true,
+  "r2_execution_authorized": false,
+  "zero_founder_cost": true,
+  "next_governed_action": "exact-head-qualify-and-canonically-merge-SG-000029-protocol-before-R1"
+}
