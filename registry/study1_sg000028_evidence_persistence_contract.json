@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1",
+  "study_id": "study1",
+  "specgrain_id": "SG-000028",
+  "grain_id": "SG-000028-E1",
+  "research_contract_issue": 141,
+  "scope": "Persist complete canonical negative evidence and update frontier without changing the experiment",
+  "source_run": 37156028113,
+  "source_main": "f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d",
+  "acceptance": [
+    "Verify all nine artifact archive digests and extracted file bytes",
+    "Recompute original aggregate exactly without exposing literal malformed keys",
+    "Account for all 341 calibration and 1122 validation rows",
+    "Preserve all 224 pass and 1239 blocker rows as negative evidence",
+    "Retain all 248 pattern identities and distinguish row association from per-call support",
+    "Verify successful raw-source cleanup for all eight shards",
+    "Persist only finite structural vocabulary and opaque hashes for unsafe generated names",
+    "Retain exact frozen producer and runtime implementation digests",
+    "Preserve historical pre-trace records",
+    "Keep SG-000028 open, D4 blocked, and final role sealed",
+    "Qualify exact head with GAXBench, pinned Alibaba OpenCodeReview, Jev, and Manuscript",
+    "Normal merge with expected-head guard and post-main verification"
+  ],
+  "training_performed": false,
+  "model_selection_performed": false,
+  "answer_correctness_scored": false,
+  "trace_producer_changed": false,
+  "final_role_access_allowed": false,
+  "d4_activation_allowed": false,
+  "zero_founder_cost": true
+}

@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.2",
   "study_id": "study1",
   "specgrain_id": "SG-000028",
   "stage": "post-D3-pre-D4",
-  "state": "blocked-observed-behavior-changing",
+  "state": "blocked-pre-trace-frozen-upstream-dependency-missing",
   "research_contract_issue": 141,
   "contract_path": "registry/study1_sg000028_contract.json",
   "canonical_dependency": {
@@ -16,16 +16,12 @@
     "provenance_repair_post_main_gaxbench_run": 37153192785,
     "provenance_repair_post_main_manuscript_run": 37153192731,
     "blocked_dependency_run": 37153192763,
-    "trace_producer_provenance_correction_path": "registry/study1_sg000028_trace_producer_provenance_correction.json",
-    "dependency_repair_merge": "f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d",
-    "dependency_repair_post_main_gaxbench_run": 37156028081,
-    "dependency_repair_post_main_manuscript_run": 37156028118,
-    "complete_query_trace_run": 37156028113
+    "trace_producer_provenance_correction_path": "registry/study1_sg000028_trace_producer_provenance_correction.json"
   },
   "trace_producing_system_frozen": true,
   "trace_producer_semantics_changed_by_correction": false,
-  "query_trace_gate_status": "blocked-behavior-changing",
-  "query_trace_evidence_generated": true,
+  "query_trace_gate_status": "blocked-pre-trace-frozen-upstream-dependency-missing",
+  "query_trace_evidence_generated": false,
   "development_data_accessed_by_blocked_provenance_run": false,
   "final_data_accessed_by_blocked_provenance_run": false,
   "dependency_failure": {
@@ -64,18 +60,5 @@
   "d7_model_selection_performed": false,
   "final_role_accessed": false,
   "zero_founder_cost": true,
-  "next_governed_action": "repair-artifact-output-firewall-and-investigate-complete-blocker-set",
-  "historical_pre_execution_frontier_path": "registry/study1_sg000028_pre_execution_frontier_37153192763.json",
-  "execution_evidence_path": "registry/study1_sg000028_execution_37156028113.json",
-  "observed_result": {
-    "calibration_rows": 341,
-    "validation_rows": 1122,
-    "total_rows": 1463,
-    "pass_rows": 224,
-    "behavior_changing_blocker_rows": 1239,
-    "normalized_unique_patterns": 248,
-    "final_rows_materialized": 0,
-    "final_question_content_accessed": false
-  },
-  "artifact_output_firewall_repair_required": true
+  "next_governed_action": "qualify-and-merge-frozen-upstream-dependency-and-cleanup-repair-then-rerun-canonical-main-only-query-trace-gate"
 }

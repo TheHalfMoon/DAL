@@ -345,7 +345,7 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Define a bounded candidate family and retain every rejected/blocked candidate
 - [x] Bind candidate model/tokenizer revisions, license, release date, provenance, contamination-risk metadata, and zero-cost compute-path status in the bounded inventory
 - [x] Prospectively freeze one trace-producing base-model + FHIR-agent-strategy identity before query-trace qualification - `registry/study1_sg000027_trace_producer_freeze.json`
-- [ ] Run the mandatory post-D3/pre-D4 development query-trace gate after the identity freeze
+- [x] Execute the mandatory post-D3/pre-D4 gate; run `37156028113` completed with scientific BLOCKED status
 - [x] Record SG-000027 / D3 closeout - `registry/study1_sg000027_closeout.json` (becomes canonical only after this closeout PR qualifies, merges, and passes post-main verification)
 
 - [x] Bound the D3 base-model candidate family and retain excluded candidates with exact revisions, license/gating, release-date contamination proxy, and zero-cost compute evidence - `registry/study1_sg000027_candidate_inventory.json`
@@ -354,7 +354,7 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [x] Diagnose raw OpenAI-compatible structured tool transport versus the frozen Qwen parser - canonical run `37142304592` proved `parser-transport-mismatch`
 - [x] Canonically qualify the minimal Qwen structured-tool transport compatibility repair; PR #137 merge `26069715534ba693049795fdb5dc6929ab807a7d`, repaired CPU smoke `37143422780` PASS
 - [x] Prospectively freeze Qwen3-4B-Instruct-2507 base-model + tokenizer identity using only preregistered non-final, non-query-trace-outcome technical criteria
-- [ ] Run the mandatory post-D3/pre-D4 observed query/search-pattern gate with the founder-authorized blind development-only custodian
+- [x] Execute the blind development-only query-trace gate; full 1463-row result retained as BLOCKED
 - [ ] D4 remains blocked until the observed query/search-pattern gate passes
 
 ### Later Study 1 stages (not activated)
@@ -374,3 +374,17 @@ Research contract: Issue #132. Canonical dependency: SG-000026 closeout merge `0
 - [ ] Peer-reviewed submission
 - [ ] Reviewer response artifacts
 - [ ] Journal extension decision
+
+### SG-000028-E1 - Complete canonical negative-evidence persistence
+
+Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d`.
+
+- [x] Verify all eight shards, aggregate, and successful raw-source cleanup
+- [x] Verify all nine artifact ZIP digests and extracted bytes; recompute the aggregate exactly
+- [x] Persist complete privacy-safe sufficient statistics, blocker taxonomy, pattern identities, producer/runtime provenance, and final firewall evidence
+- [x] Preserve earlier provenance/dependency failures as historical records
+- [ ] Exact-head qualify persistence with GAXBench, Alibaba OpenCodeReview, TypeSafe Jev, and Manuscript; merge normally and verify post-main
+- [ ] Repair the generated-parameter-name artifact output firewall in a separate bounded grain
+- [ ] Investigate the full 1239-row blocker set without changing the frozen producer, role boundary, or gate criteria
+- [ ] SG-000028 PASS / closeout remains blocked
+- [ ] D4 separate activation remains blocked
