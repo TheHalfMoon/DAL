@@ -30,7 +30,7 @@ R1PatternDisposition = Literal[
     "hard-block-unattributed",
 ]
 
-RECOVERY_RULE_VERSION = "sg000030-r1-g1-v1"
+RECOVERY_RULE_VERSION: Literal["sg000030-r1-g1-v1"] = "sg000030-r1-g1-v1"
 COMPARISON_MODIFIER_TO_VALUE_PREFIX: Mapping[str, tuple[str, str]] = {
     "date:gt": ("date", "gt"),
     "date:gte": ("date", "ge"),
