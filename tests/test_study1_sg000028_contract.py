@@ -102,10 +102,10 @@ def test_frontier_records_canonical_dependency_blocker_without_stage_progression
     dependency = frontier["canonical_dependency"]
     failure = frontier["dependency_failure"]
     assert frontier["specgrain_id"] == "SG-000028"
-    assert frontier["state"] == "blocked-pre-trace-frozen-upstream-dependency-missing"
+    assert frontier["state"] == "blocked-observed-behavior-changing"
     assert (
         frontier["query_trace_gate_status"]
-        == "blocked-pre-trace-frozen-upstream-dependency-missing"
+        == "blocked-behavior-changing"
     )
     assert dependency["provenance_repair_merge"] == (
         "d01f6eaf22ae11b44cff7a979526596c36e6ac03"
@@ -119,7 +119,10 @@ def test_frontier_records_canonical_dependency_blocker_without_stage_progression
     assert failure["final_question_content_accessed"] is False
     assert failure["raw_benchmark_source_downloaded_to_ephemeral_runner"] is True
     assert failure["raw_benchmark_source_cleanup_step_executed"] is False
-    assert frontier["query_trace_evidence_generated"] is False
+    assert frontier["query_trace_evidence_generated"] is True
+    historical = _load(ROOT / frontier["historical_pre_execution_frontier_path"])
+    assert historical["state"] == "blocked-pre-trace-frozen-upstream-dependency-missing"
+    assert historical["query_trace_evidence_generated"] is False
     assert frontier["main_only_execution_required"] is True
     assert frontier["d4_activation_allowed"] is False
     assert frontier["training_allowed"] is False

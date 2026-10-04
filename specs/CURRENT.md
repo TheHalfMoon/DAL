@@ -219,7 +219,7 @@ D2 is closed canonically by `registry/study1_sg000026_closeout.json` on model-in
 
 D3 activation now proceeds separately as SG-000027 under Issue #132. D4 training/objective experiments, D5 calibration/assurance development, D6 ablations, D7 model selection, D8 protocol freeze, D9 untouched final evaluation, and D10 paper evidence/publication packaging remain unactivated. The sealed final role remains untouched and forbidden before D9.
 
-## Active frontier - Study 1, SG-000027 / D3
+## Historical D3 frontier - Study 1, SG-000027 / D3
 
 **Architecture candidates**
 
@@ -238,6 +238,36 @@ Canonical CPU smoke run `37140291946` on merge `5fbf4f30788688014cf29ef9d238a93a
 Canonical diagnostic run `37142304592` on merge `08fec6e8a990adaff5163e8ed93226aab7371e3b` proved `parser-transport-mismatch`: the raw local OpenAI-compatible response contained exactly one structured `fhir_request_get` call with `Patient/DAL-SMOKE-0001`, while the frozen Qwen branch returned zero calls because it parsed only textual `<tool_call>` content. The active repair grain is restricted to preserving already-structured tool calls before falling back unchanged to the frozen text parser. It cannot freeze a model/tokenizer, access benchmark development/final data, train, or activate D4.
 
 The minimal transport repair is canonical via PR #137 merge `26069715534ba693049795fdb5dc6929ab807a7d`, with post-main GAXBench `37143422761` and Manuscript `37143422745` SUCCESS. Repaired zero-cost CPU smoke `37143422780` produced exactly one structured and preserved `fhir_request_get` call for synthetic case `DAL-SMOKE-0001`; both the smoke and transport classification passed, with no benchmark development/final data access and no training or model selection. The prospective trace-producer identity is now frozen by `registry/study1_sg000027_trace_producer_freeze.json` to Qwen3-4B-Instruct-2507 revision `cdbee75f17c01a7cc42f958dc650907174af0554`, its same-revision tokenizer, the exact Q8 GGUF digest, pinned llama.cpp runtime, patched frozen FHIR-AgentBench transport, and the already-frozen `single_turn_request` strategy. This is a D3 technical identity freeze, not D7 model selection. D3 closeout is recorded in `registry/study1_sg000027_closeout.json`; all eight D3 exit criteria are proven by canonical evidence. D4 remains blocked. The only next governed action is activation of the mandatory founder-authorized post-D3/pre-D4 development query-trace qualification grain; this closeout does not execute or activate that gate.
+
+## Active frontier - Study 1, SG-000028 / post-D3-pre-D4
+
+Research contract: Issue #141. State: **BLOCKED_OBSERVED_BEHAVIOR_CHANGING**.
+
+The complete canonical main-only run `37156028113` on
+`f8f5c1c8ebfbe2e044ad9beae55e56b94f1f449d` completed all eight shards and the
+aggregate successfully. Scientific qualification is BLOCKED: 341 calibration +
+1122 validation = 1463 rows, 224 pass rows, 1239 behavior-changing blocker rows,
+1623 observed tool calls, and 248 unique normalized source-pattern identities.
+Zero final rows were materialized; no final question content was accessed.
+Every shard's raw-source cleanup step succeeded. No training, answer scoring,
+second-turn reasoning, or D7 model selection occurred. Founder cost was zero.
+
+Complete safe sufficient statistics and all job/artifact IDs and digests are in
+`registry/study1_sg000028_execution_37156028113.json`. All nine archive digests
+and extracted bytes were verified; the source aggregate was recomputed exactly.
+Malformed generated parameter names exposed literal fragments in legacy pattern
+and reason keys, so the old masking assertions are not accepted as proven.
+Durable persistence retains these identities as opaque SHA-256 hashes and uses
+only a finite structural vocabulary. Per-pattern blocker evidence is explicitly
+row-associated: the source did not retain per-call reason attribution.
+
+The earlier pre-trace provenance and dependency failures remain historical;
+the pre-execution frontier is preserved separately without overwriting it.
+SG-000028 is open. D4-D10 remain unactivated. The next governed action is an
+artifact-output firewall repair and complete blocker investigation, preserving
+the frozen producer and every gate criterion. A workflow SUCCESS is not a
+scientific PASS; no compatibility repair may normalize invalid requests into
+valid ones or expand access to the sealed final role.
 
 ## Core P08 invariants
 

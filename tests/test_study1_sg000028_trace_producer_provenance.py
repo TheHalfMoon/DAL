@@ -96,7 +96,9 @@ def test_blocked_run_is_explicitly_pre_data_and_not_query_trace_evidence() -> No
     assert discovery["final_data_accessed"] is False
     assert discovery["query_trace_evidence_generated"] is False
     assert frontier["canonical_dependency"]["blocked_provenance_run"] == 37150279061
-    assert frontier["query_trace_evidence_generated"] is False
+    historical = _load(ROOT / frontier["historical_pre_execution_frontier_path"])
+    assert historical["query_trace_evidence_generated"] is False
+    assert frontier["query_trace_evidence_generated"] is True
     assert frontier["development_data_accessed_by_blocked_provenance_run"] is False
     assert frontier["final_data_accessed_by_blocked_provenance_run"] is False
     assert frontier["d4_activation_allowed"] is False
