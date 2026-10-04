@@ -169,7 +169,7 @@ def test_sg000029_closeout_binds_exact_qualification_and_post_main() -> None:
     assert post_main["new_model_inference_performed"] is False
 
 
-def test_historical_closeout_required_new_r1_authorization_and_current_frontier_records_it() -> None:
+def test_historical_closeout_required_new_r1_authorization() -> None:
     frontier = _load(FRONTIER)
     closeout = _load(CLOSEOUT)
     boundary = closeout["authorization_boundary"]
