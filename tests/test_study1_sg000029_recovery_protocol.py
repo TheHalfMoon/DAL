@@ -145,7 +145,7 @@ def test_sg000029_closeout_binds_exact_qualification_and_post_main() -> None:
     frontier = _load(FRONTIER)
     closeout = _load(CLOSEOUT)
 
-    assert frontier["state"] == "CLOSED_CANONICAL_PROTOCOL_QUALIFIED"
+    assert frontier["state"] == "CLOSED_CANONICAL_PROTOCOL_QUALIFIED_R1_AUTHORIZED"
     assert closeout["state"] == "CLOSED_CANONICAL_PROTOCOL_QUALIFIED"
     assert closeout["canonical_protocol_merge"]["pull_request"] == 151
     assert closeout["canonical_protocol_merge"]["qualified_head"] == (
@@ -169,17 +169,23 @@ def test_sg000029_closeout_binds_exact_qualification_and_post_main() -> None:
     assert post_main["new_model_inference_performed"] is False
 
 
-def test_closeout_requires_new_founder_authorization_before_r1_implementation() -> None:
+def test_historical_closeout_required_new_r1_authorization() -> None:
     frontier = _load(FRONTIER)
     closeout = _load(CLOSEOUT)
     boundary = closeout["authorization_boundary"]
 
-    assert frontier["r1_protocol_stage_available"] is True
-    assert frontier["r1_implementation_authorized"] is False
-    assert frontier["r2_execution_authorized"] is False
     assert boundary["r0_protocol_drafting_and_qualification_complete"] is True
     assert boundary["r1_recovery_implementation_authorized"] is False
     assert boundary["r2_recovery_execution_authorized"] is False
     assert boundary["d4_activation_authorized"] is False
     assert boundary["training_authorized"] is False
     assert boundary["final_evaluation_authorized"] is False
+
+    assert frontier["r1_protocol_stage_available"] is True
+    assert frontier["r1_implementation_authorized"] is True
+    assert frontier["r1_founder_authorization_issue"] == 153
+    assert frontier["r1_founder_authorization_comment"] == 5982001184
+    assert frontier["active_r1_specgrain"] == "SG-000030"
+    assert frontier["active_r1_grain"] == "SG-000030-R1-G1"
+    assert frontier["active_r1_issue"] == 154
+    assert frontier["r2_execution_authorized"] is False

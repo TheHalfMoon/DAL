@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "study_id": "study1",
   "specgrain_id": "SG-000029",
   "stage": "R0-prospective-recovery-protocol",
-  "state": "CLOSED_CANONICAL_PROTOCOL_QUALIFIED",
+  "state": "CLOSED_CANONICAL_PROTOCOL_QUALIFIED_R1_AUTHORIZED",
   "research_contract_issue": 150,
   "founder_decision_issue": 147,
   "founder_authorization_comment": 5981658161,
@@ -54,8 +54,13 @@
   "d4_activation_allowed": false,
   "final_role_access_allowed": false,
   "r1_protocol_stage_available": true,
-  "r1_implementation_authorized": false,
+  "r1_implementation_authorized": true,
+  "r1_founder_authorization_issue": 153,
+  "r1_founder_authorization_comment": 5982001184,
+  "active_r1_specgrain": "SG-000030",
+  "active_r1_grain": "SG-000030-R1-G1",
+  "active_r1_issue": 154,
   "r2_execution_authorized": false,
   "zero_founder_cost": true,
-  "next_governed_action": "founder-decision-required-before-R1-recovery-compatibility-canonicalization-implementation"
+  "next_governed_action": "qualify-SG-000030-R1-G1-without-new-inference"
 }
