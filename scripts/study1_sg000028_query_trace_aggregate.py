@@ -8,6 +8,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from gaxbench.study1_query_trace_evidence import is_safe_pattern, is_safe_reason
+
 _ALLOWED_ROW_KEYS = frozenset(
     {
         "schema_version",
@@ -140,6 +142,8 @@ def aggregate(input_dir: Path, output_path: Path, receipt_path: Path) -> dict[st
             raise ValueError("reason_codes must be strings")
         if any(not _is_normalized_pattern(pattern) for pattern in patterns):
             raise ValueError("non-normalized query pattern escaped artifact firewall")
+        if any(not is_safe_reason(reason) for reason in reasons):
+            raise ValueError("non-normalized reason escaped artifact firewall")
         if status == "pass" and reasons:
             raise ValueError("pass row retained blocker reasons")
         if status == "behavior-changing-blocker" and not reasons:
@@ -245,15 +249,7 @@ def _is_hex(value: str) -> bool:
 
 
 def _is_normalized_pattern(pattern: str) -> bool:
-    if pattern.startswith("read:"):
-        return pattern.endswith("/{id}")
-    if pattern.startswith("search:"):
-        return all(character not in pattern for character in ("\r", "\n")) and (
-            "<" in pattern or "?" not in pattern
-        )
-    if pattern.startswith("invalid:"):
-        return "/" not in pattern and "?" not in pattern
-    return False
+    return is_safe_pattern(pattern)
 
 
 def _nonnegative_int(value: Any) -> int:

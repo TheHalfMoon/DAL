@@ -383,8 +383,8 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [x] Verify all nine artifact ZIP digests and extracted bytes; recompute the aggregate exactly
 - [x] Persist complete privacy-safe sufficient statistics, blocker taxonomy, pattern identities, producer/runtime provenance, and final firewall evidence
 - [x] Preserve earlier provenance/dependency failures as historical records
-- [ ] Exact-head qualify persistence with GAXBench, Alibaba OpenCodeReview, TypeSafe Jev, and Manuscript; merge normally and verify post-main
-- [ ] Repair the generated-parameter-name artifact output firewall in a separate bounded grain
+- [x] Exact-head qualify persistence: PR #145 merged 48b73aa6ba75b2b1c6e1b11f26e762ca8d010200; all required exact-head and post-main checks passed
+- [x] Implement bounded SG-000028-R1 output firewall; all 1463 structural rows replay with unchanged classifications (canonical only after qualification, merge, and post-main verification)
 - [ ] Investigate the full 1239-row blocker set without changing the frozen producer, role boundary, or gate criteria
 - [ ] SG-000028 PASS / closeout remains blocked
 - [ ] D4 separate activation remains blocked
