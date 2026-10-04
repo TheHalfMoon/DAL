@@ -1,0 +1,357 @@
+{
+  "candidate_state": "QUALIFICATION_REQUIRED",
+  "canonical_implementation_main": "bcd7223d908af297eae330cfbe618ed3420bb24e",
+  "canonical_implementation_tree": "017fed201e618da3ffb2a41cfbc1f7ac5a4e68ec",
+  "claims_limit": "Engineering recovery layer qualified; original SG-000028 stays BLOCKED; R2 outcome unknown. Exact scalar status on Observation and MedicationRequest only. Dates and all unqualified semantics remain non-executable.",
+  "closeout_completion_policy": {
+    "final_state": "R1_COMPLETE_CANONICAL only when all requirements are proven",
+    "own_qualification_status": "PENDING_AT_CANDIDATE_CREATION",
+    "own_receipt_location": "Post-main closeout receipt on the PR that merges this record and SG-000030 research issue #154; receipt binds exact base/head, merge/tree, run IDs and actual report/artifact digests",
+    "required_exact_head": [
+      "GAXBench Linux/Windows Python 3.11/3.12",
+      "Alibaba exact-range delegated review",
+      "TypeSafe Jev complete exact-diff coverage",
+      "DAL Manuscript",
+      "zero unresolved active review threads"
+    ],
+    "required_merge": "normal merge with expected-head guard and candidate-tree correspondence",
+    "required_post_main": [
+      "GAXBench four jobs",
+      "DAL Manuscript",
+      "applicable governance triggers",
+      "no inference and sealed final verification"
+    ],
+    "self_commit_or_future_run_ids_fabricated": false
+  },
+  "execution_boundary": {
+    "d4_activated": false,
+    "final_evaluation_performed": false,
+    "final_role_access_allowed": false,
+    "new_model_inference_performed": false,
+    "r2_execution_authorized": false,
+    "r2_performed": false,
+    "training_performed": false,
+    "zero_founder_cost": true
+  },
+  "finite_inventory": {
+    "call_level_causal_attribution_claimed": false,
+    "disposition_pattern_counts": {
+      "comparison-transform-candidate": 20,
+      "hard-block-inference-or-shape": 1,
+      "hard-block-opaque-pattern": 39,
+      "hard-block-role-firewall": 7,
+      "hard-block-unproven-semantics": 1,
+      "observed-pass-through": 3,
+      "resource-specific-support-pending": 177
+    },
+    "inventory_path": "registry/study1_sg000030_r1_pattern_inventory.json",
+    "pattern_count": 248,
+    "pattern_counts_are_recovered_row_counts": false,
+    "post_recovery_blocker_rows": null,
+    "post_recovery_count_requires_authorized_r2": true,
+    "unique_source_pattern_identities": 248
+  },
+  "founder_authorization": {
+    "comment": 5982001184,
+    "issue": 153,
+    "scope": "R1 engineering and qualification only"
+  },
+  "frozen_evidence": {
+    "files": {
+      "registry/study1_sg000028_execution_37156028113.json": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+      "registry/study1_sg000030_r1_manifest.json": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+      "registry/study1_sg000030_r1_normative_evidence.json": "ce9e91c085048e3c771eb318fdda3a7d4ea617bbb253357c956fcb5c082bb4dc",
+      "registry/study1_sg000030_r1_pattern_inventory.json": "2854fe914d6c0c0a27cfff44313c3a19723ab17445f85407fd86d52c8027365d",
+      "registry/study1_sg000030_r1_runtime_qualification.json": "b58c507908b91e96f2ecec817dfc9f07842bb717ac49a6e29b86ff91edc69a96",
+      "src/gaxbench/study1_fhir_compat.py": "2ca4cf6078a514c18484869ec931bd17c8944970326c0bcf1dda49f101040bdc",
+      "src/gaxbench/study1_query_trace_gate.py": "529b67730920b03123d7a4054a0969f96b38aa9b07d455167ea1090e348dc0a9",
+      "src/gaxbench/study1_recovery_compat.py": "71a15425f41f7d9c039e50e61b0b7723c0d8788e5cc77d03bf811e25184abcce",
+      "src/gaxbench/study1_recovery_runtime.py": "7bafe8a685cd0f4465109f752647c9f1f26b9b0f3c62f02f4ebd6fea32466dba",
+      "tools/qualify_sg000030_r1.py": "c756af0a7992e5d35166c9094189afbf737a4d998ccb397e6c0889d21ca61718"
+    },
+    "hash_convention": "SHA-256 of Git blob bytes normalized CRLF to LF"
+  },
+  "g1": {
+    "alibaba": {
+      "artifact_digest": "sha256:6520af2c8ea92eb98c82e5b3a01b88e987bf17c6814a2935c79247cb2456a568",
+      "artifact_id": 11309263011,
+      "binary_sha256": "9105c7081b8362a1cb0167f1ddfd1437e147a0e3c9a5af89c03c8859a5b0f0e8",
+      "exact_range_verified": true,
+      "excluded_files": 2,
+      "mode": "delegation-accounting",
+      "report_sha256": "98afc040a3ebcbcbbcddde9bdc10702569641024853836420a702df487ed7e03",
+      "reviewable_files": 5,
+      "run": 37217646265,
+      "semantic_judgment_report": false,
+      "tool": "alibaba/open-code-review@v1.12.9",
+      "workflow_status": "SUCCESS"
+    },
+    "expected_head_guard_used": true,
+    "final_role_accessed": false,
+    "gaxbench_exact_head_matrix": "4/4 SUCCESS",
+    "gaxbench_exact_head_run": 37217646275,
+    "gaxbench_post_main": {
+      "jobs": [
+        {
+          "id": 111493316336,
+          "name": "Python 3.11 / windows-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111493316475,
+          "name": "Python 3.12 / windows-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111493316584,
+          "name": "Python 3.12 / ubuntu-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111493316622,
+          "name": "Python 3.11 / ubuntu-latest",
+          "status": "SUCCESS"
+        }
+      ],
+      "ruff_mypy_pytest_compile_all_success": true,
+      "run": 37221751449,
+      "status": "SUCCESS"
+    },
+    "grain": "SG-000030-R1-G1",
+    "jev": {
+      "artifact_digest": "sha256:76d94810583c12c1935bcd339f233e3dc628d83bbe66f9acb9f93c1ee8333aef",
+      "artifact_id": 11310315411,
+      "blocking_findings": [],
+      "coverage_complete": true,
+      "coverage_independently_verified_against_exact_git_diff": true,
+      "expected_units": 12,
+      "findings": [],
+      "report_sha256": "5d6ea6b33f0ca79102891895ca492f5f45b0098a4a44eeacf83106671d83ea38",
+      "report_status": "PASSED",
+      "reviewed_units": 12,
+      "run": 37217643768,
+      "workflow_status": "SUCCESS"
+    },
+    "manuscript_exact_head_run": 37217646258,
+    "manuscript_post_main": {
+      "receipt": {
+        "all_build_steps_success": true,
+        "artifacts": [
+          {
+            "digest": "sha256:111e37c7d36bd4c4ec1ce91de6b0b187c1173655271357c7ca538d1b029d9d38",
+            "id": 11313503555,
+            "name": "dal-arxiv-source"
+          },
+          {
+            "digest": "sha256:53a2307982e65a514d98f94918c5c2669aba3ae268dbe2c48b62e56510dee8ae",
+            "id": 11313319416,
+            "name": "dal-manuscript-pdf"
+          }
+        ],
+        "conclusion": "success",
+        "head_sha": "38ae36e80209beab0c5e7209c09d0e3c25d49f2e",
+        "job_id": 111493316386,
+        "qualification_scope": "G1 post-main Manuscript; completed G1 GAXBench and G2 qualification are bound separately in this closeout",
+        "r1_complete_claimed": false,
+        "run_id": 37221751457,
+        "standalone_arxiv_compile_verified": true,
+        "status": "completed",
+        "study_inference_performed": false
+      },
+      "run": 37221751457,
+      "status": "SUCCESS"
+    },
+    "merge_method": "normal-merge",
+    "merge_tree_matches_qualified_head": true,
+    "normal_merge": "38ae36e80209beab0c5e7209c09d0e3c25d49f2e",
+    "pull_request": 155,
+    "qualified_base": "352569f2461815a6dfc5628a6373901178b95dbf",
+    "qualified_head": "036a2a9c9cccbba2c13b0b6fda28f1a169167aa9",
+    "r1_complete_claimed": false,
+    "scientific_parent_sg000028": "IMMUTABLE_BLOCKED",
+    "state": "QUALIFIED_CANONICAL",
+    "study_inference_performed": false,
+    "tree": "561a233b17dd331a7325ad0b8041411cd1b5e1d7",
+    "unresolved_review_threads_latest_live_check": 0
+  },
+  "g2": {
+    "alibaba": {
+      "actual_reports_and_rules_inspected": true,
+      "artifact_digest": "sha256:36e0758f07ed2d8104a95a6111acf1cdda71a7a9ebbf46117685af554c1798b1",
+      "artifact_id": 11314840729,
+      "binary_sha256": "9105c7081b8362a1cb0167f1ddfd1437e147a0e3c9a5af89c03c8859a5b0f0e8",
+      "delegated_rule_inspection": "JSON keys and Python implementation inspected; no blocking defects identified",
+      "exact_range_verified": true,
+      "excluded_files": 1,
+      "mode": "delegation-accounting",
+      "report_sha256": "538b98fce56aca88e1e5da29438c41c80848ed1d4c0eabaee0e2173905191588",
+      "reviewable_files": 8,
+      "run": 37226924182,
+      "semantic_judgment_report": false,
+      "tool": "alibaba/open-code-review@v1.12.9",
+      "workflow_status": "SUCCESS"
+    },
+    "expected_head_guard_used": true,
+    "gaxbench_exact_head": {
+      "all_required_steps_success": true,
+      "head_sha": "ae181db240f4660ff117663175464ad938383104",
+      "jobs": [
+        {
+          "id": 111508379160,
+          "name": "Python 3.11 / ubuntu-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111508379310,
+          "name": "Python 3.12 / windows-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111508379321,
+          "name": "Python 3.11 / windows-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111508379344,
+          "name": "Python 3.12 / ubuntu-latest",
+          "status": "SUCCESS"
+        }
+      ],
+      "run": 37226924151,
+      "status": "SUCCESS"
+    },
+    "gaxbench_post_main": {
+      "all_required_steps_success": true,
+      "head_sha": "bcd7223d908af297eae330cfbe618ed3420bb24e",
+      "jobs": [
+        {
+          "id": 111550907613,
+          "name": "Python 3.11 / ubuntu-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111550907812,
+          "name": "Python 3.12 / windows-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111550907833,
+          "name": "Python 3.12 / ubuntu-latest",
+          "status": "SUCCESS"
+        },
+        {
+          "id": 111550907860,
+          "name": "Python 3.11 / windows-latest",
+          "status": "SUCCESS"
+        }
+      ],
+      "run": 37241480358,
+      "status": "SUCCESS"
+    },
+    "grain": "SG-000030-R1-G2",
+    "jev": {
+      "artifact_digest": "sha256:9f1f8053d2738dd864d82bbf42e5ddbc57d2e03e06d1ba13904fbd9529125c19",
+      "artifact_id": 11314522247,
+      "blocking_findings": [],
+      "coverage_complete": true,
+      "coverage_independently_verified_against_exact_git_diff": true,
+      "expected_units": 51,
+      "findings": [],
+      "report_sha256": "7508cd4e64b6b0da58a049750c00885b3fe385162571abff0c1dcd54a8f97fe5",
+      "report_status": "PASSED",
+      "reviewed_units": 51,
+      "run": 37226922528,
+      "workflow_status": "SUCCESS"
+    },
+    "manuscript_exact_head": {
+      "all_required_steps_success": true,
+      "head_sha": "ae181db240f4660ff117663175464ad938383104",
+      "jobs": [
+        {
+          "id": 111508380315,
+          "name": "Manuscript clean-room build",
+          "status": "SUCCESS"
+        }
+      ],
+      "run": 37226924141,
+      "status": "SUCCESS"
+    },
+    "manuscript_post_main": {
+      "all_required_steps_success": true,
+      "artifacts": [
+        {
+          "digest": "sha256:b195726df48d785991142a728613e361f2313058743d441817834760e46576da",
+          "id": 11317817325,
+          "name": "dal-arxiv-source"
+        },
+        {
+          "digest": "sha256:27f07f10d29d6f693642d4401e1674686ac76ccc8b951a65613e953e234b4435",
+          "id": 11317787646,
+          "name": "dal-manuscript-pdf"
+        }
+      ],
+      "head_sha": "bcd7223d908af297eae330cfbe618ed3420bb24e",
+      "jobs": [
+        {
+          "id": 111550907583,
+          "name": "Manuscript clean-room build",
+          "status": "SUCCESS"
+        }
+      ],
+      "run": 37241480357,
+      "status": "SUCCESS"
+    },
+    "merge_method": "normal-merge",
+    "merge_tree_matches_qualified_head": true,
+    "normal_merge": "bcd7223d908af297eae330cfbe618ed3420bb24e",
+    "pull_request": 156,
+    "qualification_receipt": "https://github.com/TheHalfMoon/DAL/pull/156#issuecomment-5985303790",
+    "qualified_base": "38ae36e80209beab0c5e7209c09d0e3c25d49f2e",
+    "qualified_head": "ae181db240f4660ff117663175464ad938383104",
+    "state": "QUALIFIED_CANONICAL",
+    "tree": "017fed201e618da3ffb2a41cfbc1f7ac5a4e68ec",
+    "unresolved_active_review_threads": 0
+  },
+  "grain": "R1-CLOSEOUT",
+  "immutable_sg000028": {
+    "behavior_changing_blocker_rows": 1239,
+    "calibration_rows": 341,
+    "exposed_development_rows": 1463,
+    "observed_calls": 1623,
+    "pass_rows": 224,
+    "relabelled_pass": false,
+    "source_patterns": 248,
+    "state": "BLOCKED",
+    "validation_rows": 1122
+  },
+  "next_gate": "Separate R2 founder decision proposal after this closeout qualifies; no R2 execution authorized",
+  "no_inference_evidence": {
+    "aggregate_executed": false,
+    "g1_g2_workflow_trigger_paths_changed": false,
+    "latest_workflow_head": "75be47489254b9a284ee15cfc2b9f825876ee965",
+    "r1_workflows": "CI, manuscript and review only; no model transport dispatch or benchmark loader execution",
+    "sg000028_latest_workflow_run": 37214543291,
+    "trace_shards_executed": false
+  },
+  "runtime_qualification": {
+    "adversarial_cases": 9,
+    "audit_cases": 106,
+    "cloud_fhir_equivalence_claimed": false,
+    "empty_transformation_cases": 1,
+    "inherited_d2_equivalence_cases": 2,
+    "local_suite": "522 passed",
+    "mypy": "PASS",
+    "normative_scalar_projection_cases": 96,
+    "ruff": "PASS",
+    "runtime_version": "sg000030-r1-g2-v1",
+    "synthetic_only": true
+  },
+  "schema_version": "study1-r1-closeout-v1",
+  "sealed_final_role": {
+    "accessed": false,
+    "patients": 40,
+    "rows": 173,
+    "state": "SEALED"
+  },
+  "specgrain_id": "SG-000030"
+}
