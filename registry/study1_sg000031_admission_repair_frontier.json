@@ -1,0 +1,15 @@
+{
+  "D4": false,
+  "R2_scientific_state": "BLOCKED",
+  "canonical_qualification_receipt": "record externally after exact-head, normal merge and post-main checks",
+  "contract_path": "registry/study1_sg000031_admission_repair_contract.json",
+  "contract_sha256": "da87e7078bb42fd50e490875c3126c6f79f6ce4f156a65019de084af74a0b65c",
+  "failed_attempt_immutable": true,
+  "final_access": false,
+  "founder_cost_usd": 0,
+  "model_calls": 0,
+  "new_execution_authorized": false,
+  "next_gate": "separate founder decision on whether to authorize one additional R2 execution attempt",
+  "specgrain_id": "SG-000031-A1",
+  "state": "ADMISSION_REPAIR_REVIEW_REQUIRED"
+}

@@ -1,0 +1,2543 @@
+{
+  "base_sha": "3ebf58ef10a42db6ee31d96451ea80fe98432b4c",
+  "blast": {
+    "areas": [
+      {
+        "behavioural": 8,
+        "changedTestFiles": [],
+        "files": [
+          "scripts/study1_sg000031_r2_admission.py"
+        ],
+        "key": "scripts/",
+        "label": "api",
+        "labelSource": "symbol",
+        "reached": 0,
+        "seedNames": [
+          "api",
+          "authenticated_request",
+          "native_http",
+          "repository_url",
+          "admit",
+          "qualify_canonical_receipt",
+          "native_read_only_preflight",
+          "redirect_request"
+        ],
+        "seeds": 8,
+        "testFiles": [],
+        "tests": "none",
+        "unreached": [
+          "native_read_only_preflight",
+          "repository_url",
+          "redirect_request",
+          "authenticated_request",
+          "native_http",
+          "api",
+          "qualify_canonical_receipt",
+          "admit"
+        ]
+      },
+      {
+        "behavioural": 2,
+        "changedTestFiles": [],
+        "files": [
+          "tools/qualify_sg000031_admission.py"
+        ],
+        "key": "tools/",
+        "label": "main",
+        "labelSource": "symbol",
+        "reached": 0,
+        "seedNames": [
+          "main",
+          "qualify"
+        ],
+        "seeds": 2,
+        "testFiles": [],
+        "tests": "none",
+        "unreached": [
+          "main",
+          "qualify"
+        ]
+      }
+    ],
+    "basis": "working tree vs HEAD",
+    "changed": [
+      {
+        "hunks": [
+          {
+            "dropped": 37,
+            "end": 61,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "name: DAL R2 native admission preflight"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "on:"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  pull_request:"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    paths:"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_r2_admission.py"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "      - tools/qualify_sg000031_admission.py"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "      - tests/test_study1_sg000031_admission_repair.py"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-admission-preflight.yml"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "      - registry/study1_sg000031_admission_repair*.json"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "  push:"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "    branches: [main]"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "    paths:"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_r2_admission.py"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "      - tools/qualify_sg000031_admission.py"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "      - tests/test_study1_sg000031_admission_repair.py"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-admission-preflight.yml"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "      - registry/study1_sg000031_admission_repair*.json"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "permissions:"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "  contents: read"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "jobs:"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "  native-preflight:"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": ".github/workflows/study1-sg000031-admission-preflight.yml",
+        "ranges": [
+          {
+            "end": 61,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 42,
+            "end": 66,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "# SG-000031-A1: admission repair only"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "The founder authorized a bounded engineering repair from canonical failure main"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "`3ebf58ef10a42db6ee31d96451ea80fe98432b4c`. The separate verbatim authorization"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "and repair contract are in `registry/study1_sg000031_admission_repair_*.json`."
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "No new model call, R2 attempt or row replay is authorized. R2 remains BLOCKED."
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "The retained attempt `37320473498`, attempt 1, failed during repository metadata"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "lookup: the native helper built `https://api.github.com/repos/TheHalfMoon/DAL/`,"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "which returned HTTP 404. CLI-based checks accepted that path and missed the native"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "failure. The deterministic regression fixture returns 404 for the original native"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "path and verifies that its exception hash matches the retained failure. The same"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "native request/opener path now constructs the repository root without the trailing"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "slash, uses the unchanged bearer authentication headers and succeeds on the fixture."
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "The URL constructor gives the empty repository suffix and the exact absolute root"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "with or without one trailing slash a single canonical identity. It rejects foreign"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "repositories/authorities, userinfo, explicit ports, non-HTTPS schemes, protocol-relative"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "paths, dot segments, repeated/trailing child slashes, percent escapes, backslashes,"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "fragments, whitespace/control/non-ASCII characters and ambiguous queries before"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "credentials or HTTP transport. Existing job, artifact, ref and checkpoint paths"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "remain supported. Returned repository metadata and receipt issue URLs must match"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "the exact repository identity. Redirects reject unsafe schemes, userinfo and scope"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "drift; cross-host artifact downloads still strip bearer authentication."
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "docs/study1-sg000031-admission-repair.md",
+        "ranges": [
+          {
+            "end": 66,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 10,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"agent_record_is_not_a_new_human_GitHub_authorization\": true,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"authorization_base_main\": \"3ebf58ef10a42db6ee31d96451ea80fe98432b4c\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"chat_id\": \"01a1083e-82a2-7603-8227-0684b0b98f50\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"new_model_call_or_execution_attempt_authorized\": false,"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"scope\": \"bounded R2 admission URL/preflight engineering repair only\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"source_kind\": \"direct-human-founder-message-in-Codex\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"statement_utf8_lf_sha256\": \"f5b5726e9b8676b0719c0ecb37bdf0d82c374a5cb32038485fd0fb8a2c8e63a8\","
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"verbatim_statement\": \"FOUNDER AUTHORIZATION \\u00e2\\u20ac\\u201d R2 ADMISSION REPAIR ONLY\\n\\nI authorize a bounded engineering repair to the canonical DAL R2 runner after the retained failed admission attempt recorded through PR #160.\\n\\nThis authorization is strictly limited to repairing and qualifying the admission/preflight defect that caused the sole authorized R2 attempt to fail with HTTP 404 before any model call.\\n\\nCanonical failure state:\\n\\n- Canonical main: `3ebf58ef10a42db6ee31d96451ea80fe98432b4c`\\n- PR #160 records the failed sole R2 attempt as BLOCKED.\\n- Attempt run: `37320473498`, attempt 1.\\n- First-turn generations: `0`.\\n- Physical model POSTs: `0`.\\n- Development rows unattempted: `1463`.\\n- Final-role rows materialized: `0`.\\n- Founder cost: `$0`.\\n\\nI authorize:\\n\\n- Diagnose and repair only the admission URL / trailing-slash defect proven by the retained HTTP 404 evidence.\\n- Preserve the canonical R1 manifest, runtime, producer identity, prompt, tool schema, model configuration, and scientific protocol unchanged.\\n- Replace or strengthen the existing CLI-only preflight so qualification exercises the same native HTTP request construction, URL normalization, repository lookup semantics, authentication context, and admission path used by the real R2 runner.\\n- Add deterministic regression tests that reproduce the previously retained trailing-slash failure and demonstrate the corrected admission behavior.\\n- Add fail-closed validation preventing malformed or ambiguous repository/admission URLs from reaching model execution.\\n- Use Graft for structural impact analysis.\\n- Use genuine TypeSafe Jev exact-diff review.\\n- Use repository-approved Alibaba OpenCodeReview.\\n- Run the full required CI, manuscript, SDK/preflight, review-thread, merge, and post-main qualification stack.\\n- Merge only through a normal merge commit with exact-head / expected-head protection.\\n- Persist exact repair provenance, tests, hashes, reports, and post-main evidence.\\n\\nThis authorization does NOT authorize:\\n\\n- any model call\\n- a second R2 execution attempt\\n- replay of any of the 1463 development rows\\n- rerunning the original SG-000028 scientific experiment\\n- model, tokenizer, GGUF, llama.cpp, FHIR-AgentBench, prompt, tool-schema, agent-strategy, or temperature changes\\n- model selection\\n- retries until favorable\\n- selective row replay\\n- omission of rows\\n- final-role access\\n- D4 activation\\n- training or fine-tuning\\n- answer scoring\\n- final evaluation\\n- gate waiver\\n\\nThe failed first R2 attempt remains immutable and canonically retained.\\n\\nR2 remains scientifically `BLOCKED`.\\n\\nAfter the admission repair is fully qualified, normally merged, and post-main verified, stop again before any model call and present the exact canonical repair evidence for a separate founder decision on whether to authorize one additional R2 execution attempt.\\n\\nFounder cost must remain zero.\\n\""
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_authorization.json",
+        "ranges": [
+          {
+            "end": 10,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 83,
+            "end": 107,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"D4\": false,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"authorization_base_main\": \"3ebf58ef10a42db6ee31d96451ea80fe98432b4c\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"authorization_base_tree\": \"9a6b7880b0c9c72eb71af43db9d979fccda05d25\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"authorization_path\": \"registry/study1_sg000031_admission_repair_authorization.json\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"authorization_sha256\": \"03badc235be09cdb293934c406ecd6e2931d29c99827d6a5a5c79fdc487aab32\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"canonical_r1\": {"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "    \"main\": \"ef9102ea3afda800e3fc25d38072b9e18fd3f9af\","
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "    \"manifest_sha256\": \"220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "    \"tree\": \"fd6e40177425f64bb633f1aadddf0812a16f6c7d\""
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  \"failed_attempt\": {"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "    \"generations\": 0,"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "    \"model_POSTs\": 0,"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "    \"run_attempt\": 1,"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "    \"run_id\": 37320473498,"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "    \"scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "    \"unattempted_rows\": 1463"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "  \"final_access\": false,"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "  \"founder_cost_usd\": 0,"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  \"immutable_file_lf_sha256\": {"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    \".github/scripts/jev-exact-diff.mjs\": \"d5d4ae443ec351d602adce23af90320b85855c953e174035d5932af75093ad28\","
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_contract.json",
+        "ranges": [
+          {
+            "end": 107,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 15,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"D4\": false,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"canonical_qualification_receipt\": \"record externally after exact-head, normal merge and post-main checks\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"contract_path\": \"registry/study1_sg000031_admission_repair_contract.json\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"contract_sha256\": \"da87e7078bb42fd50e490875c3126c6f79f6ce4f156a65019de084af74a0b65c\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"failed_attempt_immutable\": true,"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"final_access\": false,"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"founder_cost_usd\": 0,"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "  \"model_calls\": 0,"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "  \"new_execution_authorized\": false,"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "  \"next_gate\": \"separate founder decision on whether to authorize one additional R2 execution attempt\","
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  \"specgrain_id\": \"SG-000031-A1\","
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "  \"state\": \"ADMISSION_REPAIR_REVIEW_REQUIRED\""
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_frontier.json",
+        "ranges": [
+          {
+            "end": 15,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 12,
+            "lines": [
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "import re"
+              }
+            ],
+            "start": 12
+          },
+          {
+            "dropped": 0,
+            "end": 16,
+            "lines": [
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "from contextlib import contextmanager"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "from contextvars import ContextVar"
+              }
+            ],
+            "start": 15
+          },
+          {
+            "dropped": 34,
+            "end": 96,
+            "lines": [
+              {
+                "n": 39,
+                "sign": "+",
+                "text": "REPOSITORY_API = f\"https://api.github.com/repos/{REPOSITORY}\""
+              },
+              {
+                "n": 40,
+                "sign": "+",
+                "text": "_PREFLIGHT_AUDIT = ContextVar(\"r2_native_preflight_audit\", default=None)"
+              },
+              {
+                "n": 41,
+                "sign": "+",
+                "text": "REVIEW_THREADS_QUERY = ("
+              },
+              {
+                "n": 42,
+                "sign": "+",
+                "text": "    'query($number:Int!){repository(owner:\"TheHalfMoon\",name:\"DAL\"){'"
+              },
+              {
+                "n": 43,
+                "sign": "+",
+                "text": "    \"pullRequest(number:$number){reviewThreads(first:100){\""
+              },
+              {
+                "n": 44,
+                "sign": "+",
+                "text": "    \"pageInfo{hasNextPage}nodes{isResolved isOutdated}}}}}\""
+              },
+              {
+                "n": 45,
+                "sign": "+",
+                "text": ")"
+              },
+              {
+                "n": 46,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 47,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 48,
+                "sign": "+",
+                "text": "def repository_url(path):"
+              },
+              {
+                "n": 49,
+                "sign": "+",
+                "text": "    \"\"\"Canonicalize the repository root; reject ambiguous input before credentials or I/O.\"\"\""
+              },
+              {
+                "n": 50,
+                "sign": "+",
+                "text": "    if not isinstance(path, str) or any("
+              },
+              {
+                "n": 51,
+                "sign": "+",
+                "text": "        ord(char) <= 32 or ord(char) >= 127 or char in \"\\\\%#\" for char in path"
+              },
+              {
+                "n": 52,
+                "sign": "+",
+                "text": "    ):"
+              },
+              {
+                "n": 53,
+                "sign": "+",
+                "text": "        raise ValueError(\"invalid repository URL characters\")"
+              },
+              {
+                "n": 54,
+                "sign": "+",
+                "text": "    if path.startswith(\"https://\"):"
+              },
+              {
+                "n": 55,
+                "sign": "+",
+                "text": "        parsed = urlsplit(path)"
+              },
+              {
+                "n": 56,
+                "sign": "+",
+                "text": "        if parsed.scheme != \"https\" or parsed.netloc != \"api.github.com\":"
+              },
+              {
+                "n": 57,
+                "sign": "+",
+                "text": "            raise ValueError(\"GitHub API authority mismatch\")"
+              },
+              {
+                "n": 58,
+                "sign": "+",
+                "text": "        boundary = f\"/repos/{REPOSITORY}\""
+              },
+              {
+                "n": 59,
+                "sign": "+",
+                "text": "        if parsed.path in {boundary, boundary + \"/\"}:"
+              },
+              {
+                "n": 60,
+                "sign": "+",
+                "text": "            suffix = \"\""
+              },
+              {
+                "n": 61,
+                "sign": "+",
+                "text": "        elif parsed.path.startswith(boundary + \"/\"):"
+              },
+              {
+                "n": 62,
+                "sign": "+",
+                "text": "            suffix = parsed.path[len(boundary) + 1 :]"
+              }
+            ],
+            "start": 39
+          },
+          {
+            "dropped": 0,
+            "end": 107,
+            "lines": [
+              {
+                "n": 102,
+                "sign": "+",
+                "text": "        if redirected is not None:"
+              },
+              {
+                "n": 103,
+                "sign": "+",
+                "text": "            target = urlsplit(redirected.full_url)"
+              },
+              {
+                "n": 104,
+                "sign": "+",
+                "text": "            if target.scheme != \"https\" or target.username or target.password or target.fragment:"
+              },
+              {
+                "n": 105,
+                "sign": "+",
+                "text": "                raise ValueError(\"unsafe admission HTTP redirect\")"
+              },
+              {
+                "n": 106,
+                "sign": "+",
+                "text": "            if target.netloc == \"api.github.com\":"
+              },
+              {
+                "n": 107,
+                "sign": "+",
+                "text": "                repository_url(redirected.full_url)"
+              }
+            ],
+            "start": 102
+          },
+          {
+            "dropped": 0,
+            "end": 117,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "def api(path, value=None, *, raw=False, method=None):"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    token = os.environ[\"GH_TOKEN\"]"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    url = ("
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        path if path.startswith(\"https://\") else f\"https://api.github.com/repos/{REPOSITORY}/{path}\""
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    )"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    if not url.startswith(f\"https://api.github.com/repos/{REPOSITORY}/\"):"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        raise ValueError(\"GitHub API repository boundary\")"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    request = Request("
+              },
+              {
+                "n": 116,
+                "sign": "+",
+                "text": "def authenticated_request(url, value=None, method=None):"
+              },
+              {
+                "n": 117,
+                "sign": "+",
+                "text": "    return Request("
+              }
+            ],
+            "start": 116
+          },
+          {
+            "dropped": 0,
+            "end": 122,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "            \"Authorization\": f\"Bearer {token}\","
+              },
+              {
+                "n": 122,
+                "sign": "+",
+                "text": "            \"Authorization\": f\"Bearer {os.environ['GH_TOKEN']}\","
+              }
+            ],
+            "start": 122
+          },
+          {
+            "dropped": 0,
+            "end": 150,
+            "lines": [
+              {
+                "n": 129,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 130,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 131,
+                "sign": "+",
+                "text": "def native_http(request, *, raw=False, review_query=False):"
+              },
+              {
+                "n": 132,
+                "sign": "+",
+                "text": "    audit = _PREFLIGHT_AUDIT.get()"
+              },
+              {
+                "n": 133,
+                "sign": "+",
+                "text": "    if review_query:"
+              },
+              {
+                "n": 134,
+                "sign": "+",
+                "text": "        body = json.loads(request.data)"
+              },
+              {
+                "n": 135,
+                "sign": "+",
+                "text": "        if ("
+              },
+              {
+                "n": 136,
+                "sign": "+",
+                "text": "            request.full_url != \"https://api.github.com/graphql\""
+              },
+              {
+                "n": 137,
+                "sign": "+",
+                "text": "            or request.get_method() != \"POST\""
+              },
+              {
+                "n": 138,
+                "sign": "+",
+                "text": "            or set(body) != {\"query\", \"variables\"}"
+              },
+              {
+                "n": 139,
+                "sign": "+",
+                "text": "            or body[\"query\"] != REVIEW_THREADS_QUERY"
+              },
+              {
+                "n": 140,
+                "sign": "+",
+                "text": "            or set(body[\"variables\"]) != {\"number\"}"
+              },
+              {
+                "n": 141,
+                "sign": "+",
+                "text": "            or type(body[\"variables\"][\"number\"]) is not int"
+              },
+              {
+                "n": 142,
+                "sign": "+",
+                "text": "            or body[\"variables\"][\"number\"] <= 0"
+              },
+              {
+                "n": 143,
+                "sign": "+",
+                "text": "        ):"
+              },
+              {
+                "n": 144,
+                "sign": "+",
+                "text": "            raise ValueError(\"native preflight permits only the fixed read-only review query\")"
+              },
+              {
+                "n": 145,
+                "sign": "+",
+                "text": "    if ("
+              },
+              {
+                "n": 146,
+                "sign": "+",
+                "text": "        audit is not None"
+              },
+              {
+                "n": 147,
+                "sign": "+",
+                "text": "        and (request.get_method() != \"GET\" or request.data is not None)"
+              },
+              {
+                "n": 148,
+                "sign": "+",
+                "text": "        and not review_query"
+              },
+              {
+                "n": 149,
+                "sign": "+",
+                "text": "    ):"
+              },
+              {
+                "n": 150,
+                "sign": "+",
+                "text": "        raise ValueError(\"native preflight forbids mutation\")"
+              }
+            ],
+            "start": 129
+          },
+          {
+            "dropped": 0,
+            "end": 163,
+            "lines": [
+              {
+                "n": 153,
+                "sign": "+",
+                "text": "        if audit is not None:"
+              },
+              {
+                "n": 154,
+                "sign": "+",
+                "text": "            audit.append("
+              },
+              {
+                "n": 155,
+                "sign": "+",
+                "text": "                {"
+              },
+              {
+                "n": 156,
+                "sign": "+",
+                "text": "                    \"method\": request.get_method(),"
+              },
+              {
+                "n": 157,
+                "sign": "+",
+                "text": "                    \"url\": request.full_url,"
+              },
+              {
+                "n": 158,
+                "sign": "+",
+                "text": "                    \"status\": response.status,"
+              },
+              {
+                "n": 159,
+                "sign": "+",
+                "text": "                    \"response_sha256\": digest(payload),"
+              },
+              {
+                "n": 160,
+                "sign": "+",
+                "text": "                    \"authentication\": \"GH_TOKEN-bearer\","
+              },
+              {
+                "n": 161,
+                "sign": "+",
+                "text": "                    \"read_only_review_query\": review_query,"
+              },
+              {
+                "n": 162,
+                "sign": "+",
+                "text": "                }"
+              },
+              {
+                "n": 163,
+                "sign": "+",
+                "text": "            )"
+              }
+            ],
+            "start": 153
+          },
+          {
+            "dropped": 0,
+            "end": 172,
+            "lines": [
+              {
+                "n": 167,
+                "sign": "+",
+                "text": "def api(path, value=None, *, raw=False, method=None):"
+              },
+              {
+                "n": 168,
+                "sign": "+",
+                "text": "    url = repository_url(path)"
+              },
+              {
+                "n": 169,
+                "sign": "+",
+                "text": "    request = authenticated_request(url, value, method)"
+              },
+              {
+                "n": 170,
+                "sign": "+",
+                "text": "    return native_http(request, raw=raw)"
+              },
+              {
+                "n": 171,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 172,
+                "sign": "+",
+                "text": ""
+              }
+            ],
+            "start": 167
+          },
+          {
+            "dropped": 0,
+            "end": 353,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "def admit(root, comment_id, output):"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    environment_guard()"
+              },
+              {
+                "n": 352,
+                "sign": "+",
+                "text": "def qualify_canonical_receipt(root, comment_id, main, *, live_main=True):"
+              },
+              {
+                "n": 353,
+                "sign": "+",
+                "text": "    \"\"\"Shared native read-only admission validation. Only admit() can claim an attempt.\"\"\""
+              }
+            ],
+            "start": 352
+          },
+          {
+            "dropped": 0,
+            "end": 354,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    if os.environ[\"GITHUB_EVENT_NAME\"] != \"workflow_dispatch\":"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        raise ValueError(\"manual dispatch only\")"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    run = api(f\"actions/runs/{os.environ['GITHUB_RUN_ID']}\")"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    if run[\"path\"] != WORKFLOW:"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        raise ValueError(\"R2 entrypoint mismatch\")"
+              }
+            ],
+            "start": 354
+          },
+          {
+            "dropped": 0,
+            "end": 361,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    if repository[\"private\"] or repository[\"default_branch\"] != \"main\":"
+              },
+              {
+                "n": 356,
+                "sign": "+",
+                "text": "    if ("
+              },
+              {
+                "n": 357,
+                "sign": "+",
+                "text": "        repository[\"full_name\"] != REPOSITORY"
+              },
+              {
+                "n": 358,
+                "sign": "+",
+                "text": "        or repository[\"url\"] != REPOSITORY_API"
+              },
+              {
+                "n": 359,
+                "sign": "+",
+                "text": "        or repository[\"private\"]"
+              },
+              {
+                "n": 360,
+                "sign": "+",
+                "text": "        or repository[\"default_branch\"] != \"main\""
+              },
+              {
+                "n": 361,
+                "sign": "+",
+                "text": "    ):"
+              }
+            ],
+            "start": 356
+          },
+          {
+            "dropped": 0,
+            "end": 365,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        not comment[\"issue_url\"].endswith(\"/issues/158\")"
+              },
+              {
+                "n": 365,
+                "sign": "+",
+                "text": "        comment[\"issue_url\"] != REPOSITORY_API + \"/issues/158\""
+              }
+            ],
+            "start": 365
+          },
+          {
+            "dropped": 0,
+            "end": 372,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+              }
+            ],
+            "start": 372
+          },
+          {
+            "dropped": 0,
+            "end": 380,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    if api(\"git/ref/heads/main\")[\"object\"][\"sha\"] != main:"
+              },
+              {
+                "n": 380,
+                "sign": "+",
+                "text": "    if live_main and api(\"git/ref/heads/main\")[\"object\"][\"sha\"] != main:"
+              }
+            ],
+            "start": 380
+          },
+          {
+            "dropped": 0,
+            "end": 420,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    query = ("
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        'query($number:Int!){repository(owner:\"TheHalfMoon\",name:\"DAL\"){'"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        \"pullRequest(number:$number){reviewThreads(first:100){\""
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        \"pageInfo{hasNextPage}nodes{isResolved isOutdated}}}}}\""
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    )"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    request = Request("
+              },
+              {
+                "n": 420,
+                "sign": "+",
+                "text": "    request = authenticated_request("
+              }
+            ],
+            "start": 420
+          },
+          {
+            "dropped": 0,
+            "end": 422,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        data=json_bytes({\"query\": query, \"variables\": {\"number\": int(receipt[\"pull_request\"])}}),"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        headers={"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "            \"Authorization\": f\"Bearer {os.environ['GH_TOKEN']}\","
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "            \"Content-Type\": \"application/json\","
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        },"
+              },
+              {
+                "n": 422,
+                "sign": "+",
+                "text": "        {\"query\": REVIEW_THREADS_QUERY, \"variables\": {\"number\": int(receipt[\"pull_request\"])}},"
+              }
+            ],
+            "start": 422
+          },
+          {
+            "dropped": 0,
+            "end": 424,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    with urlopen(request, timeout=60) as response:"
+              },
+              {
+                "n": null,
+                "sign": "-",
+                "text": "        data = json.load(response)"
+              },
+              {
+                "n": 424,
+                "sign": "+",
+                "text": "    data = native_http(request, review_query=True)"
+              }
+            ],
+            "start": 424
+          },
+          {
+            "dropped": 0,
+            "end": 441,
+            "lines": [
+              {
+                "n": 430,
+                "sign": "+",
+                "text": "    return receipt, tree, units"
+              },
+              {
+                "n": 431,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 432,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 433,
+                "sign": "+",
+                "text": "def admit(root, comment_id, output):"
+              },
+              {
+                "n": 434,
+                "sign": "+",
+                "text": "    environment_guard()"
+              },
+              {
+                "n": 435,
+                "sign": "+",
+                "text": "    if os.environ[\"GITHUB_EVENT_NAME\"] != \"workflow_dispatch\":"
+              },
+              {
+                "n": 436,
+                "sign": "+",
+                "text": "        raise ValueError(\"manual dispatch only\")"
+              },
+              {
+                "n": 437,
+                "sign": "+",
+                "text": "    run = api(f\"actions/runs/{os.environ['GITHUB_RUN_ID']}\")"
+              },
+              {
+                "n": 438,
+                "sign": "+",
+                "text": "    if run[\"path\"] != WORKFLOW:"
+              },
+              {
+                "n": 439,
+                "sign": "+",
+                "text": "        raise ValueError(\"R2 entrypoint mismatch\")"
+              },
+              {
+                "n": 440,
+                "sign": "+",
+                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+              },
+              {
+                "n": 441,
+                "sign": "+",
+                "text": "    receipt, tree, units = qualify_canonical_receipt(root, comment_id, main)"
+              }
+            ],
+            "start": 430
+          }
+        ],
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "ranges": [
+          {
+            "end": 12,
+            "start": 12
+          },
+          {
+            "end": 16,
+            "start": 15
+          },
+          {
+            "end": 96,
+            "start": 39
+          },
+          {
+            "end": 107,
+            "start": 102
+          },
+          {
+            "end": 117,
+            "start": 116
+          },
+          {
+            "end": 122,
+            "start": 122
+          },
+          {
+            "end": 150,
+            "start": 129
+          },
+          {
+            "end": 163,
+            "start": 153
+          },
+          {
+            "end": 172,
+            "start": 167
+          },
+          {
+            "end": 353,
+            "start": 352
+          },
+          {
+            "end": 354,
+            "start": 354
+          },
+          {
+            "end": 361,
+            "start": 356
+          },
+          {
+            "end": 365,
+            "start": 365
+          },
+          {
+            "end": 372,
+            "start": 372
+          },
+          {
+            "end": 380,
+            "start": 380
+          },
+          {
+            "end": 420,
+            "start": 420
+          },
+          {
+            "end": 422,
+            "start": 422
+          },
+          {
+            "end": 424,
+            "start": 424
+          },
+          {
+            "end": 441,
+            "start": 430
+          }
+        ],
+        "status": "modified"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 392,
+            "lines": [
+              {
+                "n": 370,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 371,
+                "sign": "+",
+                "text": "## Active frontier - SG-000031-A1 / admission repair only"
+              },
+              {
+                "n": 372,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 373,
+                "sign": "+",
+                "text": "The founder authorized a bounded URL/admission preflight engineering repair from"
+              },
+              {
+                "n": 374,
+                "sign": "+",
+                "text": "failure main `3ebf58ef10a42db6ee31d96451ea80fe98432b4c`. The preceding failed-attempt"
+              },
+              {
+                "n": 375,
+                "sign": "+",
+                "text": "frontier remains historical and immutable. No new model call, execution attempt or"
+              },
+              {
+                "n": 376,
+                "sign": "+",
+                "text": "development row replay is authorized. R2 remains scientifically BLOCKED."
+              },
+              {
+                "n": 377,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 378,
+                "sign": "+",
+                "text": "The repair normalizes the native repository metadata root, rejects malformed or"
+              },
+              {
+                "n": 379,
+                "sign": "+",
+                "text": "ambiguous admission URLs, and shares native authenticated receipt validation"
+              },
+              {
+                "n": 380,
+                "sign": "+",
+                "text": "between real admission and a read-only preflight. Deterministic HTTP fixtures"
+              },
+              {
+                "n": 381,
+                "sign": "+",
+                "text": "reproduce the retained 404 and corrected behavior. The actual preflight workflow"
+              },
+              {
+                "n": 382,
+                "sign": "+",
+                "text": "uses the real admission token context, prohibits REST mutations, and permits only"
+              },
+              {
+                "n": 383,
+                "sign": "+",
+                "text": "the fixed read-only review-thread GraphQL query. It validates historical engineering"
+              },
+              {
+                "n": 384,
+                "sign": "+",
+                "text": "evidence without admitting execution on the repair checkout."
+              },
+              {
+                "n": 385,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 386,
+                "sign": "+",
+                "text": "See `registry/study1_sg000031_admission_repair_contract.json` and"
+              },
+              {
+                "n": 387,
+                "sign": "+",
+                "text": "`docs/study1-sg000031-admission-repair.md`. Graft structural analysis, genuine Jev,"
+              },
+              {
+                "n": 388,
+                "sign": "+",
+                "text": "approved Alibaba, full CI/manuscript/arXiv/SDK/native-preflight checks, zero active"
+              },
+              {
+                "n": 389,
+                "sign": "+",
+                "text": "review threads, guarded normal merge and post-main verification are required before"
+              },
+              {
+                "n": 390,
+                "sign": "+",
+                "text": "the external canonical repair receipt. Then stop for a separate founder decision."
+              },
+              {
+                "n": 391,
+                "sign": "+",
+                "text": "All 43 protected files remain unchanged; founder cost stays zero and final access,"
+              },
+              {
+                "n": 392,
+                "sign": "+",
+                "text": "D4, training, scoring and final evaluation remain inactive."
+              }
+            ],
+            "start": 370
+          }
+        ],
+        "path": "specs/CURRENT.md",
+        "ranges": [
+          {
+            "end": 392,
+            "start": 370
+          }
+        ],
+        "status": "modified"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 441,
+            "lines": [
+              {
+                "n": 430,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 431,
+                "sign": "+",
+                "text": "### SG-000031-A1 / R2 - Founder-authorized admission repair only"
+              },
+              {
+                "n": 432,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 433,
+                "sign": "+",
+                "text": "- [x] Preserve separate direct founder repair-only authorization and exact failure base"
+              },
+              {
+                "n": 434,
+                "sign": "+",
+                "text": "- [x] Normalize native repository metadata URL and fail closed on ambiguous admission URLs"
+              },
+              {
+                "n": 435,
+                "sign": "+",
+                "text": "- [x] Share native authenticated receipt validation with a mutation-prohibited preflight"
+              },
+              {
+                "n": 436,
+                "sign": "+",
+                "text": "- [x] Add deterministic fixtures for the retained HTTP 404 and corrected lookup, URL boundaries, authentication, read-only transport and live-main guard"
+              },
+              {
+                "n": 437,
+                "sign": "+",
+                "text": "- [ ] Persist Graft structural impact and actual test/source hashes"
+              },
+              {
+                "n": 438,
+                "sign": "+",
+                "text": "- [ ] Qualify genuine Jev, approved Alibaba, full CI, manuscript/arXiv, unchanged SDK and actual native workflow-token preflight on exact head"
+              },
+              {
+                "n": 439,
+                "sign": "+",
+                "text": "- [ ] Normal expected-head merge, intended-tree verification and complete post-main checks"
+              },
+              {
+                "n": 440,
+                "sign": "+",
+                "text": "- [ ] Record canonical repair receipt and stop before any model call for a separate founder decision"
+              },
+              {
+                "n": 441,
+                "sign": "+",
+                "text": "- [ ] No new R2 attempt, row replay, model call, final access, D4, training, scoring or final evaluation is authorized"
+              }
+            ],
+            "start": 430
+          }
+        ],
+        "path": "specs/tasks.md",
+        "ranges": [
+          {
+            "end": 441,
+            "start": 430
+          }
+        ],
+        "status": "modified"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 217,
+            "end": 241,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "\"\"\"Deterministic native HTTP fixtures only; no benchmark, model or final content.\"\"\""
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "from __future__ import annotations"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "import importlib"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "import json"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "import threading"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "from http.server import BaseHTTPRequestHandler, HTTPServer"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "from pathlib import Path"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "from urllib.error import HTTPError"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "from urllib.parse import urlsplit"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "from urllib.request import Request, urlopen"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "import pytest"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "ROOT = Path(__file__).resolve().parents[1]"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "@pytest.fixture"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "def admission(monkeypatch):"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "    monkeypatch.syspath_prepend(str(ROOT / \"scripts\"))"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "    monkeypatch.setenv(\"GH_TOKEN\", \"synthetic-qualification-token\")"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "    return importlib.import_module(\"study1_sg000031_r2_admission\")"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": ""
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "ranges": [
+          {
+            "end": 241,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 94,
+            "end": 118,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "\"\"\"Native authenticated admission qualification only; never claims, plans or infers.\"\"\""
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "from __future__ import annotations"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "import argparse"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "import json"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "import os"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "import sys"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "from pathlib import Path"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "ROOT = Path(__file__).resolve().parents[1]"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "sys.path.insert(0, str(ROOT / \"scripts\"))"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "import study1_sg000031_r2_admission as admission  # noqa: E402"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "HISTORICAL_RECEIPT_COMMENT = 5995901646"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "HISTORICAL_RUNNER_MAIN = \"73e98360863aaa1cd039ffaa5cef2e4311dcfafa\""
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "FAILED_ATTEMPT = 37320473498"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "FAILURE_MAIN = \"3ebf58ef10a42db6ee31d96451ea80fe98432b4c\""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "def qualify(root):"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "    repair_path = root / \"registry/study1_sg000031_admission_repair_contract.json\""
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "    repair = json.loads(repair_path.read_bytes())"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    if repair[\"authorization_base_main\"] != FAILURE_MAIN or repair[\"new_execution_authorized\"]:"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "tools/qualify_sg000031_admission.py",
+        "ranges": [
+          {
+            "end": 118,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      }
+    ],
+    "deleted": [],
+    "depth": 2,
+    "impacted": [
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#artifact_documents",
+        "kind": "function",
+        "name": "artifact_documents",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L249-L277"
+      },
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#ledger_write",
+        "kind": "function",
+        "name": "ledger_write",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L173-L189"
+      },
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#verify_claim",
+        "kind": "function",
+        "name": "verify_claim",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L476-L494"
+      },
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#verify_run",
+        "kind": "function",
+        "name": "verify_run",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L207-L246"
+      },
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_aggregate.py#aggregate",
+        "kind": "function",
+        "name": "aggregate",
+        "path": "scripts/study1_sg000031_r2_aggregate.py",
+        "relation": "calls",
+        "span": "L56-L188"
+      },
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#main",
+        "kind": "function",
+        "name": "main",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L527-L556"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_admission.py#verify_reports",
+        "kind": "function",
+        "name": "verify_reports",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L280-L349"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_admission.py#plan",
+        "kind": "function",
+        "name": "plan",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L497-L524"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_runner.py#run.checkpoint",
+        "kind": "function",
+        "name": "checkpoint",
+        "path": "scripts/study1_sg000031_r2_runner.py",
+        "relation": "calls",
+        "span": "L189-L194"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_runner.py#run",
+        "kind": "function",
+        "name": "run",
+        "path": "scripts/study1_sg000031_r2_runner.py",
+        "relation": "calls",
+        "span": "L133-L253"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_aggregate.py#main",
+        "kind": "function",
+        "name": "main",
+        "path": "scripts/study1_sg000031_r2_aggregate.py",
+        "relation": "calls",
+        "span": "L191-L212"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_admission.py",
+        "kind": "file",
+        "name": "study1_sg000031_r2_admission.py",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L1-L561"
+      },
+      {
+        "depth": 1,
+        "id": "tools/qualify_sg000031_admission.py",
+        "kind": "file",
+        "name": "qualify_sg000031_admission.py",
+        "path": "tools/qualify_sg000031_admission.py",
+        "relation": "calls",
+        "span": "L1-L119"
+      }
+    ],
+    "modules": [
+      {
+        "files": [
+          "scripts/study1_sg000031_r2_aggregate.py",
+          "scripts/study1_sg000031_r2_runner.py"
+        ],
+        "from": [
+          "scripts/study1_sg000031_r2_admission.py"
+        ],
+        "key": "scripts/",
+        "label": "aggregate",
+        "labelSource": "symbol",
+        "symbols": [
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_aggregate.py#aggregate",
+            "kind": "function",
+            "name": "aggregate",
+            "path": "scripts/study1_sg000031_r2_aggregate.py",
+            "relation": "calls",
+            "span": "L56-L188"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_aggregate.py#main",
+            "kind": "function",
+            "name": "main",
+            "path": "scripts/study1_sg000031_r2_aggregate.py",
+            "relation": "calls",
+            "span": "L191-L212"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_runner.py#run.checkpoint",
+            "kind": "function",
+            "name": "checkpoint",
+            "path": "scripts/study1_sg000031_r2_runner.py",
+            "relation": "calls",
+            "span": "L189-L194"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_runner.py#run",
+            "kind": "function",
+            "name": "run",
+            "path": "scripts/study1_sg000031_r2_runner.py",
+            "relation": "calls",
+            "span": "L133-L253"
+          }
+        ]
+      }
+    ],
+    "seeds": [
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#native_read_only_preflight",
+        "kind": "function",
+        "name": "native_read_only_preflight",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L89-L96",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#repository_url",
+        "kind": "function",
+        "name": "repository_url",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L48-L85",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#StripCrossHostAuthorization.redirect_request",
+        "kind": "method",
+        "name": "redirect_request",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L100-L113",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#authenticated_request",
+        "kind": "function",
+        "name": "authenticated_request",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L116-L128",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#native_http",
+        "kind": "function",
+        "name": "native_http",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L131-L164",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#api",
+        "kind": "function",
+        "name": "api",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L167-L170",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#qualify_canonical_receipt",
+        "kind": "function",
+        "name": "qualify_canonical_receipt",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L352-L430",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#admit",
+        "kind": "function",
+        "name": "admit",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L433-L473",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#admission",
+        "kind": "function",
+        "name": "admission",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L20-L23",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#native_fixture.FixtureOpener.open",
+        "kind": "method",
+        "name": "open",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L56-L64",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#native_fixture.Handler.do_GET",
+        "kind": "method",
+        "name": "do_GET",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L31-L46",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#native_fixture.Handler.log_message",
+        "kind": "method",
+        "name": "log_message",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L48-L49",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_ambiguous_urls_fail_before_transport_or_credentials",
+        "kind": "function",
+        "name": "test_ambiguous_urls_fail_before_transport_or_credentials",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L144-L150",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_cross_host_artifact_redirect_strips_bearer_and_unsafe_targets_fail",
+        "kind": "function",
+        "name": "test_cross_host_artifact_redirect_strips_bearer_and_unsafe_targets_fail",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L183-L198",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_existing_job_artifact_ref_and_checkpoint_routes_are_preserved",
+        "kind": "function",
+        "name": "test_existing_job_artifact_ref_and_checkpoint_routes_are_preserved",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L153-L161",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_live_main_guard_remains_required_for_real_admission",
+        "kind": "function",
+        "name": "test_live_main_guard_remains_required_for_real_admission",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L222-L241",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_only_fixed_read_only_graphql_query_is_permitted",
+        "kind": "function",
+        "name": "test_only_fixed_read_only_graphql_query_is_permitted",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L172-L180",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_preflight_forbids_mutations_even_with_get_body",
+        "kind": "function",
+        "name": "test_preflight_forbids_mutations_even_with_get_body",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L165-L169",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_real_admission_uses_shared_validator_and_stops_before_claim.shared",
+        "kind": "function",
+        "name": "shared",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L211-L213",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_repository_root_has_one_canonical_identity",
+        "kind": "function",
+        "name": "test_repository_root_has_one_canonical_identity",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L103-L106",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_retained_trailing_slash_failure_and_corrected_native_lookup",
+        "kind": "function",
+        "name": "test_retained_trailing_slash_failure_and_corrected_native_lookup",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L75-L92",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_admission.py#main",
+        "kind": "function",
+        "name": "main",
+        "path": "tools/qualify_sg000031_admission.py",
+        "span": "L96-L114",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_admission.py#qualify",
+        "kind": "function",
+        "name": "qualify",
+        "path": "tools/qualify_sg000031_admission.py",
+        "span": "L21-L93",
+        "wholeFile": false
+      }
+    ],
+    "testModules": [],
+    "unindexed": [
+      ".github/workflows/study1-sg000031-admission-preflight.yml",
+      "docs/study1-sg000031-admission-repair.md",
+      "registry/study1_sg000031_admission_repair_authorization.json",
+      "registry/study1_sg000031_admission_repair_contract.json",
+      "registry/study1_sg000031_admission_repair_frontier.json",
+      "specs/CURRENT.md",
+      "specs/tasks.md"
+    ]
+  },
+  "build_output_sha256": "3a160f4511438c78461fa319b56467d11d2fe6ee552c8704fb3b39c7f87fd342",
+  "callers": {
+    "matches": [
+      {
+        "hits": [
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#admit",
+            "kind": "function",
+            "name": "admit",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L433-L473"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#artifact_documents",
+            "kind": "function",
+            "name": "artifact_documents",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L249-L277"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#ledger_write",
+            "kind": "function",
+            "name": "ledger_write",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L173-L189"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#qualify_canonical_receipt",
+            "kind": "function",
+            "name": "qualify_canonical_receipt",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L352-L430"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#verify_claim",
+            "kind": "function",
+            "name": "verify_claim",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L476-L494"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_admission.py#verify_run",
+            "kind": "function",
+            "name": "verify_run",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L207-L246"
+          },
+          {
+            "depth": 1,
+            "id": "scripts/study1_sg000031_r2_aggregate.py#aggregate",
+            "kind": "function",
+            "name": "aggregate",
+            "path": "scripts/study1_sg000031_r2_aggregate.py",
+            "relation": "calls",
+            "span": "L56-L188"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_admission.py#main",
+            "kind": "function",
+            "name": "main",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L527-L556"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_admission.py#verify_reports",
+            "kind": "function",
+            "name": "verify_reports",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L280-L349"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_admission.py#plan",
+            "kind": "function",
+            "name": "plan",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "relation": "calls",
+            "span": "L497-L524"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_runner.py#run.checkpoint",
+            "kind": "function",
+            "name": "checkpoint",
+            "path": "scripts/study1_sg000031_r2_runner.py",
+            "relation": "calls",
+            "span": "L189-L194"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_runner.py#run",
+            "kind": "function",
+            "name": "run",
+            "path": "scripts/study1_sg000031_r2_runner.py",
+            "relation": "calls",
+            "span": "L133-L253"
+          },
+          {
+            "depth": 2,
+            "id": "scripts/study1_sg000031_r2_aggregate.py#main",
+            "kind": "function",
+            "name": "main",
+            "path": "scripts/study1_sg000031_r2_aggregate.py",
+            "relation": "calls",
+            "span": "L191-L212"
+          }
+        ],
+        "symbol": {
+          "id": "scripts/study1_sg000031_r2_admission.py#api",
+          "kind": "function",
+          "name": "api",
+          "path": "scripts/study1_sg000031_r2_admission.py",
+          "span": "L167-L170"
+        }
+      }
+    ],
+    "query": "api",
+    "saved": {
+      "baselineChars": 42003,
+      "files": 3
+    }
+  },
+  "commands": [
+    "graft build . --no-gitignore --no-ignore",
+    "graft callers api . --depth 2 --json",
+    "graft blast . --depth 2 --format json --no-owners"
+  ],
+  "founder_cost_usd": 0,
+  "inspection": "Shared helper impacts admission, artifact/job reads, claim verification, ledger checkpoints and aggregate job reads. Valid existing endpoint paths and mutation semantics outside preflight are preserved; no scientific runtime, producer or row processing source changes.",
+  "installed_version": "0.21.1",
+  "mode": "structural-wiring-only",
+  "model_pass_performed": false,
+  "source_lf_sha256": {
+    "scripts/study1_sg000031_r2_admission.py": "150c30ee2903edc61f304e036b4cd3150675f7e947bd1b1ad23106673b536241",
+    "tests/test_study1_sg000031_admission_repair.py": "7261aada399596cd010a4909a5e58b45694bdad9111b3a76212c2c8c43068737",
+    "tools/qualify_sg000031_admission.py": "9a83121fe6e22827b19473cd719b7aca6603f18ea728e730d46cf81431eae4b8"
+  },
+  "specgrain_id": "SG-000031-A1",
+  "tool": "Graft"
+}
