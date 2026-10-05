@@ -36,6 +36,14 @@ WORKFLOW = ".github/workflows/study1-sg000031-r2-recovery.yml"
 REPOSITORY = "TheHalfMoon/DAL"
 LEDGER_BRANCH = "codex/sg000031-r2-attempt1-journal"
 LEDGER_ROOT = "evidence/study1-r2-attempt1"
+ATTEMPT_ORDINAL = os.environ.get("DAL_R2_ATTEMPT_ORDINAL", "1")
+if ATTEMPT_ORDINAL not in {"1", "2"}:
+    raise ValueError("ambiguous R2 attempt ordinal")
+if ATTEMPT_ORDINAL == "2":
+    WORKFLOW = ".github/workflows/study1-sg000031-r2-attempt2.yml"
+    ATTEMPT_REF = "tags/dal-r2-issue158-attempt2"
+    LEDGER_BRANCH = "codex/sg000031-r2-attempt2-journal"
+    LEDGER_ROOT = "evidence/study1-r2-attempt2"
 REPOSITORY_API = f"https://api.github.com/repos/{REPOSITORY}"
 _PREFLIGHT_AUDIT = ContextVar("r2_native_preflight_audit", default=None)
 REVIEW_THREADS_QUERY = (
@@ -438,6 +446,10 @@ def qualify_canonical_receipt(root, comment_id, main, *, live_main=True):
 
 
 def admit(root, comment_id, output):
+    if ATTEMPT_ORDINAL == "2":
+        from study1_sg000031_attempt2_admission import admit as admit_attempt2
+
+        return admit_attempt2(root, comment_id, output)
     environment_guard()
     if os.environ["GITHUB_EVENT_NAME"] != "workflow_dispatch":
         raise ValueError("manual dispatch only")
@@ -481,6 +493,10 @@ def admit(root, comment_id, output):
 
 
 def verify_claim(claim_sha):
+    if ATTEMPT_ORDINAL == "2":
+        from study1_sg000031_attempt2_admission import verify_claim as verify_attempt2_claim
+
+        return verify_attempt2_claim(claim_sha)
     environment_guard()
     verify_frozen_controls(Path.cwd())
     if api("")["private"]:

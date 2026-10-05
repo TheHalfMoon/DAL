@@ -1,0 +1,2340 @@
+{
+  "analyzed_source_commit": "6cc3097daacb080902c82c15a233cc57cc997b44",
+  "base_sha": "0e298850b3392eafedeacc995e36c1e15391a15c",
+  "blast": {
+    "areas": [
+      {
+        "behavioural": 18,
+        "changedTestFiles": [],
+        "files": [
+          "scripts/study1_sg000031_attempt2_admission.py",
+          "scripts/study1_sg000031_r2_admission.py"
+        ],
+        "key": "scripts/",
+        "label": "load_contract",
+        "labelSource": "symbol",
+        "reached": 0,
+        "seedNames": [
+          "load_contract",
+          "execution_history",
+          "validate_receipt_identity",
+          "admit",
+          "artifact_report",
+          "binding_fields",
+          "git_bytes",
+          "inspection_identity",
+          "qualify_canonical_receipt",
+          "verify_claim",
+          "verify_inspection",
+          "verify_native",
+          "verify_predecessors",
+          "verify_qualification",
+          "admit",
+          "reject_constant",
+          "unique_pairs",
+          "verify_claim"
+        ],
+        "seeds": 18,
+        "testFiles": [],
+        "tests": "none",
+        "unreached": [
+          "admit",
+          "artifact_report",
+          "binding_fields",
+          "execution_history",
+          "git_bytes",
+          "inspection_identity",
+          "load_contract",
+          "reject_constant",
+          "unique_pairs",
+          "qualify_canonical_receipt",
+          "validate_receipt_identity",
+          "verify_claim",
+          "verify_inspection",
+          "verify_native",
+          "verify_predecessors",
+          "verify_qualification",
+          "admit",
+          "verify_claim"
+        ]
+      },
+      {
+        "behavioural": 7,
+        "changedTestFiles": [],
+        "files": [
+          "tools/qualify_sg000031_attempt2_admission.py"
+        ],
+        "key": "tools/",
+        "label": "build_receipt",
+        "labelSource": "symbol",
+        "reached": 0,
+        "seedNames": [
+          "build_receipt",
+          "main",
+          "prove_unconsumed",
+          "qualify",
+          "review",
+          "wait_inspection",
+          "wait_runs"
+        ],
+        "seeds": 7,
+        "testFiles": [],
+        "tests": "none",
+        "unreached": [
+          "build_receipt",
+          "main",
+          "prove_unconsumed",
+          "qualify",
+          "review",
+          "wait_inspection",
+          "wait_runs"
+        ]
+      }
+    ],
+    "basis": "0e298850b3392eafedeacc995e36c1e15391a15c...HEAD",
+    "changed": [
+      {
+        "hunks": [
+          {
+            "dropped": 62,
+            "end": 86,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "name: DAL R2 Attempt-2 native admission qualification"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "on:"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  pull_request:"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    paths:"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_r2_admission.py"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "      - tools/qualify_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "      - tests/test_study1_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "      - registry/study1_sg000031_attempt2_*.json"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-r2-attempt2*.yml"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-attempt2-admission-preflight.yml"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  push:"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "    branches: [main]"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "    paths:"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_r2_admission.py"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "      - scripts/study1_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "      - tools/qualify_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "      - tests/test_study1_sg000031_attempt2_admission.py"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "      - registry/study1_sg000031_attempt2_*.json"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-r2-attempt2*.yml"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "      - .github/workflows/study1-sg000031-attempt2-admission-preflight.yml"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  workflow_dispatch:"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    inputs:"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": ".github/workflows/study1-sg000031-attempt2-admission-preflight.yml",
+        "ranges": [
+          {
+            "end": 86,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 332,
+            "end": 356,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "name: DAL Study 1 SG-000031 R2 Attempt 2 frozen worker"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "on:"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  workflow_call:"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    inputs:"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "      shard:"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "        required: true"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "        type: number"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "      claim_sha:"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "        required: true"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "        type: string"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "permissions:"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "  contents: write"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "  actions: read"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "env:"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "  DAL_R2_ATTEMPT_ORDINAL: \"2\""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "  FHIR_AGENTBENCH_REVISION: \"bbb42909a5a7eb907d1cd91f72a560729e7037ea\""
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "  LLAMA_CPP_REVISION: \"d2e54583c7452353eb35d40431281f6ee984332f\""
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "  QWEN_MODEL_ID: \"Qwen/Qwen3-4B-Instruct-2507\""
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "  QWEN_GGUF_URL: \"https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/resolve/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf\""
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  QWEN_GGUF_SHA256: \"ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1\""
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "  OPENAI_API_KEY: \"dal-local-query-trace-gate\""
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": ".github/workflows/study1-sg000031-r2-attempt2-worker.yml",
+        "ranges": [
+          {
+            "end": 356,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 162,
+            "end": 186,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "name: DAL Study 1 SG-000031 R2 Attempt 2"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "on:"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  workflow_dispatch:"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    inputs:"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "      qualification_comment_id:"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "        description: Exact versioned Attempt-2 canonical admission receipt in Issue 158"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "        required: true"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "        type: string"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "permissions:"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "  contents: read"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  actions: read"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "concurrency:"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "  group: dal-r2-issue158-attempt2-single-attempt"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "  cancel-in-progress: false"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "env:"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "  DAL_R2_ATTEMPT_ORDINAL: \"2\""
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "jobs:"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  admission:"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    name: Qualify and permanently claim the sole R2 attempt"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": ".github/workflows/study1-sg000031-r2-attempt2.yml",
+        "ranges": [
+          {
+            "end": 186,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 70,
+            "end": 94,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "# SG-000031 Attempt-2 admission engineering"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "This grain implements the founder's separate admission-engineering authorization."
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "It does not dispatch a scientific experiment or consume the recorded second-execution"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "authorization. Stop after normal merge and post-main verification, before any"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "scientific dispatch or model call. R2 remains scientifically BLOCKED."
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "## Exact bindings and historical evidence"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "The versioned contract is `registry/study1_sg000031_attempt2_admission_contract.json`."
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "It binds canonical repair main `0e298850b3392eafedeacc995e36c1e15391a15c` and tree"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "`ed53eaf2c6577ff76b88e453c87c2370969393d3`, PR #161's retained canonical repair"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "qualification, the exact recorded execution authorization, the new engineering"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "authorization, canonical R1, the original scientific contract, immutable SG-000029"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "protocol, frozen producer and the same development population."
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "The execution authorization LF SHA-256 is"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "`64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48`."
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "The engineering authorization LF SHA-256 is"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "`8e0e2db1ddbe340a8fe53741fbfbffbed648ec857dd5bf4801a86ddf530fd08c`."
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "The predecessor lineage hash is"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "`361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c`,"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "over the canonical JSON mapping of three immutable Attempt-1 evidence paths to"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "their LF SHA-256 values. The first failed scientific dispatch remains run"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "docs/study1-sg000031-attempt2-admission.md",
+        "ranges": [
+          {
+            "end": 94,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 123,
+            "end": 147,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"D4\": false,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"admission_identity\": {"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    \"candidate_receipt_marker\": \"DAL_R2_ATTEMPT2_CANDIDATE_ADMISSION_V1\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "    \"canonical_receipt_marker\": \"DAL_R2_ATTEMPT2_CANONICAL_ADMISSION_V1\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "    \"contract_path\": \"registry/study1_sg000031_attempt2_admission_contract.json\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "    \"ledger_branch\": \"codex/sg000031-r2-attempt2-journal\","
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "    \"ledger_root\": \"evidence/study1-r2-attempt2\","
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "    \"permanent_attempt_ref\": \"tags/dal-r2-issue158-attempt2\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "    \"post_merge_receipt_marker\": \"DAL_R2_ATTEMPT2_POSTMERGE_PREFLIGHT_V1\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "    \"preflight_workflow\": \".github/workflows/study1-sg000031-attempt2-admission-preflight.yml\","
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "    \"worker\": \".github/workflows/study1-sg000031-r2-attempt2-worker.yml\","
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "    \"workflow\": \".github/workflows/study1-sg000031-r2-attempt2.yml\""
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "  \"attempt1\": {"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "    \"first_turn_generations\": 0,"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "    \"lineage_file_lf_sha256\": {"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "      \"registry/study1_sg000031_attempt1_admission_failure.json\": \"e91aa1457889bae6e7ba5ee092ee09638dcce97219f0f538da3839430f4ee505\","
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "      \"registry/study1_sg000031_attempt1_closeout.json\": \"41844f94961bd7a0177f5b3cdaa4d9626d46255f549655f0b4f389a8f2287f28\","
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "      \"registry/study1_sg000031_attempt1_unattempted_rows.json\": \"f93b41076178b1c686bbec6a85e2009b06709081760b7d2284d57288584cc4f0\""
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "    },"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "    \"lineage_sha256\": \"361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c\","
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    \"physical_model_POSTs\": 0,"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_attempt2_admission_contract.json",
+        "ranges": [
+          {
+            "end": 147,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 12,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"agent_record_is_not_a_new_human_GitHub_authorization\": true,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"attachment_sha256\": \"85893da2aa5b54586747386e2e91365ab410f8ccbf0135c812a519e8ad83f5c1\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"authorization_base_main\": \"0e298850b3392eafedeacc995e36c1e15391a15c\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"existing_execution_authorization_consumed\": false,"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"model_calls_authorized_by_this_extension\": false,"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"scientific_dispatch_authorized_by_this_extension\": false,"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"scope\": \"Attempt-2 admission engineering and qualification only; STOP before dispatch\","
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"source_kind\": \"direct-human-founder-attachment-in-Codex\","
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "  \"statement_utf8_lf_sha256\": \"f71aa0419b0e8ab2d75ca4c11976ed5203fec06328cabc4e908a54ef9fb9c230\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "  \"verbatim_statement\": \"FOUNDER AUTHORIZATION \\u2014 DAL R2 ATTEMPT-2 ADMISSION GRAIN APPROVED\\n\\nI explicitly authorize a narrowly bounded engineering scope extension to prepare, implement, review, qualify, and canonically merge a separate DAL R2 Attempt-2 admission grain.\\n\\nThis authorization is for admission engineering and qualification only.\\n\\nIt does NOT authorize dispatch, model inference, row replay, or consumption of the already-recorded second-execution authorization.\\n\\nCurrent canonical engineering state:\\n\\n- Canonical main: `0e298850b3392eafedeacc995e36c1e15391a15c`\\n- Canonical tree: `ed53eaf2c6577ff76b88e453c87c2370969393d3`\\n- Admission repair PR: `#161`\\n- R1 manifest SHA-256: `220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0`\\n- R2 remains scientifically `BLOCKED`\\n- First R2 attempt remains immutable\\n- First-turn generations from Attempt 1: `0`\\n- Physical model POSTs from Attempt 1: `0`\\n- Development rows attempted in Attempt 1: `0`\\n- Founder cost: `$0`\\n\\n## Authorized scope\\n\\nI authorize creation of a new, versioned Attempt-2 admission identity that cleanly distinguishes the second authorized execution attempt from the immutable first attempt.\\n\\nThe grain may:\\n\\n1. Create a separate Attempt-2 admission contract and receipt identity.\\n\\n2. Bind Attempt-2 admission to:\\n   - the exact canonical repaired main and tree;\\n   - the exact existing recorded second-execution founder authorization;\\n   - the canonical R1 manifest and implementation;\\n   - the immutable SG-000029 protocol;\\n   - the frozen producer;\\n   - the same 1463-row exposed-development population identity;\\n   - the retained immutable Attempt-1 failure lineage.\\n\\n3. Persist the exact hash/identity of the existing second-execution founder authorization as a required Attempt-2 admission input.\\n\\n4. Introduce an explicit attempt identity or ordinal sufficient to prevent ambiguity between:\\n   - retained Attempt 1;\\n   - proposed Attempt 2.\\n\\n5. Ensure Attempt-2 admission accepts only the correctly bound Attempt-2 receipt/contract identity.\\n\\n6. Ensure the immutable Attempt-1 contract and receipt remain historical evidence and are not rewritten, replaced, reclassified, or silently reused as Attempt-2 authorization.\\n\\n7. Retain an explicit predecessor linkage from Attempt 2 to the immutable failed Attempt 1 without treating Attempt 1 as successful or incomplete authorization.\\n\\n8. Update admission validation only as necessary to support this versioned Attempt-2 identity and the already-recorded second-execution authorization.\\n\\n9. Preserve all existing:\\n   - live-main checks;\\n   - exact contract checks;\\n   - producer checks;\\n   - R1 manifest checks;\\n   - development-role firewall checks;\\n   - population identity checks;\\n   - final-role firewall checks;\\n   - zero-cost constraints;\\n   - single-attempt protections;\\n   - fail-closed behavior.\\n\\n10. Add deterministic regression coverage proving:\\n    - Attempt-1 receipts cannot incorrectly admit Attempt 2;\\n    - Attempt-2 receipts cannot be accepted under the wrong authorization;\\n    - stale-main receipts are rejected;\\n    - wrong-tree receipts are rejected;\\n    - wrong-manifest receipts are rejected;\\n    - wrong producer identities are rejected;\\n    - altered population identities are rejected;\\n    - missing or ambiguous attempt identities are rejected;\\n    - malformed receipts remain rejected;\\n    - the correctly bound Attempt-2 receipt succeeds through the full native read-only admission preflight.\\n\\n## Required engineering qualification\\n\\nUse:\\n\\n- Graft for bounded structural impact analysis;\\n- genuine TypeSafe Jev exact-diff semantic review;\\n- repository-approved Alibaba OpenCodeReview;\\n- complete CI matrix;\\n- Ruff;\\n- Mypy;\\n- Pytest;\\n- compile checks;\\n- manuscript / standalone arXiv checks;\\n- frozen synthetic SDK qualification;\\n- actual native authenticated read-only admission preflight;\\n- zero unresolved active review threads.\\n\\nEvery review and check used as merge evidence must bind to the exact final head.\\n\\nIf the head changes, prior exact-head qualification is not sufficient for merge qualification.\\n\\nMerge requirements:\\n\\n- normal merge commit only;\\n- exact-head / expected-head guard;\\n- no squash;\\n- no rebase;\\n- no force-push;\\n- post-main verification required.\\n\\n## Scientific invariants\\n\\nThe following must remain unchanged:\\n\\n- SG-000028 remains immutable and scientifically BLOCKED:\\n  - 1463 exposed-development rows\\n  - 224 PASS\\n  - 1239 behavior-changing blockers\\n  - 1623 observed calls\\n  - 248 source-pattern identities\\n\\n- R1 remains canonical and unchanged.\\n\\n- Frozen producer remains unchanged:\\n  - `Qwen/Qwen3-4B-Instruct-2507`\\n  - model/tokenizer revision `cdbee75f17c01a7cc42f958dc650907174af0554`\\n  - GGUF SHA-256 `ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1`\\n  - llama.cpp `d2e54583c7452353eb35d40431281f6ee984332f`\\n  - FHIR-AgentBench `bbb42909a5a7eb907d1cd91f72a560729e7037ea`\\n  - strategy `single_turn_request`\\n  - temperature `0.0`\\n  - frozen prompt\\n  - frozen tool schema\\n  - frozen structured-call transport\\n\\n- Final role remains sealed:\\n  - 40 patients\\n  - 173 rows\\n\\n## Explicit non-authorizations\\n\\nThis scope extension does NOT authorize:\\n\\n- dispatching Attempt 2;\\n- any model call;\\n- consuming the recorded second-execution authorization merely through engineering qualification;\\n- replaying any development row;\\n- a third R2 attempt;\\n- automatic retry;\\n- model-call retry;\\n- selective row replay;\\n- retry-until-favorable;\\n- changing R1 recovery semantics;\\n- adding new FHIR recovery behavior;\\n- changing scientific thresholds;\\n- changing the development population;\\n- changing the model;\\n- changing the tokenizer;\\n- changing the GGUF;\\n- changing llama.cpp;\\n- changing FHIR-AgentBench;\\n- changing the prompt;\\n- changing the tool schema;\\n- changing the agent strategy;\\n- changing temperature;\\n- SQL `proc_query` substitution;\\n- expected-resource-ID substitution;\\n- patient-identity rewriting;\\n- final-role access;\\n- final-role materialization;\\n- D4 activation;\\n- training;\\n- fine-tuning;\\n- second-turn reasoning;\\n- answer-correctness scoring;\\n- final evaluation;\\n- gate waiver;\\n- paid infrastructure or services.\\n\\n## Attempt-2 authorization preservation\\n\\nThe already-recorded second-execution founder authorization remains unconsumed while this grain is prepared, reviewed, tested, merged, and post-main qualified, because no scientific dispatch or model-call attempt is authorized by this scope extension.\\n\\nDo not redefine the project's existing scientific attempt-consumption rule merely to make the authorization appear available.\\n\\nPersist the exact existing Attempt-2 authorization identity/hash and prove that the admission grain binds to it correctly.\\n\\n## Required stop\\n\\nAfter this Attempt-2 admission grain becomes fully qualified, normally merged, and post-main verified:\\n\\nSTOP before any dispatch or model call.\\n\\nReport:\\n\\n- canonical main SHA\\n- canonical tree\\n- Attempt-2 admission contract hash\\n- Attempt-2 receipt/identity hash\\n- recorded second-execution authorization hash\\n- immutable Attempt-1 lineage hash\\n- R1 manifest hash\\n- population hash\\n- frozen producer identities\\n- Graft evidence\\n- Jev result and coverage\\n- Alibaba result\\n- CI results\\n- native preflight result\\n- post-main results\\n- unresolved review-thread count\\n- confirmation that model calls remain `0`\\n- confirmation that the second-execution authorization remains unconsumed\\n- confirmation that R2 remains `BLOCKED`\\n- confirmation that final access remains sealed\\n- founder cost\\n\\nOnly after that canonical evidence exists may the already-recorded second-execution authorization be evaluated for actual dispatch under its existing terms.\\n\\nFounder cost must remain zero.\""
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_attempt2_engineering_authorization.json",
+        "ranges": [
+          {
+            "end": 12,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 14,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"agent_record_is_not_a_new_human_GitHub_authorization\": true,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"attachment_path\": \"C:\\\\Users\\\\Shehr\\\\.codex\\\\attachments\\\\80af266a-5aba-42a7-aea6-521a537190fd\\\\Pasted text.txt\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"attachment_sha256\": \"398b15a65900e5909faacd4bdbaeb98d601849b82e5c2d1277f91e284e9246a2\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"authorization_base_main\": \"0e298850b3392eafedeacc995e36c1e15391a15c\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"authorization_base_tree\": \"ed53eaf2c6577ff76b88e453c87c2370969393d3\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"authorization_consumed_by_dispatch\": false,"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"dispatch_performed\": false,"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"new_R2_attempts_authorized\": 1,"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "  \"source_kind\": \"direct-human-founder-attachment-in-Codex\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "  \"statement_utf8_lf_sha256\": \"ad42ba09f9dc9bdbf0d85864d14d6a250ba35171419b9bcff3ca5a3e05e611df\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "  \"third_attempt_authorized\": false,"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  \"verbatim_statement\": \"FOUNDER AUTHORIZATION \\u2014 DAL R2 SECOND EXECUTION ATTEMPT APPROVED\\n\\nI explicitly authorize exactly one additional DAL Study 1 R2 recovery execution attempt after canonical qualification of the bounded admission repair.\\n\\nThis authorization is bound to the current canonical repair state:\\n\\n- Canonical main: `0e298850b3392eafedeacc995e36c1e15391a15c`\\n- Canonical tree: `ed53eaf2c6577ff76b88e453c87c2370969393d3`\\n- Admission repair PR: `#161`\\n- Qualified repair head: `76d5ef41182e1d500276e0784f0961325617bf15`\\n- R1 manifest SHA-256: `220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0`\\n\\nThe first R2 attempt remains immutable and consumed as an infrastructure-failed attempt:\\n\\n- Run: `37320473498`\\n- First-turn generations: `0`\\n- Physical model POSTs: `0`\\n- Development rows attempted: `0`\\n- Development rows retained unattempted: `1463`\\n- Final rows materialized: `0`\\n- Final content accessed: `false`\\n- Founder cost: `$0`\\n\\nI authorize exactly one new R2 execution attempt over the same frozen exposed-development population:\\n\\n- 341 calibration rows\\n- 1122 validation rows\\n- 1463 rows total\\n\\nThe new attempt must preserve the exact canonical R1 system and frozen producer.\\n\\nFrozen producer:\\n\\n- Model: `Qwen/Qwen3-4B-Instruct-2507`\\n- Model/tokenizer revision: `cdbee75f17c01a7cc42f958dc650907174af0554`\\n- GGUF SHA-256: `ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1`\\n- llama.cpp revision: `d2e54583c7452353eb35d40431281f6ee984332f`\\n- FHIR-AgentBench revision: `bbb42909a5a7eb907d1cd91f72a560729e7037ea`\\n- Agent strategy: `single_turn_request`\\n- Temperature: `0.0`\\n- Frozen prompt\\n- Frozen tool schema\\n- Frozen structured-call transport\\n- Frozen provenance correction\\n- Canonical R1 compatibility/canonicalization manifest and runtime\\n\\nBefore dispatch, the runner must pass the already-canonical admission checks, including the repaired native HTTP repository path and canonical receipt handling.\\n\\nThis authorization permits:\\n\\n1. Exactly one new main-only R2 execution attempt.\\n2. Exactly one frozen first-turn generation per development row.\\n3. Execution across all 1463 exposed-development rows.\\n4. Canonical R1 recovery transformations only where already authorized and qualified.\\n5. Immutable structural/hash lineage from each R2 observation to:\\n   - original SG-000028 identity\\n   - source-pattern identity\\n   - R1 manifest\\n   - R1 runtime\\n   - transformation rule\\n   - disposition/blocker accounting\\n6. Retention of every row, including:\\n   - successful calls\\n   - failed inference\\n   - missing calls\\n   - malformed calls\\n   - unsupported semantics\\n   - out-of-manifest patterns\\n   - hard blockers\\n7. Canonical evidence persistence and review after the execution.\\n8. Founder cost of exactly `$0`.\\n\\nThis authorization does NOT authorize:\\n\\n- a third R2 attempt\\n- automatic retry of the entire workflow\\n- automatic model-call retry\\n- selective row replay\\n- retry-until-favorable\\n- omission of failed rows\\n- changing any scientific threshold after observing results\\n- rerunning SG-000028 as a new scientific result\\n- historical relabeling of SG-000028\\n- model switching\\n- model selection\\n- tokenizer changes\\n- GGUF changes\\n- llama.cpp changes\\n- FHIR-AgentBench revision changes\\n- prompt changes\\n- tool-schema changes\\n- agent-strategy changes\\n- temperature changes\\n- additional R1 recovery semantics\\n- guessed FHIR semantics\\n- patient-identity rewriting\\n- SQL `proc_query` substitution\\n- expected-resource-ID substitution\\n- final-role access\\n- final-role materialization\\n- D4 activation\\n- training\\n- fine-tuning\\n- second-turn reasoning\\n- answer-correctness scoring at this R2 gate\\n- final evaluation\\n- gate waiver\\n- paid execution or infrastructure\\n\\nIf this second attempt encounters any infrastructure, admission, model, workflow, or execution failure that prevents the authorized experiment from completing exactly as frozen:\\n\\n- retain the failure;\\n- retain all completed and unattempted row evidence;\\n- do not automatically retry;\\n- do not repair and redispatch under this authorization;\\n- stop for a new founder decision.\\n\\nR2 scientific PASS requires all 1463 development rows to be accounted for with:\\n\\n- zero unresolved behavior-changing blockers\\n- complete immutable lineage\\n- complete transformation/disposition accounting\\n- zero final-role access\\n- zero final-role materialization\\n- full canonical evidence and engineering qualification\\n\\nWorkflow completion alone does not constitute scientific PASS.\\n\\nIf any qualifying behavior-changing blocker remains, R2 remains scientifically BLOCKED.\\n\\nThe immutable SG-000028 result remains permanently separate and unchanged:\\n\\n- 1463 exposed-development rows\\n- 224 PASS\\n- 1239 behavior-changing blockers\\n- 1623 observed calls\\n- 248 source-pattern identities\\n\\nThe final role remains sealed:\\n\\n- 40 patients\\n- 173 rows\\n\\nEven if R2 becomes canonically PASS:\\n\\n- D4 remains inactive.\\n- Training remains unauthorized.\\n- Final-role access remains unauthorized.\\n- Final evaluation remains unauthorized.\\n\\nA separate future founder authorization is required for any D4 activation or later scientific stage.\\n\\nUse Graft for bounded structural inspection where useful.\\nUse genuine TypeSafe Jev exact-diff review.\\nUse repository-approved Alibaba OpenCodeReview.\\nUse the complete required CI, manuscript, evidence, merge, and post-main governance stack.\\n\\nNo force-push.\\nNo rebase.\\nNormal merge commits only.\\nNo fabricated evidence.\\n\\nFounder cost must remain zero.\""
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_attempt2_execution_authorization.json",
+        "ranges": [
+          {
+            "end": 14,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 137,
+            "end": 161,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"D4\": false,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"active_unresolved_review_threads\": 0,"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"admission_regressions\": 75,"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"alibaba_inspection\": {"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "    \"JSON\": \"all seven returned JSON files inspected for key spelling; no issues\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "    \"Python\": \"both returned source files inspected for boundary, resource, state, exception and credential handling; CRLF replacement is local before unchanged validation\","
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "    \"excluded\": \"four documentation/spec/test files independently covered by genuine Jev and CI\","
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "    \"no_blocking_findings\": true,"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "    \"rules_report_sha256\": \"f01bff64ef06900c7000a0f144131d07dc8878e07e30daa03f97122d51e2d937\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "    \"workflow\": \"pinned actions/full history/env inputs/no secret logs; permissions deliberately match real admission with read-only context guard\""
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "  \"authorization_sha256\": \"03badc235be09cdb293934c406ecd6e2931d29c99827d6a5a5c79fdc487aab32\","
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "  \"base_sha\": \"3ebf58ef10a42db6ee31d96451ea80fe98432b4c\","
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "  \"crlf_extension_authorization_sha256\": \"b79a9178f3a6df3cac8a2a4f67b8769918d7e52fc517fb1cba2b0fd5fc10ce94\","
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "  \"engineering_repair_state\": \"CANONICALLY_QUALIFIED\","
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "  \"failed_attempt_remains_immutable\": true,"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "  \"failed_attempt_run_id\": 37320473498,"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "  \"final_content_access\": false,"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "  \"final_rows_materialized\": 0,"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "  \"first_turn_generations\": 0,"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  \"founder_cost_usd\": 0,"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "  \"graft_report_sha256\": \"d5c3093d5a17ba918c4e8c16ee8b98456715fb41d5180b9621b672b2c6088c8f\","
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_attempt2_repair_qualification.json",
+        "ranges": [
+          {
+            "end": 161,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 542,
+            "end": 566,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "\"\"\"Versioned Attempt-2 admission around unchanged scientific controls; no inference.\"\"\""
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "from __future__ import annotations"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "import io"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "import json"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "import os"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "import re"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "import subprocess"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "import zipfile"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "from pathlib import Path"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "import study1_sg000031_r2_admission as legacy"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "CONTRACT_PATH = \"registry/study1_sg000031_attempt2_admission_contract.json\""
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "REPAIR_MAIN = \"0e298850b3392eafedeacc995e36c1e15391a15c\""
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "REPAIR_TREE = \"ed53eaf2c6577ff76b88e453c87c2370969393d3\""
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "EXECUTION_AUTH_SHA = \"64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48\""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "ENGINEERING_AUTH_SHA = \"8e0e2db1ddbe340a8fe53741fbfbffbed648ec857dd5bf4801a86ddf530fd08c\""
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "REPAIR_RECORD_SHA = \"3c481be6c23016c2a789d215fe65f12d19ec4f2f27b20e3c18164984f3cc30a4\""
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "LINEAGE_SHA = \"361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c\""
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "INSPECTION_MARKER = \"DAL_R2_ATTEMPT2_ALIBABA_INSPECTION_V1\""
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "ATTEMPT_REF = \"tags/dal-r2-issue158-attempt2\""
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "LEDGER_BRANCH = \"codex/sg000031-r2-attempt2-journal\""
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "ranges": [
+          {
+            "end": 566,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 46,
+            "lines": [
+              {
+                "n": 39,
+                "sign": "+",
+                "text": "ATTEMPT_ORDINAL = os.environ.get(\"DAL_R2_ATTEMPT_ORDINAL\", \"1\")"
+              },
+              {
+                "n": 40,
+                "sign": "+",
+                "text": "if ATTEMPT_ORDINAL not in {\"1\", \"2\"}:"
+              },
+              {
+                "n": 41,
+                "sign": "+",
+                "text": "    raise ValueError(\"ambiguous R2 attempt ordinal\")"
+              },
+              {
+                "n": 42,
+                "sign": "+",
+                "text": "if ATTEMPT_ORDINAL == \"2\":"
+              },
+              {
+                "n": 43,
+                "sign": "+",
+                "text": "    WORKFLOW = \".github/workflows/study1-sg000031-r2-attempt2.yml\""
+              },
+              {
+                "n": 44,
+                "sign": "+",
+                "text": "    ATTEMPT_REF = \"tags/dal-r2-issue158-attempt2\""
+              },
+              {
+                "n": 45,
+                "sign": "+",
+                "text": "    LEDGER_BRANCH = \"codex/sg000031-r2-attempt2-journal\""
+              },
+              {
+                "n": 46,
+                "sign": "+",
+                "text": "    LEDGER_ROOT = \"evidence/study1-r2-attempt2\""
+              }
+            ],
+            "start": 39
+          },
+          {
+            "dropped": 0,
+            "end": 452,
+            "lines": [
+              {
+                "n": 449,
+                "sign": "+",
+                "text": "    if ATTEMPT_ORDINAL == \"2\":"
+              },
+              {
+                "n": 450,
+                "sign": "+",
+                "text": "        from study1_sg000031_attempt2_admission import admit as admit_attempt2"
+              },
+              {
+                "n": 451,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 452,
+                "sign": "+",
+                "text": "        return admit_attempt2(root, comment_id, output)"
+              }
+            ],
+            "start": 449
+          },
+          {
+            "dropped": 0,
+            "end": 499,
+            "lines": [
+              {
+                "n": 496,
+                "sign": "+",
+                "text": "    if ATTEMPT_ORDINAL == \"2\":"
+              },
+              {
+                "n": 497,
+                "sign": "+",
+                "text": "        from study1_sg000031_attempt2_admission import verify_claim as verify_attempt2_claim"
+              },
+              {
+                "n": 498,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 499,
+                "sign": "+",
+                "text": "        return verify_attempt2_claim(claim_sha)"
+              }
+            ],
+            "start": 496
+          }
+        ],
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "ranges": [
+          {
+            "end": 46,
+            "start": 39
+          },
+          {
+            "end": 452,
+            "start": 449
+          },
+          {
+            "end": 499,
+            "start": 496
+          }
+        ],
+        "status": "modified"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 460,
+            "end": 484,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "\"\"\"Versioned receipt and single-dispatch regressions; synthetic HTTP only.\"\"\""
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "from __future__ import annotations"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "import copy"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "import importlib"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "import json"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "import subprocess"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "import sys"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "import threading"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "from http.server import BaseHTTPRequestHandler, HTTPServer"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "from pathlib import Path"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "from urllib.parse import urlsplit"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "from urllib.request import Request, urlopen"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "import pytest"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "ROOT = Path(__file__).resolve().parents[1]"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "@pytest.fixture"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "def grain(monkeypatch):"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "    monkeypatch.syspath_prepend(str(ROOT / \"scripts\"))"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    monkeypatch.setenv(\"GH_TOKEN\", \"synthetic-attempt2-token\")"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "ranges": [
+          {
+            "end": 484,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 247,
+            "end": 271,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "\"\"\"Actual native authenticated qualification; never dispatches, claims, plans or infers.\"\"\""
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "from __future__ import annotations"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "import argparse"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "import json"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "import os"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "import sys"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "import time"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "from pathlib import Path"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "from urllib.error import HTTPError"
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "ROOT = Path(__file__).resolve().parents[1]"
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "sys.path.insert(0, str(ROOT / \"scripts\"))"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "import study1_sg000031_attempt2_admission as grain  # noqa: E402"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "import study1_sg000031_r2_admission as native  # noqa: E402"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "def wait_runs(sha, keys, *, timeout=720):"
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "    deadline = time.monotonic() + timeout"
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "    current = int(os.environ.get(\"GITHUB_RUN_ID\", \"0\"))"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "    while True:"
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "        runs = native.api(\"actions/runs?per_page=100\")[\"workflow_runs\"]"
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "        result = {}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "ranges": [
+          {
+            "end": 271,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      }
+    ],
+    "deleted": [],
+    "depth": 2,
+    "impacted": [
+      {
+        "depth": 1,
+        "id": "scripts/study1_sg000031_r2_admission.py#main",
+        "kind": "function",
+        "name": "main",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L550-L579"
+      },
+      {
+        "depth": 2,
+        "id": "scripts/study1_sg000031_r2_admission.py",
+        "kind": "file",
+        "name": "study1_sg000031_r2_admission.py",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "relation": "calls",
+        "span": "L1-L584"
+      },
+      {
+        "depth": 1,
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#native_evidence",
+        "kind": "function",
+        "name": "native_evidence",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "relation": "calls",
+        "span": "L185-L281"
+      },
+      {
+        "depth": 1,
+        "id": "tools/qualify_sg000031_attempt2_admission.py",
+        "kind": "file",
+        "name": "qualify_sg000031_attempt2_admission.py",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "relation": "calls",
+        "span": "L1-L272"
+      }
+    ],
+    "modules": [],
+    "seeds": [
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#admit",
+        "kind": "function",
+        "name": "admit",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L467-L519",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#artifact_report",
+        "kind": "function",
+        "name": "artifact_report",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L265-L280",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#binding_fields",
+        "kind": "function",
+        "name": "binding_fields",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L144-L158",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#execution_history",
+        "kind": "function",
+        "name": "execution_history",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L459-L464",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#git_bytes",
+        "kind": "function",
+        "name": "git_bytes",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L53-L54",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#inspection_identity",
+        "kind": "function",
+        "name": "inspection_identity",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L228-L235",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#load_contract",
+        "kind": "function",
+        "name": "load_contract",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L57-L141",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#parse_receipt.reject_constant",
+        "kind": "function",
+        "name": "reject_constant",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L218-L219",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#parse_receipt.unique_pairs",
+        "kind": "function",
+        "name": "unique_pairs",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L210-L216",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#qualify_canonical_receipt",
+        "kind": "function",
+        "name": "qualify_canonical_receipt",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L452-L456",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#validate_receipt_identity",
+        "kind": "function",
+        "name": "validate_receipt_identity",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L161-L192",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#verify_claim",
+        "kind": "function",
+        "name": "verify_claim",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L522-L566",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#verify_inspection",
+        "kind": "function",
+        "name": "verify_inspection",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L238-L262",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#verify_native",
+        "kind": "function",
+        "name": "verify_native",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L317-L362",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#verify_predecessors",
+        "kind": "function",
+        "name": "verify_predecessors",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L283-L314",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_attempt2_admission.py#verify_qualification",
+        "kind": "function",
+        "name": "verify_qualification",
+        "path": "scripts/study1_sg000031_attempt2_admission.py",
+        "span": "L365-L449",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#admit",
+        "kind": "function",
+        "name": "admit",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L448-L492",
+        "wholeFile": false
+      },
+      {
+        "id": "scripts/study1_sg000031_r2_admission.py#verify_claim",
+        "kind": "function",
+        "name": "verify_claim",
+        "path": "scripts/study1_sg000031_r2_admission.py",
+        "span": "L495-L517",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#comment",
+        "kind": "function",
+        "name": "comment",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L77-L85",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#grain",
+        "kind": "function",
+        "name": "grain",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L22-L25",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#native_evidence.Handler.log_message",
+        "kind": "method",
+        "name": "log_message",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L232-L233",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#native_evidence.Handler.respond",
+        "kind": "method",
+        "name": "respond",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L215-L227",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#native_evidence.Opener.open",
+        "kind": "method",
+        "name": "open",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L240-L252",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#receipt",
+        "kind": "function",
+        "name": "receipt",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L29-L74",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_alibaba_workflow_cannot_fabricate_inspection",
+        "kind": "function",
+        "name": "test_alibaba_workflow_cannot_fabricate_inspection",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L441-L455",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_ambiguous_attempt_identity_is_rejected",
+        "kind": "function",
+        "name": "test_ambiguous_attempt_identity_is_rejected",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L112-L115",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_correct_receipt_uses_native_auth_http_and_read_only_guard",
+        "kind": "function",
+        "name": "test_correct_receipt_uses_native_auth_http_and_read_only_guard",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L284-L301",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_engineering_receipts_cannot_admit_execution",
+        "kind": "function",
+        "name": "test_engineering_receipts_cannot_admit_execution",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L135-L140",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_external_evidence_drift_is_rejected",
+        "kind": "function",
+        "name": "test_external_evidence_drift_is_rejected",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L316-L346",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_historical_receipt_cannot_be_reused_for_attempt2",
+        "kind": "function",
+        "name": "test_historical_receipt_cannot_be_reused_for_attempt2",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L125-L131",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_incomplete_receipt_is_rejected",
+        "kind": "function",
+        "name": "test_incomplete_receipt_is_rejected",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L119-L122",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_malformed_receipts_fail_closed",
+        "kind": "function",
+        "name": "test_malformed_receipts_fail_closed",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L157-L181",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_namespace_selection_is_explicit_and_default_preserves_attempt1",
+        "kind": "function",
+        "name": "test_namespace_selection_is_explicit_and_default_preserves_attempt1",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L388-L414",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_native_report_cannot_omit_source_or_hide_model_calls",
+        "kind": "function",
+        "name": "test_native_report_cannot_omit_source_or_hide_model_calls",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L458-L484",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_no_claim_absence_can_renew_a_failed_dispatch",
+        "kind": "function",
+        "name": "test_no_claim_absence_can_renew_a_failed_dispatch",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L350-L362",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_only_first_dispatch_reaches_canonical_receipt_validation.stop",
+        "kind": "function",
+        "name": "stop",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L376-L378",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_science_and_first_attempt_files_remain_immutable",
+        "kind": "function",
+        "name": "test_science_and_first_attempt_files_remain_immutable",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L417-L438",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_attempt2_admission.py#test_wrong_binding_is_rejected_before_external_io",
+        "kind": "function",
+        "name": "test_wrong_binding_is_rejected_before_external_io",
+        "path": "tests/test_study1_sg000031_attempt2_admission.py",
+        "span": "L103-L107",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#build_receipt",
+        "kind": "function",
+        "name": "build_receipt",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L101-L156",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#main",
+        "kind": "function",
+        "name": "main",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L245-L267",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#prove_unconsumed",
+        "kind": "function",
+        "name": "prove_unconsumed",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L159-L178",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#qualify",
+        "kind": "function",
+        "name": "qualify",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L181-L242",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#review",
+        "kind": "function",
+        "name": "review",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L49-L70",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#wait_inspection",
+        "kind": "function",
+        "name": "wait_inspection",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L73-L98",
+        "wholeFile": false
+      },
+      {
+        "id": "tools/qualify_sg000031_attempt2_admission.py#wait_runs",
+        "kind": "function",
+        "name": "wait_runs",
+        "path": "tools/qualify_sg000031_attempt2_admission.py",
+        "span": "L19-L46",
+        "wholeFile": false
+      }
+    ],
+    "testModules": [],
+    "unindexed": [
+      ".github/workflows/study1-sg000031-attempt2-admission-preflight.yml",
+      ".github/workflows/study1-sg000031-r2-attempt2-worker.yml",
+      ".github/workflows/study1-sg000031-r2-attempt2.yml",
+      "docs/study1-sg000031-attempt2-admission.md",
+      "registry/study1_sg000031_attempt2_admission_contract.json",
+      "registry/study1_sg000031_attempt2_engineering_authorization.json",
+      "registry/study1_sg000031_attempt2_execution_authorization.json",
+      "registry/study1_sg000031_attempt2_repair_qualification.json"
+    ]
+  },
+  "build_output_sha256": "cd7937356ca63d0c4fef46744c5acaa00f1387aad542e2c48f118c94ec257a3b",
+  "callers": {
+    "admit": {
+      "matches": [
+        {
+          "hits": [],
+          "note": "  no indexed callers \u00e2\u20ac\u201d the graph has no incoming call/reference edges for this symbol as written. 2 definitions share the name \"admit\"; a cross-file caller of an ambiguous name is dropped rather than guessed, so this may undercount. Check the name (try the bare symbol, or \"Type.method\"), or find its uses with graft grep \"admit\". Fall back to raw grep -rn only for unindexed files",
+          "symbol": {
+            "id": "scripts/study1_sg000031_attempt2_admission.py#admit",
+            "kind": "function",
+            "name": "admit",
+            "path": "scripts/study1_sg000031_attempt2_admission.py",
+            "span": "L467-L519"
+          }
+        },
+        {
+          "hits": [
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#main",
+              "kind": "function",
+              "name": "main",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L550-L579"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_admission.py",
+              "kind": "file",
+              "name": "study1_sg000031_r2_admission.py",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L1-L584"
+            }
+          ],
+          "symbol": {
+            "id": "scripts/study1_sg000031_r2_admission.py#admit",
+            "kind": "function",
+            "name": "admit",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "span": "L448-L492"
+          }
+        }
+      ],
+      "query": "admit",
+      "saved": {
+        "baselineChars": 50269,
+        "files": 2
+      }
+    },
+    "api": {
+      "matches": [
+        {
+          "hits": [
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#admit",
+              "kind": "function",
+              "name": "admit",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L448-L492"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#artifact_documents",
+              "kind": "function",
+              "name": "artifact_documents",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L264-L292"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#ledger_write",
+              "kind": "function",
+              "name": "ledger_write",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L188-L204"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#qualify_canonical_receipt",
+              "kind": "function",
+              "name": "qualify_canonical_receipt",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L367-L445"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#verify_claim",
+              "kind": "function",
+              "name": "verify_claim",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L495-L517"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#verify_run",
+              "kind": "function",
+              "name": "verify_run",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L222-L261"
+            },
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_aggregate.py#aggregate",
+              "kind": "function",
+              "name": "aggregate",
+              "path": "scripts/study1_sg000031_r2_aggregate.py",
+              "relation": "calls",
+              "span": "L56-L188"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_admission.py#main",
+              "kind": "function",
+              "name": "main",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L550-L579"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_admission.py#verify_reports",
+              "kind": "function",
+              "name": "verify_reports",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L295-L364"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_admission.py#plan",
+              "kind": "function",
+              "name": "plan",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L520-L547"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_runner.py#run.checkpoint",
+              "kind": "function",
+              "name": "checkpoint",
+              "path": "scripts/study1_sg000031_r2_runner.py",
+              "relation": "calls",
+              "span": "L189-L194"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_aggregate.py#main",
+              "kind": "function",
+              "name": "main",
+              "path": "scripts/study1_sg000031_r2_aggregate.py",
+              "relation": "calls",
+              "span": "L191-L212"
+            }
+          ],
+          "symbol": {
+            "id": "scripts/study1_sg000031_r2_admission.py#api",
+            "kind": "function",
+            "name": "api",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "span": "L182-L185"
+          }
+        }
+      ],
+      "query": "api",
+      "saved": {
+        "baselineChars": 42988,
+        "files": 3
+      }
+    },
+    "verify_claim": {
+      "matches": [
+        {
+          "hits": [],
+          "note": "  no indexed callers \u00e2\u20ac\u201d the graph has no incoming call/reference edges for this symbol as written. 2 definitions share the name \"verify_claim\"; a cross-file caller of an ambiguous name is dropped rather than guessed, so this may undercount. Check the name (try the bare symbol, or \"Type.method\"), or find its uses with graft grep \"verify_claim\". Fall back to raw grep -rn only for unindexed files",
+          "symbol": {
+            "id": "scripts/study1_sg000031_attempt2_admission.py#verify_claim",
+            "kind": "function",
+            "name": "verify_claim",
+            "path": "scripts/study1_sg000031_attempt2_admission.py",
+            "span": "L522-L566"
+          }
+        },
+        {
+          "hits": [
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_r2_admission.py#main",
+              "kind": "function",
+              "name": "main",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L550-L579"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_r2_admission.py",
+              "kind": "file",
+              "name": "study1_sg000031_r2_admission.py",
+              "path": "scripts/study1_sg000031_r2_admission.py",
+              "relation": "calls",
+              "span": "L1-L584"
+            }
+          ],
+          "symbol": {
+            "id": "scripts/study1_sg000031_r2_admission.py#verify_claim",
+            "kind": "function",
+            "name": "verify_claim",
+            "path": "scripts/study1_sg000031_r2_admission.py",
+            "span": "L495-L517"
+          }
+        }
+      ],
+      "query": "verify_claim",
+      "saved": {
+        "baselineChars": 50269,
+        "files": 2
+      }
+    },
+    "verify_qualification": {
+      "matches": [
+        {
+          "hits": [
+            {
+              "depth": 1,
+              "id": "scripts/study1_sg000031_attempt2_admission.py#qualify_canonical_receipt",
+              "kind": "function",
+              "name": "qualify_canonical_receipt",
+              "path": "scripts/study1_sg000031_attempt2_admission.py",
+              "relation": "calls",
+              "span": "L452-L456"
+            },
+            {
+              "depth": 2,
+              "id": "scripts/study1_sg000031_attempt2_admission.py#admit",
+              "kind": "function",
+              "name": "admit",
+              "path": "scripts/study1_sg000031_attempt2_admission.py",
+              "relation": "calls",
+              "span": "L467-L519"
+            }
+          ],
+          "symbol": {
+            "id": "scripts/study1_sg000031_attempt2_admission.py#verify_qualification",
+            "kind": "function",
+            "name": "verify_qualification",
+            "path": "scripts/study1_sg000031_attempt2_admission.py",
+            "span": "L365-L449"
+          }
+        }
+      ],
+      "query": "verify_qualification",
+      "saved": {
+        "baselineChars": 26547,
+        "files": 1
+      }
+    }
+  },
+  "commands": [
+    "graft build . --no-gitignore --no-ignore",
+    "graft callers <verify_claim|admit|api|verify_qualification> . --depth 2 --json",
+    "graft blast . --base 0e298850b3392eafedeacc995e36c1e15391a15c --depth 2 --format json --no-owners"
+  ],
+  "founder_cost_usd": 0,
+  "inspection": "Attempt selection reaches the shared admission, row ledger and unchanged scientific runner/aggregate. Candidate/canonical validation, API and permanent claims are bounded admission edges. Original science, first-attempt workflow/evidence and all 43 protected controls remain unchanged. Prepared controller/worker only select the new admission/ledger/artifact identity. Qualification is read-only and cannot infer, plan, claim, dispatch or materialize final content.",
+  "installed_version": "0.21.1",
+  "mode": "structural-wiring-only",
+  "model_pass_performed": false,
+  "source_lf_sha256": {
+    ".github/workflows/study1-sg000031-attempt2-admission-preflight.yml": "70b6cb47e51b5d2e8f8ed36710c5913183aaa01851adfc70b09b0dcea1eaf80c",
+    ".github/workflows/study1-sg000031-r2-attempt2-worker.yml": "000dddf38c753bb93143b1fad74a82c3a23ba77ce2b572da6be3347748410d5c",
+    ".github/workflows/study1-sg000031-r2-attempt2.yml": "ab8593a125556a9045a2caa988bf05c9f3b276bc9a3b52b5df6651c253e89bc7",
+    "scripts/study1_sg000031_attempt2_admission.py": "2d862c0ed20cbeceac7be00ec216192de3b1e4f92698cc4f1cdce61c5a648e27",
+    "scripts/study1_sg000031_r2_admission.py": "3ebaf168bbcca75aaa1d236f47776db9a7b3c9464ab918aa2003907f3978938e",
+    "tests/test_study1_sg000031_attempt2_admission.py": "c3e49eaff9b556fb0bc1e7a39c6bf198a4e6f1277baaff66c07158685fb1ecd4",
+    "tools/qualify_sg000031_attempt2_admission.py": "2d5eca9c8cc306ae4bd89c006cecad7dfa1b970ab2efba41007447e3bde4b7da"
+  },
+  "specgrain_id": "SG-000031-A2",
+  "tool": "Graft"
+}
