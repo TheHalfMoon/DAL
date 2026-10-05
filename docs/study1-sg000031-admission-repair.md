@@ -64,3 +64,19 @@ cost remains zero; the 40-patient / 173-row final role stays sealed. D4, trainin
 scoring and final evaluation stay inactive. After qualification, normal merge and
 post-main verification, stop before any model call and present the canonical repair
 evidence for a separate founder decision.
+
+## Native qualification blocker retained
+
+The first actual workflow-token preflight, run `37327235548` on `7bab1c9`, passed
+the repaired repository lookup and then failed at the unchanged receipt parser.
+The historical receipt comment was originally stored with CRLF line endings;
+the parser expects literal LF. Its JSON exactly matches the immutable canonical
+record after CRLF-to-LF normalization. The verified failure artifact and proof are
+retained in `registry/study1_sg000031_admission_repair_preflight_failure.json`.
+This is an engineering qualification trial, not a new R2 execution attempt.
+
+The founder's current authorization limits repairs to the URL/trailing-slash
+defect. A one-line receipt normalization proposal has therefore been prepared
+without applying it, and a separate scope decision has been requested. Full native
+qualification and normal merge remain blocked until that scope is resolved; no
+gate is waived. No model call or new experiment attempt occurred.

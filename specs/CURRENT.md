@@ -390,3 +390,11 @@ review threads, guarded normal merge and post-main verification are required bef
 the external canonical repair receipt. Then stop for a separate founder decision.
 All 43 protected files remain unchanged; founder cost stays zero and final access,
 D4, training, scoring and final evaluation remain inactive.
+
+The first actual native preflight (`37327235548`) now reaches the historical
+receipt, whose original CRLF transport representation is rejected by the unchanged
+LF-only parser. The retained JSON is identical after CRLF normalization. This
+additional receipt-format defect is outside the explicit URL-only repair scope;
+its one-line proposal is not applied pending a founder scope decision. Full native
+qualification and merge remain blocked. This engineering trial is not a new R2
+attempt, and no model calls occurred.

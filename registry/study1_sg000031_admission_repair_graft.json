@@ -59,7 +59,7 @@
         ]
       }
     ],
-    "basis": "working tree vs HEAD",
+    "basis": "3ebf58ef10a42db6ee31d96451ea80fe98432b4c...HEAD",
     "changed": [
       {
         "hunks": [
@@ -644,6 +644,423 @@
       {
         "hunks": [
           {
+            "dropped": 2519,
+            "end": 2543,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"base_sha\": \"3ebf58ef10a42db6ee31d96451ea80fe98432b4c\","
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"blast\": {"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "    \"areas\": ["
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "      {"
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "        \"behavioural\": 8,"
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "        \"changedTestFiles\": [],"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "        \"files\": ["
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "          \"scripts/study1_sg000031_r2_admission.py\""
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "        ],"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "        \"key\": \"scripts/\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "        \"label\": \"api\","
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "        \"labelSource\": \"symbol\","
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "        \"reached\": 0,"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "        \"seedNames\": ["
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "          \"api\","
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "          \"authenticated_request\","
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "          \"native_http\","
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "          \"repository_url\","
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "          \"admit\","
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "          \"qualify_canonical_receipt\","
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "          \"native_read_only_preflight\","
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "          \"redirect_request\""
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "        ],"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_graft.json",
+        "ranges": [
+          {
+            "end": 2543,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 16,
+            "end": 40,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"actual_preflight_failure_report\": {"
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "    \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    \"engineering_preflight_state\": \"FAILED\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "    \"error_sha256\": \"da18d9086dddffcf0a8cc72e6663d1cf9dbe9b38f247401f687f9d967c20d392\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "    \"new_execution_authorized\": false"
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"additional_receipt_parsing_authorization_requested\": true,"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "  \"artifact_receipt\": {"
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "    \"artifact_digest\": \"sha256:f06403a9234ebca53d90ca0b8c0d49ee6169d30753a98f2396564b05f030b6c2\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "    \"artifact_id\": 11352832401,"
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "    \"head_sha\": \"7bab1c9ebd6de2f6b5045d151680474eed48d6c0\","
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "    \"run_id\": 37327235548,"
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "    \"verified_document_sha256s\": {"
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "      \"native-admission-preflight.json\": \"3b872a75f16aef75d01278656d0fd92127a4921b4657d3430a72508f0cd2ff9a\""
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "    }"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "  },"
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "  \"current_founder_scope\": \"URL/trailing-slash repair only\","
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "  \"diagnosis\": \"native repository lookup passed; unchanged LF-only receipt parser rejected historical CRLF transport representation\","
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "  \"founder_cost_usd\": 0,"
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "  \"head_sha\": \"7bab1c9ebd6de2f6b5045d151680474eed48d6c0\","
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "  \"kind\": \"retained engineering preflight failure; not an R2 experiment attempt\","
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "  \"model_calls\": 0,"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_preflight_failure.json",
+        "ranges": [
+          {
+            "end": 40,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 43,
+            "end": 67,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"R2_scientific_state\": \"BLOCKED\","
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"admission_regression_cases\": ["
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "    \"test_retained_trailing_slash_failure_and_corrected_native_lookup\","
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "    \"test_repository_root_has_one_canonical_identity[]\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "    \"test_repository_root_has_one_canonical_identity[https://api.github.com/repos/TheHalfMoon/DAL]\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "    \"test_repository_root_has_one_canonical_identity[https://api.github.com/repos/TheHalfMoon/DAL/]\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[/]\","
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[//api.github.com/repos/TheHalfMoon/DAL]\","
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[ ../DAL]\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/../refs]\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/./refs]\","
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git//refs]\","
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs/]\","
+              },
+              {
+                "n": 15,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git\\\\\\\\refs]\","
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/%2e%2e/refs]\","
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs#fragment]\","
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs?]\","
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs?ref=main]\","
+              },
+              {
+                "n": 20,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs?per_page=101]\","
+              },
+              {
+                "n": 21,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs?per_page=100&per_page=1]\","
+              },
+              {
+                "n": 22,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[git/refs?per_page=01]\","
+              },
+              {
+                "n": 23,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[?per_page=100]\","
+              },
+              {
+                "n": 24,
+                "sign": "+",
+                "text": "    \"test_ambiguous_urls_fail_before_transport_or_credentials[https://api.github.com/repos/TheHalfMoon/DAL-other]\","
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_tests.json",
+        "ranges": [
+          {
+            "end": 67,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
             "dropped": 0,
             "end": 12,
             "lines": [
@@ -801,7 +1218,7 @@
           },
           {
             "dropped": 0,
-            "end": 107,
+            "end": 114,
             "lines": [
               {
                 "n": 102,
@@ -816,20 +1233,55 @@
               {
                 "n": 104,
                 "sign": "+",
-                "text": "            if target.scheme != \"https\" or target.username or target.password or target.fragment:"
+                "text": "            if ("
               },
               {
                 "n": 105,
                 "sign": "+",
-                "text": "                raise ValueError(\"unsafe admission HTTP redirect\")"
+                "text": "                target.scheme != \"https\""
               },
               {
                 "n": 106,
                 "sign": "+",
-                "text": "            if target.netloc == \"api.github.com\":"
+                "text": "                or target.username is not None"
               },
               {
                 "n": 107,
+                "sign": "+",
+                "text": "                or target.password is not None"
+              },
+              {
+                "n": 108,
+                "sign": "+",
+                "text": "                or target.port is not None"
+              },
+              {
+                "n": 109,
+                "sign": "+",
+                "text": "                or target.fragment"
+              },
+              {
+                "n": 110,
+                "sign": "+",
+                "text": "                or not re.fullmatch(r\"[A-Za-z0-9.-]+\", target.netloc)"
+              },
+              {
+                "n": 111,
+                "sign": "+",
+                "text": "            ):"
+              },
+              {
+                "n": 112,
+                "sign": "+",
+                "text": "                raise ValueError(\"unsafe admission HTTP redirect\")"
+              },
+              {
+                "n": 113,
+                "sign": "+",
+                "text": "            if target.hostname == \"api.github.com\":"
+              },
+              {
+                "n": 114,
                 "sign": "+",
                 "text": "                repository_url(redirected.full_url)"
               }
@@ -838,7 +1290,7 @@
           },
           {
             "dropped": 0,
-            "end": 117,
+            "end": 124,
             "lines": [
               {
                 "n": null,
@@ -881,21 +1333,21 @@
                 "text": "    request = Request("
               },
               {
-                "n": 116,
+                "n": 123,
                 "sign": "+",
                 "text": "def authenticated_request(url, value=None, method=None):"
               },
               {
-                "n": 117,
+                "n": 124,
                 "sign": "+",
                 "text": "    return Request("
               }
             ],
-            "start": 116
+            "start": 123
           },
           {
             "dropped": 0,
-            "end": 122,
+            "end": 129,
             "lines": [
               {
                 "n": null,
@@ -903,232 +1355,232 @@
                 "text": "            \"Authorization\": f\"Bearer {token}\","
               },
               {
-                "n": 122,
-                "sign": "+",
-                "text": "            \"Authorization\": f\"Bearer {os.environ['GH_TOKEN']}\","
-              }
-            ],
-            "start": 122
-          },
-          {
-            "dropped": 0,
-            "end": 150,
-            "lines": [
-              {
                 "n": 129,
                 "sign": "+",
-                "text": ""
-              },
-              {
-                "n": 130,
-                "sign": "+",
-                "text": ""
-              },
-              {
-                "n": 131,
-                "sign": "+",
-                "text": "def native_http(request, *, raw=False, review_query=False):"
-              },
-              {
-                "n": 132,
-                "sign": "+",
-                "text": "    audit = _PREFLIGHT_AUDIT.get()"
-              },
-              {
-                "n": 133,
-                "sign": "+",
-                "text": "    if review_query:"
-              },
-              {
-                "n": 134,
-                "sign": "+",
-                "text": "        body = json.loads(request.data)"
-              },
-              {
-                "n": 135,
-                "sign": "+",
-                "text": "        if ("
-              },
-              {
-                "n": 136,
-                "sign": "+",
-                "text": "            request.full_url != \"https://api.github.com/graphql\""
-              },
-              {
-                "n": 137,
-                "sign": "+",
-                "text": "            or request.get_method() != \"POST\""
-              },
-              {
-                "n": 138,
-                "sign": "+",
-                "text": "            or set(body) != {\"query\", \"variables\"}"
-              },
-              {
-                "n": 139,
-                "sign": "+",
-                "text": "            or body[\"query\"] != REVIEW_THREADS_QUERY"
-              },
-              {
-                "n": 140,
-                "sign": "+",
-                "text": "            or set(body[\"variables\"]) != {\"number\"}"
-              },
-              {
-                "n": 141,
-                "sign": "+",
-                "text": "            or type(body[\"variables\"][\"number\"]) is not int"
-              },
-              {
-                "n": 142,
-                "sign": "+",
-                "text": "            or body[\"variables\"][\"number\"] <= 0"
-              },
-              {
-                "n": 143,
-                "sign": "+",
-                "text": "        ):"
-              },
-              {
-                "n": 144,
-                "sign": "+",
-                "text": "            raise ValueError(\"native preflight permits only the fixed read-only review query\")"
-              },
-              {
-                "n": 145,
-                "sign": "+",
-                "text": "    if ("
-              },
-              {
-                "n": 146,
-                "sign": "+",
-                "text": "        audit is not None"
-              },
-              {
-                "n": 147,
-                "sign": "+",
-                "text": "        and (request.get_method() != \"GET\" or request.data is not None)"
-              },
-              {
-                "n": 148,
-                "sign": "+",
-                "text": "        and not review_query"
-              },
-              {
-                "n": 149,
-                "sign": "+",
-                "text": "    ):"
-              },
-              {
-                "n": 150,
-                "sign": "+",
-                "text": "        raise ValueError(\"native preflight forbids mutation\")"
+                "text": "            \"Authorization\": f\"Bearer {os.environ['GH_TOKEN']}\","
               }
             ],
             "start": 129
           },
           {
             "dropped": 0,
-            "end": 163,
+            "end": 157,
             "lines": [
+              {
+                "n": 136,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 137,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 138,
+                "sign": "+",
+                "text": "def native_http(request, *, raw=False, review_query=False):"
+              },
+              {
+                "n": 139,
+                "sign": "+",
+                "text": "    audit = _PREFLIGHT_AUDIT.get()"
+              },
+              {
+                "n": 140,
+                "sign": "+",
+                "text": "    if review_query:"
+              },
+              {
+                "n": 141,
+                "sign": "+",
+                "text": "        body = json.loads(request.data)"
+              },
+              {
+                "n": 142,
+                "sign": "+",
+                "text": "        if ("
+              },
+              {
+                "n": 143,
+                "sign": "+",
+                "text": "            request.full_url != \"https://api.github.com/graphql\""
+              },
+              {
+                "n": 144,
+                "sign": "+",
+                "text": "            or request.get_method() != \"POST\""
+              },
+              {
+                "n": 145,
+                "sign": "+",
+                "text": "            or set(body) != {\"query\", \"variables\"}"
+              },
+              {
+                "n": 146,
+                "sign": "+",
+                "text": "            or body[\"query\"] != REVIEW_THREADS_QUERY"
+              },
+              {
+                "n": 147,
+                "sign": "+",
+                "text": "            or set(body[\"variables\"]) != {\"number\"}"
+              },
+              {
+                "n": 148,
+                "sign": "+",
+                "text": "            or type(body[\"variables\"][\"number\"]) is not int"
+              },
+              {
+                "n": 149,
+                "sign": "+",
+                "text": "            or body[\"variables\"][\"number\"] <= 0"
+              },
+              {
+                "n": 150,
+                "sign": "+",
+                "text": "        ):"
+              },
+              {
+                "n": 151,
+                "sign": "+",
+                "text": "            raise ValueError(\"native preflight permits only the fixed read-only review query\")"
+              },
+              {
+                "n": 152,
+                "sign": "+",
+                "text": "    if ("
+              },
               {
                 "n": 153,
                 "sign": "+",
-                "text": "        if audit is not None:"
+                "text": "        audit is not None"
               },
               {
                 "n": 154,
                 "sign": "+",
-                "text": "            audit.append("
+                "text": "        and (request.get_method() != \"GET\" or request.data is not None)"
               },
               {
                 "n": 155,
                 "sign": "+",
-                "text": "                {"
+                "text": "        and not review_query"
               },
               {
                 "n": 156,
                 "sign": "+",
-                "text": "                    \"method\": request.get_method(),"
+                "text": "    ):"
               },
               {
                 "n": 157,
                 "sign": "+",
-                "text": "                    \"url\": request.full_url,"
-              },
-              {
-                "n": 158,
-                "sign": "+",
-                "text": "                    \"status\": response.status,"
-              },
-              {
-                "n": 159,
-                "sign": "+",
-                "text": "                    \"response_sha256\": digest(payload),"
-              },
+                "text": "        raise ValueError(\"native preflight forbids mutation\")"
+              }
+            ],
+            "start": 136
+          },
+          {
+            "dropped": 0,
+            "end": 170,
+            "lines": [
               {
                 "n": 160,
                 "sign": "+",
-                "text": "                    \"authentication\": \"GH_TOKEN-bearer\","
+                "text": "        if audit is not None:"
               },
               {
                 "n": 161,
                 "sign": "+",
-                "text": "                    \"read_only_review_query\": review_query,"
+                "text": "            audit.append("
               },
               {
                 "n": 162,
                 "sign": "+",
-                "text": "                }"
+                "text": "                {"
               },
               {
                 "n": 163,
                 "sign": "+",
-                "text": "            )"
-              }
-            ],
-            "start": 153
-          },
-          {
-            "dropped": 0,
-            "end": 172,
-            "lines": [
+                "text": "                    \"method\": request.get_method(),"
+              },
+              {
+                "n": 164,
+                "sign": "+",
+                "text": "                    \"url\": request.full_url,"
+              },
+              {
+                "n": 165,
+                "sign": "+",
+                "text": "                    \"status\": response.status,"
+              },
+              {
+                "n": 166,
+                "sign": "+",
+                "text": "                    \"response_sha256\": digest(payload),"
+              },
               {
                 "n": 167,
                 "sign": "+",
-                "text": "def api(path, value=None, *, raw=False, method=None):"
+                "text": "                    \"authentication\": \"GH_TOKEN-bearer\","
               },
               {
                 "n": 168,
                 "sign": "+",
-                "text": "    url = repository_url(path)"
+                "text": "                    \"read_only_review_query\": review_query,"
               },
               {
                 "n": 169,
                 "sign": "+",
-                "text": "    request = authenticated_request(url, value, method)"
+                "text": "                }"
               },
               {
                 "n": 170,
                 "sign": "+",
+                "text": "            )"
+              }
+            ],
+            "start": 160
+          },
+          {
+            "dropped": 0,
+            "end": 179,
+            "lines": [
+              {
+                "n": 174,
+                "sign": "+",
+                "text": "def api(path, value=None, *, raw=False, method=None):"
+              },
+              {
+                "n": 175,
+                "sign": "+",
+                "text": "    url = repository_url(path)"
+              },
+              {
+                "n": 176,
+                "sign": "+",
+                "text": "    request = authenticated_request(url, value, method)"
+              },
+              {
+                "n": 177,
+                "sign": "+",
                 "text": "    return native_http(request, raw=raw)"
               },
               {
-                "n": 171,
+                "n": 178,
                 "sign": "+",
                 "text": ""
               },
               {
-                "n": 172,
+                "n": 179,
                 "sign": "+",
                 "text": ""
               }
             ],
-            "start": 167
+            "start": 174
           },
           {
             "dropped": 0,
-            "end": 353,
+            "end": 360,
             "lines": [
               {
                 "n": null,
@@ -1141,21 +1593,21 @@
                 "text": "    environment_guard()"
               },
               {
-                "n": 352,
+                "n": 359,
                 "sign": "+",
                 "text": "def qualify_canonical_receipt(root, comment_id, main, *, live_main=True):"
               },
               {
-                "n": 353,
+                "n": 360,
                 "sign": "+",
                 "text": "    \"\"\"Shared native read-only admission validation. Only admit() can claim an attempt.\"\"\""
               }
             ],
-            "start": 352
+            "start": 359
           },
           {
             "dropped": 0,
-            "end": 354,
+            "end": 361,
             "lines": [
               {
                 "n": null,
@@ -1183,11 +1635,11 @@
                 "text": "        raise ValueError(\"R2 entrypoint mismatch\")"
               }
             ],
-            "start": 354
+            "start": 361
           },
           {
             "dropped": 0,
-            "end": 361,
+            "end": 368,
             "lines": [
               {
                 "n": null,
@@ -1195,54 +1647,37 @@
                 "text": "    if repository[\"private\"] or repository[\"default_branch\"] != \"main\":"
               },
               {
-                "n": 356,
+                "n": 363,
                 "sign": "+",
                 "text": "    if ("
               },
               {
-                "n": 357,
+                "n": 364,
                 "sign": "+",
                 "text": "        repository[\"full_name\"] != REPOSITORY"
               },
               {
-                "n": 358,
+                "n": 365,
                 "sign": "+",
                 "text": "        or repository[\"url\"] != REPOSITORY_API"
               },
               {
-                "n": 359,
+                "n": 366,
                 "sign": "+",
                 "text": "        or repository[\"private\"]"
               },
               {
-                "n": 360,
+                "n": 367,
                 "sign": "+",
                 "text": "        or repository[\"default_branch\"] != \"main\""
               },
               {
-                "n": 361,
+                "n": 368,
                 "sign": "+",
                 "text": "    ):"
               }
             ],
-            "start": 356
-          },
-          {
-            "dropped": 0,
-            "end": 365,
-            "lines": [
-              {
-                "n": null,
-                "sign": "-",
-                "text": "        not comment[\"issue_url\"].endswith(\"/issues/158\")"
-              },
-              {
-                "n": 365,
-                "sign": "+",
-                "text": "        comment[\"issue_url\"] != REPOSITORY_API + \"/issues/158\""
-              }
-            ],
-            "start": 365
+            "start": 363
           },
           {
             "dropped": 0,
@@ -1251,14 +1686,31 @@
               {
                 "n": null,
                 "sign": "-",
-                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+                "text": "        not comment[\"issue_url\"].endswith(\"/issues/158\")"
+              },
+              {
+                "n": 372,
+                "sign": "+",
+                "text": "        comment[\"issue_url\"] != REPOSITORY_API + \"/issues/158\""
               }
             ],
             "start": 372
           },
           {
             "dropped": 0,
-            "end": 380,
+            "end": 379,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+              }
+            ],
+            "start": 379
+          },
+          {
+            "dropped": 0,
+            "end": 387,
             "lines": [
               {
                 "n": null,
@@ -1266,16 +1718,16 @@
                 "text": "    if api(\"git/ref/heads/main\")[\"object\"][\"sha\"] != main:"
               },
               {
-                "n": 380,
+                "n": 387,
                 "sign": "+",
                 "text": "    if live_main and api(\"git/ref/heads/main\")[\"object\"][\"sha\"] != main:"
               }
             ],
-            "start": 380
+            "start": 387
           },
           {
             "dropped": 0,
-            "end": 420,
+            "end": 427,
             "lines": [
               {
                 "n": null,
@@ -1308,16 +1760,16 @@
                 "text": "    request = Request("
               },
               {
-                "n": 420,
+                "n": 427,
                 "sign": "+",
                 "text": "    request = authenticated_request("
               }
             ],
-            "start": 420
+            "start": 427
           },
           {
             "dropped": 0,
-            "end": 422,
+            "end": 429,
             "lines": [
               {
                 "n": null,
@@ -1345,16 +1797,16 @@
                 "text": "        },"
               },
               {
-                "n": 422,
+                "n": 429,
                 "sign": "+",
                 "text": "        {\"query\": REVIEW_THREADS_QUERY, \"variables\": {\"number\": int(receipt[\"pull_request\"])}},"
               }
             ],
-            "start": 422
+            "start": 429
           },
           {
             "dropped": 0,
-            "end": 424,
+            "end": 431,
             "lines": [
               {
                 "n": null,
@@ -1367,79 +1819,79 @@
                 "text": "        data = json.load(response)"
               },
               {
-                "n": 424,
+                "n": 431,
                 "sign": "+",
                 "text": "    data = native_http(request, review_query=True)"
               }
             ],
-            "start": 424
+            "start": 431
           },
           {
             "dropped": 0,
-            "end": 441,
+            "end": 448,
             "lines": [
               {
-                "n": 430,
+                "n": 437,
                 "sign": "+",
                 "text": "    return receipt, tree, units"
               },
               {
-                "n": 431,
-                "sign": "+",
-                "text": ""
-              },
-              {
-                "n": 432,
-                "sign": "+",
-                "text": ""
-              },
-              {
-                "n": 433,
-                "sign": "+",
-                "text": "def admit(root, comment_id, output):"
-              },
-              {
-                "n": 434,
-                "sign": "+",
-                "text": "    environment_guard()"
-              },
-              {
-                "n": 435,
-                "sign": "+",
-                "text": "    if os.environ[\"GITHUB_EVENT_NAME\"] != \"workflow_dispatch\":"
-              },
-              {
-                "n": 436,
-                "sign": "+",
-                "text": "        raise ValueError(\"manual dispatch only\")"
-              },
-              {
-                "n": 437,
-                "sign": "+",
-                "text": "    run = api(f\"actions/runs/{os.environ['GITHUB_RUN_ID']}\")"
-              },
-              {
                 "n": 438,
                 "sign": "+",
-                "text": "    if run[\"path\"] != WORKFLOW:"
+                "text": ""
               },
               {
                 "n": 439,
                 "sign": "+",
-                "text": "        raise ValueError(\"R2 entrypoint mismatch\")"
+                "text": ""
               },
               {
                 "n": 440,
                 "sign": "+",
-                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+                "text": "def admit(root, comment_id, output):"
               },
               {
                 "n": 441,
                 "sign": "+",
+                "text": "    environment_guard()"
+              },
+              {
+                "n": 442,
+                "sign": "+",
+                "text": "    if os.environ[\"GITHUB_EVENT_NAME\"] != \"workflow_dispatch\":"
+              },
+              {
+                "n": 443,
+                "sign": "+",
+                "text": "        raise ValueError(\"manual dispatch only\")"
+              },
+              {
+                "n": 444,
+                "sign": "+",
+                "text": "    run = api(f\"actions/runs/{os.environ['GITHUB_RUN_ID']}\")"
+              },
+              {
+                "n": 445,
+                "sign": "+",
+                "text": "    if run[\"path\"] != WORKFLOW:"
+              },
+              {
+                "n": 446,
+                "sign": "+",
+                "text": "        raise ValueError(\"R2 entrypoint mismatch\")"
+              },
+              {
+                "n": 447,
+                "sign": "+",
+                "text": "    main = os.environ[\"GITHUB_SHA\"]"
+              },
+              {
+                "n": 448,
+                "sign": "+",
                 "text": "    receipt, tree, units = qualify_canonical_receipt(root, comment_id, main)"
               }
             ],
-            "start": 430
+            "start": 437
           }
         ],
         "path": "scripts/study1_sg000031_r2_admission.py",
@@ -1457,68 +1909,68 @@
             "start": 39
           },
           {
-            "end": 107,
+            "end": 114,
             "start": 102
           },
           {
-            "end": 117,
-            "start": 116
+            "end": 124,
+            "start": 123
           },
           {
-            "end": 122,
-            "start": 122
-          },
-          {
-            "end": 150,
+            "end": 129,
             "start": 129
           },
           {
-            "end": 163,
-            "start": 153
+            "end": 157,
+            "start": 136
           },
           {
-            "end": 172,
-            "start": 167
+            "end": 170,
+            "start": 160
           },
           {
-            "end": 353,
-            "start": 352
+            "end": 179,
+            "start": 174
           },
           {
-            "end": 354,
-            "start": 354
+            "end": 360,
+            "start": 359
           },
           {
             "end": 361,
-            "start": 356
+            "start": 361
           },
           {
-            "end": 365,
-            "start": 365
+            "end": 368,
+            "start": 363
           },
           {
             "end": 372,
             "start": 372
           },
           {
-            "end": 380,
-            "start": 380
+            "end": 379,
+            "start": 379
           },
           {
-            "end": 420,
-            "start": 420
+            "end": 387,
+            "start": 387
           },
           {
-            "end": 422,
-            "start": 422
+            "end": 427,
+            "start": 427
           },
           {
-            "end": 424,
-            "start": 424
+            "end": 429,
+            "start": 429
           },
           {
-            "end": 441,
-            "start": 430
+            "end": 431,
+            "start": 431
+          },
+          {
+            "end": 448,
+            "start": 437
           }
         ],
         "status": "modified"
@@ -1739,8 +2191,8 @@
       {
         "hunks": [
           {
-            "dropped": 217,
-            "end": 241,
+            "dropped": 219,
+            "end": 243,
             "lines": [
               {
                 "n": 1,
@@ -1869,7 +2321,7 @@
         "path": "tests/test_study1_sg000031_admission_repair.py",
         "ranges": [
           {
-            "end": 241,
+            "end": 243,
             "start": 1
           }
         ],
@@ -2025,7 +2477,7 @@
         "name": "artifact_documents",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L249-L277"
+        "span": "L256-L284"
       },
       {
         "depth": 1,
@@ -2034,7 +2486,7 @@
         "name": "ledger_write",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L173-L189"
+        "span": "L180-L196"
       },
       {
         "depth": 1,
@@ -2043,7 +2495,7 @@
         "name": "verify_claim",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L476-L494"
+        "span": "L483-L501"
       },
       {
         "depth": 1,
@@ -2052,7 +2504,7 @@
         "name": "verify_run",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L207-L246"
+        "span": "L214-L253"
       },
       {
         "depth": 1,
@@ -2070,7 +2522,7 @@
         "name": "main",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L527-L556"
+        "span": "L534-L563"
       },
       {
         "depth": 2,
@@ -2079,7 +2531,7 @@
         "name": "verify_reports",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L280-L349"
+        "span": "L287-L356"
       },
       {
         "depth": 2,
@@ -2088,7 +2540,7 @@
         "name": "plan",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L497-L524"
+        "span": "L504-L531"
       },
       {
         "depth": 2,
@@ -2124,7 +2576,7 @@
         "name": "study1_sg000031_r2_admission.py",
         "path": "scripts/study1_sg000031_r2_admission.py",
         "relation": "calls",
-        "span": "L1-L561"
+        "span": "L1-L568"
       },
       {
         "depth": 1,
@@ -2210,7 +2662,7 @@
         "kind": "method",
         "name": "redirect_request",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L100-L113",
+        "span": "L100-L120",
         "wholeFile": false
       },
       {
@@ -2218,7 +2670,7 @@
         "kind": "function",
         "name": "authenticated_request",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L116-L128",
+        "span": "L123-L135",
         "wholeFile": false
       },
       {
@@ -2226,7 +2678,7 @@
         "kind": "function",
         "name": "native_http",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L131-L164",
+        "span": "L138-L171",
         "wholeFile": false
       },
       {
@@ -2234,7 +2686,7 @@
         "kind": "function",
         "name": "api",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L167-L170",
+        "span": "L174-L177",
         "wholeFile": false
       },
       {
@@ -2242,7 +2694,7 @@
         "kind": "function",
         "name": "qualify_canonical_receipt",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L352-L430",
+        "span": "L359-L437",
         "wholeFile": false
       },
       {
@@ -2250,7 +2702,7 @@
         "kind": "function",
         "name": "admit",
         "path": "scripts/study1_sg000031_r2_admission.py",
-        "span": "L433-L473",
+        "span": "L440-L480",
         "wholeFile": false
       },
       {
@@ -2298,7 +2750,7 @@
         "kind": "function",
         "name": "test_cross_host_artifact_redirect_strips_bearer_and_unsafe_targets_fail",
         "path": "tests/test_study1_sg000031_admission_repair.py",
-        "span": "L183-L198",
+        "span": "L183-L200",
         "wholeFile": false
       },
       {
@@ -2314,7 +2766,7 @@
         "kind": "function",
         "name": "test_live_main_guard_remains_required_for_real_admission",
         "path": "tests/test_study1_sg000031_admission_repair.py",
-        "span": "L222-L241",
+        "span": "L224-L243",
         "wholeFile": false
       },
       {
@@ -2338,7 +2790,7 @@
         "kind": "function",
         "name": "shared",
         "path": "tests/test_study1_sg000031_admission_repair.py",
-        "span": "L211-L213",
+        "span": "L213-L215",
         "wholeFile": false
       },
       {
@@ -2381,11 +2833,15 @@
       "registry/study1_sg000031_admission_repair_authorization.json",
       "registry/study1_sg000031_admission_repair_contract.json",
       "registry/study1_sg000031_admission_repair_frontier.json",
+      "registry/study1_sg000031_admission_repair_graft.json",
+      "registry/study1_sg000031_admission_repair_preflight_failure.json",
+      "registry/study1_sg000031_admission_repair_tests.json",
       "specs/CURRENT.md",
       "specs/tasks.md"
     ]
   },
-  "build_output_sha256": "3a160f4511438c78461fa319b56467d11d2fe6ee552c8704fb3b39c7f87fd342",
+  "blast_commit_head": "2143c4a0b64c3175a53459eb1d3011b472696e7e",
+  "build_output_sha256": "5fe4ed3f143bff7598ad7f2c7b8794a8908efca050389109845ef042069f48e8",
   "callers": {
     "matches": [
       {
@@ -2397,7 +2853,7 @@
             "name": "admit",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L433-L473"
+            "span": "L440-L480"
           },
           {
             "depth": 1,
@@ -2406,7 +2862,7 @@
             "name": "artifact_documents",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L249-L277"
+            "span": "L256-L284"
           },
           {
             "depth": 1,
@@ -2415,7 +2871,7 @@
             "name": "ledger_write",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L173-L189"
+            "span": "L180-L196"
           },
           {
             "depth": 1,
@@ -2424,7 +2880,7 @@
             "name": "qualify_canonical_receipt",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L352-L430"
+            "span": "L359-L437"
           },
           {
             "depth": 1,
@@ -2433,7 +2889,7 @@
             "name": "verify_claim",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L476-L494"
+            "span": "L483-L501"
           },
           {
             "depth": 1,
@@ -2442,7 +2898,7 @@
             "name": "verify_run",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L207-L246"
+            "span": "L214-L253"
           },
           {
             "depth": 1,
@@ -2460,7 +2916,7 @@
             "name": "main",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L527-L556"
+            "span": "L534-L563"
           },
           {
             "depth": 2,
@@ -2469,7 +2925,7 @@
             "name": "verify_reports",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L280-L349"
+            "span": "L287-L356"
           },
           {
             "depth": 2,
@@ -2478,7 +2934,7 @@
             "name": "plan",
             "path": "scripts/study1_sg000031_r2_admission.py",
             "relation": "calls",
-            "span": "L497-L524"
+            "span": "L504-L531"
           },
           {
             "depth": 2,
@@ -2513,20 +2969,20 @@
           "kind": "function",
           "name": "api",
           "path": "scripts/study1_sg000031_r2_admission.py",
-          "span": "L167-L170"
+          "span": "L174-L177"
         }
       }
     ],
     "query": "api",
     "saved": {
-      "baselineChars": 42003,
+      "baselineChars": 42222,
       "files": 3
     }
   },
   "commands": [
     "graft build . --no-gitignore --no-ignore",
     "graft callers api . --depth 2 --json",
-    "graft blast . --depth 2 --format json --no-owners"
+    "graft blast . --base 3ebf58ef10a42db6ee31d96451ea80fe98432b4c --depth 2 --format json --no-owners"
   ],
   "founder_cost_usd": 0,
   "inspection": "Shared helper impacts admission, artifact/job reads, claim verification, ledger checkpoints and aggregate job reads. Valid existing endpoint paths and mutation semantics outside preflight are preserved; no scientific runtime, producer or row processing source changes.",
@@ -2534,8 +2990,8 @@
   "mode": "structural-wiring-only",
   "model_pass_performed": false,
   "source_lf_sha256": {
-    "scripts/study1_sg000031_r2_admission.py": "150c30ee2903edc61f304e036b4cd3150675f7e947bd1b1ad23106673b536241",
-    "tests/test_study1_sg000031_admission_repair.py": "7261aada399596cd010a4909a5e58b45694bdad9111b3a76212c2c8c43068737",
+    "scripts/study1_sg000031_r2_admission.py": "ec32840349c804c5111ae6e1df88c518d383d436303931f498af0621b8cad046",
+    "tests/test_study1_sg000031_admission_repair.py": "68ce21305a7d44186a3ec5ab9e0b06311679931539c951aa0e782fa0e99690db",
     "tools/qualify_sg000031_admission.py": "9a83121fe6e22827b19473cd719b7aca6603f18ea728e730d46cf81431eae4b8"
   },
   "specgrain_id": "SG-000031-A1",
