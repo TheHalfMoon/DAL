@@ -427,3 +427,24 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [ ] Qualify and canonically merge this separate BLOCKED evidence closeout, then verify post-main and record the external receipt
 - [ ] New founder decision before any new model-call attempt; the missing permanent tag does not renew authorization
 - [ ] D4 remains inactive; scientific PASS, training and final evaluation are not authorized
+
+### SG-000031-A1 / R2 - Founder-authorized admission repair only
+
+- [x] Preserve separate direct founder repair-only authorization and exact failure base
+- [x] Normalize native repository metadata URL and fail closed on ambiguous admission URLs
+- [x] Share native authenticated receipt validation with a mutation-prohibited preflight
+- [x] Add deterministic fixtures for the retained HTTP 404 and corrected lookup, URL boundaries, authentication, read-only transport and live-main guard
+- [ ] Persist Graft structural impact and actual test/source hashes
+- [ ] Qualify genuine Jev, approved Alibaba, full CI, manuscript/arXiv, unchanged SDK and actual native workflow-token preflight on exact head
+- [ ] Normal expected-head merge, intended-tree verification and complete post-main checks
+- [ ] Record canonical repair receipt and stop before any model call for a separate founder decision
+- [ ] No new R2 attempt, row replay, model call, final access, D4, training, scoring or final evaluation is authorized
+
+### SG-000031-A1 / PR #161 - Founder-authorized CRLF extension
+
+- [x] Retain separate verbatim founder extension; preserve original authorization and failed qualification evidence
+- [x] Normalize only CRLF pairs to LF at the local receipt parsing boundary before unchanged validation
+- [x] Add LF/CRLF equality and malformed/incomplete/structural/semantic rejection regression fixtures
+- [ ] Refresh Graft and actual test/hash evidence, then qualify the revised exact head through every required gate
+- [ ] Protected normal merge, post-main verification and external canonical repair receipt
+- [ ] Stop before any model call; R2 remains BLOCKED pending a separate future execution decision

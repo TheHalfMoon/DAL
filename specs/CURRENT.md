@@ -367,3 +367,43 @@ required before any new model-call attempt. See
 exact-head qualification, guarded normal merge and post-main verification before
 its external canonical receipt is recorded. SG-000028 and R1 remain immutable;
 founder cost is zero; final access, D4, training and final evaluation remain inactive.
+
+## Active frontier - SG-000031-A1 / admission repair only
+
+The founder authorized a bounded URL/admission preflight engineering repair from
+failure main `3ebf58ef10a42db6ee31d96451ea80fe98432b4c`. The preceding failed-attempt
+frontier remains historical and immutable. No new model call, execution attempt or
+development row replay is authorized. R2 remains scientifically BLOCKED.
+
+The repair normalizes the native repository metadata root, rejects malformed or
+ambiguous admission URLs, and shares native authenticated receipt validation
+between real admission and a read-only preflight. Deterministic HTTP fixtures
+reproduce the retained 404 and corrected behavior. The actual preflight workflow
+uses the real admission token context, prohibits REST mutations, and permits only
+the fixed read-only review-thread GraphQL query. It validates historical engineering
+evidence without admitting execution on the repair checkout.
+
+See `registry/study1_sg000031_admission_repair_contract.json` and
+`docs/study1-sg000031-admission-repair.md`. Graft structural analysis, genuine Jev,
+approved Alibaba, full CI/manuscript/arXiv/SDK/native-preflight checks, zero active
+review threads, guarded normal merge and post-main verification are required before
+the external canonical repair receipt. Then stop for a separate founder decision.
+All 43 protected files remain unchanged; founder cost stays zero and final access,
+D4, training, scoring and final evaluation remain inactive.
+
+The first actual native preflight (`37327235548`) now reaches the historical
+receipt, whose original CRLF transport representation is rejected by the unchanged
+LF-only parser. The retained JSON is identical after CRLF normalization. This
+additional receipt-format defect is outside the explicit URL-only repair scope;
+its one-line proposal is not applied pending a founder scope decision. Full native
+qualification and merge remain blocked. This engineering trial is not a new R2
+attempt, and no model calls occurred.
+
+The founder subsequently approved the bounded PR #161 CRLF extension, retained
+separately in `registry/study1_sg000031_admission_repair_crlf_authorization.json`.
+The local receipt body now normalizes CRLF pairs to LF before unchanged format,
+JSON and semantic validation. Source comments, lone CR and schema/semantics remain
+unchanged. Positive/negative regression fixtures cover both representations.
+All required exact-head qualifications must run again, with a normal protected
+merge and post-main verification before the canonical repair receipt. Then stop;
+no new model call or R2 attempt is authorized and R2 remains scientifically BLOCKED.

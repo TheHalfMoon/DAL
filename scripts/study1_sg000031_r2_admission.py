@@ -9,8 +9,11 @@ import io
 import json
 import math
 import os
+import re
 import subprocess
 import zipfile
+from contextlib import contextmanager
+from contextvars import ContextVar
 from pathlib import Path
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
@@ -33,11 +36,82 @@ WORKFLOW = ".github/workflows/study1-sg000031-r2-recovery.yml"
 REPOSITORY = "TheHalfMoon/DAL"
 LEDGER_BRANCH = "codex/sg000031-r2-attempt1-journal"
 LEDGER_ROOT = "evidence/study1-r2-attempt1"
+REPOSITORY_API = f"https://api.github.com/repos/{REPOSITORY}"
+_PREFLIGHT_AUDIT = ContextVar("r2_native_preflight_audit", default=None)
+REVIEW_THREADS_QUERY = (
+    'query($number:Int!){repository(owner:"TheHalfMoon",name:"DAL"){'
+    "pullRequest(number:$number){reviewThreads(first:100){"
+    "pageInfo{hasNextPage}nodes{isResolved isOutdated}}}}}"
+)
+
+
+def repository_url(path):
+    """Canonicalize the repository root; reject ambiguous input before credentials or I/O."""
+    if not isinstance(path, str) or any(
+        ord(char) <= 32 or ord(char) >= 127 or char in "\\%#" for char in path
+    ):
+        raise ValueError("invalid repository URL characters")
+    if path.startswith("https://"):
+        parsed = urlsplit(path)
+        if parsed.scheme != "https" or parsed.netloc != "api.github.com":
+            raise ValueError("GitHub API authority mismatch")
+        boundary = f"/repos/{REPOSITORY}"
+        if parsed.path in {boundary, boundary + "/"}:
+            suffix = ""
+        elif parsed.path.startswith(boundary + "/"):
+            suffix = parsed.path[len(boundary) + 1 :]
+        else:
+            raise ValueError("GitHub API repository boundary")
+        query = parsed.query
+    else:
+        if path.startswith("/") or ":" in path:
+            raise ValueError("absolute or ambiguous repository path")
+        suffix, separator, query = path.partition("?")
+        if not separator:
+            query = ""
+    if suffix and any(
+        not re.fullmatch(r"[A-Za-z0-9_.-]+", segment) or segment in {".", ".."}
+        for segment in suffix.split("/")
+    ):
+        raise ValueError("noncanonical repository path")
+    if "?" in path and not query:
+        raise ValueError("empty repository query")
+    if query and (
+        not suffix
+        or not re.fullmatch(r"per_page=[1-9][0-9]{0,2}", query)
+        or int(query.split("=", 1)[1]) > 100
+    ):
+        raise ValueError("noncanonical repository query")
+    return REPOSITORY_API + ("/" + suffix if suffix else "") + ("?" + query if query else "")
+
+
+@contextmanager
+def native_read_only_preflight():
+    """Record canonical request metadata and prohibit all REST mutations before transport."""
+    audit = []
+    token = _PREFLIGHT_AUDIT.set(audit)
+    try:
+        yield audit
+    finally:
+        _PREFLIGHT_AUDIT.reset(token)
 
 
 class StripCrossHostAuthorization(HTTPRedirectHandler):
     def redirect_request(self, request, *args, **kwargs):
         redirected = super().redirect_request(request, *args, **kwargs)
+        if redirected is not None:
+            target = urlsplit(redirected.full_url)
+            if (
+                target.scheme != "https"
+                or target.username is not None
+                or target.password is not None
+                or target.port is not None
+                or target.fragment
+                or not re.fullmatch(r"[A-Za-z0-9.-]+", target.netloc)
+            ):
+                raise ValueError("unsafe admission HTTP redirect")
+            if target.hostname == "api.github.com":
+                repository_url(redirected.full_url)
         if (
             redirected is not None
             and urlsplit(redirected.full_url).netloc != urlsplit(request.full_url).netloc
@@ -46,28 +120,61 @@ class StripCrossHostAuthorization(HTTPRedirectHandler):
         return redirected
 
 
-def api(path, value=None, *, raw=False, method=None):
-    token = os.environ["GH_TOKEN"]
-    url = (
-        path if path.startswith("https://") else f"https://api.github.com/repos/{REPOSITORY}/{path}"
-    )
-    if not url.startswith(f"https://api.github.com/repos/{REPOSITORY}/"):
-        raise ValueError("GitHub API repository boundary")
-    request = Request(
+def authenticated_request(url, value=None, method=None):
+    return Request(
         url,
         data=json_bytes(value) if value is not None else None,
         method=method,
         headers={
-            "Authorization": f"Bearer {token}",
+            "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
             "Accept": "application/vnd.github+json",
             "Content-Type": "application/json",
             "X-GitHub-Api-Version": "2022-11-28",
             "User-Agent": "DAL-R2-admission",
         },
     )
+
+
+def native_http(request, *, raw=False, review_query=False):
+    audit = _PREFLIGHT_AUDIT.get()
+    if review_query:
+        body = json.loads(request.data)
+        if (
+            request.full_url != "https://api.github.com/graphql"
+            or request.get_method() != "POST"
+            or set(body) != {"query", "variables"}
+            or body["query"] != REVIEW_THREADS_QUERY
+            or set(body["variables"]) != {"number"}
+            or type(body["variables"]["number"]) is not int
+            or body["variables"]["number"] <= 0
+        ):
+            raise ValueError("native preflight permits only the fixed read-only review query")
+    if (
+        audit is not None
+        and (request.get_method() != "GET" or request.data is not None)
+        and not review_query
+    ):
+        raise ValueError("native preflight forbids mutation")
     with build_opener(StripCrossHostAuthorization()).open(request, timeout=60) as response:
         payload = response.read()
+        if audit is not None:
+            audit.append(
+                {
+                    "method": request.get_method(),
+                    "url": request.full_url,
+                    "status": response.status,
+                    "response_sha256": digest(payload),
+                    "authentication": "GH_TOKEN-bearer",
+                    "read_only_review_query": review_query,
+                }
+            )
     return payload if raw else json.loads(payload)
+
+
+def api(path, value=None, *, raw=False, method=None):
+    url = repository_url(path)
+    request = authenticated_request(url, value, method)
+    return native_http(request, raw=raw)
 
 
 def ledger_write(relative, value, previous_sha=None):
@@ -249,28 +356,27 @@ def verify_reports(receipt):
     return total
 
 
-def admit(root, comment_id, output):
-    environment_guard()
+def qualify_canonical_receipt(root, comment_id, main, *, live_main=True):
+    """Shared native read-only admission validation. Only admit() can claim an attempt."""
     contract = verify_frozen_controls(root)
-    if os.environ["GITHUB_EVENT_NAME"] != "workflow_dispatch":
-        raise ValueError("manual dispatch only")
-    run = api(f"actions/runs/{os.environ['GITHUB_RUN_ID']}")
-    if run["path"] != WORKFLOW:
-        raise ValueError("R2 entrypoint mismatch")
     repository = api("")
-    if repository["private"] or repository["default_branch"] != "main":
+    if (
+        repository["full_name"] != REPOSITORY
+        or repository["url"] != REPOSITORY_API
+        or repository["private"]
+        or repository["default_branch"] != "main"
+    ):
         raise ValueError("public zero-cost repository required")
     comment = api(f"issues/comments/{int(comment_id)}")
     if (
-        not comment["issue_url"].endswith("/issues/158")
+        comment["issue_url"] != REPOSITORY_API + "/issues/158"
         or comment["user"]["login"] != "TheHalfMoon"
     ):
         raise ValueError("canonical qualification receipt source mismatch")
-    body = comment["body"]
+    body = comment["body"].replace("\r\n", "\n")
     if not body.startswith("DAL_R2_CANONICAL_QUALIFICATION_V1\n") or body.count("```json\n") != 1:
         raise ValueError("canonical receipt format mismatch")
     receipt = json.loads(body.split("```json\n", 1)[1].split("```", 1)[0])
-    main = os.environ["GITHUB_SHA"]
     if (
         receipt["main_sha"] != main
         or receipt["base_sha"] != R1_MAIN
@@ -278,7 +384,7 @@ def admit(root, comment_id, output):
         or receipt["authorization_record_sha256"] != contract["authorization_record_sha256"]
     ):
         raise ValueError("canonical receipt binding drift")
-    if api("git/ref/heads/main")["object"]["sha"] != main:
+    if live_main and api("git/ref/heads/main")["object"]["sha"] != main:
         raise ValueError("live canonical main changed")
     parents = git("show", "-s", "--format=%P", main).split()
     if parents != [receipt["base_sha"], receipt["head_sha"]]:
@@ -318,26 +424,28 @@ def admit(root, comment_id, output):
         sdk = artifact_documents(receipt["reviews"][key], receipt["runs"][key])
         if sdk["sdk-qualification.json"] != expected_sdk:
             raise ValueError("actual canonical synthetic SDK report mismatch")
-    query = (
-        'query($number:Int!){repository(owner:"TheHalfMoon",name:"DAL"){'
-        "pullRequest(number:$number){reviewThreads(first:100){"
-        "pageInfo{hasNextPage}nodes{isResolved isOutdated}}}}}"
-    )
-    request = Request(
+    request = authenticated_request(
         "https://api.github.com/graphql",
-        data=json_bytes({"query": query, "variables": {"number": int(receipt["pull_request"])}}),
-        headers={
-            "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
-            "Content-Type": "application/json",
-        },
+        {"query": REVIEW_THREADS_QUERY, "variables": {"number": int(receipt["pull_request"])}},
     )
-    with urlopen(request, timeout=60) as response:
-        data = json.load(response)
+    data = native_http(request, review_query=True)
     threads = data["data"]["repository"]["pullRequest"]["reviewThreads"]
     if threads["pageInfo"]["hasNextPage"] or any(
         not item["isResolved"] and not item["isOutdated"] for item in threads["nodes"]
     ):
         raise ValueError("active unresolved review threads")
+    return receipt, tree, units
+
+
+def admit(root, comment_id, output):
+    environment_guard()
+    if os.environ["GITHUB_EVENT_NAME"] != "workflow_dispatch":
+        raise ValueError("manual dispatch only")
+    run = api(f"actions/runs/{os.environ['GITHUB_RUN_ID']}")
+    if run["path"] != WORKFLOW:
+        raise ValueError("R2 entrypoint mismatch")
+    main = os.environ["GITHUB_SHA"]
+    receipt, tree, units = qualify_canonical_receipt(root, comment_id, main)
     claim = {
         "schema_version": "study1-r2-attempt-claim-v1",
         "run_id": int(os.environ["GITHUB_RUN_ID"]),

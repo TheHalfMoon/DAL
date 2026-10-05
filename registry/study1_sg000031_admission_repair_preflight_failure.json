@@ -1,0 +1,40 @@
+{
+  "R2_scientific_state": "BLOCKED",
+  "actual_preflight_failure_report": {
+    "R2_scientific_state": "BLOCKED",
+    "engineering_preflight_state": "FAILED",
+    "error_sha256": "da18d9086dddffcf0a8cc72e6663d1cf9dbe9b38f247401f687f9d967c20d392",
+    "new_execution_authorized": false
+  },
+  "additional_receipt_parsing_authorization_requested": true,
+  "artifact_receipt": {
+    "artifact_digest": "sha256:f06403a9234ebca53d90ca0b8c0d49ee6169d30753a98f2396564b05f030b6c2",
+    "artifact_id": 11352832401,
+    "head_sha": "7bab1c9ebd6de2f6b5045d151680474eed48d6c0",
+    "run_id": 37327235548,
+    "verified_document_sha256s": {
+      "native-admission-preflight.json": "3b872a75f16aef75d01278656d0fd92127a4921b4657d3430a72508f0cd2ff9a"
+    }
+  },
+  "current_founder_scope": "URL/trailing-slash repair only",
+  "diagnosis": "native repository lookup passed; unchanged LF-only receipt parser rejected historical CRLF transport representation",
+  "founder_cost_usd": 0,
+  "head_sha": "7bab1c9ebd6de2f6b5045d151680474eed48d6c0",
+  "kind": "retained engineering preflight failure; not an R2 experiment attempt",
+  "model_calls": 0,
+  "new_R2_attempt": false,
+  "receipt_JSON_matches_immutable_canonical_record": true,
+  "receipt_format_proof": {
+    "CRLF_count": 47,
+    "canonical_JSON_unchanged": true,
+    "comment_id": 5995901646,
+    "model_calls": 0,
+    "native_qualification_run": 37327235548,
+    "normalized_format_accepted": true,
+    "proposal_only": true,
+    "raw_format_accepted": false
+  },
+  "receipt_parser_repaired": false,
+  "run_id": 37327235548,
+  "specgrain_id": "SG-000031-A1"
+}
