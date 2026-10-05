@@ -63,6 +63,13 @@ That attempt remains retained; a new founder decision is required before any
 additional model-call attempt. Infrastructure success never implies scientific
 PASS.
 
+Aggregation checks GitHub's actual admission and worker job conclusions,
+including failures after their local status checkpoints. Its candidate row gate
+remains separate from canonical scientific classification: R2 remains BLOCKED
+pending successful whole-run completion, verified retained artifacts, and the
+separately qualified evidence closeout. This prevents the aggregate job from
+claiming canonical PASS before its own eventual upload outcome is known.
+
 Every row retains input, producer, wire, source-pattern, original evidence,
 manifest, runtime, call disposition, and transformation identities where
 available. Malformed calls retain structural hashes and blockers. Calls visible

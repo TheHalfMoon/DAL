@@ -351,7 +351,7 @@ def test_workflow_is_dispatch_only_and_failure_stops_every_later_shard():
     text = (ROOT / ".github/workflows/study1-sg000031-r2-recovery.yml").read_text()
     assert "workflow_dispatch:" in text and "  push:" not in text and "  pull_request:" not in text
     assert "cancel-in-progress: false" in text
-    assert 'QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}' in text
+    assert "QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}" in text
     assert '--comment-id "$QUALIFICATION_COMMENT_ID"' in text
     assert '--comment-id "${{ inputs.qualification_comment_id }}"' not in text
     for shard in range(1, 8):
@@ -508,6 +508,7 @@ def test_aggregation_retains_available_partial_journal_without_shard_audit(
         module, "DevelopmentTraceAudit", SimpleNamespace(model_validate=lambda _: custody)
     )
     monkeypatch.setattr(module, "verify_claim", lambda _: {"engineering_qualified": True})
+    monkeypatch.setattr(module, "api", lambda _: {"jobs": []})
     monkeypatch.setenv("GITHUB_RUN_ID", "123")
     monkeypatch.setenv("GITHUB_SHA", "f" * 40)
 
@@ -530,3 +531,31 @@ def test_aggregation_retains_available_partial_journal_without_shard_audit(
     report = json.loads((output / "r2-report.json").read_bytes())
     assert report["scientific_state"] == "BLOCKED" and report["interrupted"]
     assert report["completed_rows"] == 1 and report["unfinished_rows"] == 2
+
+
+@pytest.mark.parametrize("failure", [None, "failure", "cancelled", "missing", "duplicate"])
+def test_actual_execution_job_conclusions_include_late_artifact_failures(runner, failure):
+    module = importlib.import_module("study1_sg000031_r2_aggregate")
+    names = [
+        "Qualify and permanently claim the sole R2 attempt",
+        *(f"shard-{i} / Frozen R2 shard {i}" for i in range(8)),
+    ]
+    jobs = [{"name": name, "status": "completed", "conclusion": "success"} for name in names]
+    if failure == "missing":
+        jobs.pop()
+    elif failure == "duplicate":
+        jobs.append(jobs[-1].copy())
+    elif failure:
+        jobs[-1]["conclusion"] = failure
+    assert module.execution_jobs_successful(jobs) is (failure is None)
+
+
+def test_candidate_pass_cannot_claim_canonical_pass_before_own_job_and_closeout(runner):
+    module = importlib.import_module("study1_sg000031_r2_aggregate")
+    report = module.pending_canonical_finalization(
+        {"scientific_state": "PASS", "accounted_rows": 1463}
+    )
+    assert (
+        report["candidate_scientific_state"] == "PASS" and report["scientific_state"] == "BLOCKED"
+    )
+    assert report["canonical_execution_finalization_complete"] is False

@@ -8,7 +8,7 @@ import os
 import subprocess
 from pathlib import Path
 
-from study1_sg000031_r2_admission import LEDGER_BRANCH, LEDGER_ROOT, verify_claim
+from study1_sg000031_r2_admission import LEDGER_BRANCH, LEDGER_ROOT, api, verify_claim
 
 from gaxbench.study1_query_trace_gate import DevelopmentTraceAudit
 from gaxbench.study1_recovery_execution import (
@@ -22,6 +22,35 @@ from gaxbench.study1_recovery_execution import (
 
 def git_bytes(*args):
     return subprocess.check_output(["git", *args])
+
+
+def execution_jobs_successful(jobs):
+    required = [
+        "Qualify and permanently claim the sole R2 attempt",
+        *(f"Frozen R2 shard {shard}" for shard in range(8)),
+    ]
+    for name in required:
+        matching = [
+            job for job in jobs if job["name"] == name or job["name"].endswith(" / " + name)
+        ]
+        if (
+            len(matching) != 1
+            or matching[0]["status"] != "completed"
+            or matching[0]["conclusion"] != "success"
+        ):
+            return False
+    return True
+
+
+def pending_canonical_finalization(report):
+    # This job cannot prove its own eventual upload success or canonical evidence closeout.
+    return {
+        **report,
+        "candidate_scientific_state": report["scientific_state"],
+        "scientific_state": "BLOCKED",
+        "canonical_execution_finalization_complete": False,
+        "canonical_PASS_requires_successful_whole_run_and_qualified_closeout": True,
+    }
 
 
 def aggregate(args):
@@ -54,7 +83,8 @@ def aggregate(args):
             raise ValueError("durable ledger identity drift")
         remote_rows[key] = row
         latest[key] = row
-    interrupted = False
+    execution_jobs = api(f"actions/runs/{os.environ['GITHUB_RUN_ID']}/jobs?per_page=100")["jobs"]
+    interrupted = not execution_jobs_successful(execution_jobs)
     journal_digests = {}
     for shard in range(8):
         expected = [row for row in rows if int(row.question_id_sha256[:16], 16) % 8 == shard]
@@ -104,6 +134,7 @@ def aggregate(args):
     report = classify_rows(
         ordered, engineering_qualified=claim["engineering_qualified"], interrupted=interrupted
     )
+    report = pending_canonical_finalization(report)
     source = json.loads(Path("registry/study1_sg000028_execution_37156028113.json").read_bytes())
     report.update(
         {
@@ -111,6 +142,10 @@ def aggregate(args):
             "ledger_commit": git_bytes("rev-parse", ref).decode().strip(),
             "plan_sha256": digest(plan_bytes),
             "journal_sha256s": journal_digests,
+            "execution_job_conclusions": [
+                {key: job[key] for key in ("id", "name", "status", "conclusion")}
+                for job in execution_jobs
+            ],
             "historical_pattern_sha256s": sorted(
                 entry["source_pattern_sha256"] for entry in source["pattern_support_evidence"]
             ),
