@@ -1,0 +1,41 @@
+{
+  "R2_scientific_state": "BLOCKED",
+  "analyzed_source_commit": "6cc3097daacb080902c82c15a233cc57cc997b44",
+  "base_sha": "0e298850b3392eafedeacc995e36c1e15391a15c",
+  "compile": "PASS (src/tests/scripts/tools)",
+  "contract_sha256": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+  "engineering_authorization_sha256": "8e0e2db1ddbe340a8fe53741fbfbffbed648ec857dd5bf4801a86ddf530fd08c",
+  "execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+  "execution_authorization_unconsumed": true,
+  "final_content_access": false,
+  "founder_cost_usd": 0,
+  "immutable_files_unchanged": true,
+  "immutable_files_verified": 43,
+  "junit_report_sha256": "94d885c60315c104f84e8145873222cd975b6fcf7b9d2a0cc19db251d4496e6f",
+  "model_calls": 0,
+  "mypy": "PASS (54 source files)",
+  "native_test_boundary": "Loopback synthetic HTTP preserves native URL, headers, method, parser, identity and live-main/merge guards; external historical artifacts and reviews are isolated seams. Actual authenticated native complete validator remains a required fresh workflow gate, including post-main published canonical receipt verification.",
+  "new_attempt2_regressions": 64,
+  "pytest": {
+    "errors": "0",
+    "failures": "0",
+    "hostname": "Abdulaziz",
+    "name": "pytest",
+    "skipped": "0",
+    "tests": "706",
+    "time": "69.181",
+    "timestamp": "2026-10-06T01:57:05.094252+03:00"
+  },
+  "ruff": "PASS",
+  "scientific_dispatches_performed": 0,
+  "source_lf_sha256": {
+    ".github/workflows/study1-sg000031-attempt2-admission-preflight.yml": "70b6cb47e51b5d2e8f8ed36710c5913183aaa01851adfc70b09b0dcea1eaf80c",
+    ".github/workflows/study1-sg000031-r2-attempt2-worker.yml": "000dddf38c753bb93143b1fad74a82c3a23ba77ce2b572da6be3347748410d5c",
+    ".github/workflows/study1-sg000031-r2-attempt2.yml": "ab8593a125556a9045a2caa988bf05c9f3b276bc9a3b52b5df6651c253e89bc7",
+    "scripts/study1_sg000031_attempt2_admission.py": "2d862c0ed20cbeceac7be00ec216192de3b1e4f92698cc4f1cdce61c5a648e27",
+    "scripts/study1_sg000031_r2_admission.py": "3ebaf168bbcca75aaa1d236f47776db9a7b3c9464ab918aa2003907f3978938e",
+    "tests/test_study1_sg000031_attempt2_admission.py": "c3e49eaff9b556fb0bc1e7a39c6bf198a4e6f1277baaff66c07158685fb1ecd4",
+    "tools/qualify_sg000031_attempt2_admission.py": "2d5eca9c8cc306ae4bd89c006cecad7dfa1b970ab2efba41007447e3bde4b7da"
+  },
+  "specgrain_id": "SG-000031-A2"
+}
