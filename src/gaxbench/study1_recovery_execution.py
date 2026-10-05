@@ -17,7 +17,7 @@ from typing import Annotated, Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from gaxbench.study1_fhir_compat import parse_relative_fhir_get
-from gaxbench.study1_query_trace_evidence import is_safe_reason, safe_pattern, safe_reason
+from gaxbench.study1_query_trace_evidence import is_safe_reason, safe_reason
 from gaxbench.study1_query_trace_gate import DevelopmentTraceInput, normalize_relative_fhir_get
 from gaxbench.study1_recovery_runtime import (
     R1_RUNTIME_VERSION,
@@ -417,7 +417,7 @@ def _call_audit(
                         blocker_codes=["invalid-query-encoding"],
                     )
                 normalized = normalize_relative_fhir_get(query)
-                observed_sha = digest(safe_pattern(normalized.pattern))
+                observed_sha = digest(normalized.pattern)
                 source = runtime.source_entries.get(observed_sha)
                 if not execute:
                     return R2Call(

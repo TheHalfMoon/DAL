@@ -72,7 +72,9 @@ claiming canonical PASS before its own eventual upload outcome is known.
 
 Every row retains input, producer, wire, source-pattern, original evidence,
 manifest, runtime, call disposition, and transformation identities where
-available. Malformed calls retain structural hashes and blockers. Calls visible
+available. Pattern identities hash the original normalized pattern before durable
+masking, preserving the historical identity of known opaque patterns without
+exposing them. Malformed calls retain structural hashes and blockers. Calls visible
 on the wire but unavailable to the frozen helper remain `wire-only`, blocked,
 and unexecuted. Raw questions, queries, responses, and FHIR resources are not
 durable audit output. SDK price estimates are recorded separately from actual

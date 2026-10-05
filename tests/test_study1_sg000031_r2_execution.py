@@ -11,6 +11,7 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
+from gaxbench.study1_query_trace_evidence import safe_pattern
 from gaxbench.study1_query_trace_gate import DevelopmentTraceInput, normalize_relative_fhir_get
 from gaxbench.study1_recovery_execution import (
     BASE_URL,
@@ -559,3 +560,20 @@ def test_candidate_pass_cannot_claim_canonical_pass_before_own_job_and_closeout(
         report["candidate_scientific_state"] == "PASS" and report["scientific_state"] == "BLOCKED"
     )
     assert report["canonical_execution_finalization_complete"] is False
+
+
+def test_opaque_pattern_links_original_identity_before_masking_and_stays_blocked(runtime):
+    query = "Observation?patient=synthetic-dev&private-patient-fragment=value"
+    pattern = normalize_relative_fhir_get(query).pattern
+    masked = safe_pattern(pattern)
+    assert masked != pattern
+    identity = digest(pattern)
+    fixture_runtime = replace(
+        runtime,
+        synthetic_qualification=True,
+        source_entries={identity: {"safe_pattern": masked, "source_pattern_sha256": identity}},
+    )
+    audit = call_audit(tool(json.dumps({"query_string": query})), 0, fixture_runtime)
+    assert audit.observed_pattern_sha256 == audit.source_pattern_sha256 == identity
+    assert audit.disposition == "hard-blocked" and audit.blocker_codes
+    assert "private-patient-fragment" not in audit.model_dump_json()
