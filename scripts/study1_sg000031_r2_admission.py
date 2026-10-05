@@ -101,9 +101,16 @@ class StripCrossHostAuthorization(HTTPRedirectHandler):
         redirected = super().redirect_request(request, *args, **kwargs)
         if redirected is not None:
             target = urlsplit(redirected.full_url)
-            if target.scheme != "https" or target.username or target.password or target.fragment:
+            if (
+                target.scheme != "https"
+                or target.username is not None
+                or target.password is not None
+                or target.port is not None
+                or target.fragment
+                or not re.fullmatch(r"[A-Za-z0-9.-]+", target.netloc)
+            ):
                 raise ValueError("unsafe admission HTTP redirect")
-            if target.netloc == "api.github.com":
+            if target.hostname == "api.github.com":
                 repository_url(redirected.full_url)
         if (
             redirected is not None

@@ -192,6 +192,8 @@ def test_cross_host_artifact_redirect_strips_bearer_and_unsafe_targets_fail(admi
     for target in [
         "http://api.github.com/repos/TheHalfMoon/DAL",
         "https://token@api.github.com/repos/TheHalfMoon/DAL",
+        "https://@api.github.com/repos/TheHalfMoon/DAL",
+        "https://api.github.com:443/repos/TheHalfMoon/DAL",
         "https://api.github.com/repos/TheHalfMoon/DAL-other",
     ]:
         with pytest.raises(ValueError):

@@ -55,13 +55,13 @@
     "passed": 611,
     "skipped": 0
   },
-  "junit_xml_sha256": "abbc18684395609dc8185d065c52dae65fec90a89716e8ab2f6c2d7b1304f6f9",
+  "junit_xml_sha256": "88fbd4af393bc9375494bd79974f356aa6afb943dafd240c5f9175c0be356a15",
   "kind": "actual-deterministic-local-test-evidence",
   "new_execution_authorized": false,
   "retained_failure_error_sha256": "0738e1d53e03cdde4e379859b024fb665340ccc62ac4ed215101772e5d81327b",
   "source_lf_sha256": {
-    "scripts/study1_sg000031_r2_admission.py": "150c30ee2903edc61f304e036b4cd3150675f7e947bd1b1ad23106673b536241",
-    "tests/test_study1_sg000031_admission_repair.py": "7261aada399596cd010a4909a5e58b45694bdad9111b3a76212c2c8c43068737"
+    "scripts/study1_sg000031_r2_admission.py": "ec32840349c804c5111ae6e1df88c518d383d436303931f498af0621b8cad046",
+    "tests/test_study1_sg000031_admission_repair.py": "68ce21305a7d44186a3ec5ab9e0b06311679931539c951aa0e782fa0e99690db"
   },
   "specgrain_id": "SG-000031-A1"
 }
