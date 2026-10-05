@@ -203,8 +203,8 @@
       {
         "hunks": [
           {
-            "dropped": 42,
-            "end": 66,
+            "dropped": 73,
+            "end": 97,
             "lines": [
               {
                 "n": 1,
@@ -333,7 +333,7 @@
         "path": "docs/study1-sg000031-admission-repair.md",
         "ranges": [
           {
-            "end": 66,
+            "end": 97,
             "start": 1
           }
         ],
@@ -411,8 +411,8 @@
       {
         "hunks": [
           {
-            "dropped": 83,
-            "end": 107,
+            "dropped": 93,
+            "end": 117,
             "lines": [
               {
                 "n": 1,
@@ -477,62 +477,62 @@
               {
                 "n": 13,
                 "sign": "+",
-                "text": "  \"failed_attempt\": {"
+                "text": "  \"crlf_extension_authorization_path\": \"registry/study1_sg000031_admission_repair_crlf_authorization.json\","
               },
               {
                 "n": 14,
                 "sign": "+",
-                "text": "    \"generations\": 0,"
+                "text": "  \"crlf_extension_authorization_sha256\": \"b79a9178f3a6df3cac8a2a4f67b8769918d7e52fc517fb1cba2b0fd5fc10ce94\","
               },
               {
                 "n": 15,
                 "sign": "+",
-                "text": "    \"model_POSTs\": 0,"
+                "text": "  \"failed_attempt\": {"
               },
               {
                 "n": 16,
                 "sign": "+",
-                "text": "    \"run_attempt\": 1,"
+                "text": "    \"generations\": 0,"
               },
               {
                 "n": 17,
                 "sign": "+",
-                "text": "    \"run_id\": 37320473498,"
+                "text": "    \"model_POSTs\": 0,"
               },
               {
                 "n": 18,
                 "sign": "+",
-                "text": "    \"scientific_state\": \"BLOCKED\","
+                "text": "    \"run_attempt\": 1,"
               },
               {
                 "n": 19,
                 "sign": "+",
-                "text": "    \"unattempted_rows\": 1463"
+                "text": "    \"run_id\": 37320473498,"
               },
               {
                 "n": 20,
                 "sign": "+",
-                "text": "  },"
+                "text": "    \"scientific_state\": \"BLOCKED\","
               },
               {
                 "n": 21,
                 "sign": "+",
-                "text": "  \"final_access\": false,"
+                "text": "    \"unattempted_rows\": 1463"
               },
               {
                 "n": 22,
                 "sign": "+",
-                "text": "  \"founder_cost_usd\": 0,"
+                "text": "  },"
               },
               {
                 "n": 23,
                 "sign": "+",
-                "text": "  \"immutable_file_lf_sha256\": {"
+                "text": "  \"final_access\": false,"
               },
               {
                 "n": 24,
                 "sign": "+",
-                "text": "    \".github/scripts/jev-exact-diff.mjs\": \"d5d4ae443ec351d602adce23af90320b85855c953e174035d5932af75093ad28\","
+                "text": "  \"founder_cost_usd\": 0,"
               }
             ],
             "start": 1
@@ -541,7 +541,7 @@
         "path": "registry/study1_sg000031_admission_repair_contract.json",
         "ranges": [
           {
-            "end": 107,
+            "end": 117,
             "start": 1
           }
         ],
@@ -551,7 +551,96 @@
         "hunks": [
           {
             "dropped": 0,
-            "end": 15,
+            "end": 14,
+            "lines": [
+              {
+                "n": 1,
+                "sign": "+",
+                "text": "{"
+              },
+              {
+                "n": 2,
+                "sign": "+",
+                "text": "  \"agent_record_is_not_a_new_human_GitHub_authorization\": true,"
+              },
+              {
+                "n": 3,
+                "sign": "+",
+                "text": "  \"chat_id\": \"01a1083e-82a2-7603-8227-0684b0b98f50\","
+              },
+              {
+                "n": 4,
+                "sign": "+",
+                "text": "  \"new_model_call_or_execution_attempt_authorized\": false,"
+              },
+              {
+                "n": 5,
+                "sign": "+",
+                "text": "  \"original_authorization_path\": \"registry/study1_sg000031_admission_repair_authorization.json\","
+              },
+              {
+                "n": 6,
+                "sign": "+",
+                "text": "  \"original_authorization_sha256\": \"03badc235be09cdb293934c406ecd6e2931d29c99827d6a5a5c79fdc487aab32\","
+              },
+              {
+                "n": 7,
+                "sign": "+",
+                "text": "  \"prior_head\": \"d1b368a1f3f31ea74ac99ad4a30a466f7598207f\","
+              },
+              {
+                "n": 8,
+                "sign": "+",
+                "text": "  \"prior_head_qualification_is_not_new_head_merge_qualification\": true,"
+              },
+              {
+                "n": 9,
+                "sign": "+",
+                "text": "  \"pull_request\": 161,"
+              },
+              {
+                "n": 10,
+                "sign": "+",
+                "text": "  \"scope\": \"CRLF-to-LF at receipt parsing boundary only; existing semantics unchanged\","
+              },
+              {
+                "n": 11,
+                "sign": "+",
+                "text": "  \"source_kind\": \"direct-human-founder-message-in-Codex\","
+              },
+              {
+                "n": 12,
+                "sign": "+",
+                "text": "  \"statement_utf8_lf_sha256\": \"810048afb5d46c2f3d66ad68a6c26c8fe2decc6f471ecb258edf0eb5d1c67bb9\","
+              },
+              {
+                "n": 13,
+                "sign": "+",
+                "text": "  \"verbatim_statement\": \"FOUNDER AUTHORIZATION \\u2014 PR #161 CRLF NORMALIZATION EXTENSION APPROVED\\n\\nI explicitly authorize a narrowly bounded extension to the existing SG-000031 admission-repair scope in PR #161.\\n\\nThe existing authorization remains unchanged except for the specific parser interoperability repair below.\\n\\nI authorize:\\n\\n- Normalize CRLF (`\\\\r\\\\n`) line endings to LF (`\\\\n`) at the receipt parsing boundary before the existing receipt parser applies its current semantic validation.\\n- Add deterministic regression coverage proving that semantically identical LF and CRLF receipts produce the same parsed result.\\n- Add or retain negative regression coverage proving that malformed, incomplete, structurally invalid, or semantically invalid receipts remain rejected.\\n- Document the exact normalization boundary and ensure the normalization does not modify any receipt content other than line-ending representation.\\n- Use Graft for bounded structural impact analysis.\\n- Re-run genuine TypeSafe Jev exact-diff semantic review on the new exact head.\\n- Re-run repository-approved Alibaba OpenCodeReview on the new exact head.\\n- Re-run the complete required CI, manuscript/arXiv, SDK/native preflight, review-thread, merge, and post-main qualification stack.\\n- Merge only through a normal merge commit with exact-head / expected-head protection after all required gates pass.\\n\\nThis authorization is strictly limited to line-ending normalization and its necessary regression/documentation evidence.\\n\\nIt does NOT authorize:\\n\\n- changing receipt schema or semantics\\n- accepting previously invalid receipt fields or structures\\n- weakening validation\\n- generic parser permissiveness\\n- unrelated parser refactoring\\n- additional admission fixes discovered later without a new scope decision\\n- any R2 execution attempt\\n- any model call\\n- replay of any of the 1463 development rows\\n- rerunning SG-000028\\n- model, tokenizer, GGUF, llama.cpp, FHIR-AgentBench, prompt, tool-schema, agent-strategy, or temperature changes\\n- retries until favorable\\n- selective row replay\\n- final-role access\\n- D4 activation\\n- training or fine-tuning\\n- scoring or final evaluation\\n- gate waiver\\n\\nThe retained first R2 attempt remains immutable and BLOCKED.\\n\\nNo new execution authorization is created by this repair.\\n\\nBecause this change modifies PR #161's head, qualification evidence from the previous head must not be reused as merge qualification for the new head. The complete required exact-head review and CI stack must qualify the revised candidate.\\n\\nAfter the CRLF normalization repair is fully qualified, normally merged, and post-main verified, stop again before any model call and present the canonical repair evidence for a separate founder decision on a possible second R2 execution attempt.\\n\\nFounder cost must remain zero.\\n\""
+              },
+              {
+                "n": 14,
+                "sign": "+",
+                "text": "}"
+              }
+            ],
+            "start": 1
+          }
+        ],
+        "path": "registry/study1_sg000031_admission_repair_crlf_authorization.json",
+        "ranges": [
+          {
+            "end": 14,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunks": [
+          {
+            "dropped": 0,
+            "end": 20,
             "lines": [
               {
                 "n": 1,
@@ -581,50 +670,75 @@
               {
                 "n": 6,
                 "sign": "+",
-                "text": "  \"contract_sha256\": \"da87e7078bb42fd50e490875c3126c6f79f6ce4f156a65019de084af74a0b65c\","
+                "text": "  \"contract_sha256\": \"93b37737fb2312c10652dff6e3168aa3bbf446caf5ea0ceee03f12ec97262b1f\","
               },
               {
                 "n": 7,
                 "sign": "+",
-                "text": "  \"failed_attempt_immutable\": true,"
+                "text": "  \"crlf_extension_authorization_sha256\": \"b79a9178f3a6df3cac8a2a4f67b8769918d7e52fc517fb1cba2b0fd5fc10ce94\","
               },
               {
                 "n": 8,
                 "sign": "+",
-                "text": "  \"final_access\": false,"
+                "text": "  \"current_blocker\": \"complete fresh exact-head qualification and normal merge/post-main pending\","
               },
               {
                 "n": 9,
                 "sign": "+",
-                "text": "  \"founder_cost_usd\": 0,"
+                "text": "  \"failed_attempt_immutable\": true,"
               },
               {
                 "n": 10,
                 "sign": "+",
-                "text": "  \"model_calls\": 0,"
+                "text": "  \"final_access\": false,"
               },
               {
                 "n": 11,
                 "sign": "+",
-                "text": "  \"new_execution_authorized\": false,"
+                "text": "  \"founder_cost_usd\": 0,"
               },
               {
                 "n": 12,
                 "sign": "+",
-                "text": "  \"next_gate\": \"separate founder decision on whether to authorize one additional R2 execution attempt\","
+                "text": "  \"model_calls\": 0,"
               },
               {
                 "n": 13,
                 "sign": "+",
-                "text": "  \"specgrain_id\": \"SG-000031-A1\","
+                "text": "  \"native_preflight_failure_run\": 37327235548,"
               },
               {
                 "n": 14,
                 "sign": "+",
-                "text": "  \"state\": \"ADMISSION_REPAIR_REVIEW_REQUIRED\""
+                "text": "  \"new_execution_authorized\": false,"
               },
               {
                 "n": 15,
+                "sign": "+",
+                "text": "  \"next_gate\": \"separate founder decision on whether to authorize one additional R2 execution attempt\","
+              },
+              {
+                "n": 16,
+                "sign": "+",
+                "text": "  \"prior_head_evidence_is_merge_qualification\": false,"
+              },
+              {
+                "n": 17,
+                "sign": "+",
+                "text": "  \"receipt_parser_repaired\": true,"
+              },
+              {
+                "n": 18,
+                "sign": "+",
+                "text": "  \"specgrain_id\": \"SG-000031-A1\","
+              },
+              {
+                "n": 19,
+                "sign": "+",
+                "text": "  \"state\": \"CRLF_EXTENSION_IMPLEMENTED_FULL_NEW_HEAD_QUALIFICATION_REQUIRED\""
+              },
+              {
+                "n": 20,
                 "sign": "+",
                 "text": "}"
               }
@@ -635,7 +749,7 @@
         "path": "registry/study1_sg000031_admission_repair_frontier.json",
         "ranges": [
           {
-            "end": 15,
+            "end": 20,
             "start": 1
           }
         ],
@@ -644,8 +758,8 @@
       {
         "hunks": [
           {
-            "dropped": 2519,
-            "end": 2543,
+            "dropped": 2975,
+            "end": 2999,
             "lines": [
               {
                 "n": 1,
@@ -774,7 +888,7 @@
         "path": "registry/study1_sg000031_admission_repair_graft.json",
         "ranges": [
           {
-            "end": 2543,
+            "end": 2999,
             "start": 1
           }
         ],
@@ -922,8 +1036,8 @@
       {
         "hunks": [
           {
-            "dropped": 43,
-            "end": 67,
+            "dropped": 75,
+            "end": 99,
             "lines": [
               {
                 "n": 1,
@@ -1052,7 +1166,7 @@
         "path": "registry/study1_sg000031_admission_repair_tests.json",
         "ranges": [
           {
-            "end": 67,
+            "end": 99,
             "start": 1
           }
         ],
@@ -1698,6 +1812,23 @@
           },
           {
             "dropped": 0,
+            "end": 376,
+            "lines": [
+              {
+                "n": null,
+                "sign": "-",
+                "text": "    body = comment[\"body\"]"
+              },
+              {
+                "n": 376,
+                "sign": "+",
+                "text": "    body = comment[\"body\"].replace(\"\\r\\n\", \"\\n\")"
+              }
+            ],
+            "start": 376
+          },
+          {
+            "dropped": 0,
             "end": 379,
             "lines": [
               {
@@ -1949,6 +2080,10 @@
             "start": 372
           },
           {
+            "end": 376,
+            "start": 376
+          },
+          {
             "end": 379,
             "start": 379
           },
@@ -1978,8 +2113,8 @@
       {
         "hunks": [
           {
-            "dropped": 0,
-            "end": 392,
+            "dropped": 16,
+            "end": 409,
             "lines": [
               {
                 "n": 370,
@@ -2095,6 +2230,11 @@
                 "n": 392,
                 "sign": "+",
                 "text": "D4, training, scoring and final evaluation remain inactive."
+              },
+              {
+                "n": 393,
+                "sign": "+",
+                "text": ""
               }
             ],
             "start": 370
@@ -2103,7 +2243,7 @@
         "path": "specs/CURRENT.md",
         "ranges": [
           {
-            "end": 392,
+            "end": 409,
             "start": 370
           }
         ],
@@ -2113,7 +2253,7 @@
         "hunks": [
           {
             "dropped": 0,
-            "end": 441,
+            "end": 450,
             "lines": [
               {
                 "n": 430,
@@ -2174,6 +2314,51 @@
                 "n": 441,
                 "sign": "+",
                 "text": "- [ ] No new R2 attempt, row replay, model call, final access, D4, training, scoring or final evaluation is authorized"
+              },
+              {
+                "n": 442,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 443,
+                "sign": "+",
+                "text": "### SG-000031-A1 / PR #161 - Founder-authorized CRLF extension"
+              },
+              {
+                "n": 444,
+                "sign": "+",
+                "text": ""
+              },
+              {
+                "n": 445,
+                "sign": "+",
+                "text": "- [x] Retain separate verbatim founder extension; preserve original authorization and failed qualification evidence"
+              },
+              {
+                "n": 446,
+                "sign": "+",
+                "text": "- [x] Normalize only CRLF pairs to LF at the local receipt parsing boundary before unchanged validation"
+              },
+              {
+                "n": 447,
+                "sign": "+",
+                "text": "- [x] Add LF/CRLF equality and malformed/incomplete/structural/semantic rejection regression fixtures"
+              },
+              {
+                "n": 448,
+                "sign": "+",
+                "text": "- [ ] Refresh Graft and actual test/hash evidence, then qualify the revised exact head through every required gate"
+              },
+              {
+                "n": 449,
+                "sign": "+",
+                "text": "- [ ] Protected normal merge, post-main verification and external canonical repair receipt"
+              },
+              {
+                "n": 450,
+                "sign": "+",
+                "text": "- [ ] Stop before any model call; R2 remains BLOCKED pending a separate future execution decision"
               }
             ],
             "start": 430
@@ -2182,7 +2367,7 @@
         "path": "specs/tasks.md",
         "ranges": [
           {
-            "end": 441,
+            "end": 450,
             "start": 430
           }
         ],
@@ -2191,8 +2376,8 @@
       {
         "hunks": [
           {
-            "dropped": 219,
-            "end": 243,
+            "dropped": 348,
+            "end": 372,
             "lines": [
               {
                 "n": 1,
@@ -2321,7 +2506,7 @@
         "path": "tests/test_study1_sg000031_admission_repair.py",
         "ranges": [
           {
-            "end": 243,
+            "end": 372,
             "start": 1
           }
         ],
@@ -2738,6 +2923,14 @@
         "wholeFile": false
       },
       {
+        "id": "tests/test_study1_sg000031_admission_repair.py#receipt_fixture",
+        "kind": "function",
+        "name": "receipt_fixture",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L247-L302",
+        "wholeFile": false
+      },
+      {
         "id": "tests/test_study1_sg000031_admission_repair.py#test_ambiguous_urls_fail_before_transport_or_credentials",
         "kind": "function",
         "name": "test_ambiguous_urls_fail_before_transport_or_credentials",
@@ -2759,6 +2952,22 @@
         "name": "test_existing_job_artifact_ref_and_checkpoint_routes_are_preserved",
         "path": "tests/test_study1_sg000031_admission_repair.py",
         "span": "L153-L161",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_invalid_receipts_remain_rejected",
+        "kind": "function",
+        "name": "test_invalid_receipts_remain_rejected",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L337-L372",
+        "wholeFile": false
+      },
+      {
+        "id": "tests/test_study1_sg000031_admission_repair.py#test_lf_and_crlf_receipts_have_identical_parsed_results",
+        "kind": "function",
+        "name": "test_lf_and_crlf_receipts_have_identical_parsed_results",
+        "path": "tests/test_study1_sg000031_admission_repair.py",
+        "span": "L305-L313",
         "wholeFile": false
       },
       {
@@ -2832,6 +3041,7 @@
       "docs/study1-sg000031-admission-repair.md",
       "registry/study1_sg000031_admission_repair_authorization.json",
       "registry/study1_sg000031_admission_repair_contract.json",
+      "registry/study1_sg000031_admission_repair_crlf_authorization.json",
       "registry/study1_sg000031_admission_repair_frontier.json",
       "registry/study1_sg000031_admission_repair_graft.json",
       "registry/study1_sg000031_admission_repair_preflight_failure.json",
@@ -2840,8 +3050,8 @@
       "specs/tasks.md"
     ]
   },
-  "blast_commit_head": "2143c4a0b64c3175a53459eb1d3011b472696e7e",
-  "build_output_sha256": "5fe4ed3f143bff7598ad7f2c7b8794a8908efca050389109845ef042069f48e8",
+  "blast_commit_head": "906c9d80a4b44ae72bde4ab59bc2b4b13d362cc8",
+  "build_output_sha256": "5e6c0579a575d6c4c13494813a509c9ceb3254b128900a16f3fd7fbc4d7fb427",
   "callers": {
     "matches": [
       {
@@ -2975,7 +3185,7 @@
     ],
     "query": "api",
     "saved": {
-      "baselineChars": 42222,
+      "baselineChars": 42244,
       "files": 3
     }
   },
@@ -2990,8 +3200,8 @@
   "mode": "structural-wiring-only",
   "model_pass_performed": false,
   "source_lf_sha256": {
-    "scripts/study1_sg000031_r2_admission.py": "ec32840349c804c5111ae6e1df88c518d383d436303931f498af0621b8cad046",
-    "tests/test_study1_sg000031_admission_repair.py": "68ce21305a7d44186a3ec5ab9e0b06311679931539c951aa0e782fa0e99690db",
+    "scripts/study1_sg000031_r2_admission.py": "8b94324ff39fa07941a5c8e86c73ecc118e0e445d2a1f5b66b8eba9a8a883c9b",
+    "tests/test_study1_sg000031_admission_repair.py": "98e4312adf1551325d72fde8377dd63220011c66d9b71de1836402e67dae0da5",
     "tools/qualify_sg000031_admission.py": "9a83121fe6e22827b19473cd719b7aca6603f18ea728e730d46cf81431eae4b8"
   },
   "specgrain_id": "SG-000031-A1",
