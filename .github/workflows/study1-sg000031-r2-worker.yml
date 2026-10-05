@@ -46,7 +46,8 @@ jobs:
       - name: Verify permanent exact-run R2 claim before infrastructure setup
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/study1_sg000031_r2_admission.py verify --claim-sha "${{ inputs.claim_sha }}" --output-dir "$RUNNER_TEMP/sg000031/output"
+          CLAIM_SHA: ${{ inputs.claim_sha }}
+        run: python scripts/study1_sg000031_r2_admission.py verify --claim-sha "$CLAIM_SHA" --output-dir "$RUNNER_TEMP/sg000031/output"
 
       - name: Download complete immutable development plan
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
@@ -310,6 +311,8 @@ jobs:
       - name: Execute exactly one frozen first turn per owned development row
         env:
           GH_TOKEN: ${{ github.token }}
+          CLAIM_SHA: ${{ inputs.claim_sha }}
+          SHARD_INDEX: ${{ inputs.shard }}
         run: >-
           python scripts/study1_sg000031_r2_runner.py
           --source "$RUNNER_TEMP/sg000031/source.csv"
@@ -318,8 +321,8 @@ jobs:
           --runtime-manifest registry/study1_sg000026_fhir_runtime_manifest.json
           --output-dir "$RUNNER_TEMP/sg000031/output"
           --plan "$RUNNER_TEMP/sg000031/admission/plan.json"
-          --shard-index "${{ inputs.shard }}"
-          --claim-sha "${{ inputs.claim_sha }}"
+          --shard-index "$SHARD_INDEX"
+          --claim-sha "$CLAIM_SHA"
 
       - name: Retain infrastructure status and delete raw source and server logs
         if: always()

@@ -351,11 +351,15 @@ def test_workflow_is_dispatch_only_and_failure_stops_every_later_shard():
     text = (ROOT / ".github/workflows/study1-sg000031-r2-recovery.yml").read_text()
     assert "workflow_dispatch:" in text and "  push:" not in text and "  pull_request:" not in text
     assert "cancel-in-progress: false" in text
+    assert 'QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}' in text
+    assert '--comment-id "$QUALIFICATION_COMMENT_ID"' in text
+    assert '--comment-id "${{ inputs.qualification_comment_id }}"' not in text
     for shard in range(1, 8):
         assert f"needs: [admission, shard-{shard - 1}]" in text
     worker = (ROOT / ".github/workflows/study1-sg000031-r2-worker.yml").read_text()
     assert "if: always()" in worker and "--retry 3" not in worker
     assert "scripts/study1_sg000028_query_trace_runner.py" not in worker
+    assert '--claim-sha "${{ inputs.claim_sha }}"' not in worker
 
 
 @pytest.mark.parametrize(

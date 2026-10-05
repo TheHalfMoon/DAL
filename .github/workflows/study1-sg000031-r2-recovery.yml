@@ -43,9 +43,10 @@ jobs:
         id: claim
         env:
           GH_TOKEN: ${{ github.token }}
+          QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}
         run: >-
           python scripts/study1_sg000031_r2_admission.py admit
-          --comment-id "${{ inputs.qualification_comment_id }}"
+          --comment-id "$QUALIFICATION_COMMENT_ID"
           --output-dir "$RUNNER_TEMP/sg000031/admission"
       - name: Freeze all 1463 development identities without final content access
         env:
