@@ -415,3 +415,15 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [ ] Retain all rows, blockers, transformations, immutable lineage, and interrupted evidence
 - [ ] Qualify and canonically persist the separate R2 scientific classification
 - [ ] D4 remains inactive pending canonical R2 PASS and separate future founder authorization
+
+### SG-000031-E1 / R2 - Retained failed attempt
+
+- [x] Qualify the separate runner with actual exact-head Jev, Alibaba delegated inspection, synthetic SDK and GAXBench 4/4 evidence
+- [x] Normally merge PR #159 and verify post-main CI, manuscript/arXiv and synthetic SDK before dispatch
+- [x] Perform exactly one authorized dispatch: run `37320473498`, attempt 1
+- [x] Retain admission failure and stop; all eight model workers were skipped, with zero study model calls
+- [x] Verify the failure artifact ZIP and report hashes and reproduce the native trailing-slash HTTP 404 read-only
+- [x] Retain all 1463 historical development identities as unattempted with the exact population hash
+- [ ] Qualify and canonically merge this separate BLOCKED evidence closeout, then verify post-main and record the external receipt
+- [ ] New founder decision before any new model-call attempt; the missing permanent tag does not renew authorization
+- [ ] D4 remains inactive; scientific PASS, training and final evaluation are not authorized

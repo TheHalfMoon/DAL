@@ -343,3 +343,27 @@ formatting equality != semantic evidence equality
 No paper-level claim becomes supported merely because a metric exists. Every claim must be mapped to canonical evidence or explicitly rejected, and the completed SG-000022 experiment remains under a permanent no-post-test-tuning/no-rerun lock.
 
 Research claims remain subject to `docs/research/REPRODUCIBILITY.md`.
+
+## Active frontier - SG-000031-E1 / failed sole R2 attempt
+
+The preceding R2 preparation frontier is historical. PR #159 qualified the
+separate runner and normally merged at `73e98360863aaa1cd039ffaa5cef2e4311dcfafa`,
+with complete exact-head and post-main CI, manuscript/arXiv and synthetic SDK
+verification. The sole authorized main-only dispatch, run `37320473498` attempt 1,
+failed during admission with HTTP 404. All eight model workers were skipped;
+zero study model calls occurred. The failure artifact is retained.
+
+SG-000031-E1 preserves the failure, the qualified runner evidence, and all 1463
+historical development identities as unattempted (341 calibration / 1122 validation).
+The native repository metadata URL has a trailing slash that returned 404 in a
+read-only reproduction with the matching retained error hash. The runner remains
+unchanged in this evidence closeout. The missing permanent tag does not renew
+authorization. No retry, redispatch or new model-call attempt is authorized.
+
+R2 remains **BLOCKED / R2_INFRASTRUCTURE_FAILED_STOP**. A new founder decision is
+required before any new model-call attempt. See
+`registry/study1_sg000031_attempt1_closeout.json` and
+`docs/study1-sg000031-attempt1-closeout.md`. The evidence closeout requires its own
+exact-head qualification, guarded normal merge and post-main verification before
+its external canonical receipt is recorded. SG-000028 and R1 remain immutable;
+founder cost is zero; final access, D4, training and final evaluation remain inactive.

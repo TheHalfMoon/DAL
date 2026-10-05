@@ -1,0 +1,376 @@
+{
+  "D4": false,
+  "admission_artifact": {
+    "artifact_digest": "sha256:7852db01bde641281d48d77d9d2e6ebc8d32a2535b6ae8353a35225a02f2e386",
+    "artifact_id": 11348489633,
+    "head_sha": "73e98360863aaa1cd039ffaa5cef2e4311dcfafa",
+    "run_id": 37320473498,
+    "verified_document_sha256s": {
+      "admit-failure.json": "e91aa1457889bae6e7ba5ee092ee09638dcce97219f0f538da3839430f4ee505"
+    }
+  },
+  "admission_failure_path": "registry/study1_sg000031_attempt1_admission_failure.json",
+  "admission_failure_sha256": "e91aa1457889bae6e7ba5ee092ee09638dcce97219f0f538da3839430f4ee505",
+  "answer_correctness_scoring": false,
+  "attempt_disposition": "failed-before-admission-stop",
+  "automatic_retry_or_redispatch_authorized": false,
+  "benchmark_downloaded_in_attempt": false,
+  "canonical_r1": {
+    "main": "ef9102ea3afda800e3fc25d38072b9e18fd3f9af",
+    "manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "tree": "fd6e40177425f64bb633f1aadddf0812a16f6c7d"
+  },
+  "canonical_runner_qualification": {
+    "authorization_record_sha256": "8aeb6274a98ce50f1f5877d67b794ad40ae59097061f565dbc7f76d1f731c889",
+    "base_sha": "ef9102ea3afda800e3fc25d38072b9e18fd3f9af",
+    "contract_sha256": "61416d07409aa08305fb05e90cbf7790497128857a2af046daa290bbb8612f97",
+    "head_sha": "fb3943e8c5bf472250089257db74c82290781436",
+    "main_sha": "73e98360863aaa1cd039ffaa5cef2e4311dcfafa",
+    "pull_request": 159,
+    "reviews": {
+      "alibaba": {
+        "artifact_digest": "sha256:559b59015dd6cd54878a64efb6e45841b1e5c5a6146a6cef29c035a1df076de9",
+        "artifact_id": 11348757138,
+        "delegated_inspection_no_blocking_findings": true,
+        "report_sha256": "f236ecf25cd72dcbea0840ca212c52f446e8f140f5ff2d3db37b013f478dda17"
+      },
+      "jev": {
+        "artifact_digest": "sha256:31e6755d8d3d471073f4fd10a269bd240889ed04400dc75d35778f8fb2f5ac30",
+        "artifact_id": 11349196520,
+        "report_sha256": "3a5a4dd0aa662adc1b1060b3e2eef828c14294cffe7312d604ab155eaa6652d1"
+      },
+      "post_sdk": {
+        "artifact_digest": "sha256:7b38db56cc39ca10b1bc3a7d0bbcf64edb4c1571c4f06d0e1898550ed7b6afdd",
+        "artifact_id": 11349656688,
+        "report_sha256": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e"
+      },
+      "sdk": {
+        "artifact_digest": "sha256:3f3ce860f69e0741534e545534e701e5061fbe41a461f15d55255eeff09204c7",
+        "artifact_id": 11349276538,
+        "report_sha256": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e"
+      }
+    },
+    "runs": {
+      "alibaba": 37318315616,
+      "ci": 37318315386,
+      "jev": 37318310161,
+      "manuscript": 37318315638,
+      "post_ci": 37319948296,
+      "post_manuscript": 37319948567,
+      "post_sdk": 37319948300,
+      "sdk": 37318315449
+    },
+    "tree": "bfb825f4115f562b919b914fa4df4aa554f385bc"
+  },
+  "closeout_qualification": "requires exact-head review/CI, guarded normal merge, and post-main verification; canonical receipt recorded externally after these gates",
+  "diagnostic": {
+    "confirmed_defect": "repository metadata lookup api(\"\") constructs a trailing-slash GitHub repository URL returning HTTP 404",
+    "observed_public_GET_results": [
+      {
+        "status": 200,
+        "url": "https://api.github.com/repos/TheHalfMoon/DAL"
+      },
+      {
+        "error_sha256": "0738e1d53e03cdde4e379859b024fb665340ccc62ac4ed215101772e5d81327b",
+        "status": 404,
+        "url": "https://api.github.com/repos/TheHalfMoon/DAL/"
+      }
+    ],
+    "read_only_only": true,
+    "runner_repaired_in_this_closeout": false,
+    "source_lf_sha256": "b2c3788e574459daa1203bb8638203b2fbb55a9ac0b70db5fe90832a734cdf44",
+    "source_path": "scripts/study1_sg000031_r2_admission.py"
+  },
+  "dispatch_count": 1,
+  "execution_admitted": false,
+  "failure_record": {
+    "code": "r2-infrastructure-or-admission-failed-stop",
+    "error_sha256": "0738e1d53e03cdde4e379859b024fb665340ccc62ac4ed215101772e5d81327b",
+    "new_founder_decision_before_new_model_attempt": true,
+    "run_id": "37320473498",
+    "state": "BLOCKED"
+  },
+  "final_question_content_accessed": false,
+  "final_rows_materialized": 0,
+  "founder_cost_usd": 0,
+  "frozen_producer": {
+    "agent_strategy": "single_turn_request",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "context_tokens": 4096,
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+    "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
+    "quantized_file": "qwen3-4b-instruct-2507-q8_0.gguf",
+    "quantized_repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+    "quantized_repo_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+    "quantized_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "temperature": 0.0,
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+    "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757"
+  },
+  "new_founder_decision_required_before_any_new_model_call_attempt": true,
+  "permanent_attempt_tag_created": false,
+  "population": {
+    "calibration": 341,
+    "complete_R2_generation_lineage": false,
+    "complete_R2_transformation_accounting": false,
+    "counts": {
+      "calls": 0,
+      "first_turn_generations": 0,
+      "not_attempted": 1463,
+      "physical_model_POSTs": 0,
+      "recovery_transformed": 0
+    },
+    "historical_shards": [
+      {
+        "artifact_digest": "sha256:77bd266f72da7a9158ccebbe37796f1d206e2e99c3252c9c503c2d4404069beb",
+        "artifact_id": 11287066230,
+        "calibration_rows": 51,
+        "rows_sha256": "8fd99a1ad5b8a5bb3f840666c5e249001f607b2ba8496de1c17c111fdf15d69d",
+        "selected_rows": 184,
+        "shard_index": 0,
+        "validation_rows": 133
+      },
+      {
+        "artifact_digest": "sha256:f90f5ccb9b396f944b860adb30fd66dc252b1891bd08f848006150e76b5bdf80",
+        "artifact_id": 11286797280,
+        "calibration_rows": 34,
+        "rows_sha256": "d6e95af59e72ce8e5cf1b32fe152bed800404a48b190acac167ccf42b77beb49",
+        "selected_rows": 171,
+        "shard_index": 1,
+        "validation_rows": 137
+      },
+      {
+        "artifact_digest": "sha256:7d2a60c35fd714b84bccd6e67f0ad9934d7a3b5b2411edd3acbc8d8a076a8ba3",
+        "artifact_id": 11289643384,
+        "calibration_rows": 42,
+        "rows_sha256": "27cb6cbe0ed74d51b01a81d485da79917f0d5f9a7284b02d3d756d8df236510b",
+        "selected_rows": 204,
+        "shard_index": 2,
+        "validation_rows": 162
+      },
+      {
+        "artifact_digest": "sha256:3f2e7aed1462dd89bdb00fa9b5f646307e65780a38c5e3f56bb5fb0c7b94a3b0",
+        "artifact_id": 11290800101,
+        "calibration_rows": 43,
+        "rows_sha256": "71652164555acdc9ed573e7bba35f7593aa2c6f87a22d9440f975080bfc22947",
+        "selected_rows": 200,
+        "shard_index": 3,
+        "validation_rows": 157
+      },
+      {
+        "artifact_digest": "sha256:d6bffc29315e67e058ba6dc98125a5084b1f76001a3bca18d8458bda0f49a6d4",
+        "artifact_id": 11287589952,
+        "calibration_rows": 48,
+        "rows_sha256": "567ade76b299e6b8c16be521cc02521c62a92677874301ddeebc18bffd799399",
+        "selected_rows": 178,
+        "shard_index": 4,
+        "validation_rows": 130
+      },
+      {
+        "artifact_digest": "sha256:51d4a7c7ebc09f452e25c1e66664d1aed2a26a97932ea8770d0d9457cc509119",
+        "artifact_id": 11287735018,
+        "calibration_rows": 47,
+        "rows_sha256": "888e39fa823f8abcc2d4ba1808c825780c7ee52208a2e84799f13024ade89939",
+        "selected_rows": 168,
+        "shard_index": 5,
+        "validation_rows": 121
+      },
+      {
+        "artifact_digest": "sha256:5f3996599f774894a6ce442edc6efeaaee40c64a6e921dee857c9849eb9acb0a",
+        "artifact_id": 11287681429,
+        "calibration_rows": 34,
+        "rows_sha256": "71984440ffc7c04f9b97135fe5ee23af0f3f90ab06ede1c07efee78c844ff917",
+        "selected_rows": 178,
+        "shard_index": 6,
+        "validation_rows": 144
+      },
+      {
+        "artifact_digest": "sha256:9a906bcc982fe5c7fa9b9d91dd6717b73f370d737235c2ff5732fdc32ebe63c0",
+        "artifact_id": 11287257513,
+        "calibration_rows": 42,
+        "rows_sha256": "d9ba26c04649ec2d7269b4f22edfdca59e253f08b2460653b70742c2ceb8515c",
+        "selected_rows": 180,
+        "shard_index": 7,
+        "validation_rows": 138
+      }
+    ],
+    "original_evidence": {
+      "blockers": 1239,
+      "calls": 1623,
+      "pass": 224,
+      "path": "registry/study1_sg000028_execution_37156028113.json",
+      "patterns": 248,
+      "raw_trace_regeneration_allowed": false,
+      "rows": 1463,
+      "sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+      "state": "BLOCKED"
+    },
+    "provenance": "read-only reconstruction from hash-verified immutable historical development artifacts; not a completed R2 admission plan",
+    "question_role_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "row_record_columns": [
+      "question_id_sha256",
+      "role",
+      "R2_status"
+    ],
+    "rows": 1463,
+    "rows_lf_sha256": "f93b41076178b1c686bbec6a85e2009b06709081760b7d2284d57288584cc4f0",
+    "rows_path": "registry/study1_sg000031_attempt1_unattempted_rows.json",
+    "unavailable_R2_fields": [
+      "input_sha256",
+      "original_request_sha256",
+      "observed_pattern_sha256",
+      "response_sha256",
+      "runtime_call_dispositions"
+    ],
+    "validation": 1122
+  },
+  "qualification_comment_id": 5995901646,
+  "remaining_blockers": [
+    "infrastructure-admission-HTTP-404",
+    "1463-unattempted-development-rows",
+    "incomplete-generation-lineage-and-transformation-accounting"
+  ],
+  "row_ledger_created": false,
+  "run": {
+    "conclusion": "failure",
+    "created_at": "2026-10-05T13:54:45Z",
+    "event": "workflow_dispatch",
+    "head_sha": "73e98360863aaa1cd039ffaa5cef2e4311dcfafa",
+    "html_url": "https://github.com/TheHalfMoon/DAL/actions/runs/37320473498",
+    "id": 37320473498,
+    "run_attempt": 1,
+    "status": "completed",
+    "updated_at": "2026-10-05T13:55:04Z"
+  },
+  "schema_version": "study1-r2-failed-attempt-closeout-v1",
+  "scientific_state": "BLOCKED",
+  "sealed_final": {
+    "access_allowed": false,
+    "patients": 40,
+    "rows": 173
+  },
+  "second_turn_reasoning": false,
+  "sole_dispatch_retained": true,
+  "source_jobs": [
+    {
+      "conclusion": "failure",
+      "id": 111797963368,
+      "name": "Qualify and permanently claim the sole R2 attempt",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install DAL"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Verify full canonical qualification and atomically claim one attempt"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Freeze all 1463 development identities without final content access"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain admission and infrastructure failure evidence"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job"
+        }
+      ]
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798078018,
+      "name": "shard-0",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798081980,
+      "name": "shard-1",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798083108,
+      "name": "shard-2",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798083382,
+      "name": "shard-3",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798084503,
+      "name": "shard-4",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798086805,
+      "name": "shard-5",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798088307,
+      "name": "shard-6",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798089861,
+      "name": "shard-7",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 111798091719,
+      "name": "Preserve complete R2 denominator and scientific classification",
+      "status": "completed",
+      "steps": []
+    }
+  ],
+  "specgrain_id": "SG-000031-E1",
+  "study_id": "study1",
+  "training": false,
+  "workflow_success_is_not_scientific_PASS": true,
+  "zero_founder_cost": true
+}
