@@ -3,8 +3,9 @@
   "R2_scientific_state": "BLOCKED",
   "canonical_qualification_receipt": "record externally after exact-head, normal merge and post-main checks",
   "contract_path": "registry/study1_sg000031_admission_repair_contract.json",
-  "contract_sha256": "da87e7078bb42fd50e490875c3126c6f79f6ce4f156a65019de084af74a0b65c",
-  "current_blocker": "unchanged LF-only parser rejects original CRLF receipt; scope decision required",
+  "contract_sha256": "93b37737fb2312c10652dff6e3168aa3bbf446caf5ea0ceee03f12ec97262b1f",
+  "crlf_extension_authorization_sha256": "b79a9178f3a6df3cac8a2a4f67b8769918d7e52fc517fb1cba2b0fd5fc10ce94",
+  "current_blocker": "complete fresh exact-head qualification and normal merge/post-main pending",
   "failed_attempt_immutable": true,
   "final_access": false,
   "founder_cost_usd": 0,
@@ -12,7 +13,8 @@
   "native_preflight_failure_run": 37327235548,
   "new_execution_authorized": false,
   "next_gate": "separate founder decision on whether to authorize one additional R2 execution attempt",
-  "receipt_parser_repaired": false,
+  "prior_head_evidence_is_merge_qualification": false,
+  "receipt_parser_repaired": true,
   "specgrain_id": "SG-000031-A1",
-  "state": "NATIVE_PREFLIGHT_RECEIPT_FORMAT_SCOPE_DECISION_REQUIRED"
+  "state": "CRLF_EXTENSION_IMPLEMENTED_FULL_NEW_HEAD_QUALIFICATION_REQUIRED"
 }

@@ -10,6 +10,8 @@
     "manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
     "tree": "fd6e40177425f64bb633f1aadddf0812a16f6c7d"
   },
+  "crlf_extension_authorization_path": "registry/study1_sg000031_admission_repair_crlf_authorization.json",
+  "crlf_extension_authorization_sha256": "b79a9178f3a6df3cac8a2a4f67b8769918d7e52fc517fb1cba2b0fd5fc10ce94",
   "failed_attempt": {
     "generations": 0,
     "model_POSTs": 0,
@@ -78,12 +80,20 @@
   "new_execution_authorized": false,
   "new_model_calls_authorized": false,
   "next_gate": "separate founder decision on whether to authorize one additional R2 execution attempt",
+  "receipt_normalization": {
+    "boundary": "qualify_canonical_receipt: local comment body before existing format/JSON/semantic validation",
+    "lone_CR_normalized": false,
+    "operation": "replace CRLF pairs with LF only",
+    "schema_or_semantics_changed": false,
+    "source_receipt_modified": false
+  },
   "repair_scope": [
     "repository metadata root URL normalization",
     "reject malformed/ambiguous repository/admission URLs",
     "shared native authenticated read-only admission validation",
     "deterministic HTTP regression fixtures",
-    "actual workflow-token native preflight qualification"
+    "actual workflow-token native preflight qualification",
+    "founder-authorized CRLF-to-LF receipt boundary normalization only"
   ],
   "required_qualification": [
     "Graft structural impact",

@@ -241,3 +241,132 @@ def test_live_main_guard_remains_required_for_real_admission(admission, monkeypa
     monkeypatch.setattr(admission, "api", lambda path: responses[path])
     with pytest.raises(ValueError, match="live canonical main changed"):
         admission.qualify_canonical_receipt(ROOT, 5995901646, receipt["main_sha"])
+
+
+@pytest.fixture
+def receipt_fixture(admission, monkeypatch):
+    """Keep the real parser/bindings; replace only external engineering evidence I/O."""
+    historical = json.loads((ROOT / "registry/study1_sg000031_attempt1_closeout.json").read_bytes())
+    receipt = historical["canonical_runner_qualification"]
+    body = "DAL_R2_CANONICAL_QUALIFICATION_V1\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
+    comment = {
+        "issue_url": admission.REPOSITORY_API + "/issues/158",
+        "user": {"login": "TheHalfMoon"},
+        "body": body,
+    }
+    pr = {
+        "merged": True,
+        "merge_commit_sha": receipt["main_sha"],
+        "head": {"sha": receipt["head_sha"]},
+    }
+    responses = {
+        "": {
+            "full_name": admission.REPOSITORY,
+            "url": admission.REPOSITORY_API,
+            "private": False,
+            "default_branch": "main",
+        },
+        "issues/comments/5995901646": comment,
+        "git/ref/heads/main": {"object": {"sha": receipt["main_sha"]}},
+        f"pulls/{receipt['pull_request']}": pr,
+    }
+    monkeypatch.setattr(admission, "api", lambda path: responses[path])
+    monkeypatch.setattr(
+        admission,
+        "git",
+        lambda *args: (
+            receipt["base_sha"] + " " + receipt["head_sha"]
+            if args[0] == "show"
+            else receipt["tree"]
+        ),
+    )
+    monkeypatch.setattr(admission, "verify_run", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(admission, "verify_reports", lambda _receipt: 33)
+    sdk = json.loads((ROOT / "registry/study1_sg000031_sdk_qualification.json").read_bytes())
+    monkeypatch.setattr(
+        admission, "artifact_documents", lambda *_args: {"sdk-qualification.json": sdk}
+    )
+    monkeypatch.setattr(
+        admission,
+        "native_http",
+        lambda *_args, **_kwargs: {
+            "data": {
+                "repository": {
+                    "pullRequest": {
+                        "reviewThreads": {"pageInfo": {"hasNextPage": False}, "nodes": []}
+                    }
+                }
+            }
+        },
+    )
+    return receipt, comment, responses
+
+
+def test_lf_and_crlf_receipts_have_identical_parsed_results(admission, receipt_fixture):
+    receipt, comment, _responses = receipt_fixture
+    lf_body = comment["body"]
+    expected = admission.qualify_canonical_receipt(ROOT, 5995901646, receipt["main_sha"])
+    comment["body"] = lf_body.replace("\n", "\r\n")
+    assert admission.qualify_canonical_receipt(ROOT, 5995901646, receipt["main_sha"]) == expected
+    assert expected == (receipt, receipt["tree"], 33)
+    # Parsing is local: neither the original source comment nor its JSON fields are rewritten.
+    assert comment["body"] == lf_body.replace("\n", "\r\n")
+
+
+@pytest.mark.parametrize("line_ending", ["\n", "\r\n"])
+@pytest.mark.parametrize(
+    "invalid",
+    [
+        "wrong-marker",
+        "missing-fence",
+        "duplicate-fence",
+        "invalid-json",
+        "missing-fields",
+        "array-structure",
+        "main-sha",
+        "base-sha",
+        "contract-sha",
+        "authorization-sha",
+        "foreign-issue",
+        "foreign-author",
+        "lone-cr",
+        "live-main",
+        "unmerged-pr",
+    ],
+)
+def test_invalid_receipts_remain_rejected(admission, receipt_fixture, line_ending, invalid):
+    receipt, comment, responses = receipt_fixture
+    invalid_receipt = dict(receipt)
+    fields = {
+        "main-sha": "main_sha",
+        "base-sha": "base_sha",
+        "contract-sha": "contract_sha256",
+        "authorization-sha": "authorization_record_sha256",
+    }
+    if invalid in fields:
+        invalid_receipt[fields[invalid]] = "invalid-binding"
+        comment["body"] = (
+            "DAL_R2_CANONICAL_QUALIFICATION_V1\n```json\n" + json.dumps(invalid_receipt) + "\n```"
+        )
+    elif invalid == "wrong-marker":
+        comment["body"] = comment["body"].replace("QUALIFICATION_V1", "QUALIFICATION_V2")
+    elif invalid == "missing-fence":
+        comment["body"] = "DAL_R2_CANONICAL_QUALIFICATION_V1\n" + json.dumps(receipt)
+    elif invalid == "duplicate-fence":
+        comment["body"] += "\n```json\n{}\n```"
+    elif invalid in {"invalid-json", "missing-fields", "array-structure"}:
+        content = {"invalid-json": "{", "missing-fields": "{}", "array-structure": "[]"}[invalid]
+        comment["body"] = "DAL_R2_CANONICAL_QUALIFICATION_V1\n```json\n" + content + "\n```"
+    elif invalid == "foreign-issue":
+        comment["issue_url"] = admission.REPOSITORY_API + "/issues/157"
+    elif invalid == "foreign-author":
+        comment["user"] = {"login": "SomeoneElse"}
+    elif invalid == "lone-cr":
+        comment["body"] = comment["body"].replace("V1\n", "V1\r")
+    elif invalid == "live-main":
+        responses["git/ref/heads/main"] = {"object": {"sha": "different-main"}}
+    elif invalid == "unmerged-pr":
+        responses[f"pulls/{receipt['pull_request']}"]["merged"] = False
+    comment["body"] = comment["body"].replace("\n", line_ending)
+    with pytest.raises((ValueError, KeyError, TypeError)):
+        admission.qualify_canonical_receipt(ROOT, 5995901646, receipt["main_sha"])

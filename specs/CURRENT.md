@@ -398,3 +398,12 @@ additional receipt-format defect is outside the explicit URL-only repair scope;
 its one-line proposal is not applied pending a founder scope decision. Full native
 qualification and merge remain blocked. This engineering trial is not a new R2
 attempt, and no model calls occurred.
+
+The founder subsequently approved the bounded PR #161 CRLF extension, retained
+separately in `registry/study1_sg000031_admission_repair_crlf_authorization.json`.
+The local receipt body now normalizes CRLF pairs to LF before unchanged format,
+JSON and semantic validation. Source comments, lone CR and schema/semantics remain
+unchanged. Positive/negative regression fixtures cover both representations.
+All required exact-head qualifications must run again, with a normal protected
+merge and post-main verification before the canonical repair receipt. Then stop;
+no new model call or R2 attempt is authorized and R2 remains scientifically BLOCKED.

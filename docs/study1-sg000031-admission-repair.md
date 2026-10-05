@@ -75,8 +75,23 @@ record after CRLF-to-LF normalization. The verified failure artifact and proof a
 retained in `registry/study1_sg000031_admission_repair_preflight_failure.json`.
 This is an engineering qualification trial, not a new R2 execution attempt.
 
-The founder's current authorization limits repairs to the URL/trailing-slash
-defect. A one-line receipt normalization proposal has therefore been prepared
-without applying it, and a separate scope decision has been requested. Full native
-qualification and normal merge remain blocked until that scope is resolved; no
-gate is waived. No model call or new experiment attempt occurred.
+The founder separately authorized the CRLF extension in PR #161. Its verbatim
+statement and hash are retained in
+`registry/study1_sg000031_admission_repair_crlf_authorization.json`; the original
+URL-only authorization and failed qualification evidence remain unchanged.
+
+At the receipt parsing boundary, `qualify_canonical_receipt` now applies exactly
+`comment["body"].replace("\r\n", "\n")` to a local string before the existing marker,
+JSON and semantic checks. Only CRLF pairs become LF; lone CR characters, JSON escape
+sequences, fields, structures and semantic bindings are not changed. The source
+comment is never rewritten. LF and CRLF fixtures produce the same parsed receipt,
+tree and review-unit count. Negative fixtures exercise both representations and
+retain rejection of malformed markers/fences/JSON, incomplete or invalid structures,
+invalid bindings, foreign issue/author sources, lone CR, changed live main and
+unmerged PRs. External engineering I/O is synthetic in these deterministic tests;
+the workflow separately exercises actual native authenticated admission validation.
+
+The changed head requires fresh genuine Jev, approved Alibaba, full CI,
+manuscript/arXiv, SDK and native preflight evidence, followed by zero active review
+threads, guarded normal merge and full post-main verification. Earlier-head evidence
+does not qualify this candidate. No model call or new experiment attempt is authorized.

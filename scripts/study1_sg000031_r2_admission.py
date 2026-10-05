@@ -373,7 +373,7 @@ def qualify_canonical_receipt(root, comment_id, main, *, live_main=True):
         or comment["user"]["login"] != "TheHalfMoon"
     ):
         raise ValueError("canonical qualification receipt source mismatch")
-    body = comment["body"]
+    body = comment["body"].replace("\r\n", "\n")
     if not body.startswith("DAL_R2_CANONICAL_QUALIFICATION_V1\n") or body.count("```json\n") != 1:
         raise ValueError("canonical receipt format mismatch")
     receipt = json.loads(body.split("```json\n", 1)[1].split("```", 1)[0])
