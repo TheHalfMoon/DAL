@@ -291,6 +291,36 @@ program as scientifically blocked. Neither option is authorized by this record.
 SG-000028 stays open; D4-D10 stay inactive; the 40-patient / 173-row final role
 stays sealed. No new experiment, training, criterion waiver, or final access is authorized.
 
+## Active frontier - SG-000031 / Issue #158 Option A
+
+R1 is COMPLETE_CANONICAL at main
+`ef9102ea3afda800e3fc25d38072b9e18fd3f9af`, tree
+`fd6e40177425f64bb633f1aadddf0812a16f6c7d`, with manifest SHA-256
+`220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0`.
+Its implementation and qualification are frozen in
+`registry/study1_sg000030_r1_closeout.json`. The preceding SG-000028 narrative
+records historical decisions and the immutable negative result.
+
+The founder explicitly authorized Issue #158 Option A in the Codex chat.
+`registry/study1_sg000031_founder_authorization.json` preserves the verbatim human
+instruction and identifies the separate GitHub agent transcription honestly.
+SG-000031 prepares the separate R2 execution contract and runner before inference.
+It remains **R2_RUNNER_QUALIFICATION_REQUIRED / NOT_EXECUTED** until full exact-head
+review, CI and synthetic SDK qualification, guarded normal merge, intended-tree
+verification, and post-main qualification are complete.
+
+The contract permits exactly one main-only recovery attempt over all 1463
+exposed-development rows with the unchanged producer and canonical R1 runtime.
+Every failed row and blocker remains; infrastructure or experiment failure stops
+the attempt and requires a new founder decision before any further model-call
+attempt. The permanent attempt claim and hash-only forward evidence history
+prevent automatic replay. Workflow success alone cannot classify R2 PASS.
+
+See `docs/study1-sg000031-r2-execution.md` and
+`registry/study1_sg000031_r2_contract.json`. SG-000028 remains scientifically
+BLOCKED and immutable. The 40-patient / 173-row final role remains sealed, founder
+cost remains zero, and D4, training, and final evaluation remain inactive.
+
 ## Core P08 invariants
 
 ```text

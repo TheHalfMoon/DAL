@@ -1,0 +1,18 @@
+{
+  "D4": false,
+  "R2_executed": false,
+  "R2_scientific_state": "NOT_EXECUTED",
+  "canonical_r1": {
+    "main": "ef9102ea3afda800e3fc25d38072b9e18fd3f9af",
+    "manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "tree": "fd6e40177425f64bb633f1aadddf0812a16f6c7d"
+  },
+  "contract_sha256": "61416d07409aa08305fb05e90cbf7790497128857a2af046daa290bbb8612f97",
+  "execution_admitted": false,
+  "final_role_access": false,
+  "founder_scope_authorized": true,
+  "next_gate": "full exact-head engineering/review, guarded normal merge and post-main verification before one dispatch",
+  "specgrain_id": "SG-000031",
+  "state": "R2_RUNNER_QUALIFICATION_REQUIRED",
+  "training": false
+}
