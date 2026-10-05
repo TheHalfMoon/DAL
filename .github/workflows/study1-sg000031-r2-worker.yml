@@ -1,0 +1,355 @@
+name: DAL Study 1 SG-000031 R2 frozen worker
+
+on:
+  workflow_call:
+    inputs:
+      shard:
+        required: true
+        type: number
+      claim_sha:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+env:
+  FHIR_AGENTBENCH_REVISION: "bbb42909a5a7eb907d1cd91f72a560729e7037ea"
+  LLAMA_CPP_REVISION: "d2e54583c7452353eb35d40431281f6ee984332f"
+  QWEN_MODEL_ID: "Qwen/Qwen3-4B-Instruct-2507"
+  QWEN_GGUF_URL: "https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/resolve/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf"
+  QWEN_GGUF_SHA256: "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1"
+  OPENAI_API_KEY: "dal-local-query-trace-gate"
+  TRACE_SHARD_COUNT: "8"
+
+jobs:
+  frozen-worker:
+    name: Frozen R2 shard ${{ inputs.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout exact canonical execution main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install DAL
+        run: python -m pip install -e . -c registry/study1_sg000031_producer_constraints.txt
+
+      - name: Verify permanent exact-run R2 claim before infrastructure setup
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLAIM_SHA: ${{ inputs.claim_sha }}
+        run: python scripts/study1_sg000031_r2_admission.py verify --claim-sha "$CLAIM_SHA" --output-dir "$RUNNER_TEMP/sg000031/output"
+
+      - name: Download complete immutable development plan
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: sg000031-r2-admission-${{ github.run_id }}
+          path: ${{ runner.temp }}/sg000031/admission
+
+      - name: Install DAL and frozen upstream dependencies
+        run: >-
+          python -m pip install -e . -c registry/study1_sg000031_producer_constraints.txt
+          litellm==1.75.9
+          tiktoken==0.8.0
+          pandas==2.3.2
+          numpy==2.3.2
+          PyYAML==6.0.2
+          requests==2.32.5
+          google-auth==2.40.3
+          sqlglot==26.9.0
+          sqlparse==0.5.3
+          tqdm==4.66.5
+
+      - name: Checkout and verify frozen FHIR-AgentBench source
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream="$RUNNER_TEMP/fhir-agentbench"
+          git clone --filter=blob:none https://github.com/glee4810/FHIR-AgentBench.git "$upstream"
+          git -C "$upstream" checkout --detach "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$upstream" rev-parse HEAD)" = "$FHIR_AGENTBENCH_REVISION"
+          test "$(git -C "$upstream" hash-object utils/core_utils.py)" = \
+            "6544570985916074f40a5fb469243aa5ced22f65"
+          test "$(git -C "$upstream" hash-object agent/single_turn_request_agent.py)" = \
+            "1188a4053560924c3ed801e9b1aaa91ccd6d010d"
+          test "$(git -C "$upstream" hash-object tools/request_tools.py)" = \
+            "0f50e1c4aae7fdfee4e2c83c7c9954f9c3e811d0"
+
+      - name: Apply canonical provenance correction and verify transport patch
+        shell: python
+        run: |
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          freeze = json.loads(
+              Path("registry/study1_sg000027_trace_producer_freeze.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          correction = json.loads(
+              Path(
+                  "registry/study1_sg000028_trace_producer_provenance_correction.json"
+              ).read_text(encoding="utf-8")
+          )
+          repair_contract = json.loads(
+              Path("registry/study1_sg000027_transport_repair_contract.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          sg28_contract = json.loads(
+              Path("registry/study1_sg000028_contract.json").read_text(encoding="utf-8")
+          )
+          frozen_transport = freeze["trace_producer_identity"]["fhir_agentbench"]
+          incorrect = correction["incorrect_freeze_provenance"]
+          corrected = correction["correct_canonical_repair_provenance"]
+          repair = repair_contract["repair"]
+          sg28 = sg28_contract["trace_producer"]
+          keys = (
+              "transport_patch_sha256",
+              "patched_core_utils_blob_sha",
+              "patched_core_utils_sha256",
+          )
+          for key in keys:
+              if frozen_transport[key] != incorrect[key]:
+                  raise SystemExit(f"historical D3 freeze provenance drift: {key}")
+              if sg28[key] != corrected[key]:
+                  raise SystemExit(f"SG-000028 provenance overlay drift: {key}")
+          if repair["patch_sha256"] != corrected["transport_patch_sha256"]:
+              raise SystemExit("canonical transport patch SHA-256 drift")
+          if repair["patched_core_utils_blob_sha"] != corrected["patched_core_utils_blob_sha"]:
+              raise SystemExit("canonical patched core blob drift")
+          if repair["patched_core_utils_sha256"] != corrected["patched_core_utils_sha256"]:
+              raise SystemExit("canonical patched core SHA-256 drift")
+          if repair["patch_path"] != corrected["patch_path"]:
+              raise SystemExit("canonical transport patch path drift")
+          if sg28["transport_patch_path"] != corrected["patch_path"]:
+              raise SystemExit("SG-000028 transport patch path drift")
+          if correction["semantic_invariants"]["behavior_changed"] is not False:
+              raise SystemExit("provenance correction cannot change behavior")
+          if correction["semantic_invariants"]["post_outcome_trace_producer_switching"] is not False:
+              raise SystemExit("provenance correction cannot switch trace producer")
+
+          upstream = Path(os.environ["RUNNER_TEMP"]) / "fhir-agentbench"
+          patch = Path(corrected["patch_path"])
+          patch_sha = hashlib.sha256(patch.read_bytes()).hexdigest()
+          if patch_sha != corrected["transport_patch_sha256"]:
+              raise SystemExit(f"transport patch SHA-256 drift: {patch_sha}")
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", "--check", str(patch.resolve())],
+              check=True,
+          )
+          subprocess.run(
+              ["git", "-C", str(upstream), "apply", str(patch.resolve())],
+              check=True,
+          )
+          core = upstream / "utils/core_utils.py"
+          blob = subprocess.check_output(
+              ["git", "-C", str(upstream), "hash-object", str(core)],
+              text=True,
+          ).strip()
+          digest = hashlib.sha256(core.read_bytes()).hexdigest()
+          if blob != corrected["patched_core_utils_blob_sha"]:
+              raise SystemExit(f"patched core blob drift: {blob}")
+          if digest != corrected["patched_core_utils_sha256"]:
+              raise SystemExit(f"patched core SHA-256 drift: {digest}")
+          print("trace_producer_provenance_overlay=VERIFIED")
+
+      - name: Download exact frozen benchmark source without row logging
+        shell: python
+        run: |
+          import hashlib
+          import os
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          from gaxbench.fhir_agentbench_qualification import (
+              FHIR_AGENTBENCH_RAW_URL,
+              FHIR_AGENTBENCH_SOURCE_SHA256,
+          )
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "sg000031"
+          root.mkdir(parents=True, exist_ok=True)
+          target = root / "source.csv"
+          request = Request(
+              FHIR_AGENTBENCH_RAW_URL,
+              headers={"User-Agent": "DAL-research/0.1"},
+          )
+          with urlopen(request, timeout=60) as response:
+              payload = response.read()
+          digest = hashlib.sha256(payload).hexdigest()
+          if digest != FHIR_AGENTBENCH_SOURCE_SHA256:
+              raise SystemExit(f"FHIR-AgentBench source SHA-256 drift: {digest}")
+          target.write_bytes(payload)
+          print(f"frozen_source_sha256={digest}")
+          print(f"frozen_source_bytes={len(payload)}")
+
+      - name: Download and verify frozen zero-cost FHIR runtime
+        shell: python
+        run: |
+          import concurrent.futures
+          import hashlib
+          import json
+          import os
+          import time
+          from pathlib import Path
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          work = Path(os.environ["RUNNER_TEMP"]) / "sg000031"
+          root = work / "runtime"
+          root.mkdir(parents=True, exist_ok=True)
+          manifest = json.loads(
+              Path("registry/study1_sg000026_fhir_runtime_manifest.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          source = manifest["source"]
+          base = str(source["official_files_root"]).rstrip("/")
+          sums = root / "official-SHA256SUMS.txt"
+          with urlopen(
+              Request(
+                  str(source["checksum_manifest_url"]),
+                  headers={"User-Agent": "DAL-research/0.1"},
+              ),
+              timeout=60,
+          ) as response:
+              sums.write_bytes(response.read())
+          sums_sha = hashlib.sha256(sums.read_bytes()).hexdigest()
+          if sums_sha != source["checksum_manifest_sha256"]:
+              raise SystemExit(f"official SHA256SUMS drift: {sums_sha}")
+
+          def download(entry: dict[str, str]) -> str:
+              relative = entry["path"]
+              expected = entry["sha256"]
+              target = root / relative
+              target.parent.mkdir(parents=True, exist_ok=True)
+              encoded = "/".join(quote(part) for part in Path(relative).parts)
+              url = f"{base}/{encoded}"
+              part = target.with_suffix(target.suffix + ".part")
+              part.unlink(missing_ok=True)
+              try:
+                  request = Request(url, headers={"User-Agent": "DAL-research/0.1"})
+                  with urlopen(request, timeout=180) as response, part.open("wb") as handle:
+                      while chunk := response.read(1024 * 1024):
+                          handle.write(chunk)
+                  actual = hashlib.sha256(part.read_bytes()).hexdigest()
+                  if actual != expected:
+                      raise RuntimeError(f"SHA-256 mismatch for {relative}: {actual}")
+                  part.replace(target)
+                  return relative
+              except BaseException:
+                  part.unlink(missing_ok=True)
+                  raise
+
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+              completed = list(executor.map(download, manifest["files"]))
+          if len(completed) != len(manifest["files"]):
+              raise SystemExit("FHIR runtime download coverage incomplete")
+          print(f"runtime_files_verified={len(completed)}")
+
+      - name: Build pinned llama.cpp CPU server
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/ggml-org/llama.cpp.git \
+            "$RUNNER_TEMP/llama.cpp"
+          git -C "$RUNNER_TEMP/llama.cpp" checkout --detach "$LLAMA_CPP_REVISION"
+          test "$(git -C "$RUNNER_TEMP/llama.cpp" rev-parse HEAD)" = \
+            "$LLAMA_CPP_REVISION"
+          cmake -S "$RUNNER_TEMP/llama.cpp" -B "$RUNNER_TEMP/llama.cpp/build" \
+            -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+          cmake --build "$RUNNER_TEMP/llama.cpp/build" \
+            --config Release -j 2 --target llama-server
+
+      - name: Download and verify exact frozen Qwen CPU artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          curl --fail --location \
+            --output "$model" "$QWEN_GGUF_URL"
+          actual="$(sha256sum "$model" | awk '{print $1}')"
+          test "$actual" = "$QWEN_GGUF_SHA256"
+          echo "qwen_gguf_sha256=$actual"
+
+      - name: Start exact local OpenAI-compatible trace-producer server
+        shell: bash
+        run: |
+          set -euo pipefail
+          server="$RUNNER_TEMP/llama.cpp/build/bin/llama-server"
+          model="$RUNNER_TEMP/qwen3-4b-instruct-2507-q8_0.gguf"
+          nohup "$server" \
+            -m "$model" \
+            --alias "$QWEN_MODEL_ID" \
+            --host 127.0.0.1 \
+            --port 8080 \
+            -c 4096 \
+            --jinja \
+            > "$RUNNER_TEMP/llama-server.log" 2>&1 &
+          echo $! > "$RUNNER_TEMP/llama-server.pid"
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "local trace-producer server did not become healthy"
+          exit 1
+
+      - name: Execute exactly one frozen first turn per owned development row
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLAIM_SHA: ${{ inputs.claim_sha }}
+          SHARD_INDEX: ${{ inputs.shard }}
+        run: >-
+          python scripts/study1_sg000031_r2_runner.py
+          --source "$RUNNER_TEMP/sg000031/source.csv"
+          --upstream-root "$RUNNER_TEMP/fhir-agentbench"
+          --runtime-root "$RUNNER_TEMP/sg000031/runtime"
+          --runtime-manifest registry/study1_sg000026_fhir_runtime_manifest.json
+          --output-dir "$RUNNER_TEMP/sg000031/output"
+          --plan "$RUNNER_TEMP/sg000031/admission/plan.json"
+          --shard-index "$SHARD_INDEX"
+          --claim-sha "$CLAIM_SHA"
+
+      - name: Retain infrastructure status and delete raw source and server logs
+        if: always()
+        env:
+          SHARD_INDEX: ${{ inputs.shard }}
+          JOB_STATUS: ${{ job.status }}
+        shell: python
+        run: |
+          import json
+          import os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          (root / "sg000031/source.csv").unlink(missing_ok=True)
+          (root / "llama-server.log").unlink(missing_ok=True)
+          output = root / "sg000031/output"
+          output.mkdir(parents=True, exist_ok=True)
+          path = output / ("shard-" + os.environ["SHARD_INDEX"] + "-job-status.json")
+          with path.open("x", encoding="utf-8") as handle:
+              json.dump({"job_status": os.environ["JOB_STATUS"], "run_id": os.environ["GITHUB_RUN_ID"],
+                         "main_sha": os.environ["GITHUB_SHA"], "shard": int(os.environ["SHARD_INDEX"]),
+                         "no_retry_authorized": True}, handle, sort_keys=True)
+
+      - name: Upload hash-only evidence including partial interrupted journals
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000031-r2-shard-${{ inputs.shard }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/sg000031/output/
+          if-no-files-found: error
+          retention-days: 30

@@ -397,3 +397,21 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [x] Create decision-only Issue #147 with concrete options and scientific consequences
 - [x] SG-000028-G1 investigation CLOSED_CANONICAL via PR #148 merge `ad67bf48138da8aa260844ae92eee74c16e53971`; required exact-head and post-main checks passed; durable qualification in `registry/study1_sg000028_governance_gate_closeout.json`
 - [ ] Founder program-direction decision under Issue #147; no replacement experiment is authorized
+
+### SG-000030 / R1 - Canonical recovery system
+
+- [x] Prospective recovery protocol and separate finite R1 implementation qualified
+- [x] R1 G1/G2 and closeout reviewed, normally merged, and verified post-main
+- [x] Preserve canonical main `ef9102ea3afda800e3fc25d38072b9e18fd3f9af` and manifest `220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0`
+- [x] Open separate R2 decision gate Issue #158 without inference
+
+### SG-000031 / R2 - Founder-approved bounded recovery
+
+- [x] Record direct founder Option A authorization separately from the agent transcription
+- [ ] Fully qualify the separate R2 contract and runner on exact head
+- [ ] Verify actual Jev, Alibaba delegation-accounting, and synthetic SDK reports
+- [ ] Guarded normal merge and complete post-main qualification before inference
+- [ ] Claim and execute exactly one main-only attempt over all 1463 development rows
+- [ ] Retain all rows, blockers, transformations, immutable lineage, and interrupted evidence
+- [ ] Qualify and canonically persist the separate R2 scientific classification
+- [ ] D4 remains inactive pending canonical R2 PASS and separate future founder authorization
