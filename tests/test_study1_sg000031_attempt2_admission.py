@@ -426,6 +426,12 @@ def test_science_and_first_attempt_files_remain_immutable(grain):
         "R2 Attempt 2 frozen worker", "R2 frozen worker"
     )
     new = new.replace("sg000031-r2-attempt2-", "sg000031-r2-")
+    ancestry_fix = (
+        "          # Permanent-claim merge ancestry verification requires actual parent objects.\n"
+        "          fetch-depth: 0\n"
+    )
+    assert new.count(ancestry_fix) == 1
+    new = new.replace(ancestry_fix, "", 1)
     assert new == old
     controller = (ROOT / grain.WORKFLOW).read_text(encoding="utf-8")
     assert (
