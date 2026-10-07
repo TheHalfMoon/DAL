@@ -407,3 +407,32 @@ unchanged. Positive/negative regression fixtures cover both representations.
 All required exact-head qualifications must run again, with a normal protected
 merge and post-main verification before the canonical repair receipt. Then stop;
 no new model call or R2 attempt is authorized and R2 remains scientifically BLOCKED.
+
+## Active frontier - SG-000031-E2 / retained failed Attempt 2
+
+The preceding repair-only frontier is historical. PR #161 and the versioned
+Attempt-2 admission grain in PR #162 completed canonical engineering qualification.
+The separately recorded founder authorization permitted one second execution.
+Live pre-dispatch verification on 2026-10-07 confirmed canonical main
+`8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03`, exact receipt and frozen identities,
+complete actual review/CI artifacts, and unconsumed Attempt-2 authorization.
+
+Run `37653806159`, workflow attempt 1, was dispatched once and consumed that
+authorization. Admission passed, created the permanent Attempt-2 claim and froze
+all 1463 development rows. Shard 0 failed at permanent-claim ancestry verification
+before inference infrastructure; the other seven workers were skipped. The
+successful aggregate retained 341 calibration and 1122 validation rows as
+unattempted. First-turn generations, physical model POSTs and retries are zero.
+
+R2 is **BLOCKED / ATTEMPT2_WORKER_CLAIM_FAILED_STOP**. The failed attempt, exact
+source artifacts and losslessly reconstructable denominator are retained in
+`registry/study1_sg000031_attempt2_closeout.json` and described in
+`docs/study1-sg000031-attempt2-closeout.md`. The retained error hash and read-only
+shallow/full Git reproduction support a shallow-checkout ancestry failure.
+This evidence closeout preserves the runner and all frozen controls unchanged;
+it requires exact-head qualification, guarded normal merge and post-main evidence.
+
+No retry, redispatch, repair or Attempt 3 is authorized. The next scientific
+boundary is a new founder decision. SG-000028, Attempt 1 and R1 remain immutable.
+The final role remains sealed; founder cost is zero. D4, training and final
+evaluation remain inactive.

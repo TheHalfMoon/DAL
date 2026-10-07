@@ -1,0 +1,681 @@
+{
+  "D4": false,
+  "accounting": {
+    "blocker_counts": {},
+    "calibration_rows": 341,
+    "complete_generation_lineage": false,
+    "duplicate_model_calls": 0,
+    "first_turn_generations": 0,
+    "infrastructure_failed_worker_jobs": 1,
+    "model_call_retries": 0,
+    "observed_behavior_changing_blocker_rows": 0,
+    "pass_rows": 0,
+    "pass_through_rows": 0,
+    "physical_model_POSTs": 0,
+    "recovery_transformed_rows": 0,
+    "rows_accounted": 1463,
+    "rows_unattempted": 1463,
+    "skipped_worker_jobs": 7,
+    "total_rows": 1463,
+    "validation_rows": 1122
+  },
+  "admission_audit_sha256": "41eb2783f5500b3397e6b02b567c4722b245caab3216b2bb28f4ae12c4e39253",
+  "admission_contract_sha256": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+  "attempt1_lineage_sha256": "361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c",
+  "attempt3_authorized": false,
+  "attempt_ordinal": 2,
+  "automatic_retry_authorized": false,
+  "claim": {
+    "attempt1_lineage_sha256": "361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c",
+    "attempt_ordinal": 2,
+    "claim_sha": "14a92834c3e9e28f83dd6cb696d7c3e78bea9c17",
+    "contract_sha256": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+    "engineering_qualified": true,
+    "execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+    "jev_review_units": 48,
+    "ledger_branch": "codex/sg000031-r2-attempt2-journal",
+    "ledger_root": "evidence/study1-r2-attempt2",
+    "main_sha": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+    "predecessor_attempt_ordinal": 1,
+    "qualification_comment_id": 6005216567,
+    "qualification_receipt": {
+      "attempt1_lineage_sha256": "361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c",
+      "attempt_ordinal": 2,
+      "base_sha": "0e298850b3392eafedeacc995e36c1e15391a15c",
+      "contract_sha256": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+      "engineering_authorization_sha256": "8e0e2db1ddbe340a8fe53741fbfbffbed648ec857dd5bf4801a86ddf530fd08c",
+      "execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+      "head_sha": "9dcb0a63de888d2258d982c695e49cff3d04266d",
+      "main_sha": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+      "phase": "canonical",
+      "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+      "predecessor_attempt_ordinal": 1,
+      "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+      "pull_request": 162,
+      "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+      "repair_main": "0e298850b3392eafedeacc995e36c1e15391a15c",
+      "repair_tree": "ed53eaf2c6577ff76b88e453c87c2370969393d3",
+      "reviews": {
+        "alibaba": {
+          "artifact_digest": "sha256:295cc7c1b6e220e6c1e1e53fc0e386ce4b3d2a5494c79ea2fbd993d529f33b74",
+          "artifact_id": 11380080078,
+          "delegated_inspection_no_blocking_findings": true,
+          "inspection_comment_id": 6005014804,
+          "report_sha256": "b353539234ed5d4e7f666fb24498c0a5106ac62469c15a317ac8330c56474574"
+        },
+        "jev": {
+          "artifact_digest": "sha256:e69cf5989d7170de78022ad1807dbc6d43ae3a37a28e790d9da22b11c53c3a96",
+          "artifact_id": 11379660237,
+          "report_sha256": "2fcc028b180e8175cb8822f9537ebbac40fe100c68d68ee0e0e00d235993ccbb"
+        },
+        "post_native": {
+          "artifact_digest": "sha256:21cf3019386903f8e57766443eb92976c078bf75c89a6f73660f7b8a65feb55d",
+          "artifact_id": 11380226614,
+          "report_sha256": "b5f973e2dbebf2c07576071039a19d6584542aa6a822708b7e1674a34272fd43"
+        },
+        "post_repair_native": {
+          "artifact_digest": "sha256:6531d45ab890738c7fd8697215665c2e4f076373391a80231f5c6dbb6c6bc1fe",
+          "artifact_id": 11379381496,
+          "report_sha256": "3ebb16d0a1fe8a337cd944a1cfc5c86f3a5e8418a145f898898b520bdf2b7efa"
+        },
+        "post_sdk": {
+          "artifact_digest": "sha256:9036cb04f8b73ed4ff93456bccce5c66117bd31f995fadcf32f1303f70f01fd8",
+          "artifact_id": 11379556218,
+          "report_sha256": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e"
+        },
+        "pre_native": {
+          "artifact_digest": "sha256:2c9755146607d015fe188ab3207de946580a2aa762dd099575526ff59f8870e6",
+          "artifact_id": 11379040676,
+          "report_sha256": "c5fccf4f889330ca0dc42f27055ef89c55c5fdf4ef3f56af95b39405bad063f3"
+        },
+        "repair_native": {
+          "artifact_digest": "sha256:b441316bb250922094b50f6f1972163fc4dfed41b036d4dfd50f4bb958d1401e",
+          "artifact_id": 11379025362,
+          "report_sha256": "30ae4fd972bbd8774e2d83032b331d490f9b941dbf160117e8febcad439232a0"
+        },
+        "sdk": {
+          "artifact_digest": "sha256:67fe6f793ee34cb1fbe4d39337dce01605cc3277727697cd8ba23bbf8e591ef5",
+          "artifact_id": 11379045344,
+          "report_sha256": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e"
+        }
+      },
+      "runs": {
+        "alibaba": 37386118568,
+        "ci": 37386118632,
+        "jev": 37386118590,
+        "manuscript": 37386118639,
+        "post_ci": 37386803429,
+        "post_manuscript": 37386803137,
+        "post_native": 37386803862,
+        "post_repair_native": 37386803135,
+        "post_sdk": 37386803133,
+        "pre_native": 37386118850,
+        "repair_native": 37386118480,
+        "sdk": 37386118468
+      },
+      "schema_version": "study1-r2-attempt2-admission-receipt-v1",
+      "tree": "430da88b2cd85a32b41cac5d6d2951fb8ebfb944"
+    },
+    "qualification_receipt_sha256": "ed2df6e8e3c96bbd59234260d0b646a7be8b2ce766c94f45bc29e0348ff7fe25",
+    "run_attempt": 1,
+    "run_id": 37653806159,
+    "schema_version": "study1-r2-attempt2-claim-v1",
+    "tree": "430da88b2cd85a32b41cac5d6d2951fb8ebfb944",
+    "zero_cost_infrastructure_verified": true
+  },
+  "closeout_qualification": "Requires exact-head genuine Jev, Alibaba inspection, Graft, full CI/manuscript, zero active review threads, guarded normal merge and post-main evidence; canonical receipt is external after those gates.",
+  "completed_run_snapshot_sha256": "10bf507039fbbd12fa830b57bbe5059ecf0fee4b077576b54d052089cc6b7a2f",
+  "deterministic_accounting_recomputed": {
+    "D4": false,
+    "accounted_rows": 1463,
+    "answer_correctness_scored": false,
+    "blocker_counts": {},
+    "call_dispositions": {},
+    "completed_rows": 0,
+    "cost_accounting_complete": true,
+    "engineering_qualified": true,
+    "executed_recovery_transformed_calls": 0,
+    "expected_rows": 1463,
+    "final_question_content_accessed": false,
+    "final_rows_materialized": 0,
+    "founder_cost": 0.0,
+    "generation_admissions": 0,
+    "http_post_admissions": 0,
+    "interpretation": "Exposed-development recovery; no independent confirmation or final evaluation.",
+    "interrupted": true,
+    "new_founder_decision_required_before_new_model_attempt": true,
+    "observed_tool_calls": 0,
+    "original_sg000028": {
+      "blockers": 1239,
+      "calls": 1623,
+      "evidence_sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+      "pass": 224,
+      "rows": 1463,
+      "scientific_state": "BLOCKED",
+      "source_patterns": 248
+    },
+    "population_complete": true,
+    "question_role_assignments_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "recovered_runtime_support_calls": 0,
+    "recovery_transformed_labels": 0,
+    "request_transformations_accounted": 0,
+    "role_counts": {
+      "calibration": 341,
+      "validation": 1122
+    },
+    "runtime_version": "sg000030-r1-g2-v1",
+    "schema_version": "study1-r2-accounting-v1",
+    "scientific_state": "BLOCKED",
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173,
+    "second_turn_reasoning_executed": false,
+    "status_counts": {
+      "not-attempted": 1463
+    },
+    "training": false,
+    "transformation_rule_counts": {},
+    "unfinished_rows": 1463,
+    "unresolved_behavior_changing_blocker_rows": 0
+  },
+  "diagnostic": {
+    "actual_job_log_sha256": "53ebaf582aaec3e7dce8e20aeb36b73070636e5c91ae89f94e67f81a8e02707e",
+    "expected_parents": [
+      "0e298850b3392eafedeacc995e36c1e15391a15c",
+      "9dcb0a63de888d2258d982c695e49cff3d04266d"
+    ],
+    "failure_error_sha256": "fa91411d1c425a21c740e719c34523e58e9cd85a5c5c13d3790506d8ddb0d2fe",
+    "full_parent_output": [
+      "0e298850b3392eafedeacc995e36c1e15391a15c",
+      "9dcb0a63de888d2258d982c695e49cff3d04266d"
+    ],
+    "matching_exception_text": "Attempt-2 claim normal merge/tree mismatch",
+    "runner_repaired": false,
+    "scientific_execution_retried": false,
+    "shallow_parent_output": [],
+    "shallow_repository_observed": true,
+    "support": "Actual worker checkout depth, matching retained exception hash, and isolated read-only shallow/full ancestry reproduction support a shallow-checkout ancestry failure; the retained worker error is hash-only and contains no stack.",
+    "worker_checkout_depth": 1
+  },
+  "dispatch_run_id": 37653806159,
+  "dispatch_url": "https://github.com/TheHalfMoon/DAL/actions/runs/37653806159",
+  "evidence_paths": {
+    "aggregate": "registry/study1_sg000031_attempt2_execution_37653806159.json",
+    "closeout": "registry/study1_sg000031_attempt2_closeout.json",
+    "failure": "registry/study1_sg000031_attempt2_claim_failure.json",
+    "rows": "registry/study1_sg000031_attempt2_unattempted_rows.json"
+  },
+  "evidence_sha256s": {
+    "aggregate": "8f26529dca6e7058e0ef816c918b8d2311c76e0b7a280f2dde35a52831e525dd",
+    "failure": "6f145fb1da3d10fdbec548ea13595814be866901a99ae2264f8bdebd906f3b67",
+    "rows": "ace44ad6b6755e5a664723641d5ce503d34de4d93dbeaa4f74ad450954c68a51"
+  },
+  "execution_authorization_consumed": true,
+  "execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+  "execution_main": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+  "execution_tree": "430da88b2cd85a32b41cac5d6d2951fb8ebfb944",
+  "final_content_access": false,
+  "final_evaluation": false,
+  "final_role_status": "SEALED: 40 patients / 173 rows",
+  "final_rows_materialized": 0,
+  "founder_cost_usd": 0,
+  "frozen_producer": {
+    "agent_strategy": "single_turn_request",
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "context_tokens": 4096,
+    "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+    "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "patched_core_utils_blob_sha": "e43534fcb90ca8a69d9cb75e458cd5d3ee01ecf6",
+    "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
+    "quantized_file": "qwen3-4b-instruct-2507-q8_0.gguf",
+    "quantized_repo": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+    "quantized_repo_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+    "quantized_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+    "temperature": 0.0,
+    "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "transport_patch_path": "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch",
+    "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757"
+  },
+  "jobs": [
+    {
+      "conclusion": "success",
+      "id": 112903706826,
+      "name": "Qualify and permanently claim the sole R2 attempt",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install DAL",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify full canonical qualification and atomically claim one attempt",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Freeze all 1463 development identities without final content access",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain admission and infrastructure failure evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "conclusion": "failure",
+      "id": 112905378900,
+      "name": "shard-0 / Frozen R2 shard 0",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Checkout exact canonical execution main",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install DAL",
+          "status": "completed"
+        },
+        {
+          "conclusion": "failure",
+          "name": "Verify permanent exact-run R2 claim before infrastructure setup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Download complete immutable development plan",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install DAL and frozen upstream dependencies",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Checkout and verify frozen FHIR-AgentBench source",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Apply canonical provenance correction and verify transport patch",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Download exact frozen benchmark source without row logging",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Download and verify frozen zero-cost FHIR runtime",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build pinned llama.cpp CPU server",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Download and verify exact frozen Qwen CPU artifact",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Start exact local OpenAI-compatible trace-producer server",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Execute exactly one frozen first turn per owned development row",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain infrastructure status and delete raw source and server logs",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload hash-only evidence including partial interrupted journals",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Checkout exact canonical execution main",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906598103,
+      "name": "shard-1",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906603428,
+      "name": "shard-2",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906609937,
+      "name": "shard-3",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906613918,
+      "name": "shard-4",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906618426,
+      "name": "shard-5",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906621411,
+      "name": "shard-6",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "conclusion": "success",
+      "id": 112906621452,
+      "name": "Preserve complete R2 denominator and scientific classification",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install DAL",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Fetch permanent hash-only attempt ledger without inference",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Download all available immutable partial or complete evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Classify scientifically and retain every planned row",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload R2 accounting separately from immutable SG-000028",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "conclusion": "skipped",
+      "id": 112906621937,
+      "name": "shard-7",
+      "status": "completed",
+      "steps": []
+    }
+  ],
+  "ledger_branch": "codex/sg000031-r2-attempt2-journal",
+  "ledger_commit": "f2b4b083b7d039e68283c8a3b0f6a74ef213141b",
+  "ledger_row_checkpoint_count": 0,
+  "lossless_rows": {
+    "all_source_row_hashes_independently_verified": true,
+    "columns": [
+      "question_id_sha256",
+      "role",
+      "input_sha256",
+      "status"
+    ],
+    "reconstruction": "Combine each finite row with shared_template; canonical json_bytes exactly reproduces each of the 1463 aggregate row files.",
+    "shared_template": {
+      "answer_correctness_scored": false,
+      "blocker_codes": [],
+      "calls": [],
+      "completion_tokens": 0,
+      "cost": null,
+      "cost_basis": "public-hosted-CPU-local-llama-no-paid-provider",
+      "error_sha256": null,
+      "final_question_content_accessed": false,
+      "final_rows_materialized": 0,
+      "generation_attempts": 0,
+      "http_post_admissions": 0,
+      "original_evidence_sha256": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+      "producer_request_sha256": null,
+      "prompt_tokens": 0,
+      "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+      "response_sha256": null,
+      "runtime_version": "sg000030-r1-g2-v1",
+      "schema_version": "study1-r2-row-v1",
+      "sdk_reported_cost": null,
+      "second_turn_reasoning_executed": false,
+      "system_prompt_sha256": null,
+      "tool_call_count": 0,
+      "tool_schema_sha256": null,
+      "total_tokens": 0,
+      "wire_http_status": null,
+      "wire_request_sha256": null,
+      "wire_response_sha256": null,
+      "wire_tool_call_sha256s": [],
+      "wire_tool_calls_available": false
+    }
+  },
+  "next_governance_gate": "New founder decision before any repair or additional scientific execution.",
+  "plan_sha256": "014dedbf0e822ba41ff0570cfa34f99dbba13765006aeb3b27035ba5c94e6cc7",
+  "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+  "predispatch_audit_sha256": "7756037f8b4e6dd3fa4947d74550916ec49f8f221862b5538b8e2d0398812141",
+  "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+  "protected_file_lf_sha256": {
+    ".github/scripts/jev-exact-diff.mjs": "d5d4ae443ec351d602adce23af90320b85855c953e174035d5932af75093ad28",
+    ".github/workflows/jev-review-target.yml": "ce5f71fec69d9716ededaec1559ba4c30c856c52d86b60bf8d2078472cc0440e",
+    ".github/workflows/review-gates.yml": "abf89576953b09b76dc822f6cb05f2e1ecfa70c78adb3965be905f7451f836c6",
+    ".github/workflows/study1-sg000028-query-trace-gate.yml": "04412cc6ca085aaf7ab963dc6a361fb2dc7fee29b77846ffac8bb05a6c8d0b42",
+    ".github/workflows/study1-sg000031-attempt2-admission-preflight.yml": "70b6cb47e51b5d2e8f8ed36710c5913183aaa01851adfc70b09b0dcea1eaf80c",
+    ".github/workflows/study1-sg000031-r2-attempt2-worker.yml": "000dddf38c753bb93143b1fad74a82c3a23ba77ce2b572da6be3347748410d5c",
+    ".github/workflows/study1-sg000031-r2-attempt2.yml": "ab8593a125556a9045a2caa988bf05c9f3b276bc9a3b52b5df6651c253e89bc7",
+    ".github/workflows/study1-sg000031-r2-recovery.yml": "8e8a1502b7e6dec978c26fc2fbfc711f4201a8f6bb2cb0ec32ccece5e63be3b2",
+    ".github/workflows/study1-sg000031-r2-worker.yml": "a86e4667f7af16763d243019a14199185a50c1505a2562592b517a2b18a015b1",
+    ".github/workflows/study1-sg000031-sdk-qualification.yml": "46dd5273db2739964bf22b0ea323496fa230910c2e914701ba87eebfabcea38f",
+    "docs/study1-sg000031-attempt1-closeout.md": "a5cb363162ee987371e377a2c72994330acb844eb4408831932a1927a09d6dd6",
+    "patches/study1_fhir_agentbench_qwen_structured_tool_calls.patch": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
+    "registry/study1_sg000026_fhir_runtime_manifest.json": "744cc639e0d9f703869846636263d5e1d77c73c1c68d68aebd6d7d4a5485d57e",
+    "registry/study1_sg000027_trace_producer_freeze.json": "2dc7159d84772aeb775e605e6bbaf79187ce3293331764a6f9f2fc9e66feeec5",
+    "registry/study1_sg000027_transport_repair_contract.json": "29261a7d672930dae809a098c47c987aee4a2e3fcec3e7e5331f8f5f69090799",
+    "registry/study1_sg000028_contract.json": "3ea52308ae97abe26759973a033be9255310786332bec72b02c65163194c1603",
+    "registry/study1_sg000028_execution_37156028113.json": "631c04d8717eb896c0496197c9a82dac60bf2eb9575f945b8716b796c2dca785",
+    "registry/study1_sg000028_trace_producer_provenance_correction.json": "9db5001c1aa6662aae8bff98c644da69bafba12bf73ed5f7c2458ec98a157879",
+    "registry/study1_sg000029_recovery_protocol.json": "d2301bbd204febe57c036274564a651b8391c5736e6d92f95799a8ee6ed4de23",
+    "registry/study1_sg000030_r1_closeout.json": "4d960848732fcbe37ab0c52d691585fdd5bab92f725428e58a1ccd8ca019fb7f",
+    "registry/study1_sg000030_r1_manifest.json": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "registry/study1_sg000030_r1_normative_evidence.json": "ce9e91c085048e3c771eb318fdda3a7d4ea617bbb253357c956fcb5c082bb4dc",
+    "registry/study1_sg000030_r1_pattern_inventory.json": "2854fe914d6c0c0a27cfff44313c3a19723ab17445f85407fd86d52c8027365d",
+    "registry/study1_sg000030_r1_runtime_qualification.json": "b58c507908b91e96f2ecec817dfc9f07842bb717ac49a6e29b86ff91edc69a96",
+    "registry/study1_sg000031_attempt1_admission_failure.json": "e91aa1457889bae6e7ba5ee092ee09638dcce97219f0f538da3839430f4ee505",
+    "registry/study1_sg000031_attempt1_closeout.json": "41844f94961bd7a0177f5b3cdaa4d9626d46255f549655f0b4f389a8f2287f28",
+    "registry/study1_sg000031_attempt1_unattempted_rows.json": "f93b41076178b1c686bbec6a85e2009b06709081760b7d2284d57288584cc4f0",
+    "registry/study1_sg000031_attempt2_admission_contract.json": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+    "registry/study1_sg000031_attempt2_execution_authorization.json": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+    "registry/study1_sg000031_founder_authorization.json": "8aeb6274a98ce50f1f5877d67b794ad40ae59097061f565dbc7f76d1f731c889",
+    "registry/study1_sg000031_frontier_status.json": "c16b181ff9747dbf1f079c78d718e9885046309bf482f4b6d65c8a391f7d25f8",
+    "registry/study1_sg000031_producer_constraints.txt": "9f1ce74f5a5ec2c078f18a9cd276556d137db9e720915449af3abd5105954470",
+    "registry/study1_sg000031_r2_contract.json": "61416d07409aa08305fb05e90cbf7790497128857a2af046daa290bbb8612f97",
+    "registry/study1_sg000031_sdk_qualification.json": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e",
+    "scripts/study1_sg000028_query_trace_aggregate.py": "d696f5d0979019b8c4bd8f34f975d37d490e2d3b47310a78f49763dd58c4352a",
+    "scripts/study1_sg000028_query_trace_runner.py": "1ce3674c4c8c0e96c021d78af67918597b68f7018e233068a61018ffe69798fa",
+    "scripts/study1_sg000031_attempt2_admission.py": "2d862c0ed20cbeceac7be00ec216192de3b1e4f92698cc4f1cdce61c5a648e27",
+    "scripts/study1_sg000031_r2_admission.py": "3ebaf168bbcca75aaa1d236f47776db9a7b3c9464ab918aa2003907f3978938e",
+    "scripts/study1_sg000031_r2_aggregate.py": "3002e1045e426b4ec33bde27427fb5664d035a5c96f340f1a1ccdc09cc0fca8a",
+    "scripts/study1_sg000031_r2_runner.py": "701b5f7cd3ba3522cac65b52f35ee9885f615852898efa80f02250340863cde5",
+    "src/gaxbench/study1_fhir_compat.py": "2ca4cf6078a514c18484869ec931bd17c8944970326c0bcf1dda49f101040bdc",
+    "src/gaxbench/study1_fhir_custodian.py": "754ff12ed888e8753bed856b6ad6a2e46b80f6c29edfe1f0469143433587f762",
+    "src/gaxbench/study1_query_trace_evidence.py": "4331c53cae76254b40c61744440f16204f085c2d12e92e2fdc31f5ecebd85640",
+    "src/gaxbench/study1_query_trace_gate.py": "529b67730920b03123d7a4054a0969f96b38aa9b07d455167ea1090e348dc0a9",
+    "src/gaxbench/study1_recovery_compat.py": "71a15425f41f7d9c039e50e61b0b7723c0d8788e5cc77d03bf811e25184abcce",
+    "src/gaxbench/study1_recovery_execution.py": "2390743b456eabe75e217293c1fd4f35149e276d7711dd4dac11a38239717909",
+    "src/gaxbench/study1_recovery_runtime.py": "7bafe8a685cd0f4465109f752647c9f1f26b9b0f3c62f02f4ebd6fea32466dba",
+    "tests/test_study1_sg000031_attempt2_admission.py": "c3e49eaff9b556fb0bc1e7a39c6bf198a4e6f1277baaff66c07158685fb1ecd4",
+    "tests/test_study1_sg000031_r2_execution.py": "a6ef38b5f851a1b9766b204fee85ffa45192a4e5670e5f6ee7a548050156544f",
+    "tools/qualify_sg000030_r1.py": "c756af0a7992e5d35166c9094189afbf737a4d998ccb397e6c0889d21ca61718",
+    "tools/qualify_sg000031_attempt2_admission.py": "2d5eca9c8cc306ae4bd89c006cecad7dfa1b970ab2efba41007447e3bde4b7da",
+    "tools/qualify_sg000031_sdk.py": "6e498535c9ce496fd6c68b0334491ea00d3ff56f67ccb006cf0ebd865a933187"
+  },
+  "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+  "receipt_identity_sha256": "ed2df6e8e3c96bbd59234260d0b646a7be8b2ce766c94f45bc29e0348ff7fe25",
+  "run": {
+    "conclusion": "failure",
+    "created_at": "2026-10-07T16:39:49Z",
+    "event": "workflow_dispatch",
+    "head_sha": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+    "id": 37653806159,
+    "path": ".github/workflows/study1-sg000031-r2-attempt2.yml",
+    "run_attempt": 1,
+    "status": "completed",
+    "updated_at": "2026-10-07T16:46:46Z"
+  },
+  "schema_version": "study1-r2-attempt2-failed-closeout-v1",
+  "scientific_dispatch_count": 1,
+  "scientific_gate_blockers": [
+    "worker-claim-ancestry-verification-failed",
+    "1463-unattempted-development-rows",
+    "incomplete-generation-lineage-and-transformation-accounting"
+  ],
+  "scientific_state": "BLOCKED",
+  "source_artifacts": [
+    {
+      "digest": "sha256:621f3952ebbb534461ef852ed1ed674e8b83187aaf6121c99a54fe2a600f6c6a",
+      "document_count": 2,
+      "document_hash_inventory_sha256": "abfea923263e64722b30aacd4507a72dcf7e56649c213e3129edd69f933c1f46",
+      "id": 11498062642,
+      "name": "sg000031-r2-attempt2-shard-0-37653806159",
+      "non_row_document_sha256s": {
+        "shard-0-job-status.json": "435a4ced1ef3bc611d4354fc9c4fa9952b05866e5bd6c9686ca03aef8dd92a27",
+        "verify-failure.json": "6f145fb1da3d10fdbec548ea13595814be866901a99ae2264f8bdebd906f3b67"
+      }
+    },
+    {
+      "digest": "sha256:337fbc42fd5b57eb3743a563f75d018e8c8120383091c65026402a60f6288a09",
+      "document_count": 2,
+      "document_hash_inventory_sha256": "4d0bac8a9deef7ef9c8374a7862b9c9dc58223db47eda16cf23748ac0bae5473",
+      "id": 11497962268,
+      "name": "sg000031-r2-attempt2-admission-37653806159",
+      "non_row_document_sha256s": {
+        "admission.json": "2422dcd363786065c7e138c9bfbdff32e1be4015398596ebed9c980653786405",
+        "plan.json": "014dedbf0e822ba41ff0570cfa34f99dbba13765006aeb3b27035ba5c94e6cc7"
+      }
+    },
+    {
+      "digest": "sha256:e0ca6ad0f8562afd8cdf97546bfbc79661737cd4cbc721d2e563b9541c68e48c",
+      "document_count": 1464,
+      "document_hash_inventory_sha256": "71a62feffdbd00a48bbdef0897054f2570f6aa036dc7eacc007b1aacaf8a8b40",
+      "id": 11497378744,
+      "name": "sg000031-r2-attempt2-aggregate-37653806159",
+      "non_row_document_sha256s": {
+        "r2-report.json": "8f26529dca6e7058e0ef816c918b8d2311c76e0b7a280f2dde35a52831e525dd"
+      }
+    }
+  ],
+  "specgrain_id": "SG-000031-E2",
+  "training": false,
+  "workflow_run_attempt": 1
+}
