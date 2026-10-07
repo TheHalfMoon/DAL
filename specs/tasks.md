@@ -448,3 +448,19 @@ Research contract: Issue #141; source run `37156028113` on `f8f5c1c8ebfbe2e044ad
 - [ ] Refresh Graft and actual test/hash evidence, then qualify the revised exact head through every required gate
 - [ ] Protected normal merge, post-main verification and external canonical repair receipt
 - [ ] Stop before any model call; R2 remains BLOCKED pending a separate future execution decision
+
+### SG-000031-E2 / R2 - Retained failed Attempt 2
+
+- [x] Verify the live canonical PR #162 admission state, exact artifacts and all frozen identities before dispatch
+- [x] Independently verify genuine Jev 48/48 coverage, Alibaba artifacts/inspection, full pre/post qualification and zero active review threads
+- [x] Verify unconsumed authorization, empty Attempt-2 dispatch history, and absent permanent claim/journal before execution
+- [x] Dispatch exactly one authorized Attempt 2: run `37653806159`, workflow attempt 1; authorization consumed
+- [x] Verify actual permanent claim and complete 1463-row development plan against the immutable journal
+- [x] Retain shard-0 claim-verification failure and seven skipped workers without retry, repair or redispatch
+- [x] Hash-verify all three actual artifacts and every aggregate row; recompute complete BLOCKED accounting deterministically
+- [x] Retain a lossless finite encoding of all 341 calibration and 1122 validation unattempted rows, with zero generations/model POSTs
+- [x] Reproduce shallow/full parent-query behavior read-only and preserve the frozen executed runner
+- [ ] Exact-head qualify this separate evidence closeout using Graft, genuine Jev, approved Alibaba, full CI and manuscript/arXiv
+- [ ] Guarded normal merge, intended-tree equality, zero active unresolved threads and complete post-main verification
+- [ ] Record the external canonical evidence receipt, then stop for a new founder decision
+- [ ] No Attempt 3, D4, training, final-role access or final evaluation is authorized

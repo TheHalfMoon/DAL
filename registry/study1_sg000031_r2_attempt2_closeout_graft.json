@@ -1,0 +1,142 @@
+{
+  "actual_blast_sha256": "c61b16353761323c295ba3039bc84539070ed1f774609e09cad885f812f18f88",
+  "actual_blast_summary": {
+    "areas": [],
+    "basis": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03...HEAD",
+    "changed": [
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "b329624f3b2665d7bf24e3b4acfcb1133e4ad1febea93bbe8fba50175cfba29c",
+        "path": "docs/study1-sg000031-attempt2-closeout.md",
+        "ranges": [
+          {
+            "end": 62,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "f141378415d52dd33cdb1f468e2bf1dd93c214afe8fc74b81f1017c8b5af1271",
+        "path": "registry/study1_sg000031_r2_attempt2_claim_failure.json",
+        "ranges": [
+          {
+            "end": 1,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "57cc226dd52f879ae44168bc8a3b2cd6296b79314fc79a021c29dc91a10b79d4",
+        "path": "registry/study1_sg000031_r2_attempt2_closeout.json",
+        "ranges": [
+          {
+            "end": 681,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "7d73ad21b807dd6a3165bb81ae0fc1bb51f7770731c5bdc40b4f68ba4984ce34",
+        "path": "registry/study1_sg000031_r2_attempt2_closeout_graft.json",
+        "ranges": [
+          {
+            "end": 128,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "d8b88c1d04074070210106b9a7b7c7a8e90d4d6bfe71184479040835c9692a0f",
+        "path": "registry/study1_sg000031_r2_attempt2_execution_37653806159.json",
+        "ranges": [
+          {
+            "end": 1,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "fb467581ae0f955c7870f5e4448b7f0407f90246621804675477f5f97ad8ff94",
+        "path": "registry/study1_sg000031_r2_attempt2_unattempted_rows.json",
+        "ranges": [
+          {
+            "end": 1,
+            "start": 1
+          }
+        ],
+        "status": "added"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "520a8876d6ee5d99a02d949b6c5854e9a57f3ecb7508c89317339f252625a94f",
+        "path": "specs/CURRENT.md",
+        "ranges": [
+          {
+            "end": 438,
+            "start": 410
+          }
+        ],
+        "status": "modified"
+      },
+      {
+        "hunk_count": 1,
+        "hunks_sha256": "11645084956baeb79c191fed72331914388a7e2cbd6712eaa3d0644392796ad2",
+        "path": "specs/tasks.md",
+        "ranges": [
+          {
+            "end": 466,
+            "start": 451
+          }
+        ],
+        "status": "modified"
+      }
+    ],
+    "deleted": [],
+    "depth": 2,
+    "impacted": [],
+    "modules": [],
+    "seeds": [],
+    "testModules": [],
+    "unindexed": [
+      "docs/study1-sg000031-attempt2-closeout.md",
+      "registry/study1_sg000031_r2_attempt2_claim_failure.json",
+      "registry/study1_sg000031_r2_attempt2_closeout.json",
+      "registry/study1_sg000031_r2_attempt2_closeout_graft.json",
+      "registry/study1_sg000031_r2_attempt2_execution_37653806159.json",
+      "registry/study1_sg000031_r2_attempt2_unattempted_rows.json",
+      "specs/CURRENT.md",
+      "specs/tasks.md"
+    ]
+  },
+  "base_sha": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+  "changed_files": [
+    "docs/study1-sg000031-attempt2-closeout.md",
+    "registry/study1_sg000031_r2_attempt2_claim_failure.json",
+    "registry/study1_sg000031_r2_attempt2_closeout.json",
+    "registry/study1_sg000031_r2_attempt2_closeout_graft.json",
+    "registry/study1_sg000031_r2_attempt2_execution_37653806159.json",
+    "registry/study1_sg000031_r2_attempt2_unattempted_rows.json",
+    "specs/CURRENT.md",
+    "specs/tasks.md"
+  ],
+  "evidence_candidate_head": "aa6c1b0989c6c35a6424ac213fe08f422536c1c4",
+  "exact_diff_sha256": "4f196992118528934bb5e9fd984ffdf4c59e66dbddc3cb51733060a7a75502ea",
+  "founder_cost_usd": 0,
+  "inspection": "Only scientific failure evidence, lossless row accounting and frontier documentation change. No executable source, worker workflow, manifest, producer or protected lineage changes. Graft reports no executable dependency or test-module impact.",
+  "installed_version": "0.21.1",
+  "mode": "structural-only; no model pass",
+  "protected_execution_file_bytes_equal_to_base": true,
+  "protected_execution_file_count": 52,
+  "schema_version": "study1-r2-attempt2-closeout-graft-v1",
+  "tool": "graft"
+}
