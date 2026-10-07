@@ -27,14 +27,14 @@ No repair, workflow rerun, redispatch or selective replay is part of this closeo
 
 Three actual artifact archives and all extracted documents were hash-verified.
 The original aggregate is retained byte-for-byte in
-`registry/study1_sg000031_attempt2_execution_37653806159.json`; the original failure
-is `registry/study1_sg000031_attempt2_claim_failure.json`. The closeout record
+`registry/study1_sg000031_r2_attempt2_execution_37653806159.json`; the original failure
+is `registry/study1_sg000031_r2_attempt2_claim_failure.json`. The closeout record
 binds their hashes, source artifact IDs/digests, exact dispatch, claim, receipt,
 population, producer, manifest, immutable Attempt-1 lineage and all job steps.
 
-`registry/study1_sg000031_attempt2_unattempted_rows.json` retains each question
+`registry/study1_sg000031_r2_attempt2_unattempted_rows.json` retains each question
 identity, role, input identity and disposition. Combining its four finite columns
-with the shared template in `registry/study1_sg000031_attempt2_closeout.json`
+with the shared template in `registry/study1_sg000031_r2_attempt2_closeout.json`
 reproduces every original aggregate row byte-for-byte under the frozen canonical
 JSON serializer. Each of the 1463 reconstructed file hashes was independently
 checked against its actual source artifact. The aggregate was also independently

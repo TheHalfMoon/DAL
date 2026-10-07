@@ -200,10 +200,10 @@
   "dispatch_run_id": 37653806159,
   "dispatch_url": "https://github.com/TheHalfMoon/DAL/actions/runs/37653806159",
   "evidence_paths": {
-    "aggregate": "registry/study1_sg000031_attempt2_execution_37653806159.json",
-    "closeout": "registry/study1_sg000031_attempt2_closeout.json",
-    "failure": "registry/study1_sg000031_attempt2_claim_failure.json",
-    "rows": "registry/study1_sg000031_attempt2_unattempted_rows.json"
+    "aggregate": "registry/study1_sg000031_r2_attempt2_execution_37653806159.json",
+    "closeout": "registry/study1_sg000031_r2_attempt2_closeout.json",
+    "failure": "registry/study1_sg000031_r2_attempt2_claim_failure.json",
+    "rows": "registry/study1_sg000031_r2_attempt2_unattempted_rows.json"
   },
   "evidence_sha256s": {
     "aggregate": "8f26529dca6e7058e0ef816c918b8d2311c76e0b7a280f2dde35a52831e525dd",

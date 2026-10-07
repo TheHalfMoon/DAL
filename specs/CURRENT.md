@@ -426,7 +426,7 @@ unattempted. First-turn generations, physical model POSTs and retries are zero.
 
 R2 is **BLOCKED / ATTEMPT2_WORKER_CLAIM_FAILED_STOP**. The failed attempt, exact
 source artifacts and losslessly reconstructable denominator are retained in
-`registry/study1_sg000031_attempt2_closeout.json` and described in
+`registry/study1_sg000031_r2_attempt2_closeout.json` and described in
 `docs/study1-sg000031-attempt2-closeout.md`. The retained error hash and read-only
 shallow/full Git reproduction support a shallow-checkout ancestry failure.
 This evidence closeout preserves the runner and all frozen controls unchanged;
