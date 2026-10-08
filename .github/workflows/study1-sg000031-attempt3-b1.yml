@@ -4,21 +4,31 @@ on:
   pull_request:
     paths:
       - registry/study1_sg000031_attempt3_b1_contract.json
+      - registry/study1_sg000031_attempt3_b1_durable_contract.json
       - src/gaxbench/study1_attempt3_b1.py
+      - src/gaxbench/study1_attempt3_b1_durable.py
       - tools/study1_sg000031_attempt3_b1.py
       - tools/qualify_sg000031_attempt3_b1.py
+      - tools/qualify_sg000031_attempt3_b1_durable.py
       - tests/test_study1_sg000031_attempt3_b1.py
+      - tests/test_study1_sg000031_attempt3_b1_durable.py
       - docs/study1-sg000031-attempt3-b1.md
+      - docs/study1-sg000031-attempt3-b1-durable.md
       - .github/workflows/study1-sg000031-attempt3-b1.yml
   push:
     branches: [main]
     paths:
       - registry/study1_sg000031_attempt3_b1_contract.json
+      - registry/study1_sg000031_attempt3_b1_durable_contract.json
       - src/gaxbench/study1_attempt3_b1.py
+      - src/gaxbench/study1_attempt3_b1_durable.py
       - tools/study1_sg000031_attempt3_b1.py
       - tools/qualify_sg000031_attempt3_b1.py
+      - tools/qualify_sg000031_attempt3_b1_durable.py
       - tests/test_study1_sg000031_attempt3_b1.py
+      - tests/test_study1_sg000031_attempt3_b1_durable.py
       - docs/study1-sg000031-attempt3-b1.md
+      - docs/study1-sg000031-attempt3-b1-durable.md
       - .github/workflows/study1-sg000031-attempt3-b1.yml
 
 permissions:
@@ -53,6 +63,7 @@ jobs:
         run: >-
           python -m pytest -q
           tests/test_study1_sg000031_attempt3_b1.py
+          tests/test_study1_sg000031_attempt3_b1_durable.py
           tests/test_study1_sg000031_attempt3_admission.py
           tests/test_study1_sg000031_attempt3_readiness.py
       - name: Prove synthetic one-shot claim and frozen worker plan without inference
@@ -66,7 +77,7 @@ jobs:
           EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: >-
-          python tools/qualify_sg000031_attempt3_b1.py
+          python tools/qualify_sg000031_attempt3_b1_durable.py
           --output "$RUNNER_TEMP/attempt3-b1-native.json"
       - name: Retain B1 no-science engineering artifacts with GitHub digest
         if: always()
