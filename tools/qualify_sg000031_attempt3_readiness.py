@@ -109,6 +109,8 @@ def check_policy(root: Path, contract: dict) -> None:
         for x in historical
     ):
         raise ValueError("historical failure and consumption cannot be rewritten")
+    if native.lf_digest(root / A2_CONTRACT) != historical[1]["contract_sha256"]:
+        raise ValueError("canonical Attempt-2 admission contract digest drift")
     a2 = json.loads((root / A2_CONTRACT).read_text(encoding="utf-8"))
     close1 = json.loads((root / A1_CLOSEOUT).read_text(encoding="utf-8"))
     close2 = json.loads((root / A2_CLOSEOUT).read_text(encoding="utf-8"))
@@ -187,6 +189,9 @@ def check_history(root: Path, contract: dict, *, api=native.api) -> dict:
         tag["object"]["sha"] != contract["historical_attempts"][1]["canonical_main"]
         or json.loads(tag["message"]).get("execution_authorization_sha256")
         != contract["historical_attempts"][1]["execution_authorization_sha256"]
+        or json.loads(tag["message"]).get("run_id") != A2_RUN
+        or json.loads(tag["message"]).get("contract_sha256")
+        != contract["historical_attempts"][1]["contract_sha256"]
     ):
         raise ValueError("Attempt-2 permanent claim mutated")
     for path, run_id in (
