@@ -72,6 +72,27 @@ def test_orphan_tag_does_not_create_claim():
         ClaimProtocolSimulator(api).try_claim_synthetic(fixture())
     assert len(api.tag_objects) == 1
     assert api.get_ref(REF) is None
+    # The original authorization must remain unusable after an ambiguous failure.
+    api.fail_between_tag_and_ref = False
+    with pytest.raises(PermissionError, match="NO RETRY"):
+        ClaimProtocolSimulator(api).try_claim_synthetic(fixture())
+    with pytest.raises(PermissionError, match="NO RETRY"):
+        ClaimProtocolSimulator(api).try_claim_synthetic(fixture(44))
+    assert api.tag_posts == 1
+    assert api.ref_posts == 1
+
+
+def test_new_synthetic_authority_is_distinct_after_orphan_failure():
+    api = SimulatedGitHubREST()
+    api.fail_between_tag_and_ref = True
+    with pytest.raises(PermissionError):
+        ClaimProtocolSimulator(api).try_claim_synthetic(fixture())
+    api.fail_between_tag_and_ref = False
+    separate_mock = SyntheticAuthority("a" * 40, "b" * 40, 22, "d" * 64)
+    tag = ClaimProtocolSimulator(api).try_claim_synthetic(separate_mock)
+    assert api.get_ref(REF) == tag
+    assert len(api.reserved_synthetic_signatures) == 2
+    assert len(api.references) == 1
 
 
 def test_pre_model_failure_still_consumes_ref():
