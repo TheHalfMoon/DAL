@@ -1,0 +1,84 @@
+{
+  "schema_version": "dal-sg000031-attempt3-b1-durable-design-v1",
+  "specgrain": "SG-000031-A3-B1-DURABLE",
+  "authorized_issue": 173,
+  "founder_gate": {
+    "issue": 171,
+    "assistant_transcribed_comment": 6066751157,
+    "scope": "ENGINEERING_ONLY_UNARMED"
+  },
+  "base": {
+    "main": "eee686d05332ed5fad93a52c75ca50dbee9cb877",
+    "tree": "c3df431eff7b81218e6bae91ff797446bb6a860e",
+    "pr": 172
+  },
+  "frozen_predecessor": {
+    "path": "registry/study1_sg000031_attempt3_b1_contract.json",
+    "sha256": "70d257f0056d6d50d4a8a8eef6c53108124fff3ad17bd03765d42b7edbc2cb3a",
+    "sdk_path": "registry/study1_sg000031_sdk_qualification.json",
+    "sdk_sha256": "c2fbcecab00f957a49c59af38875de095cfbf9e9176e06293ab5840838bbab1e"
+  },
+  "producer": {
+    "system_prompt_sha256": "20adf0bf367302a185b03c0c5151ae425ad74f4ef85caaecf4a483f3703a3bdf",
+    "tool_schema_sha256": "8444e610f0bfe2738a4a4ffee7808d6eedc850d332f5958ce7e20ea767ad24ce"
+  },
+  "durable_claim": {
+    "method": "POST /repos/TheHalfMoon/DAL/git/refs",
+    "ref": "refs/tags/dal-r2-issue166-attempt3",
+    "create_only": true,
+    "existing_ref_conflict": "CONSUMED_STOP_NO_RETRY",
+    "atomic_create_ref": true,
+    "no_delete": true,
+    "no_update": true,
+    "bind_to": "unique SHA256 of canonical JSON envelope",
+    "simulate_with": "InMemoryGitHubRefService only",
+    "real_mutation_allowed": false
+  },
+  "authority": {
+    "scientific_gate": "B2",
+    "authorization_sha256": null,
+    "approval_record": null,
+    "live_run_id": null,
+    "main_sha": null,
+    "main_tree": null,
+    "verified_signature": false,
+    "real_dispatch_permitted": false
+  },
+  "runtime": {
+    "shards": 8,
+    "rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "first_turn_limit_per_row": 1,
+    "model_retry": 0,
+    "workflow_retry": 0,
+    "secondary_reasoning": false,
+    "selection_or_scoring": false,
+    "persistent_row_write": false,
+    "scoring_correctness": false,
+    "final_access": false
+  },
+  "transport": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "url_policy": "loopback_only_when_future_B2",
+    "http_post_allowed": false,
+    "network_client_available": false,
+    "api_credentials_allowed": false
+  },
+  "paths": {
+    "blueprint": "docs/study1-sg000031-attempt3-b1-durable.md",
+    "module": "src/gaxbench/study1_attempt3_b1_durable.py",
+    "test": "tests/test_study1_sg000031_attempt3_b1_durable.py",
+    "qualifier": "tools/qualify_sg000031_attempt3_b1.py"
+  },
+  "safety": {
+    "science_state": "BLOCKED",
+    "sealed_final": "SEALED",
+    "historical_outcomes": "EXPOSED_DEV_NOT_BLIND",
+    "physical_model_posts": 0,
+    "rows_replayed": 0,
+    "permanent_scientific_claim": false,
+    "founder_cost_usd": 0
+  },
+  "next_gate": "EXPLICIT_FOUNDER_B2_REQUIRED_AFTER_B1_CANONICAL"
+}
