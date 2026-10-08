@@ -1,0 +1,84 @@
+{
+  "schema_version": "dal-sg000031-a3-b2-readiness-unarmed-v1",
+  "specgrain": "SG-000031-A3-B2-PREFLIGHT",
+  "engineering_issue": 175,
+  "founder": {
+    "decision_issue": 171,
+    "assistant_transcribed_chat_comment_id": 6069470401,
+    "verbatim_reply": "i approve move on",
+    "evidence_provenance": "assistant_transcription_of_user_chat_not_founder_github_signature",
+    "approval_scope": "PROGRESSION_AND_CONDITIONAL_ONE_SHOT_ENGINEERING"
+  },
+  "engineering_baseline": {
+    "main_sha": "1e2eb0970678ef86bcd25bb0a7a5f1b3dc1f7e6d",
+    "tree_sha": "9e8e0a5ecb8d2b708f5a194c2eccd919f107b373",
+    "b1_pr": 174,
+    "b1_issue": 173,
+    "b1_receipt_comment_id": 6068669337,
+    "b1_receipt_sha256": "12d870788ae059d0107b7442907a6006d8d5700b677fa62a2865f5c26005e7b7"
+  },
+  "frozen_predecessor": {
+    "b1_contract_path": "registry/study1_sg000031_attempt3_b1_contract.json",
+    "b1_contract_sha256": "70d257f0056d6d50d4a8a8eef6c53108124fff3ad17bd03765d42b7edbc2cb3a",
+    "b1_durable_path": "registry/study1_sg000031_attempt3_b1_durable_contract.json",
+    "b1_durable_sha256": "d46c5a36547b8bde4bd47fc16a0d067361ce35516386e22dd7403634f8481f79"
+  },
+  "frozen_science": {
+    "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+    "development_rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "shards": 8,
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173
+  },
+  "execution_authority": {
+    "status": "CHAT_APPROVED_CONDITIONAL_SIGNED_TOKEN_ABSENT",
+    "founder_signed_execution_authorization_sha256": null,
+    "authenticated_github_founder_signature": null,
+    "run_id": null,
+    "canonical_execution_main_sha": null,
+    "canonical_execution_tree_sha": null,
+    "one_real_attempt_allowed": false,
+    "git_ref_creation_allowed": false,
+    "model_http_post_allowed": false,
+    "scientific_workflow_dispatch_allowed": false
+  },
+  "capacity_preflight": {
+    "status": "UNQUALIFIED",
+    "free_ram_floor_gib": 10,
+    "free_disk_floor_gib": 8,
+    "threshold_role": "conservative_diagnostic_floor_not_empirical_performance_proof",
+    "host_device": "Abdulaziz",
+    "hardware_observation_timestamp": "2026-10-09",
+    "hardware_observed_ram_gib": 15.73,
+    "hardware_observed_free_ram_gib": 2.58,
+    "hardware_observed_free_disk_gib": 6.23,
+    "host_snapshot_is_sufficient": false,
+    "frozen_model_download_and_cpu_inference_qualified": false,
+    "no_paid_providers": true
+  },
+  "claim": {
+    "tag_ref": "refs/tags/dal-r2-issue166-attempt3",
+    "atomic_one_shot_required": true,
+    "permanent_claim_existed_at_baseline": false,
+    "consumed_prior_attempt2_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+    "real_claim_created": false
+  },
+  "firewall": {
+    "r2": "BLOCKED",
+    "historic_exposed_pass": 224,
+    "historic_exposed_blockers": 1239,
+    "final": "SEALED",
+    "scientific_row_replays": 0,
+    "model_posts": 0,
+    "permanent_scientific_claims": 0,
+    "founder_cost_usd": 0,
+    "no_training": true,
+    "no_d4": true,
+    "no_final_access": true
+  },
+  "next_action": "REQUIRE_CRYPTOGRAPHIC_FOUNDER_EXECUTION_TOKEN_AND_EMPIRICALLY_QUALIFIED_ZERO_COST_RUNTIME_BEFORE_ARMING"
+}
