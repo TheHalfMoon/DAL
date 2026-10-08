@@ -199,7 +199,9 @@ def main() -> None:
                 "new_model_calls": 0,
             },
         )
-        raise SystemExit("post-consumption repair qualification failed; no inference allowed") from None
+        raise SystemExit(
+            "post-consumption repair qualification failed; no inference allowed"
+        ) from None
     native.write_exclusive(args.output, report)
     print("POSTCONSUMPTION_ANCESTRY_PREFLIGHT=PASS; ATTEMPT3=NOT_AUTHORIZED")
 
