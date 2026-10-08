@@ -115,21 +115,9 @@ def _fixture(verifier):
 
 def test_consumed_claim_with_frozen_history_passes(verifier, monkeypatch):
     routes, claim = _fixture(verifier)
-    # Synthetic fixture digest, not the canonical published receipt hash.
-    monkeypatch.setattr(verifier, "CONTRACT_SHA", "fixture-only")
-    monkeypatch.setattr(verifier.native, "lf_digest", lambda *_: "fixture-only")
-    claim["contract_sha256"] = "fixture-only"
-    claim["qualification_receipt_sha256"] = (
-        verifier.native.digest(verifier.native.json_bytes(claim["qualification_receipt"]))
-    )
-    routes["git/tags/" + verifier.ATTEMPT_TAG]["message"] = json.dumps(claim)
-    # Synthetic receipt hash must still be an exact-match contract.
+    monkeypatch.setattr(verifier.native, "lf_digest", lambda *_: verifier.CONTRACT_SHA)
     monkeypatch.setattr(
-        verifier, "verify_consumed_claim",
-        lambda root, api: (
-            None if not isinstance(api("git/ref/tags/dal-r2-issue158-attempt2"), dict)
-            else claim
-        ),
+        verifier, "RECEIPT_SHA", claim["qualification_receipt_sha256"]
     )
     assert verifier.verify_consumed_claim(ROOT, lambda path: routes[path]) == claim
 
@@ -141,16 +129,8 @@ def test_consumed_claim_with_frozen_history_passes(verifier, monkeypatch):
 def test_incorrect_or_replayed_claim_fails_closed(verifier, monkeypatch, fault):
     routes, claim = _fixture(verifier)
     monkeypatch.setattr(verifier.native, "lf_digest", lambda *_: verifier.CONTRACT_SHA)
-    # Bind fixture hash to the fixture, but preserve all other strict identities.
-    original_digest = verifier.native.digest
-    old = claim["qualification_receipt_sha256"]
     monkeypatch.setattr(
-        verifier.native,
-        "digest",
-        lambda data: verifier.ATTEMPT_TAG if False else (
-            verifier.RECEIPT_FIXTURE_SHA if hasattr(verifier, "RECEIPT_FIXTURE_SHA")
-            else old
-        ),
+        verifier, "RECEIPT_SHA", claim["qualification_receipt_sha256"]
     )
     if fault == "tag":
         routes["git/ref/tags/dal-r2-issue158-attempt2"]["object"]["sha"] = "0" * 40
@@ -167,7 +147,6 @@ def test_incorrect_or_replayed_claim_fails_closed(verifier, monkeypatch, fault):
     routes["git/tags/" + verifier.ATTEMPT_TAG]["message"] = json.dumps(claim)
     with pytest.raises(ValueError):
         verifier.verify_consumed_claim(ROOT, lambda path: routes[path])
-    monkeypatch.setattr(verifier.native, "digest", original_digest)
 
 
 @pytest.mark.parametrize("event", ["workflow_dispatch", "schedule", "repository_dispatch"])
