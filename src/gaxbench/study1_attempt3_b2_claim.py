@@ -465,6 +465,17 @@ def verify_offline_founder_ssh_signature(
         or not signature.startswith(b"-----BEGIN SSH SIGNATURE-----")
     ):
         raise PermissionError("founder signature format or allowed signer list invalid")
+    # OpenSSH may accept trailing bytes after END; reject noncanonical wrappers.
+    normalized_sig = signature.replace(b"\r\n", b"\n").splitlines()
+    if (
+        len(normalized_sig) < 3
+        or normalized_sig[0] != b"-----BEGIN SSH SIGNATURE-----"
+        or normalized_sig[-1] != b"-----END SSH SIGNATURE-----"
+        or not all(re.fullmatch(rb"[A-Za-z0-9+/=]{1,76}", line) for line in normalized_sig[1:-1])
+        or signature.count(b"-----BEGIN SSH SIGNATURE-----") != 1
+        or signature.count(b"-----END SSH SIGNATURE-----") != 1
+    ):
+        raise PermissionError("noncanonical SSH signature wrapper or extra data")
     actual = hashlib.sha256(allowed_signers).hexdigest()
     if not hmac.compare_digest(actual, expected_allowed_signers_sha256):
         raise PermissionError("allowed signers do not match independent founder trust pin")
