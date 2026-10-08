@@ -361,3 +361,164 @@ def rehearsal(root: Path) -> dict[str, Any]:
         "final_content_access": False,
         "founder_cost_usd": 0,
     }
+
+
+# Offline verification only; this cannot sign a founder token or dispatch a workflow.
+FOUNDER_SSH_NAMESPACE = "dal-sg000031-attempt3-b2"
+FOUNDER_SSH_IDENTITY = "dal-founder"
+
+
+def execution_authorization_bytes(
+    authorization: dict[str, Any],
+    *,
+    expected_main: str,
+    expected_tree: str,
+) -> bytes:
+    """Validate one-run frozen scientific scope before any external signature check."""
+    if not re.fullmatch(r"[0-9a-f]{40}", expected_main) or not re.fullmatch(
+        r"[0-9a-f]{40}", expected_tree
+    ):
+        raise ValueError("trusted current main and tree must be explicit SHA-1 identities")
+    required = {
+        "schema_version",
+        "attempt_ordinal",
+        "main_sha",
+        "tree_sha",
+        "run_id",
+        "run_attempt",
+        "ref",
+        "population_sha256",
+        "r1_manifest_sha256",
+        "development_rows",
+        "shards",
+        "final_role_access",
+        "training",
+        "d4_activation",
+        "founder_cost_usd",
+        "retry_permitted",
+        "scientific_role",
+        "single_use",
+    }
+    if set(authorization) != required:
+        raise ValueError("execution authority cannot add or omit scientific permissions")
+    fixed = {
+        "schema_version": "dal-sg000031-a3-b2-founder-execution-v1",
+        "attempt_ordinal": 3,
+        "main_sha": expected_main,
+        "tree_sha": expected_tree,
+        "run_attempt": 1,
+        "ref": REF,
+        "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+        "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+        "development_rows": 1463,
+        "shards": 8,
+        "final_role_access": False,
+        "training": False,
+        "d4_activation": False,
+        "founder_cost_usd": 0,
+        "retry_permitted": False,
+        "scientific_role": "outcome-exposed-development-only",
+        "single_use": True,
+    }
+    if any(
+        type(authorization[key]) is not type(value) or authorization[key] != value
+        for key, value in fixed.items()
+    ):
+        raise ValueError("signed scientific authority scope/identity drift")
+    if type(authorization["run_id"]) is not int or authorization["run_id"] <= 0:
+        raise ValueError("unique run id must be a real positive integer")
+    return canonical(authorization)
+
+
+def verify_offline_founder_ssh_signature(
+    *,
+    authorization: dict[str, Any],
+    signature: bytes,
+    allowed_signers: bytes,
+    expected_allowed_signers_sha256: str | None,
+    expected_main: str,
+    expected_tree: str,
+) -> dict[str, Any]:
+    """Verify a pinned SSHSIG offline; no unsigned fallback, network or GitHub writes.
+
+    The caller MUST obtain the trusted allowlist SHA256 through independent
+    founder governance, not from this payload, an agent-written issue, or test key.
+    No such trusted production digest is available in the B2 engineering grain.
+    """
+    import hmac
+    import shutil
+    import subprocess
+    import tempfile
+
+    content = execution_authorization_bytes(
+        authorization, expected_main=expected_main, expected_tree=expected_tree
+    )
+    if not isinstance(expected_allowed_signers_sha256, str) or not re.fullmatch(
+        r"[0-9a-f]{64}", expected_allowed_signers_sha256
+    ):
+        raise PermissionError("independently pinned founder allowlist digest ABSENT")
+    if (
+        not isinstance(allowed_signers, bytes)
+        or not isinstance(signature, bytes)
+        or len(allowed_signers) > 4096
+        or len(signature) > 8192
+        or not signature.startswith(b"-----BEGIN SSH SIGNATURE-----")
+    ):
+        raise PermissionError("founder signature format or allowed signer list invalid")
+    actual = hashlib.sha256(allowed_signers).hexdigest()
+    if not hmac.compare_digest(actual, expected_allowed_signers_sha256):
+        raise PermissionError("allowed signers do not match independent founder trust pin")
+    lines = allowed_signers.decode("ascii", errors="strict").splitlines()
+    if len(lines) != 1 or not lines[0].startswith(
+        f'{FOUNDER_SSH_IDENTITY} namespaces="{FOUNDER_SSH_NAMESPACE}" ssh-ed25519 '
+    ):
+        raise PermissionError("only the pinned founder Ed25519/SSH namespace is accepted")
+    ssh_keygen = shutil.which("ssh-keygen")
+    if not ssh_keygen:
+        raise PermissionError("OpenSSH verifier unavailable; no execution allowed")
+    with tempfile.TemporaryDirectory(prefix="dal-a3-b2-sigcheck-") as workdir:
+        signers = Path(workdir) / "allowed_signers"
+        sigfile = Path(workdir) / "signature"
+        signers.write_bytes(allowed_signers)
+        sigfile.write_bytes(signature)
+        try:
+            check = subprocess.run(
+                [
+                    ssh_keygen,
+                    "-Y",
+                    "verify",
+                    "-f",
+                    str(signers),
+                    "-I",
+                    FOUNDER_SSH_IDENTITY,
+                    "-n",
+                    FOUNDER_SSH_NAMESPACE,
+                    "-s",
+                    str(sigfile),
+                ],
+                input=content,
+                capture_output=True,
+                check=False,
+                timeout=10,
+            )
+        except (OSError, subprocess.TimeoutExpired) as error:
+            raise PermissionError(
+                "independent founder signature verification unavailable"
+            ) from error
+    if check.returncode != 0:
+        raise PermissionError("founder SSH signature verification FAILED")
+    return {
+        "cryptographic_verification": "PASS_ONLY_FOR_SUPPLIED_INDEPENDENT_TRUST_PIN",
+        "identity": FOUNDER_SSH_IDENTITY,
+        "namespace": FOUNDER_SSH_NAMESPACE,
+        "main_sha": expected_main,
+        "tree_sha": expected_tree,
+        "run_id": authorization["run_id"],
+        "authority_sha256": hashlib.sha256(content).hexdigest(),
+        "signature_sha256": hashlib.sha256(signature).hexdigest(),
+        "trusted_allowlist_sha256": actual,
+        "real_attempt_claimed": False,
+        "model_posts": 0,
+        "founder_cost_usd": 0,
+        "scientific_execution_permitted_by_this_check_alone": False,
+    }
