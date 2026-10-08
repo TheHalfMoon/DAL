@@ -90,3 +90,141 @@ def test_missing_native_workflow_must_fail_closed_offline(
     assert not (ROOT / ".github/workflows/study1-sg000031-attempt3-b2-claim.yml").exists()
     with pytest.raises(FileNotFoundError):
         gate.qualify(ROOT)
+
+
+# Genuine offline SSHSIG verification is tested with throwaway fixture keys only.
+# These tests do not create or approve any founder execution authorization.
+def authority_fixture() -> dict[str, object]:
+    return {
+        "schema_version": "dal-sg000031-a3-b2-founder-execution-v1",
+        "attempt_ordinal": 3,
+        "main_sha": "a" * 40,
+        "tree_sha": "b" * 40,
+        "run_id": 101,
+        "run_attempt": 1,
+        "ref": "refs/tags/dal-r2-issue166-attempt3",
+        "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+        "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+        "development_rows": 1463,
+        "shards": 8,
+        "final_role_access": False,
+        "training": False,
+        "d4_activation": False,
+        "founder_cost_usd": 0,
+        "retry_permitted": False,
+        "scientific_role": "outcome-exposed-development-only",
+        "single_use": True,
+    }
+
+
+def test_signed_auth_requires_independent_trust_pin_before_opening_tools() -> None:
+    from gaxbench.study1_attempt3_b2_claim import verify_offline_founder_ssh_signature
+
+    with pytest.raises(PermissionError, match="independently pinned"):
+        verify_offline_founder_ssh_signature(
+            authorization=authority_fixture(),
+            signature=b"fake",
+            allowed_signers=b"fake",
+            expected_allowed_signers_sha256=None,
+            expected_main="a" * 40,
+            expected_tree="b" * 40,
+        )
+
+
+@pytest.mark.parametrize(
+    ("field", "bad"),
+    [
+        ("run_id", 0),
+        ("run_id", True),
+        ("run_attempt", 2),
+        ("main_sha", "f" * 40),
+        ("tree_sha", "f" * 40),
+        ("attempt_ordinal", 2),
+        ("retry_permitted", True),
+        ("single_use", False),
+        ("final_role_access", True),
+        ("founder_cost_usd", 1),
+        ("development_rows", 1464),
+        ("shards", 9),
+        ("scientific_role", "sealed-final"),
+    ],
+)
+def test_signed_manifest_frozen_scope_rejects_mutation(field: str, bad: object) -> None:
+    from gaxbench.study1_attempt3_b2_claim import execution_authorization_bytes
+
+    body = authority_fixture()
+    body[field] = bad
+    with pytest.raises(ValueError, match="scope/identity drift|unique run id"):
+        execution_authorization_bytes(body, expected_main="a" * 40, expected_tree="b" * 40)
+
+
+def test_offline_ed25519_verification_positive_and_tamper_negative(tmp_path: Path) -> None:
+    import hashlib
+    import os
+    import shutil
+    import subprocess
+
+    from gaxbench.study1_attempt3_b2_claim import (
+        FOUNDER_SSH_NAMESPACE,
+        execution_authorization_bytes,
+        verify_offline_founder_ssh_signature,
+    )
+
+    signer = shutil.which("ssh-keygen")
+    if signer is None:
+        pytest.skip("OpenSSH unavailable; production verifier would fail closed")
+    key_path = tmp_path / "ephemeral-test-only-key"
+    keygen = subprocess.run(
+        [signer, "-q", "-t", "ed25519", "-N", "", "-f", str(key_path)],
+        capture_output=True,
+        timeout=20,
+        check=False,
+    )
+    if keygen.returncode:
+        if os.name == "nt":
+            pytest.skip("Windows OpenSSH fixture key generation unavailable")
+        pytest.fail("Linux OpenSSH fixture key generation unexpectedly failed")
+    authority = authority_fixture()
+    payload = tmp_path / "test-only-not-an-authorization.json"
+    payload.write_bytes(
+        execution_authorization_bytes(authority, expected_main="a" * 40, expected_tree="b" * 40)
+    )
+    signature_cmd = subprocess.run(
+        [signer, "-Y", "sign", "-f", str(key_path), "-n", FOUNDER_SSH_NAMESPACE, str(payload)],
+        capture_output=True,
+        timeout=20,
+        check=False,
+    )
+    if signature_cmd.returncode:
+        if os.name == "nt":
+            pytest.skip("Windows OpenSSH SSHSIG fixture unavailable")
+        pytest.fail("Linux OpenSSH SSHSIG signing unexpectedly failed")
+    signature = (tmp_path / (payload.name + ".sig")).read_bytes()
+    allowlist = (
+        'dal-founder namespaces="'
+        + FOUNDER_SSH_NAMESPACE
+        + '" '
+        + key_path.with_suffix(".pub").read_text(encoding="utf-8").strip()
+        + "\n"
+    ).encode("ascii")
+    pin = hashlib.sha256(allowlist).hexdigest()
+    args = {
+        "authorization": authority,
+        "signature": signature,
+        "allowed_signers": allowlist,
+        "expected_allowed_signers_sha256": pin,
+        "expected_main": "a" * 40,
+        "expected_tree": "b" * 40,
+    }
+    verification = verify_offline_founder_ssh_signature(**args)
+    assert verification["run_id"] == 101
+    assert verification["real_attempt_claimed"] is False
+    assert verification["scientific_execution_permitted_by_this_check_alone"] is False
+    with pytest.raises(PermissionError):
+        verify_offline_founder_ssh_signature(**{**args, "signature": signature + b"tamper"})
+    with pytest.raises(PermissionError):
+        verify_offline_founder_ssh_signature(
+            **{**args, "expected_allowed_signers_sha256": "f" * 64}
+        )
+    with pytest.raises(ValueError):
+        verify_offline_founder_ssh_signature(**{**args, "expected_main": "f" * 40})
