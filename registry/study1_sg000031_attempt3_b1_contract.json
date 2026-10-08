@@ -1,0 +1,120 @@
+{
+  "schema_version": "dal-sg000031-attempt3-b1-scientific-capability-unarmed-v1",
+  "specgrain_id": "SG-000031-A3-B1",
+  "attempt_ordinal": 3,
+  "engineering_authorization": {
+    "issue": 171,
+    "assistant_transcribed_comment_id": 6066751157,
+    "scope": "B1_SCIENCE_CAPABLE_ENGINEERING_UNARMED",
+    "original_founder_github_comment": false
+  },
+  "authorized_base": {
+    "sha": "b2acddbc5a74962124555f87e679c2ca7cecb277",
+    "tree": "2513e4f8f48c5f3654850fdb60c1b88625549a73",
+    "issue168_closeout_comment": 6063077432,
+    "issue168_canonical_receipt_sha256": "a9600b2431fc87071e651c9c96c689c949d838e78d2fbecd656efd81f581414e"
+  },
+  "predecessor_contracts": [
+    "registry/study1_sg000031_attempt2_admission_contract.json",
+    "registry/study1_sg000031_attempt3_readiness_contract.json",
+    "registry/study1_sg000031_attempt3_admission_contract.json"
+  ],
+  "execution_authorization": {
+    "status": "NOT_AUTHORIZED",
+    "sha256": null,
+    "approved_scientific_execution_issue": null,
+    "single_run_token": null,
+    "science_dispatch_permitted": false,
+    "model_http_post_permitted": false,
+    "development_row_replay_permitted": false,
+    "permanent_claim_permitted": false
+  },
+  "frozen_science": {
+    "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "development_rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173,
+    "producer": {
+      "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "tokenizer_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gguf_repository": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+      "gguf_revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+      "gguf_filename": "qwen3-4b-instruct-2507-q8_0.gguf",
+      "gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+      "llama_cpp_revision": "d2e54583c7452353eb35d40431281f6ee984332f",
+      "fhir_agentbench_revision": "bbb42909a5a7eb907d1cd91f72a560729e7037ea",
+      "patched_core_utils_sha256": "9dcbe56df002e8e30c28cc171dd47db687aa6760e5fc798aaa2dc5dc1d9803da",
+      "transport_patch_sha256": "ef9c657ca666a1a6a9e7f21c79afe1da9e30ed4a30b879ecc6fb2af00db5d757",
+      "strategy": "single_turn_request",
+      "temperature": 0,
+      "agent_context_tokens": 4096,
+      "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860"
+    }
+  },
+  "history": {
+    "attempt1_run": 37320473498,
+    "attempt2_run": 37653806159,
+    "attempt2_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+    "attempt1_state": "INFRASTRUCTURE_FAILURE_CONSUMED",
+    "attempt2_state": "INFRASTRUCTURE_FAILURE_CONSUMED",
+    "attempt1_physical_posts": 0,
+    "attempt2_physical_posts": 0,
+    "exposed_development_historical_PASS": 224,
+    "exposed_development_historical_blockers": 1239
+  },
+  "claim_namespace": {
+    "permanent_tag": "refs/tags/dal-r2-issue166-attempt3",
+    "ledger_branch": "codex/sg000031-r2-attempt3-journal",
+    "ledger_root": "evidence/study1-r2-attempt3",
+    "scientific_workflow": ".github/workflows/study1-sg000031-r2-attempt3.yml",
+    "scientific_worker": ".github/workflows/study1-sg000031-r2-attempt3-worker.yml",
+    "scientific_receipt_marker": "DAL_R2_ATTEMPT3_CANONICAL_ADMISSION_V1"
+  },
+  "execution_shape": {
+    "shards": 8,
+    "first_turn_generations_per_row": 1,
+    "maximum_first_turn_generations": 1463,
+    "automatic_retries": 0,
+    "second_turn_reasoning": false,
+    "answer_correctness_scoring": false,
+    "selective_row_omission": false,
+    "final_role_access": false,
+    "d4": false,
+    "training": false,
+    "fine_tuning": false,
+    "model_switching": false,
+    "founder_cost_usd": 0,
+    "claim_consumption": "ATOMIC_SINGLE_USE_EVEN_IF_PRE_MODEL_FAILURE"
+  },
+  "engineering_gate": {
+    "controller": "tools/study1_sg000031_attempt3_b1.py",
+    "worker": "src/gaxbench/study1_attempt3_b1.py",
+    "native_qualifier": "tools/qualify_sg000031_attempt3_b1.py",
+    "workflow": ".github/workflows/study1-sg000031-attempt3-b1.yml",
+    "workflow_dispatch_created": false,
+    "scientific_worker_workflow_created": false,
+    "credentialed_transport_created": false,
+    "raw_row_loader_created": false,
+    "production_claim_writer_created": false,
+    "production_http_client_created": false,
+    "admission_mode": "SYNTHETIC_REHEARSAL_ONLY"
+  },
+  "science_firewall": {
+    "r2": "BLOCKED",
+    "scientific_execution_authorized": false,
+    "model_posts": 0,
+    "rows_replayed": 0,
+    "permanent_claim_created": false,
+    "final_role": "SEALED",
+    "final_rows_materialized": 0,
+    "final_content_access": false,
+    "d4": false,
+    "training": false,
+    "founder_cost_usd": 0
+  },
+  "next_gate": "B2_INDEPENDENT_FOUNDER_SCIENTIFIC_EXECUTION_APPROVAL_REQUIRED"
+}
