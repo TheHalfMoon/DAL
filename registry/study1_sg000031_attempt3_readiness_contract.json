@@ -1,0 +1,91 @@
+{
+  "schema_version": "dal-r2-attempt3-engineering-readiness-v1",
+  "specgrain_id": "SG-000031",
+  "attempt_ordinal": 3,
+  "engineering_authorization": {
+    "issue": 166,
+    "comment_id": 6050120310,
+    "scope": "readiness-only",
+    "model_calls_permitted": false
+  },
+  "execution_authorization": {
+    "status": "NOT_AUTHORIZED",
+    "sha256": null,
+    "dispatch_permitted": false,
+    "claim_permitted": false
+  },
+  "reserved_namespace": {
+    "scientific_workflow": ".github/workflows/study1-sg000031-r2-attempt3.yml",
+    "worker": ".github/workflows/study1-sg000031-r2-attempt3-worker.yml",
+    "permanent_ref": "refs/tags/dal-r2-issue166-attempt3",
+    "ledger_branch": "codex/sg000031-r2-attempt3-journal",
+    "ledger_root": "evidence/study1-r2-attempt3",
+    "receipt_marker": "DAL_R2_ATTEMPT3_CANONICAL_ADMISSION_V1"
+  },
+  "readiness": {
+    "qualification_workflow": ".github/workflows/study1-sg000031-attempt3-readiness.yml",
+    "actual_scientific_workflow_created": false,
+    "actual_scientific_worker_created": false,
+    "model_or_rows_executed": false,
+    "r2_state": "BLOCKED",
+    "final_role": "SEALED",
+    "final_content_access": false,
+    "final_rows_materialized": 0,
+    "d4": false,
+    "training": false,
+    "founder_cost_usd": 0
+  },
+  "canonical_base": {
+    "sha": "6b345396d16f4e827d6339fdd850ec86c6a9a399",
+    "tree": "233f0303d230458debc1e812045766e25c8fa323"
+  },
+  "scientific_freeze": {
+    "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+    "population_identity_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "development_rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173
+  },
+  "historical_attempts": [
+    {
+      "ordinal": 1,
+      "run_id": 37320473498,
+      "run_attempt": 1,
+      "conclusion": "failure",
+      "model_posts": 0,
+      "unattempted_rows": 1463,
+      "source": "registry/study1_sg000031_attempt1_closeout.json",
+      "consumed": true
+    },
+    {
+      "ordinal": 2,
+      "run_id": 37653806159,
+      "run_attempt": 1,
+      "conclusion": "failure",
+      "model_posts": 0,
+      "unattempted_rows": 1463,
+      "source": "registry/study1_sg000031_r2_attempt2_closeout.json",
+      "consumed": true,
+      "execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+      "contract_sha256": "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105",
+      "canonical_main": "8fcf29f2e0c1b6cf78661acd2f5e1340a578ac03",
+      "canonical_tree": "430da88b2cd85a32b41cac5d6d2951fb8ebfb944",
+      "claim_tag_object": "14a92834c3e9e28f83dd6cb696d7c3e78bea9c17",
+      "merge_parents": [
+        "0e298850b3392eafedeacc995e36c1e15391a15c",
+        "9dcb0a63de888d2258d982c695e49cff3d04266d"
+      ]
+    }
+  ],
+  "governance": {
+    "automatic_retry": false,
+    "attempt3_dispatches_allowed": 0,
+    "scientific_r2_pass_claim_allowed": false,
+    "preflight_http_mutations_allowed": false,
+    "third_execution_requires_separate_founder_authorization": true,
+    "post_readiness_stop": true
+  }
+}
