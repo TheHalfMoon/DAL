@@ -1,0 +1,72 @@
+name: DAL R2 Attempt-3 Gate B2 read-only founder and capacity readiness (NO SCIENCE)
+
+on:
+  pull_request:
+    paths:
+      - registry/study1_sg000031_attempt3_b2_readiness_contract.json
+      - src/gaxbench/study1_attempt3_b2_readiness.py
+      - tools/qualify_sg000031_attempt3_b2_readiness.py
+      - tests/test_study1_sg000031_attempt3_b2_readiness.py
+      - docs/study1-sg000031-attempt3-b2-readiness.md
+      - .github/workflows/study1-sg000031-attempt3-b2-readiness.yml
+  push:
+    branches: [main]
+    paths:
+      - registry/study1_sg000031_attempt3_b2_readiness_contract.json
+      - src/gaxbench/study1_attempt3_b2_readiness.py
+      - tools/qualify_sg000031_attempt3_b2_readiness.py
+      - tests/test_study1_sg000031_attempt3_b2_readiness.py
+      - docs/study1-sg000031-attempt3-b2-readiness.md
+      - .github/workflows/study1-sg000031-attempt3-b2-readiness.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dal-b2-readiness-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  read-only-b2:
+    name: Gate B2 read-only independent founder + no-science qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+      issues: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install -e '.[dev]'
+      - name: Verify fake consent cannot arm real science
+        run: >-
+          python -m pytest -q
+          tests/test_study1_sg000031_attempt3_b2_readiness.py
+          tests/test_study1_sg000031_attempt3_b1_durable.py
+          tests/test_study1_sg000031_attempt3_b1.py
+      - name: Native exact-head founder provenance and capacity, GET only
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: >-
+          python tools/qualify_sg000031_attempt3_b2_readiness.py
+          --output "$RUNNER_TEMP/attempt3-b2-readiness.json"
+      - name: Retain no-science B2 readiness receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000031-b2-readonly-${{ github.run_id }}
+          path: ${{ runner.temp }}/attempt3-b2-readiness.json
+          if-no-files-found: error
+          retention-days: 30
