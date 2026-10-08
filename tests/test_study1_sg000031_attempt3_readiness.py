@@ -131,7 +131,9 @@ def _routes(q, contract):
             "object": {"sha": old["canonical_main"]},
             "message": json.dumps({
                 "execution_authorization_sha256":
-                    old["execution_authorization_sha256"]
+                    old["execution_authorization_sha256"],
+                "contract_sha256": old["contract_sha256"],
+                "run_id": q.A2_RUN
             }),
         },
         "actions/workflows/study1-sg000031-r2-recovery.yml/runs?per_page=100": {
