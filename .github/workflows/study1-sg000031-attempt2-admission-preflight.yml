@@ -6,6 +6,9 @@ on:
       - scripts/study1_sg000031_r2_admission.py
       - scripts/study1_sg000031_attempt2_admission.py
       - tools/qualify_sg000031_attempt2_admission.py
+      - tools/qualify_sg000031_postconsumption_ancestry.py
+      - tests/test_study1_sg000031_postconsumption_ancestry.py
+      - tests/test_study1_sg000031_worker_checkout_ancestry.py
       - tests/test_study1_sg000031_attempt2_admission.py
       - registry/study1_sg000031_attempt2_*.json
       - .github/workflows/study1-sg000031-r2-attempt2*.yml
@@ -16,6 +19,9 @@ on:
       - scripts/study1_sg000031_r2_admission.py
       - scripts/study1_sg000031_attempt2_admission.py
       - tools/qualify_sg000031_attempt2_admission.py
+      - tools/qualify_sg000031_postconsumption_ancestry.py
+      - tests/test_study1_sg000031_postconsumption_ancestry.py
+      - tests/test_study1_sg000031_worker_checkout_ancestry.py
       - tests/test_study1_sg000031_attempt2_admission.py
       - registry/study1_sg000031_attempt2_*.json
       - .github/workflows/study1-sg000031-r2-attempt2*.yml
@@ -35,13 +41,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  native-qualification:
+  postconsumption-native:
+    name: native-qualification
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    # Parity with scientific admission token context. The actual native context
-    # guard forbids every REST mutation and permits only the fixed GraphQL read.
+    timeout-minutes: 15
     permissions:
-      contents: write
+      contents: read
       actions: read
       pull-requests: read
       issues: read
@@ -56,31 +62,68 @@ jobs:
           python-version: "3.12"
       - name: Install DAL and deterministic regression tooling
         run: python -m pip install -e '.[dev]'
-      - name: Verify versioned admission identities without inference
-        run: python -m pytest tests/test_study1_sg000031_attempt2_admission.py
-      - name: Qualify actual native authenticated read-only admission
+      - name: Verify original admission and post-consumption regressions
+        run: >-
+          python -m pytest
+          tests/test_study1_sg000031_attempt2_admission.py
+          tests/test_study1_sg000031_worker_checkout_ancestry.py
+          tests/test_study1_sg000031_postconsumption_ancestry.py
+      - name: Qualify real consumed claim and bounded full-history worker repair
         env:
           GH_TOKEN: ${{ github.token }}
-          DAL_R2_ATTEMPT_ORDINAL: "2"
           EXPECTED_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            python tools/qualify_sg000031_attempt2_admission.py \
-              --comment-id "$QUALIFICATION_COMMENT_ID" \
-              --output "$RUNNER_TEMP/attempt2-native-admission-preflight.json"
-          else
-            python tools/qualify_sg000031_attempt2_admission.py \
-              --output "$RUNNER_TEMP/attempt2-native-admission-preflight.json"
-          fi
-      - name: Retain actual native qualification with zero model calls
+        run: >-
+          python tools/qualify_sg000031_postconsumption_ancestry.py
+          --output "$RUNNER_TEMP/postconsumption-worker-preflight.json"
+      - name: Retain hash-only engineering result
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: sg000031-attempt2-native-admission-${{ github.run_id }}
+          name: sg000031-postconsumption-ancestry-${{ github.run_id }}
+          path: ${{ runner.temp }}/postconsumption-worker-preflight.json
+          if-no-files-found: error
+          retention-days: 30
+
+  historical-canonical-receipt:
+    name: Historical Attempt-2 canonical receipt (read-only)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: read
+      issues: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Install DAL and deterministic regression tooling
+        run: python -m pip install -e '.[dev]'
+      - name: Verify historical contract regressions
+        run: python -m pytest tests/test_study1_sg000031_attempt2_admission.py
+      - name: Verify historical receipt read-only
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DAL_R2_ATTEMPT_ORDINAL: "2"
+          EXPECTED_CHECKOUT_SHA: ${{ github.sha }}
+          QUALIFICATION_COMMENT_ID: ${{ inputs.qualification_comment_id }}
+        run: >-
+          python tools/qualify_sg000031_attempt2_admission.py
+          --comment-id "$QUALIFICATION_COMMENT_ID"
+          --output "$RUNNER_TEMP/attempt2-native-admission-preflight.json"
+      - name: Retain historic receipt verification
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sg000031-historical-canonical-verification-${{ github.run_id }}
           path: ${{ runner.temp }}/attempt2-native-admission-preflight.json
           if-no-files-found: error
           retention-days: 30
