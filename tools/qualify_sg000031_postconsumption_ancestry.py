@@ -23,6 +23,7 @@ ATTEMPT_TAG = "14a92834c3e9e28f83dd6cb696d7c3e78bea9c17"
 REPAIR_MAIN = "0e298850b3392eafedeacc995e36c1e15391a15c"
 REPAIR_HEAD = "9dcb0a63de888d2258d982c695e49cff3d04266d"
 CONTRACT_SHA = "0f5e8ac550ca578afae69cdb948f0b9199a729b038071c7777b55b1e4d567105"
+RECEIPT_SHA = "ed2df6e8e3c96bbd59234260d0b646a7be8b2ce766c94f45bc29e0348ff7fe25"
 AUTH_SHA = "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48"
 LINEAGE_SHA = "361dc916c5066c04c8c008ceb772442ebc54ebbbf0d412c817e9e7f9fc75eb3c"
 R1_SHA = "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0"
@@ -77,8 +78,7 @@ def verify_consumed_claim(root: Path, api=native.api) -> dict:
         "contract_sha256": CONTRACT_SHA,
         "execution_authorization_sha256": AUTH_SHA,
         "attempt1_lineage_sha256": LINEAGE_SHA,
-        "qualification_receipt_sha256":
-            "ed2df6e8e3c96bbd59234260d0b646a7be8b2ce766c94f45bc29e0348ff7fe25",
+        "qualification_receipt_sha256": RECEIPT_SHA,
         "engineering_qualified": True,
         "zero_cost_infrastructure_verified": True,
     }
