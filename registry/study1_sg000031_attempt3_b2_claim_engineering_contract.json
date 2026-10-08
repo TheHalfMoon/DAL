@@ -1,0 +1,71 @@
+{
+  "schema_version": "dal-sg000031-a3-b2-atomic-claim-engineering-v1",
+  "specgrain": "SG-000031-A3-B2-CLAIM-ENGINEERING",
+  "issue": 175,
+  "engineering_baseline": {
+    "main_sha": "e460e766566d233c79b1270d6e425cb2005d9514",
+    "tree_sha": "e109f0f963e787b94909dcabbdda61bda4bd06fd",
+    "pr": 176,
+    "b2_readiness_sha256": "36ce48e0c5e5d9301fe9dd22d3a3268c1235bf817d2dd65d0763127a013064a1",
+    "b1_contract_sha256": "70d257f0056d6d50d4a8a8eef6c53108124fff3ad17bd03765d42b7edbc2cb3a",
+    "b1_durable_sha256": "d46c5a36547b8bde4bd47fc16a0d067361ce35516386e22dd7403634f8481f79"
+  },
+  "founder_decision": {
+    "issue": 171,
+    "comment_id": 6069470401,
+    "source": "assistant_transcription_of_direct_chat_reply",
+    "reply": "i approve move on",
+    "scope": "B2_ENGINEERING_PROGRESSION_CONDITIONAL_ONLY",
+    "signed_single_run_authority_sha256": null,
+    "pinned_founder_public_key_sha256": null,
+    "cryptographic_signature_verified": false
+  },
+  "protocol": {
+    "http_tag_create": "POST /repos/TheHalfMoon/DAL/git/tags",
+    "http_ref_create": "POST /repos/TheHalfMoon/DAL/git/refs",
+    "http_ref_read": "GET /repos/TheHalfMoon/DAL/git/ref/tags/dal-r2-issue166-attempt3",
+    "ref": "refs/tags/dal-r2-issue166-attempt3",
+    "annotated_tag_name": "dal-r2-issue166-attempt3",
+    "object_type": "commit",
+    "create_ref_only": true,
+    "no_ref_update": true,
+    "no_ref_delete": true,
+    "collision": "STOP_NO_RETRY",
+    "orphan_tag": "NOT_CLAIMED_MUST_NOT_RETRY_WITHOUT_NEW_FOUNDER_DECISION",
+    "tag_created_but_ref_missing": "NO_CONSUMPTION_PROOF_STOP",
+    "ref_created": "CONSUMED_IMMEDIATELY_EVEN_WITH_ZERO_MODEL_POSTS"
+  },
+  "identity": {
+    "r1_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "population_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "producer_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+    "development_rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "shards": 8,
+    "sealed_final_rows": 173,
+    "attempt_ordinal": 3,
+    "attempt2_authority_consumed_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48"
+  },
+  "scope": {
+    "real_github_transport_connected": false,
+    "real_github_api_mutation_permitted": false,
+    "real_claim_exists": false,
+    "model_http_post_permitted": false,
+    "scientific_workflow_available": false,
+    "empirically_qualified_free_compute": false,
+    "founder_cost_usd": 0,
+    "training": false,
+    "d4": false,
+    "final_content_access": false,
+    "science": "BLOCKED"
+  },
+  "files": {
+    "module": "src/gaxbench/study1_attempt3_b2_claim.py",
+    "tests": "tests/test_study1_sg000031_attempt3_b2_claim.py",
+    "qualifier": "tools/qualify_sg000031_attempt3_b2_claim.py",
+    "workflow": ".github/workflows/study1-sg000031-attempt3-b2-claim.yml",
+    "documentation": "docs/study1-sg000031-attempt3-b2-claim.md"
+  },
+  "next": "COMPLETE_INDEPENDENT_SIGNED_ONE_SHOT_AUTHORITY_AND_VERIFIED_REAL_RUNTIME_BEFORE_ANY_CLAIM"
+}
