@@ -187,10 +187,19 @@ class SimulatedGitHubREST:
         self._lock = threading.Lock()
         self.tag_objects: dict[str, dict[str, Any]] = {}
         self.references: dict[str, str] = {}
+        # Ephemeral TEST fixture guard, not a substitute for a durable real run ledger.
+        self.reserved_synthetic_signatures: set[str] = set()
         self.tag_posts = 0
         self.ref_posts = 0
         self.failed_ref_creations = 0
         self.fail_between_tag_and_ref = False
+
+    def reserve_synthetic_signature(self, signature_digest: str) -> None:
+        """Deny re-entry under the same test authority, including after an orphan tag."""
+        with self._lock:
+            if signature_digest in self.reserved_synthetic_signatures:
+                raise PermissionError("synthetic authority already attempted; NO RETRY")
+            self.reserved_synthetic_signatures.add(signature_digest)
 
     def post_tag(self, payload: dict[str, Any]) -> str:
         if set(payload) != {"tag", "message", "object", "type", "tagger"}:
@@ -294,6 +303,9 @@ class ClaimProtocolSimulator:
         }
         if self.github.get_ref(REF) is not None:
             raise PermissionError("consumed, duplicate run forbidden")
+        # This models a pre-mutation reservation within one fake process ONLY.
+        # Real crash-safe reservation must be independently durable and reviewed.
+        self.github.reserve_synthetic_signature(auth.signature_digest)
         tag_sha = self.github.post_tag(tag)
         try:
             self.github.post_ref(REF, tag_sha)
