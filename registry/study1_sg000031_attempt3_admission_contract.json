@@ -1,0 +1,76 @@
+{
+  "schema_version": "dal-sg000031-attempt3-admission-engineering-v1",
+  "specgrain_id": "SG-000031-A3-E",
+  "attempt_ordinal": 3,
+  "engineering_authorization": {
+    "issue": 168,
+    "transcribed_comment_id": 6062562405,
+    "provenance": "founder-chat-transcribed-by-assistant",
+    "scope": "executable-but-unarmed-admission",
+    "scientific_execution_authorized": false
+  },
+  "engineering_base": {
+    "sha": "6caaa5341aa798db66855fb3525c73b7de3327c9",
+    "tree": "c2f48dbd06850b54e364651b0a7552d15e1bf8cf"
+  },
+  "readiness_contract": "registry/study1_sg000031_attempt3_readiness_contract.json",
+  "attempt2_contract": "registry/study1_sg000031_attempt2_admission_contract.json",
+  "execution_authorization": {
+    "status": "NOT_AUTHORIZED",
+    "sha256": null,
+    "dispatch_permitted": false,
+    "permanent_claim_permitted": false,
+    "model_calls_permitted": false,
+    "row_replay_permitted": false
+  },
+  "scientific_freeze": {
+    "r1_manifest_sha256": "220c676df241d8dc1ac8ccd83e81d54554e7618fc5acf016eaa32ec6302ca2b0",
+    "producer_identity_sha256": "4794eef60d9a7ec3e82d21390127bbfbc4156f7abfeb311313c13bef9b7c1860",
+    "population_identity_sha256": "0755fcb62129037e05557d73863574b399503458b48b2c5a906546575aa1679f",
+    "development_rows": 1463,
+    "calibration_rows": 341,
+    "validation_rows": 1122,
+    "sealed_final_patients": 40,
+    "sealed_final_rows": 173
+  },
+  "historical_attempts": {
+    "attempt1_run": 37320473498,
+    "attempt2_run": 37653806159,
+    "attempt2_execution_authorization_sha256": "64eeb307da268144cde54af9b143e136e82cbb069b3a12c1909dd0a775dbcb48",
+    "both_consumed": true,
+    "both_infrastructure_failed": true,
+    "both_model_posts": 0
+  },
+  "reserved_scientific_namespace": {
+    "scientific_workflow": ".github/workflows/study1-sg000031-r2-attempt3.yml",
+    "worker": ".github/workflows/study1-sg000031-r2-attempt3-worker.yml",
+    "permanent_ref": "refs/tags/dal-r2-issue166-attempt3",
+    "ledger_branch": "codex/sg000031-r2-attempt3-journal",
+    "ledger_root": "evidence/study1-r2-attempt3",
+    "receipt_marker": "DAL_R2_ATTEMPT3_CANONICAL_ADMISSION_V1"
+  },
+  "admission": {
+    "qualification_workflow": ".github/workflows/study1-sg000031-attempt3-admission-qualification.yml",
+    "controller": "tools/study1_sg000031_attempt3_admission.py",
+    "validator": "src/gaxbench/study1_attempt3_admission.py",
+    "read_only_http": true,
+    "synthetic_rehearsal_only": true,
+    "all_production_mutations_prohibited": true,
+    "worker_runtime_created": false,
+    "scientific_workflow_created": false,
+    "automatic_retry": false,
+    "next_scientific_execution_requires_new_founder_approval": true
+  },
+  "firewall": {
+    "r2_state": "BLOCKED",
+    "final_role": "SEALED",
+    "final_content_access": false,
+    "final_rows_materialized": 0,
+    "training": false,
+    "fine_tuning": false,
+    "d4": false,
+    "scientific_dispatches": 0,
+    "model_posts": 0,
+    "founder_cost_usd": 0
+  }
+}
