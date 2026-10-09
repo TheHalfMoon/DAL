@@ -106,6 +106,39 @@ def test_missing_native_workflow_must_fail_closed_offline(
         gate.qualify(tmp_path)
 
 
+def test_workflow_envelope_comments_do_not_count_as_configuration() -> None:
+    """Historical substring-only checks incorrectly accepted comment-only YAML."""
+    good = (
+        "on:\n"
+        "  pull_request:\n"
+        "  push:\n"
+        "permissions:\n"
+        "  contents: read\n"
+        "jobs:\n"
+        "  verify:\n"
+        "    steps:\n"
+        "      - uses: actions/checkout@0123456789abcdef\n"
+        "        with:\n"
+        "          persist-credentials: false\n"
+        "      - run: python tools/qualify_sg000031_attempt3_b2_claim.py\n"
+    )
+    assert gate.verify_workflow_envelope(good) is None
+    commented = "\n".join("# " + line for line in good.splitlines())
+    with pytest.raises(PermissionError, match="required structure"):
+        gate.verify_workflow_envelope(commented)
+    with pytest.raises(PermissionError, match="required structure"):
+        gate.verify_workflow_envelope(good.replace("  push:", "# push:"))
+    with pytest.raises(PermissionError, match="event scope"):
+        gate.verify_workflow_envelope(good.replace("  push:", "  push:\n  workflow_run:"))
+    with pytest.raises(PermissionError, match="prohibited"):
+        gate.verify_workflow_envelope(good + "  contents: write\n")
+    with pytest.raises(PermissionError, match="prohibited"):
+        gate.verify_workflow_envelope(
+            good.replace("persist-credentials: false", "persist-credentials: true")
+            + "          persist-credentials: false\n"
+        )
+
+
 # Genuine offline SSHSIG verification is tested with throwaway fixture keys only.
 # These tests do not create or approve any founder execution authorization.
 def authority_fixture() -> dict[str, object]:

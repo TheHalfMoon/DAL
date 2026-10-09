@@ -32,6 +32,55 @@ APPROVAL_COMMENT = 6069470401
 REF_PATH = "git/ref/tags/dal-r2-issue166-attempt3"
 
 
+def verify_workflow_envelope(workflow: str) -> None:
+    """Fail closed on commented or unrecognized workflow triggers.
+
+    This is a static defense-in-depth check, NOT evidence of a real native
+    GitHub Actions run or permission to dispatch science.
+    """
+    import re
+
+    if not isinstance(workflow, str) or "\t" in workflow:
+        raise PermissionError("native workflow envelope invalid")
+    lines = [
+        line.rstrip()
+        for line in workflow.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    required = (
+        r"^on:$",
+        r"^  pull_request:$",
+        r"^  push:$",
+        r"^permissions:$",
+        r"^  contents: read$",
+        r"^\s+persist-credentials: false$",
+        r"^\s+[^#]*qualify_sg000031_attempt3_b2_claim\.py(?:\s|$)",
+    )
+    if not all(any(re.fullmatch(pattern, line) for line in lines) for pattern in required):
+        raise PermissionError("native B2 workflow required structure not active")
+    start = lines.index("on:")
+    end = next(
+        (n for n in range(start + 1, len(lines)) if not lines[n].startswith(" ")),
+        len(lines),
+    )
+    events = [
+        match.group(1)
+        for line in lines[start + 1 : end]
+        if (match := re.fullmatch(r"  ([a-z_]+):", line))
+    ]
+    if sorted(events) != ["pull_request", "push"]:
+        raise PermissionError("native B2 workflow event scope expanded or invalid")
+    forbidden = r"^\s*(?:workflow_dispatch|workflow_call|schedule|repository_dispatch):"
+    writes = r"^\s*[a-z][a-z-]*: write$"
+    unsafe_checkout = r"^\s*persist-credentials: (?!false$)\S+"
+    if any(
+        re.match(forbidden, line) or re.match(writes, line)
+        or re.match(unsafe_checkout, line)
+        for line in lines
+    ):
+        raise PermissionError("native B2 workflow writes or dispatches prohibited")
+
+
 def verify_head(event: str, expected_head: str) -> dict[str, Any]:
     if native.git("rev-parse", "HEAD") != expected_head:
         raise ValueError("wrong exact-head checkout")
@@ -127,26 +176,7 @@ def qualify(root: Path = ROOT) -> dict[str, Any]:
     workflow = (root / ".github/workflows/study1-sg000031-attempt3-b2-claim.yml").read_text(
         encoding="utf-8"
     )
-    if not all(
-        term in workflow
-        for term in (
-            "pull_request:",
-            "push:",
-            "contents: read",
-            "persist-credentials: false",
-            "qualify_sg000031_attempt3_b2_claim.py",
-        )
-    ) or any(
-        term in workflow
-        for term in (
-            "workflow_dispatch:",
-            "workflow_call:",
-            "contents: write",
-            "schedule:",
-            "repository_dispatch:",
-        )
-    ):
-        raise PermissionError("B2 claim engineering cannot trigger scientific execution")
+    verify_workflow_envelope(workflow)
     expected = os.environ["EXPECTED_CHECKOUT_SHA"]
     with native.native_read_only_preflight() as audit:
         founder = verify_founder_transcription()
