@@ -111,18 +111,163 @@ def test_workflow_envelope_comments_do_not_count_as_configuration() -> None:
     good = (
         "on:\n"
         "  pull_request:\n"
+        "    branches: [main]\n"
+        "    paths:\n"
+        "      - .github/workflows/study1-sg000031-attempt3-b2-claim.yml\n"
+        "      - tools/qualify_sg000031_attempt3_b2_claim.py\n"
+        "      - docs/study1-sg000031-attempt3-b2-claim.md\n"
+        "      - registry/study1_sg000031_attempt3_b2_claim_engineering_contract.json\n"
+        "      - src/gaxbench/study1_attempt3_b2_claim.py\n"
+        "      - tests/test_study1_sg000031_attempt3_b2_claim.py\n"
+        "      - tests/test_study1_sg000031_attempt3_b2_claim_native.py\n"
         "  push:\n"
+        "    branches: [main]\n"
+        "    paths:\n"
+        "      - .github/workflows/study1-sg000031-attempt3-b2-claim.yml\n"
+        "      - tools/qualify_sg000031_attempt3_b2_claim.py\n"
+        "      - docs/study1-sg000031-attempt3-b2-claim.md\n"
+        "      - registry/study1_sg000031_attempt3_b2_claim_engineering_contract.json\n"
+        "      - src/gaxbench/study1_attempt3_b2_claim.py\n"
+        "      - tests/test_study1_sg000031_attempt3_b2_claim.py\n"
+        "      - tests/test_study1_sg000031_attempt3_b2_claim_native.py\n"
         "permissions:\n"
         "  contents: read\n"
+        "  issues: read\n"
+        "  pull-requests: read\n"
         "jobs:\n"
         "  verify:\n"
+        "    runs-on: ubuntu-latest\n"
         "    steps:\n"
-        "      - uses: actions/checkout@0123456789abcdef\n"
+        "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n"
         "        with:\n"
+        "          ref: ${{ github.event.pull_request.head.sha || github.sha }}\n"
+        "          fetch-depth: 0\n"
         "          persist-credentials: false\n"
-        "      - run: python tools/qualify_sg000031_attempt3_b2_claim.py\n"
+        "      - run: python -m pytest -q"
+        " tests/test_study1_sg000031_attempt3_b2_claim.py"
+        " tests/test_study1_sg000031_attempt3_b2_claim_native.py\n"
+        "      - run: python tools/qualify_sg000031_attempt3_b2_claim.py --output b2-receipt.json\n"
     )
     assert gate.verify_workflow_envelope(good) is None
+    assert gate.verify_workflow_envelope(good.replace("  verify:", "  read-only-b2:")) is None
+    assert gate.verify_workflow_envelope(
+        good.replace("    steps:", "    timeout-minutes: 25\n    steps:")
+    ) is None
+    for disallowed in (
+        good.replace("    steps:", "    permissions: write-all\n    steps:"),
+        good.replace(
+            "permissions:\n  contents: read",
+            "permissions: write-all\npermissions:\n  contents: read",
+        ),
+        good + "  extra_job:\n    permissions: write-all\n",
+        good.replace("    steps:", "    permissions: {contents: write}\n    steps:"),
+        good.replace("  contents: read", "  contents: write # expanded\n  contents: read"),
+    ):
+        with pytest.raises(PermissionError, match="prohibited|permissions|top-level"):
+            gate.verify_workflow_envelope(disallowed)
+    for disallowed in (
+        good.replace("    steps:", "    permissions: read-all\n    steps:"),
+        good.replace(
+            "permissions:\n  contents: read",
+            "permissions: read-all\npermissions:\n  contents: read",
+        ),
+        good.replace("  contents: read", "  contents: read\n  actions: read"),
+        good.replace("  contents: read", "  contents: read\n  contents: read"),
+        good.replace("  issues: read\n", ""),
+        good.replace("  pull-requests: read\n", ""),
+        good.replace("jobs:\n", "permissions:\n  contents: read\njobs:\n"),
+    ):
+        with pytest.raises(PermissionError, match="permissions|top-level"):
+            gate.verify_workflow_envelope(disallowed)
+    with pytest.raises(PermissionError, match="native qualifier"):
+        gate.verify_workflow_envelope(good.replace(" --output b2-receipt.json", ""))
+    for disallowed in (
+        good.replace("    steps:", "    if: false\n    steps:"),
+        good.replace("      - run:", "      - if: false\n        run:"),
+        good.replace("      - run:", "      - continue-on-error: true\n        run:"),
+        good.replace("      - run: python", "      - run: echo python"),
+        good.replace(
+            " tests/test_study1_sg000031_attempt3_b2_claim_native.py\n", "\n"
+        ),
+        good.replace("      - run: python -m pytest -q", "      - name: tests skipped"),
+        good.replace("      - run: python", "      - name: python"),
+        good.replace("      - uses: actions/checkout@", "      - name: actions/checkout@"),
+        good.replace("          fetch-depth: 0", "          fetch-depth: 1"),
+        good.replace(
+            "          ref: ${{ github.event.pull_request.head.sha || github.sha }}\n", ""
+        ),
+        good.replace("persist-credentials: false", "persist-credentials: true"),
+        good + "      - run: curl -X POST https://example.invalid/model\n",
+        good.replace(
+            "      - run: python tools/qualify_sg000031_attempt3_b2_claim.py",
+            "      - env:\n          run: python tools/qualify_sg000031_attempt3_b2_claim.py",
+        ),
+        good.replace("  push:", "  workflow_run: [completed]\n  push:"),
+        good + "      - uses: actions/upload-artifact@main\n",
+        good + "      - uses: attacker/review@0123456789abcdef0123456789abcdef01234567\n",
+        good.replace(
+            "          fetch-depth: 0",
+            "          repository: untrusted/other\n          fetch-depth: 0",
+        ),
+        good.replace(
+            "          fetch-depth: 0",
+            "          ref: main\n          fetch-depth: 0",
+        ),
+        good.replace("--output b2-receipt.json", '--output "$(echo command-substitution)"'),
+        good.replace("--output b2-receipt.json", "--output $(echo command-substitution)"),
+        good.replace("--output b2-receipt.json", "--output `command-substitution`"),
+        good + "      - run: python -m pytest -q tests/../../../tmp/script.py\n",
+        good.replace("    steps:", "    runs-on: self-hosted\n    steps:"),
+        good.replace("    steps:", "    container: unreviewed/image\n    steps:"),
+        good.replace("    steps:", "    <<: *injected\n    steps:"),
+        good.replace("    steps:", "    env:\n      HTTP_PROXY: https://other.invalid\n    steps:"),
+        good + "  injected:\n    runs-on: ubuntu-latest\n",
+        good.replace("    steps:", "    matrix:"),
+        good.replace("    steps:", "    arbitrary:"),
+        good.replace("permissions:\n", "env: {BASH_ENV: injected}\npermissions:\n"),
+        good.replace(
+            "permissions:\n",
+            "concurrency: {group: dangerous, cancel-in-progress: true}\npermissions:\n",
+        ),
+        good.replace(
+            "permissions:\n",
+            "run-name: ${{ github.event.pull_request.title }}\npermissions:\n",
+        ),
+        good.replace("    steps:", "    needs: missing-upstream\n    steps:"),
+        good.replace("    steps:", "    environment: production\n    steps:"),
+        good.replace(
+            "    steps:", "    strategy:\n      matrix:\n        os: [ubuntu-latest]\n    steps:"
+        ),
+        good.replace("    steps:", "    timeout-minutes: 1\n    steps:"),
+        good.replace("    branches: [main]", "    branches: [dev]"),
+        good.replace(
+            "      - tests/test_study1_sg000031_attempt3_b2_claim_native.py\n", ""
+        ),
+        good.replace("    branches: [main]\n", ""),
+        good.replace(
+            "      - tools/qualify_sg000031_attempt3_b2_claim.py",
+            "      - .github/workflows/unreviewed.yml",
+        ),
+    ):
+        with pytest.raises(PermissionError):
+            gate.verify_workflow_envelope(disallowed)
+    folded = good.replace(
+        "      - run: python tools/qualify_sg000031_attempt3_b2_claim.py --output b2-receipt.json",
+        (
+            "      - run: >-\n"
+            "          python tools/qualify_sg000031_attempt3_b2_claim.py\n"
+            "          --output b2-receipt.json"
+        ),
+    )
+    assert gate.verify_workflow_envelope(folded) is None
+    named = folded.replace(
+        "      - run: >-",
+        "      - name: Native read-only qualification\n        run: >-",
+    ).replace(
+        "      - name: Native read-only qualification\n",
+        "      - name: Native read-only qualification\n",
+    )
+    assert gate.verify_workflow_envelope(named) is None
     commented = "\n".join("# " + line for line in good.splitlines())
     with pytest.raises(PermissionError, match="required structure"):
         gate.verify_workflow_envelope(commented)
